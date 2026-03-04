@@ -1,0 +1,11 @@
+{
+  "id": "srd52:class:wizard",
+  "name": "Wizard",
+  "hitDie": 6,
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "int"
+    }
+  ]
+}

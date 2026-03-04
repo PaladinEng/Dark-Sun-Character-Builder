@@ -1,0 +1,5 @@
+{
+  "id": "darksun:species:thri-kreen",
+  "name": "Thri-kreen",
+  "effects": [{ "type": "set_speed", "value": 35 }]
+}

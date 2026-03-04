@@ -1,0 +1,9 @@
+{
+  "id": "srd52:equipment:longsword",
+  "type": "weapon",
+  "name": "Longsword",
+  "damageDice": "1d8",
+  "properties": [
+    "versatile"
+  ]
+}

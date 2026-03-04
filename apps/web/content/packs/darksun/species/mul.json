@@ -1,0 +1,18 @@
+{
+  "id": "darksun:species:mul",
+  "name": "Mul",
+  "replaces": "srd52:species:human",
+  "description": "Bred for endurance under brutal conditions.",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 30
+    },
+    {
+      "type": "add_bonus",
+      "target": "save",
+      "key": "con",
+      "value": 1
+    }
+  ]
+}

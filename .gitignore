@@ -1,0 +1,21 @@
+# Node / pnpm
+node_modules
+.pnpm-store
+
+# Next.js
+.next
+out
+
+# Build artifacts
+dist
+coverage
+
+# Logs
+*.log
+npm-debug.log*
+
+# Mac
+.DS_Store
+
+# Dev tooling
+.loopdev

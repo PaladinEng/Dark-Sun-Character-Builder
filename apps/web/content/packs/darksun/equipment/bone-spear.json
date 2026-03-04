@@ -1,0 +1,7 @@
+{
+  "id": "darksun:equipment:bone-spear",
+  "name": "Bone Spear",
+  "type": "weapon",
+  "damageDice": "1d8",
+  "properties": []
+}

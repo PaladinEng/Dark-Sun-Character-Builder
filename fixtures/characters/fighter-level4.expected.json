@@ -1,0 +1,80 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": 4,
+    "wis": 1
+  },
+  "advancementSlots": [
+    {
+      "asi": {
+        "con": 1,
+        "str": 1
+      },
+      "choice": "asi",
+      "filled": true,
+      "level": 4
+    }
+  ],
+  "armorClass": 17,
+  "attack": {
+    "damage": "1d8+4",
+    "name": "Longsword",
+    "toHit": 6
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    },
+    {
+      "id": "test:feat:sharpshooter-init",
+      "name": "Sharpshooter Initiate"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 15,
+    "int": 10,
+    "str": 18,
+    "wis": 12
+  },
+  "maxHP": 36,
+  "proficiencyBonus": 2,
+  "savingThrows": {
+    "cha": -1,
+    "con": 4,
+    "dex": 2,
+    "int": 0,
+    "str": 6,
+    "wis": 2
+  },
+  "skills": {
+    "acrobatics": 2,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": 7,
+    "deception": -1,
+    "history": 0,
+    "insight": 1,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 4,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 0,
+    "sleight_of_hand": 2,
+    "stealth": 4,
+    "survival": 1
+  },
+  "speed": 35,
+  "toolProficiencies": [
+    "artisan",
+    "cartographer"
+  ]
+}

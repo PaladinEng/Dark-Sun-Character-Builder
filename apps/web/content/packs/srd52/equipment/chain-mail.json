@@ -1,0 +1,9 @@
+{
+  "id": "srd52:equipment:chain-mail",
+  "type": "armor_heavy",
+  "name": "Chain Mail",
+  "armorClassBase": 16,
+  "dexCap": 0,
+  "strengthRequirement": 13,
+  "stealthDisadvantage": true
+}

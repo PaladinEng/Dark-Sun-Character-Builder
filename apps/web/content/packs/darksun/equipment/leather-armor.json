@@ -1,0 +1,6 @@
+{
+  "id": "srd52:equipment:leather-armor",
+  "name": "Leather Armor (Hardened Hide)",
+  "type": "armor_light",
+  "armorClassBase": 12
+}

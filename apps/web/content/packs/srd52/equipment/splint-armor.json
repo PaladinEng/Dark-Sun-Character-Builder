@@ -1,0 +1,9 @@
+{
+  "id": "srd52:equipment:splint-armor",
+  "type": "armor_heavy",
+  "name": "Splint Armor",
+  "armorClassBase": 17,
+  "dexCap": 0,
+  "strengthRequirement": 15,
+  "stealthDisadvantage": true
+}

@@ -1,0 +1,10 @@
+{
+  "id": "darksun:species:wasteland-human",
+  "name": "Wasteland Human",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 35
+    }
+  ]
+}

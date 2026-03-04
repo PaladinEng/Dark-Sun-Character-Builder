@@ -1,0 +1,19 @@
+{
+  "id": "srd52:background:acolyte",
+  "name": "Acolyte",
+  "abilityOptions": {
+    "abilities": [
+      "wis",
+      "int",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:alert",
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "insight"
+    }
+  ]
+}

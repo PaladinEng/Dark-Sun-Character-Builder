@@ -1,0 +1,5 @@
+{
+  "id": "darksun:species:silt-elf",
+  "name": "Silt Elf",
+  "effects": [{ "type": "set_speed", "value": 35 }]
+}

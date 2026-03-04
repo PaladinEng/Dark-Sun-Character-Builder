@@ -1,0 +1,8 @@
+{
+  "id": "srd52:equipment:ring-mail",
+  "type": "armor_heavy",
+  "name": "Ring Mail",
+  "armorClassBase": 14,
+  "dexCap": 0,
+  "stealthDisadvantage": true
+}

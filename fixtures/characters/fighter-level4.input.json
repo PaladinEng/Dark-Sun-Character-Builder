@@ -1,0 +1,294 @@
+{
+  "state": {
+    "level": 4,
+    "baseAbilities": {
+      "str": 15,
+      "dex": 14,
+      "con": 13,
+      "int": 10,
+      "wis": 12,
+      "cha": 8
+    },
+    "abilityIncreases": [
+      {
+        "source": "background",
+        "changes": {
+          "str": 2,
+          "dex": 1
+        }
+      }
+    ],
+    "selectedSpeciesId": "test:species:mul",
+    "selectedBackgroundId": "test:bg:scout",
+    "selectedClassId": "test:class:fighter",
+    "selectedFeatureIds": [
+      "test:feature:keen-eyes"
+    ],
+    "selectedFeats": [
+      "test:feat:sharpshooter-init"
+    ],
+    "advancements": [
+      {
+        "type": "asi",
+        "changes": {
+          "str": 1,
+          "con": 1
+        },
+        "source": "level",
+        "level": 4
+      }
+    ],
+    "chosenSkillProficiencies": [
+      "athletics"
+    ],
+    "chosenSaveProficiencies": [
+      "str"
+    ],
+    "toolProficiencies": [
+      "artisan"
+    ],
+    "equippedArmorId": "test:armor:chain-shirt",
+    "equippedShieldId": "test:shield:wood",
+    "equippedWeaponId": "test:weapon:longsword",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:mul",
+        "name": "Mul",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "stealth"
+          },
+          {
+            "type": "set_speed",
+            "value": 35
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:scout",
+        "name": "Scout",
+        "grantsFeat": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "perception",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "con"
+          }
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "test:feature:keen-eyes",
+        "name": "Keen Eyes",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "perception",
+            "value": 2
+          },
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "cartographer"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:sharpshooter-init",
+        "name": "Sharpshooter Initiate",
+        "category": "general",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "athletics",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "save",
+            "key": "wis",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      {
+        "id": "test:shield:wood",
+        "name": "Wood Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      {
+        "id": "test:weapon:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "properties": [
+          "versatile"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:mul": {
+        "id": "test:species:mul",
+        "name": "Mul",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "stealth"
+          },
+          {
+            "type": "set_speed",
+            "value": 35
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:scout": {
+        "id": "test:bg:scout",
+        "name": "Scout",
+        "grantsFeat": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "perception",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "con"
+          }
+        ]
+      }
+    },
+    "featuresById": {
+      "test:feature:keen-eyes": {
+        "id": "test:feature:keen-eyes",
+        "name": "Keen Eyes",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "perception",
+            "value": 2
+          },
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "cartographer"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:sharpshooter-init": {
+        "id": "test:feat:sharpshooter-init",
+        "name": "Sharpshooter Initiate",
+        "category": "general",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "athletics",
+            "value": 1
+          }
+        ]
+      },
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "save",
+            "key": "wis",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "equipmentById": {
+      "test:armor:chain-shirt": {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      "test:shield:wood": {
+        "id": "test:shield:wood",
+        "name": "Wood Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      "test:weapon:longsword": {
+        "id": "test:weapon:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "properties": [
+          "versatile"
+        ]
+      }
+    }
+  }
+}

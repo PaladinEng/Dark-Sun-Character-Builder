@@ -1,0 +1,205 @@
+{
+  "state": {
+    "level": 5,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 12,
+      "int": 14,
+      "wis": 15,
+      "cha": 10
+    },
+    "selectedSpeciesId": "test:species:elf",
+    "selectedBackgroundId": "test:bg:wanderer",
+    "selectedClassId": "test:class:ranger",
+    "selectedFeatureIds": [],
+    "selectedFeats": [
+      "test:feat:eagle-eye"
+    ],
+    "advancements": [
+      {
+        "type": "feat",
+        "featId": "test:feat:sprinter",
+        "source": "level",
+        "level": 4
+      }
+    ],
+    "chosenSkillProficiencies": [
+      "survival",
+      "stealth"
+    ],
+    "chosenSaveProficiencies": [
+      "dex",
+      "wis"
+    ],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:leather",
+    "equippedWeaponId": "test:weapon:shortbow",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:wanderer",
+        "name": "Wanderer",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "survival",
+            "value": 1
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:ranger",
+        "name": "Ranger",
+        "hitDie": 10
+      }
+    ],
+    "features": [],
+    "feats": [
+      {
+        "id": "test:feat:eagle-eye",
+        "name": "Eagle Eye",
+        "category": "general",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "perception",
+            "value": 1
+          }
+        ]
+      },
+      {
+        "id": "test:feat:sprinter",
+        "name": "Sprinter",
+        "category": "general",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 40
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:weapon:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "properties": [
+          "ranged"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:elf": {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:wanderer": {
+        "id": "test:bg:wanderer",
+        "name": "Wanderer",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "survival",
+            "value": 1
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:ranger": {
+        "id": "test:class:ranger",
+        "name": "Ranger",
+        "hitDie": 10
+      }
+    },
+    "featuresById": {},
+    "featsById": {
+      "test:feat:eagle-eye": {
+        "id": "test:feat:eagle-eye",
+        "name": "Eagle Eye",
+        "category": "general",
+        "effects": [
+          {
+            "type": "add_bonus",
+            "target": "skill",
+            "key": "perception",
+            "value": 1
+          }
+        ]
+      },
+      "test:feat:sprinter": {
+        "id": "test:feat:sprinter",
+        "name": "Sprinter",
+        "category": "general",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 40
+          }
+        ]
+      }
+    },
+    "equipmentById": {
+      "test:armor:leather": {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:weapon:shortbow": {
+        "id": "test:weapon:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "properties": [
+          "ranged"
+        ]
+      }
+    }
+  }
+}

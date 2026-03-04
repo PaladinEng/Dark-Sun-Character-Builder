@@ -1,0 +1,9 @@
+{
+  "id": "srd52:equipment:rapier",
+  "type": "weapon",
+  "name": "Rapier",
+  "damageDice": "1d8",
+  "properties": [
+    "finesse"
+  ]
+}

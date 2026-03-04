@@ -1,0 +1,16 @@
+{
+  "id": "darksun:species:desert-elf",
+  "name": "Desert Elf",
+  "replaces": "srd52:species:elf",
+  "description": "Swift nomads adapted to the dunes.",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 35
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    }
+  ]
+}

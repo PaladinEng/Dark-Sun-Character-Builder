@@ -1,0 +1,25 @@
+{
+  "name": "dark-sun-builder",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @dark-sun/content build && pnpm --filter web dev",
+    "lint": "pnpm --filter web lint",
+    "test": "pnpm --filter @dark-sun/rules test && pnpm --filter @dark-sun/content test",
+    "test:watch": "pnpm --filter @dark-sun/content test:watch & pnpm --filter @dark-sun/rules test:watch",
+    "sheet:golden": "pnpm --filter @dark-sun/rules sheet:golden",
+    "sheet:invariants": "pnpm --filter @dark-sun/rules sheet:invariants",
+    "loop:check": "node scripts/loopdev-check.mjs",
+    "fetch:srd521": "tsx scripts/fetch_srd_5_2_1.ts",
+    "import:srd521:seed": "pnpm import:seed",
+    "import:seed": "pnpm --filter @dark-sun/content build && tsx scripts/import_srd521_seed.ts",
+    "typecheck": "pnpm --filter @dark-sun/content build && pnpm --filter @dark-sun/rules typecheck && pnpm --filter @dark-sun/content typecheck && pnpm --filter web typecheck",
+    "verify": "pnpm test && pnpm import:seed && pnpm typecheck",
+    "start:dev": "pnpm verify && pnpm --filter web dev"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}

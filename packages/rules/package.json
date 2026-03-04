@@ -1,0 +1,30 @@
+{
+  "name": "@dark-sun/rules",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:unit": "vitest run test/rules.test.ts",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "sheet:golden": "node test/run-sheet-golden.mjs",
+    "sheet:invariants": "vitest run test/sheet.invariants.test.ts"
+  },
+  "dependencies": {
+    "@dark-sun/content": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.16.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

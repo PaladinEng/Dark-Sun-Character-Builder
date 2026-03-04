@@ -1,0 +1,9 @@
+{
+  "id": "srd52:equipment:chain-shirt",
+  "name": "Chain Shirt (Sun-Bleached)",
+  "type": "armor_medium",
+  "description": "Worn and reinforced links suited for desert patrols.",
+  "armorClassBase": 14,
+  "dexCap": 1,
+  "hasShieldBonus": false
+}

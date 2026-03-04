@@ -1,0 +1,11 @@
+{
+  "id": "srd52:class:barbarian",
+  "name": "Barbarian",
+  "hitDie": 12,
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "con"
+    }
+  ]
+}

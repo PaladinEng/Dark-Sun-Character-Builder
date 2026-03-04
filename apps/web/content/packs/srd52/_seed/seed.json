@@ -1,0 +1,238 @@
+{
+  "species": [
+    {
+      "slug": "human",
+      "name": "Human",
+      "effects": [{ "type": "set_speed", "value": 30 }]
+    },
+    {
+      "slug": "elf",
+      "name": "Elf",
+      "effects": [{ "type": "set_speed", "value": 30 }]
+    },
+    {
+      "slug": "dwarf",
+      "name": "Dwarf",
+      "effects": [{ "type": "set_speed", "value": 25 }]
+    },
+    {
+      "slug": "halfling",
+      "name": "Halfling",
+      "effects": [{ "type": "set_speed", "value": 25 }]
+    }
+  ],
+  "backgrounds": [
+    {
+      "slug": "acolyte",
+      "name": "Acolyte",
+      "abilityOptions": {
+        "abilities": ["wis", "int", "cha"],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:alert",
+      "effects": [{ "type": "grant_skill_proficiency", "skill": "insight" }]
+    },
+    {
+      "slug": "soldier",
+      "name": "Soldier",
+      "effects": [{ "type": "grant_skill_proficiency", "skill": "athletics" }]
+    },
+    {
+      "slug": "sage",
+      "name": "Sage",
+      "effects": [{ "type": "grant_skill_proficiency", "skill": "arcana" }]
+    },
+    {
+      "slug": "criminal",
+      "name": "Criminal",
+      "effects": [{ "type": "grant_skill_proficiency", "skill": "stealth" }]
+    }
+  ],
+  "classes": [
+    {
+      "slug": "fighter",
+      "name": "Fighter",
+      "hitDie": 10,
+      "effects": [{ "type": "grant_save_proficiency", "ability": "str" }]
+    },
+    {
+      "slug": "wizard",
+      "name": "Wizard",
+      "hitDie": 6,
+      "effects": [{ "type": "grant_save_proficiency", "ability": "int" }]
+    },
+    {
+      "slug": "rogue",
+      "name": "Rogue",
+      "hitDie": 8,
+      "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
+    },
+    {
+      "slug": "cleric",
+      "name": "Cleric",
+      "hitDie": 8,
+      "effects": [{ "type": "grant_save_proficiency", "ability": "wis" }]
+    },
+    {
+      "slug": "barbarian",
+      "name": "Barbarian",
+      "hitDie": 12,
+      "effects": [{ "type": "grant_save_proficiency", "ability": "con" }]
+    },
+    {
+      "slug": "ranger",
+      "name": "Ranger",
+      "hitDie": 10,
+      "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
+    }
+  ],
+  "features": [
+    { "slug": "second-wind", "name": "Second Wind" },
+    { "slug": "sneak-attack", "name": "Sneak Attack" },
+    { "slug": "spellcasting", "name": "Spellcasting" }
+  ],
+  "feats": [
+    { "slug": "alert", "name": "Alert", "category": "origin" },
+    { "slug": "tough", "name": "Tough", "category": "general" },
+    { "slug": "magic-initiate", "name": "Magic Initiate", "category": "general" }
+  ],
+  "equipment": [
+    {
+      "slug": "padded-armor",
+      "name": "Padded Armor",
+      "type": "armor",
+      "armorCategory": "light",
+      "armorClassBase": 11,
+      "stealthDisadvantage": true
+    },
+    {
+      "slug": "leather-armor",
+      "name": "Leather Armor",
+      "type": "armor",
+      "armorCategory": "light",
+      "armorClassBase": 11
+    },
+    {
+      "slug": "studded-leather-armor",
+      "name": "Studded Leather Armor",
+      "type": "armor",
+      "armorCategory": "light",
+      "armorClassBase": 12
+    },
+    {
+      "slug": "hide-armor",
+      "name": "Hide Armor",
+      "type": "armor",
+      "armorCategory": "medium",
+      "armorClassBase": 12,
+      "dexCap": 2
+    },
+    {
+      "slug": "chain-shirt",
+      "name": "Chain Shirt",
+      "type": "armor",
+      "armorCategory": "medium",
+      "armorClassBase": 13,
+      "dexCap": 2
+    },
+    {
+      "slug": "scale-mail",
+      "name": "Scale Mail",
+      "type": "armor",
+      "armorCategory": "medium",
+      "armorClassBase": 14,
+      "dexCap": 2,
+      "stealthDisadvantage": true
+    },
+    {
+      "slug": "breastplate",
+      "name": "Breastplate",
+      "type": "armor",
+      "armorCategory": "medium",
+      "armorClassBase": 14,
+      "dexCap": 2
+    },
+    {
+      "slug": "half-plate-armor",
+      "name": "Half Plate Armor",
+      "type": "armor",
+      "armorCategory": "medium",
+      "armorClassBase": 15,
+      "dexCap": 2,
+      "stealthDisadvantage": true
+    },
+    {
+      "slug": "ring-mail",
+      "name": "Ring Mail",
+      "type": "armor",
+      "armorCategory": "heavy",
+      "armorClassBase": 14,
+      "dexCap": 0,
+      "stealthDisadvantage": true
+    },
+    {
+      "slug": "chain-mail",
+      "name": "Chain Mail",
+      "type": "armor",
+      "armorCategory": "heavy",
+      "armorClassBase": 16,
+      "dexCap": 0,
+      "stealthDisadvantage": true,
+      "strengthRequirement": 13
+    },
+    {
+      "slug": "splint-armor",
+      "name": "Splint Armor",
+      "type": "armor",
+      "armorCategory": "heavy",
+      "armorClassBase": 17,
+      "dexCap": 0,
+      "stealthDisadvantage": true,
+      "strengthRequirement": 15
+    },
+    {
+      "slug": "plate-armor",
+      "name": "Plate Armor",
+      "type": "armor",
+      "armorCategory": "heavy",
+      "armorClassBase": 18,
+      "dexCap": 0,
+      "stealthDisadvantage": true,
+      "strengthRequirement": 15
+    },
+    {
+      "slug": "shield",
+      "name": "Shield",
+      "type": "shield",
+      "hasShieldBonus": true
+    },
+    {
+      "slug": "longsword",
+      "name": "Longsword",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "properties": ["versatile"]
+    },
+    {
+      "slug": "battleaxe",
+      "name": "Battleaxe",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "properties": ["versatile"]
+    },
+    {
+      "slug": "rapier",
+      "name": "Rapier",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "properties": ["finesse"]
+    },
+    {
+      "slug": "shortbow",
+      "name": "Shortbow",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "properties": ["ranged"]
+    }
+  ]
+}

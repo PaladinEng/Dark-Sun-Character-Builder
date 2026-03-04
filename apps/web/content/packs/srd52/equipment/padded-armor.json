@@ -1,0 +1,7 @@
+{
+  "id": "srd52:equipment:padded-armor",
+  "type": "armor_light",
+  "name": "Padded Armor",
+  "armorClassBase": 11,
+  "stealthDisadvantage": true
+}

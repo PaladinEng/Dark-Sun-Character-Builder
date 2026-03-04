@@ -1,0 +1,25 @@
+{
+  "id": "darksun:background:templar-initiate",
+  "name": "Templar Initiate",
+  "replaces": "srd52:background:acolyte",
+  "grantsFeat": "srd52:feat:alert",
+  "description": "An initiate trained in civic rites and arcane bureaucracy.",
+  "abilityOptions": {
+    "abilities": ["wis", "int", "cha"],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "insight"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "religion"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "calligrapher's supplies"
+    }
+  ]
+}

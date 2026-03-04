@@ -1,0 +1,8 @@
+{
+  "id": "darksun:equipment:gythka",
+  "name": "Gythka",
+  "type": "weapon",
+  "description": "A double-ended polearm common among gladiators.",
+  "damageDice": "1d8",
+  "properties": ["versatile 1d10", "reach"]
+}
