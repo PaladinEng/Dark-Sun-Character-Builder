@@ -8,12 +8,16 @@ import {
   EquipmentSchema,
   FeatSchema,
   FeatureSchema,
+  SpellListSchema,
+  SpellSchema,
   SpeciesSchema,
   type Background,
   type Class,
   type Equipment,
   type Feat,
   type Feature,
+  type Spell,
+  type SpellList,
   type Species
 } from "./entities";
 import { PackManifestSchema, type PackManifest } from "./manifest";
@@ -27,6 +31,8 @@ export interface Pack {
     features: Feature[];
     feats: Feat[];
     equipment: Equipment[];
+    spells: Spell[];
+    spellLists: SpellList[];
   };
 }
 
@@ -88,6 +94,12 @@ export async function loadPackFromDir(dir: string): Promise<Pack> {
         manifest.id,
         path.join(dir, "equipment"),
         EquipmentSchema
+      ),
+      spells: await readEntityDir(manifest.id, path.join(dir, "spells"), SpellSchema),
+      spellLists: await readEntityDir(
+        manifest.id,
+        path.join(dir, "spelllists"),
+        SpellListSchema
       )
     }
   };

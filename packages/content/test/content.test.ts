@@ -23,7 +23,9 @@ function makePack(input: Partial<Pack> & { id: string }): Pack {
       classes: [],
       features: [],
       feats: [],
-      equipment: []
+      equipment: [],
+      spells: [],
+      spellLists: []
     },
     ...input
   } as Pack;
@@ -39,7 +41,9 @@ describe("content", () => {
         classes: [],
         features: [],
         feats: [],
-        equipment: []
+        equipment: [],
+        spells: [],
+        spellLists: []
       }
     });
     const darksun = makePack({
@@ -56,7 +60,9 @@ describe("content", () => {
         classes: [],
         features: [],
         feats: [],
-        equipment: []
+        equipment: [],
+        spells: [],
+        spellLists: []
       }
     });
 

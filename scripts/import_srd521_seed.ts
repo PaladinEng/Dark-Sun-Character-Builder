@@ -20,6 +20,8 @@ const GENERATED_DIRS = {
   features: path.join(PACK_ROOT, "features"),
   feats: path.join(PACK_ROOT, "feats"),
   equipment: path.join(PACK_ROOT, "equipment"),
+  spells: path.join(PACK_ROOT, "spells"),
+  spellLists: path.join(PACK_ROOT, "spelllists"),
 } as const;
 
 function slugFromId(id: string): string {
@@ -59,6 +61,8 @@ function validateNormalizedEntities(normalized: {
   features?: unknown[];
   feats?: unknown[];
   equipment?: unknown[];
+  spells?: unknown[];
+  spellLists?: unknown[];
 }): void {
   for (const _entry of normalized.species ?? []) {
     void _entry;
@@ -76,6 +80,12 @@ function validateNormalizedEntities(normalized: {
     void _entry;
   }
   for (const _entry of normalized.equipment ?? []) {
+    void _entry;
+  }
+  for (const _entry of normalized.spells ?? []) {
+    void _entry;
+  }
+  for (const _entry of normalized.spellLists ?? []) {
     void _entry;
   }
 }
@@ -97,6 +107,8 @@ async function main(): Promise<void> {
   await writeEntities(GENERATED_DIRS.features, normalized.features ?? []);
   await writeEntities(GENERATED_DIRS.feats, normalized.feats ?? []);
   await writeEntities(GENERATED_DIRS.equipment, normalized.equipment ?? []);
+  await writeEntities(GENERATED_DIRS.spells, normalized.spells ?? []);
+  await writeEntities(GENERATED_DIRS.spellLists, normalized.spellLists ?? []);
 }
 
 main().catch((error) => {

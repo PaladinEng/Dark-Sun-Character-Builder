@@ -2,6 +2,31 @@
   "id": "srd52:class:ranger",
   "name": "Ranger",
   "hitDie": 10,
+  "classSkillChoices": {
+    "count": 3,
+    "from": [
+      "animal_handling",
+      "athletics",
+      "insight",
+      "investigation",
+      "nature",
+      "perception",
+      "stealth",
+      "survival"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true,
+    "martial": true
+  },
+  "spellcasting": {
+    "ability": "wis",
+    "progression": "half",
+    "mode": "known"
+  },
+  "spellListRefs": [
+    "srd52:spelllist:ranger-core"
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

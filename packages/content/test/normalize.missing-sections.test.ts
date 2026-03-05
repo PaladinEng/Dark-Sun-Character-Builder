@@ -12,5 +12,7 @@ describe("normalizeSeedPack", () => {
     expect(normalized.features).toEqual([]);
     expect(normalized.feats).toEqual([]);
     expect(normalized.equipment).toEqual([]);
+    expect(normalized.spells).toEqual([]);
+    expect(normalized.spellLists).toEqual([]);
   });
 });

@@ -2,6 +2,29 @@
   "id": "srd52:class:rogue",
   "name": "Rogue",
   "hitDie": 8,
+  "classSkillChoices": {
+    "count": 4,
+    "from": [
+      "acrobatics",
+      "athletics",
+      "deception",
+      "insight",
+      "intimidation",
+      "investigation",
+      "perception",
+      "performance",
+      "persuasion",
+      "sleight_of_hand",
+      "stealth"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true,
+    "weaponIds": [
+      "srd52:equipment:rapier",
+      "srd52:equipment:shortbow"
+    ]
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",

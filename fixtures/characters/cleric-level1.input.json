@@ -1,0 +1,194 @@
+{
+  "state": {
+    "level": 1,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 12,
+      "con": 14,
+      "int": 10,
+      "wis": 16,
+      "cha": 8
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:bg:acolyte",
+    "selectedClassId": "test:class:cleric",
+    "selectedFeatureIds": [],
+    "selectedFeats": [],
+    "chosenSkillProficiencies": [
+      "religion"
+    ],
+    "chosenSaveProficiencies": [
+      "wis"
+    ],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:chain-shirt",
+    "equippedShieldId": "test:shield:wood",
+    "equippedWeaponId": "test:weapon:mace",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": []
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:acolyte",
+        "name": "Acolyte",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "insight"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:cleric",
+        "name": "Cleric",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "full",
+          "mode": "prepared"
+        },
+        "weaponProficiencies": {
+          "simple": true
+        }
+      }
+    ],
+    "features": [],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      {
+        "id": "test:feat:sprinter",
+        "name": "Sprinter",
+        "category": "general",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 35
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      {
+        "id": "test:shield:wood",
+        "name": "Wood Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      {
+        "id": "test:weapon:mace",
+        "name": "Mace",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple"
+      }
+    ],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": []
+      }
+    },
+    "backgroundsById": {
+      "test:bg:acolyte": {
+        "id": "test:bg:acolyte",
+        "name": "Acolyte",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "insight"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:cleric": {
+        "id": "test:class:cleric",
+        "name": "Cleric",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "full",
+          "mode": "prepared"
+        },
+        "weaponProficiencies": {
+          "simple": true
+        }
+      }
+    },
+    "featuresById": {},
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      "test:feat:sprinter": {
+        "id": "test:feat:sprinter",
+        "name": "Sprinter",
+        "category": "general",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 35
+          }
+        ]
+      }
+    },
+    "equipmentById": {
+      "test:armor:chain-shirt": {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      "test:shield:wood": {
+        "id": "test:shield:wood",
+        "name": "Wood Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      "test:weapon:mace": {
+        "id": "test:weapon:mace",
+        "name": "Mace",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple"
+      }
+    }
+  }
+}

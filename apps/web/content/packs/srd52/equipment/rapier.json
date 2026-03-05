@@ -3,6 +3,7 @@
   "type": "weapon",
   "name": "Rapier",
   "damageDice": "1d8",
+  "weaponCategory": "martial",
   "properties": [
     "finesse"
   ]

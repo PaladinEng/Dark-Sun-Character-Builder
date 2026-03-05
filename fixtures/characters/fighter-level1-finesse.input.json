@@ -1,0 +1,196 @@
+{
+  "state": {
+    "level": 1,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 8
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:bg:acolyte",
+    "selectedClassId": "test:class:fighter",
+    "selectedFeatureIds": [],
+    "selectedFeats": [],
+    "chosenSkillProficiencies": [
+      "acrobatics"
+    ],
+    "chosenSaveProficiencies": [
+      "str"
+    ],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:leather",
+    "equippedShieldId": "test:shield:wood",
+    "equippedWeaponId": "test:weapon:rapier",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 30
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:acolyte",
+        "name": "Acolyte",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "insight"
+          },
+          {
+            "type": "grant_language",
+            "language": "Common"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    ],
+    "features": [],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin"
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:shield:wood",
+        "name": "Wood Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      {
+        "id": "test:weapon:rapier",
+        "name": "Rapier",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "finesse"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 30
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:acolyte": {
+        "id": "test:bg:acolyte",
+        "name": "Acolyte",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "insight"
+          },
+          {
+            "type": "grant_language",
+            "language": "Common"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    },
+    "featuresById": {},
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin"
+      }
+    },
+    "equipmentById": {
+      "test:armor:leather": {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:shield:wood": {
+        "id": "test:shield:wood",
+        "name": "Wood Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      "test:weapon:rapier": {
+        "id": "test:weapon:rapier",
+        "name": "Rapier",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "finesse"
+        ]
+      }
+    }
+  }
+}

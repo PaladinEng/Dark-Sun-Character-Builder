@@ -1,0 +1,92 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 2,
+    "dex": 1,
+    "int": 0,
+    "str": 0,
+    "wis": 3
+  },
+  "advancementSlots": [],
+  "armorClass": 16,
+  "attack": {
+    "damage": "1d6+0",
+    "name": "Mace",
+    "toHit": 2
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 12,
+    "int": 10,
+    "str": 10,
+    "wis": 16
+  },
+  "languages": [],
+  "maxHP": 10,
+  "passivePerception": 13,
+  "proficiencyBonus": 2,
+  "saveProficiencies": [
+    "wis"
+  ],
+  "savingThrows": {
+    "cha": -1,
+    "con": 2,
+    "dex": 1,
+    "int": 0,
+    "str": 0,
+    "wis": 5
+  },
+  "skillProficiencies": [
+    "insight",
+    "religion"
+  ],
+  "skills": {
+    "acrobatics": 1,
+    "animal_handling": 3,
+    "arcana": 0,
+    "athletics": 0,
+    "deception": -1,
+    "history": 0,
+    "insight": 5,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 3,
+    "nature": 0,
+    "perception": 3,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 2,
+    "sleight_of_hand": 1,
+    "stealth": 1,
+    "survival": 3
+  },
+  "speed": 30,
+  "spellAttackBonus": 5,
+  "spellcasting": {
+    "ability": "wis",
+    "abilityMod": 3,
+    "attackBonus": 5,
+    "cantripsKnownIds": [],
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "progression": "full",
+    "saveDC": 13,
+    "slots": {
+      "1": 2
+    }
+  },
+  "spellcastingAbility": "wis",
+  "spellSaveDC": 13,
+  "spellSlots": {
+    "1": 2
+  },
+  "toolProficiencies": [],
+  "warnings": []
+}

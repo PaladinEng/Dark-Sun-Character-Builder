@@ -1,0 +1,76 @@
+{
+  "state": {
+    "level": 3,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 12,
+      "int": 15,
+      "wis": 10,
+      "cha": 10
+    },
+    "selectedClassId": "test:class:arcane-trickster",
+    "selectedBackgroundId": "test:bg:none",
+    "selectedSpeciesId": "test:species:human",
+    "selectedFeats": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "featSelections": {
+      "level": {}
+    }
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      { "id": "test:species:human", "name": "Human" }
+    ],
+    "backgrounds": [
+      { "id": "test:bg:none", "name": "None" }
+    ],
+    "classes": [
+      {
+        "id": "test:class:arcane-trickster",
+        "name": "Arcane Trickster",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "int",
+          "progression": "third",
+          "mode": "known"
+        }
+      }
+    ],
+    "features": [],
+    "feats": [],
+    "equipment": [],
+    "speciesById": {
+      "test:species:human": { "id": "test:species:human", "name": "Human" }
+    },
+    "backgroundsById": {
+      "test:bg:none": { "id": "test:bg:none", "name": "None" }
+    },
+    "classesById": {
+      "test:class:arcane-trickster": {
+        "id": "test:class:arcane-trickster",
+        "name": "Arcane Trickster",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "int",
+          "progression": "third",
+          "mode": "known"
+        }
+      }
+    },
+    "featuresById": {},
+    "featsById": {},
+    "equipmentById": {}
+  }
+}

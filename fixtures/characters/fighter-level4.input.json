@@ -24,20 +24,11 @@
     "selectedFeatureIds": [
       "test:feature:keen-eyes"
     ],
-    "selectedFeats": [
-      "test:feat:sharpshooter-init"
-    ],
-    "advancements": [
-      {
-        "type": "asi",
-        "changes": {
-          "str": 1,
-          "con": 1
-        },
-        "source": "level",
-        "level": 4
+    "featSelections": {
+      "level": {
+        "4": "test:feat:sharpshooter-init"
       }
-    ],
+    },
     "chosenSkillProficiencies": [
       "athletics"
     ],
@@ -98,6 +89,10 @@
         "id": "test:class:fighter",
         "name": "Fighter",
         "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
         "effects": [
           {
             "type": "grant_save_proficiency",
@@ -171,6 +166,7 @@
         "name": "Longsword",
         "type": "weapon",
         "damageDice": "1d8",
+        "weaponCategory": "martial",
         "properties": [
           "versatile"
         ]
@@ -212,6 +208,10 @@
         "id": "test:class:fighter",
         "name": "Fighter",
         "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
         "effects": [
           {
             "type": "grant_save_proficiency",
@@ -285,6 +285,7 @@
         "name": "Longsword",
         "type": "weapon",
         "damageDice": "1d8",
+        "weaponCategory": "martial",
         "properties": [
           "versatile"
         ]

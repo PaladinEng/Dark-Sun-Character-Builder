@@ -1,17 +1,21 @@
 import type {
   Background,
   Class,
-  Equipment,
   Feat,
-  Feature,
-  Species,
+  MergeProvenance,
+  Spell,
+  SpellList,
+  Species
 } from "@dark-sun/content";
 
 import DebugContentClient, {
   type DebugContentData,
-  type DebugPackManifestRow,
+  type DebugEntityProvenance,
+  type DebugEntityRow,
+  type DebugEntityType,
+  type DebugPackManifestRow
 } from "./DebugContentClient";
-import { getMergedContent } from "../../../src/lib/content";
+import { getMergedContent, loadAllPacks } from "../../../src/lib/content";
 
 export const runtime = "nodejs";
 
@@ -21,21 +25,83 @@ function toManifestRows(
     name: string;
     version: string;
     license: string;
-  }>,
+  }>
 ): DebugPackManifestRow[] {
   return manifests.map((manifest) => ({
     id: manifest.id,
     name: manifest.name,
     version: manifest.version,
-    license: manifest.license,
+    license: manifest.license
   }));
 }
 
-function probeBackground(
-  backgrounds: Background[],
-  id: string,
-): Background | null {
-  return backgrounds.find((background) => background.id === id) ?? null;
+function toRows<T extends { id: string; name: string; sourcePackId?: string; replaces?: string }>(
+  entities: T[]
+): DebugEntityRow[] {
+  return [...entities]
+    .sort((a, b) => a.id.localeCompare(b.id))
+    .map((entity) => ({
+      id: entity.id,
+      name: entity.name,
+      sourcePackId: entity.sourcePackId,
+      replaces: entity.replaces
+    }));
+}
+
+function mapById<T extends { id: string }>(entities: T[]): Record<string, T> {
+  const out: Record<string, T> = {};
+  for (const entity of entities) {
+    out[entity.id] = entity;
+  }
+  return out;
+}
+
+function toDebugProvenance(
+  provenance: MergeProvenance | undefined
+): Record<DebugEntityType, Record<string, DebugEntityProvenance>> {
+  if (!provenance) {
+    return {
+      species: {},
+      backgrounds: {},
+      classes: {},
+      feats: {},
+      spells: {},
+      spellLists: {}
+    };
+  }
+
+  return {
+    species: provenance.speciesById,
+    backgrounds: provenance.backgroundsById,
+    classes: provenance.classesById,
+    feats: provenance.featsById,
+    spells: provenance.spellsById,
+    spellLists: provenance.spellListsById
+  };
+}
+
+function toPackEntityLookup(
+  packs: Awaited<ReturnType<typeof loadAllPacks>>
+): Record<DebugEntityType, Record<string, Record<string, unknown>>> {
+  const out: Record<DebugEntityType, Record<string, Record<string, unknown>>> = {
+    species: {},
+    backgrounds: {},
+    classes: {},
+    feats: {},
+    spells: {},
+    spellLists: {}
+  };
+
+  for (const pack of packs) {
+    out.species[pack.manifest.id] = mapById(pack.entities.species);
+    out.backgrounds[pack.manifest.id] = mapById(pack.entities.backgrounds);
+    out.classes[pack.manifest.id] = mapById(pack.entities.classes);
+    out.feats[pack.manifest.id] = mapById(pack.entities.feats);
+    out.spells[pack.manifest.id] = mapById(pack.entities.spells);
+    out.spellLists[pack.manifest.id] = mapById(pack.entities.spellLists);
+  }
+
+  return out;
 }
 
 export default async function DebugContentPage() {
@@ -48,34 +114,62 @@ export default async function DebugContentPage() {
     );
   }
 
-  const { packs, content } = await getMergedContent();
+  const [allPacks, merged] = await Promise.all([
+    loadAllPacks(),
+    getMergedContent(undefined, { includeProvenance: true })
+  ]);
+  const content = merged.content;
 
   const species: Species[] = content.species;
   const backgrounds: Background[] = content.backgrounds;
   const classes: Class[] = content.classes;
-  const features: Feature[] = content.features;
   const feats: Feat[] = content.feats;
-  const equipment: Equipment[] = content.equipment;
+  const spells: Spell[] = content.spells;
+  const spellLists: SpellList[] = content.spellLists;
 
   const data: DebugContentData = {
-    manifests: toManifestRows(packs.map((pack) => pack.manifest)),
+    manifests: toManifestRows(merged.packs.map((pack) => pack.manifest)),
     counts: {
-      species: species.length,
-      backgrounds: backgrounds.length,
-      classes: classes.length,
-      features: features.length,
-      feats: feats.length,
-      equipment: equipment.length,
+      species: content.species.length,
+      backgrounds: content.backgrounds.length,
+      classes: content.classes.length,
+      features: content.features.length,
+      feats: content.feats.length,
+      equipment: content.equipment.length,
+      spells: content.spells.length,
+      spellLists: content.spellLists.length
     },
-    samples: {
-      species: species.slice(0, 5),
-      backgrounds: backgrounds.slice(0, 5),
-      classes: classes.slice(0, 5),
-      features: features.slice(0, 5),
-      feats: feats.slice(0, 5),
-      equipment: equipment.slice(0, 5),
+    entities: {
+      species: toRows(species),
+      backgrounds: toRows(backgrounds),
+      classes: toRows(classes),
+      feats: toRows(feats),
+      spells: toRows(spells),
+      spellLists: toRows(spellLists)
     },
-    backgroundProbe: probeBackground(backgrounds, "srd52:background:acolyte"),
+    entitiesByTypeAndId: {
+      species: mapById(species),
+      backgrounds: mapById(backgrounds),
+      classes: mapById(classes),
+      feats: mapById(feats),
+      spells: mapById(spells),
+      spellLists: mapById(spellLists)
+    },
+    spellAccessPreviewByClassId: Object.fromEntries(
+      classes.map((klass) => {
+        const spellListIds = klass.spellListRefs ?? [];
+        const spellIds = Array.from(
+          new Set(
+            spellListIds.flatMap(
+              (spellListId) => content.spellListsById[spellListId]?.spellIds ?? []
+            )
+          )
+        ).sort((a, b) => a.localeCompare(b));
+        return [klass.id, { spellListIds, spellIds }];
+      })
+    ),
+    packEntityLookupByType: toPackEntityLookup(allPacks),
+    provenanceByTypeAndId: toDebugProvenance(merged.provenance)
   };
 
   return <DebugContentClient data={data} />;

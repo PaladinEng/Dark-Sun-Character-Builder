@@ -2,6 +2,21 @@
   "id": "srd52:class:barbarian",
   "name": "Barbarian",
   "hitDie": 12,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "animal_handling",
+      "athletics",
+      "intimidation",
+      "nature",
+      "perception",
+      "survival"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true,
+    "martial": true
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",

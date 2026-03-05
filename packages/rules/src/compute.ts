@@ -9,13 +9,15 @@ import type {
 
 import { getAvailableAdvancementSlots } from "./advancement";
 import { applyEffectsToCharacter } from "./effects";
+import { getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   type Ability,
   type AbilityRecord,
   type Advancement,
   type CharacterState,
-  type DerivedState
+  type DerivedState,
+  type SpellcastingAbility
 } from "./types";
 
 const SKILL_TO_ABILITY: Record<string, Ability> = {
@@ -43,6 +45,13 @@ const STANDARD_SKILLS = Object.keys(SKILL_TO_ABILITY);
 
 function dedupe<T>(values: T[]): T[] {
   return [...new Set(values)];
+}
+
+function sortIds(values: string[] | undefined): string[] {
+  if (!values || values.length === 0) {
+    return [];
+  }
+  return [...values].sort((a, b) => a.localeCompare(b));
 }
 
 function getBonusTotal(
@@ -102,6 +111,34 @@ function hasProperty(equipment: Equipment, wanted: string): boolean {
   );
 }
 
+export function isProficientWithWeapon(
+  weapon: Equipment,
+  klass?: Class
+): boolean {
+  if (weapon.type !== "weapon") {
+    return false;
+  }
+
+  const proficiencies = klass?.weaponProficiencies;
+  if (!proficiencies) {
+    return false;
+  }
+
+  if (proficiencies.weaponIds?.includes(weapon.id)) {
+    return true;
+  }
+
+  if (weapon.weaponCategory === "simple" && proficiencies.simple) {
+    return true;
+  }
+
+  if (weapon.weaponCategory === "martial" && proficiencies.martial) {
+    return true;
+  }
+
+  return false;
+}
+
 function signed(value: number): string {
   return value >= 0 ? `+${value}` : `${value}`;
 }
@@ -118,16 +155,30 @@ function resolveSelectedFeatures(
 function resolveSelectedFeats(
   state: CharacterState,
   merged: MergedContent,
-  advancementFeatIds: string[]
+  levelFeatIds: string[]
 ): Feat[] {
   const background = state.selectedBackgroundId
     ? merged.backgroundsById[state.selectedBackgroundId]
     : undefined;
+  const fixedOriginFeatId = background?.grantsOriginFeatId ?? background?.grantsFeat;
+  const chosenOriginFeatId = background?.originFeatChoice
+    ? state.featSelections?.origin ?? state.originFeatId
+    : undefined;
+  const candidateOriginFeatId = fixedOriginFeatId ?? chosenOriginFeatId;
+  const candidateOriginFeat = candidateOriginFeatId
+    ? merged.featsById[candidateOriginFeatId]
+    : undefined;
+  const resolvedOriginFeatId =
+    candidateOriginFeat?.category === "origin"
+      ? candidateOriginFeat.id
+      : undefined;
 
+  // Deterministic ordering: origin feat first, then level-slot feats (ascending level),
+  // then any legacy free-form selected feats.
   const allIds = dedupe([
-    ...(state.selectedFeats ?? []),
-    ...advancementFeatIds,
-    ...(background?.grantsFeat ? [background.grantsFeat] : [])
+    ...(resolvedOriginFeatId ? [resolvedOriginFeatId] : []),
+    ...levelFeatIds,
+    ...(state.selectedFeats ?? [])
   ]);
 
   return allIds
@@ -141,11 +192,38 @@ function getLevelAdvancements(
 ): Map<number, Advancement> {
   const set = new Set(slotLevels);
   const byLevel = new Map<number, Advancement>();
+
+  const levelFeatSelections = state.featSelections?.level ?? {};
+  const selectedFeatByLevel = new Map<number, string>();
+  for (const [rawLevel, featId] of Object.entries(levelFeatSelections)) {
+    const parsedLevel = Number(rawLevel);
+    if (!Number.isFinite(parsedLevel) || !set.has(parsedLevel)) {
+      continue;
+    }
+    if (typeof featId !== "string" || featId.length === 0) {
+      continue;
+    }
+    selectedFeatByLevel.set(parsedLevel, featId);
+  }
+
   for (const advancement of state.advancements ?? []) {
     if (advancement.source !== "level") continue;
     if (!set.has(advancement.level)) continue;
+    if (advancement.type === "feat" && selectedFeatByLevel.has(advancement.level)) {
+      continue;
+    }
     byLevel.set(advancement.level, advancement);
   }
+
+  for (const [slotLevel, featId] of selectedFeatByLevel.entries()) {
+    byLevel.set(slotLevel, {
+      type: "feat",
+      featId,
+      source: "level",
+      level: slotLevel
+    });
+  }
+
   return byLevel;
 }
 
@@ -153,6 +231,7 @@ export function computeDerivedState(
   state: CharacterState,
   merged: MergedContent
 ): DerivedState {
+  const warnings: string[] = [];
   const level = Math.max(1, Math.floor(state.level || 1));
   const slotLevels = getAvailableAdvancementSlots(level, state.selectedClassId);
   const advancementsByLevel = getLevelAdvancements(state, slotLevels);
@@ -193,13 +272,14 @@ export function computeDerivedState(
     ? merged.classesById[state.selectedClassId]
     : undefined;
   const features = resolveSelectedFeatures(state, merged);
-  const advancementFeatIds = [...advancementsByLevel.values()]
+  const levelFeatIds = [...advancementsByLevel.entries()]
     .filter(
-      (entry): entry is Extract<Advancement, { type: "feat" }> =>
-        entry.type === "feat"
+      (entry): entry is [number, Extract<Advancement, { type: "feat" }>] =>
+        entry[1].type === "feat"
     )
-    .map((entry) => entry.featId);
-  const feats = resolveSelectedFeats(state, merged, advancementFeatIds);
+    .sort((a, b) => a[0] - b[0])
+    .map((entry) => entry[1].featId);
+  const feats = resolveSelectedFeats(state, merged, levelFeatIds);
 
   const effects: Effect[] = [
     ...(species?.effects ?? []),
@@ -215,6 +295,28 @@ export function computeDerivedState(
     ...(state.chosenSkillProficiencies ?? []),
     ...applied.grantedSkillProficiencies
   ]);
+  const chosenClassSkills = dedupe(state.chosenClassSkills ?? []);
+  const classSkillsTouched = state.touched?.classSkills === true;
+  if (klass?.classSkillChoices) {
+    const classSkillChoices = klass.classSkillChoices;
+    const allowed = new Set(classSkillChoices.from);
+    const invalidChoices = chosenClassSkills.filter((skill) => !allowed.has(skill));
+    if (invalidChoices.length > 0) {
+      warnings.push(
+        `Invalid class skill selections for ${klass.name}: ${invalidChoices.join(", ")}`
+      );
+    }
+
+    const validChoices = chosenClassSkills.filter((skill) => allowed.has(skill));
+    if (classSkillsTouched && validChoices.length !== classSkillChoices.count) {
+      warnings.push(
+        `Class skill selections incomplete for ${klass.name}: expected ${classSkillChoices.count}, got ${validChoices.length}`
+      );
+    }
+
+    skillProficiencies.push(...validChoices.slice(0, classSkillChoices.count));
+  }
+  const finalSkillProficiencies = dedupe(skillProficiencies);
   const saveProficiencies = dedupe([
     ...(state.chosenSaveProficiencies ?? []),
     ...applied.grantedSaveProficiencies
@@ -223,12 +325,16 @@ export function computeDerivedState(
     ...(state.toolProficiencies ?? []),
     ...applied.grantedToolProficiencies
   ]);
+  const languages = dedupe([
+    ...(state.languages ?? []),
+    ...applied.grantedLanguages
+  ]);
 
   const skills: Record<string, number> = {};
   for (const skill of STANDARD_SKILLS) {
     const ability = SKILL_TO_ABILITY[skill] ?? "wis";
     const bonus = getBonusTotal(applied.bonuses, "skill", skill);
-    const proficient = skillProficiencies.includes(skill);
+    const proficient = finalSkillProficiencies.includes(skill);
     skills[skill] = abilityMods[ability] + (proficient ? proficiencyBonus : 0) + bonus;
   }
 
@@ -297,6 +403,12 @@ export function computeDerivedState(
 
   let attack: DerivedState["attack"] = null;
   if (weapon?.type === "weapon" && weapon.damageDice) {
+    if (!weapon.weaponCategory) {
+      warnings.push(
+        `Weapon category missing for ${weapon.name}; proficiency cannot be inferred from simple/martial rules`
+      );
+    }
+
     const ranged = hasProperty(weapon, "ranged");
     const finesse = hasProperty(weapon, "finesse");
     const attackAbility: Ability = ranged
@@ -307,12 +419,56 @@ export function computeDerivedState(
           : "str"
         : "str";
     const mod = abilityMods[attackAbility];
+    const proficientWithWeapon = isProficientWithWeapon(weapon, klass);
+    if (!proficientWithWeapon) {
+      warnings.push(
+        `Attack with ${weapon.name} is not proficient; proficiency bonus not applied`
+      );
+    }
     attack = {
       name: weapon.name,
-      toHit: mod + proficiencyBonus,
+      toHit: mod + (proficientWithWeapon ? proficiencyBonus : 0),
       damage: `${weapon.damageDice}${signed(mod)}`
     };
   }
+
+  let spellcastingAbility: SpellcastingAbility | null = null;
+  let spellSaveDC: number | null = null;
+  let spellAttackBonus: number | null = null;
+  let spellSlots: Record<number, number> | null = null;
+  const knownSpellIds = sortIds(state.knownSpellIds);
+  const preparedSpellIds = sortIds(state.preparedSpellIds);
+  const cantripsKnownIds = sortIds(state.cantripsKnownIds);
+
+  const spellcasting = klass?.spellcasting
+    ? (() => {
+        const spellAbility = klass.spellcasting.ability;
+        const abilityMod = abilityMods[spellAbility];
+        const slots =
+          klass.spellcasting.progression === "pact"
+            ? {}
+            : getSpellSlots(level, klass.spellcasting.progression);
+        const saveDC = 8 + proficiencyBonus + abilityMod;
+        const attackBonus = proficiencyBonus + abilityMod;
+
+        spellcastingAbility = spellAbility;
+        spellSaveDC = saveDC;
+        spellAttackBonus = attackBonus;
+        spellSlots = slots;
+
+        return {
+          ability: spellAbility,
+          abilityMod,
+          saveDC,
+          attackBonus,
+          progression: klass.spellcasting.progression,
+          slots,
+          knownSpellIds,
+          preparedSpellIds,
+          cantripsKnownIds
+        };
+      })()
+    : undefined;
 
   const advancementSlots = slotLevels.map((slotLevel) => {
     const advancement = advancementsByLevel.get(slotLevel);
@@ -345,11 +501,21 @@ export function computeDerivedState(
     speed: applied.speedOverride ?? state.baseSpeed ?? 30,
     savingThrows,
     skills,
+    skillProficiencies: finalSkillProficiencies,
+    saveProficiencies,
     toolProficiencies,
+    languages,
+    passivePerception: 10 + (skills.perception ?? 0),
     maxHP,
     armorClass,
     attack,
+    spellcastingAbility,
+    spellSaveDC,
+    spellAttackBonus,
+    spellSlots,
+    spellcasting,
     feats: feats.map((feat) => ({ id: feat.id, name: feat.name })),
+    warnings: dedupe(warnings),
     advancementSlots
   };
 }

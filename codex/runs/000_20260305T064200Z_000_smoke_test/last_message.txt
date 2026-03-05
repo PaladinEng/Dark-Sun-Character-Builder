@@ -1,0 +1,3 @@
+`pnpm loop:check` passed.
+
+=== ALL_PASS ===

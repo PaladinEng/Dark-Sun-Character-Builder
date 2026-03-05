@@ -30,6 +30,7 @@
         "mode": "2+1_or_1+1+1"
       },
       "grantsFeat": "srd52:feat:alert",
+      "grantsOriginFeatId": "srd52:feat:alert",
       "effects": [{ "type": "grant_skill_proficiency", "skill": "insight" }]
     },
     {
@@ -45,6 +46,9 @@
     {
       "slug": "criminal",
       "name": "Criminal",
+      "originFeatChoice": {
+        "featIds": ["srd52:feat:alert", "srd52:feat:magic-initiate"]
+      },
       "effects": [{ "type": "grant_skill_proficiency", "skill": "stealth" }]
     }
   ],
@@ -53,36 +57,151 @@
       "slug": "fighter",
       "name": "Fighter",
       "hitDie": 10,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "acrobatics",
+          "animal_handling",
+          "athletics",
+          "history",
+          "insight",
+          "intimidation",
+          "investigation",
+          "perception",
+          "survival"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true,
+        "martial": true
+      },
       "effects": [{ "type": "grant_save_proficiency", "ability": "str" }]
     },
     {
       "slug": "wizard",
       "name": "Wizard",
       "hitDie": 6,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "arcana",
+          "history",
+          "insight",
+          "investigation",
+          "medicine",
+          "religion"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true
+      },
+      "spellcasting": {
+        "ability": "int",
+        "progression": "full",
+        "mode": "prepared"
+      },
       "effects": [{ "type": "grant_save_proficiency", "ability": "int" }]
     },
     {
       "slug": "rogue",
       "name": "Rogue",
       "hitDie": 8,
+      "classSkillChoices": {
+        "count": 4,
+        "from": [
+          "acrobatics",
+          "athletics",
+          "deception",
+          "insight",
+          "intimidation",
+          "investigation",
+          "perception",
+          "performance",
+          "persuasion",
+          "sleight_of_hand",
+          "stealth"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true,
+        "weaponIds": [
+          "srd52:equipment:rapier",
+          "srd52:equipment:shortbow"
+        ]
+      },
       "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
     },
     {
       "slug": "cleric",
       "name": "Cleric",
       "hitDie": 8,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "history",
+          "insight",
+          "medicine",
+          "persuasion",
+          "religion"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true
+      },
+      "spellcasting": {
+        "ability": "wis",
+        "progression": "full",
+        "mode": "prepared"
+      },
       "effects": [{ "type": "grant_save_proficiency", "ability": "wis" }]
     },
     {
       "slug": "barbarian",
       "name": "Barbarian",
       "hitDie": 12,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "animal_handling",
+          "athletics",
+          "intimidation",
+          "nature",
+          "perception",
+          "survival"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true,
+        "martial": true
+      },
       "effects": [{ "type": "grant_save_proficiency", "ability": "con" }]
     },
     {
       "slug": "ranger",
       "name": "Ranger",
       "hitDie": 10,
+      "classSkillChoices": {
+        "count": 3,
+        "from": [
+          "animal_handling",
+          "athletics",
+          "insight",
+          "investigation",
+          "nature",
+          "perception",
+          "stealth",
+          "survival"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true,
+        "martial": true
+      },
+      "spellcasting": {
+        "ability": "wis",
+        "progression": "half",
+        "mode": "known"
+      },
       "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
     }
   ],
@@ -93,8 +212,8 @@
   ],
   "feats": [
     { "slug": "alert", "name": "Alert", "category": "origin" },
-    { "slug": "tough", "name": "Tough", "category": "general" },
-    { "slug": "magic-initiate", "name": "Magic Initiate", "category": "general" }
+    { "slug": "tough", "name": "Tough", "category": "general", "prerequisites": { "minLevel": 4 } },
+    { "slug": "magic-initiate", "name": "Magic Initiate", "category": "origin" }
   ],
   "equipment": [
     {
@@ -211,6 +330,7 @@
       "name": "Longsword",
       "type": "weapon",
       "damageDice": "1d8",
+      "weaponCategory": "martial",
       "properties": ["versatile"]
     },
     {
@@ -218,6 +338,7 @@
       "name": "Battleaxe",
       "type": "weapon",
       "damageDice": "1d8",
+      "weaponCategory": "martial",
       "properties": ["versatile"]
     },
     {
@@ -225,6 +346,7 @@
       "name": "Rapier",
       "type": "weapon",
       "damageDice": "1d8",
+      "weaponCategory": "martial",
       "properties": ["finesse"]
     },
     {
@@ -232,6 +354,7 @@
       "name": "Shortbow",
       "type": "weapon",
       "damageDice": "1d6",
+      "weaponCategory": "simple",
       "properties": ["ranged"]
     }
   ]

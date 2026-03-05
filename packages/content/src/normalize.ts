@@ -4,6 +4,8 @@ import type {
   Equipment,
   Feat,
   Feature,
+  Spell,
+  SpellList,
   Species,
 } from "./entities";
 import type { SeedPack } from "./seed";
@@ -15,6 +17,8 @@ export type NormalizedEntities = {
   features: Feature[];
   feats: Feat[];
   equipment: Equipment[];
+  spells: Spell[];
+  spellLists: SpellList[];
 };
 
 type SeedBackgroundEntry = NonNullable<SeedPack["backgrounds"]>[number];
@@ -38,6 +42,8 @@ function normalizeBackground(
   const metadata = entry as {
     abilityOptions?: Background["abilityOptions"];
     grantsFeat?: string;
+    grantsOriginFeatId?: string;
+    originFeatChoice?: Background["originFeatChoice"];
   };
 
   return {
@@ -46,15 +52,25 @@ function normalizeBackground(
     description: entry.description,
     abilityOptions: metadata.abilityOptions,
     grantsFeat: metadata.grantsFeat,
+    grantsOriginFeatId: metadata.grantsOriginFeatId,
+    originFeatChoice: metadata.originFeatChoice,
     effects: entry.effects,
   };
 }
 
 function normalizeFeat(packId: string, entry: SeedFeatEntry): Feat {
+  const metadata = entry as {
+    category?: Feat["category"];
+    repeatable?: boolean;
+    prerequisites?: Feat["prerequisites"];
+  };
   return {
     id: slugToId(packId, "feat", entry.slug),
     name: entry.name,
     description: entry.description,
+    category: metadata.category,
+    repeatable: metadata.repeatable,
+    prerequisites: metadata.prerequisites,
     effects: entry.effects,
   };
 }
@@ -74,6 +90,7 @@ function normalizeEquipment(packId: string, entry: SeedEquipmentEntry): Equipmen
     dexCap: entry.dexCap,
     hasShieldBonus: entry.hasShieldBonus,
     damageDice: entry.damageDice,
+    weaponCategory: entry.weaponCategory,
     properties: entry.properties,
     effects: entry.effects,
     strengthRequirement: entryWithExtras.strengthRequirement,
@@ -145,6 +162,10 @@ export function normalizeSeedPack(
     name: entry.name,
     description: entry.description,
     hitDie: entry.hitDie,
+    classSkillChoices: entry.classSkillChoices,
+    weaponProficiencies: entry.weaponProficiencies,
+    spellcasting: entry.spellcasting,
+    spellListRefs: entry.spellListRefs,
     effects: entry.effects,
   }));
 
@@ -163,6 +184,30 @@ export function normalizeSeedPack(
     normalizeEquipment(packId, entry),
   );
 
+  const spells: Spell[] = (seed.spells ?? []).map((entry) => ({
+    id: slugToId(packId, "spell", entry.slug),
+    name: entry.name,
+    description: entry.description,
+    level: entry.level,
+    school: entry.school,
+    ritual: entry.ritual,
+    castingTime: entry.castingTime,
+    range: entry.range,
+    components: entry.components,
+    duration: entry.duration,
+    concentration: entry.concentration,
+    summary: entry.summary,
+    effects: entry.effects,
+  }));
+
+  const spellLists: SpellList[] = (seed.spellLists ?? []).map((entry) => ({
+    id: slugToId(packId, "spelllist", entry.slug),
+    name: entry.name,
+    description: entry.description,
+    spellIds: entry.spellIds,
+    effects: entry.effects,
+  }));
+
   return {
     species,
     backgrounds,
@@ -170,5 +215,7 @@ export function normalizeSeedPack(
     features,
     feats,
     equipment,
+    spells,
+    spellLists,
   };
 }

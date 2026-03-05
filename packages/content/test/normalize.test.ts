@@ -4,6 +4,8 @@ import {
   ClassSchema,
   EquipmentSchema,
   FeatureSchema,
+  SpellListSchema,
+  SpellSchema,
   SeedPackSchema,
   SpeciesSchema,
   normalizeSeedPack
@@ -120,6 +122,12 @@ describe("normalizeSeedPack", () => {
     }
     for (const equipment of normalized.equipment) {
       expect(EquipmentSchema.safeParse(equipment).success).toBe(true);
+    }
+    for (const spell of normalized.spells) {
+      expect(SpellSchema.safeParse(spell).success).toBe(true);
+    }
+    for (const spellList of normalized.spellLists) {
+      expect(SpellListSchema.safeParse(spellList).success).toBe(true);
     }
   });
 });

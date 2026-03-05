@@ -30,6 +30,10 @@
       "name": "Eagle Eye"
     },
     {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    },
+    {
       "id": "test:feat:sprinter",
       "name": "Sprinter"
     }
@@ -42,8 +46,14 @@
     "str": 10,
     "wis": 15
   },
+  "languages": [],
   "maxHP": 39,
+  "passivePerception": 16,
   "proficiencyBonus": 3,
+  "saveProficiencies": [
+    "dex",
+    "wis"
+  ],
   "savingThrows": {
     "cha": 0,
     "con": 1,
@@ -52,6 +62,11 @@
     "str": 0,
     "wis": 5
   },
+  "skillProficiencies": [
+    "perception",
+    "stealth",
+    "survival"
+  ],
   "skills": {
     "acrobatics": 3,
     "animal_handling": 2,
@@ -73,5 +88,27 @@
     "survival": 6
   },
   "speed": 40,
-  "toolProficiencies": []
+  "spellAttackBonus": 5,
+  "spellcasting": {
+    "ability": "wis",
+    "abilityMod": 2,
+    "attackBonus": 5,
+    "cantripsKnownIds": [],
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "progression": "half",
+    "saveDC": 13,
+    "slots": {
+      "1": 4,
+      "2": 2
+    }
+  },
+  "spellcastingAbility": "wis",
+  "spellSaveDC": 13,
+  "spellSlots": {
+    "1": 4,
+    "2": 2
+  },
+  "toolProficiencies": [],
+  "warnings": []
 }

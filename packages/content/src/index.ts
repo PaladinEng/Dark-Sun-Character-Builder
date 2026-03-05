@@ -10,7 +10,9 @@ export type {
   Class,
   Feature,
   Feat,
-  Equipment
+  Equipment,
+  Spell,
+  SpellList
 } from "./entities";
 export {
   SpeciesSchema,
@@ -19,7 +21,11 @@ export {
   FeatureSchema,
   FeatSchema,
   EquipmentSchema,
-  EquipmentTypeSchema
+  EquipmentTypeSchema,
+  SpellSchema,
+  SpellListSchema,
+  SpellSchoolSchema,
+  SpellComponentSchema
 } from "./entities";
 
 export type {
@@ -29,7 +35,9 @@ export type {
   SeedClass,
   SeedFeature,
   SeedFeat,
-  SeedEquipment
+  SeedEquipment,
+  SeedSpell,
+  SeedSpellList
 } from "./seed";
 export {
   SeedPackSchema,
@@ -38,7 +46,9 @@ export {
   SeedClassSchema,
   SeedFeatureSchema,
   SeedFeatSchema,
-  SeedEquipmentSchema
+  SeedEquipmentSchema,
+  SeedSpellSchema,
+  SeedSpellListSchema
 } from "./seed";
 
 export type { NormalizedEntities } from "./normalize";
@@ -47,8 +57,18 @@ export { normalizeSeedPack, slugToId } from "./normalize";
 export type { Pack } from "./load";
 export { loadPackFromDir } from "./load";
 
-export type { MergeCount, MergeReport, MergedContent } from "./merge";
-export { mergePacks } from "./merge";
+export type {
+  MergeCount,
+  MergeReport,
+  MergedContent,
+  MergeProvenance,
+  EntityProvenance,
+  ProvenanceLineageStep
+} from "./merge";
+export { mergePacks, mergePacksWithProvenance } from "./merge";
+
+export type { ContentLintIssue, ContentLintReport } from "./lint";
+export { lintPacks } from "./lint";
 
 export type { AttributionBlock } from "./attribution";
 export { getAttributionBlocks } from "./attribution";

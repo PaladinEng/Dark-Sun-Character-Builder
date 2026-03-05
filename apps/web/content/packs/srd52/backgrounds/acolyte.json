@@ -10,6 +10,7 @@
     "mode": "2+1_or_1+1+1"
   },
   "grantsFeat": "srd52:feat:alert",
+  "grantsOriginFeatId": "srd52:feat:alert",
   "effects": [
     {
       "type": "grant_skill_proficiency",

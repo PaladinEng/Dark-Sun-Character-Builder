@@ -3,6 +3,7 @@
   "type": "weapon",
   "name": "Longsword",
   "damageDice": "1d8",
+  "weaponCategory": "martial",
   "properties": [
     "versatile"
   ]

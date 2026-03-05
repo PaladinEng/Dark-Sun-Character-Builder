@@ -50,6 +50,31 @@ describe("BackgroundSchema abilityOptions", () => {
 
     expect(parsed.success).toBe(true);
   });
+
+  it("accepts background originFeatChoice metadata", () => {
+    const parsed = BackgroundSchema.safeParse({
+      id: "srd52:background:custom",
+      name: "Custom",
+      originFeatChoice: {
+        featIds: ["srd52:feat:alert"]
+      }
+    });
+
+    expect(parsed.success).toBe(true);
+  });
+
+  it("rejects background with both grantsFeat and originFeatChoice", () => {
+    const parsed = BackgroundSchema.safeParse({
+      id: "srd52:background:invalid",
+      name: "Invalid",
+      grantsFeat: "srd52:feat:alert",
+      originFeatChoice: {
+        featIds: ["srd52:feat:alert"]
+      }
+    });
+
+    expect(parsed.success).toBe(false);
+  });
 });
 
 describe("FeatSchema", () => {

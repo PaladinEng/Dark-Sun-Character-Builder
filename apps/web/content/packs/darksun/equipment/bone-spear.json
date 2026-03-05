@@ -3,5 +3,6 @@
   "name": "Bone Spear",
   "type": "weapon",
   "damageDice": "1d8",
+  "weaponCategory": "simple",
   "properties": []
 }

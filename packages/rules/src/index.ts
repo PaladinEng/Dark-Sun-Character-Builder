@@ -5,8 +5,11 @@ export {
   computeAbilityMod,
   computeProfBonus,
   computeFinalAbilities,
-  computeDerivedState
+  computeDerivedState,
+  isProficientWithWeapon
 } from "./compute";
+export { getSpellSlots } from "./spellSlots";
+export { validateCharacter } from "./validate";
 export type {
   Ability,
   AbilityRecord,
@@ -15,6 +18,7 @@ export type {
   CharacterState,
   DerivedState
 } from "./types";
+export type { ValidationIssue, ValidationReport } from "./validate";
 export type { RulesCoverageReport } from "./coverage";
 
 export function rulesPing(): string {

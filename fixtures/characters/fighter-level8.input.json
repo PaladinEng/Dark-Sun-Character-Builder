@@ -1,0 +1,248 @@
+{
+  "state": {
+    "level": 8,
+    "baseAbilities": {
+      "str": 12,
+      "dex": 15,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 8
+    },
+    "selectedSpeciesId": "test:species:elf",
+    "selectedBackgroundId": "test:bg:wanderer",
+    "selectedClassId": "test:class:fighter",
+    "selectedFeatureIds": [],
+    "selectedFeats": [
+      "test:feat:sharpshooter"
+    ],
+    "featSelections": {
+      "origin": "test:feat:origin-alert",
+      "level": {
+        "4": "test:feat:tough"
+      }
+    },
+    "advancements": [
+      {
+        "type": "asi",
+        "changes": {
+          "dex": 2
+        },
+        "source": "level",
+        "level": 8
+      }
+    ],
+    "chosenSkillProficiencies": [
+      "perception",
+      "stealth"
+    ],
+    "chosenSaveProficiencies": [
+      "str"
+    ],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:chain-shirt",
+    "equippedWeaponId": "test:weapon:longbow",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:wanderer",
+        "name": "Wanderer",
+        "originFeatChoice": {
+          "featIds": [
+            "test:feat:origin-alert"
+          ]
+        },
+        "effects": [
+          {
+            "type": "grant_language",
+            "language": "Common"
+          },
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "Navigator's Tools"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    ],
+    "features": [],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin"
+      },
+      {
+        "id": "test:feat:tough",
+        "name": "Tough",
+        "category": "general",
+        "prerequisites": {
+          "minLevel": 4
+        }
+      },
+      {
+        "id": "test:feat:sharpshooter",
+        "name": "Sharpshooter",
+        "category": "general",
+        "prerequisites": {
+          "abilities": {
+            "dex": 13
+          }
+        }
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      {
+        "id": "test:weapon:longbow",
+        "name": "Longbow",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "ranged"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:elf": {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:wanderer": {
+        "id": "test:bg:wanderer",
+        "name": "Wanderer",
+        "originFeatChoice": {
+          "featIds": [
+            "test:feat:origin-alert"
+          ]
+        },
+        "effects": [
+          {
+            "type": "grant_language",
+            "language": "Common"
+          },
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "Navigator's Tools"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    },
+    "featuresById": {},
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin"
+      },
+      "test:feat:tough": {
+        "id": "test:feat:tough",
+        "name": "Tough",
+        "category": "general",
+        "prerequisites": {
+          "minLevel": 4
+        }
+      },
+      "test:feat:sharpshooter": {
+        "id": "test:feat:sharpshooter",
+        "name": "Sharpshooter",
+        "category": "general",
+        "prerequisites": {
+          "abilities": {
+            "dex": 13
+          }
+        }
+      }
+    },
+    "equipmentById": {
+      "test:armor:chain-shirt": {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      "test:weapon:longbow": {
+        "id": "test:weapon:longbow",
+        "name": "Longbow",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "ranged"
+        ]
+      }
+    }
+  }
+}

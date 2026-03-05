@@ -2,6 +2,28 @@
   "id": "srd52:class:wizard",
   "name": "Wizard",
   "hitDie": 6,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "arcana",
+      "history",
+      "insight",
+      "investigation",
+      "medicine",
+      "religion"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true
+  },
+  "spellcasting": {
+    "ability": "int",
+    "progression": "full",
+    "mode": "prepared"
+  },
+  "spellListRefs": [
+    "srd52:spelllist:wizard-core"
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

@@ -3,6 +3,7 @@
   "name": "Templar Initiate",
   "replaces": "srd52:background:acolyte",
   "grantsFeat": "srd52:feat:alert",
+  "grantsOriginFeatId": "srd52:feat:alert",
   "description": "An initiate trained in civic rites and arcane bureaucracy.",
   "abilityOptions": {
     "abilities": ["wis", "int", "cha"],

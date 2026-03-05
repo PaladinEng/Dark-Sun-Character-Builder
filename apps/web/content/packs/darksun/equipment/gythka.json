@@ -4,5 +4,6 @@
   "type": "weapon",
   "description": "A double-ended polearm common among gladiators.",
   "damageDice": "1d8",
+  "weaponCategory": "martial",
   "properties": ["versatile 1d10", "reach"]
 }

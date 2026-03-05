@@ -1,0 +1,11 @@
+{
+  "id": "srd52:spell:sacred-flame",
+  "name": "Sacred Flame",
+  "level": 0,
+  "school": "evocation",
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": ["V", "S"],
+  "duration": "Instantaneous",
+  "description": "Flame-like radiance descends on a creature that fails a Dexterity save."
+}

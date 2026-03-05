@@ -16,14 +16,12 @@
     "selectedFeats": [
       "test:feat:eagle-eye"
     ],
-    "advancements": [
-      {
-        "type": "feat",
-        "featId": "test:feat:sprinter",
-        "source": "level",
-        "level": 4
+    "featSelections": {
+      "origin": "test:feat:origin-alert",
+      "level": {
+        "4": "test:feat:sprinter"
       }
-    ],
+    },
     "chosenSkillProficiencies": [
       "survival",
       "stealth"
@@ -63,6 +61,11 @@
       {
         "id": "test:bg:wanderer",
         "name": "Wanderer",
+        "originFeatChoice": {
+          "featIds": [
+            "test:feat:origin-alert"
+          ]
+        },
         "effects": [
           {
             "type": "add_bonus",
@@ -77,7 +80,16 @@
       {
         "id": "test:class:ranger",
         "name": "Ranger",
-        "hitDie": 10
+        "hitDie": 10,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "half",
+          "mode": "known"
+        },
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        }
       }
     ],
     "features": [],
@@ -105,6 +117,12 @@
             "value": 40
           }
         ]
+      },
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
       }
     ],
     "equipment": [
@@ -119,6 +137,7 @@
         "name": "Shortbow",
         "type": "weapon",
         "damageDice": "1d6",
+        "weaponCategory": "simple",
         "properties": [
           "ranged"
         ]
@@ -140,6 +159,11 @@
       "test:bg:wanderer": {
         "id": "test:bg:wanderer",
         "name": "Wanderer",
+        "originFeatChoice": {
+          "featIds": [
+            "test:feat:origin-alert"
+          ]
+        },
         "effects": [
           {
             "type": "add_bonus",
@@ -154,7 +178,16 @@
       "test:class:ranger": {
         "id": "test:class:ranger",
         "name": "Ranger",
-        "hitDie": 10
+        "hitDie": 10,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "half",
+          "mode": "known"
+        },
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        }
       }
     },
     "featuresById": {},
@@ -182,6 +215,12 @@
             "value": 40
           }
         ]
+      },
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
       }
     },
     "equipmentById": {
@@ -196,6 +235,7 @@
         "name": "Shortbow",
         "type": "weapon",
         "damageDice": "1d6",
+        "weaponCategory": "simple",
         "properties": [
           "ranged"
         ]

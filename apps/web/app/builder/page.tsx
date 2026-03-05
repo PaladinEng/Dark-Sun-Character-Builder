@@ -3,6 +3,7 @@ import {
   formatSourceLabel,
   getContentOptionsFromMerged,
   getMergedContent,
+  loadAllPacks,
   parseSourcesParam,
 } from "../../src/lib/content";
 
@@ -15,10 +16,13 @@ export default async function BuilderPage({
 }) {
   const sp = (await searchParams) ?? {};
   const parsedIds = parseSourcesParam(sp.sources);
-  const merged = await getMergedContent(parsedIds);
+  const [allPacks, merged] = await Promise.all([
+    loadAllPacks(),
+    getMergedContent(parsedIds),
+  ]);
   const options = getContentOptionsFromMerged(merged.content);
 
-  const manifests = merged.packs.map((pack) => ({
+  const manifests = allPacks.map((pack) => ({
     id: pack.manifest.id,
     name: pack.manifest.name,
     version: pack.manifest.version,

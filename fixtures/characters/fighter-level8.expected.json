@@ -1,0 +1,107 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 2,
+    "dex": 3,
+    "int": 0,
+    "str": 1,
+    "wis": 1
+  },
+  "advancementSlots": [
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:tough",
+        "name": "Tough"
+      },
+      "filled": true,
+      "level": 4
+    },
+    {
+      "asi": {
+        "dex": 2
+      },
+      "choice": "asi",
+      "filled": true,
+      "level": 8
+    }
+  ],
+  "armorClass": 15,
+  "attack": {
+    "damage": "1d8+3",
+    "name": "Longbow",
+    "toHit": 6
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    },
+    {
+      "id": "test:feat:sharpshooter",
+      "name": "Sharpshooter"
+    },
+    {
+      "id": "test:feat:tough",
+      "name": "Tough"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 17,
+    "int": 10,
+    "str": 12,
+    "wis": 12
+  },
+  "languages": [
+    "Common"
+  ],
+  "maxHP": 68,
+  "passivePerception": 14,
+  "proficiencyBonus": 3,
+  "saveProficiencies": [
+    "str"
+  ],
+  "savingThrows": {
+    "cha": -1,
+    "con": 2,
+    "dex": 3,
+    "int": 0,
+    "str": 4,
+    "wis": 1
+  },
+  "skillProficiencies": [
+    "perception",
+    "stealth"
+  ],
+  "skills": {
+    "acrobatics": 3,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": 1,
+    "deception": -1,
+    "history": 0,
+    "insight": 1,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 4,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 0,
+    "sleight_of_hand": 3,
+    "stealth": 6,
+    "survival": 1
+  },
+  "speed": 30,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [
+    "Navigator's Tools"
+  ],
+  "warnings": []
+}

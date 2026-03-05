@@ -3,6 +3,7 @@
   "type": "weapon",
   "name": "Shortbow",
   "damageDice": "1d6",
+  "weaponCategory": "simple",
   "properties": [
     "ranged"
   ]

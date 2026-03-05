@@ -1,0 +1,79 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 2,
+    "dex": 3,
+    "int": 0,
+    "str": 0,
+    "wis": 1
+  },
+  "advancementSlots": [],
+  "armorClass": 16,
+  "attack": {
+    "damage": "1d8+3",
+    "name": "Rapier",
+    "toHit": 5
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 16,
+    "int": 10,
+    "str": 10,
+    "wis": 12
+  },
+  "languages": [
+    "Common"
+  ],
+  "maxHP": 12,
+  "passivePerception": 11,
+  "proficiencyBonus": 2,
+  "saveProficiencies": [
+    "str"
+  ],
+  "savingThrows": {
+    "cha": -1,
+    "con": 2,
+    "dex": 3,
+    "int": 0,
+    "str": 2,
+    "wis": 1
+  },
+  "skillProficiencies": [
+    "acrobatics",
+    "insight"
+  ],
+  "skills": {
+    "acrobatics": 5,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": 0,
+    "deception": -1,
+    "history": 0,
+    "insight": 3,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 1,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 0,
+    "sleight_of_hand": 3,
+    "stealth": 3,
+    "survival": 1
+  },
+  "speed": 30,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [],
+  "warnings": []
+}

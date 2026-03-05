@@ -4,6 +4,7 @@ import { readdir } from "node:fs/promises";
 import path from "node:path";
 
 import type {
+  MergeProvenance,
   Background,
   Class,
   Equipment,
@@ -13,7 +14,7 @@ import type {
   PackManifest,
   Species,
 } from "@dark-sun/content";
-import { loadPackFromDir, mergePacks } from "@dark-sun/content";
+import { loadPackFromDir, mergePacks, mergePacksWithProvenance } from "@dark-sun/content";
 
 export type LoadedPackManifest = {
   id: string;
@@ -29,6 +30,7 @@ export type MergedContentResult = MergedContent & {
   content: MergedContent;
   report: MergeReport;
   enabledPackIds: string[];
+  provenance?: MergeProvenance;
 };
 
 type ContentOptions = {
@@ -173,6 +175,9 @@ export function formatSourceLabel(manifest: LoadedPackManifest): string {
 
 export async function getMergedContent(
   enabledPackIds?: string[],
+  options?: {
+    includeProvenance?: boolean;
+  },
 ): Promise<MergedContentResult> {
   const packs = await loadAllPacks();
   const allIds = new Set(packs.map((pack) => pack.manifest.id));
@@ -183,7 +188,10 @@ export async function getMergedContent(
       : requested.filter((id) => allIds.has(id)).sort((a, b) => comparePackId(a, b));
 
   const finalIds = resolvedIds.length > 0 ? resolvedIds : getDefaultEnabledPackIds(packs);
-  const cacheKey = finalIds.join(",");
+  const includeProvenance = options?.includeProvenance === true;
+  const cacheKey = includeProvenance
+    ? `${finalIds.join(",")}|provenance`
+    : finalIds.join(",");
   const cache = getCache();
   const cached = cache.mergedByKey.get(cacheKey);
   if (cached) {
@@ -191,7 +199,9 @@ export async function getMergedContent(
   }
 
   const selected = filterPacks(packs, finalIds);
-  const merged = mergePacks(selected);
+  const merged = includeProvenance
+    ? mergePacksWithProvenance(selected)
+    : mergePacks(selected);
 
   const result: MergedContentResult = {
     ...merged.content,
@@ -199,6 +209,7 @@ export async function getMergedContent(
     content: merged.content,
     report: merged.report,
     enabledPackIds: finalIds,
+    provenance: "provenance" in merged ? merged.provenance : undefined
   };
 
   cache.mergedByKey.set(cacheKey, result);

@@ -2,6 +2,27 @@
   "id": "srd52:class:cleric",
   "name": "Cleric",
   "hitDie": 8,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "history",
+      "insight",
+      "medicine",
+      "persuasion",
+      "religion"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true
+  },
+  "spellcasting": {
+    "ability": "wis",
+    "progression": "full",
+    "mode": "prepared"
+  },
+  "spellListRefs": [
+    "srd52:spelllist:cleric-core"
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

@@ -2,13 +2,22 @@
 
 This repository uses a closed-loop development harness to validate code changes.
 
-## Mandatory Workflow
+## MANDATORY DEVELOPMENT LOOP
 
-After ANY code modification, run:
+After any code modification, run:
 
 pnpm loop:check
 
-Work is NOT complete until the harness passes.
+If it fails:
+
+1. Identify the first failing stage.
+2. Fix the root cause.
+3. Re-run pnpm loop:check.
+4. Repeat until all stages pass.
+
+Work is NOT complete until pnpm loop:check passes.
+
+Do not commit changes unless pnpm loop:check is green.
 
 ## Harness
 

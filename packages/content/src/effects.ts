@@ -25,6 +25,10 @@ export const EffectSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("grant_tool_proficiency"),
     tool: z.string().min(1)
+  }),
+  z.object({
+    type: z.literal("grant_language"),
+    language: z.string().min(1)
   })
 ]);
 

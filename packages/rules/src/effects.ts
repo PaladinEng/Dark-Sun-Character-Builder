@@ -7,7 +7,8 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_save_proficiency",
   "add_bonus",
   "set_speed",
-  "grant_tool_proficiency"
+  "grant_tool_proficiency",
+  "grant_language"
 ] as const;
 
 export interface DerivedBonus {
@@ -20,6 +21,7 @@ export interface AppliedEffects {
   grantedSkillProficiencies: string[];
   grantedSaveProficiencies: Ability[];
   grantedToolProficiencies: string[];
+  grantedLanguages: string[];
   bonuses: DerivedBonus[];
   speedOverride?: number;
 }
@@ -35,6 +37,7 @@ export function applyEffectsToCharacter(
   const skillProfs: string[] = [];
   const saveProfs: Ability[] = [];
   const toolProfs: string[] = [];
+  const languages: string[] = [];
   const bonuses: DerivedBonus[] = [];
   let speedOverride: number | undefined;
 
@@ -49,6 +52,10 @@ export function applyEffectsToCharacter(
     }
     if (effect.type === "grant_tool_proficiency") {
       toolProfs.push(effect.tool);
+      continue;
+    }
+    if (effect.type === "grant_language") {
+      languages.push(effect.language);
       continue;
     }
     if (effect.type === "add_bonus") {
@@ -68,6 +75,7 @@ export function applyEffectsToCharacter(
     grantedSkillProficiencies: dedupe(skillProfs),
     grantedSaveProficiencies: dedupe(saveProfs),
     grantedToolProficiencies: dedupe(toolProfs),
+    grantedLanguages: dedupe(languages),
     bonuses,
     speedOverride
   };

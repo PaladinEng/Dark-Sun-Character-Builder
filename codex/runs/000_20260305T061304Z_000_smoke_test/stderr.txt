@@ -1,0 +1,8 @@
+WARNING: proceeding, even though we could not update PATH: Operation not permitted (os error 1)
+error: unexpected argument '--ask-for-approval' found
+
+  tip: to pass '--ask-for-approval' as a value, use '-- --ask-for-approval'
+
+Usage: codex exec --cd <DIR> --sandbox <SANDBOX_MODE> [PROMPT]
+
+For more information, try '--help'.

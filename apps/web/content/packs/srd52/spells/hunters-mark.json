@@ -1,0 +1,12 @@
+{
+  "id": "srd52:spell:hunters-mark",
+  "name": "Hunter's Mark",
+  "level": 1,
+  "school": "divination",
+  "castingTime": "1 bonus action",
+  "range": "90 feet",
+  "components": ["V"],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "description": "You mark a target and deal extra weapon damage to it."
+}
