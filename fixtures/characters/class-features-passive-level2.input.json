@@ -1,0 +1,198 @@
+{
+  "state": {
+    "level": 2,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 14,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "selectedClassId": "test:class:fighter",
+    "selectedFeatureIds": [],
+    "selectedFeats": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "languages": [],
+    "equippedArmorId": "test:equipment:leather",
+    "equippedWeaponId": "test:equipment:shortbow",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [],
+    "backgrounds": [],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "classFeaturesByLevel": [
+          {
+            "level": 1,
+            "featureId": "test:feature:defense-style"
+          },
+          {
+            "level": 2,
+            "featureId": "test:feature:archery-style"
+          }
+        ],
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "test:feature:defense-style",
+        "name": "Fighting Style: Defense",
+        "effects": [
+          {
+            "type": "add_armor_class_bonus",
+            "value": 1,
+            "condition": "wearing_armor"
+          },
+          {
+            "type": "grant_trait",
+            "name": "Fighting Style: Defense"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:archery-style",
+        "name": "Fighting Style: Archery",
+        "effects": [
+          {
+            "type": "add_attack_bonus",
+            "value": 2,
+            "condition": "ranged_weapon"
+          },
+          {
+            "type": "grant_trait",
+            "name": "Fighting Style: Archery"
+          }
+        ]
+      }
+    ],
+    "feats": [],
+    "equipment": [
+      {
+        "id": "test:equipment:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:equipment:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple",
+        "properties": [
+          "ranged"
+        ]
+      }
+    ],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {},
+    "backgroundsById": {},
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "classFeaturesByLevel": [
+          {
+            "level": 1,
+            "featureId": "test:feature:defense-style"
+          },
+          {
+            "level": 2,
+            "featureId": "test:feature:archery-style"
+          }
+        ],
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    },
+    "featuresById": {
+      "test:feature:defense-style": {
+        "id": "test:feature:defense-style",
+        "name": "Fighting Style: Defense",
+        "effects": [
+          {
+            "type": "add_armor_class_bonus",
+            "value": 1,
+            "condition": "wearing_armor"
+          },
+          {
+            "type": "grant_trait",
+            "name": "Fighting Style: Defense"
+          }
+        ]
+      },
+      "test:feature:archery-style": {
+        "id": "test:feature:archery-style",
+        "name": "Fighting Style: Archery",
+        "effects": [
+          {
+            "type": "add_attack_bonus",
+            "value": 2,
+            "condition": "ranged_weapon"
+          },
+          {
+            "type": "grant_trait",
+            "name": "Fighting Style: Archery"
+          }
+        ]
+      }
+    },
+    "featsById": {},
+    "equipmentById": {
+      "test:equipment:leather": {
+        "id": "test:equipment:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:equipment:shortbow": {
+        "id": "test:equipment:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple",
+        "properties": [
+          "ranged"
+        ]
+      }
+    },
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

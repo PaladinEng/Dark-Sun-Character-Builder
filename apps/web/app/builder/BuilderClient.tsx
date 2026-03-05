@@ -3,15 +3,28 @@
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import type { MergedContent } from "@dark-sun/content";
-import type { CharacterState, DerivedState, ValidationReport } from "@dark-sun/rules";
+import type { MergedContent, Spell } from "@dark-sun/content";
+import type {
+  AbilityScoreMethod,
+  CharacterState,
+  DerivedState,
+  ValidationReport,
+} from "@dark-sun/rules";
 import {
+  POINT_BUY_BUDGET,
+  POINT_BUY_MAX_SCORE,
+  POINT_BUY_MIN_SCORE,
+  STANDARD_ARRAY,
+  computePointBuyCost,
   computeDerivedState,
+  getPointBuyScoreCost,
   getAvailableAdvancementSlots,
   validateCharacter,
 } from "@dark-sun/rules";
+import { formatSpellNameWithFlags } from "../../src/lib/spells";
 
 type Ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
+type CoinDenomination = "gp" | "sp" | "cp";
 type AbilityChanges = Partial<Record<Ability, number>>;
 
 type BackgroundAbilityOptions = {
@@ -22,6 +35,19 @@ type BackgroundAbilityOptions = {
 type Option = {
   id: string;
   name: string;
+  type?:
+    | "armor_light"
+    | "armor_medium"
+    | "armor_heavy"
+    | "shield"
+    | "weapon"
+    | "adventuring_gear";
+  startingEquipment?: {
+    itemIds?: string[];
+    equippedArmorId?: string;
+    equippedShieldId?: string;
+    equippedWeaponId?: string;
+  };
   abilityOptions?: BackgroundAbilityOptions;
   grantsFeat?: string;
   grantsOriginFeatId?: string;
@@ -35,6 +61,8 @@ type Option = {
     abilities?: Partial<Record<Ability, number>>;
     classIds?: string[];
     speciesIds?: string[];
+    featureIds?: string[];
+    requiresSpellcasting?: boolean;
   };
   classSkillChoices?: {
     count: number;
@@ -46,7 +74,22 @@ type Option = {
     weaponIds?: string[];
   };
   weaponCategory?: "simple" | "martial";
+  spellcasting?: {
+    ability: Ability;
+    progression: "full" | "half" | "third" | "pact";
+    mode?: "prepared" | "known";
+    selectionLimitsByLevel?: Array<{
+      level: number;
+      known?: number;
+      prepared?: number;
+      cantripsKnown?: number;
+    }>;
+  };
+  spellListRefIds?: string[];
+  spellListRefs?: string[];
 };
+
+type SpellSelectionField = "knownSpellIds" | "preparedSpellIds" | "cantripsKnownIds";
 
 type BuilderOptions = {
   species: Option[];
@@ -55,6 +98,7 @@ type BuilderOptions = {
   armor: Option[];
   shields: Option[];
   weapons: Option[];
+  adventuringGear: Option[];
 };
 
 type SourceManifest = {
@@ -77,7 +121,7 @@ type ExportedDerivedState = {
   AC: number;
   HP: number;
   speed: number;
-  attacks: Array<{ name: string; toHit: number; damage: string }>;
+  attacks: Array<{ name: string; toHit: number; damage: string; mastery?: string[] }>;
   feats: { id: string; name: string }[];
   background: string | null;
   class: string | null;
@@ -87,25 +131,11 @@ type ExportedDerivedState = {
   spellcastingAbility: Ability | null;
   spellSaveDC: number | null;
   spellAttackBonus: number | null;
-  spellSlots: Record<number, number> | null;
-  spellcasting?: {
-    ability: Ability;
-    abilityMod: number;
-    saveDC: number;
-    attackBonus: number;
-    progression: "full" | "half" | "third" | "pact";
-    slots: Record<number, number>;
-    knownSpellIds: string[];
-    preparedSpellIds: string[];
-    cantripsKnownIds: string[];
-  };
+  spellSlots: DerivedState["spellSlots"];
+  spellcasting?: DerivedState["spellcasting"];
+  activeConditionIds?: DerivedState["activeConditionIds"];
+  appliedModifiers?: DerivedState["appliedModifiers"];
   warnings: string[];
-};
-
-type PrintPayload = {
-  characterState: CharacterState;
-  enabledPackIds: string[];
-  generatedAt: string;
 };
 
 type BuilderClientProps = {
@@ -118,7 +148,13 @@ type BuilderClientProps = {
 };
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
+const COIN_DENOMINATIONS: CoinDenomination[] = ["gp", "sp", "cp"];
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
+const ABILITY_SCORE_METHOD_OPTIONS: Array<{ value: AbilityScoreMethod; label: string }> = [
+  { value: "manual", label: "Manual" },
+  { value: "standard_array", label: "Standard Array" },
+  { value: "point_buy", label: "Point Buy" },
+];
 
 function makeDefaultAbilities(): Record<Ability, number> {
   return {
@@ -128,6 +164,40 @@ function makeDefaultAbilities(): Record<Ability, number> {
     int: 10,
     wis: 10,
     cha: 10,
+  };
+}
+
+function makeStandardArrayAbilities(): Record<Ability, number> {
+  return {
+    str: STANDARD_ARRAY[0],
+    dex: STANDARD_ARRAY[1],
+    con: STANDARD_ARRAY[2],
+    int: STANDARD_ARRAY[3],
+    wis: STANDARD_ARRAY[4],
+    cha: STANDARD_ARRAY[5],
+  };
+}
+
+function normalizePointBuyScore(value: number): number {
+  if (!Number.isFinite(value)) {
+    return POINT_BUY_MIN_SCORE;
+  }
+  return Math.max(
+    POINT_BUY_MIN_SCORE,
+    Math.min(POINT_BUY_MAX_SCORE, Math.floor(value)),
+  );
+}
+
+function normalizePointBuyAbilities(
+  abilities: Record<Ability, number>,
+): Record<Ability, number> {
+  return {
+    str: normalizePointBuyScore(abilities.str),
+    dex: normalizePointBuyScore(abilities.dex),
+    con: normalizePointBuyScore(abilities.con),
+    int: normalizePointBuyScore(abilities.int),
+    wis: normalizePointBuyScore(abilities.wis),
+    cha: normalizePointBuyScore(abilities.cha),
   };
 }
 
@@ -184,6 +254,30 @@ function labelSkill(skillId: string): string {
     .join(" ");
 }
 
+function sortStringIds(values: string[]): string[] {
+  return [...values].sort((a, b) => a.localeCompare(b));
+}
+
+function sortInventoryEntries(
+  entries: Array<{ itemId: string; quantity?: number }>,
+): Array<{ itemId: string; quantity?: number }> {
+  return [...entries].sort((a, b) => a.itemId.localeCompare(b.itemId));
+}
+
+function withSpellSelectionField(
+  state: BuilderState,
+  field: SpellSelectionField,
+  nextIds: string[],
+): BuilderState {
+  if (field === "knownSpellIds") {
+    return { ...state, knownSpellIds: nextIds };
+  }
+  if (field === "preparedSpellIds") {
+    return { ...state, preparedSpellIds: nextIds };
+  }
+  return { ...state, cantripsKnownIds: nextIds };
+}
+
 function isFeatEligibleForState(
   feat: Option,
   state: BuilderState,
@@ -219,6 +313,24 @@ function isFeatEligibleForState(
     return false;
   }
 
+  if (prereq.featureIds && prereq.featureIds.length > 0) {
+    const selectedFeatureIds = new Set(state.selectedFeatureIds ?? []);
+    const hasAllRequiredFeatures = prereq.featureIds.every((featureId) =>
+      selectedFeatureIds.has(featureId),
+    );
+    if (!hasAllRequiredFeatures) {
+      return false;
+    }
+  }
+
+  if (
+    prereq.requiresSpellcasting &&
+    !derived.spellcastingAbility &&
+    !derived.spellcasting
+  ) {
+    return false;
+  }
+
   if (prereq.abilities) {
     const reqs = Object.entries(prereq.abilities).filter(
       (entry): entry is [Ability, number] => typeof entry[1] === "number",
@@ -233,7 +345,7 @@ function isFeatEligibleForState(
   return true;
 }
 
-function downloadFile(filename: string, contents: string, mimeType: string): void {
+function downloadFile(filename: string, contents: BlobPart, mimeType: string): void {
   const blob = new Blob([contents], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
@@ -241,15 +353,6 @@ function downloadFile(filename: string, contents: string, mimeType: string): voi
   anchor.download = filename;
   anchor.click();
   URL.revokeObjectURL(url);
-}
-
-function encodePrintPayload(payload: PrintPayload): string {
-  const bytes = new TextEncoder().encode(JSON.stringify(payload));
-  let binary = "";
-  for (const byte of bytes) {
-    binary += String.fromCharCode(byte);
-  }
-  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
 }
 
 export default function BuilderClient({
@@ -272,6 +375,7 @@ export default function BuilderClient({
   const [state, setState] = useState<BuilderState>(() => ({
     level: 1,
     baseAbilities: makeDefaultAbilities(),
+    abilityScoreMethod: "manual",
     selectedSpeciesId: options.species[0]?.id,
     selectedBackgroundId: options.backgrounds[0]?.id,
     selectedClassId: options.classes[0]?.id,
@@ -285,6 +389,9 @@ export default function BuilderClient({
     knownSpellIds: [],
     preparedSpellIds: [],
     cantripsKnownIds: [],
+    coins: { gp: 0, sp: 0, cp: 0 },
+    inventoryItemIds: [],
+    inventoryEntries: [],
     featSelections: {
       level: {},
     },
@@ -345,6 +452,42 @@ export default function BuilderClient({
     () => options.classes.find((entry) => entry.id === state.selectedClassId),
     [options.classes, state.selectedClassId],
   );
+  const classSpellSelectionLimits = useMemo(() => {
+    return selectedClass?.spellcasting?.selectionLimitsByLevel?.find(
+      (entry) => entry.level === state.level,
+    );
+  }, [selectedClass?.spellcasting?.selectionLimitsByLevel, state.level]);
+  const classSpellListRefIds = selectedClass?.spellListRefIds ?? selectedClass?.spellListRefs ?? [];
+  const missingClassSpellListRefIds = useMemo(() => {
+    return classSpellListRefIds.filter((spellListId) => !content.spellListsById[spellListId]);
+  }, [classSpellListRefIds, content.spellListsById]);
+  const availableClassSpells = useMemo(() => {
+    const spellIds = Array.from(
+      new Set(
+        classSpellListRefIds.flatMap(
+          (spellListId) => content.spellListsById[spellListId]?.spellIds ?? [],
+        ),
+      ),
+    );
+
+    return spellIds
+      .map((spellId) => content.spellsById[spellId])
+      .filter((spell): spell is Spell => Boolean(spell))
+      .sort((a, b) => {
+        if (a.level !== b.level) {
+          return a.level - b.level;
+        }
+        return a.name.localeCompare(b.name);
+      });
+  }, [classSpellListRefIds, content.spellListsById, content.spellsById]);
+  const availableCantripSpells = useMemo(
+    () => availableClassSpells.filter((spell) => spell.level === 0),
+    [availableClassSpells],
+  );
+  const availableLeveledSpells = useMemo(
+    () => availableClassSpells.filter((spell) => spell.level > 0),
+    [availableClassSpells],
+  );
   const selectedWeapon = useMemo(
     () => options.weapons.find((entry) => entry.id === state.equippedWeaponId),
     [options.weapons, state.equippedWeaponId],
@@ -358,6 +501,10 @@ export default function BuilderClient({
   const selectedBackgroundOriginChoice = selectedBackground?.originFeatChoice;
   const selectedBackgroundFixedOriginFeatId =
     selectedBackground?.grantsOriginFeatId ?? selectedBackground?.grantsFeat;
+  const derived = useMemo(
+    () => computeDerivedState(state, content) as DerivedState,
+    [content, state],
+  );
   const selectedBackgroundFixedOriginFeat = selectedBackgroundFixedOriginFeatId
     ? originFeats.find((feat) => feat.id === selectedBackgroundFixedOriginFeatId)
     : undefined;
@@ -366,12 +513,35 @@ export default function BuilderClient({
       return [];
     }
     const allowedIds = selectedBackgroundOriginChoice.featIds;
+    const levelFeatSelections = state.featSelections?.level ?? {};
+    const levelFeatAdvancements = (state.advancements ?? []).filter(
+      (entry): entry is Extract<NonNullable<BuilderState["advancements"]>[number], { type: "feat" }> =>
+        entry.type === "feat" && entry.source === "level",
+    );
+    const selectedIds = new Set<string>([
+      ...(state.selectedFeats ?? []),
+      ...Object.values(levelFeatSelections).filter(
+        (featId): featId is string => typeof featId === "string" && featId.length > 0,
+      ),
+      ...levelFeatAdvancements.map((entry) => entry.featId),
+    ]);
+    const selectedOriginFeatId = state.featSelections?.origin ?? state.originFeatId;
+
     if (!allowedIds || allowedIds.length === 0) {
-      return originFeats;
+      return originFeats.filter(
+        (feat) =>
+          feat.id === selectedOriginFeatId ||
+          isFeatEligibleForState(feat, state, derived, selectedIds),
+      );
     }
     const allowedSet = new Set(allowedIds);
-    return originFeats.filter((feat) => allowedSet.has(feat.id));
-  }, [originFeats, selectedBackgroundOriginChoice]);
+    return originFeats.filter(
+      (feat) =>
+        allowedSet.has(feat.id) &&
+        (feat.id === selectedOriginFeatId ||
+          isFeatEligibleForState(feat, state, derived, selectedIds)),
+    );
+  }, [derived, originFeats, selectedBackgroundOriginChoice, state]);
 
   useEffect(() => {
     const available = selectedBackground?.abilityOptions?.abilities ?? [];
@@ -572,10 +742,6 @@ export default function BuilderClient({
     });
   }, [state.level, state.selectedClassId]);
 
-  const derived = useMemo(
-    () => computeDerivedState(state, content) as DerivedState,
-    [content, state],
-  );
   const validation = useMemo<ValidationReport>(
     () => validateCharacter(state, content),
     [content, state],
@@ -584,27 +750,48 @@ export default function BuilderClient({
   const feats = useMemo(() => {
     return collectArray(content, "feats").sort((a, b) => a.name.localeCompare(b.name));
   }, [content]);
-  const levelEligibleFeats = useMemo(() => {
-    const levelSlotFeatIds = Object.values(state.featSelections?.level ?? {}).filter(
-      (value): value is string => typeof value === "string" && value.length > 0,
+  const levelEligibleFeatsBySlot = useMemo(() => {
+    const slotLevels = getAvailableAdvancementSlots(state.level, state.selectedClassId);
+    const levelSelections = state.featSelections?.level ?? {};
+    const levelFeatAdvancements = (state.advancements ?? []).filter(
+      (entry): entry is Extract<NonNullable<BuilderState["advancements"]>[number], { type: "feat" }> =>
+        entry.type === "feat" && entry.source === "level",
     );
     const chosenOriginFeatId = state.featSelections?.origin ?? state.originFeatId;
-    const selectedIds = new Set<string>([
-      ...(state.selectedFeats ?? []),
-      ...levelSlotFeatIds,
-      ...((state.advancements ?? [])
-        .filter((entry): entry is Extract<NonNullable<BuilderState["advancements"]>[number], { type: "feat" }> =>
-          entry.type === "feat")
-        .map((entry) => entry.featId)),
-      ...(selectedBackgroundFixedOriginFeatId ? [selectedBackgroundFixedOriginFeatId] : []),
-      ...(selectedBackgroundOriginChoice && chosenOriginFeatId ? [chosenOriginFeatId] : []),
-    ]);
 
-    return feats.filter(
-      (feat) =>
-        feat.category !== "origin" &&
-        isFeatEligibleForState(feat, state, derived, selectedIds),
-    );
+    return Object.fromEntries(
+      slotLevels.map((slotLevel) => {
+        const otherSlotFeatIds = Object.entries(levelSelections)
+          .filter(
+            ([rawLevel, featId]) =>
+              Number(rawLevel) !== slotLevel &&
+              typeof featId === "string" &&
+              featId.length > 0,
+          )
+          .map(([, featId]) => featId as string);
+        const otherAdvancementFeatIds = levelFeatAdvancements
+          .filter((entry) => entry.level !== slotLevel)
+          .map((entry) => entry.featId);
+        const selectedIds = new Set<string>([
+          ...(state.selectedFeats ?? []),
+          ...otherSlotFeatIds,
+          ...otherAdvancementFeatIds,
+          ...(selectedBackgroundFixedOriginFeatId ? [selectedBackgroundFixedOriginFeatId] : []),
+          ...(selectedBackgroundOriginChoice && chosenOriginFeatId ? [chosenOriginFeatId] : []),
+        ]);
+        const currentSlotFeatId =
+          levelSelections[slotLevel] ??
+          levelFeatAdvancements.find((entry) => entry.level === slotLevel)?.featId;
+
+        const eligible = feats.filter(
+          (feat) =>
+            feat.category !== "origin" &&
+            (feat.id === currentSlotFeatId ||
+              isFeatEligibleForState(feat, state, derived, selectedIds)),
+        );
+        return [slotLevel, eligible];
+      }),
+    ) as Record<number, Option[]>;
   }, [
     derived,
     feats,
@@ -637,16 +824,78 @@ export default function BuilderClient({
       spellAttackBonus: derived.spellAttackBonus,
       spellSlots: derived.spellSlots,
       spellcasting: derived.spellcasting,
+      activeConditionIds: derived.activeConditionIds,
+      appliedModifiers: derived.appliedModifiers,
       warnings: derived.warnings,
     }),
     [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, state.level],
   );
 
   const advancementSlots = (derived.advancementSlots ?? []) as Array<Record<string, unknown>>;
+  const missingAdvancementSlotLevels = advancementSlots
+    .filter((slot) => !Boolean(slot.filled))
+    .map((slot) => Number(slot.level ?? 0))
+    .filter((slotLevel) => Number.isFinite(slotLevel));
   const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
   const spellAttackBonus = derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+  const startingEquipment = derived.startingEquipment;
+  const hasStartingEquipmentSuggestions = Boolean(
+    startingEquipment?.equippedArmorId ||
+      startingEquipment?.equippedShieldId ||
+      startingEquipment?.equippedWeaponId,
+  );
+  const knownSpellLimit = classSpellSelectionLimits?.known;
+  const preparedSpellLimit = classSpellSelectionLimits?.prepared;
+  const cantripsKnownLimit = classSpellSelectionLimits?.cantripsKnown;
+  const spellSelectionBuckets: Array<{
+    field: SpellSelectionField;
+    label: string;
+    selectedIds: string[];
+    availableSpells: Spell[];
+    maxCount: number | undefined;
+  }> = [
+    {
+      field: "cantripsKnownIds",
+      label: "Cantrips Known",
+      selectedIds: state.cantripsKnownIds ?? [],
+      availableSpells: availableCantripSpells,
+      maxCount: cantripsKnownLimit,
+    },
+    {
+      field: "knownSpellIds",
+      label: "Known Spells",
+      selectedIds: state.knownSpellIds ?? [],
+      availableSpells: availableLeveledSpells,
+      maxCount: knownSpellLimit,
+    },
+    {
+      field: "preparedSpellIds",
+      label: "Prepared Spells",
+      selectedIds: state.preparedSpellIds ?? [],
+      availableSpells: availableLeveledSpells,
+      maxCount: preparedSpellLimit,
+    },
+  ];
+  const abilityScoreMethod = state.abilityScoreMethod ?? "manual";
+  const pointBuySpent = useMemo(() => computePointBuyCost(state.baseAbilities), [state.baseAbilities]);
+  const pointBuyRemaining = pointBuySpent === null ? null : POINT_BUY_BUDGET - pointBuySpent;
+  const standardArrayAllowedCounts = useMemo(() => {
+    const counts = new Map<number, number>();
+    for (const value of STANDARD_ARRAY) {
+      counts.set(value, (counts.get(value) ?? 0) + 1);
+    }
+    return counts;
+  }, []);
+  const standardArrayAssignedCounts = useMemo(() => {
+    const counts = new Map<number, number>();
+    for (const ability of ABILITIES) {
+      const score = state.baseAbilities[ability];
+      counts.set(score, (counts.get(score) ?? 0) + 1);
+    }
+    return counts;
+  }, [state.baseAbilities]);
 
   const applySources = (nextEnabledIds: string[]) => {
     const ordered = manifestOrder.filter((id) => nextEnabledIds.includes(id));
@@ -679,6 +928,119 @@ export default function BuilderClient({
         [ability]: value,
       },
     }));
+  };
+
+  const setAbilityScoreMethod = (method: AbilityScoreMethod) => {
+    setState((previous) => {
+      if ((previous.abilityScoreMethod ?? "manual") === method) {
+        return previous;
+      }
+
+      let nextBaseAbilities = previous.baseAbilities;
+      if (method === "standard_array") {
+        nextBaseAbilities = makeStandardArrayAbilities();
+      } else if (method === "point_buy") {
+        nextBaseAbilities = normalizePointBuyAbilities(previous.baseAbilities);
+      }
+
+      return {
+        ...previous,
+        abilityScoreMethod: method,
+        baseAbilities: nextBaseAbilities,
+      };
+    });
+  };
+
+  const updatePointBuyAbility = (ability: Ability, value: number) => {
+    setState((previous) => ({
+      ...previous,
+      baseAbilities: {
+        ...previous.baseAbilities,
+        [ability]: normalizePointBuyScore(value),
+      },
+    }));
+  };
+
+  const updateCoin = (denomination: CoinDenomination, value: number) => {
+    setState((previous) => ({
+      ...previous,
+      coins: {
+        ...(previous.coins ?? {}),
+        [denomination]: Math.max(0, Math.floor(value || 0)),
+      },
+    }));
+  };
+
+  const updateEncumberedCondition = (active: boolean) => {
+    setState((previous) => ({
+      ...previous,
+      conditions: {
+        ...(previous.conditions ?? {}),
+        encumbered: active,
+      },
+    }));
+  };
+
+  const onToggleAdventuringGear = (itemId: string, checked: boolean) => {
+    setState((previous) => {
+      const inventoryEntries = previous.inventoryEntries ?? [];
+      const inventoryItemIds = previous.inventoryItemIds ?? [];
+
+      if (checked) {
+        if (inventoryEntries.some((entry) => entry.itemId === itemId)) {
+          return previous;
+        }
+        return {
+          ...previous,
+          inventoryItemIds: inventoryItemIds.filter((id) => id !== itemId),
+          inventoryEntries: sortInventoryEntries([
+            ...inventoryEntries,
+            {
+              itemId,
+              quantity: 1,
+            },
+          ]),
+        };
+      }
+
+      const nextEntries = inventoryEntries.filter((entry) => entry.itemId !== itemId);
+      const nextIds = inventoryItemIds.filter((id) => id !== itemId);
+      if (
+        nextEntries.length === inventoryEntries.length &&
+        nextIds.length === inventoryItemIds.length
+      ) {
+        return previous;
+      }
+
+      return {
+        ...previous,
+        inventoryItemIds: nextIds,
+        inventoryEntries: nextEntries,
+      };
+    });
+  };
+
+  const onSetAdventuringGearQuantity = (itemId: string, quantity: number) => {
+    setState((previous) => {
+      const normalized = Math.max(1, Math.floor(quantity || 1));
+      const inventoryEntries = previous.inventoryEntries ?? [];
+      const current = inventoryEntries.find((entry) => entry.itemId === itemId);
+      if (current && current.quantity === normalized) {
+        return previous;
+      }
+
+      const nextEntries = current
+        ? inventoryEntries.map((entry) =>
+            entry.itemId === itemId ? { ...entry, quantity: normalized } : entry,
+          )
+        : [...inventoryEntries, { itemId, quantity: normalized }];
+
+      return {
+        ...previous,
+        inventoryItemIds: (previous.inventoryItemIds ?? []).filter((id) => id !== itemId),
+        inventoryEntries: sortInventoryEntries(nextEntries),
+      };
+    });
   };
 
   const setLevelFeatSelection = (level: number, featId: string) => {
@@ -769,6 +1131,34 @@ export default function BuilderClient({
     });
   };
 
+  const onToggleSpellSelection = (
+    field: SpellSelectionField,
+    spellId: string,
+    checked: boolean,
+    maxCount: number | undefined,
+  ) => {
+    setState((previous) => {
+      const next = new Set(previous[field] ?? []);
+
+      if (checked) {
+        if (next.has(spellId)) {
+          return previous;
+        }
+        if (typeof maxCount === "number" && next.size >= maxCount) {
+          return previous;
+        }
+        next.add(spellId);
+      } else {
+        if (!next.has(spellId)) {
+          return previous;
+        }
+        next.delete(spellId);
+      }
+
+      return withSpellSelectionField(previous, field, sortStringIds(Array.from(next)));
+    });
+  };
+
   const onDownloadJson = () => {
     const payload = {
       state,
@@ -781,7 +1171,7 @@ export default function BuilderClient({
     setExportNotice("JSON exported with validation report.");
   };
 
-  const onDownloadPdf = () => {
+  const onDownloadPdf = async () => {
     if (!validation.isValidForExport) {
       const message = validation.errors
         .map((issue) => `- [${issue.code}] ${issue.message}`)
@@ -801,17 +1191,101 @@ export default function BuilderClient({
       setExportNotice(null);
     }
 
-    const payload: PrintPayload = {
-      characterState: state,
-      enabledPackIds: enabledSources,
-      generatedAt: new Date().toISOString(),
-    };
-    const encoded = encodePrintPayload(payload);
-    const targetUrl = `/print?payload=${encodeURIComponent(encoded)}`;
-    const opened = window.open(targetUrl, "_blank", "noopener,noreferrer");
-    if (!opened) {
-      router.push(targetUrl);
+    try {
+      const response = await fetch("/api/export/pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          characterState: state,
+          enabledPackIds: enabledSources,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorPayload = (await response.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        const errorMessage =
+          typeof errorPayload?.error === "string"
+            ? errorPayload.error
+            : "PDF export failed on server.";
+        setExportNotice("PDF export failed.");
+        window.alert(errorMessage);
+        return;
+      }
+
+      const pdfBytes = new Uint8Array(await response.arrayBuffer());
+      if (pdfBytes.byteLength === 0) {
+        setExportNotice("PDF export failed.");
+        window.alert("PDF export failed: server returned an empty file.");
+        return;
+      }
+
+      downloadFile("character-sheet.pdf", pdfBytes, "application/pdf");
+      setExportNotice("PDF exported.");
+    } catch {
+      setExportNotice("PDF export failed.");
+      window.alert("PDF export failed: network or server error.");
     }
+  };
+
+  const onApplyStartingEquipment = () => {
+    if (!startingEquipment) {
+      return;
+    }
+
+    setState((previous) => {
+      const nextArmorId =
+        startingEquipment.equippedArmorId &&
+        options.armor.some((item) => item.id === startingEquipment.equippedArmorId)
+          ? startingEquipment.equippedArmorId
+          : previous.equippedArmorId;
+      const nextShieldId =
+        startingEquipment.equippedShieldId &&
+        options.shields.some((item) => item.id === startingEquipment.equippedShieldId)
+          ? startingEquipment.equippedShieldId
+          : previous.equippedShieldId;
+      const nextWeaponId =
+        startingEquipment.equippedWeaponId &&
+        options.weapons.some((item) => item.id === startingEquipment.equippedWeaponId)
+          ? startingEquipment.equippedWeaponId
+          : previous.equippedWeaponId;
+
+      if (
+        nextArmorId === previous.equippedArmorId &&
+        nextShieldId === previous.equippedShieldId &&
+        nextWeaponId === previous.equippedWeaponId &&
+        JSON.stringify(previous.inventoryItemIds ?? []) ===
+          JSON.stringify(
+            sortStringIds(
+              Array.from(
+                new Set([
+                  ...(previous.inventoryItemIds ?? []),
+                  ...(startingEquipment.itemIds ?? []),
+                ]),
+              ),
+            ),
+          )
+      ) {
+        return previous;
+      }
+
+      const nextInventoryItemIds = sortStringIds(
+        Array.from(
+          new Set([...(previous.inventoryItemIds ?? []), ...(startingEquipment.itemIds ?? [])]),
+        ),
+      );
+
+      return {
+        ...previous,
+        equippedArmorId: nextArmorId,
+        equippedShieldId: nextShieldId,
+        equippedWeaponId: nextWeaponId,
+        inventoryItemIds: nextInventoryItemIds,
+      };
+    });
   };
 
   return (
@@ -826,7 +1300,7 @@ export default function BuilderClient({
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
         <h2 className="text-sm font-semibold">Export</h2>
         <p className="mt-1 text-sm text-slate-300">
-          Download machine-readable data or open a print-ready sheet for PDF export.
+          Download machine-readable data or a template-based printable PDF.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
           <button
@@ -904,37 +1378,116 @@ export default function BuilderClient({
       </section>
 
       <section className="grid gap-4 rounded-lg border border-slate-700 bg-slate-900/60 p-4 md:grid-cols-2">
-        <label className="text-sm">
-          <div className="font-semibold">Level</div>
-          <input
-            type="number"
-            min={1}
-            max={20}
-            value={state.level}
-            onChange={(event) =>
-              setState((previous) => ({
-                ...previous,
-                level: Math.max(1, Math.min(20, Number(event.target.value) || 1)),
-              }))
-            }
-            className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
-          />
-        </label>
+        <div className="space-y-3">
+          <label className="text-sm">
+            <div className="font-semibold">Level</div>
+            <input
+              type="number"
+              min={1}
+              max={20}
+              value={state.level}
+              onChange={(event) =>
+                setState((previous) => ({
+                  ...previous,
+                  level: Math.max(1, Math.min(20, Number(event.target.value) || 1)),
+                }))
+              }
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+            />
+          </label>
+
+          <label className="text-sm">
+            <div className="font-semibold">Ability Score Method</div>
+            <select
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              value={abilityScoreMethod}
+              onChange={(event) => setAbilityScoreMethod(event.target.value as AbilityScoreMethod)}
+            >
+              {ABILITY_SCORE_METHOD_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {abilityScoreMethod === "standard_array" ? (
+            <p className="text-xs text-slate-300">Assign each value once: 15, 14, 13, 12, 10, 8.</p>
+          ) : null}
+
+          {abilityScoreMethod === "point_buy" ? (
+            <div className="rounded border border-slate-700 bg-slate-950/60 p-2 text-xs">
+              <div>Budget: {POINT_BUY_BUDGET}</div>
+              <div>Spent: {pointBuySpent ?? "invalid"}</div>
+              <div className={pointBuyRemaining !== null && pointBuyRemaining < 0 ? "text-rose-300" : ""}>
+                Remaining: {pointBuyRemaining ?? "invalid"}
+              </div>
+            </div>
+          ) : null}
+        </div>
 
         <div className="grid grid-cols-3 gap-2">
-          {ABILITIES.map((ability) => (
-            <label key={ability} className="text-sm">
-              <div className="font-semibold uppercase">{ability}</div>
-              <input
-                type="number"
-                min={1}
-                max={30}
-                value={state.baseAbilities[ability]}
-                onChange={(event) => updateAbility(ability, Number(event.target.value) || 1)}
-                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
-              />
-            </label>
-          ))}
+          {ABILITIES.map((ability) => {
+            if (abilityScoreMethod === "standard_array") {
+              return (
+                <label key={ability} className="text-sm">
+                  <div className="font-semibold uppercase">{ability}</div>
+                  <select
+                    value={state.baseAbilities[ability]}
+                    onChange={(event) => updateAbility(ability, Number(event.target.value))}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  >
+                    {STANDARD_ARRAY.map((value) => {
+                      const assignedCount = standardArrayAssignedCounts.get(value) ?? 0;
+                      const allowedCount = standardArrayAllowedCounts.get(value) ?? 0;
+                      const isCurrentValue = state.baseAbilities[ability] === value;
+                      const disabled = !isCurrentValue && assignedCount >= allowedCount;
+                      return (
+                        <option key={`${ability}-standard-${value}`} value={value} disabled={disabled}>
+                          {value}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </label>
+              );
+            }
+
+            if (abilityScoreMethod === "point_buy") {
+              const score = state.baseAbilities[ability];
+              const cost = getPointBuyScoreCost(score);
+              return (
+                <label key={ability} className="text-sm">
+                  <div className="flex items-center justify-between font-semibold uppercase">
+                    <span>{ability}</span>
+                    <span className="text-xs text-slate-400">{cost !== null ? `${cost} pts` : "invalid"}</span>
+                  </div>
+                  <input
+                    type="number"
+                    min={POINT_BUY_MIN_SCORE}
+                    max={POINT_BUY_MAX_SCORE}
+                    value={score}
+                    onChange={(event) => updatePointBuyAbility(ability, Number(event.target.value))}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  />
+                </label>
+              );
+            }
+
+            return (
+              <label key={ability} className="text-sm">
+                <div className="font-semibold uppercase">{ability}</div>
+                <input
+                  type="number"
+                  min={1}
+                  max={30}
+                  value={state.baseAbilities[ability]}
+                  onChange={(event) => updateAbility(ability, Number(event.target.value) || 1)}
+                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                />
+              </label>
+            );
+          })}
         </div>
       </section>
 
@@ -1067,6 +1620,129 @@ export default function BuilderClient({
             ))}
           </select>
         </label>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Coins</div>
+          <div className="mt-1 grid grid-cols-3 gap-2">
+            {COIN_DENOMINATIONS.map((denomination) => (
+              <label key={`coins-${denomination}`} className="text-sm">
+                <div className="font-semibold uppercase">{denomination}</div>
+                <input
+                  type="number"
+                  min={0}
+                  value={state.coins?.[denomination] ?? 0}
+                  onChange={(event) => updateCoin(denomination, Number(event.target.value))}
+                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                />
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Conditions</div>
+          <label className="mt-2 flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={state.conditions?.encumbered === true}
+              onChange={(event) => updateEncumberedCondition(event.target.checked)}
+            />
+            <span>Encumbered (-10 ft speed)</span>
+          </label>
+        </div>
+
+        {options.adventuringGear.length > 0 ? (
+          <div className="text-sm md:col-span-3">
+            <div className="font-semibold">Adventuring Gear</div>
+            <p className="mt-1 text-xs text-slate-300">
+              Add inventory entries and quantities for non-equipped gear.
+            </p>
+            <div className="mt-2 grid gap-2 md:grid-cols-2">
+              {options.adventuringGear.map((entry) => {
+                const selectedEntry = (state.inventoryEntries ?? []).find(
+                  (inventoryEntry) => inventoryEntry.itemId === entry.id,
+                );
+                const checked = Boolean(selectedEntry);
+                const quantity = selectedEntry?.quantity ?? 1;
+
+                return (
+                  <div
+                    key={`adventuring-gear-${entry.id}`}
+                    className="rounded border border-slate-700 bg-slate-950/40 px-3 py-2"
+                  >
+                    <label className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={(event) =>
+                          onToggleAdventuringGear(entry.id, event.target.checked)
+                        }
+                      />
+                      <span>{entry.name}</span>
+                    </label>
+                    {checked ? (
+                      <label className="mt-2 block text-xs text-slate-300">
+                        Qty
+                        <input
+                          type="number"
+                          min={1}
+                          value={quantity}
+                          onChange={(event) =>
+                            onSetAdventuringGearQuantity(entry.id, Number(event.target.value))
+                          }
+                          className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                        />
+                      </label>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+
+        {startingEquipment ? (
+          <div className="text-sm md:col-span-3">
+            <div className="rounded border border-slate-700 bg-slate-950/50 p-3">
+              <div className="font-semibold">Starting Equipment Package</div>
+              <p className="mt-1 text-xs text-slate-300">
+                Derived from selected class/background.
+              </p>
+              <div className="mt-2 text-xs text-slate-300">
+                Items:{" "}
+                {startingEquipment.itemIds.length > 0
+                  ? startingEquipment.itemIds
+                      .map((itemId) => content.equipmentById[itemId]?.name ?? itemId)
+                      .join(", ")
+                  : "(none)"}
+              </div>
+              <div className="mt-1 text-xs text-slate-300">
+                Equipped suggestions:{" "}
+                {[
+                  startingEquipment.equippedArmorId
+                    ? `Armor ${content.equipmentById[startingEquipment.equippedArmorId]?.name ?? startingEquipment.equippedArmorId}`
+                    : null,
+                  startingEquipment.equippedShieldId
+                    ? `Shield ${content.equipmentById[startingEquipment.equippedShieldId]?.name ?? startingEquipment.equippedShieldId}`
+                    : null,
+                  startingEquipment.equippedWeaponId
+                    ? `Weapon ${content.equipmentById[startingEquipment.equippedWeaponId]?.name ?? startingEquipment.equippedWeaponId}`
+                    : null,
+                ]
+                  .filter((entry): entry is string => Boolean(entry))
+                  .join(", ") || "(none)"}
+              </div>
+              <button
+                type="button"
+                onClick={onApplyStartingEquipment}
+                disabled={!hasStartingEquipmentSuggestions}
+                className="mt-3 rounded border border-slate-600 px-3 py-1.5 text-sm disabled:opacity-50"
+              >
+                Apply Starting Equipment
+              </button>
+            </div>
+          </div>
+        ) : null}
       </section>
 
       {selectedBackgroundFixedOriginFeat || selectedBackgroundOriginChoice ? (
@@ -1212,6 +1888,13 @@ export default function BuilderClient({
 
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
         <h2 className="text-sm font-semibold">Level Advancements</h2>
+        {missingAdvancementSlotLevels.length > 0 ? (
+          <p className="mt-2 text-xs text-amber-300">
+            Required advancement selections missing for level
+            {missingAdvancementSlotLevels.length === 1 ? "" : "s"}:{" "}
+            {missingAdvancementSlotLevels.join(", ")}.
+          </p>
+        ) : null}
         <div className="mt-3 space-y-3">
           {advancementSlots.length === 0 ? (
             <p className="text-sm text-slate-300">No feat/ASI slots at current level.</p>
@@ -1230,11 +1913,15 @@ export default function BuilderClient({
                 : (state.advancements ?? []).find(
                     (entry) => entry.source === "level" && entry.level === level,
                   );
+              const existingFeatId = existing?.type === "feat" ? existing.featId : undefined;
               const mode =
                 slotModes[level] ??
                 (existing?.type === "asi" ? "asi" : "feat");
-              const featDraft = featDrafts[level] ?? existingLevelFeat ?? levelEligibleFeats[0]?.id ?? "";
-              const asiDraft = asiDrafts[level] ?? {};
+              const levelEligibleFeats = levelEligibleFeatsBySlot[level] ?? [];
+              const featDraft = featDrafts[level] ?? existingFeatId ?? levelEligibleFeats[0]?.id ?? "";
+              const existingAsiDraft: AbilityChanges =
+                existing?.type === "asi" ? (existing.changes as AbilityChanges) : {};
+              const asiDraft = asiDrafts[level] ?? existingAsiDraft;
               const asiTotal = ABILITIES.reduce(
                 (sum, ability) => sum + (asiDraft[ability] ?? 0),
                 0,
@@ -1254,127 +1941,236 @@ export default function BuilderClient({
                       </button>
                     ) : null}
                   </div>
+                  <p
+                    className={`mt-2 text-xs ${
+                      filled ? "text-emerald-300" : "text-amber-300"
+                    }`}
+                  >
+                    {filled ? "Selection applied for this slot." : "Required selection missing for this slot."}
+                  </p>
 
-                  {filled ? (
-                    <pre className="mt-2 overflow-auto rounded bg-slate-950 p-2 text-xs">
-                      {JSON.stringify(existing ?? slot, null, 2)}
-                    </pre>
-                  ) : (
-                    <div className="mt-3 space-y-3">
-                      <div className="flex gap-4 text-sm">
-                        <label className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            checked={mode === "feat"}
-                            onChange={() =>
-                              setSlotModes((previous) => ({ ...previous, [level]: "feat" }))
-                            }
-                          />
-                          Choose a Feat
-                        </label>
-                        <label className="flex items-center gap-2">
-                          <input
-                            type="radio"
-                            checked={mode === "asi"}
-                            onChange={() =>
-                              setSlotModes((previous) => ({ ...previous, [level]: "asi" }))
-                            }
-                          />
-                          Ability Score Increase (ASI)
-                        </label>
-                      </div>
-
-                      {mode === "feat" ? (
-                        <div className="space-y-2">
-                          <div className="grid gap-2 md:grid-cols-[1fr_auto]">
-                            <select
-                              value={featDraft}
-                              onChange={(event) =>
-                                setFeatDrafts((previous) => ({
-                                  ...previous,
-                                  [level]: event.target.value,
-                                }))
-                              }
-                              className="rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-                              disabled={levelEligibleFeats.length === 0}
-                            >
-                              {levelEligibleFeats.length === 0 ? (
-                                <option value="">No eligible feats</option>
-                              ) : null}
-                              {levelEligibleFeats.map((feat) => (
-                                <option key={`slot-${level}-feat-${feat.id}`} value={feat.id}>
-                                  {labelFeat(feat)}
-                                </option>
-                              ))}
-                            </select>
-                            <button
-                              type="button"
-                              onClick={() => setLevelFeatSelection(level, featDraft)}
-                              className="rounded border border-slate-700 px-3 py-1 text-sm"
-                              disabled={featDraft.length === 0 || levelEligibleFeats.length === 0}
-                            >
-                              Apply
-                            </button>
-                          </div>
-                          {levelEligibleFeats.length === 0 ? (
-                            <p className="text-xs text-amber-300">
-                              No feats currently meet prerequisites or duplicate restrictions.
-                            </p>
-                          ) : null}
-                        </div>
-                      ) : (
-                        <div className="space-y-2">
-                          <div className="grid grid-cols-3 gap-2 md:grid-cols-6">
-                            {ABILITIES.map((ability) => (
-                              <label key={`asi-${level}-${ability}`} className="text-xs">
-                                <div className="font-semibold uppercase">{ability}</div>
-                                <input
-                                  type="number"
-                                  min={0}
-                                  max={2}
-                                  value={asiDraft[ability] ?? 0}
-                                  onChange={(event) =>
-                                    setAsiDrafts((previous) => ({
-                                      ...previous,
-                                      [level]: {
-                                        ...(previous[level] ?? {}),
-                                        [ability]: Math.max(
-                                          0,
-                                          Math.min(2, Number(event.target.value) || 0),
-                                        ),
-                                      },
-                                    }))
-                                  }
-                                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
-                                />
-                              </label>
-                            ))}
-                          </div>
-                          <div className="flex items-center justify-between text-xs">
-                            <span
-                              className={asiTotal === 2 ? "text-emerald-300" : "text-amber-300"}
-                            >
-                              ASI points used: {asiTotal}/2
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => upsertAsiAdvancement(level, asiDraft)}
-                              className="rounded border border-slate-700 px-3 py-1 text-sm"
-                              disabled={asiTotal !== 2}
-                            >
-                              Apply
-                            </button>
-                          </div>
-                        </div>
-                      )}
+                  <div className="mt-3 space-y-3">
+                    <div className="flex gap-4 text-sm">
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          checked={mode === "feat"}
+                          onChange={() =>
+                            setSlotModes((previous) => ({ ...previous, [level]: "feat" }))
+                          }
+                        />
+                        Choose a Feat
+                      </label>
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          checked={mode === "asi"}
+                          onChange={() =>
+                            setSlotModes((previous) => ({ ...previous, [level]: "asi" }))
+                          }
+                        />
+                        Ability Score Increase (ASI)
+                      </label>
                     </div>
-                  )}
+
+                    {mode === "feat" ? (
+                      <div className="space-y-2">
+                        <div className="grid gap-2 md:grid-cols-[1fr_auto]">
+                          <select
+                            value={featDraft}
+                            onChange={(event) =>
+                              setFeatDrafts((previous) => ({
+                                ...previous,
+                                [level]: event.target.value,
+                              }))
+                            }
+                            className="rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                            disabled={levelEligibleFeats.length === 0}
+                          >
+                            {levelEligibleFeats.length === 0 ? (
+                              <option value="">No eligible feats</option>
+                            ) : null}
+                            {levelEligibleFeats.map((feat) => (
+                              <option key={`slot-${level}-feat-${feat.id}`} value={feat.id}>
+                                {labelFeat(feat)}
+                              </option>
+                            ))}
+                          </select>
+                          <button
+                            type="button"
+                            onClick={() => setLevelFeatSelection(level, featDraft)}
+                            className="rounded border border-slate-700 px-3 py-1 text-sm"
+                            disabled={featDraft.length === 0 || levelEligibleFeats.length === 0}
+                          >
+                            Apply
+                          </button>
+                        </div>
+                        {levelEligibleFeats.length === 0 ? (
+                          <p className="text-xs text-amber-300">
+                            No feats currently meet prerequisites or duplicate restrictions.
+                          </p>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        <div className="grid grid-cols-3 gap-2 md:grid-cols-6">
+                          {ABILITIES.map((ability) => (
+                            <label key={`asi-${level}-${ability}`} className="text-xs">
+                              <div className="font-semibold uppercase">{ability}</div>
+                              <input
+                                type="number"
+                                min={0}
+                                max={2}
+                                value={asiDraft[ability] ?? 0}
+                                onChange={(event) =>
+                                  setAsiDrafts((previous) => ({
+                                    ...previous,
+                                    [level]: {
+                                      ...(previous[level] ?? existingAsiDraft),
+                                      [ability]: Math.max(
+                                        0,
+                                        Math.min(2, Number(event.target.value) || 0),
+                                      ),
+                                    },
+                                  }))
+                                }
+                                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                              />
+                            </label>
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between text-xs">
+                          <span
+                            className={asiTotal === 2 ? "text-emerald-300" : "text-amber-300"}
+                          >
+                            ASI points used: {asiTotal}/2
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => upsertAsiAdvancement(level, asiDraft)}
+                            className="rounded border border-slate-700 px-3 py-1 text-sm"
+                            disabled={asiTotal !== 2}
+                          >
+                            Apply
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })
           )}
         </div>
       </section>
+
+      {selectedClass?.spellcasting ? (
+        <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+          <h2 className="text-sm font-semibold">Spell Selection</h2>
+          <p className="mt-1 text-sm text-slate-300">
+            Available spells come from the selected class spell list references (
+            {classSpellListRefIds.length} list{classSpellListRefIds.length === 1 ? "" : "s"}).
+          </p>
+          {missingClassSpellListRefIds.length > 0 ? (
+            <p className="mt-2 text-sm text-amber-300">
+              Missing spell lists in content: {missingClassSpellListRefIds.join(", ")}
+            </p>
+          ) : null}
+          <div className="mt-3 grid gap-3 md:grid-cols-3">
+            {spellSelectionBuckets.map((bucket) => {
+              const selectedSet = new Set(bucket.selectedIds);
+              const atLimit =
+                typeof bucket.maxCount === "number" && bucket.selectedIds.length >= bucket.maxCount;
+              const overLimit =
+                typeof bucket.maxCount === "number" && bucket.selectedIds.length > bucket.maxCount;
+              return (
+                <div key={`spell-selection-${bucket.field}`} className="rounded border border-slate-700 p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="text-sm font-semibold">{bucket.label}</div>
+                    <div className="text-xs text-slate-300">
+                      {bucket.selectedIds.length}/
+                      {typeof bucket.maxCount === "number" ? bucket.maxCount : "∞"}
+                    </div>
+                  </div>
+                  {overLimit ? (
+                    <p className="mt-1 text-xs text-rose-300">
+                      Over limit by {bucket.selectedIds.length - bucket.maxCount!}. Remove spells to resolve.
+                    </p>
+                  ) : null}
+
+                  <div className="mt-2 space-y-1">
+                    {bucket.selectedIds.length === 0 ? (
+                      <div className="text-xs text-slate-400">(none selected)</div>
+                    ) : (
+                      bucket.selectedIds.map((spellId) => {
+                        const spell = content.spellsById[spellId];
+                        return (
+                          <div
+                            key={`selected-${bucket.field}-${spellId}`}
+                            className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
+                          >
+                            <span className="truncate">
+                              {spell
+                                ? `${formatSpellNameWithFlags(spell)} (L${spell.level})`
+                                : `${spellId} (missing)`}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                onToggleSpellSelection(bucket.field, spellId, false, bucket.maxCount)
+                              }
+                              className="rounded border border-slate-700 px-2 py-0.5"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+
+                  <div className="mt-3 max-h-56 overflow-auto rounded border border-slate-800 bg-slate-950/70 p-2">
+                    {bucket.availableSpells.length === 0 ? (
+                      <div className="text-xs text-slate-400">No available spells in this category.</div>
+                    ) : (
+                      <div className="space-y-1">
+                        {bucket.availableSpells.map((spell) => {
+                          const checked = selectedSet.has(spell.id);
+                          const disabled = !checked && atLimit;
+                          return (
+                            <label
+                              key={`spell-option-${bucket.field}-${spell.id}`}
+                              className="flex items-start gap-2 rounded px-1 py-1 text-xs"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                disabled={disabled}
+                                onChange={(event) =>
+                                  onToggleSpellSelection(
+                                    bucket.field,
+                                    spell.id,
+                                    event.target.checked,
+                                    bucket.maxCount,
+                                  )
+                                }
+                              />
+                              <span className="leading-5">
+                                {formatSpellNameWithFlags(spell)}
+                                <span className="ml-1 text-slate-400">(L{spell.level})</span>
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
 
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
         <h2 className="text-sm font-semibold">Derived State</h2>
@@ -1448,7 +2244,7 @@ export default function BuilderClient({
                   {Array.from({ length: 9 }, (_, index) => index + 1).map((slotLevel) => (
                     <tr key={`builder-spell-slot-${slotLevel}`} className="border-b border-slate-800">
                       <td className="py-1 pr-3">{slotLevel}</td>
-                      <td className="py-1">{spellSlots?.[slotLevel] ?? 0}</td>
+                      <td className="py-1">{spellSlots?.[slotLevel - 1] ?? 0}</td>
                     </tr>
                   ))}
                 </tbody>

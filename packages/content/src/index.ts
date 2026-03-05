@@ -8,9 +8,11 @@ export type {
   Species,
   Background,
   Class,
+  ClassFeatureGrant,
   Feature,
   Feat,
   Equipment,
+  WeaponMasteryProperty,
   Spell,
   SpellList
 } from "./entities";
@@ -22,10 +24,13 @@ export {
   FeatSchema,
   EquipmentSchema,
   EquipmentTypeSchema,
+  WeaponMasteryPropertySchema,
   SpellSchema,
   SpellListSchema,
   SpellSchoolSchema,
-  SpellComponentSchema
+  SpellComponentSchema,
+  getClassSpellListRefIds,
+  getClassFeatureIdsForLevel
 } from "./entities";
 
 export type {
@@ -53,9 +58,6 @@ export {
 
 export type { NormalizedEntities } from "./normalize";
 export { normalizeSeedPack, slugToId } from "./normalize";
-
-export type { Pack } from "./load";
-export { loadPackFromDir } from "./load";
 
 export type {
   MergeCount,

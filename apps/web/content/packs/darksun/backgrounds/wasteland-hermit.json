@@ -20,7 +20,11 @@
     },
     {
       "type": "grant_tool_proficiency",
-      "tool": "herbalism-kit"
+      "tool": "Herbalism Kit"
+    },
+    {
+      "type": "grant_language",
+      "language": "Primordial"
     }
   ]
 }

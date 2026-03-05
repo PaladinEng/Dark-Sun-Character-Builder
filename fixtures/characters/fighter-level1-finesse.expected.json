@@ -34,6 +34,7 @@
   "maxHP": 12,
   "passivePerception": 11,
   "proficiencyBonus": 2,
+  "resistances": [],
   "saveProficiencies": [
     "str"
   ],
@@ -45,6 +46,7 @@
     "str": 2,
     "wis": 1
   },
+  "senses": [],
   "skillProficiencies": [
     "acrobatics",
     "insight"
@@ -74,6 +76,17 @@
   "spellcastingAbility": null,
   "spellSaveDC": null,
   "spellSlots": null,
+  "startingEquipment": {
+    "equippedArmorId": "test:armor:leather",
+    "equippedShieldId": "test:shield:wood",
+    "equippedWeaponId": "test:weapon:rapier",
+    "itemIds": [
+      "test:armor:leather",
+      "test:shield:wood",
+      "test:weapon:rapier"
+    ]
+  },
   "toolProficiencies": [],
+  "traits": [],
   "warnings": []
 }

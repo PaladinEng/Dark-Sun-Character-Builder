@@ -1,0 +1,75 @@
+{
+  "abilityMods": {
+    "cha": 0,
+    "con": 2,
+    "dex": 3,
+    "int": 0,
+    "str": 0,
+    "wis": 0
+  },
+  "advancementSlots": [],
+  "armorClass": 15,
+  "attack": {
+    "damage": "1d6+3",
+    "name": "Shortbow",
+    "toHit": 7
+  },
+  "feats": [],
+  "finalAbilities": {
+    "cha": 10,
+    "con": 14,
+    "dex": 16,
+    "int": 10,
+    "str": 10,
+    "wis": 10
+  },
+  "languages": [],
+  "maxHP": 20,
+  "passivePerception": 10,
+  "proficiencyBonus": 2,
+  "resistances": [],
+  "saveProficiencies": [
+    "str"
+  ],
+  "savingThrows": {
+    "cha": 0,
+    "con": 2,
+    "dex": 3,
+    "int": 0,
+    "str": 2,
+    "wis": 0
+  },
+  "senses": [],
+  "skillProficiencies": [],
+  "skills": {
+    "acrobatics": 3,
+    "animal_handling": 0,
+    "arcana": 0,
+    "athletics": 0,
+    "deception": 0,
+    "history": 0,
+    "insight": 0,
+    "intimidation": 0,
+    "investigation": 0,
+    "medicine": 0,
+    "nature": 0,
+    "perception": 0,
+    "performance": 0,
+    "persuasion": 0,
+    "religion": 0,
+    "sleight_of_hand": 3,
+    "stealth": 3,
+    "survival": 0
+  },
+  "speed": 30,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [],
+  "traits": [
+    "Fighting Style: Archery",
+    "Fighting Style: Defense"
+  ],
+  "warnings": []
+}

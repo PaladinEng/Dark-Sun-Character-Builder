@@ -7,6 +7,7 @@ export type DebugEntityType =
   | "backgrounds"
   | "classes"
   | "feats"
+  | "equipment"
   | "spells"
   | "spellLists";
 
@@ -19,6 +20,7 @@ export type DebugEntityRow = {
 
 export type DebugEntityProvenance = {
   entityId: string;
+  entityType: DebugEntityType;
   sourcePackId?: string;
   fieldSources: Record<string, string>;
   lineage: Array<{
@@ -53,8 +55,26 @@ export type DebugContentData = {
   spellAccessPreviewByClassId: Record<
     string,
     {
-      spellListIds: string[];
-      spellIds: string[];
+      config: {
+        spellListRefIds: string[];
+        legacySpellListRefs?: string[];
+        selectionLimitsByLevel?: Array<{
+          level: number;
+          known?: number;
+          prepared?: number;
+          cantripsKnown?: number;
+        }>;
+      };
+      preview: {
+        totalSpellCount: number;
+        previewLimit: number;
+        capped: boolean;
+        missingSpellListRefIds: string[];
+        spells: Array<{
+          id: string;
+          name: string;
+        }>;
+      };
     }
   >;
   packEntityLookupByType: Record<
@@ -69,9 +89,45 @@ const ENTITY_TYPE_OPTIONS: Array<{ value: DebugEntityType; label: string }> = [
   { value: "backgrounds", label: "Backgrounds" },
   { value: "classes", label: "Classes" },
   { value: "feats", label: "Feats" },
+  { value: "equipment", label: "Equipment" },
   { value: "spells", label: "Spells" },
   { value: "spellLists", label: "Spell Lists" }
 ];
+
+const SRD_PACK_ID = "srd52";
+const DARK_SUN_PACK_ID = "darksun";
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return null;
+  }
+  return value as Record<string, unknown>;
+}
+
+function computeFieldDiff(
+  baseEntity: unknown,
+  overrideEntity: unknown
+): Record<string, { base: unknown; override: unknown }> | null {
+  const base = asRecord(baseEntity);
+  const next = asRecord(overrideEntity);
+  if (!base || !next) {
+    return null;
+  }
+
+  const keys = Array.from(new Set([...Object.keys(base), ...Object.keys(next)])).sort((a, b) =>
+    a.localeCompare(b)
+  );
+  const out: Record<string, { base: unknown; override: unknown }> = {};
+  for (const key of keys) {
+    const left = base[key];
+    const right = next[key];
+    if (JSON.stringify(left) === JSON.stringify(right)) {
+      continue;
+    }
+    out[key] = { base: left, override: right };
+  }
+  return out;
+}
 
 export default function DebugContentClient({ data }: { data: DebugContentData }) {
   const [search, setSearch] = useState("");
@@ -121,33 +177,53 @@ export default function DebugContentClient({ data }: { data: DebugContentData })
         finalLineageStep.entityId
       ] ?? null
     : selectedEntity;
-  const fieldDiff = useMemo(() => {
-    if (!baseEntity || !overrideEntity) {
+  const fieldDiff = useMemo(
+    () => computeFieldDiff(baseEntity, overrideEntity),
+    [baseEntity, overrideEntity]
+  );
+
+  const srdBaseEntity =
+    resolvedEntityId.length > 0
+      ? data.packEntityLookupByType[entityType]?.[SRD_PACK_ID]?.[resolvedEntityId] ?? null
+      : null;
+  const darkSunEntities = data.packEntityLookupByType[entityType]?.[DARK_SUN_PACK_ID] ?? {};
+  const darkSunDirectOverride =
+    resolvedEntityId.length > 0 ? darkSunEntities[resolvedEntityId] ?? null : null;
+  const darkSunReplacementOverride = useMemo(() => {
+    if (resolvedEntityId.length === 0 || darkSunDirectOverride) {
       return null;
     }
-    const base = baseEntity as Record<string, unknown>;
-    const next = overrideEntity as Record<string, unknown>;
-    const keys = Array.from(new Set([...Object.keys(base), ...Object.keys(next)])).sort((a, b) =>
-      a.localeCompare(b)
-    );
-    const out: Record<string, { base: unknown; override: unknown }> = {};
-    for (const key of keys) {
-      const left = base[key];
-      const right = next[key];
-      if (JSON.stringify(left) === JSON.stringify(right)) {
+    for (const entity of Object.values(darkSunEntities)) {
+      const candidate = asRecord(entity);
+      if (!candidate) {
         continue;
       }
-      out[key] = { base: left, override: right };
+      if (candidate.replaces === resolvedEntityId) {
+        return candidate;
+      }
     }
-    return out;
-  }, [baseEntity, overrideEntity]);
+    return null;
+  }, [darkSunDirectOverride, darkSunEntities, resolvedEntityId]);
+  const darkSunOverride = darkSunDirectOverride ?? darkSunReplacementOverride;
+  const darkSunOverrideEntityId = (() => {
+    const candidate = asRecord(darkSunOverride);
+    return typeof candidate?.id === "string" ? candidate.id : null;
+  })();
+  const darkSunOverrideReplaces = (() => {
+    const candidate = asRecord(darkSunOverride);
+    return typeof candidate?.replaces === "string" ? candidate.replaces : undefined;
+  })();
+  const srdToDarkSunFieldDiff = useMemo(
+    () => computeFieldDiff(srdBaseEntity, darkSunOverride),
+    [darkSunOverride, srdBaseEntity]
+  );
 
   return (
     <main className="mx-auto max-w-6xl space-y-6 p-6">
       <header>
         <h1 className="text-2xl font-semibold">Debug: Content</h1>
         <p className="mt-2 text-sm text-slate-300">
-          Merged entity inspector with per-field provenance and replacement lineage.
+          Merged entity inspector with per-field provenance, replacement lineage, and pack-level diffs.
         </p>
       </header>
 
@@ -259,6 +335,32 @@ export default function DebugContentClient({ data }: { data: DebugContentData })
                 ? { packId: finalLineageStep.packId, entityId: finalLineageStep.entityId }
                 : null,
               fields: fieldDiff
+            },
+            null,
+            2
+          )}
+        </pre>
+      </section>
+
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <h2 className="text-sm font-semibold">Pack Diff (srd52 -&gt; darksun)</h2>
+        <pre className="mt-2 overflow-auto rounded bg-slate-950 p-3 text-xs">
+          {JSON.stringify(
+            {
+              entityId: resolvedEntityId || null,
+              base:
+                resolvedEntityId && srdBaseEntity
+                  ? { packId: SRD_PACK_ID, entityId: resolvedEntityId }
+                  : null,
+              override:
+                darkSunOverrideEntityId
+                  ? {
+                      packId: DARK_SUN_PACK_ID,
+                      entityId: darkSunOverrideEntityId,
+                      replaces: darkSunOverrideReplaces
+                    }
+                  : null,
+              fields: srdToDarkSunFieldDiff
             },
             null,
             2

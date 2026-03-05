@@ -1,7 +1,8 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { loadPackFromDir, mergePacks } from "@dark-sun/content";
+import { mergePacks } from "@dark-sun/content";
+import { loadPackFromDir } from "@dark-sun/content/node";
 import { describe, expect, it } from "vitest";
 
 import { generateRulesCoverageReport } from "../src/coverage";
@@ -32,7 +33,11 @@ describe("rules coverage report", () => {
         "grant_save_proficiency",
         "add_bonus",
         "set_speed",
-        "grant_tool_proficiency"
+        "add_armor_class_bonus",
+        "add_attack_bonus",
+        "set_unarmored_defense",
+        "grant_tool_proficiency",
+        "grant_language"
       ])
     );
   });

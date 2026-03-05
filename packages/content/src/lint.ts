@@ -9,6 +9,7 @@ import {
   SpellListSchema,
   SpellSchema,
   SpeciesSchema,
+  getClassSpellListRefIds,
   type Background,
   type Class,
   type Equipment,
@@ -20,6 +21,14 @@ import {
 } from "./entities";
 import { mergePacks, type MergedContent } from "./merge";
 import type { Pack } from "./load";
+import { isKnownLanguage, isKnownToolProficiency } from "./proficiencies";
+
+type StartingEquipmentBundle = {
+  itemIds?: string[];
+  equippedArmorId?: string;
+  equippedShieldId?: string;
+  equippedWeaponId?: string;
+};
 
 const ENTITY_TYPES = [
   "species",
@@ -92,6 +101,8 @@ export interface ContentLintReport {
 
 function lintPerPackEntityShape(packs: Pack[], issues: ContentLintIssue[]): void {
   for (const pack of packs) {
+    const seenEntityTypeById = new Map<string, EntityType>();
+
     for (const entityType of ENTITY_TYPES) {
       const entities = pack.entities[entityType] as PackEntity[];
       const schema = schemaFor(entityType);
@@ -121,6 +132,21 @@ function lintPerPackEntityShape(packs: Pack[], issues: ContentLintIssue[]): void
           });
         }
         seenIds.add(entity.id);
+
+        const existingEntityType = seenEntityTypeById.get(entity.id);
+        if (existingEntityType && existingEntityType !== entityType) {
+          issues.push({
+            code: "DUPLICATE_ENTITY_ID",
+            message:
+              `Duplicate entity id "${entity.id}" in pack "${pack.manifest.id}" ` +
+              `across ${entityLabel(existingEntityType)} and ${entityLabel(entityType)}.`,
+            packId: pack.manifest.id,
+            entityType,
+            entityId: entity.id
+          });
+        } else if (!existingEntityType) {
+          seenEntityTypeById.set(entity.id, entityType);
+        }
 
         const replaceTarget = (entity as { replaces?: string }).replaces;
         if (!replaceTarget) {
@@ -178,15 +204,160 @@ function lintDanglingReplacements(packs: Pack[], issues: ContentLintIssue[]): vo
 }
 
 function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]): void {
+  const lintEffectReference = (
+    ownerType: Exclude<EntityType, "equipment" | "spells" | "spellLists">,
+    ownerId: string,
+    effects: Array<{ type: string; tool?: string; language?: string }> | undefined
+  ) => {
+    if (!effects) {
+      return;
+    }
+
+    const ownerLabelMap: Record<
+      Exclude<EntityType, "equipment" | "spells" | "spellLists">,
+      string
+    > = {
+      species: "Species",
+      backgrounds: "Background",
+      classes: "Class",
+      features: "Feature",
+      feats: "Feat"
+    };
+    const ownerLabel = ownerLabelMap[ownerType];
+
+    for (const [index, effect] of effects.entries()) {
+      if (effect.type === "grant_tool_proficiency") {
+        const tool = effect.tool;
+        if (typeof tool === "string" && !isKnownToolProficiency(tool)) {
+          issues.push({
+            code: "DANGLING_REFERENCE",
+            message: `${ownerLabel} "${ownerId}" references unknown tool proficiency "${tool}".`,
+            entityType: ownerType,
+            entityId: ownerId,
+            path: `effects[${index}].tool`,
+          });
+        }
+      }
+
+      if (effect.type === "grant_language") {
+        const language = effect.language;
+        if (typeof language === "string" && !isKnownLanguage(language)) {
+          issues.push({
+            code: "DANGLING_REFERENCE",
+            message: `${ownerLabel} "${ownerId}" references unknown language "${language}".`,
+            entityType: ownerType,
+            entityId: ownerId,
+            path: `effects[${index}].language`,
+          });
+        }
+      }
+    }
+  };
+
+  for (const species of content.species) {
+    lintEffectReference("species", species.id, species.effects);
+  }
+
+  const lintStartingEquipmentReferences = (
+    bundle: StartingEquipmentBundle | undefined,
+    ownerType: "backgrounds" | "classes",
+    ownerId: string,
+  ) => {
+    const ownerLabel = ownerType === "classes" ? "Class" : "Background";
+    if (!bundle) {
+      return;
+    }
+
+    for (const itemId of bundle.itemIds ?? []) {
+      if (!content.equipmentById[itemId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment references missing item "${itemId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.itemIds",
+        });
+      }
+    }
+
+    if (bundle.equippedArmorId) {
+      const item = content.equipmentById[bundle.equippedArmorId];
+      if (!item) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment references missing equipped armor "${bundle.equippedArmorId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.equippedArmorId",
+        });
+      } else if (
+        item.type !== "armor_light" &&
+        item.type !== "armor_medium" &&
+        item.type !== "armor_heavy"
+      ) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment equippedArmorId is not armor "${bundle.equippedArmorId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.equippedArmorId",
+        });
+      }
+    }
+
+    if (bundle.equippedShieldId) {
+      const item = content.equipmentById[bundle.equippedShieldId];
+      if (!item) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment references missing equipped shield "${bundle.equippedShieldId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.equippedShieldId",
+        });
+      } else if (item.type !== "shield") {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment equippedShieldId is not a shield "${bundle.equippedShieldId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.equippedShieldId",
+        });
+      }
+    }
+
+    if (bundle.equippedWeaponId) {
+      const item = content.equipmentById[bundle.equippedWeaponId];
+      if (!item) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment references missing equipped weapon "${bundle.equippedWeaponId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.equippedWeaponId",
+        });
+      } else if (item.type !== "weapon") {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" starting equipment equippedWeaponId is not a weapon "${bundle.equippedWeaponId}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: "startingEquipment.equippedWeaponId",
+        });
+      }
+    }
+  };
+
   for (const background of content.backgrounds) {
     const fixedOrigin = background.grantsOriginFeatId ?? background.grantsFeat;
+    const fixedOriginPath = background.grantsOriginFeatId ? "grantsOriginFeatId" : "grantsFeat";
     if (fixedOrigin && !content.featsById[fixedOrigin]) {
       issues.push({
         code: "DANGLING_REFERENCE",
         message: `Background "${background.id}" references missing feat "${fixedOrigin}".`,
         entityType: "backgrounds",
         entityId: background.id,
-        path: "grantsOriginFeatId"
+        path: fixedOriginPath
       });
     }
     for (const featId of background.originFeatChoice?.featIds ?? []) {
@@ -200,6 +371,14 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
         });
       }
     }
+
+    lintStartingEquipmentReferences(
+      background.startingEquipment,
+      "backgrounds",
+      background.id,
+    );
+
+    lintEffectReference("backgrounds", background.id, background.effects);
   }
 
   for (const klass of content.classes) {
@@ -224,17 +403,37 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
       }
     }
 
-    for (const spellListId of klass.spellListRefs ?? []) {
+    const spellListRefIds = getClassSpellListRefIds(klass);
+    for (const spellListId of spellListRefIds) {
       if (!content.spellListsById[spellListId]) {
         issues.push({
           code: "DANGLING_REFERENCE",
-          message: `Class "${klass.id}" references missing spell list "${spellListId}" in spellListRefs.`,
+          message: `Class "${klass.id}" references missing spell list "${spellListId}" in spellListRefIds.`,
           entityType: "classes",
           entityId: klass.id,
-          path: "spellListRefs"
+          path: "spellListRefIds"
         });
       }
     }
+
+    for (const entry of klass.classFeaturesByLevel ?? []) {
+      if (!content.featuresById[entry.featureId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Class "${klass.id}" classFeaturesByLevel references missing feature "${entry.featureId}".`,
+          entityType: "classes",
+          entityId: klass.id,
+          path: "classFeaturesByLevel"
+        });
+      }
+    }
+
+    lintStartingEquipmentReferences(klass.startingEquipment, "classes", klass.id);
+    lintEffectReference("classes", klass.id, klass.effects);
+  }
+
+  for (const feature of content.features) {
+    lintEffectReference("features", feature.id, feature.effects);
   }
 
   for (const feat of content.feats) {
@@ -260,6 +459,19 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
         });
       }
     }
+    for (const featureId of feat.prerequisites?.featureIds ?? []) {
+      if (!content.featuresById[featureId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Feat "${feat.id}" prerequisite references missing feature "${featureId}".`,
+          entityType: "feats",
+          entityId: feat.id,
+          path: "prerequisites.featureIds"
+        });
+      }
+    }
+
+    lintEffectReference("feats", feat.id, feat.effects);
   }
 
   for (const spellList of content.spellLists) {

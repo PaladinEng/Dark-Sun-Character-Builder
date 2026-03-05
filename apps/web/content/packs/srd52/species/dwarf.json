@@ -5,6 +5,27 @@
     {
       "type": "set_speed",
       "value": 25
+    },
+    {
+      "type": "grant_sense",
+      "sense": "darkvision",
+      "range": 60
+    },
+    {
+      "type": "grant_resistance",
+      "damageType": "poison"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Stonecunning"
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
+    },
+    {
+      "type": "grant_language",
+      "language": "Dwarvish"
     }
   ]
 }

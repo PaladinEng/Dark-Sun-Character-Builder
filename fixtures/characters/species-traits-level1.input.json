@@ -1,0 +1,108 @@
+{
+  "state": {
+    "level": 1,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 10,
+      "con": 10,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    },
+    "selectedSpeciesId": "srd52:species:dwarf",
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "srd52",
+        "name": "SRD 5.2.1",
+        "version": "5.2.1",
+        "license": "CC-BY-4.0",
+        "source": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    ],
+    "species": [
+      {
+        "id": "srd52:species:dwarf",
+        "name": "Dwarf",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 25
+          },
+          {
+            "type": "grant_sense",
+            "sense": "darkvision",
+            "range": 60
+          },
+          {
+            "type": "grant_resistance",
+            "damageType": "poison"
+          },
+          {
+            "type": "grant_trait",
+            "name": "Stonecunning"
+          },
+          {
+            "type": "grant_language",
+            "language": "Common"
+          },
+          {
+            "type": "grant_language",
+            "language": "Dwarvish"
+          }
+        ]
+      }
+    ],
+    "backgrounds": [],
+    "classes": [],
+    "features": [],
+    "feats": [],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {
+      "srd52:species:dwarf": {
+        "id": "srd52:species:dwarf",
+        "name": "Dwarf",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 25
+          },
+          {
+            "type": "grant_sense",
+            "sense": "darkvision",
+            "range": 60
+          },
+          {
+            "type": "grant_resistance",
+            "damageType": "poison"
+          },
+          {
+            "type": "grant_trait",
+            "name": "Stonecunning"
+          },
+          {
+            "type": "grant_language",
+            "language": "Common"
+          },
+          {
+            "type": "grant_language",
+            "language": "Dwarvish"
+          }
+        ]
+      }
+    },
+    "backgroundsById": {},
+    "classesById": {},
+    "featuresById": {},
+    "featsById": {},
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

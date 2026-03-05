@@ -6,6 +6,7 @@ import type { CharacterState } from "@dark-sun/rules";
 import { computeDerivedState } from "@dark-sun/rules";
 
 import { getMergedContent } from "../../src/lib/content";
+import { formatSpellNameWithFlags } from "../../src/lib/spells";
 import PrintSheetControls from "./PrintSheetControls";
 
 export const runtime = "nodejs";
@@ -61,6 +62,47 @@ function formatSkillName(skill: string): string {
     .join(" ");
 }
 
+function formatMasteryLabel(mastery: string): string {
+  return mastery
+    .split(/[_\s-]+/g)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatConditionLabel(conditionId: string): string {
+  return conditionId
+    .split(/[_\s-]+/g)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatAttackName(attack: { name: string; mastery?: string[] } | null): string {
+  if (!attack) {
+    return "";
+  }
+  const masteries = attack.mastery ?? [];
+  if (masteries.length === 0) {
+    return attack.name;
+  }
+  const masteryLabel = masteries.map((entry) => formatMasteryLabel(entry)).join(", ");
+  return `${attack.name} (${masteryLabel})`;
+}
+
+function formatSenseSummary(sense: { type: string; range?: number }): string {
+  const typeLabel = sense.type
+    .split(/[_\s-]+/g)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+  return typeof sense.range === "number" ? `${typeLabel} ${sense.range} ft.` : typeLabel;
+}
+
+function sortIds(values: string[] | undefined): string[] {
+  if (!values || values.length === 0) {
+    return [];
+  }
+  return [...values].sort((a, b) => a.localeCompare(b));
+}
+
 function normalizeCharacterState(input: CharacterState): CharacterState {
   return {
     ...input,
@@ -79,6 +121,9 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     selectedFeatureIds: Array.isArray(input.selectedFeatureIds) ? input.selectedFeatureIds : [],
     abilityIncreases: Array.isArray(input.abilityIncreases) ? input.abilityIncreases : [],
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
+    inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
+    inventoryEntries: Array.isArray(input.inventoryEntries) ? input.inventoryEntries : [],
+    coins: input.coins && typeof input.coins === "object" ? input.coins : undefined,
   };
 }
 
@@ -136,8 +181,8 @@ export default async function PrintPage({
 }: {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const sp = (await searchParams) ?? {};
-  const payload = decodePayload(sp.payload);
+  const params = (await searchParams) ?? {};
+  const payload = decodePayload(params.payload);
 
   if (!payload) {
     return (
@@ -177,15 +222,103 @@ export default async function PrintPage({
   const weapon = payload.characterState.equippedWeaponId
     ? merged.content.equipmentById[payload.characterState.equippedWeaponId]
     : undefined;
+  const coinValues = payload.characterState.coins ?? {};
+  const gpCoins = Number.isFinite(coinValues.gp)
+    ? Math.max(0, Math.floor(coinValues.gp ?? 0))
+    : 0;
+  const spCoins = Number.isFinite(coinValues.sp)
+    ? Math.max(0, Math.floor(coinValues.sp ?? 0))
+    : 0;
+  const cpCoins = Number.isFinite(coinValues.cp)
+    ? Math.max(0, Math.floor(coinValues.cp ?? 0))
+    : 0;
+  const inventoryQuantities = new Map<string, number>();
+  for (const itemId of payload.characterState.inventoryItemIds ?? []) {
+    if (!inventoryQuantities.has(itemId)) {
+      inventoryQuantities.set(itemId, 1);
+    }
+  }
+  for (const entry of payload.characterState.inventoryEntries ?? []) {
+    const normalizedQuantity =
+      typeof entry.quantity === "number" && Number.isFinite(entry.quantity)
+        ? Math.max(1, Math.floor(entry.quantity))
+        : 1;
+    inventoryQuantities.set(
+      entry.itemId,
+      Math.max(inventoryQuantities.get(entry.itemId) ?? 0, normalizedQuantity),
+    );
+  }
+
+  const inventoryNameList = [...inventoryQuantities.entries()]
+    .map(([itemId, quantity]) => {
+      const label = merged.content.equipmentById[itemId]?.name ?? itemId;
+      return quantity > 1 ? `${label} x${quantity}` : label;
+    })
+    .sort((a, b) => a.localeCompare(b))
+    .slice(0, 6);
+
+  const toolProficiencies = sortIds(derived.toolProficiencies);
+  const languages = sortIds(derived.languages);
+  const level = Math.max(1, Math.floor(payload.characterState.level || 1));
 
   const featureNames = (payload.characterState.selectedFeatureIds ?? [])
     .map((id) => merged.content.featuresById[id]?.name)
     .filter((name): name is string => Boolean(name));
+  const classFeatureIds = new Set<string>();
+  const classFeatureNames = (klass?.classFeaturesByLevel ?? [])
+    .filter((entry) => entry.level <= level)
+    .sort((a, b) => {
+      if (a.level !== b.level) {
+        return a.level - b.level;
+      }
+      return a.featureId.localeCompare(b.featureId);
+    })
+    .filter((entry) => {
+      if (classFeatureIds.has(entry.featureId)) {
+        return false;
+      }
+      classFeatureIds.add(entry.featureId);
+      return true;
+    })
+    .map((entry) => merged.content.featuresById[entry.featureId]?.name ?? entry.featureId);
+
+  const sensesSummary =
+    derived.senses.length > 0
+      ? `Senses: ${derived.senses.map((sense) => formatSenseSummary(sense)).join(", ")}`
+      : null;
+  const resistancesSummary =
+    derived.resistances.length > 0
+      ? `Resistances: ${derived.resistances.join(", ")}`
+      : null;
+  const passiveTraits = derived.traits;
+  const activeConditionEntries = (derived.activeConditionIds ?? []).map(
+    (conditionId) => `Condition: ${formatConditionLabel(conditionId)}`,
+  );
+  const activeModifierEntries = (derived.appliedModifiers ?? []).map((modifier) => {
+    const effectSummary = modifier.effects
+      .map((effect) => {
+        if (effect.type === "add_speed") {
+          const sign = effect.value >= 0 ? "+" : "";
+          return `${sign}${effect.value} ft speed`;
+        }
+        return effect.type;
+      })
+      .join(", ");
+    return effectSummary.length > 0
+      ? `Modifier: ${modifier.label} (${effectSummary})`
+      : `Modifier: ${modifier.label}`;
+  });
 
   const traitEntries = [
+    sensesSummary,
+    resistancesSummary,
+    ...activeConditionEntries,
+    ...activeModifierEntries,
+    ...passiveTraits.map((entry) => `Trait: ${entry}`),
     species ? `Species: ${species.name}` : null,
     background ? `Background: ${background.name}` : null,
     klass ? `Class: ${klass.name}` : null,
+    ...classFeatureNames.map((name) => `Class Feature: ${name}`),
     ...featureNames.map((name) => `Feature: ${name}`),
     ...derived.feats.map((feat) => `Feat: ${feat.name}`),
   ].filter((entry): entry is string => Boolean(entry));
@@ -200,7 +333,6 @@ export default async function PrintPage({
     .map((pack) => pack.manifest.attributionText?.trim())
     .filter((text): text is string => Boolean(text));
 
-  const level = Math.max(1, Math.floor(payload.characterState.level || 1));
   const passivePerception = derived.passivePerception;
   const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
@@ -208,12 +340,23 @@ export default async function PrintPage({
     derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
   const spellcastingProgression = derived.spellcasting?.progression ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
-  const knownSpellNames = (derived.spellcasting?.knownSpellIds ?? [])
-    .map((id) => merged.content.spellsById[id]?.name ?? id);
-  const preparedSpellNames = (derived.spellcasting?.preparedSpellIds ?? [])
-    .map((id) => merged.content.spellsById[id]?.name ?? id);
-  const cantripNames = (derived.spellcasting?.cantripsKnownIds ?? [])
-    .map((id) => merged.content.spellsById[id]?.name ?? id);
+  const knownSpellIds = derived.spellcasting?.knownSpellIds ?? sortIds(payload.characterState.knownSpellIds);
+  const preparedSpellIds =
+    derived.spellcasting?.preparedSpellIds ?? sortIds(payload.characterState.preparedSpellIds);
+  const cantripIds =
+    derived.spellcasting?.cantripsKnownIds ?? sortIds(payload.characterState.cantripsKnownIds);
+  const knownSpellNames = knownSpellIds.map((id) => {
+    const spell = merged.content.spellsById[id];
+    return spell ? formatSpellNameWithFlags(spell) : id;
+  });
+  const preparedSpellNames = preparedSpellIds.map((id) => {
+    const spell = merged.content.spellsById[id];
+    return spell ? formatSpellNameWithFlags(spell) : id;
+  });
+  const cantripNames = cantripIds.map((id) => {
+    const spell = merged.content.spellsById[id];
+    return spell ? formatSpellNameWithFlags(spell) : id;
+  });
   const spellSlotLevels = Array.from({ length: 9 }, (_value, index) => index + 1);
 
   return (
@@ -372,7 +515,7 @@ export default async function PrintPage({
                     <tbody>
                       {attackRows.map((attack, index) => (
                         <tr key={`attack-row-${index}`}>
-                          <td>{attack?.name ?? ""}</td>
+                          <td>{formatAttackName(attack)}</td>
                           <td className="num-col">{attack ? formatModifier(attack.toHit) : ""}</td>
                           <td>{attack?.damage ?? ""}</td>
                         </tr>
@@ -400,11 +543,11 @@ export default async function PrintPage({
                   <div className="section-head">Proficiencies & Languages</div>
                   <div className="list-block">
                     <div className="small-label">Tools</div>
-                    {derived.toolProficiencies.length === 0 ? (
+                    {toolProficiencies.length === 0 ? (
                       <div className="placeholder">None</div>
                     ) : (
                       <ul className="trimmed-list compact">
-                        {derived.toolProficiencies.map((tool) => (
+                        {toolProficiencies.map((tool) => (
                           <li key={tool}>{tool}</li>
                         ))}
                       </ul>
@@ -412,11 +555,11 @@ export default async function PrintPage({
                   </div>
                   <div className="list-block">
                     <div className="small-label">Languages</div>
-                    {derived.languages.length === 0 ? (
+                    {languages.length === 0 ? (
                       <div className="placeholder">None</div>
                     ) : (
                       <ul className="trimmed-list compact">
-                        {derived.languages.map((language) => (
+                        {languages.map((language) => (
                           <li key={language}>{language}</li>
                         ))}
                       </ul>
@@ -430,7 +573,8 @@ export default async function PrintPage({
                     <li>Armor: {armor?.name ?? "None"}</li>
                     <li>Shield: {shield?.name ?? "None"}</li>
                     <li>Weapon: {weapon?.name ?? "None"}</li>
-                    <li>Other: -</li>
+                    <li>Coins: {gpCoins} gp / {spCoins} sp / {cpCoins} cp</li>
+                    <li>Other: {inventoryNameList.join(", ") || "-"}</li>
                   </ul>
                 </section>
 
@@ -523,10 +667,10 @@ export default async function PrintPage({
                         <tr key={`slot-${slotLevel}`}>
                           <td>{slotLevel}</td>
                           <td className="num-col">
-                            {spellSlots ? (spellSlots[slotLevel] ?? 0) : "-"}
+                            {spellSlots ? (spellSlots[slotLevel - 1] ?? 0) : "-"}
                           </td>
                           <td className="num-col">
-                            {spellSlots && (spellSlots[slotLevel] ?? 0) > 0 ? "0" : "-"}
+                            {spellSlots && (spellSlots[slotLevel - 1] ?? 0) > 0 ? "0" : "-"}
                           </td>
                         </tr>
                       ))}
@@ -536,26 +680,25 @@ export default async function PrintPage({
 
                 <section className="panel spell-list-panel">
                   <div className="section-head">Spells Known / Prepared</div>
-                  {spellcastingAbility ? (
-                    <div className="spell-list-grid">
-                      <div>
-                        <div className="small-label">Cantrips</div>
-                        <div className="small-value-list">{cantripNames.join(", ") || "(none)"}</div>
-                      </div>
-                      <div>
-                        <div className="small-label">Known</div>
-                        <div className="small-value-list">{knownSpellNames.join(", ") || "(none)"}</div>
-                      </div>
-                      <div>
-                        <div className="small-label">Prepared</div>
-                        <div className="small-value-list">{preparedSpellNames.join(", ") || "(none)"}</div>
-                      </div>
+                  <div className="spell-list-grid">
+                    <div>
+                      <div className="small-label">Cantrips</div>
+                      <div className="small-value-list">{cantripNames.join(", ") || "(none)"}</div>
                     </div>
-                  ) : (
+                    <div>
+                      <div className="small-label">Known</div>
+                      <div className="small-value-list">{knownSpellNames.join(", ") || "(none)"}</div>
+                    </div>
+                    <div>
+                      <div className="small-label">Prepared</div>
+                      <div className="small-value-list">{preparedSpellNames.join(", ") || "(none)"}</div>
+                    </div>
+                  </div>
+                  {!spellcastingAbility ? (
                     <div className="placeholder spell-placeholder">
-                      This class has no spellcasting scaffold at the current level.
+                      No spellcasting class selected; lists shown from scaffold state.
                     </div>
-                  )}
+                  ) : null}
                 </section>
               </div>
 

@@ -6,5 +6,8 @@
   "weaponCategory": "martial",
   "properties": [
     "versatile"
+  ],
+  "masteryProperties": [
+    "sap"
   ]
 }

@@ -17,8 +17,52 @@ describe("normalizeSeedPack", () => {
     const seed: SeedPack = {
       species: [{ slug: "human", name: "Human" }],
       backgrounds: [{ slug: "acolyte", name: "Acolyte" }],
-      classes: [{ slug: "fighter", name: "Fighter", hitDie: 10 }],
+      classes: [
+        {
+          slug: "fighter",
+          name: "Fighter",
+          hitDie: 10,
+          classFeaturesByLevel: [
+            {
+              level: 1,
+              featureId: "srd52:feature:fighting-style-defense"
+            }
+          ]
+        },
+        {
+          slug: "wizard",
+          name: "Wizard",
+          hitDie: 6,
+          spellcasting: {
+            ability: "int",
+            progression: "full",
+            mode: "prepared"
+          },
+          spellListRefIds: ["srd52:spelllist:wizard-core"]
+        }
+      ],
       features: [{ slug: "darkvision", name: "Darkvision" }],
+      spells: [
+        {
+          slug: "magic-missile",
+          name: "Magic Missile",
+          level: 1,
+          school: "evocation",
+          ritual: false,
+          castingTime: "1 action",
+          range: "120 feet",
+          components: ["V", "S"],
+          duration: "Instantaneous",
+          concentration: false
+        }
+      ],
+      spellLists: [
+        {
+          slug: "wizard-core",
+          name: "Wizard Core",
+          spellIds: ["srd52:spell:magic-missile"]
+        }
+      ],
       equipment: [
         {
           slug: "chain-shirt",
@@ -39,6 +83,11 @@ describe("normalizeSeedPack", () => {
           slug: "shield",
           name: "Shield",
           type: "shield"
+        },
+        {
+          slug: "rope-hempen-50ft",
+          name: "Rope, Hempen (50 ft.)",
+          type: "gear"
         }
       ]
     };
@@ -48,17 +97,28 @@ describe("normalizeSeedPack", () => {
     expect(normalized.species[0].id).toBe("srd52:species:human");
     expect(normalized.backgrounds[0].id).toBe("srd52:background:acolyte");
     expect(normalized.classes[0].id).toBe("srd52:class:fighter");
+    expect(normalized.classes[0].classFeaturesByLevel).toEqual([
+      {
+        level: 1,
+        featureId: "srd52:feature:fighting-style-defense"
+      }
+    ]);
+    expect(normalized.classes[1].spellListRefIds).toEqual(["srd52:spelllist:wizard-core"]);
     expect(normalized.features[0].id).toBe("srd52:feature:darkvision");
+    expect(normalized.spells[0].id).toBe("srd52:spell:magic-missile");
+    expect(normalized.spellLists[0].id).toBe("srd52:spelllist:wizard-core");
 
     const armor = normalized.equipment.find((entry) => entry.id.endsWith(":chain-shirt"));
     const weapon = normalized.equipment.find((entry) => entry.id.endsWith(":rapier"));
     const shield = normalized.equipment.find((entry) => entry.id.endsWith(":shield"));
+    const rope = normalized.equipment.find((entry) => entry.id.endsWith(":rope-hempen-50ft"));
 
     expect(armor?.type).toBe("armor_medium");
     expect(weapon?.type).toBe("weapon");
     expect(weapon?.damageDice).toBe("1d8");
     expect(shield?.type).toBe("shield");
     expect(shield?.hasShieldBonus).toBe(true);
+    expect(rope?.type).toBe("adventuring_gear");
   });
 
   it("throws a clear error when armorCategory is missing for armor", () => {
@@ -129,5 +189,21 @@ describe("normalizeSeedPack", () => {
     for (const spellList of normalized.spellLists) {
       expect(SpellListSchema.safeParse(spellList).success).toBe(true);
     }
+  });
+
+  it("accepts legacy class spellListRefs and normalizes to spellListRefIds", () => {
+    const seed = SeedPackSchema.parse({
+      classes: [
+        {
+          slug: "wizard",
+          name: "Wizard",
+          spellListRefs: ["srd52:spelllist:wizard-core"],
+        },
+      ],
+    });
+
+    const normalized = normalizeSeedPack(seed, "srd52");
+    expect(normalized.classes[0].spellListRefIds).toEqual(["srd52:spelllist:wizard-core"]);
+    expect(normalized.classes[0].spellListRefs).toBeUndefined();
   });
 });

@@ -17,6 +17,12 @@
     "simple": true,
     "martial": true
   },
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:unarmored-defense"
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

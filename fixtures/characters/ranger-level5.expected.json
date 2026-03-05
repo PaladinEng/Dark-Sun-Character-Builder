@@ -50,6 +50,7 @@
   "maxHP": 39,
   "passivePerception": 16,
   "proficiencyBonus": 3,
+  "resistances": [],
   "saveProficiencies": [
     "dex",
     "wis"
@@ -62,6 +63,7 @@
     "str": 0,
     "wis": 5
   },
+  "senses": [],
   "skillProficiencies": [
     "perception",
     "stealth",
@@ -94,21 +96,41 @@
     "abilityMod": 2,
     "attackBonus": 5,
     "cantripsKnownIds": [],
-    "knownSpellIds": [],
+    "knownSpellIds": [
+      "test:spell:cure-wounds",
+      "test:spell:enhance-ability",
+      "test:spell:hail-of-thorns",
+      "test:spell:zephyr-strike"
+    ],
     "preparedSpellIds": [],
     "progression": "half",
     "saveDC": 13,
-    "slots": {
-      "1": 4,
-      "2": 2
-    }
+    "slots": [
+      4,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   },
   "spellcastingAbility": "wis",
   "spellSaveDC": 13,
-  "spellSlots": {
-    "1": 4,
-    "2": 2
-  },
+  "spellSlots": [
+    4,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
   "toolProficiencies": [],
+  "traits": [],
   "warnings": []
 }

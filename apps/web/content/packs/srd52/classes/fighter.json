@@ -20,6 +20,20 @@
     "simple": true,
     "martial": true
   },
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:fighting-style-defense"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:chain-shirt",
+      "srd52:equipment:longsword"
+    ],
+    "equippedArmorId": "srd52:equipment:chain-shirt",
+    "equippedWeaponId": "srd52:equipment:longsword"
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",

@@ -3,7 +3,8 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
-import { lintPacks, loadPackFromDir } from "../src";
+import { lintPacks } from "../src";
+import { loadPackFromDir } from "../src/load";
 
 const PACK_PRIORITY = ["srd52", "darksun"] as const;
 

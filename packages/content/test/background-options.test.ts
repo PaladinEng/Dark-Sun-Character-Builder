@@ -87,4 +87,17 @@ describe("FeatSchema", () => {
 
     expect(parsed.success).toBe(true);
   });
+
+  it("accepts feature and spellcasting prerequisites", () => {
+    const parsed = FeatSchema.safeParse({
+      id: "srd52:feat:spell-blade",
+      name: "Spell Blade",
+      prerequisites: {
+        featureIds: ["srd52:feature:spellcasting"],
+        requiresSpellcasting: true
+      }
+    });
+
+    expect(parsed.success).toBe(true);
+  });
 });

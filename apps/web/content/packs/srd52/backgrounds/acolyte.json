@@ -15,6 +15,14 @@
     {
       "type": "grant_skill_proficiency",
       "skill": "insight"
+    },
+    {
+      "type": "grant_language",
+      "language": "Celestial"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Calligrapher's Supplies"
     }
   ]
 }

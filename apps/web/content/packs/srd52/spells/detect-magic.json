@@ -1,0 +1,13 @@
+{
+  "id": "srd52:spell:detect-magic",
+  "name": "Detect Magic",
+  "level": 1,
+  "school": "divination",
+  "ritual": true,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": ["V", "S"],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true,
+  "description": "For the duration, you sense the presence of magic within 30 feet of you."
+}

@@ -6,10 +6,13 @@ import type {
   Feature,
   MergedContent
 } from "@dark-sun/content";
+import { getClassFeatureIdsForLevel } from "@dark-sun/content";
 
 import { getAvailableAdvancementSlots } from "./advancement";
 import { applyEffectsToCharacter } from "./effects";
-import { getSpellSlots } from "./spellSlots";
+import { applyDerivedModifierPipeline } from "./modifiers";
+import { deriveStartingEquipment } from "./startingEquipment";
+import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   type Ability,
@@ -17,6 +20,7 @@ import {
   type Advancement,
   type CharacterState,
   type DerivedState,
+  type SpellSlots,
   type SpellcastingAbility
 } from "./types";
 
@@ -45,6 +49,10 @@ const STANDARD_SKILLS = Object.keys(SKILL_TO_ABILITY);
 
 function dedupe<T>(values: T[]): T[] {
   return [...new Set(values)];
+}
+
+function dedupeSortedStrings(values: string[]): string[] {
+  return [...new Set(values)].sort((a, b) => a.localeCompare(b));
 }
 
 function sortIds(values: string[] | undefined): string[] {
@@ -152,6 +160,20 @@ function resolveSelectedFeatures(
     .filter((feature): feature is Feature => Boolean(feature));
 }
 
+function resolveClassFeatures(
+  klass: Class | undefined,
+  level: number,
+  merged: MergedContent
+): Feature[] {
+  if (!klass) {
+    return [];
+  }
+
+  return getClassFeatureIdsForLevel(klass, level)
+    .map((id) => merged.featuresById[id])
+    .filter((feature): feature is Feature => Boolean(feature));
+}
+
 function resolveSelectedFeats(
   state: CharacterState,
   merged: MergedContent,
@@ -235,6 +257,7 @@ export function computeDerivedState(
   const level = Math.max(1, Math.floor(state.level || 1));
   const slotLevels = getAvailableAdvancementSlots(level, state.selectedClassId);
   const advancementsByLevel = getLevelAdvancements(state, slotLevels);
+  const startingEquipment = deriveStartingEquipment(state, merged);
 
   const asiIncreases = [...advancementsByLevel.values()]
     .filter(
@@ -272,6 +295,7 @@ export function computeDerivedState(
     ? merged.classesById[state.selectedClassId]
     : undefined;
   const features = resolveSelectedFeatures(state, merged);
+  const classFeatures = resolveClassFeatures(klass, level, merged);
   const levelFeatIds = [...advancementsByLevel.entries()]
     .filter(
       (entry): entry is [number, Extract<Advancement, { type: "feat" }>] =>
@@ -281,15 +305,30 @@ export function computeDerivedState(
     .map((entry) => entry[1].featId);
   const feats = resolveSelectedFeats(state, merged, levelFeatIds);
 
+  const speciesEffects = species?.effects ?? [];
+
   const effects: Effect[] = [
-    ...(species?.effects ?? []),
+    ...speciesEffects,
     ...(background?.effects ?? []),
     ...(klass?.effects ?? []),
+    ...classFeatures.flatMap((feature) => feature.effects ?? []),
     ...features.flatMap((feature) => feature.effects ?? []),
     ...feats.flatMap((feat) => feat.effects ?? [])
   ];
 
+  const speciesApplied = applyEffectsToCharacter(state, speciesEffects);
   const applied = applyEffectsToCharacter(state, effects);
+
+  const speciesBaselineSpeed = state.baseSpeed ?? 30;
+  const speciesSpeedOverride = speciesApplied.speedOverride;
+  const speedTraits =
+    typeof speciesSpeedOverride === "number" &&
+    speciesSpeedOverride !== speciesBaselineSpeed
+      ? [`Speed ${speciesSpeedOverride} ft.`]
+      : [];
+  const senses = speciesApplied.senses;
+  const resistances = speciesApplied.resistances;
+  const traits = dedupe([...speedTraits, ...applied.traits]);
 
   const skillProficiencies = dedupe([
     ...(state.chosenSkillProficiencies ?? []),
@@ -321,11 +360,11 @@ export function computeDerivedState(
     ...(state.chosenSaveProficiencies ?? []),
     ...applied.grantedSaveProficiencies
   ]);
-  const toolProficiencies = dedupe([
+  const toolProficiencies = dedupeSortedStrings([
     ...(state.toolProficiencies ?? []),
     ...applied.grantedToolProficiencies
   ]);
-  const languages = dedupe([
+  const languages = dedupeSortedStrings([
     ...(state.languages ?? []),
     ...applied.grantedLanguages
   ]);
@@ -392,11 +431,29 @@ export function computeDerivedState(
     typeof dexCapEffective === "number" ? Math.min(dexMod, dexCapEffective) : dexMod;
 
   let armorClass: number;
-  if (typeof armor?.armorClassBase === "number") {
-    armorClass = armor.armorClassBase + dexPart;
+  const armorClassBase = typeof armor?.armorClassBase === "number" ? armor.armorClassBase : null;
+  const hasEquippedArmor = armorClassBase !== null;
+  if (hasEquippedArmor) {
+    armorClass = armorClassBase + dexPart;
   } else {
     armorClass = 10 + dexMod;
+    if (applied.unarmoredDefenseAbility) {
+      const unarmoredDefense = 10 + dexMod + abilityMods[applied.unarmoredDefenseAbility];
+      armorClass = Math.max(armorClass, unarmoredDefense);
+    }
   }
+  const armorClassBonus = applied.armorClassBonuses
+    .filter((bonus) => {
+      if (bonus.condition === "wearing_armor") {
+        return hasEquippedArmor;
+      }
+      if (bonus.condition === "unarmored") {
+        return !hasEquippedArmor;
+      }
+      return true;
+    })
+    .reduce((sum, bonus) => sum + bonus.value, 0);
+  armorClass += armorClassBonus;
   if (shield && (shield.type === "shield" || shield.hasShieldBonus === true)) {
     armorClass += 2;
   }
@@ -420,6 +477,14 @@ export function computeDerivedState(
         : "str";
     const mod = abilityMods[attackAbility];
     const proficientWithWeapon = isProficientWithWeapon(weapon, klass);
+    const attackBonus = applied.attackBonuses
+      .filter((bonus) => {
+        if (bonus.condition === "ranged_weapon") {
+          return ranged;
+        }
+        return true;
+      })
+      .reduce((sum, bonus) => sum + bonus.value, 0);
     if (!proficientWithWeapon) {
       warnings.push(
         `Attack with ${weapon.name} is not proficient; proficiency bonus not applied`
@@ -427,15 +492,18 @@ export function computeDerivedState(
     }
     attack = {
       name: weapon.name,
-      toHit: mod + (proficientWithWeapon ? proficiencyBonus : 0),
-      damage: `${weapon.damageDice}${signed(mod)}`
+      toHit: mod + (proficientWithWeapon ? proficiencyBonus : 0) + attackBonus,
+      damage: `${weapon.damageDice}${signed(mod)}`,
+      ...(weapon.masteryProperties && weapon.masteryProperties.length > 0
+        ? { mastery: [...weapon.masteryProperties] }
+        : {})
     };
   }
 
   let spellcastingAbility: SpellcastingAbility | null = null;
   let spellSaveDC: number | null = null;
   let spellAttackBonus: number | null = null;
-  let spellSlots: Record<number, number> | null = null;
+  let spellSlots: SpellSlots | null = null;
   const knownSpellIds = sortIds(state.knownSpellIds);
   const preparedSpellIds = sortIds(state.preparedSpellIds);
   const cantripsKnownIds = sortIds(state.cantripsKnownIds);
@@ -446,7 +514,7 @@ export function computeDerivedState(
         const abilityMod = abilityMods[spellAbility];
         const slots =
           klass.spellcasting.progression === "pact"
-            ? {}
+            ? createEmptySpellSlots()
             : getSpellSlots(level, klass.spellcasting.progression);
         const saveDC = 8 + proficiencyBonus + abilityMod;
         const attackBonus = proficiencyBonus + abilityMod;
@@ -494,11 +562,14 @@ export function computeDerivedState(
     };
   });
 
-  return {
+  const baseDerived: DerivedState = {
     finalAbilities,
     abilityMods,
     proficiencyBonus,
     speed: applied.speedOverride ?? state.baseSpeed ?? 30,
+    senses,
+    resistances,
+    traits,
     savingThrows,
     skills,
     skillProficiencies: finalSkillProficiencies,
@@ -516,6 +587,9 @@ export function computeDerivedState(
     spellcasting,
     feats: feats.map((feat) => ({ id: feat.id, name: feat.name })),
     warnings: dedupe(warnings),
+    ...(startingEquipment ? { startingEquipment } : {}),
     advancementSlots
   };
+
+  return applyDerivedModifierPipeline(baseDerived, state);
 }

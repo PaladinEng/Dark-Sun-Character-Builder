@@ -1,8 +1,24 @@
 export const ABILITIES = ["str", "dex", "con", "int", "wis", "cha"] as const;
 export type Ability = (typeof ABILITIES)[number];
 export type SpellcastingAbility = Ability;
+export type SpellSlots = [
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number
+];
 
 export type AbilityRecord = Record<Ability, number>;
+export const ABILITY_SCORE_METHODS = ["manual", "standard_array", "point_buy"] as const;
+export type AbilityScoreMethod = (typeof ABILITY_SCORE_METHODS)[number];
+export const CONDITION_IDS = ["encumbered"] as const;
+export type ConditionId = (typeof CONDITION_IDS)[number];
+export type CharacterConditions = Partial<Record<ConditionId, boolean>>;
 
 export interface AbilityIncrease {
   source: "background" | "feat" | "other";
@@ -23,9 +39,21 @@ export interface FeatSelections {
   level?: Record<number, string>;
 }
 
+export interface CharacterCoins {
+  gp: number;
+  sp: number;
+  cp: number;
+}
+
+export interface InventoryEntry {
+  itemId: string;
+  quantity?: number;
+}
+
 export interface CharacterState {
   level: number;
   baseAbilities: AbilityRecord;
+  abilityScoreMethod?: AbilityScoreMethod;
   abilities?: AbilityRecord;
   abilityIncreases?: AbilityIncrease[];
   selectedSpeciesId?: string;
@@ -48,10 +76,26 @@ export interface CharacterState {
   knownSpellIds?: string[];
   preparedSpellIds?: string[];
   cantripsKnownIds?: string[];
+  coins?: Partial<CharacterCoins>;
+  inventoryItemIds?: string[];
+  inventoryEntries?: InventoryEntry[];
   equippedArmorId?: string;
   equippedShieldId?: string;
   equippedWeaponId?: string;
   baseSpeed?: number;
+  conditions?: CharacterConditions;
+}
+
+export interface DerivedStartingEquipment {
+  itemIds: string[];
+  equippedArmorId?: string;
+  equippedShieldId?: string;
+  equippedWeaponId?: string;
+}
+
+export interface DerivedSense {
+  type: string;
+  range?: number;
 }
 
 export interface DerivedState {
@@ -59,6 +103,9 @@ export interface DerivedState {
   abilityMods: AbilityRecord;
   proficiencyBonus: number;
   speed: number;
+  senses: DerivedSense[];
+  resistances: string[];
+  traits: string[];
   savingThrows: AbilityRecord;
   skills: Record<string, number>;
   skillProficiencies: string[];
@@ -68,24 +115,27 @@ export interface DerivedState {
   passivePerception: number;
   maxHP: number;
   armorClass: number;
-  attack: { name: string; toHit: number; damage: string } | null;
+  attack: { name: string; toHit: number; damage: string; mastery?: string[] } | null;
   spellcastingAbility: SpellcastingAbility | null;
   spellSaveDC: number | null;
   spellAttackBonus: number | null;
-  spellSlots: Record<number, number> | null;
+  spellSlots: SpellSlots | null;
   spellcasting?: {
     ability: SpellcastingAbility;
     abilityMod: number;
     saveDC: number;
     attackBonus: number;
     progression: "full" | "half" | "third" | "pact";
-    slots: Record<number, number>;
+    slots: SpellSlots;
     knownSpellIds: string[];
     preparedSpellIds: string[];
     cantripsKnownIds: string[];
   };
   feats: { id: string; name: string }[];
   warnings: string[];
+  startingEquipment?: DerivedStartingEquipment;
+  activeConditionIds?: ConditionId[];
+  appliedModifiers?: DerivedModifier[];
   advancementSlots: Array<{
     level: number;
     filled: boolean;
@@ -93,4 +143,17 @@ export interface DerivedState {
     feat?: { id: string; name: string };
     asi?: Partial<Record<Ability, number>>;
   }>;
+}
+
+export type DerivedModifierEffect = {
+  type: "add_speed";
+  value: number;
+};
+
+export interface DerivedModifier {
+  id: string;
+  source: "condition";
+  sourceId: ConditionId;
+  label: string;
+  effects: DerivedModifierEffect[];
 }

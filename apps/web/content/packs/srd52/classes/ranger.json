@@ -19,12 +19,40 @@
     "simple": true,
     "martial": true
   },
+  "classFeaturesByLevel": [
+    {
+      "level": 2,
+      "featureId": "srd52:feature:fighting-style-archery"
+    }
+  ],
   "spellcasting": {
     "ability": "wis",
     "progression": "half",
-    "mode": "known"
+    "mode": "known",
+    "selectionLimitsByLevel": [
+      { "level": 1, "known": 0, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 2, "known": 2, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 3, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 4, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 5, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 6, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 7, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 8, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 9, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 10, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 11, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 12, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 13, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 14, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 15, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 16, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 17, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 18, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 19, "known": 11, "prepared": 0, "cantripsKnown": 0 },
+      { "level": 20, "known": 11, "prepared": 0, "cantripsKnown": 0 }
+    ]
   },
-  "spellListRefs": [
+  "spellListRefIds": [
     "srd52:spelllist:ranger-core"
   ],
   "effects": [

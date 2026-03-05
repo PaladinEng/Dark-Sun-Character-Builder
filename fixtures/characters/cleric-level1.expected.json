@@ -32,6 +32,7 @@
   "maxHP": 10,
   "passivePerception": 13,
   "proficiencyBonus": 2,
+  "resistances": [],
   "saveProficiencies": [
     "wis"
   ],
@@ -43,6 +44,7 @@
     "str": 0,
     "wis": 5
   },
+  "senses": [],
   "skillProficiencies": [
     "insight",
     "religion"
@@ -78,15 +80,32 @@
     "preparedSpellIds": [],
     "progression": "full",
     "saveDC": 13,
-    "slots": {
-      "1": 2
-    }
+    "slots": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   },
   "spellcastingAbility": "wis",
   "spellSaveDC": 13,
-  "spellSlots": {
-    "1": 2
-  },
+  "spellSlots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
   "toolProficiencies": [],
+  "traits": [],
   "warnings": []
 }

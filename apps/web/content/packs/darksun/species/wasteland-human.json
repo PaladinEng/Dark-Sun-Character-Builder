@@ -5,6 +5,10 @@
     {
       "type": "set_speed",
       "value": 35
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
     }
   ]
 }

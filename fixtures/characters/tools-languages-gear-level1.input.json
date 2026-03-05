@@ -1,0 +1,252 @@
+{
+  "state": {
+    "level": 1,
+    "baseAbilities": {
+      "str": 14,
+      "dex": 12,
+      "con": 13,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "selectedSpeciesId": "test:species:linguist",
+    "selectedBackgroundId": "test:bg:traveler",
+    "selectedClassId": "test:class:fighter",
+    "selectedFeatureIds": [],
+    "selectedFeats": [
+      "test:feat:dabbler"
+    ],
+    "featSelections": {
+      "origin": "test:feat:origin-alert",
+      "level": {}
+    },
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [
+      "Calligrapher's Supplies"
+    ],
+    "languages": [
+      "Common"
+    ],
+    "inventoryEntries": [
+      {
+        "itemId": "test:equipment:bedroll",
+        "quantity": 1
+      },
+      {
+        "itemId": "test:equipment:rope-hempen-50ft",
+        "quantity": 2
+      }
+    ],
+    "equippedArmorId": "test:armor:chain-shirt",
+    "equippedWeaponId": "test:weapon:longsword",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:linguist",
+        "name": "Linguist",
+        "effects": [
+          {
+            "type": "grant_language",
+            "language": "Elvish"
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:traveler",
+        "name": "Traveler",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_language",
+            "language": "Dwarvish"
+          },
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "Navigator's Tools"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    ],
+    "features": [],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      {
+        "id": "test:feat:dabbler",
+        "name": "Dabbler",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "Herbalism Kit"
+          },
+          {
+            "type": "grant_language",
+            "language": "Celestial"
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      {
+        "id": "test:weapon:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial"
+      },
+      {
+        "id": "test:equipment:bedroll",
+        "name": "Bedroll",
+        "type": "adventuring_gear"
+      },
+      {
+        "id": "test:equipment:rope-hempen-50ft",
+        "name": "Rope, Hempen (50 ft.)",
+        "type": "adventuring_gear"
+      }
+    ],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {
+      "test:species:linguist": {
+        "id": "test:species:linguist",
+        "name": "Linguist",
+        "effects": [
+          {
+            "type": "grant_language",
+            "language": "Elvish"
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:traveler": {
+        "id": "test:bg:traveler",
+        "name": "Traveler",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_language",
+            "language": "Dwarvish"
+          },
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "Navigator's Tools"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    },
+    "featuresById": {},
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      "test:feat:dabbler": {
+        "id": "test:feat:dabbler",
+        "name": "Dabbler",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_tool_proficiency",
+            "tool": "Herbalism Kit"
+          },
+          {
+            "type": "grant_language",
+            "language": "Celestial"
+          }
+        ]
+      }
+    },
+    "equipmentById": {
+      "test:armor:chain-shirt": {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      "test:weapon:longsword": {
+        "id": "test:weapon:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial"
+      },
+      "test:equipment:bedroll": {
+        "id": "test:equipment:bedroll",
+        "name": "Bedroll",
+        "type": "adventuring_gear"
+      },
+      "test:equipment:rope-hempen-50ft": {
+        "id": "test:equipment:rope-hempen-50ft",
+        "name": "Rope, Hempen (50 ft.)",
+        "type": "adventuring_gear"
+      }
+    },
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

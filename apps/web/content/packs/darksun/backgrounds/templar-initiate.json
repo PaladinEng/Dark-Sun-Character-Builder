@@ -20,7 +20,11 @@
     },
     {
       "type": "grant_tool_proficiency",
-      "tool": "calligrapher's supplies"
+      "tool": "Calligrapher's Supplies"
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
     }
   ]
 }
