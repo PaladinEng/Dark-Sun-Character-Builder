@@ -19,3 +19,7 @@ npm-debug.log*
 
 # Dev tooling
 .loopdev
+
+# Codex runner artifacts
+codex/runs/
+codex/runs/**
