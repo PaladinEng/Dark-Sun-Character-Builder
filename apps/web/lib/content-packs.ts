@@ -1,3 +1,4 @@
+import "server-only";
 import { access, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { cache } from "react";
