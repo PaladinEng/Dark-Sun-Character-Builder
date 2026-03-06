@@ -56,6 +56,11 @@ async function main() {
       requiredAll: [],
     },
     {
+      path: `/sheet?payload=${encodeURIComponent(encodedPrintPayload)}`,
+      requiredAny: ["Character Sheet (HTML)", "Abilities", "Core Stats"],
+      requiredAll: [],
+    },
+    {
       path: "/debug/content",
       requiredAny: ["Debug: Content", "Merged Entity JSON", "Merged Counts"],
       requiredAll: [],

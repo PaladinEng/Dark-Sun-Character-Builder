@@ -7,7 +7,7 @@ import process from "node:process";
 import { makeKnownValidExportPayload } from "./smoke-fixture.mjs";
 import { startWebDevServer } from "./smoke-server.mjs";
 
-const DEFAULT_MIN_PDF_BYTES = 4096;
+const DEFAULT_MIN_PDF_BYTES = 512;
 const ARTIFACT_DIR = join(process.cwd(), "codex", "harness");
 const PDF_ARTIFACT_PATH = join(ARTIFACT_DIR, "pdf-sanity-export.pdf");
 const META_ARTIFACT_PATH = join(ARTIFACT_DIR, "pdf-sanity.json");

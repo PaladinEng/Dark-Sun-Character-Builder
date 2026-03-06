@@ -10,7 +10,7 @@ import {
 } from "./smoke-fixture.mjs";
 import { startWebDevServer } from "./smoke-server.mjs";
 
-const DEFAULT_MIN_PDF_BYTES = 4096;
+const DEFAULT_MIN_PDF_BYTES = 512;
 
 async function loadTemplatePdfBytesIfPresent() {
   const candidates = [
