@@ -23,3 +23,4 @@ npm-debug.log*
 # Codex runner artifacts
 codex/runs/
 codex/runs/**
+codex/harness/
