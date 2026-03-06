@@ -1,0 +1,15 @@
+{
+  "id": "srd52:feature:fighting-style-archery",
+  "name": "Fighting Style: Archery",
+  "effects": [
+    {
+      "type": "add_attack_bonus",
+      "value": 2,
+      "condition": "ranged_weapon"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Fighting Style: Archery"
+    }
+  ]
+}

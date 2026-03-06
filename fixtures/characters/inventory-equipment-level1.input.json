@@ -1,0 +1,149 @@
+{
+  "state": {
+    "level": 1,
+    "baseAbilities": {
+      "str": 16,
+      "dex": 12,
+      "con": 14,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "selectedClassId": "test:class:fighter",
+    "chosenSkillProficiencies": [],
+    "chosenClassSkills": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "cantripsKnownIds": [],
+    "coins": {
+      "gp": 12,
+      "sp": 5,
+      "cp": 9
+    },
+    "inventoryItemIds": [
+      "test:equipment:chain-shirt",
+      "test:equipment:shield",
+      "test:equipment:longsword"
+    ],
+    "inventoryEntries": [
+      {
+        "itemId": "test:equipment:shortbow",
+        "quantity": 1
+      }
+    ],
+    "equippedArmorId": "test:equipment:chain-shirt",
+    "equippedShieldId": "test:equipment:shield",
+    "equippedWeaponId": "test:equipment:longsword"
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [],
+    "backgrounds": [],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        }
+      }
+    ],
+    "features": [],
+    "feats": [],
+    "equipment": [
+      {
+        "id": "test:equipment:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      {
+        "id": "test:equipment:shield",
+        "name": "Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      {
+        "id": "test:equipment:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial"
+      },
+      {
+        "id": "test:equipment:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple",
+        "properties": [
+          "ranged"
+        ]
+      }
+    ],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {},
+    "backgroundsById": {},
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        }
+      }
+    },
+    "featuresById": {},
+    "featsById": {},
+    "equipmentById": {
+      "test:equipment:chain-shirt": {
+        "id": "test:equipment:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      "test:equipment:shield": {
+        "id": "test:equipment:shield",
+        "name": "Shield",
+        "type": "shield",
+        "hasShieldBonus": true
+      },
+      "test:equipment:longsword": {
+        "id": "test:equipment:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial"
+      },
+      "test:equipment:shortbow": {
+        "id": "test:equipment:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple",
+        "properties": [
+          "ranged"
+        ]
+      }
+    },
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

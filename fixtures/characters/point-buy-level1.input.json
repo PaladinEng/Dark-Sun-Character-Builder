@@ -1,0 +1,35 @@
+{
+  "state": {
+    "level": 1,
+    "abilityScoreMethod": "point_buy",
+    "baseAbilities": {
+      "str": 8,
+      "dex": 15,
+      "con": 15,
+      "int": 10,
+      "wis": 10,
+      "cha": 13
+    },
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": []
+  },
+  "content": {
+    "manifests": [],
+    "species": [],
+    "backgrounds": [],
+    "classes": [],
+    "features": [],
+    "feats": [],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {},
+    "backgroundsById": {},
+    "classesById": {},
+    "featuresById": {},
+    "featsById": {},
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

@@ -1,6 +1,12 @@
 {
   "id": "srd52:background:soldier",
   "name": "Soldier",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:shield"
+    ],
+    "equippedShieldId": "srd52:equipment:shield"
+  },
   "effects": [
     {
       "type": "grant_skill_proficiency",

@@ -4,9 +4,9 @@ import {
   BackgroundSchema,
   FeatSchema,
   getAttributionBlocks,
-  mergePacks,
-  type Pack
+  mergePacks
 } from "../src/index.js";
+import type { Pack } from "../src/load";
 
 function makePack(input: Partial<Pack> & { id: string }): Pack {
   return {
@@ -72,6 +72,63 @@ describe("content", () => {
       merged.content.speciesById["darksun:species:wasteland-human"]?.name
     ).toBe("Wasteland Human");
     expect(merged.report.species.replaced).toBe(1);
+  });
+
+  it("supports replacement semantics for spells", () => {
+    const srd = makePack({
+      id: "srd52",
+      entities: {
+        species: [],
+        backgrounds: [],
+        classes: [],
+        features: [],
+        feats: [],
+        equipment: [],
+        spells: [
+          {
+            id: "srd52:spell:magic-missile",
+            name: "Magic Missile",
+            level: 1,
+            school: "evocation",
+            castingTime: "1 action",
+            range: "120 feet",
+            components: ["V", "S"],
+            duration: "Instantaneous"
+          }
+        ],
+        spellLists: []
+      }
+    });
+    const darksun = makePack({
+      id: "darksun",
+      entities: {
+        species: [],
+        backgrounds: [],
+        classes: [],
+        features: [],
+        feats: [],
+        equipment: [],
+        spells: [
+          {
+            id: "darksun:spell:force-bolts",
+            name: "Force Bolts",
+            level: 1,
+            school: "evocation",
+            castingTime: "1 action",
+            range: "120 feet",
+            components: ["V", "S"],
+            duration: "Instantaneous",
+            replaces: "srd52:spell:magic-missile"
+          }
+        ],
+        spellLists: []
+      }
+    });
+
+    const merged = mergePacks([srd, darksun]);
+    expect(merged.content.spellsById["srd52:spell:magic-missile"]).toBeUndefined();
+    expect(merged.content.spellsById["darksun:spell:force-bolts"]?.name).toBe("Force Bolts");
+    expect(merged.report.spells.replaced).toBe(1);
   });
 
   it("returns attribution blocks with SRD text", () => {

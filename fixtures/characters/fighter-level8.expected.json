@@ -60,6 +60,7 @@
   "maxHP": 68,
   "passivePerception": 14,
   "proficiencyBonus": 3,
+  "resistances": [],
   "saveProficiencies": [
     "str"
   ],
@@ -71,6 +72,7 @@
     "str": 4,
     "wis": 1
   },
+  "senses": [],
   "skillProficiencies": [
     "perception",
     "stealth"
@@ -103,5 +105,6 @@
   "toolProficiencies": [
     "Navigator's Tools"
   ],
+  "traits": [],
   "warnings": []
 }

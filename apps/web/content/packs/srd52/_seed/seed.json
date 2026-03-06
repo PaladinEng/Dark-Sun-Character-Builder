@@ -3,22 +3,40 @@
     {
       "slug": "human",
       "name": "Human",
-      "effects": [{ "type": "set_speed", "value": 30 }]
+      "effects": [
+        { "type": "set_speed", "value": 30 },
+        { "type": "grant_language", "language": "Common" }
+      ]
     },
     {
       "slug": "elf",
       "name": "Elf",
-      "effects": [{ "type": "set_speed", "value": 30 }]
+      "effects": [
+        { "type": "set_speed", "value": 30 },
+        { "type": "grant_language", "language": "Common" },
+        { "type": "grant_language", "language": "Elvish" }
+      ]
     },
     {
       "slug": "dwarf",
       "name": "Dwarf",
-      "effects": [{ "type": "set_speed", "value": 25 }]
+      "effects": [
+        { "type": "set_speed", "value": 25 },
+        { "type": "grant_sense", "sense": "darkvision", "range": 60 },
+        { "type": "grant_resistance", "damageType": "poison" },
+        { "type": "grant_trait", "name": "Stonecunning" },
+        { "type": "grant_language", "language": "Common" },
+        { "type": "grant_language", "language": "Dwarvish" }
+      ]
     },
     {
       "slug": "halfling",
       "name": "Halfling",
-      "effects": [{ "type": "set_speed", "value": 25 }]
+      "effects": [
+        { "type": "set_speed", "value": 25 },
+        { "type": "grant_language", "language": "Common" },
+        { "type": "grant_language", "language": "Halfling" }
+      ]
     }
   ],
   "backgrounds": [
@@ -31,17 +49,28 @@
       },
       "grantsFeat": "srd52:feat:alert",
       "grantsOriginFeatId": "srd52:feat:alert",
-      "effects": [{ "type": "grant_skill_proficiency", "skill": "insight" }]
+      "effects": [
+        { "type": "grant_skill_proficiency", "skill": "insight" },
+        { "type": "grant_language", "language": "Celestial" },
+        { "type": "grant_tool_proficiency", "tool": "Calligrapher's Supplies" }
+      ]
     },
     {
       "slug": "soldier",
       "name": "Soldier",
+      "startingEquipment": {
+        "itemIds": ["srd52:equipment:shield"],
+        "equippedShieldId": "srd52:equipment:shield"
+      },
       "effects": [{ "type": "grant_skill_proficiency", "skill": "athletics" }]
     },
     {
       "slug": "sage",
       "name": "Sage",
-      "effects": [{ "type": "grant_skill_proficiency", "skill": "arcana" }]
+      "effects": [
+        { "type": "grant_skill_proficiency", "skill": "arcana" },
+        { "type": "grant_language", "language": "Draconic" }
+      ]
     },
     {
       "slug": "criminal",
@@ -49,7 +78,10 @@
       "originFeatChoice": {
         "featIds": ["srd52:feat:alert", "srd52:feat:magic-initiate"]
       },
-      "effects": [{ "type": "grant_skill_proficiency", "skill": "stealth" }]
+      "effects": [
+        { "type": "grant_skill_proficiency", "skill": "stealth" },
+        { "type": "grant_tool_proficiency", "tool": "Thieves' Tools" }
+      ]
     }
   ],
   "classes": [
@@ -74,6 +106,20 @@
       "weaponProficiencies": {
         "simple": true,
         "martial": true
+      },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:fighting-style-defense"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:chain-shirt",
+          "srd52:equipment:longsword"
+        ],
+        "equippedArmorId": "srd52:equipment:chain-shirt",
+        "equippedWeaponId": "srd52:equipment:longsword"
       },
       "effects": [{ "type": "grant_save_proficiency", "ability": "str" }]
     },
@@ -100,6 +146,7 @@
         "progression": "full",
         "mode": "prepared"
       },
+      "spellListRefIds": ["srd52:spelllist:wizard-core"],
       "effects": [{ "type": "grant_save_proficiency", "ability": "int" }]
     },
     {
@@ -153,6 +200,7 @@
         "progression": "full",
         "mode": "prepared"
       },
+      "spellListRefIds": ["srd52:spelllist:cleric-core"],
       "effects": [{ "type": "grant_save_proficiency", "ability": "wis" }]
     },
     {
@@ -174,6 +222,12 @@
         "simple": true,
         "martial": true
       },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:unarmored-defense"
+        }
+      ],
       "effects": [{ "type": "grant_save_proficiency", "ability": "con" }]
     },
     {
@@ -197,15 +251,56 @@
         "simple": true,
         "martial": true
       },
+      "classFeaturesByLevel": [
+        {
+          "level": 2,
+          "featureId": "srd52:feature:fighting-style-archery"
+        }
+      ],
       "spellcasting": {
         "ability": "wis",
         "progression": "half",
-        "mode": "known"
+        "mode": "known",
+        "selectionLimitsByLevel": [
+          { "level": 1, "known": 0, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 2, "known": 2, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 3, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 4, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 5, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 6, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 7, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 8, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 9, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 10, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 11, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 12, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 13, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 14, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 15, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 16, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 17, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 18, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 19, "known": 11, "prepared": 0, "cantripsKnown": 0 },
+          { "level": 20, "known": 11, "prepared": 0, "cantripsKnown": 0 }
+        ]
       },
+      "spellListRefIds": ["srd52:spelllist:ranger-core"],
       "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
     }
   ],
   "features": [
+    { "slug": "fighting-style-defense", "name": "Fighting Style: Defense", "effects": [
+      { "type": "add_armor_class_bonus", "value": 1, "condition": "wearing_armor" },
+      { "type": "grant_trait", "name": "Fighting Style: Defense" }
+    ] },
+    { "slug": "fighting-style-archery", "name": "Fighting Style: Archery", "effects": [
+      { "type": "add_attack_bonus", "value": 2, "condition": "ranged_weapon" },
+      { "type": "grant_trait", "name": "Fighting Style: Archery" }
+    ] },
+    { "slug": "unarmored-defense", "name": "Unarmored Defense", "effects": [
+      { "type": "set_unarmored_defense", "ability": "con" },
+      { "type": "grant_trait", "name": "Unarmored Defense" }
+    ] },
     { "slug": "second-wind", "name": "Second Wind" },
     { "slug": "sneak-attack", "name": "Sneak Attack" },
     { "slug": "spellcasting", "name": "Spellcasting" }
@@ -331,7 +426,8 @@
       "type": "weapon",
       "damageDice": "1d8",
       "weaponCategory": "martial",
-      "properties": ["versatile"]
+      "properties": ["versatile"],
+      "masteryProperties": ["sap"]
     },
     {
       "slug": "battleaxe",
@@ -339,7 +435,8 @@
       "type": "weapon",
       "damageDice": "1d8",
       "weaponCategory": "martial",
-      "properties": ["versatile"]
+      "properties": ["versatile"],
+      "masteryProperties": ["topple"]
     },
     {
       "slug": "rapier",
@@ -347,7 +444,8 @@
       "type": "weapon",
       "damageDice": "1d8",
       "weaponCategory": "martial",
-      "properties": ["finesse"]
+      "properties": ["finesse"],
+      "masteryProperties": ["vex"]
     },
     {
       "slug": "shortbow",
@@ -355,7 +453,144 @@
       "type": "weapon",
       "damageDice": "1d6",
       "weaponCategory": "simple",
-      "properties": ["ranged"]
+      "properties": ["ranged"],
+      "masteryProperties": ["vex"]
+    },
+    {
+      "slug": "bedroll",
+      "name": "Bedroll",
+      "type": "gear"
+    },
+    {
+      "slug": "rope-hempen-50ft",
+      "name": "Rope, Hempen (50 ft.)",
+      "type": "gear"
+    },
+    {
+      "slug": "torch",
+      "name": "Torch",
+      "type": "gear"
+    }
+  ],
+  "spells": [
+    {
+      "slug": "guidance",
+      "name": "Guidance",
+      "level": 0,
+      "school": "divination",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": ["V", "S"],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "You touch a willing creature and grant a brief bonus to an ability check."
+    },
+    {
+      "slug": "sacred-flame",
+      "name": "Sacred Flame",
+      "level": 0,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": ["V", "S"],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "Flame-like radiance descends on a creature that fails a Dexterity save."
+    },
+    {
+      "slug": "cure-wounds",
+      "name": "Cure Wounds",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": ["V", "S"],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A creature you touch regains hit points."
+    },
+    {
+      "slug": "hunters-mark",
+      "name": "Hunter's Mark",
+      "level": 1,
+      "school": "divination",
+      "ritual": false,
+      "castingTime": "1 bonus action",
+      "range": "90 feet",
+      "components": ["V"],
+      "duration": "Concentration, up to 1 hour",
+      "concentration": true,
+      "description": "You mark a target and deal extra weapon damage to it."
+    },
+    {
+      "slug": "detect-magic",
+      "name": "Detect Magic",
+      "level": 1,
+      "school": "divination",
+      "ritual": true,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": ["V", "S"],
+      "duration": "Concentration, up to 10 minutes",
+      "concentration": true,
+      "description": "For the duration, you sense the presence of magic within 30 feet of you."
+    },
+    {
+      "slug": "magic-missile",
+      "name": "Magic Missile",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "components": ["V", "S"],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You create darts of magical force that strike targets automatically."
+    },
+    {
+      "slug": "fireball",
+      "name": "Fireball",
+      "level": 3,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "150 feet",
+      "components": ["V", "S", "M"],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A bright streak erupts into an explosion of fire in a 20-foot radius."
+    }
+  ],
+  "spellLists": [
+    {
+      "slug": "cleric-core",
+      "name": "Cleric Core",
+      "spellIds": [
+        "srd52:spell:guidance",
+        "srd52:spell:sacred-flame",
+        "srd52:spell:cure-wounds"
+      ]
+    },
+    {
+      "slug": "ranger-core",
+      "name": "Ranger Core",
+      "spellIds": [
+        "srd52:spell:cure-wounds",
+        "srd52:spell:hunters-mark"
+      ]
+    },
+    {
+      "slug": "wizard-core",
+      "name": "Wizard Core",
+      "spellIds": [
+        "srd52:spell:detect-magic",
+        "srd52:spell:magic-missile",
+        "srd52:spell:fireball"
+      ]
     }
   ]
 }

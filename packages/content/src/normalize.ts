@@ -8,6 +8,7 @@ import type {
   SpellList,
   Species,
 } from "./entities";
+import { getClassSpellListRefIds } from "./entities";
 import type { SeedPack } from "./seed";
 
 export type NormalizedEntities = {
@@ -43,6 +44,7 @@ function normalizeBackground(
     abilityOptions?: Background["abilityOptions"];
     grantsFeat?: string;
     grantsOriginFeatId?: string;
+    startingEquipment?: Background["startingEquipment"];
     originFeatChoice?: Background["originFeatChoice"];
   };
 
@@ -53,6 +55,7 @@ function normalizeBackground(
     abilityOptions: metadata.abilityOptions,
     grantsFeat: metadata.grantsFeat,
     grantsOriginFeatId: metadata.grantsOriginFeatId,
+    startingEquipment: metadata.startingEquipment,
     originFeatChoice: metadata.originFeatChoice,
     effects: entry.effects,
   };
@@ -92,6 +95,7 @@ function normalizeEquipment(packId: string, entry: SeedEquipmentEntry): Equipmen
     damageDice: entry.damageDice,
     weaponCategory: entry.weaponCategory,
     properties: entry.properties,
+    masteryProperties: entry.masteryProperties,
     effects: entry.effects,
     strengthRequirement: entryWithExtras.strengthRequirement,
     stealthDisadvantage: entryWithExtras.stealthDisadvantage,
@@ -115,6 +119,14 @@ function normalizeEquipment(packId: string, entry: SeedEquipmentEntry): Equipmen
       type: "weapon",
       ...base,
       damageDice: entry.damageDice,
+    };
+  }
+
+  if (entry.type === "gear") {
+    return {
+      id: slugToId(packId, "equipment", entry.slug),
+      type: "adventuring_gear",
+      ...base,
     };
   }
 
@@ -165,7 +177,9 @@ export function normalizeSeedPack(
     classSkillChoices: entry.classSkillChoices,
     weaponProficiencies: entry.weaponProficiencies,
     spellcasting: entry.spellcasting,
-    spellListRefs: entry.spellListRefs,
+    spellListRefIds: getClassSpellListRefIds(entry),
+    classFeaturesByLevel: entry.classFeaturesByLevel,
+    startingEquipment: entry.startingEquipment,
     effects: entry.effects,
   }));
 
@@ -190,12 +204,12 @@ export function normalizeSeedPack(
     description: entry.description,
     level: entry.level,
     school: entry.school,
-    ritual: entry.ritual,
+    ritual: entry.ritual ?? false,
     castingTime: entry.castingTime,
     range: entry.range,
     components: entry.components,
     duration: entry.duration,
-    concentration: entry.concentration,
+    concentration: entry.concentration ?? false,
     summary: entry.summary,
     effects: entry.effects,
   }));

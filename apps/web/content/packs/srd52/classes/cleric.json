@@ -20,7 +20,7 @@
     "progression": "full",
     "mode": "prepared"
   },
-  "spellListRefs": [
+  "spellListRefIds": [
     "srd52:spelllist:cleric-core"
   ],
   "effects": [

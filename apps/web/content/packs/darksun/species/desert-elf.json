@@ -11,6 +11,14 @@
     {
       "type": "grant_skill_proficiency",
       "skill": "survival"
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
+    },
+    {
+      "type": "grant_language",
+      "language": "Elvish"
     }
   ]
 }

@@ -53,6 +53,12 @@
         "id": "test:bg:acolyte",
         "name": "Acolyte",
         "grantsOriginFeatId": "test:feat:origin-alert",
+        "startingEquipment": {
+          "itemIds": [
+            "test:shield:wood"
+          ],
+          "equippedShieldId": "test:shield:wood"
+        },
         "effects": [
           {
             "type": "grant_skill_proficiency",
@@ -70,6 +76,14 @@
         "id": "test:class:fighter",
         "name": "Fighter",
         "hitDie": 10,
+        "startingEquipment": {
+          "itemIds": [
+            "test:armor:leather",
+            "test:weapon:rapier"
+          ],
+          "equippedArmorId": "test:armor:leather",
+          "equippedWeaponId": "test:weapon:rapier"
+        },
         "weaponProficiencies": {
           "simple": true,
           "martial": true
@@ -131,6 +145,12 @@
         "id": "test:bg:acolyte",
         "name": "Acolyte",
         "grantsOriginFeatId": "test:feat:origin-alert",
+        "startingEquipment": {
+          "itemIds": [
+            "test:shield:wood"
+          ],
+          "equippedShieldId": "test:shield:wood"
+        },
         "effects": [
           {
             "type": "grant_skill_proficiency",
@@ -148,6 +168,14 @@
         "id": "test:class:fighter",
         "name": "Fighter",
         "hitDie": 10,
+        "startingEquipment": {
+          "itemIds": [
+            "test:armor:leather",
+            "test:weapon:rapier"
+          ],
+          "equippedArmorId": "test:armor:leather",
+          "equippedWeaponId": "test:weapon:rapier"
+        },
         "weaponProficiencies": {
           "simple": true,
           "martial": true

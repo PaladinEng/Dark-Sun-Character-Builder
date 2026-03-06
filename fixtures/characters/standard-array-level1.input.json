@@ -1,0 +1,35 @@
+{
+  "state": {
+    "level": 1,
+    "abilityScoreMethod": "standard_array",
+    "baseAbilities": {
+      "str": 15,
+      "dex": 14,
+      "con": 13,
+      "int": 12,
+      "wis": 10,
+      "cha": 8
+    },
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": []
+  },
+  "content": {
+    "manifests": [],
+    "species": [],
+    "backgrounds": [],
+    "classes": [],
+    "features": [],
+    "feats": [],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {},
+    "backgroundsById": {},
+    "classesById": {},
+    "featuresById": {},
+    "featsById": {},
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

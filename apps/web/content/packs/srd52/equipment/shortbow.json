@@ -6,5 +6,8 @@
   "weaponCategory": "simple",
   "properties": [
     "ranged"
+  ],
+  "masteryProperties": [
+    "vex"
   ]
 }

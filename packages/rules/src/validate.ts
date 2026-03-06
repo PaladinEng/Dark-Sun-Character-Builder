@@ -2,13 +2,27 @@ import type { MergedContent } from "@dark-sun/content";
 
 import { getAvailableAdvancementSlots } from "./advancement";
 import {
+  POINT_BUY_BUDGET,
+  POINT_BUY_MAX_SCORE,
+  POINT_BUY_MIN_SCORE,
+  computePointBuyCost,
+  isStandardArray
+} from "./abilityScoreMethods";
+import {
   computeAbilityMod,
   computeFinalAbilities,
   computeProfBonus,
   isProficientWithWeapon
 } from "./compute";
-import { getSpellSlots } from "./spellSlots";
-import type { Ability, CharacterState } from "./types";
+import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
+import {
+  ABILITIES,
+  CONDITION_IDS,
+  type Ability,
+  type CharacterCoins,
+  type CharacterState,
+  type ConditionId
+} from "./types";
 
 export type ValidationIssue = {
   code: string;
@@ -24,6 +38,24 @@ export type ValidationReport = {
 
 function dedupe(values: string[]): string[] {
   return [...new Set(values)];
+}
+
+function isAbilityKey(value: string): value is Ability {
+  return ABILITIES.includes(value as Ability);
+}
+
+function isConditionId(value: string): value is ConditionId {
+  return CONDITION_IDS.includes(value as ConditionId);
+}
+
+const COIN_DENOMINATIONS: Array<keyof CharacterCoins> = ["gp", "sp", "cp"];
+
+function collectInventoryItemIds(state: CharacterState): string[] {
+  const itemIds = state.inventoryItemIds ?? [];
+  const entryIds = (state.inventoryEntries ?? [])
+    .map((entry) => entry.itemId)
+    .filter((itemId): itemId is string => typeof itemId === "string");
+  return dedupe([...itemIds, ...entryIds]);
 }
 
 function parseLevelFeatSelections(state: CharacterState): Map<number, string> {
@@ -120,6 +152,48 @@ export function validateCharacter(
     ...state,
     abilityIncreases: [...(state.abilityIncreases ?? []), ...asiIncreases]
   });
+  const nonAsiFinalAbilities = computeFinalAbilities({
+    ...state,
+    abilityIncreases: state.abilityIncreases ?? []
+  });
+  const abilityScoreMethod = state.abilityScoreMethod ?? "manual";
+
+  if (abilityScoreMethod === "point_buy") {
+    const outOfRange = ABILITIES.filter((ability) => {
+      const score = state.baseAbilities?.[ability];
+      return (
+        !Number.isInteger(score) ||
+        score < POINT_BUY_MIN_SCORE ||
+        score > POINT_BUY_MAX_SCORE
+      );
+    });
+    if (outOfRange.length > 0) {
+      pushError({
+        code: "POINT_BUY_SCORE_OUT_OF_RANGE",
+        message:
+          `Point buy scores must be integers between ${POINT_BUY_MIN_SCORE} and ${POINT_BUY_MAX_SCORE} ` +
+          `for all abilities (invalid: ${outOfRange.map((ability) => ability.toUpperCase()).join(", ")}).`,
+        path: "baseAbilities"
+      });
+    }
+
+    const cost = computePointBuyCost(state.baseAbilities);
+    if (cost !== null && cost > POINT_BUY_BUDGET) {
+      pushError({
+        code: "POINT_BUY_BUDGET_EXCEEDED",
+        message: `Point buy spent ${cost} points, exceeding budget ${POINT_BUY_BUDGET}.`,
+        path: "baseAbilities"
+      });
+    }
+  }
+
+  if (abilityScoreMethod === "standard_array" && !isStandardArray(state.baseAbilities)) {
+    pushError({
+      code: "STANDARD_ARRAY_INVALID",
+      message: "Standard array must assign exactly [15, 14, 13, 12, 10, 8] across abilities.",
+      path: "baseAbilities"
+    });
+  }
 
   if (!Number.isInteger(state.level) || state.level < 1 || state.level > 20) {
     pushError({
@@ -159,6 +233,35 @@ export function validateCharacter(
       message: `Selected class id not found: ${state.selectedClassId}.`,
       path: "selectedClassId"
     });
+  }
+
+  const rawConditions = (state as CharacterState & { conditions?: unknown }).conditions;
+  if (typeof rawConditions !== "undefined") {
+    if (typeof rawConditions !== "object" || rawConditions === null || Array.isArray(rawConditions)) {
+      pushError({
+        code: "CONDITION_VALUE_INVALID",
+        message: "Conditions must be an object map with boolean values.",
+        path: "conditions"
+      });
+    } else {
+      for (const [conditionId, value] of Object.entries(rawConditions)) {
+        if (!isConditionId(conditionId)) {
+          pushError({
+            code: "CONDITION_ID_INVALID",
+            message: `Condition id is not supported: ${conditionId}.`,
+            path: `conditions.${conditionId}`
+          });
+          continue;
+        }
+        if (typeof value !== "boolean") {
+          pushError({
+            code: "CONDITION_VALUE_INVALID",
+            message: `Condition value must be boolean for ${conditionId}.`,
+            path: `conditions.${conditionId}`
+          });
+        }
+      }
+    }
   }
 
   for (const [index, featureId] of (state.selectedFeatureIds ?? []).entries()) {
@@ -219,6 +322,71 @@ export function validateCharacter(
         code: "INVALID_EQUIPPED_WEAPON_TYPE",
         message: `Equipped weapon id does not reference a weapon: ${state.equippedWeaponId}.`,
         path: "equippedWeaponId"
+      });
+    }
+  }
+
+  for (const [index, itemId] of (state.inventoryItemIds ?? []).entries()) {
+    if (content.equipmentById[itemId]) {
+      continue;
+    }
+    pushError({
+      code: "INVENTORY_ITEM_ID_MISSING",
+      message: `Inventory item id not found: ${itemId}.`,
+      path: `inventoryItemIds[${index}]`
+    });
+  }
+
+  for (const [index, entry] of (state.inventoryEntries ?? []).entries()) {
+    if (!content.equipmentById[entry.itemId]) {
+      pushError({
+        code: "INVENTORY_ITEM_ID_MISSING",
+        message: `Inventory entry item id not found: ${entry.itemId}.`,
+        path: `inventoryEntries[${index}].itemId`
+      });
+    }
+
+    if (
+      typeof entry.quantity !== "undefined" &&
+      (!Number.isInteger(entry.quantity) || entry.quantity < 1)
+    ) {
+      pushError({
+        code: "INVENTORY_QUANTITY_INVALID",
+        message: `Inventory entry quantity must be a positive integer for item ${entry.itemId}.`,
+        path: `inventoryEntries[${index}].quantity`
+      });
+    }
+  }
+
+  for (const denomination of COIN_DENOMINATIONS) {
+    const amount = state.coins?.[denomination];
+    if (typeof amount === "undefined") {
+      continue;
+    }
+    if (!Number.isInteger(amount) || amount < 0) {
+      pushError({
+        code: "COIN_VALUE_INVALID",
+        message: `Coin value for ${denomination.toUpperCase()} must be a non-negative integer.`,
+        path: `coins.${denomination}`
+      });
+    }
+  }
+
+  const inventoryItemIds = new Set(collectInventoryItemIds(state));
+  if (inventoryItemIds.size > 0) {
+    const equippedChecks: Array<[string | undefined, string, string]> = [
+      [state.equippedArmorId, "EQUIPPED_ARMOR_NOT_IN_INVENTORY", "equippedArmorId"],
+      [state.equippedShieldId, "EQUIPPED_SHIELD_NOT_IN_INVENTORY", "equippedShieldId"],
+      [state.equippedWeaponId, "EQUIPPED_WEAPON_NOT_IN_INVENTORY", "equippedWeaponId"]
+    ];
+    for (const [equippedId, code, path] of equippedChecks) {
+      if (!equippedId || inventoryItemIds.has(equippedId)) {
+        continue;
+      }
+      pushWarning({
+        code,
+        message: `Equipped item is not present in inventory: ${equippedId}.`,
+        path
       });
     }
   }
@@ -380,8 +548,32 @@ export function validateCharacter(
     }
 
     if (advancement.type === "asi") {
-      const entries = Object.entries(advancement.changes).filter(
-        (_entry): _entry is [string, number] => typeof _entry[1] === "number"
+      const rawEntries = Object.entries(advancement.changes as Record<string, unknown>);
+      const invalidAbilityKeys = rawEntries
+        .map(([ability]) => ability)
+        .filter((ability) => !isAbilityKey(ability));
+      if (invalidAbilityKeys.length > 0) {
+        pushError({
+          code: "ASI_INVALID_ABILITY",
+          message: `ASI references unknown abilities: ${invalidAbilityKeys.join(", ")}.`,
+          path: `advancements[${index}]`
+        });
+      }
+
+      const hasNonIntegerValues = rawEntries.some(
+        ([, value]) => typeof value !== "number" || !Number.isInteger(value)
+      );
+      if (hasNonIntegerValues) {
+        pushError({
+          code: "ASI_INVALID_VALUE",
+          message: "ASI changes must use integer values.",
+          path: `advancements[${index}]`
+        });
+      }
+
+      const entries = rawEntries.filter(
+        (_entry): _entry is [Ability, number] =>
+          isAbilityKey(_entry[0]) && typeof _entry[1] === "number"
       );
       const hasNegative = entries.some(([, value]) => value < 0);
       const total = entries.reduce((sum, [, value]) => sum + value, 0);
@@ -405,6 +597,36 @@ export function validateCharacter(
     }
   }
 
+  const runningAbilityTotals: Record<Ability, number> = { ...nonAsiFinalAbilities };
+  const orderedAsiAdvancements = (state.advancements ?? [])
+    .map((entry, index) => ({ entry, index }))
+    .filter(
+      (
+        candidate
+      ): candidate is {
+        entry: Extract<NonNullable<CharacterState["advancements"]>[number], { type: "asi" }>;
+        index: number;
+      } => candidate.entry.type === "asi"
+    )
+    .sort((a, b) => a.entry.level - b.entry.level || a.index - b.index);
+  for (const { entry, index } of orderedAsiAdvancements) {
+    for (const ability of ABILITIES) {
+      const delta = entry.changes[ability];
+      if (typeof delta !== "number" || delta <= 0) {
+        continue;
+      }
+      const nextScore = runningAbilityTotals[ability] + delta;
+      if (nextScore > 20) {
+        pushError({
+          code: "ASI_EXCEEDS_CAP",
+          message: `ASI at level ${entry.level} would raise ${ability.toUpperCase()} above 20.`,
+          path: `advancements[${index}]`
+        });
+      }
+      runningAbilityTotals[ability] = Math.min(20, nextScore);
+    }
+  }
+
   for (const slotLevel of allowedAdvancementSlots) {
     const hasFeatSelection =
       levelFeatSelections.has(slotLevel) ||
@@ -412,7 +634,13 @@ export function validateCharacter(
     const hasAsiSelection = (state.advancements ?? []).some(
       (entry) => entry.type === "asi" && entry.level === slotLevel
     );
-    if (!hasFeatSelection && !hasAsiSelection) {
+    if (hasFeatSelection && hasAsiSelection) {
+      pushError({
+        code: "ADVANCEMENT_SLOT_CONFLICT",
+        message: `Advancement slot at level ${slotLevel} cannot contain both a feat and an ASI.`,
+        path: `advancements[level=${slotLevel}]`
+      });
+    } else if (!hasFeatSelection && !hasAsiSelection) {
       pushError({
         code: "ADVANCEMENT_SLOT_MISSING",
         message: `Advancement slot at level ${slotLevel} must be filled with a feat or ASI.`,
@@ -452,6 +680,8 @@ export function validateCharacter(
     }
   }
 
+  const selectedFeatureIds = new Set(state.selectedFeatureIds ?? []);
+
   for (const featId of dedupe(chosenFeatIds)) {
     const feat = content.featsById[featId];
     if (!feat?.prerequisites) {
@@ -487,6 +717,28 @@ export function validateCharacter(
       pushError({
         code: "FEAT_PREREQ_UNMET",
         message: `Feat ${feat.name} requires one of species: ${prereq.speciesIds.join(", ")}.`,
+        path: "feats"
+      });
+    }
+
+    if (prereq.featureIds && prereq.featureIds.length > 0) {
+      const missingFeatureIds = prereq.featureIds.filter(
+        (featureId) => !selectedFeatureIds.has(featureId)
+      );
+      if (missingFeatureIds.length > 0) {
+        pushError({
+          code: "FEAT_PREREQ_UNMET",
+          message:
+            `Feat ${feat.name} requires features: ${missingFeatureIds.join(", ")}.`,
+          path: "feats"
+        });
+      }
+    }
+
+    if (prereq.requiresSpellcasting && !selectedClass?.spellcasting) {
+      pushError({
+        code: "FEAT_PREREQ_UNMET",
+        message: `Feat ${feat.name} requires spellcasting.`,
         path: "feats"
       });
     }
@@ -530,7 +782,7 @@ export function validateCharacter(
 
   if (selectedClass?.spellcasting) {
     const progression = selectedClass.spellcasting.progression;
-    const slots = progression === "pact" ? {} : getSpellSlots(level, progression);
+    const slots = progression === "pact" ? createEmptySpellSlots() : getSpellSlots(level, progression);
     const abilityMod = computeAbilityMod(finalAbilities[selectedClass.spellcasting.ability] ?? NaN);
     const profBonus = computeProfBonus(level);
     const saveDC = 8 + profBonus + abilityMod;
@@ -560,12 +812,57 @@ export function validateCharacter(
           : progression === "third"
             ? level >= 3
             : false;
-    if (shouldHaveSlots && Object.keys(slots).length === 0) {
+    if (shouldHaveSlots && !slots.some((count) => count > 0)) {
       pushError({
         code: "SPELLCASTING_SLOTS_MISSING",
         message: `Spell slots are missing for ${selectedClass.name} at level ${level}.`,
         path: "spellcasting.slots"
       });
+    }
+
+    const selectionLimits = selectedClass.spellcasting.selectionLimitsByLevel?.find(
+      (entry) => entry.level === level
+    );
+    if (selectionLimits) {
+      const knownCount = state.knownSpellIds?.length ?? 0;
+      const preparedCount = state.preparedSpellIds?.length ?? 0;
+      const cantripsKnownCount = state.cantripsKnownIds?.length ?? 0;
+
+      if (typeof selectionLimits.known === "number" && knownCount > selectionLimits.known) {
+        pushError({
+          code: "SPELL_KNOWN_LIMIT_EXCEEDED",
+          message:
+            `${selectedClass.name} allows at most ${selectionLimits.known} known spells at level ${level} ` +
+            `(selected ${knownCount}).`,
+          path: "spellcasting.knownSpellIds"
+        });
+      }
+
+      if (
+        typeof selectionLimits.prepared === "number" &&
+        preparedCount > selectionLimits.prepared
+      ) {
+        pushError({
+          code: "SPELL_PREPARED_LIMIT_EXCEEDED",
+          message:
+            `${selectedClass.name} allows at most ${selectionLimits.prepared} prepared spells at level ${level} ` +
+            `(selected ${preparedCount}).`,
+          path: "spellcasting.preparedSpellIds"
+        });
+      }
+
+      if (
+        typeof selectionLimits.cantripsKnown === "number" &&
+        cantripsKnownCount > selectionLimits.cantripsKnown
+      ) {
+        pushError({
+          code: "SPELL_CANTRIPS_KNOWN_LIMIT_EXCEEDED",
+          message:
+            `${selectedClass.name} allows at most ${selectionLimits.cantripsKnown} cantrips at level ${level} ` +
+            `(selected ${cantripsKnownCount}).`,
+          path: "spellcasting.cantripsKnownIds"
+        });
+      }
     }
   }
 

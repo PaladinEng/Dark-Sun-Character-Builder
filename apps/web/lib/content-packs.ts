@@ -1,7 +1,9 @@
+import "server-only";
 import { access, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { cache } from "react";
-import { loadPackFromDir, mergePacks } from "@dark-sun/content";
+import { mergePacks } from "@dark-sun/content";
+import { loadPackFromDir } from "@dark-sun/content/node";
 
 async function resolvePacksDir(): Promise<string> {
   const candidates = [

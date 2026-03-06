@@ -41,6 +41,14 @@ export function normalizeForComparison(value: unknown): unknown {
   if (Array.isArray(value)) {
     const normalized = value.map((entry) => normalizeForComparison(entry));
 
+    // Spell slot arrays are ordered by spell level and must remain positional.
+    if (
+      normalized.length === 9 &&
+      normalized.every((entry) => typeof entry === "number")
+    ) {
+      return normalized;
+    }
+
     if (normalized.every(isPrimitive)) {
       return [...normalized].sort((a, b) =>
         primitiveSortKey(a).localeCompare(primitiveSortKey(b))

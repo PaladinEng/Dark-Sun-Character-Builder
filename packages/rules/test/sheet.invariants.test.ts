@@ -56,6 +56,9 @@ describe("sheet.invariants", () => {
       expect(derived.spellSaveDC).toBe(expectedSaveDC);
       expect(derived.spellAttackBonus).toBe(expectedAttackBonus);
       expect(derived.spellSlots).not.toBeNull();
+      expect(derived.spellSaveDC).not.toBeNull();
+      expect(derived.spellAttackBonus).not.toBeNull();
+      expect(derived.spellSlots).toHaveLength(9);
     });
   }
 });

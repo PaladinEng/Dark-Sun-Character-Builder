@@ -23,6 +23,7 @@
   "maxHP": 21,
   "passivePerception": 10,
   "proficiencyBonus": 2,
+  "resistances": [],
   "saveProficiencies": [],
   "savingThrows": {
     "cha": 0,
@@ -32,6 +33,7 @@
     "str": 0,
     "wis": 0
   },
+  "senses": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 3,
@@ -64,15 +66,32 @@
     "preparedSpellIds": [],
     "progression": "third",
     "saveDC": 12,
-    "slots": {
-      "1": 2
-    }
+    "slots": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
   },
   "spellcastingAbility": "int",
   "spellSaveDC": 12,
-  "spellSlots": {
-    "1": 2
-  },
+  "spellSlots": [
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
   "toolProficiencies": [],
+  "traits": [],
   "warnings": []
 }

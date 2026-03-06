@@ -21,7 +21,7 @@
     "progression": "full",
     "mode": "prepared"
   },
-  "spellListRefs": [
+  "spellListRefIds": [
     "srd52:spelllist:wizard-core"
   ],
   "effects": [

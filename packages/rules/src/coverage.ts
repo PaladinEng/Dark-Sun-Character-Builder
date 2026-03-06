@@ -36,7 +36,14 @@ const SUPPORTED_EFFECT_TYPES = [
   "grant_save_proficiency",
   "add_bonus",
   "set_speed",
+  "add_armor_class_bonus",
+  "add_attack_bonus",
+  "set_unarmored_defense",
+  "grant_sense",
+  "grant_resistance",
+  "grant_trait",
   "grant_tool_proficiency",
+  "grant_language",
 ] as const;
 
 function collectArrayFromContent<T = unknown>(

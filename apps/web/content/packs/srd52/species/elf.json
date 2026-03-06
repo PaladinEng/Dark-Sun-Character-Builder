@@ -5,6 +5,14 @@
     {
       "type": "set_speed",
       "value": 30
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
+    },
+    {
+      "type": "grant_language",
+      "language": "Elvish"
     }
   ]
 }

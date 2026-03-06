@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-import { AbilitySchema, BackgroundAbilityOptionsSchema } from "./entities";
+import {
+  AbilitySchema,
+  BackgroundAbilityOptionsSchema,
+  StartingEquipmentBundleSchema,
+  WeaponMasteryPropertySchema,
+} from "./entities";
 import { EffectSchema } from "./effects";
 
 export const SeedBaseSchema = z.object({
@@ -18,6 +23,7 @@ export const SeedBackgroundSchema = SeedBaseSchema.extend({
   abilityOptions: BackgroundAbilityOptionsSchema.optional(),
   grantsFeat: z.string().optional(),
   grantsOriginFeatId: z.string().optional(),
+  startingEquipment: StartingEquipmentBundleSchema.optional(),
   originFeatChoice: z
     .object({
       featIds: z.array(z.string()).min(1).optional(),
@@ -42,6 +48,51 @@ export const SeedBackgroundSchema = SeedBaseSchema.extend({
 });
 export type SeedBackground = z.infer<typeof SeedBackgroundSchema>;
 
+const SeedSpellSelectionLimitByLevelSchema = z.object({
+  level: z.number().int().min(1).max(20),
+  known: z.number().int().min(0).optional(),
+  prepared: z.number().int().min(0).optional(),
+  cantripsKnown: z.number().int().min(0).optional(),
+});
+
+const SeedClassFeatureGrantSchema = z.object({
+  level: z.number().int().min(1).max(20),
+  featureId: z.string().min(1),
+});
+
+const SeedClassFeaturesByLevelSchema = z
+  .array(SeedClassFeatureGrantSchema)
+  .superRefine((value, ctx) => {
+    const seen = new Set<string>();
+    for (const entry of value) {
+      const key = `${entry.level}|${entry.featureId}`;
+      if (seen.has(key)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Duplicate seed class feature entry at level ${entry.level}: ${entry.featureId}.`,
+          path: ["classFeaturesByLevel"],
+        });
+      }
+      seen.add(key);
+    }
+  });
+
+const SeedSpellSelectionLimitsByLevelSchema = z
+  .array(SeedSpellSelectionLimitByLevelSchema)
+  .superRefine((value, ctx) => {
+    const seen = new Set<number>();
+    for (const entry of value) {
+      if (seen.has(entry.level)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Duplicate seed spellcasting selection limit level: ${entry.level}.`,
+          path: ["level"],
+        });
+      }
+      seen.add(entry.level);
+    }
+  });
+
 export const SeedClassSchema = SeedBaseSchema.extend({
   hitDie: z.number().int().positive().optional(),
   classSkillChoices: z
@@ -62,9 +113,26 @@ export const SeedClassSchema = SeedBaseSchema.extend({
       ability: AbilitySchema,
       progression: z.enum(["full", "half", "third", "pact"]),
       mode: z.enum(["prepared", "known"]).optional(),
+      selectionLimitsByLevel: SeedSpellSelectionLimitsByLevelSchema.optional(),
     })
     .optional(),
+  spellListRefIds: z.array(z.string()).optional(),
   spellListRefs: z.array(z.string()).optional(),
+  classFeaturesByLevel: SeedClassFeaturesByLevelSchema.optional(),
+  startingEquipment: StartingEquipmentBundleSchema.optional(),
+}).superRefine((value, ctx) => {
+  if (
+    value.spellListRefIds &&
+    value.spellListRefs &&
+    JSON.stringify(value.spellListRefIds) !== JSON.stringify(value.spellListRefs)
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message:
+        "Seed class spellListRefIds and legacy spellListRefs must match when both are provided.",
+      path: ["spellListRefIds"],
+    });
+  }
 });
 export type SeedClass = z.infer<typeof SeedClassSchema>;
 
@@ -89,13 +157,15 @@ export const SeedFeatSchema = SeedBaseSchema.extend({
         .optional(),
       classIds: z.array(z.string()).min(1).optional(),
       speciesIds: z.array(z.string()).min(1).optional(),
+      featureIds: z.array(z.string()).min(1).optional(),
+      requiresSpellcasting: z.boolean().optional(),
     })
     .optional(),
 });
 export type SeedFeat = z.infer<typeof SeedFeatSchema>;
 
 export const SeedEquipmentSchema = SeedBaseSchema.extend({
-  type: z.enum(["armor", "shield", "weapon"]),
+  type: z.enum(["armor", "shield", "weapon", "gear"]),
   armorCategory: z.enum(["light", "medium", "heavy"]).optional(),
   armorClassBase: z.number().int().optional(),
   dexCap: z.number().int().optional(),
@@ -103,6 +173,7 @@ export const SeedEquipmentSchema = SeedBaseSchema.extend({
   damageDice: z.string().optional(),
   weaponCategory: z.enum(["simple", "martial"]).optional(),
   properties: z.array(z.string()).optional(),
+  masteryProperties: z.array(WeaponMasteryPropertySchema).min(1).optional(),
   strengthRequirement: z.number().int().optional(),
   stealthDisadvantage: z.boolean().optional(),
 });
@@ -127,6 +198,22 @@ export const SeedSpellSchema = SeedBaseSchema.extend({
   duration: z.string(),
   concentration: z.boolean().optional(),
   summary: z.string().optional(),
+}).superRefine((value, ctx) => {
+  if (!Object.prototype.hasOwnProperty.call(value, "ritual")) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Seed spell must include ritual flag (true or false).",
+      path: ["ritual"],
+    });
+  }
+
+  if (!Object.prototype.hasOwnProperty.call(value, "concentration")) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Seed spell must include concentration flag (true or false).",
+      path: ["concentration"],
+    });
+  }
 });
 export type SeedSpell = z.infer<typeof SeedSpellSchema>;
 

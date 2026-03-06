@@ -1,0 +1,224 @@
+{
+  "state": {
+    "level": 1,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 12,
+      "int": 14,
+      "wis": 15,
+      "cha": 10
+    },
+    "selectedSpeciesId": "test:species:elf",
+    "selectedBackgroundId": "test:bg:wanderer",
+    "selectedClassId": "test:class:ranger",
+    "selectedFeatureIds": [],
+    "selectedFeats": [],
+    "featSelections": {
+      "origin": "test:feat:origin-alert",
+      "level": {}
+    },
+    "chosenSkillProficiencies": [
+      "survival",
+      "stealth"
+    ],
+    "chosenSaveProficiencies": [
+      "dex",
+      "wis"
+    ],
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "cantripsKnownIds": [],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:leather",
+    "equippedWeaponId": "test:weapon:shortbow",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:wanderer",
+        "name": "Wanderer",
+        "originFeatChoice": {
+          "featIds": [
+            "test:feat:origin-alert"
+          ]
+        }
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:ranger",
+        "name": "Ranger",
+        "hitDie": 10,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "half",
+          "mode": "known",
+          "selectionLimitsByLevel": [
+            { "level": 1, "known": 0, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 2, "known": 2, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 3, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 4, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 5, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 6, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 7, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 8, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 9, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 10, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 11, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 12, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 13, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 14, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 15, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 16, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 17, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 18, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 19, "known": 11, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 20, "known": 11, "prepared": 0, "cantripsKnown": 0 }
+          ]
+        },
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        }
+      }
+    ],
+    "features": [],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:weapon:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple",
+        "properties": [
+          "ranged"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:elf": {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:wanderer": {
+        "id": "test:bg:wanderer",
+        "name": "Wanderer",
+        "originFeatChoice": {
+          "featIds": [
+            "test:feat:origin-alert"
+          ]
+        }
+      }
+    },
+    "classesById": {
+      "test:class:ranger": {
+        "id": "test:class:ranger",
+        "name": "Ranger",
+        "hitDie": 10,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "half",
+          "mode": "known",
+          "selectionLimitsByLevel": [
+            { "level": 1, "known": 0, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 2, "known": 2, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 3, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 4, "known": 3, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 5, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 6, "known": 4, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 7, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 8, "known": 5, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 9, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 10, "known": 6, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 11, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 12, "known": 7, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 13, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 14, "known": 8, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 15, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 16, "known": 9, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 17, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 18, "known": 10, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 19, "known": 11, "prepared": 0, "cantripsKnown": 0 },
+            { "level": 20, "known": 11, "prepared": 0, "cantripsKnown": 0 }
+          ]
+        },
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        }
+      }
+    },
+    "featuresById": {},
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      }
+    },
+    "equipmentById": {
+      "test:armor:leather": {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:weapon:shortbow": {
+        "id": "test:weapon:shortbow",
+        "name": "Shortbow",
+        "type": "weapon",
+        "damageDice": "1d6",
+        "weaponCategory": "simple",
+        "properties": [
+          "ranged"
+        ]
+      }
+    }
+  }
+}

@@ -10,11 +10,12 @@ import type {
   Equipment,
   MergedContent,
   MergeReport,
-  Pack,
   PackManifest,
   Species,
 } from "@dark-sun/content";
-import { loadPackFromDir, mergePacks, mergePacksWithProvenance } from "@dark-sun/content";
+import { mergePacks, mergePacksWithProvenance } from "@dark-sun/content";
+import type { Pack } from "@dark-sun/content/node";
+import { loadPackFromDir } from "@dark-sun/content/node";
 
 export type LoadedPackManifest = {
   id: string;
@@ -40,6 +41,7 @@ type ContentOptions = {
   armor: Equipment[];
   shields: Equipment[];
   weapons: Equipment[];
+  adventuringGear: Equipment[];
 };
 
 type ContentCache = {
@@ -202,6 +204,9 @@ export async function getMergedContent(
   const merged = includeProvenance
     ? mergePacksWithProvenance(selected)
     : mergePacks(selected);
+  const provenance: MergeProvenance | undefined = includeProvenance
+    ? (merged as ReturnType<typeof mergePacksWithProvenance>).provenance
+    : undefined;
 
   const result: MergedContentResult = {
     ...merged.content,
@@ -209,7 +214,7 @@ export async function getMergedContent(
     content: merged.content,
     report: merged.report,
     enabledPackIds: finalIds,
-    provenance: "provenance" in merged ? merged.provenance : undefined
+    provenance
   };
 
   cache.mergedByKey.set(cacheKey, result);
@@ -249,6 +254,7 @@ export function getContentOptionsFromMerged(content: MergedContent): ContentOpti
     ),
     shields: equipment.filter((item) => item.type === "shield"),
     weapons: equipment.filter((item) => item.type === "weapon"),
+    adventuringGear: equipment.filter((item) => item.type === "adventuring_gear"),
   };
 }
 

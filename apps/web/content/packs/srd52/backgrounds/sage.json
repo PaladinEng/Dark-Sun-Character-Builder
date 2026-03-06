@@ -5,6 +5,10 @@
     {
       "type": "grant_skill_proficiency",
       "skill": "arcana"
+    },
+    {
+      "type": "grant_language",
+      "language": "Draconic"
     }
   ]
 }

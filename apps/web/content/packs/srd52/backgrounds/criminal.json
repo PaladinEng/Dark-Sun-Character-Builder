@@ -11,6 +11,10 @@
     {
       "type": "grant_skill_proficiency",
       "skill": "stealth"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Thieves' Tools"
     }
   ]
 }

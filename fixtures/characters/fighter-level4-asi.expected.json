@@ -1,0 +1,95 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 1,
+    "dex": 2,
+    "int": 0,
+    "str": 4,
+    "wis": 1
+  },
+  "advancementSlots": [
+    {
+      "asi": {
+        "str": 2
+      },
+      "choice": "asi",
+      "filled": true,
+      "level": 4
+    }
+  ],
+  "armorClass": 17,
+  "attack": {
+    "damage": "1d8+4",
+    "name": "Longsword",
+    "toHit": 6
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 13,
+    "dex": 15,
+    "int": 10,
+    "str": 19,
+    "wis": 12
+  },
+  "languages": [],
+  "maxHP": 32,
+  "passivePerception": 14,
+  "proficiencyBonus": 2,
+  "resistances": [],
+  "saveProficiencies": [
+    "con",
+    "str"
+  ],
+  "savingThrows": {
+    "cha": -1,
+    "con": 3,
+    "dex": 2,
+    "int": 0,
+    "str": 6,
+    "wis": 2
+  },
+  "senses": [],
+  "skillProficiencies": [
+    "athletics",
+    "stealth"
+  ],
+  "skills": {
+    "acrobatics": 2,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": 6,
+    "deception": -1,
+    "history": 0,
+    "insight": 1,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 4,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 0,
+    "sleight_of_hand": 2,
+    "stealth": 4,
+    "survival": 1
+  },
+  "speed": 35,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [
+    "artisan",
+    "cartographer"
+  ],
+  "traits": [
+    "Speed 35 ft."
+  ],
+  "warnings": []
+}
