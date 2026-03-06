@@ -96,6 +96,7 @@ const ENTITY_TYPE_OPTIONS: Array<{ value: DebugEntityType; label: string }> = [
 
 const SRD_PACK_ID = "srd52";
 const DARK_SUN_PACK_ID = "darksun";
+const EMPTY_ENTITY_RECORD: Record<string, unknown> = {};
 
 function asRecord(value: unknown): Record<string, unknown> | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -186,7 +187,10 @@ export default function DebugContentClient({ data }: { data: DebugContentData })
     resolvedEntityId.length > 0
       ? data.packEntityLookupByType[entityType]?.[SRD_PACK_ID]?.[resolvedEntityId] ?? null
       : null;
-  const darkSunEntities = data.packEntityLookupByType[entityType]?.[DARK_SUN_PACK_ID] ?? {};
+  const darkSunEntities = useMemo(
+    () => data.packEntityLookupByType[entityType]?.[DARK_SUN_PACK_ID] ?? EMPTY_ENTITY_RECORD,
+    [data.packEntityLookupByType, entityType]
+  );
   const darkSunDirectOverride =
     resolvedEntityId.length > 0 ? darkSunEntities[resolvedEntityId] ?? null : null;
   const darkSunReplacementOverride = useMemo(() => {

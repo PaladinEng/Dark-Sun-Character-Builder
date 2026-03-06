@@ -457,7 +457,10 @@ export default function BuilderClient({
       (entry) => entry.level === state.level,
     );
   }, [selectedClass?.spellcasting?.selectionLimitsByLevel, state.level]);
-  const classSpellListRefIds = selectedClass?.spellListRefIds ?? selectedClass?.spellListRefs ?? [];
+  const classSpellListRefIds = useMemo(
+    () => selectedClass?.spellListRefIds ?? selectedClass?.spellListRefs ?? [],
+    [selectedClass?.spellListRefIds, selectedClass?.spellListRefs],
+  );
   const missingClassSpellListRefIds = useMemo(() => {
     return classSpellListRefIds.filter((spellListId) => !content.spellListsById[spellListId]);
   }, [classSpellListRefIds, content.spellListsById]);
