@@ -3,7 +3,7 @@ import { join } from "node:path";
 
 import { NextResponse } from "next/server";
 import type { CharacterState } from "@dark-sun/rules";
-import { buildPdfExportFromTemplate, validateCharacter } from "@dark-sun/rules";
+import { buildPdfExportFromTemplate, computeDerivedState, validateCharacter } from "@dark-sun/rules";
 
 import { getMergedContent } from "../../../../src/lib/content";
 
@@ -84,8 +84,33 @@ export async function POST(request: Request) {
 
   const merged = await getMergedContent(payload.enabledPackIds ?? []);
   const validation = validateCharacter(payload.characterState, merged.content);
+  const derived = computeDerivedState(payload.characterState, merged.content);
+  const selectedClass = payload.characterState.selectedClassId
+    ? merged.content.classesById[payload.characterState.selectedClassId]
+    : undefined;
+  const selectedSpecies = payload.characterState.selectedSpeciesId
+    ? merged.content.speciesById[payload.characterState.selectedSpeciesId]
+    : undefined;
+  const selectedBackground = payload.characterState.selectedBackgroundId
+    ? merged.content.backgroundsById[payload.characterState.selectedBackgroundId]
+    : undefined;
   const templatePdfBytes = await loadTemplatePdfBytes();
-  const pdfResult = buildPdfExportFromTemplate(templatePdfBytes, validation);
+  const pdfResult = buildPdfExportFromTemplate(templatePdfBytes, validation, {
+    level: payload.characterState.level,
+    className: selectedClass?.name,
+    speciesName: selectedSpecies?.name,
+    backgroundName: selectedBackground?.name,
+    abilities: derived.finalAbilities,
+    abilityMods: derived.abilityMods,
+    proficiencyBonus: derived.proficiencyBonus,
+    armorClass: derived.armorClass,
+    maxHP: derived.maxHP,
+    speed: derived.speed,
+    attackName: derived.attack?.name,
+    attackToHit: derived.attack?.toHit,
+    attackDamage: derived.attack?.damage,
+    featNames: derived.feats.map((feat) => feat.name),
+  });
 
   if (!pdfResult.ok) {
     return NextResponse.json(

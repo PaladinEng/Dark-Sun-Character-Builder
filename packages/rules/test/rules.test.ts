@@ -2199,8 +2199,38 @@ describe("validateCharacter", () => {
     expect(validation.errors).toHaveLength(0);
 
     const templateBytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x0a]);
-    const exportA = buildPdfExportFromTemplate(templateBytes, validation);
-    const exportB = buildPdfExportFromTemplate(templateBytes, validation);
+    const snapshot = {
+      level: 1,
+      className: "Fighter",
+      speciesName: "Human",
+      backgroundName: "Acolyte",
+      abilities: {
+        str: 15,
+        dex: 14,
+        con: 13,
+        int: 12,
+        wis: 10,
+        cha: 8
+      },
+      abilityMods: {
+        str: 2,
+        dex: 2,
+        con: 1,
+        int: 1,
+        wis: 0,
+        cha: -1
+      },
+      proficiencyBonus: 2,
+      armorClass: 16,
+      maxHP: 11,
+      speed: 30,
+      attackName: "Longsword",
+      attackToHit: 4,
+      attackDamage: "1d8+2 slashing",
+      featNames: ["Savage Attacker"]
+    } as const;
+    const exportA = buildPdfExportFromTemplate(templateBytes, validation, snapshot);
+    const exportB = buildPdfExportFromTemplate(templateBytes, validation, snapshot);
 
     expect(exportA.ok).toBe(true);
     expect(exportB.ok).toBe(true);
@@ -2210,6 +2240,7 @@ describe("validateCharacter", () => {
 
     expect(exportA.pdfBytes.byteLength).toBeGreaterThan(0);
     expect(Array.from(exportA.pdfBytes)).toEqual(Array.from(exportB.pdfBytes));
+    expect(Array.from(exportA.pdfBytes)).not.toEqual(Array.from(templateBytes));
   });
 
   it("buildPdfExportFromTemplate blocks export with clear error when validation has errors", () => {

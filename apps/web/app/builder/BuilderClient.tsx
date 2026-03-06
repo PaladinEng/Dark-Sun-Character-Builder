@@ -376,12 +376,12 @@ export default function BuilderClient({
     level: 1,
     baseAbilities: makeDefaultAbilities(),
     abilityScoreMethod: "manual",
-    selectedSpeciesId: options.species[0]?.id,
-    selectedBackgroundId: options.backgrounds[0]?.id,
-    selectedClassId: options.classes[0]?.id,
-    equippedArmorId: options.armor[0]?.id,
-    equippedShieldId: options.shields[0]?.id,
-    equippedWeaponId: options.weapons[0]?.id,
+    selectedSpeciesId: undefined,
+    selectedBackgroundId: undefined,
+    selectedClassId: undefined,
+    equippedArmorId: undefined,
+    equippedShieldId: undefined,
+    equippedWeaponId: undefined,
     chosenSkillProficiencies: [],
     chosenClassSkills: [],
     chosenSaveProficiencies: [],
@@ -689,7 +689,7 @@ export default function BuilderClient({
         if (id && list.some((item) => item.id === id)) {
           return id;
         }
-        return list[0]?.id;
+        return undefined;
       };
 
       return {
@@ -1512,6 +1512,7 @@ export default function BuilderClient({
               setState((previous) => ({ ...previous, selectedSpeciesId: event.target.value || undefined }))
             }
           >
+            <option value="">None</option>
             {options.species.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
@@ -1537,6 +1538,7 @@ export default function BuilderClient({
               }))
             }
           >
+            <option value="">None</option>
             {options.backgrounds.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
@@ -1562,6 +1564,7 @@ export default function BuilderClient({
               }))
             }
           >
+            <option value="">None</option>
             {options.classes.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
@@ -1579,6 +1582,7 @@ export default function BuilderClient({
               setState((previous) => ({ ...previous, equippedArmorId: event.target.value || undefined }))
             }
           >
+            <option value="">None</option>
             {options.armor.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
@@ -1596,6 +1600,7 @@ export default function BuilderClient({
               setState((previous) => ({ ...previous, equippedShieldId: event.target.value || undefined }))
             }
           >
+            <option value="">None</option>
             {options.shields.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
@@ -1613,6 +1618,7 @@ export default function BuilderClient({
               setState((previous) => ({ ...previous, equippedWeaponId: event.target.value || undefined }))
             }
           >
+            <option value="">None</option>
             {options.weapons.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
