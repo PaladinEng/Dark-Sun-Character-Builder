@@ -4,126 +4,571 @@
       "slug": "human",
       "name": "Human",
       "effects": [
-        { "type": "set_speed", "value": 30 },
-        { "type": "grant_language", "language": "Common" }
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        }
       ]
     },
     {
       "slug": "elf",
       "name": "Elf",
       "effects": [
-        { "type": "set_speed", "value": 30 },
-        { "type": "grant_language", "language": "Common" },
-        { "type": "grant_language", "language": "Elvish" }
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Elvish"
+        }
       ]
     },
     {
       "slug": "dwarf",
       "name": "Dwarf",
       "effects": [
-        { "type": "set_speed", "value": 25 },
-        { "type": "grant_sense", "sense": "darkvision", "range": 60 },
-        { "type": "grant_resistance", "damageType": "poison" },
-        { "type": "grant_trait", "name": "Stonecunning" },
-        { "type": "grant_language", "language": "Common" },
-        { "type": "grant_language", "language": "Dwarvish" }
+        {
+          "type": "set_speed",
+          "value": 25
+        },
+        {
+          "type": "grant_sense",
+          "sense": "darkvision",
+          "range": 60
+        },
+        {
+          "type": "grant_resistance",
+          "damageType": "poison"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Stonecunning"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Dwarvish"
+        }
       ]
     },
     {
       "slug": "halfling",
       "name": "Halfling",
       "effects": [
-        { "type": "set_speed", "value": 25 },
-        { "type": "grant_language", "language": "Common" },
-        { "type": "grant_language", "language": "Halfling" }
+        {
+          "type": "set_speed",
+          "value": 25
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Halfling"
+        }
       ]
     }
   ],
   "skills": [
-    { "slug": "athletics", "name": "Athletics", "ability": "str", "sortOrder": 1 },
-    { "slug": "acrobatics", "name": "Acrobatics", "ability": "dex", "sortOrder": 2 },
-    { "slug": "sleight_of_hand", "name": "Sleight of Hand", "ability": "dex", "sortOrder": 3 },
-    { "slug": "stealth", "name": "Stealth", "ability": "dex", "sortOrder": 4 },
-    { "slug": "arcana", "name": "Arcana", "ability": "int", "sortOrder": 5 },
-    { "slug": "history", "name": "History", "ability": "int", "sortOrder": 6 },
-    { "slug": "investigation", "name": "Investigation", "ability": "int", "sortOrder": 7 },
-    { "slug": "nature", "name": "Nature", "ability": "int", "sortOrder": 8 },
-    { "slug": "religion", "name": "Religion", "ability": "int", "sortOrder": 9 },
-    { "slug": "animal_handling", "name": "Animal Handling", "ability": "wis", "sortOrder": 10 },
-    { "slug": "insight", "name": "Insight", "ability": "wis", "sortOrder": 11 },
-    { "slug": "medicine", "name": "Medicine", "ability": "wis", "sortOrder": 12 },
-    { "slug": "perception", "name": "Perception", "ability": "wis", "sortOrder": 13 },
-    { "slug": "survival", "name": "Survival", "ability": "wis", "sortOrder": 14 },
-    { "slug": "deception", "name": "Deception", "ability": "cha", "sortOrder": 15 },
-    { "slug": "intimidation", "name": "Intimidation", "ability": "cha", "sortOrder": 16 },
-    { "slug": "performance", "name": "Performance", "ability": "cha", "sortOrder": 17 },
-    { "slug": "persuasion", "name": "Persuasion", "ability": "cha", "sortOrder": 18 }
+    {
+      "slug": "athletics",
+      "name": "Athletics",
+      "ability": "str",
+      "sortOrder": 1
+    },
+    {
+      "slug": "acrobatics",
+      "name": "Acrobatics",
+      "ability": "dex",
+      "sortOrder": 2
+    },
+    {
+      "slug": "sleight_of_hand",
+      "name": "Sleight of Hand",
+      "ability": "dex",
+      "sortOrder": 3
+    },
+    {
+      "slug": "stealth",
+      "name": "Stealth",
+      "ability": "dex",
+      "sortOrder": 4
+    },
+    {
+      "slug": "arcana",
+      "name": "Arcana",
+      "ability": "int",
+      "sortOrder": 5
+    },
+    {
+      "slug": "history",
+      "name": "History",
+      "ability": "int",
+      "sortOrder": 6
+    },
+    {
+      "slug": "investigation",
+      "name": "Investigation",
+      "ability": "int",
+      "sortOrder": 7
+    },
+    {
+      "slug": "nature",
+      "name": "Nature",
+      "ability": "int",
+      "sortOrder": 8
+    },
+    {
+      "slug": "religion",
+      "name": "Religion",
+      "ability": "int",
+      "sortOrder": 9
+    },
+    {
+      "slug": "animal_handling",
+      "name": "Animal Handling",
+      "ability": "wis",
+      "sortOrder": 10
+    },
+    {
+      "slug": "insight",
+      "name": "Insight",
+      "ability": "wis",
+      "sortOrder": 11
+    },
+    {
+      "slug": "medicine",
+      "name": "Medicine",
+      "ability": "wis",
+      "sortOrder": 12
+    },
+    {
+      "slug": "perception",
+      "name": "Perception",
+      "ability": "wis",
+      "sortOrder": 13
+    },
+    {
+      "slug": "survival",
+      "name": "Survival",
+      "ability": "wis",
+      "sortOrder": 14
+    },
+    {
+      "slug": "deception",
+      "name": "Deception",
+      "ability": "cha",
+      "sortOrder": 15
+    },
+    {
+      "slug": "intimidation",
+      "name": "Intimidation",
+      "ability": "cha",
+      "sortOrder": 16
+    },
+    {
+      "slug": "performance",
+      "name": "Performance",
+      "ability": "cha",
+      "sortOrder": 17
+    },
+    {
+      "slug": "persuasion",
+      "name": "Persuasion",
+      "ability": "cha",
+      "sortOrder": 18
+    }
   ],
   "backgrounds": [
     {
       "slug": "acolyte",
       "name": "Acolyte",
       "abilityOptions": {
-        "abilities": ["wis", "int", "cha"],
+        "abilities": [
+          "wis",
+          "int",
+          "cha"
+        ],
         "mode": "2+1_or_1+1+1"
       },
       "grantsFeat": "srd52:feat:alert",
       "grantsOriginFeatId": "srd52:feat:alert",
       "effects": [
-        { "type": "grant_skill_proficiency", "skill": "insight" },
-        { "type": "grant_skill_proficiency", "skill": "religion" },
-        { "type": "grant_language", "language": "Celestial" },
-        { "type": "grant_tool_proficiency", "tool": "Calligrapher's Supplies" }
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "insight"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "religion"
+        },
+        {
+          "type": "grant_language",
+          "language": "Celestial"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Calligrapher's Supplies"
+        }
       ]
     },
     {
       "slug": "soldier",
       "name": "Soldier",
       "abilityOptions": {
-        "abilities": ["str", "dex", "con"],
+        "abilities": [
+          "str",
+          "dex",
+          "con"
+        ],
         "mode": "2+1_or_1+1+1"
       },
       "grantsFeat": "srd52:feat:alert",
       "grantsOriginFeatId": "srd52:feat:alert",
       "startingEquipment": {
-        "itemIds": ["srd52:equipment:shield"],
+        "itemIds": [
+          "srd52:equipment:shield"
+        ],
         "equippedShieldId": "srd52:equipment:shield"
       },
       "effects": [
-        { "type": "grant_skill_proficiency", "skill": "athletics" },
-        { "type": "grant_skill_proficiency", "skill": "intimidation" },
-        { "type": "grant_tool_proficiency", "tool": "Gaming Set" }
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "athletics"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "intimidation"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Gaming Set"
+        }
       ]
     },
     {
       "slug": "sage",
       "name": "Sage",
       "abilityOptions": {
-        "abilities": ["int", "wis", "cha"],
+        "abilities": [
+          "int",
+          "wis",
+          "cha"
+        ],
         "mode": "2+1_or_1+1+1"
       },
       "grantsFeat": "srd52:feat:magic-initiate",
       "grantsOriginFeatId": "srd52:feat:magic-initiate",
       "effects": [
-        { "type": "grant_skill_proficiency", "skill": "arcana" },
-        { "type": "grant_skill_proficiency", "skill": "history" },
-        { "type": "grant_language", "language": "Draconic" }
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "arcana"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "history"
+        },
+        {
+          "type": "grant_language",
+          "language": "Draconic"
+        }
       ]
     },
     {
       "slug": "criminal",
       "name": "Criminal",
       "abilityOptions": {
-        "abilities": ["dex", "int", "cha"],
+        "abilities": [
+          "dex",
+          "int",
+          "cha"
+        ],
         "mode": "2+1_or_1+1+1"
       },
       "originFeatChoice": {
-        "featIds": ["srd52:feat:alert", "srd52:feat:magic-initiate"]
+        "featIds": [
+          "srd52:feat:alert",
+          "srd52:feat:magic-initiate",
+          "srd52:feat:lucky",
+          "srd52:feat:skilled"
+        ]
       },
       "effects": [
-        { "type": "grant_skill_proficiency", "skill": "stealth" },
-        { "type": "grant_skill_proficiency", "skill": "deception" },
-        { "type": "grant_tool_proficiency", "tool": "Thieves' Tools" }
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "stealth"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "deception"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Thieves' Tools"
+        }
+      ]
+    },
+    {
+      "slug": "entertainer",
+      "name": "Entertainer",
+      "abilityOptions": {
+        "abilities": [
+          "dex",
+          "cha",
+          "wis"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:musician",
+      "grantsOriginFeatId": "srd52:feat:musician",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:musical-instrument",
+          "srd52:equipment:disguise-kit"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "acrobatics"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "performance"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Musical Instrument"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Disguise Kit"
+        }
+      ]
+    },
+    {
+      "slug": "folk-hero",
+      "name": "Folk Hero",
+      "abilityOptions": {
+        "abilities": [
+          "str",
+          "wis",
+          "cha"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:tavern-brawler",
+      "grantsOriginFeatId": "srd52:feat:tavern-brawler",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:bedroll",
+          "srd52:equipment:rope-hempen-50ft"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "animal_handling"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "survival"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Carpenter's Tools"
+        }
+      ]
+    },
+    {
+      "slug": "guild-artisan",
+      "name": "Guild Artisan",
+      "abilityOptions": {
+        "abilities": [
+          "int",
+          "con",
+          "cha"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:skilled",
+      "grantsOriginFeatId": "srd52:feat:skilled",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:backpack",
+          "srd52:equipment:smiths-tools"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "insight"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "persuasion"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Smith's Tools"
+        }
+      ]
+    },
+    {
+      "slug": "hermit",
+      "name": "Hermit",
+      "abilityOptions": {
+        "abilities": [
+          "con",
+          "wis",
+          "int"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:healer",
+      "grantsOriginFeatId": "srd52:feat:healer",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:herbalism-kit",
+          "srd52:equipment:bedroll"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "medicine"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "religion"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Herbalism Kit"
+        },
+        {
+          "type": "grant_language",
+          "language": "Primordial"
+        }
+      ]
+    },
+    {
+      "slug": "noble",
+      "name": "Noble",
+      "abilityOptions": {
+        "abilities": [
+          "int",
+          "wis",
+          "cha"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:lucky",
+      "grantsOriginFeatId": "srd52:feat:lucky",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:gaming-set"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "history"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "persuasion"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Gaming Set"
+        },
+        {
+          "type": "grant_language",
+          "language": "Elvish"
+        }
+      ]
+    },
+    {
+      "slug": "outlander",
+      "name": "Outlander",
+      "abilityOptions": {
+        "abilities": [
+          "str",
+          "dex",
+          "wis"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:alert",
+      "grantsOriginFeatId": "srd52:feat:alert",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:bedroll",
+          "srd52:equipment:rations-1day",
+          "srd52:equipment:waterskin"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "athletics"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "survival"
+        },
+        {
+          "type": "grant_language",
+          "language": "Giant"
+        }
+      ]
+    },
+    {
+      "slug": "sailor",
+      "name": "Sailor",
+      "abilityOptions": {
+        "abilities": [
+          "str",
+          "dex",
+          "wis"
+        ],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:savage-attacker",
+      "grantsOriginFeatId": "srd52:feat:savage-attacker",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:rope-hempen-50ft",
+          "srd52:equipment:waterskin"
+        ]
+      },
+      "effects": [
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "athletics"
+        },
+        {
+          "type": "grant_skill_proficiency",
+          "skill": "perception"
+        },
+        {
+          "type": "grant_tool_proficiency",
+          "tool": "Navigator's Tools"
+        }
       ]
     }
   ],
@@ -169,8 +614,14 @@
         "equippedWeaponId": "srd52:equipment:longsword"
       },
       "effects": [
-        { "type": "grant_save_proficiency", "ability": "str" },
-        { "type": "grant_save_proficiency", "ability": "con" }
+        {
+          "type": "grant_save_proficiency",
+          "ability": "str"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "con"
+        }
       ]
     },
     {
@@ -202,11 +653,25 @@
           "featureId": "srd52:feature:spellcasting"
         }
       ],
-      "spellListRefIds": ["srd52:spelllist:wizard-core"],
+      "spellListRefIds": [
+        "srd52:spelllist:wizard-core"
+      ],
       "effects": [
-        { "type": "grant_save_proficiency", "ability": "int" },
-        { "type": "grant_save_proficiency", "ability": "wis" }
-      ]
+        {
+          "type": "grant_save_proficiency",
+          "ability": "int"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "wis"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:dagger"
+        ],
+        "equippedWeaponId": "srd52:equipment:dagger"
+      }
     },
     {
       "slug": "rogue",
@@ -242,9 +707,24 @@
         }
       ],
       "effects": [
-        { "type": "grant_save_proficiency", "ability": "dex" },
-        { "type": "grant_save_proficiency", "ability": "int" }
-      ]
+        {
+          "type": "grant_save_proficiency",
+          "ability": "dex"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "int"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:leather-armor",
+          "srd52:equipment:rapier",
+          "srd52:equipment:shortbow"
+        ],
+        "equippedArmorId": "srd52:equipment:leather-armor",
+        "equippedWeaponId": "srd52:equipment:rapier"
+      }
     },
     {
       "slug": "cleric",
@@ -274,11 +754,29 @@
           "featureId": "srd52:feature:spellcasting"
         }
       ],
-      "spellListRefIds": ["srd52:spelllist:cleric-core"],
+      "spellListRefIds": [
+        "srd52:spelllist:cleric-core"
+      ],
       "effects": [
-        { "type": "grant_save_proficiency", "ability": "wis" },
-        { "type": "grant_save_proficiency", "ability": "cha" }
-      ]
+        {
+          "type": "grant_save_proficiency",
+          "ability": "wis"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "cha"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:chain-shirt",
+          "srd52:equipment:shield",
+          "srd52:equipment:mace"
+        ],
+        "equippedArmorId": "srd52:equipment:chain-shirt",
+        "equippedShieldId": "srd52:equipment:shield",
+        "equippedWeaponId": "srd52:equipment:mace"
+      }
     },
     {
       "slug": "barbarian",
@@ -306,9 +804,23 @@
         }
       ],
       "effects": [
-        { "type": "grant_save_proficiency", "ability": "con" },
-        { "type": "grant_save_proficiency", "ability": "str" }
-      ]
+        {
+          "type": "grant_save_proficiency",
+          "ability": "con"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "str"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:hide-armor",
+          "srd52:equipment:greataxe"
+        ],
+        "equippedArmorId": "srd52:equipment:hide-armor",
+        "equippedWeaponId": "srd52:equipment:greataxe"
+      }
     },
     {
       "slug": "ranger",
@@ -346,56 +858,673 @@
         "progression": "half",
         "mode": "known",
         "selectionLimitsByLevel": [
-          { "level": 1, "known": 0, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 2, "known": 2, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 3, "known": 3, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 4, "known": 3, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 5, "known": 4, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 6, "known": 4, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 7, "known": 5, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 8, "known": 5, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 9, "known": 6, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 10, "known": 6, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 11, "known": 7, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 12, "known": 7, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 13, "known": 8, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 14, "known": 8, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 15, "known": 9, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 16, "known": 9, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 17, "known": 10, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 18, "known": 10, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 19, "known": 11, "prepared": 0, "cantripsKnown": 0 },
-          { "level": 20, "known": 11, "prepared": 0, "cantripsKnown": 0 }
+          {
+            "level": 1,
+            "known": 0,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 2,
+            "known": 2,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 3,
+            "known": 3,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 4,
+            "known": 3,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 5,
+            "known": 4,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 6,
+            "known": 4,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 7,
+            "known": 5,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 8,
+            "known": 5,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 9,
+            "known": 6,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 10,
+            "known": 6,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 11,
+            "known": 7,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 12,
+            "known": 7,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 13,
+            "known": 8,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 14,
+            "known": 8,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 15,
+            "known": 9,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 16,
+            "known": 9,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 17,
+            "known": 10,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 18,
+            "known": 10,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 19,
+            "known": 11,
+            "prepared": 0,
+            "cantripsKnown": 0
+          },
+          {
+            "level": 20,
+            "known": 11,
+            "prepared": 0,
+            "cantripsKnown": 0
+          }
         ]
       },
-      "spellListRefIds": ["srd52:spelllist:ranger-core"],
+      "spellListRefIds": [
+        "srd52:spelllist:ranger-core"
+      ],
       "effects": [
-        { "type": "grant_save_proficiency", "ability": "dex" },
-        { "type": "grant_save_proficiency", "ability": "str" }
+        {
+          "type": "grant_save_proficiency",
+          "ability": "dex"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "str"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:leather-armor",
+          "srd52:equipment:shortsword",
+          "srd52:equipment:shortbow"
+        ],
+        "equippedArmorId": "srd52:equipment:leather-armor",
+        "equippedWeaponId": "srd52:equipment:shortbow"
+      }
+    },
+    {
+      "slug": "bard",
+      "name": "Bard",
+      "hitDie": 8,
+      "classSkillChoices": {
+        "count": 3,
+        "from": [
+          "acrobatics",
+          "animal_handling",
+          "arcana",
+          "athletics",
+          "deception",
+          "history",
+          "insight",
+          "intimidation",
+          "investigation",
+          "medicine",
+          "nature",
+          "perception",
+          "performance",
+          "persuasion",
+          "religion",
+          "sleight_of_hand",
+          "stealth",
+          "survival"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true
+      },
+      "spellcasting": {
+        "ability": "cha",
+        "progression": "full",
+        "mode": "known"
+      },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:spellcasting"
+        },
+        {
+          "level": 1,
+          "featureId": "srd52:feature:bardic-inspiration"
+        }
+      ],
+      "spellListRefIds": [
+        "srd52:spelllist:bard-core"
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:leather-armor",
+          "srd52:equipment:rapier",
+          "srd52:equipment:dagger"
+        ],
+        "equippedArmorId": "srd52:equipment:leather-armor",
+        "equippedWeaponId": "srd52:equipment:rapier"
+      },
+      "effects": [
+        {
+          "type": "grant_save_proficiency",
+          "ability": "dex"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "cha"
+        }
+      ]
+    },
+    {
+      "slug": "druid",
+      "name": "Druid",
+      "hitDie": 8,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "arcana",
+          "animal_handling",
+          "insight",
+          "medicine",
+          "nature",
+          "perception",
+          "religion",
+          "survival"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true
+      },
+      "spellcasting": {
+        "ability": "wis",
+        "progression": "full",
+        "mode": "prepared"
+      },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:spellcasting"
+        },
+        {
+          "level": 1,
+          "featureId": "srd52:feature:druidic"
+        }
+      ],
+      "spellListRefIds": [
+        "srd52:spelllist:druid-core"
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:leather-armor",
+          "srd52:equipment:shield",
+          "srd52:equipment:quarterstaff"
+        ],
+        "equippedArmorId": "srd52:equipment:leather-armor",
+        "equippedShieldId": "srd52:equipment:shield",
+        "equippedWeaponId": "srd52:equipment:quarterstaff"
+      },
+      "effects": [
+        {
+          "type": "grant_save_proficiency",
+          "ability": "int"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "wis"
+        }
+      ]
+    },
+    {
+      "slug": "monk",
+      "name": "Monk",
+      "hitDie": 8,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "acrobatics",
+          "athletics",
+          "history",
+          "insight",
+          "religion",
+          "stealth"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true,
+        "weaponIds": [
+          "srd52:equipment:shortsword"
+        ]
+      },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:unarmored-defense-monk"
+        },
+        {
+          "level": 1,
+          "featureId": "srd52:feature:martial-arts"
+        }
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:shortsword"
+        ],
+        "equippedWeaponId": "srd52:equipment:shortsword"
+      },
+      "effects": [
+        {
+          "type": "grant_save_proficiency",
+          "ability": "str"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "dex"
+        }
+      ]
+    },
+    {
+      "slug": "paladin",
+      "name": "Paladin",
+      "hitDie": 10,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "athletics",
+          "insight",
+          "intimidation",
+          "medicine",
+          "persuasion",
+          "religion"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true,
+        "martial": true
+      },
+      "spellcasting": {
+        "ability": "cha",
+        "progression": "half",
+        "mode": "prepared"
+      },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:lay-on-hands"
+        },
+        {
+          "level": 1,
+          "featureId": "srd52:feature:divine-sense"
+        },
+        {
+          "level": 2,
+          "featureId": "srd52:feature:spellcasting"
+        }
+      ],
+      "spellListRefIds": [
+        "srd52:spelllist:paladin-core"
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:chain-mail",
+          "srd52:equipment:shield",
+          "srd52:equipment:longsword"
+        ],
+        "equippedArmorId": "srd52:equipment:chain-mail",
+        "equippedShieldId": "srd52:equipment:shield",
+        "equippedWeaponId": "srd52:equipment:longsword"
+      },
+      "effects": [
+        {
+          "type": "grant_save_proficiency",
+          "ability": "wis"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "cha"
+        }
+      ]
+    },
+    {
+      "slug": "sorcerer",
+      "name": "Sorcerer",
+      "hitDie": 6,
+      "classSkillChoices": {
+        "count": 2,
+        "from": [
+          "arcana",
+          "deception",
+          "insight",
+          "intimidation",
+          "persuasion",
+          "religion"
+        ]
+      },
+      "weaponProficiencies": {
+        "simple": true
+      },
+      "spellcasting": {
+        "ability": "cha",
+        "progression": "full",
+        "mode": "known"
+      },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:spellcasting"
+        },
+        {
+          "level": 1,
+          "featureId": "srd52:feature:sorcerous-origin"
+        }
+      ],
+      "spellListRefIds": [
+        "srd52:spelllist:sorcerer-core"
+      ],
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:dagger"
+        ],
+        "equippedWeaponId": "srd52:equipment:dagger"
+      },
+      "effects": [
+        {
+          "type": "grant_save_proficiency",
+          "ability": "con"
+        },
+        {
+          "type": "grant_save_proficiency",
+          "ability": "cha"
+        }
       ]
     }
   ],
   "features": [
-    { "slug": "fighting-style-defense", "name": "Fighting Style: Defense", "effects": [
-      { "type": "add_armor_class_bonus", "value": 1, "condition": "wearing_armor" },
-      { "type": "grant_trait", "name": "Fighting Style: Defense" }
-    ] },
-    { "slug": "fighting-style-archery", "name": "Fighting Style: Archery", "effects": [
-      { "type": "add_attack_bonus", "value": 2, "condition": "ranged_weapon" },
-      { "type": "grant_trait", "name": "Fighting Style: Archery" }
-    ] },
-    { "slug": "unarmored-defense", "name": "Unarmored Defense", "effects": [
-      { "type": "set_unarmored_defense", "ability": "con" },
-      { "type": "grant_trait", "name": "Unarmored Defense" }
-    ] },
-    { "slug": "second-wind", "name": "Second Wind" },
-    { "slug": "sneak-attack", "name": "Sneak Attack" },
-    { "slug": "spellcasting", "name": "Spellcasting" }
+    {
+      "slug": "fighting-style-defense",
+      "name": "Fighting Style: Defense",
+      "effects": [
+        {
+          "type": "add_armor_class_bonus",
+          "value": 1,
+          "condition": "wearing_armor"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Fighting Style: Defense"
+        }
+      ]
+    },
+    {
+      "slug": "fighting-style-archery",
+      "name": "Fighting Style: Archery",
+      "effects": [
+        {
+          "type": "add_attack_bonus",
+          "value": 2,
+          "condition": "ranged_weapon"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Fighting Style: Archery"
+        }
+      ]
+    },
+    {
+      "slug": "unarmored-defense",
+      "name": "Unarmored Defense",
+      "effects": [
+        {
+          "type": "set_unarmored_defense",
+          "ability": "con"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Unarmored Defense"
+        }
+      ]
+    },
+    {
+      "slug": "second-wind",
+      "name": "Second Wind"
+    },
+    {
+      "slug": "sneak-attack",
+      "name": "Sneak Attack"
+    },
+    {
+      "slug": "spellcasting",
+      "name": "Spellcasting"
+    },
+    {
+      "slug": "bardic-inspiration",
+      "name": "Bardic Inspiration",
+      "effects": [
+        {
+          "type": "grant_trait",
+          "name": "Bardic Inspiration"
+        }
+      ]
+    },
+    {
+      "slug": "druidic",
+      "name": "Druidic",
+      "effects": [
+        {
+          "type": "grant_trait",
+          "name": "Druidic"
+        }
+      ]
+    },
+    {
+      "slug": "martial-arts",
+      "name": "Martial Arts",
+      "effects": [
+        {
+          "type": "grant_trait",
+          "name": "Martial Arts"
+        }
+      ]
+    },
+    {
+      "slug": "lay-on-hands",
+      "name": "Lay on Hands",
+      "effects": [
+        {
+          "type": "grant_trait",
+          "name": "Lay on Hands"
+        }
+      ]
+    },
+    {
+      "slug": "divine-sense",
+      "name": "Divine Sense",
+      "effects": [
+        {
+          "type": "grant_trait",
+          "name": "Divine Sense"
+        }
+      ]
+    },
+    {
+      "slug": "sorcerous-origin",
+      "name": "Sorcerous Origin",
+      "effects": [
+        {
+          "type": "grant_trait",
+          "name": "Sorcerous Origin"
+        }
+      ]
+    },
+    {
+      "slug": "unarmored-defense-monk",
+      "name": "Unarmored Defense (Monk)",
+      "effects": [
+        {
+          "type": "set_unarmored_defense",
+          "ability": "wis"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Unarmored Defense"
+        }
+      ]
+    }
   ],
   "feats": [
-    { "slug": "alert", "name": "Alert", "category": "origin" },
-    { "slug": "tough", "name": "Tough", "category": "general", "prerequisites": { "minLevel": 4 } },
-    { "slug": "magic-initiate", "name": "Magic Initiate", "category": "origin" }
+    {
+      "slug": "alert",
+      "name": "Alert",
+      "category": "origin"
+    },
+    {
+      "slug": "tough",
+      "name": "Tough",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4
+      }
+    },
+    {
+      "slug": "magic-initiate",
+      "name": "Magic Initiate",
+      "category": "origin"
+    },
+    {
+      "slug": "healer",
+      "name": "Healer",
+      "category": "origin"
+    },
+    {
+      "slug": "lucky",
+      "name": "Lucky",
+      "category": "origin"
+    },
+    {
+      "slug": "musician",
+      "name": "Musician",
+      "category": "origin"
+    },
+    {
+      "slug": "savage-attacker",
+      "name": "Savage Attacker",
+      "category": "origin"
+    },
+    {
+      "slug": "skilled",
+      "name": "Skilled",
+      "category": "origin"
+    },
+    {
+      "slug": "tavern-brawler",
+      "name": "Tavern Brawler",
+      "category": "origin"
+    },
+    {
+      "slug": "athlete",
+      "name": "Athlete",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4
+      }
+    },
+    {
+      "slug": "durable",
+      "name": "Durable",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4
+      }
+    },
+    {
+      "slug": "mage-slayer",
+      "name": "Mage Slayer",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4
+      }
+    },
+    {
+      "slug": "sharpshooter",
+      "name": "Sharpshooter",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4
+      }
+    },
+    {
+      "slug": "spell-sniper",
+      "name": "Spell Sniper",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4,
+        "requiresSpellcasting": true
+      }
+    },
+    {
+      "slug": "war-caster",
+      "name": "War Caster",
+      "category": "general",
+      "prerequisites": {
+        "minLevel": 4,
+        "requiresSpellcasting": true
+      }
+    }
   ],
   "equipment": [
     {
@@ -513,8 +1642,12 @@
       "type": "weapon",
       "damageDice": "1d8",
       "weaponCategory": "martial",
-      "properties": ["versatile"],
-      "masteryProperties": ["sap"]
+      "properties": [
+        "versatile"
+      ],
+      "masteryProperties": [
+        "sap"
+      ]
     },
     {
       "slug": "battleaxe",
@@ -522,8 +1655,12 @@
       "type": "weapon",
       "damageDice": "1d8",
       "weaponCategory": "martial",
-      "properties": ["versatile"],
-      "masteryProperties": ["topple"]
+      "properties": [
+        "versatile"
+      ],
+      "masteryProperties": [
+        "topple"
+      ]
     },
     {
       "slug": "rapier",
@@ -531,8 +1668,12 @@
       "type": "weapon",
       "damageDice": "1d8",
       "weaponCategory": "martial",
-      "properties": ["finesse"],
-      "masteryProperties": ["vex"]
+      "properties": [
+        "finesse"
+      ],
+      "masteryProperties": [
+        "vex"
+      ]
     },
     {
       "slug": "shortbow",
@@ -540,8 +1681,12 @@
       "type": "weapon",
       "damageDice": "1d6",
       "weaponCategory": "simple",
-      "properties": ["ranged"],
-      "masteryProperties": ["vex"]
+      "properties": [
+        "ranged"
+      ],
+      "masteryProperties": [
+        "vex"
+      ]
     },
     {
       "slug": "bedroll",
@@ -557,6 +1702,414 @@
       "slug": "torch",
       "name": "Torch",
       "type": "gear"
+    },
+    {
+      "slug": "club",
+      "name": "Club",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "simple",
+      "properties": [
+        "light"
+      ]
+    },
+    {
+      "slug": "dagger",
+      "name": "Dagger",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "simple",
+      "properties": [
+        "finesse",
+        "light",
+        "thrown",
+        "range 20/60"
+      ]
+    },
+    {
+      "slug": "greatclub",
+      "name": "Greatclub",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "weaponCategory": "simple",
+      "properties": [
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "handaxe",
+      "name": "Handaxe",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "simple",
+      "properties": [
+        "light",
+        "thrown",
+        "range 20/60"
+      ]
+    },
+    {
+      "slug": "javelin",
+      "name": "Javelin",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "simple",
+      "properties": [
+        "thrown",
+        "range 30/120"
+      ]
+    },
+    {
+      "slug": "light-hammer",
+      "name": "Light Hammer",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "simple",
+      "properties": [
+        "light",
+        "thrown",
+        "range 20/60"
+      ]
+    },
+    {
+      "slug": "mace",
+      "name": "Mace",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "simple"
+    },
+    {
+      "slug": "quarterstaff",
+      "name": "Quarterstaff",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "simple",
+      "properties": [
+        "versatile"
+      ]
+    },
+    {
+      "slug": "sickle",
+      "name": "Sickle",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "simple",
+      "properties": [
+        "light"
+      ]
+    },
+    {
+      "slug": "spear",
+      "name": "Spear",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "simple",
+      "properties": [
+        "thrown",
+        "range 20/60",
+        "versatile"
+      ]
+    },
+    {
+      "slug": "light-crossbow",
+      "name": "Light Crossbow",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "weaponCategory": "simple",
+      "properties": [
+        "ranged",
+        "loading",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "dart",
+      "name": "Dart",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "simple",
+      "properties": [
+        "finesse",
+        "thrown",
+        "range 20/60",
+        "ranged"
+      ]
+    },
+    {
+      "slug": "shortsword",
+      "name": "Shortsword",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "simple",
+      "properties": [
+        "finesse",
+        "light"
+      ]
+    },
+    {
+      "slug": "sling",
+      "name": "Sling",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "simple",
+      "properties": [
+        "ranged"
+      ]
+    },
+    {
+      "slug": "glaive",
+      "name": "Glaive",
+      "type": "weapon",
+      "damageDice": "1d10",
+      "weaponCategory": "martial",
+      "properties": [
+        "heavy",
+        "reach",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "greataxe",
+      "name": "Greataxe",
+      "type": "weapon",
+      "damageDice": "1d12",
+      "weaponCategory": "martial",
+      "properties": [
+        "heavy",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "greatsword",
+      "name": "Greatsword",
+      "type": "weapon",
+      "damageDice": "2d6",
+      "weaponCategory": "martial",
+      "properties": [
+        "heavy",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "halberd",
+      "name": "Halberd",
+      "type": "weapon",
+      "damageDice": "1d10",
+      "weaponCategory": "martial",
+      "properties": [
+        "heavy",
+        "reach",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "lance",
+      "name": "Lance",
+      "type": "weapon",
+      "damageDice": "1d12",
+      "weaponCategory": "martial",
+      "properties": [
+        "reach",
+        "special"
+      ]
+    },
+    {
+      "slug": "longbow",
+      "name": "Longbow",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "weaponCategory": "martial",
+      "properties": [
+        "ranged",
+        "heavy",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "maul",
+      "name": "Maul",
+      "type": "weapon",
+      "damageDice": "2d6",
+      "weaponCategory": "martial",
+      "properties": [
+        "heavy",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "morningstar",
+      "name": "Morningstar",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "weaponCategory": "martial"
+    },
+    {
+      "slug": "pike",
+      "name": "Pike",
+      "type": "weapon",
+      "damageDice": "1d10",
+      "weaponCategory": "martial",
+      "properties": [
+        "heavy",
+        "reach",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "scimitar",
+      "name": "Scimitar",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "martial",
+      "properties": [
+        "finesse",
+        "light"
+      ]
+    },
+    {
+      "slug": "trident",
+      "name": "Trident",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "martial",
+      "properties": [
+        "thrown",
+        "range 20/60",
+        "versatile"
+      ]
+    },
+    {
+      "slug": "war-pick",
+      "name": "War Pick",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "weaponCategory": "martial"
+    },
+    {
+      "slug": "warhammer",
+      "name": "Warhammer",
+      "type": "weapon",
+      "damageDice": "1d8",
+      "weaponCategory": "martial",
+      "properties": [
+        "versatile"
+      ]
+    },
+    {
+      "slug": "whip",
+      "name": "Whip",
+      "type": "weapon",
+      "damageDice": "1d4",
+      "weaponCategory": "martial",
+      "properties": [
+        "finesse",
+        "reach"
+      ]
+    },
+    {
+      "slug": "heavy-crossbow",
+      "name": "Heavy Crossbow",
+      "type": "weapon",
+      "damageDice": "1d10",
+      "weaponCategory": "martial",
+      "properties": [
+        "ranged",
+        "heavy",
+        "loading",
+        "two-handed"
+      ]
+    },
+    {
+      "slug": "hand-crossbow",
+      "name": "Hand Crossbow",
+      "type": "weapon",
+      "damageDice": "1d6",
+      "weaponCategory": "martial",
+      "properties": [
+        "ranged",
+        "light",
+        "loading"
+      ]
+    },
+    {
+      "slug": "backpack",
+      "name": "Backpack",
+      "type": "gear"
+    },
+    {
+      "slug": "crowbar",
+      "name": "Crowbar",
+      "type": "gear"
+    },
+    {
+      "slug": "flask-oil",
+      "name": "Flask of Oil",
+      "type": "gear"
+    },
+    {
+      "slug": "rations-1day",
+      "name": "Rations (1 day)",
+      "type": "gear"
+    },
+    {
+      "slug": "waterskin",
+      "name": "Waterskin",
+      "type": "gear"
+    },
+    {
+      "slug": "tinderbox",
+      "name": "Tinderbox",
+      "type": "gear"
+    },
+    {
+      "slug": "mess-kit",
+      "name": "Mess Kit",
+      "type": "gear"
+    },
+    {
+      "slug": "shovel",
+      "name": "Shovel",
+      "type": "gear"
+    },
+    {
+      "slug": "healers-kit",
+      "name": "Healer's Kit",
+      "type": "gear"
+    },
+    {
+      "slug": "thieves-tools",
+      "name": "Thieves' Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "herbalism-kit",
+      "name": "Herbalism Kit",
+      "type": "gear"
+    },
+    {
+      "slug": "smiths-tools",
+      "name": "Smith's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "disguise-kit",
+      "name": "Disguise Kit",
+      "type": "gear"
+    },
+    {
+      "slug": "forgery-kit",
+      "name": "Forgery Kit",
+      "type": "gear"
+    },
+    {
+      "slug": "gaming-set",
+      "name": "Gaming Set",
+      "type": "gear"
+    },
+    {
+      "slug": "musical-instrument",
+      "name": "Musical Instrument",
+      "type": "gear"
     }
   ],
   "spells": [
@@ -568,7 +2121,10 @@
       "ritual": false,
       "castingTime": "1 action",
       "range": "Touch",
-      "components": ["V", "S"],
+      "components": [
+        "V",
+        "S"
+      ],
       "duration": "Concentration, up to 1 minute",
       "concentration": true,
       "description": "You touch a willing creature and grant a brief bonus to an ability check."
@@ -581,7 +2137,10 @@
       "ritual": false,
       "castingTime": "1 action",
       "range": "60 feet",
-      "components": ["V", "S"],
+      "components": [
+        "V",
+        "S"
+      ],
       "duration": "Instantaneous",
       "concentration": false,
       "description": "Flame-like radiance descends on a creature that fails a Dexterity save."
@@ -594,7 +2153,10 @@
       "ritual": false,
       "castingTime": "1 action",
       "range": "Touch",
-      "components": ["V", "S"],
+      "components": [
+        "V",
+        "S"
+      ],
       "duration": "Instantaneous",
       "concentration": false,
       "description": "A creature you touch regains hit points."
@@ -607,7 +2169,9 @@
       "ritual": false,
       "castingTime": "1 bonus action",
       "range": "90 feet",
-      "components": ["V"],
+      "components": [
+        "V"
+      ],
       "duration": "Concentration, up to 1 hour",
       "concentration": true,
       "description": "You mark a target and deal extra weapon damage to it."
@@ -620,7 +2184,10 @@
       "ritual": true,
       "castingTime": "1 action",
       "range": "Self",
-      "components": ["V", "S"],
+      "components": [
+        "V",
+        "S"
+      ],
       "duration": "Concentration, up to 10 minutes",
       "concentration": true,
       "description": "For the duration, you sense the presence of magic within 30 feet of you."
@@ -633,7 +2200,10 @@
       "ritual": false,
       "castingTime": "1 action",
       "range": "120 feet",
-      "components": ["V", "S"],
+      "components": [
+        "V",
+        "S"
+      ],
       "duration": "Instantaneous",
       "concentration": false,
       "description": "You create darts of magical force that strike targets automatically."
@@ -646,10 +2216,929 @@
       "ritual": false,
       "castingTime": "1 action",
       "range": "150 feet",
-      "components": ["V", "S", "M"],
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
       "duration": "Instantaneous",
       "concentration": false,
       "description": "A bright streak erupts into an explosion of fire in a 20-foot radius."
+    },
+    {
+      "slug": "acid-splash",
+      "name": "Acid Splash",
+      "level": 0,
+      "school": "conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You hurl a bubble of acid."
+    },
+    {
+      "slug": "blade-ward",
+      "name": "Blade Ward",
+      "level": 0,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "1 round",
+      "concentration": false,
+      "description": "You ward yourself against weapon strikes."
+    },
+    {
+      "slug": "dancing-lights",
+      "name": "Dancing Lights",
+      "level": 0,
+      "school": "illusion",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Create up to four torch-sized lights."
+    },
+    {
+      "slug": "light",
+      "name": "Light",
+      "level": 0,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "M"
+      ],
+      "duration": "1 hour",
+      "concentration": false,
+      "description": "You touch an object that sheds bright light."
+    },
+    {
+      "slug": "mage-hand",
+      "name": "Mage Hand",
+      "level": 0,
+      "school": "conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "1 minute",
+      "concentration": false,
+      "description": "A spectral hand appears at a point you choose."
+    },
+    {
+      "slug": "mending",
+      "name": "Mending",
+      "level": 0,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 minute",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "This spell repairs a single break or tear."
+    },
+    {
+      "slug": "message",
+      "name": "Message",
+      "level": 0,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "1 round",
+      "concentration": false,
+      "description": "You whisper a message that only the target hears."
+    },
+    {
+      "slug": "poison-spray",
+      "name": "Poison Spray",
+      "level": 0,
+      "school": "necromancy",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You project a puff of poisonous gas."
+    },
+    {
+      "slug": "prestidigitation",
+      "name": "Prestidigitation",
+      "level": 0,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "10 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Up to 1 hour",
+      "concentration": false,
+      "description": "You perform a minor magical trick."
+    },
+    {
+      "slug": "produce-flame",
+      "name": "Produce Flame",
+      "level": 0,
+      "school": "conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "10 minutes",
+      "concentration": false,
+      "description": "A flickering flame appears in your hand."
+    },
+    {
+      "slug": "ray-of-frost",
+      "name": "Ray of Frost",
+      "level": 0,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A frigid beam of blue-white light streaks toward a creature."
+    },
+    {
+      "slug": "resistance",
+      "name": "Resistance",
+      "level": 0,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "A willing creature gains a brief bonus on a saving throw."
+    },
+    {
+      "slug": "shillelagh",
+      "name": "Shillelagh",
+      "level": 0,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 bonus action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "1 minute",
+      "concentration": false,
+      "description": "Wooden club or staff becomes empowered with druidic magic."
+    },
+    {
+      "slug": "shocking-grasp",
+      "name": "Shocking Grasp",
+      "level": 0,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "Lightning springs from your hand to deliver a shock."
+    },
+    {
+      "slug": "spare-the-dying",
+      "name": "Spare the Dying",
+      "level": 0,
+      "school": "necromancy",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A living creature with 0 hit points becomes stable."
+    },
+    {
+      "slug": "thaumaturgy",
+      "name": "Thaumaturgy",
+      "level": 0,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V"
+      ],
+      "duration": "Up to 1 minute",
+      "concentration": false,
+      "description": "You manifest a minor wonder of divine power."
+    },
+    {
+      "slug": "vicious-mockery",
+      "name": "Vicious Mockery",
+      "level": 0,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You unleash a string of insults laced with subtle enchantment."
+    },
+    {
+      "slug": "bane",
+      "name": "Bane",
+      "level": 1,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Up to three creatures subtract from attacks and saves."
+    },
+    {
+      "slug": "bless",
+      "name": "Bless",
+      "level": 1,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Up to three creatures add to attacks and saves."
+    },
+    {
+      "slug": "burning-hands",
+      "name": "Burning Hands",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self (15-foot cone)",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A thin sheet of flames shoots from your fingertips."
+    },
+    {
+      "slug": "charm-person",
+      "name": "Charm Person",
+      "level": 1,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "1 hour",
+      "concentration": false,
+      "description": "You attempt to charm a humanoid you can see."
+    },
+    {
+      "slug": "comprehend-languages",
+      "name": "Comprehend Languages",
+      "level": 1,
+      "school": "divination",
+      "ritual": true,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "1 hour",
+      "concentration": false,
+      "description": "You understand spoken and written language."
+    },
+    {
+      "slug": "command",
+      "name": "Command",
+      "level": 1,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V"
+      ],
+      "duration": "1 round",
+      "concentration": false,
+      "description": "You speak a one-word command that a creature obeys."
+    },
+    {
+      "slug": "detect-evil-and-good",
+      "name": "Detect Evil and Good",
+      "level": 1,
+      "school": "divination",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Concentration, up to 10 minutes",
+      "concentration": true,
+      "description": "For the duration, you know if aberrations and other creatures are nearby."
+    },
+    {
+      "slug": "detect-poison-and-disease",
+      "name": "Detect Poison and Disease",
+      "level": 1,
+      "school": "divination",
+      "ritual": true,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 10 minutes",
+      "concentration": true,
+      "description": "For the duration, you can sense poison and disease."
+    },
+    {
+      "slug": "entangle",
+      "name": "Entangle",
+      "level": 1,
+      "school": "conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "90 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Grasping weeds and vines sprout in a square area."
+    },
+    {
+      "slug": "faerie-fire",
+      "name": "Faerie Fire",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Each object in a cube is outlined in colored light."
+    },
+    {
+      "slug": "goodberry",
+      "name": "Goodberry",
+      "level": 1,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "Up to ten berries appear and each can restore a little vitality."
+    },
+    {
+      "slug": "healing-word",
+      "name": "Healing Word",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 bonus action",
+      "range": "60 feet",
+      "components": [
+        "V"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A creature regains hit points from your spoken word."
+    },
+    {
+      "slug": "mage-armor",
+      "name": "Mage Armor",
+      "level": 1,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "8 hours",
+      "concentration": false,
+      "description": "Protective magical force surrounds a willing creature."
+    },
+    {
+      "slug": "sanctuary",
+      "name": "Sanctuary",
+      "level": 1,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 bonus action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "1 minute",
+      "concentration": false,
+      "description": "You ward a creature against attacks."
+    },
+    {
+      "slug": "shield",
+      "name": "Shield",
+      "level": 1,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 reaction",
+      "range": "Self",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "1 round",
+      "concentration": false,
+      "description": "An invisible barrier of magical force appears and protects you."
+    },
+    {
+      "slug": "shield-of-faith",
+      "name": "Shield of Faith",
+      "level": 1,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 bonus action",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 10 minutes",
+      "concentration": true,
+      "description": "A shimmering field appears around a creature and boosts defense."
+    },
+    {
+      "slug": "sleep",
+      "name": "Sleep",
+      "level": 1,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "90 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "1 minute",
+      "concentration": false,
+      "description": "This spell sends creatures into a magical slumber."
+    },
+    {
+      "slug": "speak-with-animals",
+      "name": "Speak with Animals",
+      "level": 1,
+      "school": "divination",
+      "ritual": true,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "10 minutes",
+      "concentration": false,
+      "description": "You gain the ability to understand and communicate with beasts."
+    },
+    {
+      "slug": "thunderwave",
+      "name": "Thunderwave",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self (15-foot cube)",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A wave of thunderous force sweeps out from you."
+    },
+    {
+      "slug": "guiding-bolt",
+      "name": "Guiding Bolt",
+      "level": 1,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "1 round",
+      "concentration": false,
+      "description": "A flash of light streaks toward a creature."
+    },
+    {
+      "slug": "aid",
+      "name": "Aid",
+      "level": 2,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "8 hours",
+      "concentration": false,
+      "description": "Your spell bolsters allies with toughness and resolve."
+    },
+    {
+      "slug": "enhance-ability",
+      "name": "Enhance Ability",
+      "level": 2,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 hour",
+      "concentration": true,
+      "description": "A creature gains magical enhancement to one ability."
+    },
+    {
+      "slug": "hold-person",
+      "name": "Hold Person",
+      "level": 2,
+      "school": "enchantment",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Choose a humanoid that can be paralyzed on a failed save."
+    },
+    {
+      "slug": "invisibility",
+      "name": "Invisibility",
+      "level": 2,
+      "school": "illusion",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 hour",
+      "concentration": true,
+      "description": "A creature you touch becomes invisible."
+    },
+    {
+      "slug": "lesser-restoration",
+      "name": "Lesser Restoration",
+      "level": 2,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You end one disease or one condition affecting a creature."
+    },
+    {
+      "slug": "misty-step",
+      "name": "Misty Step",
+      "level": 2,
+      "school": "conjuration",
+      "ritual": false,
+      "castingTime": "1 bonus action",
+      "range": "Self",
+      "components": [
+        "V"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "Briefly surrounded by mist, you teleport a short distance."
+    },
+    {
+      "slug": "pass-without-trace",
+      "name": "Pass without Trace",
+      "level": 2,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 hour",
+      "concentration": true,
+      "description": "A veil of shadows and silence radiates from you and your companions."
+    },
+    {
+      "slug": "prayer-of-healing",
+      "name": "Prayer of Healing",
+      "level": 2,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "10 minutes",
+      "range": "30 feet",
+      "components": [
+        "V"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "Up to five creatures of your choice regain hit points."
+    },
+    {
+      "slug": "scorching-ray",
+      "name": "Scorching Ray",
+      "level": 2,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You create three rays of fire and hurl them at targets."
+    },
+    {
+      "slug": "spike-growth",
+      "name": "Spike Growth",
+      "level": 2,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "150 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 10 minutes",
+      "concentration": true,
+      "description": "The ground in an area twists and sprouts hard spikes."
+    },
+    {
+      "slug": "web",
+      "name": "Web",
+      "level": 2,
+      "school": "conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 hour",
+      "concentration": true,
+      "description": "You conjure a mass of thick, sticky webbing."
+    },
+    {
+      "slug": "counterspell",
+      "name": "Counterspell",
+      "level": 3,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 reaction",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You attempt to interrupt a creature casting a spell."
+    },
+    {
+      "slug": "daylight",
+      "name": "Daylight",
+      "level": 3,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "1 hour",
+      "concentration": false,
+      "description": "A sphere of bright light spreads out from a point."
+    },
+    {
+      "slug": "dispel-magic",
+      "name": "Dispel Magic",
+      "level": 3,
+      "school": "abjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "120 feet",
+      "components": [
+        "V",
+        "S"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "Choose one creature, object, or magical effect to end spells on it."
+    },
+    {
+      "slug": "fear",
+      "name": "Fear",
+      "level": 3,
+      "school": "illusion",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self (30-foot cone)",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Each creature in a cone drops what it is holding and becomes frightened."
+    },
+    {
+      "slug": "fly",
+      "name": "Fly",
+      "level": 3,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 10 minutes",
+      "concentration": true,
+      "description": "You touch a willing creature and grant it a flying speed."
+    },
+    {
+      "slug": "haste",
+      "name": "Haste",
+      "level": 3,
+      "school": "transmutation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Concentration, up to 1 minute",
+      "concentration": true,
+      "description": "Choose a willing creature and speed up its movement and actions."
+    },
+    {
+      "slug": "lightning-bolt",
+      "name": "Lightning Bolt",
+      "level": 3,
+      "school": "evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Self (100-foot line)",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "A stroke of lightning blasts out from you in a line."
+    },
+    {
+      "slug": "revivify",
+      "name": "Revivify",
+      "level": 3,
+      "school": "necromancy",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "Touch",
+      "components": [
+        "V",
+        "S",
+        "M"
+      ],
+      "duration": "Instantaneous",
+      "concentration": false,
+      "description": "You touch a creature that has died recently and restore it to life."
     }
   ],
   "spellLists": [
@@ -659,7 +3148,20 @@
       "spellIds": [
         "srd52:spell:guidance",
         "srd52:spell:sacred-flame",
-        "srd52:spell:cure-wounds"
+        "srd52:spell:spare-the-dying",
+        "srd52:spell:bless",
+        "srd52:spell:command",
+        "srd52:spell:cure-wounds",
+        "srd52:spell:detect-magic",
+        "srd52:spell:guiding-bolt",
+        "srd52:spell:healing-word",
+        "srd52:spell:sanctuary",
+        "srd52:spell:shield-of-faith",
+        "srd52:spell:aid",
+        "srd52:spell:lesser-restoration",
+        "srd52:spell:prayer-of-healing",
+        "srd52:spell:daylight",
+        "srd52:spell:revivify"
       ]
     },
     {
@@ -667,16 +3169,141 @@
       "name": "Ranger Core",
       "spellIds": [
         "srd52:spell:cure-wounds",
-        "srd52:spell:hunters-mark"
+        "srd52:spell:detect-magic",
+        "srd52:spell:entangle",
+        "srd52:spell:goodberry",
+        "srd52:spell:hunters-mark",
+        "srd52:spell:speak-with-animals",
+        "srd52:spell:lesser-restoration",
+        "srd52:spell:pass-without-trace",
+        "srd52:spell:spike-growth"
       ]
     },
     {
       "slug": "wizard-core",
       "name": "Wizard Core",
       "spellIds": [
+        "srd52:spell:acid-splash",
+        "srd52:spell:light",
+        "srd52:spell:mage-hand",
+        "srd52:spell:mending",
+        "srd52:spell:message",
+        "srd52:spell:prestidigitation",
+        "srd52:spell:ray-of-frost",
+        "srd52:spell:burning-hands",
+        "srd52:spell:charm-person",
+        "srd52:spell:comprehend-languages",
         "srd52:spell:detect-magic",
+        "srd52:spell:mage-armor",
         "srd52:spell:magic-missile",
-        "srd52:spell:fireball"
+        "srd52:spell:shield",
+        "srd52:spell:sleep",
+        "srd52:spell:thunderwave",
+        "srd52:spell:hold-person",
+        "srd52:spell:invisibility",
+        "srd52:spell:misty-step",
+        "srd52:spell:scorching-ray",
+        "srd52:spell:web",
+        "srd52:spell:counterspell",
+        "srd52:spell:dispel-magic",
+        "srd52:spell:fireball",
+        "srd52:spell:fly",
+        "srd52:spell:haste",
+        "srd52:spell:lightning-bolt"
+      ]
+    },
+    {
+      "slug": "bard-core",
+      "name": "Bard Core",
+      "spellIds": [
+        "srd52:spell:dancing-lights",
+        "srd52:spell:light",
+        "srd52:spell:mage-hand",
+        "srd52:spell:message",
+        "srd52:spell:prestidigitation",
+        "srd52:spell:vicious-mockery",
+        "srd52:spell:bane",
+        "srd52:spell:charm-person",
+        "srd52:spell:comprehend-languages",
+        "srd52:spell:detect-magic",
+        "srd52:spell:faerie-fire",
+        "srd52:spell:healing-word",
+        "srd52:spell:sleep",
+        "srd52:spell:enhance-ability",
+        "srd52:spell:hold-person",
+        "srd52:spell:invisibility",
+        "srd52:spell:lesser-restoration",
+        "srd52:spell:fear"
+      ]
+    },
+    {
+      "slug": "druid-core",
+      "name": "Druid Core",
+      "spellIds": [
+        "srd52:spell:guidance",
+        "srd52:spell:produce-flame",
+        "srd52:spell:resistance",
+        "srd52:spell:shillelagh",
+        "srd52:spell:cure-wounds",
+        "srd52:spell:detect-magic",
+        "srd52:spell:detect-poison-and-disease",
+        "srd52:spell:entangle",
+        "srd52:spell:faerie-fire",
+        "srd52:spell:goodberry",
+        "srd52:spell:speak-with-animals",
+        "srd52:spell:enhance-ability",
+        "srd52:spell:lesser-restoration",
+        "srd52:spell:pass-without-trace",
+        "srd52:spell:spike-growth",
+        "srd52:spell:daylight"
+      ]
+    },
+    {
+      "slug": "paladin-core",
+      "name": "Paladin Core",
+      "spellIds": [
+        "srd52:spell:bless",
+        "srd52:spell:command",
+        "srd52:spell:cure-wounds",
+        "srd52:spell:detect-magic",
+        "srd52:spell:shield-of-faith",
+        "srd52:spell:aid",
+        "srd52:spell:lesser-restoration",
+        "srd52:spell:prayer-of-healing",
+        "srd52:spell:revivify"
+      ]
+    },
+    {
+      "slug": "sorcerer-core",
+      "name": "Sorcerer Core",
+      "spellIds": [
+        "srd52:spell:acid-splash",
+        "srd52:spell:dancing-lights",
+        "srd52:spell:light",
+        "srd52:spell:mage-hand",
+        "srd52:spell:message",
+        "srd52:spell:poison-spray",
+        "srd52:spell:prestidigitation",
+        "srd52:spell:ray-of-frost",
+        "srd52:spell:shocking-grasp",
+        "srd52:spell:burning-hands",
+        "srd52:spell:charm-person",
+        "srd52:spell:mage-armor",
+        "srd52:spell:magic-missile",
+        "srd52:spell:shield",
+        "srd52:spell:sleep",
+        "srd52:spell:thunderwave",
+        "srd52:spell:hold-person",
+        "srd52:spell:invisibility",
+        "srd52:spell:misty-step",
+        "srd52:spell:scorching-ray",
+        "srd52:spell:web",
+        "srd52:spell:counterspell",
+        "srd52:spell:dispel-magic",
+        "srd52:spell:fireball",
+        "srd52:spell:fly",
+        "srd52:spell:haste",
+        "srd52:spell:lightning-bolt"
       ]
     }
   ]

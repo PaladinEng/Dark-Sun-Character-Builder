@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:lance",
+  "type": "weapon",
+  "name": "Lance",
+  "damageDice": "1d12",
+  "weaponCategory": "martial",
+  "properties": [
+    "reach",
+    "special"
+  ]
+}

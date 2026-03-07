@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:whip",
+  "type": "weapon",
+  "name": "Whip",
+  "damageDice": "1d4",
+  "weaponCategory": "martial",
+  "properties": [
+    "finesse",
+    "reach"
+  ]
+}

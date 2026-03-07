@@ -1,0 +1,10 @@
+{
+  "id": "srd52:feature:lay-on-hands",
+  "name": "Lay on Hands",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Lay on Hands"
+    }
+  ]
+}

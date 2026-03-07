@@ -25,6 +25,34 @@ async function resolveSrdPackDir(): Promise<string> {
 }
 
 describe("srd52 content audit", () => {
+  it("meets expanded builder-facing SRD coverage floors", async () => {
+    const srdPackDir = await resolveSrdPackDir();
+    const pack = await loadPackFromDir(srdPackDir);
+
+    expect(pack.entities.classes.length).toBeGreaterThanOrEqual(11);
+    expect(pack.entities.backgrounds.length).toBeGreaterThanOrEqual(11);
+    expect(pack.entities.features.length).toBeGreaterThanOrEqual(13);
+    expect(pack.entities.feats.length).toBeGreaterThanOrEqual(15);
+    expect(pack.entities.equipment.length).toBeGreaterThanOrEqual(60);
+    expect(pack.entities.spells.length).toBeGreaterThanOrEqual(60);
+    expect(pack.entities.spellLists.length).toBeGreaterThanOrEqual(7);
+
+    const spellcastingClasses = pack.entities.classes.filter((klass) => klass.spellcasting);
+    expect(spellcastingClasses.length).toBeGreaterThanOrEqual(7);
+
+    const spellListIds = new Set(pack.entities.spellLists.map((list) => list.id));
+    for (const klass of spellcastingClasses) {
+      const refs = klass.spellListRefIds ?? klass.spellListRefs ?? [];
+      expect(refs.length, `${klass.id} should define spell list references`).toBeGreaterThan(0);
+      for (const spellListId of refs) {
+        expect(
+          spellListIds.has(spellListId),
+          `${klass.id} references missing spell list ${spellListId}`,
+        ).toBe(true);
+      }
+    }
+  });
+
   it("classes grant two save proficiencies and wire core features", async () => {
     const srdPackDir = await resolveSrdPackDir();
     const pack = await loadPackFromDir(srdPackDir);

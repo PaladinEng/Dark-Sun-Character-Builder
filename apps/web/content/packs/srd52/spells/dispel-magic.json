@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:dispel-magic",
+  "name": "Dispel Magic",
+  "description": "Choose one creature, object, or magical effect to end spells on it.",
+  "level": 3,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

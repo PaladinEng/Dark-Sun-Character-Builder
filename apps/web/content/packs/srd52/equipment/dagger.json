@@ -1,0 +1,13 @@
+{
+  "id": "srd52:equipment:dagger",
+  "type": "weapon",
+  "name": "Dagger",
+  "damageDice": "1d4",
+  "weaponCategory": "simple",
+  "properties": [
+    "finesse",
+    "light",
+    "thrown",
+    "range 20/60"
+  ]
+}

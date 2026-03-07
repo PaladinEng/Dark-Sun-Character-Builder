@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:spell-sniper",
+  "name": "Spell Sniper",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "requiresSpellcasting": true
+  }
+}

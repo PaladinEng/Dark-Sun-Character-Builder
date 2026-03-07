@@ -1,13 +1,16 @@
 {
   "id": "srd52:spell:cure-wounds",
   "name": "Cure Wounds",
+  "description": "A creature you touch regains hit points.",
   "level": 1,
   "school": "evocation",
   "ritual": false,
   "castingTime": "1 action",
   "range": "Touch",
-  "components": ["V", "S"],
+  "components": [
+    "V",
+    "S"
+  ],
   "duration": "Instantaneous",
-  "concentration": false,
-  "description": "A creature you touch regains hit points."
+  "concentration": false
 }

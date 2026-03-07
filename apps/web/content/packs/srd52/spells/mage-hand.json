@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:mage-hand",
+  "name": "Mage Hand",
+  "description": "A spectral hand appears at a point you choose.",
+  "level": 0,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 minute",
+  "concentration": false
+}

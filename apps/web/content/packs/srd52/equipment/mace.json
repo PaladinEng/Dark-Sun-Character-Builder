@@ -1,0 +1,7 @@
+{
+  "id": "srd52:equipment:mace",
+  "type": "weapon",
+  "name": "Mace",
+  "damageDice": "1d6",
+  "weaponCategory": "simple"
+}

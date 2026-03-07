@@ -1,0 +1,33 @@
+{
+  "id": "srd52:spelllist:sorcerer-core",
+  "name": "Sorcerer Core",
+  "spellIds": [
+    "srd52:spell:acid-splash",
+    "srd52:spell:dancing-lights",
+    "srd52:spell:light",
+    "srd52:spell:mage-hand",
+    "srd52:spell:message",
+    "srd52:spell:poison-spray",
+    "srd52:spell:prestidigitation",
+    "srd52:spell:ray-of-frost",
+    "srd52:spell:shocking-grasp",
+    "srd52:spell:burning-hands",
+    "srd52:spell:charm-person",
+    "srd52:spell:mage-armor",
+    "srd52:spell:magic-missile",
+    "srd52:spell:shield",
+    "srd52:spell:sleep",
+    "srd52:spell:thunderwave",
+    "srd52:spell:hold-person",
+    "srd52:spell:invisibility",
+    "srd52:spell:misty-step",
+    "srd52:spell:scorching-ray",
+    "srd52:spell:web",
+    "srd52:spell:counterspell",
+    "srd52:spell:dispel-magic",
+    "srd52:spell:fireball",
+    "srd52:spell:fly",
+    "srd52:spell:haste",
+    "srd52:spell:lightning-bolt"
+  ]
+}

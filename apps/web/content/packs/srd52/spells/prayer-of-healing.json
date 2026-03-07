@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spell:prayer-of-healing",
+  "name": "Prayer of Healing",
+  "description": "Up to five creatures of your choice regain hit points.",
+  "level": 2,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "10 minutes",
+  "range": "30 feet",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

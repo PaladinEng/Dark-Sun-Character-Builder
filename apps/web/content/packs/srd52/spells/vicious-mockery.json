@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spell:vicious-mockery",
+  "name": "Vicious Mockery",
+  "description": "You unleash a string of insults laced with subtle enchantment.",
+  "level": 0,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

@@ -1,0 +1,10 @@
+{
+  "id": "srd52:feature:druidic",
+  "name": "Druidic",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Druidic"
+    }
+  ]
+}

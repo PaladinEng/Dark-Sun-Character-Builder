@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:charm-person",
+  "name": "Charm Person",
+  "description": "You attempt to charm a humanoid you can see.",
+  "level": 1,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 hour",
+  "concentration": false
+}

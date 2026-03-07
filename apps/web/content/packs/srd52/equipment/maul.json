@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:maul",
+  "type": "weapon",
+  "name": "Maul",
+  "damageDice": "2d6",
+  "weaponCategory": "martial",
+  "properties": [
+    "heavy",
+    "two-handed"
+  ]
+}

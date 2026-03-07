@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:spare-the-dying",
+  "name": "Spare the Dying",
+  "description": "A living creature with 0 hit points becomes stable.",
+  "level": 0,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

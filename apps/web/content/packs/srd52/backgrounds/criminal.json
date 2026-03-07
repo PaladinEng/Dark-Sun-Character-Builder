@@ -12,7 +12,9 @@
   "originFeatChoice": {
     "featIds": [
       "srd52:feat:alert",
-      "srd52:feat:magic-initiate"
+      "srd52:feat:magic-initiate",
+      "srd52:feat:lucky",
+      "srd52:feat:skilled"
     ]
   },
   "effects": [

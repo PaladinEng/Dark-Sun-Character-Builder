@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spell:misty-step",
+  "name": "Misty Step",
+  "description": "Briefly surrounded by mist, you teleport a short distance.",
+  "level": 2,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 bonus action",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

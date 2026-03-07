@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:shocking-grasp",
+  "name": "Shocking Grasp",
+  "description": "Lightning springs from your hand to deliver a shock.",
+  "level": 0,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

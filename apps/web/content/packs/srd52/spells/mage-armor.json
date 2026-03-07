@@ -1,0 +1,17 @@
+{
+  "id": "srd52:spell:mage-armor",
+  "name": "Mage Armor",
+  "description": "Protective magical force surrounds a willing creature.",
+  "level": 1,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "8 hours",
+  "concentration": false
+}

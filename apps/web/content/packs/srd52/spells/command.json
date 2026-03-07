@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spell:command",
+  "name": "Command",
+  "description": "You speak a one-word command that a creature obeys.",
+  "level": 1,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V"
+  ],
+  "duration": "1 round",
+  "concentration": false
+}

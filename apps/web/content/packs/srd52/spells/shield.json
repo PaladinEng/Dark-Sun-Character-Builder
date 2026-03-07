@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:shield",
+  "name": "Shield",
+  "description": "An invisible barrier of magical force appears and protects you.",
+  "level": 1,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 reaction",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 round",
+  "concentration": false
+}

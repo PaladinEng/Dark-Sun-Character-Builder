@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:prestidigitation",
+  "name": "Prestidigitation",
+  "description": "You perform a minor magical trick.",
+  "level": 0,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "10 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Up to 1 hour",
+  "concentration": false
+}

@@ -25,12 +25,22 @@
       "srd52:equipment:shortbow"
     ]
   },
+  "spellListRefIds": [],
   "classFeaturesByLevel": [
     {
       "level": 1,
       "featureId": "srd52:feature:sneak-attack"
     }
   ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:leather-armor",
+      "srd52:equipment:rapier",
+      "srd52:equipment:shortbow"
+    ],
+    "equippedArmorId": "srd52:equipment:leather-armor",
+    "equippedWeaponId": "srd52:equipment:rapier"
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",

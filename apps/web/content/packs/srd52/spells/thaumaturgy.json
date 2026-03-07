@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spell:thaumaturgy",
+  "name": "Thaumaturgy",
+  "description": "You manifest a minor wonder of divine power.",
+  "level": 0,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V"
+  ],
+  "duration": "Up to 1 minute",
+  "concentration": false
+}

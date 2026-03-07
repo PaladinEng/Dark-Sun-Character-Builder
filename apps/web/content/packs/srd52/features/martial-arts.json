@@ -1,0 +1,10 @@
+{
+  "id": "srd52:feature:martial-arts",
+  "name": "Martial Arts",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Martial Arts"
+    }
+  ]
+}

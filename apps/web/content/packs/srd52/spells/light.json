@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:light",
+  "name": "Light",
+  "description": "You touch an object that sheds bright light.",
+  "level": 0,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false
+}

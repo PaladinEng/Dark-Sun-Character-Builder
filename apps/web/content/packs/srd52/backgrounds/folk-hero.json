@@ -1,0 +1,34 @@
+{
+  "id": "srd52:background:folk-hero",
+  "name": "Folk Hero",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "wis",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:tavern-brawler",
+  "grantsOriginFeatId": "srd52:feat:tavern-brawler",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:bedroll",
+      "srd52:equipment:rope-hempen-50ft"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "animal_handling"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Carpenter's Tools"
+    }
+  ]
+}

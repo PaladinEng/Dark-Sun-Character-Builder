@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spelllist:paladin-core",
+  "name": "Paladin Core",
+  "spellIds": [
+    "srd52:spell:bless",
+    "srd52:spell:command",
+    "srd52:spell:cure-wounds",
+    "srd52:spell:detect-magic",
+    "srd52:spell:shield-of-faith",
+    "srd52:spell:aid",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:prayer-of-healing",
+    "srd52:spell:revivify"
+  ]
+}

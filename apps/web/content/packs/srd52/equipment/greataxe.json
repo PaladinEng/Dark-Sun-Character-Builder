@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:greataxe",
+  "type": "weapon",
+  "name": "Greataxe",
+  "damageDice": "1d12",
+  "weaponCategory": "martial",
+  "properties": [
+    "heavy",
+    "two-handed"
+  ]
+}

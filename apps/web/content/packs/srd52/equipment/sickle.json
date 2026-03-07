@@ -1,0 +1,10 @@
+{
+  "id": "srd52:equipment:sickle",
+  "type": "weapon",
+  "name": "Sickle",
+  "damageDice": "1d4",
+  "weaponCategory": "simple",
+  "properties": [
+    "light"
+  ]
+}

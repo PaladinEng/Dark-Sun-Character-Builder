@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:daylight",
+  "name": "Daylight",
+  "description": "A sphere of bright light spreads out from a point.",
+  "level": 3,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 hour",
+  "concentration": false
+}

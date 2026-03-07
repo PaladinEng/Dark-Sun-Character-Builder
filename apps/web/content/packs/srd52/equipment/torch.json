@@ -1,5 +1,5 @@
 {
   "id": "srd52:equipment:torch",
-  "name": "Torch",
-  "type": "adventuring_gear"
+  "type": "adventuring_gear",
+  "name": "Torch"
 }

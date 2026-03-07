@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:produce-flame",
+  "name": "Produce Flame",
+  "description": "A flickering flame appears in your hand.",
+  "level": 0,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 minutes",
+  "concentration": false
+}

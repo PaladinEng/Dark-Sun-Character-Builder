@@ -1,0 +1,59 @@
+{
+  "id": "srd52:class:druid",
+  "name": "Druid",
+  "hitDie": 8,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "arcana",
+      "animal_handling",
+      "insight",
+      "medicine",
+      "nature",
+      "perception",
+      "religion",
+      "survival"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true
+  },
+  "spellcasting": {
+    "ability": "wis",
+    "progression": "full",
+    "mode": "prepared"
+  },
+  "spellListRefIds": [
+    "srd52:spelllist:druid-core"
+  ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:druidic"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:leather-armor",
+      "srd52:equipment:shield",
+      "srd52:equipment:quarterstaff"
+    ],
+    "equippedArmorId": "srd52:equipment:leather-armor",
+    "equippedShieldId": "srd52:equipment:shield",
+    "equippedWeaponId": "srd52:equipment:quarterstaff"
+  },
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "int"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "wis"
+    }
+  ]
+}

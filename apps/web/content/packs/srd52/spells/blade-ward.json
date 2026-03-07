@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:blade-ward",
+  "name": "Blade Ward",
+  "description": "You ward yourself against weapon strikes.",
+  "level": 0,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 round",
+  "concentration": false
+}

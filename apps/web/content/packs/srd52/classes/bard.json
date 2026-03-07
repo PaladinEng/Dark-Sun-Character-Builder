@@ -1,0 +1,68 @@
+{
+  "id": "srd52:class:bard",
+  "name": "Bard",
+  "hitDie": 8,
+  "classSkillChoices": {
+    "count": 3,
+    "from": [
+      "acrobatics",
+      "animal_handling",
+      "arcana",
+      "athletics",
+      "deception",
+      "history",
+      "insight",
+      "intimidation",
+      "investigation",
+      "medicine",
+      "nature",
+      "perception",
+      "performance",
+      "persuasion",
+      "religion",
+      "sleight_of_hand",
+      "stealth",
+      "survival"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true
+  },
+  "spellcasting": {
+    "ability": "cha",
+    "progression": "full",
+    "mode": "known"
+  },
+  "spellListRefIds": [
+    "srd52:spelllist:bard-core"
+  ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:bardic-inspiration"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:leather-armor",
+      "srd52:equipment:rapier",
+      "srd52:equipment:dagger"
+    ],
+    "equippedArmorId": "srd52:equipment:leather-armor",
+    "equippedWeaponId": "srd52:equipment:rapier"
+  },
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "dex"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "cha"
+    }
+  ]
+}

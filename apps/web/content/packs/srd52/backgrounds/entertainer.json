@@ -1,0 +1,38 @@
+{
+  "id": "srd52:background:entertainer",
+  "name": "Entertainer",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "cha",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:musician",
+  "grantsOriginFeatId": "srd52:feat:musician",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:musical-instrument",
+      "srd52:equipment:disguise-kit"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "acrobatics"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "performance"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Musical Instrument"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Disguise Kit"
+    }
+  ]
+}

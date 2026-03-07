@@ -1,0 +1,22 @@
+{
+  "id": "srd52:spelllist:druid-core",
+  "name": "Druid Core",
+  "spellIds": [
+    "srd52:spell:guidance",
+    "srd52:spell:produce-flame",
+    "srd52:spell:resistance",
+    "srd52:spell:shillelagh",
+    "srd52:spell:cure-wounds",
+    "srd52:spell:detect-magic",
+    "srd52:spell:detect-poison-and-disease",
+    "srd52:spell:entangle",
+    "srd52:spell:faerie-fire",
+    "srd52:spell:goodberry",
+    "srd52:spell:speak-with-animals",
+    "srd52:spell:enhance-ability",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:pass-without-trace",
+    "srd52:spell:spike-growth",
+    "srd52:spell:daylight"
+  ]
+}

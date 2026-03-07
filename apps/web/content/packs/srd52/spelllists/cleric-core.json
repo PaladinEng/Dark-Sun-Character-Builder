@@ -4,6 +4,19 @@
   "spellIds": [
     "srd52:spell:guidance",
     "srd52:spell:sacred-flame",
-    "srd52:spell:cure-wounds"
+    "srd52:spell:spare-the-dying",
+    "srd52:spell:bless",
+    "srd52:spell:command",
+    "srd52:spell:cure-wounds",
+    "srd52:spell:detect-magic",
+    "srd52:spell:guiding-bolt",
+    "srd52:spell:healing-word",
+    "srd52:spell:sanctuary",
+    "srd52:spell:shield-of-faith",
+    "srd52:spell:aid",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:prayer-of-healing",
+    "srd52:spell:daylight",
+    "srd52:spell:revivify"
   ]
 }

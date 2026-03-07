@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:thunderwave",
+  "name": "Thunderwave",
+  "description": "A wave of thunderous force sweeps out from you.",
+  "level": 1,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self (15-foot cube)",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}
