@@ -206,6 +206,11 @@
       },
       "grantsFeat": "srd52:feat:alert",
       "grantsOriginFeatId": "srd52:feat:alert",
+      "startingEquipment": {
+        "itemIds": [
+          "srd52:equipment:calligraphers-supplies"
+        ]
+      },
       "effects": [
         {
           "type": "grant_skill_proficiency",
@@ -375,6 +380,7 @@
       "startingEquipment": {
         "itemIds": [
           "srd52:equipment:bedroll",
+          "srd52:equipment:carpenters-tools",
           "srd52:equipment:rope-hempen-50ft"
         ]
       },
@@ -552,6 +558,7 @@
       "grantsOriginFeatId": "srd52:feat:savage-attacker",
       "startingEquipment": {
         "itemIds": [
+          "srd52:equipment:navigators-tools",
           "srd52:equipment:rope-hempen-50ft",
           "srd52:equipment:waterskin"
         ]
@@ -2077,6 +2084,16 @@
       "type": "gear"
     },
     {
+      "slug": "calligraphers-supplies",
+      "name": "Calligrapher's Supplies",
+      "type": "gear"
+    },
+    {
+      "slug": "carpenters-tools",
+      "name": "Carpenter's Tools",
+      "type": "gear"
+    },
+    {
       "slug": "thieves-tools",
       "name": "Thieves' Tools",
       "type": "gear"
@@ -2109,6 +2126,11 @@
     {
       "slug": "musical-instrument",
       "name": "Musical Instrument",
+      "type": "gear"
+    },
+    {
+      "slug": "navigators-tools",
+      "name": "Navigator's Tools",
       "type": "gear"
     }
   ],
@@ -3149,10 +3171,12 @@
         "srd52:spell:guidance",
         "srd52:spell:sacred-flame",
         "srd52:spell:spare-the-dying",
+        "srd52:spell:thaumaturgy",
         "srd52:spell:bless",
         "srd52:spell:command",
         "srd52:spell:cure-wounds",
         "srd52:spell:detect-magic",
+        "srd52:spell:detect-evil-and-good",
         "srd52:spell:guiding-bolt",
         "srd52:spell:healing-word",
         "srd52:spell:sanctuary",
@@ -3184,6 +3208,7 @@
       "name": "Wizard Core",
       "spellIds": [
         "srd52:spell:acid-splash",
+        "srd52:spell:blade-ward",
         "srd52:spell:light",
         "srd52:spell:mage-hand",
         "srd52:spell:mending",
@@ -3266,6 +3291,7 @@
         "srd52:spell:command",
         "srd52:spell:cure-wounds",
         "srd52:spell:detect-magic",
+        "srd52:spell:detect-evil-and-good",
         "srd52:spell:shield-of-faith",
         "srd52:spell:aid",
         "srd52:spell:lesser-restoration",
@@ -3278,6 +3304,7 @@
       "name": "Sorcerer Core",
       "spellIds": [
         "srd52:spell:acid-splash",
+        "srd52:spell:blade-ward",
         "srd52:spell:dancing-lights",
         "srd52:spell:light",
         "srd52:spell:mage-hand",
