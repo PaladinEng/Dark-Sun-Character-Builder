@@ -110,6 +110,7 @@ export interface CharacterState {
   alignment?: string;
   notes?: string;
   companion?: CompanionPlaceholder;
+  familiar?: CompanionPlaceholder;
   baseSpeed?: number;
   conditions?: CharacterConditions;
 }

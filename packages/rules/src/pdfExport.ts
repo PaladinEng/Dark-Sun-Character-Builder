@@ -74,6 +74,10 @@ export type PdfExportCharacterSnapshot = {
   companionType?: string | null;
   companionSummary?: string | null;
   companionNotes?: string | null;
+  familiarName?: string | null;
+  familiarType?: string | null;
+  familiarSummary?: string | null;
+  familiarNotes?: string | null;
   equippedArmorName?: string | null;
   equippedShieldName?: string | null;
   equippedWeaponName?: string | null;

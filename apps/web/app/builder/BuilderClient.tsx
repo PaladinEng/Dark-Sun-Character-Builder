@@ -160,6 +160,12 @@ type ExportedDerivedState = {
     summary: string | null;
     notes: string | null;
   } | null;
+  familiar: {
+    name: string | null;
+    type: string | null;
+    summary: string | null;
+    notes: string | null;
+  } | null;
   spellcastingAbility: Ability | null;
   spellcastingModifier: number | null;
   spellSaveDC: number | null;
@@ -453,6 +459,12 @@ export default function BuilderClient({
     alignment: "",
     notes: "",
     companion: {
+      name: "",
+      type: "",
+      summary: "",
+      notes: "",
+    },
+    familiar: {
       name: "",
       type: "",
       summary: "",
@@ -942,6 +954,14 @@ export default function BuilderClient({
               type: state.companion.type?.trim() ? state.companion.type.trim() : null,
               summary: state.companion.summary?.trim() ? state.companion.summary.trim() : null,
               notes: state.companion.notes?.trim() ? state.companion.notes.trim() : null,
+            }
+          : null,
+        familiar: state.familiar
+          ? {
+              name: state.familiar.name?.trim() ? state.familiar.name.trim() : null,
+              type: state.familiar.type?.trim() ? state.familiar.type.trim() : null,
+              summary: state.familiar.summary?.trim() ? state.familiar.summary.trim() : null,
+              notes: state.familiar.notes?.trim() ? state.familiar.notes.trim() : null,
             }
           : null,
         spellcastingAbility,

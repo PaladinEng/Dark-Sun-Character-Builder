@@ -114,6 +114,14 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
           notes: normalizeOptionalString(input.companion.notes),
         }
       : undefined,
+    familiar: isObjectRecord(input.familiar)
+      ? {
+          name: normalizeOptionalString(input.familiar.name),
+          type: normalizeOptionalString(input.familiar.type),
+          summary: normalizeOptionalString(input.familiar.summary),
+          notes: normalizeOptionalString(input.familiar.notes),
+        }
+      : undefined,
     coins: coins
       ? {
           cp: normalizeOptionalNonNegativeInt(coins.cp),
@@ -535,20 +543,36 @@ export default async function SheetPage({
               </h2>
               <div className="space-y-2 p-2 text-sm">
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Name</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Name</div>
                   <div>{payload.characterState.companion?.name || "None"}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Type</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Type</div>
                   <div>{payload.characterState.companion?.type || "None"}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Summary</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Summary</div>
                   <div>{payload.characterState.companion?.summary || "None"}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Notes</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Notes</div>
                   <div>{payload.characterState.companion?.notes || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Name</div>
+                  <div>{payload.characterState.familiar?.name || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Type</div>
+                  <div>{payload.characterState.familiar?.type || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Summary</div>
+                  <div>{payload.characterState.familiar?.summary || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Notes</div>
+                  <div>{payload.characterState.familiar?.notes || "None"}</div>
                 </div>
               </div>
             </section>

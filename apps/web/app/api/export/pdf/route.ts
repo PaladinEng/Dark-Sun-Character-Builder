@@ -87,6 +87,14 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
           notes: normalizeOptionalString(input.companion.notes),
         }
       : undefined,
+    familiar: isObjectRecord(input.familiar)
+      ? {
+          name: normalizeOptionalString(input.familiar.name),
+          type: normalizeOptionalString(input.familiar.type),
+          summary: normalizeOptionalString(input.familiar.summary),
+          notes: normalizeOptionalString(input.familiar.notes),
+        }
+      : undefined,
     coins: coins
       ? {
           cp: normalizeOptionalNonNegativeInt(coins.cp),
@@ -252,6 +260,10 @@ export async function POST(request: Request) {
     companionType: payload.characterState.companion?.type ?? null,
     companionSummary: payload.characterState.companion?.summary ?? null,
     companionNotes: payload.characterState.companion?.notes ?? null,
+    familiarName: payload.characterState.familiar?.name ?? null,
+    familiarType: payload.characterState.familiar?.type ?? null,
+    familiarSummary: payload.characterState.familiar?.summary ?? null,
+    familiarNotes: payload.characterState.familiar?.notes ?? null,
     equippedArmorName: armor?.name,
     equippedShieldName: shield?.name,
     equippedWeaponName: weapon?.name,
