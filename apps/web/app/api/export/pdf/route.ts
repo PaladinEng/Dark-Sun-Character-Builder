@@ -81,6 +81,30 @@ function normalizeOptionalNonNegativeInt(
   return bounded;
 }
 
+function normalizeSpellSlotUsage(value: unknown): Array<number | null> | null {
+  const normalizeEntry = (entry: unknown): number | null => {
+    const parsed = Number(entry);
+    if (!Number.isFinite(parsed)) {
+      return null;
+    }
+    return Math.max(0, Math.floor(parsed));
+  };
+
+  if (Array.isArray(value)) {
+    return Array.from({ length: 9 }, (_entry, index) => normalizeEntry(value[index]));
+  }
+
+  if (isObjectRecord(value)) {
+    return Array.from({ length: 9 }, (_entry, index) => {
+      const level = index + 1;
+      const raw = value[String(level)];
+      return normalizeEntry(raw);
+    });
+  }
+
+  return null;
+}
+
 function formatDelimitedLabel(value: string): string {
   return value
     .split(/[_\s-]+/g)
@@ -331,6 +355,13 @@ export async function POST(request: Request) {
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
   const spellAttackBonus = derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+  const characterStateWithSpellSlots = payload.characterState as CharacterState & {
+    spellSlotsExpended?: unknown;
+    spellSlotsUsed?: unknown;
+  };
+  const spellSlotsExpended =
+    normalizeSpellSlotUsage(characterStateWithSpellSlots.spellSlotsExpended) ??
+    normalizeSpellSlotUsage(characterStateWithSpellSlots.spellSlotsUsed);
   const normalizedLevel = Math.max(1, Math.floor(payload.characterState.level || 1));
   const characterStateWithOptionalIdentity = payload.characterState as CharacterState & {
     characterName?: unknown;
@@ -506,6 +537,7 @@ export async function POST(request: Request) {
     spellSaveDC,
     spellAttackBonus,
     spellSlots,
+    spellSlotsExpended,
     armorProficiencies: payload.characterState.armorProficiencies ?? [],
     weaponProficiencies: payload.characterState.weaponProficiencies ?? [],
     toolProficiencies: derived.toolProficiencies,

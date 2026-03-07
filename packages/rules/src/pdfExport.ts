@@ -77,6 +77,7 @@ export type PdfExportCharacterSnapshot = {
   spellSaveDC?: number | null;
   spellAttackBonus?: number | null;
   spellSlots?: SpellSlots | null;
+  spellSlotsExpended?: readonly (number | null)[] | null;
   armorProficiencies?: readonly string[];
   weaponProficiencies?: readonly string[];
   toolProficiencies?: readonly string[];
@@ -413,6 +414,30 @@ function toListLine(label: string, values: readonly string[] | undefined): strin
   return `${label}: ${normalized.length > 0 ? normalized.join(", ") : "-"}`;
 }
 
+function toWrappedListLines(
+  label: string,
+  values: readonly string[] | undefined,
+  maxCharsPerLine: number,
+  maxLines: number
+): string[] {
+  const normalized = normalizeDisplayValues(values);
+  if (normalized.length === 0) {
+    return [`${label}: -`];
+  }
+
+  const labelPrefix = `${label}: `;
+  const wrapped = wrapText(normalized.join(", "), Math.max(8, maxCharsPerLine - labelPrefix.length));
+  if (wrapped.length === 0) {
+    return [`${label}: -`];
+  }
+
+  const lines = [`${labelPrefix}${wrapped[0]}`];
+  for (let index = 1; index < wrapped.length && lines.length < maxLines; index += 1) {
+    lines.push(`  ${wrapped[index]}`);
+  }
+  return lines;
+}
+
 function formatSpellcastingAbility(value: Ability | null | undefined): string {
   if (!value) {
     return "-";
@@ -422,6 +447,24 @@ function formatSpellcastingAbility(value: Ability | null | undefined): string {
 
 function formatNumeric(value: number | null | undefined): string {
   return typeof value === "number" && Number.isFinite(value) ? `${Math.floor(value)}` : "-";
+}
+
+function formatCoinTotalInGp(snapshot: PdfExportCharacterSnapshot): string | null {
+  const cp = typeof snapshot.cp === "number" ? Math.max(0, snapshot.cp) : 0;
+  const sp = typeof snapshot.sp === "number" ? Math.max(0, snapshot.sp) : 0;
+  const ep = typeof snapshot.ep === "number" ? Math.max(0, snapshot.ep) : 0;
+  const gp = typeof snapshot.gp === "number" ? Math.max(0, snapshot.gp) : 0;
+  const pp = typeof snapshot.pp === "number" ? Math.max(0, snapshot.pp) : 0;
+
+  if (cp + sp + ep + gp + pp <= 0) {
+    return null;
+  }
+
+  const total = cp / 100 + sp / 10 + ep / 2 + gp + pp * 10;
+  const rounded = Math.round(total * 100) / 100;
+  const asString =
+    Math.abs(rounded - Math.floor(rounded)) < 0.00001 ? `${Math.floor(rounded)}` : `${rounded.toFixed(2)}`;
+  return `${asString} gp total`;
 }
 
 function normalizeSpellTableRows(
@@ -566,16 +609,23 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   const bottomHeight = 282;
 
   const spellSlots = snapshot.spellSlots ?? ([0, 0, 0, 0, 0, 0, 0, 0, 0] as const);
+  const spellSlotsExpended = snapshot.spellSlotsExpended ?? [];
   const spellSlotRows = Array.from({ length: 9 }, (_, index) => {
     const level = index + 1;
     const total = spellSlots[index] ?? 0;
+    const expendedRaw = spellSlotsExpended[index];
+    const expended =
+      typeof expendedRaw === "number" && Number.isFinite(expendedRaw)
+        ? Math.max(0, Math.floor(expendedRaw))
+        : null;
     return {
       level,
       total: total > 0 ? `${total}` : "-",
-      used: total > 0 ? "-" : "-",
+      used: expended === null ? "-" : `${expended}`,
     };
   });
   const hasAnySpellSlots = spellSlotRows.some((row) => row.total !== "-");
+  const hasTrackedExpendedSlots = spellSlotRows.some((row) => row.used !== "-");
 
   const cantripCount = snapshot.cantripSpellNames?.length ?? 0;
   const preparedCount = snapshot.preparedSpellNames?.length ?? 0;
@@ -759,7 +809,11 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   });
   drawText(
     commands,
-    hasAnySpellSlots ? "Expended slot tracking is not currently modeled." : "No class spell slots at this level.",
+    hasAnySpellSlots
+      ? hasTrackedExpendedSlots
+        ? "Expended slots shown from character state."
+        : "Expended slot tracking is not currently modeled."
+      : "No class spell slots at this level.",
     slotsTableX,
     slotsTableY - 10,
     7,
@@ -867,6 +921,205 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   for (let pageIndex = 1; pageIndex < narrativePages.length; pageIndex += 1) {
     streams.push(createNarrativeContinuationPageStream(narrativePages[pageIndex], pageIndex + 1));
   }
+  return streams;
+}
+
+type DetailSection = {
+  title: string;
+  lines: string[];
+};
+
+function createDetailsPageStreams(snapshot: PdfExportCharacterSnapshot): string[] {
+  const lineHeight = 10;
+  const sectionGap = 8;
+  const contentWidth = PDF_PAGE_WIDTH - PDF_MARGIN * 2;
+  const usableTopY = 746;
+  const usableBottomY = 24;
+
+  const spellcastingSummaryLines = [
+    `Spellcasting Ability: ${formatSpellcastingAbility(snapshot.spellcastingAbility)}`,
+    `Spellcasting Modifier: ${
+      typeof snapshot.spellcastingModifier === "number" ? formatModifier(snapshot.spellcastingModifier) : "-"
+    }`,
+    `Spell Save DC: ${formatNumeric(snapshot.spellSaveDC)}`,
+    `Spell Attack Bonus: ${
+      typeof snapshot.spellAttackBonus === "number" ? formatModifier(snapshot.spellAttackBonus) : "-"
+    }`,
+  ];
+
+  const spellSlots = snapshot.spellSlots ?? ([0, 0, 0, 0, 0, 0, 0, 0, 0] as const);
+  const spellSlotsExpended = snapshot.spellSlotsExpended ?? [];
+  const spellSlotLines = Array.from({ length: 9 }, (_, index) => {
+    const level = index + 1;
+    const total = typeof spellSlots[index] === "number" ? Math.max(0, Math.floor(spellSlots[index])) : 0;
+    const spentRaw = spellSlotsExpended[index];
+    const spent =
+      typeof spentRaw === "number" && Number.isFinite(spentRaw) ? Math.max(0, Math.floor(spentRaw)) : null;
+    const spentLabel = spent === null ? "-" : `${spent}`;
+    const remainingLabel =
+      spent === null
+        ? "-"
+        : `${Math.max(0, total - spent)}`;
+    return `Level ${level}: total ${total > 0 ? total : "-"} | expended ${spentLabel} | remaining ${remainingLabel}`;
+  });
+
+  const cantrips = normalizeDisplayValues(snapshot.cantripSpellNames);
+  const prepared = normalizeDisplayValues(snapshot.preparedSpellNames);
+  const known = normalizeDisplayValues(snapshot.knownSpellNames);
+  const spellSelectionLines = [
+    ...toWrappedListLines(`Cantrips (${cantrips.length})`, cantrips, 102, 12),
+    ...toWrappedListLines(`Prepared (${prepared.length})`, prepared, 102, 14),
+    ...toWrappedListLines(`Known (${known.length})`, known, 102, 14),
+  ];
+
+  const inventoryLines = normalizeLines(snapshot.inventoryItems ?? snapshot.inventorySummary, "Other Gear: None");
+  const attunedLines = normalizeAttunedItemLines(snapshot.attunedItems);
+  const coinSummary = [
+    `CP ${formatNumeric(snapshot.cp)} | SP ${formatNumeric(snapshot.sp)} | EP ${formatNumeric(snapshot.ep)} | GP ${formatNumeric(snapshot.gp)} | PP ${formatNumeric(snapshot.pp)}`,
+    `Coin Value: ${formatCoinTotalInGp(snapshot) ?? "-"}`,
+    `Other Wealth: ${snapshot.otherWealth?.trim() || "-"}`,
+  ];
+  const equipmentLines = [
+    `Armor Worn: ${snapshot.equippedArmorName?.trim() || "-"}`,
+    `Shield: ${snapshot.equippedShieldName?.trim() || "-"}`,
+    `Weapon: ${snapshot.equippedWeaponName?.trim() || "-"}`,
+    "Inventory:",
+    ...inventoryLines.map((line) => `- ${line}`),
+    "Attuned Items:",
+    ...attunedLines.map((line) => `- ${line}`),
+    ...coinSummary,
+  ];
+
+  const proficiencyLines = [
+    ...toWrappedListLines("Armor", snapshot.armorProficiencies, 100, 8),
+    ...toWrappedListLines("Weapons", snapshot.weaponProficiencies, 100, 8),
+    ...toWrappedListLines("Tools", snapshot.toolProficiencies, 100, 8),
+    ...toWrappedListLines("Languages", snapshot.languages, 100, 8),
+  ];
+
+  const companionSummary = [
+    snapshot.companionName?.trim(),
+    snapshot.companionType?.trim() ? `(${snapshot.companionType.trim()})` : "",
+    snapshot.companionSummary?.trim(),
+    snapshot.companionNotes?.trim(),
+  ]
+    .filter((part) => Boolean(part))
+    .join(" ");
+  const familiarSummary = [
+    snapshot.familiarName?.trim(),
+    snapshot.familiarType?.trim() ? `(${snapshot.familiarType.trim()})` : "",
+    snapshot.familiarSummary?.trim(),
+    snapshot.familiarNotes?.trim(),
+  ]
+    .filter((part) => Boolean(part))
+    .join(" ");
+  const narrativeLines = [
+    ...toLabeledLines("Alignment", snapshot.alignment, 102, 2),
+    ...toLabeledLines("Appearance", snapshot.appearance, 102, 6),
+    ...toLabeledLines("Physical Description", snapshot.physicalDescription, 102, 6),
+    ...toLabeledLines("Backstory", snapshot.backstory, 102, 12),
+    ...toLabeledLines("Notes", snapshot.notes, 102, 8),
+    ...toLabeledLines("Companion", companionSummary, 102, 5),
+    ...toLabeledLines("Familiar", familiarSummary, 102, 5),
+  ];
+  const warningLines =
+    snapshot.warningMessages && snapshot.warningMessages.length > 0
+      ? ["Warnings:", ...snapshot.warningMessages.map((message) => `! ${message}`)]
+      : [];
+
+  const sections: DetailSection[] = [
+    { title: "Spellcasting Summary", lines: spellcastingSummaryLines },
+    { title: "Spell Slot Tracking", lines: spellSlotLines },
+    { title: "Cantrips / Prepared / Known Spells", lines: spellSelectionLines },
+    { title: "Equipment / Attunement / Currency", lines: equipmentLines },
+    { title: "Armor, Weapon, Tool, and Language Proficiencies", lines: proficiencyLines },
+    { title: "Narrative / Companion / Familiar", lines: [...narrativeLines, ...warningLines] },
+  ];
+
+  const streams: string[] = [];
+  let commands: string[] = [];
+  let cursorY = usableTopY;
+  let pageNumber = 1;
+
+  const startPage = () => {
+    commands = [];
+    commands.push("0.2 w");
+    drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - EXTENDED DETAILS", PDF_MARGIN, 778, 11, true);
+    drawText(commands, `Page ${pageNumber}`, PDF_MARGIN, 764, 8, false);
+    cursorY = usableTopY;
+  };
+
+  const closePage = () => {
+    streams.push(commands.join("\n"));
+  };
+
+  startPage();
+
+  for (const section of sections) {
+    const sourceLines = section.lines.length > 0 ? section.lines : ["-"];
+    let start = 0;
+    let sectionChunk = 1;
+
+    while (start < sourceLines.length) {
+      const availableHeight = cursorY - usableBottomY;
+      const maxLines = Math.max(
+        1,
+        Math.floor((availableHeight - SECTION_HEADER_HEIGHT - SECTION_INNER_PADDING * 2 - 8) / lineHeight)
+      );
+
+      if (maxLines < 2 && cursorY < usableTopY - 12) {
+        closePage();
+        pageNumber += 1;
+        startPage();
+        continue;
+      }
+
+      const remaining = sourceLines.length - start;
+      const lineCount = Math.min(remaining, maxLines);
+      const sectionHeight = SECTION_HEADER_HEIGHT + SECTION_INNER_PADDING * 2 + lineCount * lineHeight + 4;
+
+      if (!ensurePageSpace(cursorY, usableBottomY, sectionHeight) && cursorY < usableTopY - 12) {
+        closePage();
+        pageNumber += 1;
+        startPage();
+        continue;
+      }
+
+      const sectionY = cursorY - sectionHeight;
+      drawSection(
+        commands,
+        PDF_MARGIN,
+        sectionY,
+        contentWidth,
+        sectionHeight,
+        sectionChunk > 1 ? `${section.title} (continued)` : section.title
+      );
+      const sectionLines = sourceLines.slice(start, start + lineCount);
+      drawList(
+        commands,
+        sectionLines,
+        PDF_MARGIN + SECTION_INNER_PADDING,
+        sectionY + sectionHeight - 22,
+        sectionLines.length,
+        lineHeight,
+        8,
+        160,
+        contentWidth - SECTION_INNER_PADDING * 2
+      );
+
+      start += lineCount;
+      sectionChunk += 1;
+      cursorY = sectionY - sectionGap;
+
+      if (start < sourceLines.length) {
+        closePage();
+        pageNumber += 1;
+        startPage();
+      }
+    }
+  }
+
+  closePage();
   return streams;
 }
 
@@ -1418,8 +1671,9 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
 
   const pageOneStream = commands.join("\n");
   const supplementalStreams = createSupplementalPageStreams(snapshot);
+  const detailStreams = createDetailsPageStreams(snapshot);
   const spellListStreams = createSpellListPageStreams(snapshot);
-  return buildPdfDocument([pageOneStream, ...supplementalStreams, ...spellListStreams]);
+  return buildPdfDocument([pageOneStream, ...supplementalStreams, ...detailStreams, ...spellListStreams]);
 }
 
 export function buildPdfExportFromTemplate(
