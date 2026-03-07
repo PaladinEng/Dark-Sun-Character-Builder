@@ -1402,66 +1402,84 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
   const tableX = PDF_MARGIN;
   const tableTopY = 746;
   const tableBottomY = 24;
-  const headerHeight = 14;
-  const bodyFontSize = 6.5;
-  const bodyLineHeight = 8;
-  const rowVerticalPadding = 2;
-  const maxTableHeight = tableTopY - tableBottomY;
+  const sectionRowHeight = 11;
+  const headerHeight = sectionRowHeight * 2;
+  const spellEntryHeight = sectionRowHeight * 2;
+  const pagedRows = paginateByPageSpace(rows, tableTopY - headerHeight, tableBottomY, spellEntryHeight);
 
-  const columns = [
-    { key: "level", label: "LVL", width: 24, maxLength: 3, maxLines: 1, align: "center" as const },
-    { key: "name", label: "NAME", width: 122, maxLength: 64, maxLines: 3, align: "left" as const },
-    { key: "school", label: "SCHOOL", width: 52, maxLength: 28, maxLines: 2, align: "left" as const },
-    { key: "castingTime", label: "CAST", width: 70, maxLength: 48, maxLines: 2, align: "left" as const },
-    { key: "range", label: "RANGE", width: 52, maxLength: 28, maxLines: 2, align: "left" as const },
-    { key: "duration", label: "DURATION", width: 66, maxLength: 44, maxLines: 2, align: "left" as const },
-    { key: "components", label: "COMP", width: 52, maxLength: 24, maxLines: 2, align: "left" as const },
-    { key: "notes", label: "NOTES", width: 92, maxLength: 220, maxLines: 4, align: "left" as const },
-    { key: "reference", label: "REF", width: 34, maxLength: 24, maxLines: 2, align: "center" as const },
-  ] as const;
-
-  type SpellColumn = (typeof columns)[number];
-  type SpellColumnKey = SpellColumn["key"];
-  type PreparedSpellTableRow = {
-    rowHeight: number;
-    cellLines: Record<SpellColumnKey, string[]>;
+  type SpellTableColumn = {
+    key: keyof NormalizedSpellTableRow;
+    label: string;
+    width: number;
+    maxLength: number;
+    align: TextAlign;
   };
 
-  const preparedRows: PreparedSpellTableRow[] = rows.map((row) => {
-    const cellLines = {} as Record<SpellColumnKey, string[]>;
-    let maxLineCount = 1;
-    for (const column of columns) {
-      const wrappedLines = wrapTextToCellLines(
-        row[column.key],
-        column.width,
-        bodyFontSize,
-        column.maxLines,
-        column.maxLength
-      );
-      cellLines[column.key] = wrappedLines;
-      maxLineCount = Math.max(maxLineCount, wrappedLines.length);
-    }
-    return {
-      rowHeight: rowVerticalPadding * 2 + maxLineCount * bodyLineHeight,
-      cellLines,
-    };
-  });
+  const topColumns: readonly SpellTableColumn[] = [
+    { key: "level", label: "LVL", width: 30, maxLength: 4, align: "center" },
+    { key: "name", label: "NAME", width: 176, maxLength: 40, align: "left" },
+    { key: "school", label: "SCHOOL", width: 74, maxLength: 18, align: "left" },
+    { key: "castingTime", label: "CASTING TIME", width: 100, maxLength: 24, align: "left" },
+    {
+      key: "range",
+      label: "RANGE",
+      width: contentWidth - 30 - 176 - 74 - 100,
+      maxLength: 32,
+      align: "left",
+    },
+  ];
+  const bottomColumns: readonly SpellTableColumn[] = [
+    { key: "duration", label: "DURATION", width: 116, maxLength: 24, align: "left" },
+    { key: "components", label: "COMPONENTS", width: 100, maxLength: 22, align: "left" },
+    { key: "notes", label: "NOTES", width: 268, maxLength: 76, align: "left" },
+    {
+      key: "reference",
+      label: "PAGE / REF",
+      width: contentWidth - 116 - 100 - 268,
+      maxLength: 24,
+      align: "left",
+    },
+  ];
 
-  const pagedRows: PreparedSpellTableRow[][] = [];
-  let currentPageRows: PreparedSpellTableRow[] = [];
-  let currentPageHeight = headerHeight;
-  for (const row of preparedRows) {
-    if (currentPageRows.length > 0 && currentPageHeight + row.rowHeight > maxTableHeight) {
-      pagedRows.push(currentPageRows);
-      currentPageRows = [];
-      currentPageHeight = headerHeight;
+  const drawHorizontalLine = (commands: string[], y: number): void => {
+    commands.push(`${tableX} ${y} m ${tableX + contentWidth} ${y} l S`);
+  };
+  const drawVerticalLinesForRow = (
+    commands: string[],
+    columns: readonly SpellTableColumn[],
+    rowTopY: number,
+    rowHeight: number
+  ): void => {
+    let x = tableX;
+    for (let index = 0; index < columns.length - 1; index += 1) {
+      x += columns[index].width;
+      commands.push(`${x} ${rowTopY - rowHeight} m ${x} ${rowTopY} l S`);
     }
-    currentPageRows.push(row);
-    currentPageHeight += row.rowHeight;
-  }
-  if (currentPageRows.length > 0) {
-    pagedRows.push(currentPageRows);
-  }
+  };
+  const drawRowValues = (
+    commands: string[],
+    columns: readonly SpellTableColumn[],
+    rowTopY: number,
+    values: NormalizedSpellTableRow | null,
+    size: number,
+    bold: boolean
+  ): void => {
+    let x = tableX;
+    for (const column of columns) {
+      drawTextInCell(
+        commands,
+        values ? values[column.key] : column.label,
+        x,
+        rowTopY - 8,
+        column.width,
+        size,
+        bold,
+        column.align,
+        values ? column.maxLength : 32
+      );
+      x += column.width;
+    }
+  };
 
   const pageCount = pagedRows.length;
   const streams: string[] = [];
@@ -1472,7 +1490,7 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
     const endIndex = rowCursor + pageRows.length;
     rowCursor += pageRows.length;
     const commands: string[] = [];
-    const tableHeight = headerHeight + pageRows.reduce((sum, row) => sum + row.rowHeight, 0);
+    const tableHeight = headerHeight + pageRows.length * spellEntryHeight;
     const tableY = tableTopY - tableHeight;
 
     commands.push("0.2 w");
@@ -1509,52 +1527,24 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
     );
 
     commands.push(`${tableX} ${tableY} ${contentWidth} ${tableHeight} re S`);
-    let rowBoundaryY = tableTopY - headerHeight;
-    commands.push(`${tableX} ${rowBoundaryY} m ${tableX + contentWidth} ${rowBoundaryY} l S`);
-    for (const row of pageRows) {
-      rowBoundaryY -= row.rowHeight;
-      commands.push(`${tableX} ${rowBoundaryY} m ${tableX + contentWidth} ${rowBoundaryY} l S`);
-    }
+    drawHorizontalLine(commands, tableTopY - sectionRowHeight);
+    drawHorizontalLine(commands, tableTopY - headerHeight);
+    drawVerticalLinesForRow(commands, topColumns, tableTopY, sectionRowHeight);
+    drawVerticalLinesForRow(commands, bottomColumns, tableTopY - sectionRowHeight, sectionRowHeight);
+    drawRowValues(commands, topColumns, tableTopY, null, 6, true);
+    drawRowValues(commands, bottomColumns, tableTopY - sectionRowHeight, null, 6, true);
 
-    let columnCursor = tableX;
-    for (let columnIndex = 0; columnIndex < columns.length - 1; columnIndex += 1) {
-      columnCursor += columns[columnIndex].width;
-      commands.push(`${columnCursor} ${tableY} m ${columnCursor} ${tableY + tableHeight} l S`);
-    }
+    pageRows.forEach((row, rowIndex) => {
+      const rowTopY = tableTopY - headerHeight - rowIndex * spellEntryHeight;
+      const rowSplitY = rowTopY - sectionRowHeight;
+      const rowBottomY = rowTopY - spellEntryHeight;
 
-    columnCursor = tableX;
-    for (const column of columns) {
-      drawTextInCell(
-        commands,
-        column.label,
-        columnCursor,
-        tableTopY - 10,
-        column.width,
-        6,
-        true,
-        column.align,
-        20
-      );
-      columnCursor += column.width;
-    }
-
-    let rowTopY = tableTopY - headerHeight;
-    pageRows.forEach((row) => {
-      let x = tableX;
-      for (const column of columns) {
-        drawWrappedTextInCell(
-          commands,
-          row.cellLines[column.key],
-          x,
-          rowTopY,
-          column.width,
-          row.rowHeight,
-          bodyFontSize,
-          column.align
-        );
-        x += column.width;
-      }
-      rowTopY -= row.rowHeight;
+      drawHorizontalLine(commands, rowSplitY);
+      drawHorizontalLine(commands, rowBottomY);
+      drawVerticalLinesForRow(commands, topColumns, rowTopY, sectionRowHeight);
+      drawVerticalLinesForRow(commands, bottomColumns, rowSplitY, sectionRowHeight);
+      drawRowValues(commands, topColumns, rowTopY, row, 7, false);
+      drawRowValues(commands, bottomColumns, rowSplitY, row, 7, false);
     });
 
     streams.push(commands.join("\n"));
