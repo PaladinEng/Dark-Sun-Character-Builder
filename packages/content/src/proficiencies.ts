@@ -1,4 +1,4 @@
-const TOOL_PROFICIENCY_VALUES = [
+export const TOOL_PROFICIENCY_VALUES = [
   "Alchemist's Supplies",
   "Brewer's Supplies",
   "Calligrapher's Supplies",
@@ -28,7 +28,7 @@ const TOOL_PROFICIENCY_VALUES = [
   "Woodcarver's Tools"
 ] as const;
 
-const LANGUAGE_VALUES = [
+export const LANGUAGE_VALUES = [
   "Abyssal",
   "Celestial",
   "Common",

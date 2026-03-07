@@ -2351,6 +2351,91 @@
       "slug": "navigators-tools",
       "name": "Navigator's Tools",
       "type": "gear"
+    },
+    {
+      "slug": "alchemists-supplies",
+      "name": "Alchemist's Supplies",
+      "type": "gear"
+    },
+    {
+      "slug": "brewers-supplies",
+      "name": "Brewer's Supplies",
+      "type": "gear"
+    },
+    {
+      "slug": "cartographers-tools",
+      "name": "Cartographer's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "cobblers-tools",
+      "name": "Cobbler's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "cooks-utensils",
+      "name": "Cook's Utensils",
+      "type": "gear"
+    },
+    {
+      "slug": "glassblowers-tools",
+      "name": "Glassblower's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "jewelers-tools",
+      "name": "Jeweler's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "leatherworkers-tools",
+      "name": "Leatherworker's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "masons-tools",
+      "name": "Mason's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "painters-supplies",
+      "name": "Painter's Supplies",
+      "type": "gear"
+    },
+    {
+      "slug": "poisoners-kit",
+      "name": "Poisoner's Kit",
+      "type": "gear"
+    },
+    {
+      "slug": "potters-tools",
+      "name": "Potter's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "tinkers-tools",
+      "name": "Tinker's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "vehicles-land",
+      "name": "Vehicles (Land)",
+      "type": "gear"
+    },
+    {
+      "slug": "vehicles-water",
+      "name": "Vehicles (Water)",
+      "type": "gear"
+    },
+    {
+      "slug": "weavers-tools",
+      "name": "Weaver's Tools",
+      "type": "gear"
+    },
+    {
+      "slug": "woodcarvers-tools",
+      "name": "Woodcarver's Tools",
+      "type": "gear"
     }
   ],
   "spells": [

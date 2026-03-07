@@ -4,6 +4,7 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import { loadPackFromDir } from "../src/load";
+import { TOOL_PROFICIENCY_VALUES } from "../src/proficiencies";
 
 async function resolveSrdPackDir(): Promise<string> {
   const cwd = process.cwd();
@@ -205,6 +206,13 @@ describe("srd52 content audit", () => {
       expect(
         equipmentNames.has(tool),
         `Background tool proficiency "${tool}" should have a matching SRD equipment entry`,
+      ).toBe(true);
+    }
+
+    for (const tool of TOOL_PROFICIENCY_VALUES) {
+      expect(
+        equipmentNames.has(tool),
+        `Known tool proficiency "${tool}" should have a matching SRD equipment entry`,
       ).toBe(true);
     }
   });
