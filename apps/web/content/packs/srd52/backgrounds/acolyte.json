@@ -17,6 +17,10 @@
       "skill": "insight"
     },
     {
+      "type": "grant_skill_proficiency",
+      "skill": "religion"
+    },
+    {
       "type": "grant_language",
       "language": "Celestial"
     },

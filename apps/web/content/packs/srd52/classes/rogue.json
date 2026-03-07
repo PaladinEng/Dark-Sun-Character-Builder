@@ -25,10 +25,20 @@
       "srd52:equipment:shortbow"
     ]
   },
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:sneak-attack"
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",
       "ability": "dex"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "int"
     }
   ]
 }

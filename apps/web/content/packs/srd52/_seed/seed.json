@@ -71,6 +71,7 @@
       "grantsOriginFeatId": "srd52:feat:alert",
       "effects": [
         { "type": "grant_skill_proficiency", "skill": "insight" },
+        { "type": "grant_skill_proficiency", "skill": "religion" },
         { "type": "grant_language", "language": "Celestial" },
         { "type": "grant_tool_proficiency", "tool": "Calligrapher's Supplies" }
       ]
@@ -78,28 +79,50 @@
     {
       "slug": "soldier",
       "name": "Soldier",
+      "abilityOptions": {
+        "abilities": ["str", "dex", "con"],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:alert",
+      "grantsOriginFeatId": "srd52:feat:alert",
       "startingEquipment": {
         "itemIds": ["srd52:equipment:shield"],
         "equippedShieldId": "srd52:equipment:shield"
       },
-      "effects": [{ "type": "grant_skill_proficiency", "skill": "athletics" }]
+      "effects": [
+        { "type": "grant_skill_proficiency", "skill": "athletics" },
+        { "type": "grant_skill_proficiency", "skill": "intimidation" },
+        { "type": "grant_tool_proficiency", "tool": "Gaming Set" }
+      ]
     },
     {
       "slug": "sage",
       "name": "Sage",
+      "abilityOptions": {
+        "abilities": ["int", "wis", "cha"],
+        "mode": "2+1_or_1+1+1"
+      },
+      "grantsFeat": "srd52:feat:magic-initiate",
+      "grantsOriginFeatId": "srd52:feat:magic-initiate",
       "effects": [
         { "type": "grant_skill_proficiency", "skill": "arcana" },
+        { "type": "grant_skill_proficiency", "skill": "history" },
         { "type": "grant_language", "language": "Draconic" }
       ]
     },
     {
       "slug": "criminal",
       "name": "Criminal",
+      "abilityOptions": {
+        "abilities": ["dex", "int", "cha"],
+        "mode": "2+1_or_1+1+1"
+      },
       "originFeatChoice": {
         "featIds": ["srd52:feat:alert", "srd52:feat:magic-initiate"]
       },
       "effects": [
         { "type": "grant_skill_proficiency", "skill": "stealth" },
+        { "type": "grant_skill_proficiency", "skill": "deception" },
         { "type": "grant_tool_proficiency", "tool": "Thieves' Tools" }
       ]
     }
@@ -131,6 +154,10 @@
         {
           "level": 1,
           "featureId": "srd52:feature:fighting-style-defense"
+        },
+        {
+          "level": 1,
+          "featureId": "srd52:feature:second-wind"
         }
       ],
       "startingEquipment": {
@@ -141,7 +168,10 @@
         "equippedArmorId": "srd52:equipment:chain-shirt",
         "equippedWeaponId": "srd52:equipment:longsword"
       },
-      "effects": [{ "type": "grant_save_proficiency", "ability": "str" }]
+      "effects": [
+        { "type": "grant_save_proficiency", "ability": "str" },
+        { "type": "grant_save_proficiency", "ability": "con" }
+      ]
     },
     {
       "slug": "wizard",
@@ -166,8 +196,17 @@
         "progression": "full",
         "mode": "prepared"
       },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:spellcasting"
+        }
+      ],
       "spellListRefIds": ["srd52:spelllist:wizard-core"],
-      "effects": [{ "type": "grant_save_proficiency", "ability": "int" }]
+      "effects": [
+        { "type": "grant_save_proficiency", "ability": "int" },
+        { "type": "grant_save_proficiency", "ability": "wis" }
+      ]
     },
     {
       "slug": "rogue",
@@ -196,7 +235,16 @@
           "srd52:equipment:shortbow"
         ]
       },
-      "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:sneak-attack"
+        }
+      ],
+      "effects": [
+        { "type": "grant_save_proficiency", "ability": "dex" },
+        { "type": "grant_save_proficiency", "ability": "int" }
+      ]
     },
     {
       "slug": "cleric",
@@ -220,8 +268,17 @@
         "progression": "full",
         "mode": "prepared"
       },
+      "classFeaturesByLevel": [
+        {
+          "level": 1,
+          "featureId": "srd52:feature:spellcasting"
+        }
+      ],
       "spellListRefIds": ["srd52:spelllist:cleric-core"],
-      "effects": [{ "type": "grant_save_proficiency", "ability": "wis" }]
+      "effects": [
+        { "type": "grant_save_proficiency", "ability": "wis" },
+        { "type": "grant_save_proficiency", "ability": "cha" }
+      ]
     },
     {
       "slug": "barbarian",
@@ -248,7 +305,10 @@
           "featureId": "srd52:feature:unarmored-defense"
         }
       ],
-      "effects": [{ "type": "grant_save_proficiency", "ability": "con" }]
+      "effects": [
+        { "type": "grant_save_proficiency", "ability": "con" },
+        { "type": "grant_save_proficiency", "ability": "str" }
+      ]
     },
     {
       "slug": "ranger",
@@ -272,6 +332,10 @@
         "martial": true
       },
       "classFeaturesByLevel": [
+        {
+          "level": 2,
+          "featureId": "srd52:feature:spellcasting"
+        },
         {
           "level": 2,
           "featureId": "srd52:feature:fighting-style-archery"
@@ -305,7 +369,10 @@
         ]
       },
       "spellListRefIds": ["srd52:spelllist:ranger-core"],
-      "effects": [{ "type": "grant_save_proficiency", "ability": "dex" }]
+      "effects": [
+        { "type": "grant_save_proficiency", "ability": "dex" },
+        { "type": "grant_save_proficiency", "ability": "str" }
+      ]
     }
   ],
   "features": [

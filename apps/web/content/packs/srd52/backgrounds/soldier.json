@@ -1,6 +1,16 @@
 {
   "id": "srd52:background:soldier",
   "name": "Soldier",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:alert",
+  "grantsOriginFeatId": "srd52:feat:alert",
   "startingEquipment": {
     "itemIds": [
       "srd52:equipment:shield"
@@ -11,6 +21,14 @@
     {
       "type": "grant_skill_proficiency",
       "skill": "athletics"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "intimidation"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Gaming Set"
     }
   ]
 }

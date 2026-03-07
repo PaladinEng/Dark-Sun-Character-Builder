@@ -21,6 +21,12 @@
     "progression": "full",
     "mode": "prepared"
   },
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    }
+  ],
   "spellListRefIds": [
     "srd52:spelllist:wizard-core"
   ],
@@ -28,6 +34,10 @@
     {
       "type": "grant_save_proficiency",
       "ability": "int"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "wis"
     }
   ]
 }

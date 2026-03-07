@@ -27,6 +27,10 @@
     {
       "type": "grant_save_proficiency",
       "ability": "con"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "str"
     }
   ]
 }
