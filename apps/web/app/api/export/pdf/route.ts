@@ -2,7 +2,7 @@ import { access, readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { NextResponse } from "next/server";
-import { getClassFeatureIdsForLevel, type Effect } from "@dark-sun/content";
+import { getClassFeatureIdsForLevel, type Effect, type Spell } from "@dark-sun/content";
 import type { AttunedItem, CharacterState } from "@dark-sun/rules";
 import {
   buildPdfExportFromTemplate,
@@ -84,6 +84,40 @@ function formatDelimitedLabel(value: string): string {
 
 function formatConditionLabel(conditionId: string): string {
   return formatDelimitedLabel(conditionId);
+}
+
+function sortUniqueIds(ids: readonly string[] | undefined): string[] {
+  return [...new Set(ids ?? [])].filter((id) => id.trim().length > 0).sort((a, b) => a.localeCompare(b));
+}
+
+function normalizeSpellReferencePart(value: string | number | undefined): string | null {
+  if (typeof value === "string") {
+    const normalized = value.trim();
+    return normalized.length > 0 ? normalized : null;
+  }
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return `${Math.max(1, Math.floor(value))}`;
+  }
+  return null;
+}
+
+function formatSpellReference(spell: Spell): string | null {
+  const spellWithReference = spell as Spell & {
+    reference?: string | number;
+    page?: string | number;
+  };
+  const reference = normalizeSpellReferencePart(spellWithReference.reference);
+  const page = normalizeSpellReferencePart(spellWithReference.page);
+  if (reference && page) {
+    return `${reference} p.${page}`;
+  }
+  if (reference) {
+    return reference;
+  }
+  if (page) {
+    return `p.${page}`;
+  }
+  return null;
 }
 
 function summarizeSpeciesTraits(
@@ -317,19 +351,97 @@ export async function POST(request: Request) {
         .join(", ")}`
     : null;
   const resolveSpellNames = (spellIds: readonly string[] | undefined): string[] =>
-    [...new Set(spellIds ?? [])]
+    sortUniqueIds(spellIds)
       .map((spellId) => merged.content.spellsById[spellId]?.name ?? spellId)
       .filter((name) => name.trim().length > 0)
       .sort((a, b) => a.localeCompare(b));
-  const cantripSpellNames = resolveSpellNames(
+  const cantripSpellIds = sortUniqueIds(
     derived.spellcasting?.cantripsKnownIds ?? payload.characterState.cantripsKnownIds
   );
-  const knownSpellNames = resolveSpellNames(
+  const knownSpellIds = sortUniqueIds(
     derived.spellcasting?.knownSpellIds ?? payload.characterState.knownSpellIds
   );
-  const preparedSpellNames = resolveSpellNames(
+  const preparedSpellIds = sortUniqueIds(
     derived.spellcasting?.preparedSpellIds ?? payload.characterState.preparedSpellIds
   );
+  const cantripSpellNames = resolveSpellNames(cantripSpellIds);
+  const knownSpellNames = resolveSpellNames(knownSpellIds);
+  const preparedSpellNames = resolveSpellNames(preparedSpellIds);
+
+  type SpellSelectionKind = "cantrip" | "known" | "prepared";
+  const spellSelectionById = new Map<string, Set<SpellSelectionKind>>();
+  const registerSpellSelection = (spellIds: readonly string[], kind: SpellSelectionKind): void => {
+    for (const spellId of spellIds) {
+      const existing = spellSelectionById.get(spellId);
+      if (existing) {
+        existing.add(kind);
+      } else {
+        spellSelectionById.set(spellId, new Set([kind]));
+      }
+    }
+  };
+  registerSpellSelection(cantripSpellIds, "cantrip");
+  registerSpellSelection(knownSpellIds, "known");
+  registerSpellSelection(preparedSpellIds, "prepared");
+
+  const spellSelectionOrder: SpellSelectionKind[] = ["cantrip", "known", "prepared"];
+  const spellSelectionLabels: Record<SpellSelectionKind, string> = {
+    cantrip: "Cantrip",
+    known: "Known",
+    prepared: "Prepared",
+  };
+  const spellListEntries = [...spellSelectionById.entries()]
+    .map(([spellId, selections]) => {
+      const spell = merged.content.spellsById[spellId];
+      const orderedSelections = spellSelectionOrder.filter((selection) => selections.has(selection));
+      const noteParts: string[] = [orderedSelections.map((selection) => spellSelectionLabels[selection]).join("/")];
+
+      if (!spell) {
+        return {
+          name: spellId,
+          notes: noteParts.join("; "),
+        };
+      }
+
+      if (spell.ritual) {
+        noteParts.push("Ritual");
+      }
+      if (spell.concentration) {
+        noteParts.push("Concentration");
+      }
+      const spellWithNotes = spell as Spell & { notes?: string };
+      const summary = spell.summary?.trim() || spellWithNotes.notes?.trim() || spell.description?.trim();
+      if (summary) {
+        noteParts.push(summary);
+      }
+
+      return {
+        level: spell.level,
+        name: spell.name,
+        school: formatDelimitedLabel(spell.school),
+        castingTime: spell.castingTime,
+        range: spell.range,
+        duration: spell.duration,
+        components: spell.components.join(", "),
+        notes: noteParts.join("; "),
+        reference: formatSpellReference(spell),
+      };
+    })
+    .sort((left, right) => {
+      const leftLevel = typeof left.level === "number" && Number.isFinite(left.level) ? left.level : Number.POSITIVE_INFINITY;
+      const rightLevel =
+        typeof right.level === "number" && Number.isFinite(right.level) ? right.level : Number.POSITIVE_INFINITY;
+      if (leftLevel !== rightLevel) {
+        return leftLevel - rightLevel;
+      }
+
+      const leftName = left.name?.trim() ?? "";
+      const rightName = right.name?.trim() ?? "";
+      if (leftName !== rightName) {
+        return leftName.localeCompare(rightName);
+      }
+      return (left.notes ?? "").localeCompare(right.notes ?? "");
+    });
   const orderedSkillDefinitions = [...merged.content.skillDefinitions]
     .map((skill, index) => ({ skill, index }))
     .sort((left, right) => {
@@ -412,6 +524,7 @@ export async function POST(request: Request) {
     cantripSpellNames,
     knownSpellNames,
     preparedSpellNames,
+    spellListEntries,
     appearance: payload.characterState.appearance ?? null,
     physicalDescription: payload.characterState.physicalDescription ?? null,
     backstory: payload.characterState.backstory ?? null,

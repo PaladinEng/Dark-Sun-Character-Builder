@@ -206,6 +206,9 @@ export const SeedSpellSchema = SeedBaseSchema.extend({
   duration: z.string(),
   concentration: z.boolean().optional(),
   summary: z.string().optional(),
+  notes: z.string().optional(),
+  page: z.union([z.number().int().positive(), z.string().min(1)]).optional(),
+  reference: z.string().optional(),
 }).superRefine((value, ctx) => {
   if (!Object.prototype.hasOwnProperty.call(value, "ritual")) {
     ctx.addIssue({

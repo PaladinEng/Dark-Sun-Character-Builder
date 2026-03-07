@@ -230,6 +230,9 @@ export function normalizeSeedPack(
     duration: entry.duration,
     concentration: entry.concentration ?? false,
     summary: entry.summary,
+    notes: entry.notes,
+    page: entry.page,
+    reference: entry.reference,
     effects: entry.effects,
   }));
 

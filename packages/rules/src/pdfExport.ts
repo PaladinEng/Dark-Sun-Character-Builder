@@ -20,6 +20,18 @@ export type PdfExportResult =
       error: PdfExportError;
     };
 
+export type PdfSpellListEntry = {
+  level?: number | null;
+  name?: string | null;
+  school?: string | null;
+  castingTime?: string | null;
+  range?: string | null;
+  duration?: string | null;
+  components?: string | null;
+  notes?: string | null;
+  reference?: string | null;
+};
+
 export type PdfExportCharacterSnapshot = {
   level: number;
   characterName?: string | null;
@@ -79,6 +91,7 @@ export type PdfExportCharacterSnapshot = {
   cantripSpellNames?: readonly string[];
   knownSpellNames?: readonly string[];
   preparedSpellNames?: readonly string[];
+  spellListEntries?: readonly PdfSpellListEntry[];
   appearance?: string | null;
   physicalDescription?: string | null;
   backstory?: string | null;
@@ -273,6 +286,49 @@ function formatSpellcastingAbility(value: Ability | null | undefined): string {
 
 function formatNumeric(value: number | null | undefined): string {
   return typeof value === "number" && Number.isFinite(value) ? `${Math.floor(value)}` : "-";
+}
+
+function normalizeSpellTableRows(
+  rows: readonly PdfSpellListEntry[] | undefined
+): Array<{
+  level: string;
+  name: string;
+  school: string;
+  castingTime: string;
+  range: string;
+  duration: string;
+  components: string;
+  notes: string;
+  reference: string;
+}> {
+  if (!rows || rows.length === 0) {
+    return [];
+  }
+
+  const toCell = (value: string | null | undefined): string => {
+    const normalized = value?.trim();
+    return normalized && normalized.length > 0 ? normalized : "-";
+  };
+
+  return rows.map((row) => {
+    const level =
+      typeof row.level === "number" && Number.isFinite(row.level)
+        ? row.level === 0
+          ? "C"
+          : `${Math.max(0, Math.floor(row.level))}`
+        : "-";
+    return {
+      level,
+      name: toCell(row.name),
+      school: toCell(row.school),
+      castingTime: toCell(row.castingTime),
+      range: toCell(row.range),
+      duration: toCell(row.duration),
+      components: toCell(row.components),
+      notes: toCell(row.notes),
+      reference: toCell(row.reference),
+    };
+  });
 }
 
 function buildPdfDocument(pageStreams: readonly string[]): Uint8Array {
@@ -559,6 +615,100 @@ function createSupplementalPageStream(snapshot: PdfExportCharacterSnapshot): str
   }
 
   return commands.join("\n");
+}
+
+function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): string[] {
+  const rows = normalizeSpellTableRows(snapshot.spellListEntries);
+  if (rows.length === 0) {
+    return [];
+  }
+
+  const margin = 24;
+  const pageWidth = 612;
+  const contentWidth = pageWidth - margin * 2;
+  const tableX = margin;
+  const tableTopY = 746;
+  const tableBottomY = 34;
+  const tableRowHeight = 13;
+  const rowsPerPage = Math.max(1, Math.floor((tableTopY - tableBottomY - tableRowHeight) / tableRowHeight));
+  const pageCount = Math.ceil(rows.length / rowsPerPage);
+
+  const columns = [
+    { key: "level", label: "LVL", width: 32, maxLength: 3 },
+    { key: "name", label: "NAME", width: 120, maxLength: 24 },
+    { key: "school", label: "SCHOOL", width: 58, maxLength: 11 },
+    { key: "castingTime", label: "CASTING", width: 68, maxLength: 14 },
+    { key: "range", label: "RANGE", width: 56, maxLength: 11 },
+    { key: "duration", label: "DURATION", width: 72, maxLength: 14 },
+    { key: "components", label: "COMP", width: 58, maxLength: 11 },
+    { key: "notes", label: "NOTES", width: 70, maxLength: 15 },
+    { key: "reference", label: "REF", width: 30, maxLength: 8 },
+  ] as const;
+
+  const streams: string[] = [];
+  for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
+    const startIndex = pageIndex * rowsPerPage;
+    const endIndex = Math.min(rows.length, startIndex + rowsPerPage);
+    const pageRows = rows.slice(startIndex, endIndex);
+    const commands: string[] = [];
+    const tableRows = pageRows.length + 1;
+    const tableHeight = tableRows * tableRowHeight;
+    const tableY = tableTopY - tableHeight;
+
+    commands.push("0.2 w");
+    drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - SPELL LIST", margin, 778, 11, true);
+    drawText(
+      commands,
+      truncateText(
+        `Character: ${snapshot.characterName?.trim() || "Unnamed Character"} | ${snapshot.className?.trim() || "Class Unset"} | Level ${Math.max(1, Math.floor(snapshot.level || 1))}`,
+        106
+      ),
+      margin,
+      764,
+      8,
+      false
+    );
+    drawText(
+      commands,
+      `Page ${pageIndex + 1} of ${pageCount} | Spells ${startIndex + 1}-${endIndex} of ${rows.length}`,
+      margin,
+      752,
+      8,
+      false
+    );
+
+    commands.push(`${tableX} ${tableY} ${contentWidth} ${tableHeight} re S`);
+    for (let rowIndex = 1; rowIndex < tableRows; rowIndex += 1) {
+      const y = tableY + tableHeight - rowIndex * tableRowHeight;
+      commands.push(`${tableX} ${y} m ${tableX + contentWidth} ${y} l S`);
+    }
+
+    let columnCursor = tableX;
+    for (let columnIndex = 0; columnIndex < columns.length - 1; columnIndex += 1) {
+      columnCursor += columns[columnIndex].width;
+      commands.push(`${columnCursor} ${tableY} m ${columnCursor} ${tableY + tableHeight} l S`);
+    }
+
+    columnCursor = tableX;
+    for (const column of columns) {
+      drawText(commands, column.label, columnCursor + 3, tableY + tableHeight - 9, 6, true);
+      columnCursor += column.width;
+    }
+
+    pageRows.forEach((row, rowIndex) => {
+      const rowTextY = tableY + tableHeight - tableRowHeight * (rowIndex + 2) + 3;
+      let x = tableX;
+      for (const column of columns) {
+        const value = truncateText(row[column.key], column.maxLength);
+        drawText(commands, value, x + 3, rowTextY, 7, false);
+        x += column.width;
+      }
+    });
+
+    streams.push(commands.join("\n"));
+  }
+
+  return streams;
 }
 
 function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint8Array {
@@ -924,7 +1074,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
 
   const pageOneStream = commands.join("\n");
   const pageTwoStream = createSupplementalPageStream(snapshot);
-  return buildPdfDocument([pageOneStream, pageTwoStream]);
+  const spellListStreams = createSpellListPageStreams(snapshot);
+  return buildPdfDocument([pageOneStream, pageTwoStream, ...spellListStreams]);
 }
 
 export function buildPdfExportFromTemplate(
