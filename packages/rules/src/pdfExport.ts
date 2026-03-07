@@ -136,6 +136,8 @@ const PDF_PAGE_HEIGHT = 792;
 const PDF_MARGIN = 24;
 const SECTION_HEADER_HEIGHT = 14;
 const SECTION_INNER_PADDING = 8;
+const SECTION_LIST_TOP_OFFSET = SECTION_HEADER_HEIGHT + SECTION_INNER_PADDING;
+const SECTION_LIST_BOTTOM_PADDING = SECTION_INNER_PADDING + 4;
 const CELL_PADDING_X = 3;
 const AVERAGE_GLYPH_WIDTH_FACTOR = 0.52;
 const TEXT_WIDTH_SAFETY_FACTOR = 1.08;
@@ -148,6 +150,8 @@ const FIELD_LABEL_VALUE_GAP = 2;
 const DETAIL_SECTION_CHROME_HEIGHT = SECTION_HEADER_HEIGHT + SECTION_INNER_PADDING * 2 + 4;
 const DETAIL_SECTION_SAFETY_BUFFER = 8;
 const DETAIL_PAGE_BREAK_THRESHOLD = 12;
+const WIDE_GLYPH_PATTERN = /[MW@#%&]/g;
+const NARROW_GLYPH_PATTERN = /[.,'`!|:;ilIjt]/g;
 
 type TextAlign = "left" | "center" | "right";
 
@@ -206,7 +210,11 @@ function drawText(
 }
 
 function estimateTextWidth(text: string, size: number): number {
-  return text.length * size * AVERAGE_GLYPH_WIDTH_FACTOR * TEXT_WIDTH_SAFETY_FACTOR;
+  const baseWidth = text.length * size * AVERAGE_GLYPH_WIDTH_FACTOR;
+  const wideGlyphCount = text.match(WIDE_GLYPH_PATTERN)?.length ?? 0;
+  const narrowGlyphCount = text.match(NARROW_GLYPH_PATTERN)?.length ?? 0;
+  const adjustedWidth = baseWidth + wideGlyphCount * size * 0.18 - narrowGlyphCount * size * 0.08;
+  return Math.max(size * 0.5, adjustedWidth) * TEXT_WIDTH_SAFETY_FACTOR;
 }
 
 function truncateTextToWidth(value: string, maxWidth: number, size: number, maxLength = 200): string {
@@ -268,6 +276,20 @@ function hasActivePageContent(cursorY: number, topY: number): boolean {
   return cursorY < topY - DETAIL_PAGE_BREAK_THRESHOLD;
 }
 
+function sectionListTopY(sectionY: number, sectionHeight: number): number {
+  return sectionY + sectionHeight - SECTION_LIST_TOP_OFFSET;
+}
+
+function sectionListMinY(sectionY: number): number {
+  return sectionY + SECTION_LIST_BOTTOM_PADDING;
+}
+
+function maxListLinesForSection(sectionHeight: number, lineHeight: number): number {
+  const top = sectionHeight - SECTION_LIST_TOP_OFFSET;
+  const bottom = SECTION_LIST_BOTTOM_PADDING;
+  return Math.max(1, Math.floor((top - bottom) / lineHeight) + 1);
+}
+
 function maxSectionLinesForPageSpace(availableHeight: number, lineHeight: number): number {
   return Math.max(
     1,
@@ -299,12 +321,20 @@ function fieldValueBaselineY(y: number, height: number, valueSize: number): numb
 }
 
 function paginateByPageSpace<T>(rows: readonly T[], topY: number, bottomY: number, rowHeight: number): T[][] {
+  if (rows.length === 0) {
+    return [];
+  }
+
+  if (rowHeight <= 0 || topY <= bottomY) {
+    return [rows.slice()];
+  }
+
   const pages: T[][] = [];
   let currentPage: T[] = [];
   let cursorY = topY;
 
   for (const row of rows) {
-    if (currentPage.length > 0 && !ensurePageSpace(cursorY, bottomY, rowHeight)) {
+    if (!ensurePageSpace(cursorY, bottomY, rowHeight) && currentPage.length > 0) {
       pages.push(currentPage);
       currentPage = [];
       cursorY = topY;
@@ -344,14 +374,45 @@ function drawList(
   lineHeight: number,
   size = 8,
   maxLength = 56,
-  maxWidth?: number
+  maxWidth?: number,
+  minY = Number.NEGATIVE_INFINITY
 ): void {
   for (let index = 0; index < Math.min(maxLines, lines.length); index += 1) {
+    const lineY = topY - index * lineHeight;
+    if (lineY < minY) {
+      break;
+    }
     const truncated = truncateText(lines[index], maxLength);
     const finalText =
       typeof maxWidth === "number" ? truncateTextToWidth(truncated, maxWidth, size, maxLength) : truncated;
-    drawText(commands, finalText, x, topY - index * lineHeight, size, false);
+    drawText(commands, finalText, x, lineY, size, false);
   }
+}
+
+function drawListInSection(
+  commands: string[],
+  lines: readonly string[],
+  sectionX: number,
+  sectionY: number,
+  sectionWidth: number,
+  sectionHeight: number,
+  lineHeight: number,
+  size = 8,
+  maxLength = 56,
+  maxLines = lines.length
+): void {
+  drawList(
+    commands,
+    lines,
+    sectionX + SECTION_INNER_PADDING,
+    sectionListTopY(sectionY, sectionHeight),
+    maxLines,
+    lineHeight,
+    size,
+    maxLength,
+    sectionWidth - SECTION_INNER_PADDING * 2,
+    sectionListMinY(sectionY)
+  );
 }
 
 function drawField(
@@ -604,7 +665,7 @@ function normalizeSupplementalSpellRows(
 }
 
 function maxLinesForSection(sectionHeight: number, lineHeight: number): number {
-  return Math.max(1, Math.floor((sectionHeight - SECTION_HEADER_HEIGHT - 16) / lineHeight));
+  return maxListLinesForSection(sectionHeight, lineHeight);
 }
 
 function splitLinesForSection(
@@ -678,7 +739,6 @@ function createNarrativeContinuationPageStream(
   const sectionY = PDF_MARGIN;
   const sectionHeight = PDF_PAGE_HEIGHT - PDF_MARGIN * 2 - 20;
   const lineHeight = 10;
-  const lineTopY = sectionY + sectionHeight - 22;
 
   commands.push("0.2 w");
   drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - SUPPLEMENTAL", PDF_MARGIN, 778, 11, true);
@@ -691,16 +751,16 @@ function createNarrativeContinuationPageStream(
     sectionHeight,
     title
   );
-  drawList(
+  drawListInSection(
     commands,
     lines,
-    PDF_MARGIN + SECTION_INNER_PADDING,
-    lineTopY,
-    lines.length,
+    PDF_MARGIN,
+    sectionY,
+    contentWidth,
+    sectionHeight,
     lineHeight,
     8,
-    140,
-    contentWidth - SECTION_INNER_PADDING * 2
+    140
   );
 
   return commands.join("\n");
@@ -1018,13 +1078,15 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     spellColumnCursor += spellColumns[columnIndex].width;
     commands.push(`${spellColumnCursor} ${spellGridY} m ${spellColumnCursor} ${spellGridY + spellGridHeight} l S`);
   }
+  const spellHeaderRowTopY = rowTopY(spellGridY, spellGridHeight, spellGridRowHeight, 1);
+  const spellHeaderTextY = rowBaselineY(spellHeaderRowTopY, spellGridRowHeight, 6);
   spellColumnCursor = spellGridX;
   for (const column of spellColumns) {
     drawTextInCell(
       commands,
       column.label,
       spellColumnCursor,
-      spellGridY + spellGridHeight - 12,
+      spellHeaderTextY,
       column.width,
       6,
       true,
@@ -1036,7 +1098,8 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   const visibleSpellRows = spellRows.slice(0, spellBodyRows);
   for (let rowIndex = 0; rowIndex < spellBodyRows; rowIndex += 1) {
     const row = visibleSpellRows[rowIndex];
-    const rowTextY = spellGridY + spellGridHeight - spellGridRowHeight * (rowIndex + 2) + 4;
+    const rowTop = rowTopY(spellGridY, spellGridHeight, spellGridRowHeight, rowIndex + 2);
+    const rowTextY = rowBaselineY(rowTop, spellGridRowHeight, 7);
     let x = spellGridX;
     for (const column of spellColumns) {
       drawTextInCell(
@@ -1067,55 +1130,55 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   }
 
   drawSection(commands, rightX, appearanceY, rightColumnWidth, appearanceHeight, "Appearance");
-  drawList(
+  drawListInSection(
     commands,
     appearanceSplit.visible,
-    rightX + SECTION_INNER_PADDING,
-    appearanceY + appearanceHeight - 22,
-    appearanceSplit.visible.length,
+    rightX,
+    appearanceY,
+    rightColumnWidth,
+    appearanceHeight,
     9,
     8,
-    120,
-    rightColumnWidth - SECTION_INNER_PADDING * 2
+    120
   );
 
   drawSection(commands, rightX, backstoryY, rightColumnWidth, backstoryHeight, "Backstory & Personality");
-  drawList(
+  drawListInSection(
     commands,
     backstorySplit.visible,
-    rightX + SECTION_INNER_PADDING,
-    backstoryY + backstoryHeight - 22,
-    backstorySplit.visible.length,
+    rightX,
+    backstoryY,
+    rightColumnWidth,
+    backstoryHeight,
     9,
     8,
-    120,
-    rightColumnWidth - SECTION_INNER_PADDING * 2
+    120
   );
 
   drawSection(commands, rightX, languageY, rightColumnWidth, languageHeight, "Languages & Proficiencies");
-  drawList(
+  drawListInSection(
     commands,
     languageSplit.visible,
-    rightX + SECTION_INNER_PADDING,
-    languageY + languageHeight - 22,
-    languageSplit.visible.length,
+    rightX,
+    languageY,
+    rightColumnWidth,
+    languageHeight,
     9,
     8,
-    120,
-    rightColumnWidth - SECTION_INNER_PADDING * 2
+    120
   );
 
   drawSection(commands, rightX, equipmentY, rightColumnWidth, equipmentHeight, "Equipment");
-  drawList(
+  drawListInSection(
     commands,
     equipmentSplit.visible,
-    rightX + SECTION_INNER_PADDING,
-    equipmentY + equipmentHeight - 22,
-    equipmentSplit.visible.length,
+    rightX,
+    equipmentY,
+    rightColumnWidth,
+    equipmentHeight,
     9,
     8,
-    120,
-    rightColumnWidth - SECTION_INNER_PADDING * 2
+    120
   );
 
   drawSection(commands, rightX, coinsY, rightColumnWidth, coinsHeight, "Coins");
@@ -1367,16 +1430,16 @@ function createDetailsPageStreams(snapshot: PdfExportCharacterSnapshot): string[
         sectionChunk > 1 ? `${section.title} (continued)` : section.title
       );
       const sectionLines = sourceLines.slice(start, start + lineCount);
-      drawList(
+      drawListInSection(
         commands,
         sectionLines,
-        PDF_MARGIN + SECTION_INNER_PADDING,
-        sectionY + sectionHeight - 22,
-        sectionLines.length,
+        PDF_MARGIN,
+        sectionY,
+        contentWidth,
+        sectionHeight,
         lineHeight,
         8,
-        160,
-        contentWidth - SECTION_INNER_PADDING * 2
+        160
       );
 
       start += lineCount;
@@ -1405,7 +1468,7 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
   const tableX = PDF_MARGIN;
   const tableTopY = 746;
   const tableBottomY = 24;
-  const sectionRowHeight = 11;
+  const sectionRowHeight = 12;
   const headerHeight = sectionRowHeight * 2;
   const spellEntryHeight = sectionRowHeight * 2;
   const pagedRows = paginateByPageSpace(rows, tableTopY - headerHeight, tableBottomY, spellEntryHeight);
@@ -1463,17 +1526,19 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
     commands: string[],
     columns: readonly SpellTableColumn[],
     rowTopY: number,
+    rowHeight: number,
     values: NormalizedSpellTableRow | null,
     size: number,
     bold: boolean
   ): void => {
+    const textY = rowBaselineY(rowTopY, rowHeight, size);
     let x = tableX;
     for (const column of columns) {
       drawTextInCell(
         commands,
         values ? values[column.key] : column.label,
         x,
-        rowTopY - 8,
+        textY,
         column.width,
         size,
         bold,
@@ -1534,8 +1599,16 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
     drawHorizontalLine(commands, tableTopY - headerHeight);
     drawVerticalLinesForRow(commands, topColumns, tableTopY, sectionRowHeight);
     drawVerticalLinesForRow(commands, bottomColumns, tableTopY - sectionRowHeight, sectionRowHeight);
-    drawRowValues(commands, topColumns, tableTopY, null, 6, true);
-    drawRowValues(commands, bottomColumns, tableTopY - sectionRowHeight, null, 6, true);
+    drawRowValues(commands, topColumns, tableTopY, sectionRowHeight, null, 6, true);
+    drawRowValues(
+      commands,
+      bottomColumns,
+      tableTopY - sectionRowHeight,
+      sectionRowHeight,
+      null,
+      6,
+      true
+    );
 
     pageRows.forEach((row, rowIndex) => {
       const rowTopY = tableTopY - headerHeight - rowIndex * spellEntryHeight;
@@ -1546,8 +1619,8 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
       drawHorizontalLine(commands, rowBottomY);
       drawVerticalLinesForRow(commands, topColumns, rowTopY, sectionRowHeight);
       drawVerticalLinesForRow(commands, bottomColumns, rowSplitY, sectionRowHeight);
-      drawRowValues(commands, topColumns, rowTopY, row, 7, false);
-      drawRowValues(commands, bottomColumns, rowSplitY, row, 7, false);
+      drawRowValues(commands, topColumns, rowTopY, sectionRowHeight, row, 7, false);
+      drawRowValues(commands, bottomColumns, rowSplitY, sectionRowHeight, row, 7, false);
     });
 
     streams.push(commands.join("\n"));
@@ -1828,17 +1901,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     toListLine("Tools", snapshot.toolProficiencies),
     toListLine("Languages", snapshot.languages),
   ];
-  drawList(
-    commands,
-    trainingLines,
-    leftX + SECTION_INNER_PADDING,
-    trainingY + trainingHeight - 22,
-    10,
-    12,
-    8,
-    96,
-    leftWidth - SECTION_INNER_PADDING * 2
-  );
+  drawListInSection(commands, trainingLines, leftX, trainingY, leftWidth, trainingHeight, 12, 8, 96, 10);
 
   drawSection(commands, rightX, attacksY, rightWidth, attacksHeight, "Weapons / Attacks");
   const tableX = rightX + 8;
@@ -1939,7 +2002,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     10,
     8,
     52,
-    rightWidth - 108
+    rightWidth - 108,
+    conditionsY + 10
   );
 
   drawSection(commands, rightX, featuresY, rightWidth, featuresHeight, "Features Summary");
@@ -1970,7 +2034,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     9,
     8,
     84,
-    featuresInnerWidth - 8
+    featuresInnerWidth - 8,
+    classPanelY + 8
   );
 
   drawText(commands, "SPECIES TRAITS", speciesPanelX + 4, lowerPanelsY + lowerPanelHeight - 10, 7, true);
@@ -1983,7 +2048,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     9,
     8,
     56,
-    lowerPanelWidth - 8
+    lowerPanelWidth - 8,
+    lowerPanelsY + 8
   );
 
   drawText(commands, "FEATS", featPanelX + 4, lowerPanelsY + lowerPanelHeight - 10, 7, true);
@@ -1996,7 +2062,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     9,
     8,
     56,
-    lowerPanelWidth - 8
+    lowerPanelWidth - 8,
+    lowerPanelsY + 8
   );
 
   const pageOneStream = commands.join("\n");
