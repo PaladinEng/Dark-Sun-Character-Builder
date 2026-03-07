@@ -1,3 +1,4 @@
+import { getSkillAndToolDisplayRows, type SkillAndToolDisplayRow } from "./skills";
 import type { ValidationIssue, ValidationReport } from "./validate";
 import type { Ability, AbilityRecord, SpellSlots } from "./types";
 
@@ -33,6 +34,7 @@ export type PdfExportCharacterSnapshot = {
   saveProficiencies?: readonly Ability[];
   skills?: Record<string, number>;
   skillDefinitions?: ReadonlyArray<{ id: string; name: string; ability: Ability }>;
+  skillAndToolRows?: readonly SkillAndToolDisplayRow[];
   proficiencyBonus: number;
   armorClass: number;
   shieldAC?: number | null;
@@ -107,13 +109,6 @@ function truncateText(value: string, maxLength: number): string {
     return value;
   }
   return `${value.slice(0, Math.max(0, maxLength - 3)).trimEnd()}...`;
-}
-
-function formatSkillLabel(skillId: string): string {
-  return skillId
-    .split("_")
-    .map((part) => part[0]?.toUpperCase() + part.slice(1))
-    .join(" ");
 }
 
 function normalizeLines(value: readonly string[] | undefined, fallback: string): string[] {
@@ -200,6 +195,13 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   const toolLines = normalizeLines(snapshot.toolProficiencies, "None");
   const languageLines = normalizeLines(snapshot.languages, "None");
   const saveProficiencySet = new Set(snapshot.saveProficiencies ?? []);
+  const skillAndToolRows =
+    snapshot.skillAndToolRows ??
+    getSkillAndToolDisplayRows({
+      skillDefinitions: snapshot.skillDefinitions,
+      skills: snapshot.skills,
+      toolProficiencies: snapshot.toolProficiencies,
+    });
 
   commands.push("0.2 w");
   commands.push(`${headerX} ${headerY} ${headerWidth} ${headerHeight} re S`);
@@ -282,33 +284,17 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     drawText(commands, saveLine, leftX + 8, savingThrowsY + 102 - index * 16, 9, false);
   });
 
-  const orderedSkills: Array<{ id: string; label: string }> = [];
-  const seenSkills = new Set<string>();
-  for (const skill of snapshot.skillDefinitions ?? []) {
-    if (seenSkills.has(skill.id)) {
-      continue;
-    }
-    seenSkills.add(skill.id);
-    orderedSkills.push({ id: skill.id, label: skill.name });
-  }
-  for (const skillId of Object.keys(snapshot.skills ?? {}).sort((a, b) => a.localeCompare(b))) {
-    if (seenSkills.has(skillId)) {
-      continue;
-    }
-    seenSkills.add(skillId);
-    orderedSkills.push({ id: skillId, label: formatSkillLabel(skillId) });
-  }
-
   drawList(
     commands,
-    orderedSkills.map(
-      (skill) =>
-        `${skill.label} ${formatModifier(snapshot.skills?.[skill.id] ?? 0)}`
+    skillAndToolRows.map((row) =>
+      row.kind === "skill"
+        ? `${row.label} ${formatModifier(row.value)}`
+        : `Tool: ${row.label} (Proficient)`
     ),
     leftX + 8,
     skillsY + 176,
-    18,
-    9,
+    24,
+    7,
     7
   );
 

@@ -17,8 +17,9 @@ import {
   STANDARD_ARRAY,
   computePointBuyCost,
   computeDerivedState,
-  getPointBuyScoreCost,
   getAvailableAdvancementSlots,
+  getPointBuyScoreCost,
+  getSkillAndToolDisplayRows,
   validateCharacter,
 } from "@dark-sun/rules";
 import { formatSpellNameWithFlags } from "../../src/lib/spells";
@@ -291,6 +292,10 @@ function formatSkillId(skillId: string): string {
     .split("_")
     .map((part) => part[0]?.toUpperCase() + part.slice(1))
     .join(" ");
+}
+
+function formatSigned(value: number): string {
+  return value >= 0 ? `+${value}` : String(value);
 }
 
 function sortStringIds(values: string[]): string[] {
@@ -595,6 +600,30 @@ export default function BuilderClient({
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
   );
+  const skillAndToolRows = useMemo(() => {
+    const orderedSkillDefinitions = [...(content.skillDefinitions ?? [])]
+      .map((skill, index) => ({ skill, index }))
+      .sort((left, right) => {
+        const leftOrder =
+          typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
+        const rightOrder =
+          typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
+        if (leftOrder !== rightOrder) {
+          return leftOrder - rightOrder;
+        }
+        return left.index - right.index;
+      })
+      .map(({ skill }) => ({
+        id: skill.id,
+        name: skill.name,
+      }));
+
+    return getSkillAndToolDisplayRows({
+      skillDefinitions: orderedSkillDefinitions,
+      skills: derived.skills,
+      toolProficiencies: derived.toolProficiencies,
+    });
+  }, [content.skillDefinitions, derived.skills, derived.toolProficiencies]);
   const selectedBackgroundFixedOriginFeat = selectedBackgroundFixedOriginFeatId
     ? originFeats.find((feat) => feat.id === selectedBackgroundFixedOriginFeatId)
     : undefined;
@@ -2470,10 +2499,24 @@ export default function BuilderClient({
             </pre>
           </div>
           <div>
-            <div className="text-sm font-semibold">Skills</div>
-            <pre className="mt-1 overflow-auto rounded bg-slate-950 p-3 text-xs">
-              {JSON.stringify(derived.skills, null, 2)}
-            </pre>
+            <div className="text-sm font-semibold">Skills & Tools</div>
+            <div className="mt-1 max-h-56 overflow-auto rounded bg-slate-950 p-3">
+              <table className="w-full border-collapse text-xs">
+                <tbody>
+                  {skillAndToolRows.map((row) => (
+                    <tr key={`${row.kind}-${row.id}`} className="border-b border-slate-800 align-top">
+                      <td className="py-1 pr-2">
+                        <span className="mr-2 text-[10px] uppercase text-slate-400">{row.kind}</span>
+                        {row.label}
+                      </td>
+                      <td className="py-1 text-right font-semibold">
+                        {row.kind === "skill" ? formatSigned(row.value) : "Proficient"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

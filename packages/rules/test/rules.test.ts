@@ -7,6 +7,7 @@ import {
   computeProfBonus,
   deriveStartingEquipment,
   getAvailableAdvancementSlots,
+  getSkillAndToolDisplayRows,
   validateCharacter
 } from "../src";
 import type { CharacterState } from "../src/types";
@@ -2244,6 +2245,40 @@ describe("validateCharacter", () => {
     );
 
     expect(report.errors.some((issue) => issue.code === "SPELL_ID_MISSING")).toBe(true);
+  });
+
+  it("builds skill and tool display rows with tools shown only when proficient", () => {
+    const rows = getSkillAndToolDisplayRows({
+      skillDefinitions: [
+        { id: "athletics", name: "Athletics" },
+        { id: "arcana", name: "Arcana" }
+      ],
+      skills: {
+        athletics: 4,
+        arcana: 0,
+        survival: 2
+      },
+      toolProficiencies: ["Disguise Kit", "Gaming Set", "Disguise Kit"]
+    });
+
+    expect(rows).toEqual([
+      { kind: "skill", id: "athletics", label: "Athletics", value: 4 },
+      { kind: "skill", id: "arcana", label: "Arcana", value: 0 },
+      { kind: "skill", id: "survival", label: "Survival", value: 2 },
+      { kind: "tool", id: "Disguise Kit", label: "Disguise Kit" },
+      { kind: "tool", id: "Gaming Set", label: "Gaming Set" }
+    ]);
+  });
+
+  it("does not emit tool rows when no tool proficiencies are present", () => {
+    const rows = getSkillAndToolDisplayRows({
+      skills: {
+        stealth: 5
+      },
+      toolProficiencies: []
+    });
+
+    expect(rows).toEqual([{ kind: "skill", id: "stealth", label: "Stealth", value: 5 }]);
   });
 
   it("buildPdfExportFromTemplate returns deterministic non-empty PDF bytes for valid export", () => {

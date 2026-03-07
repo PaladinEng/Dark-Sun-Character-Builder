@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Ability, CharacterState } from "@dark-sun/rules";
-import { computeDerivedState, validateCharacter } from "@dark-sun/rules";
+import { computeDerivedState, getSkillAndToolDisplayRows, validateCharacter } from "@dark-sun/rules";
 
 import { getMergedContent } from "../../src/lib/content";
 
@@ -143,39 +143,6 @@ function formatModifier(value: number): string {
   return value >= 0 ? `+${value}` : String(value);
 }
 
-function formatSkillName(skillId: string): string {
-  return skillId
-    .split("_")
-    .map((part) => part[0]?.toUpperCase() + part.slice(1))
-    .join(" ");
-}
-
-function getOrderedSkillRows(
-  skillDefinitions: Array<{ id: string; name: string }>,
-  skillValues: Record<string, number>,
-): Array<{ id: string; name: string }> {
-  const rows: Array<{ id: string; name: string }> = [];
-  const seen = new Set<string>();
-
-  for (const skill of skillDefinitions) {
-    if (seen.has(skill.id)) {
-      continue;
-    }
-    seen.add(skill.id);
-    rows.push({ id: skill.id, name: skill.name });
-  }
-
-  for (const skillId of Object.keys(skillValues).sort((a, b) => a.localeCompare(b))) {
-    if (seen.has(skillId)) {
-      continue;
-    }
-    seen.add(skillId);
-    rows.push({ id: skillId, name: formatSkillName(skillId) });
-  }
-
-  return rows;
-}
-
 function formatSpellSlots(slots: readonly number[] | null | undefined): string {
   if (!slots) {
     return "None";
@@ -253,8 +220,8 @@ export default async function SheetPage({
     })
     .sort((a, b) => a.localeCompare(b));
 
-  const orderedSkills = getOrderedSkillRows(
-    [...merged.content.skillDefinitions]
+  const skillAndToolRows = getSkillAndToolDisplayRows({
+    skillDefinitions: [...merged.content.skillDefinitions]
       .map((skill, index) => ({ skill, index }))
       .sort((left, right) => {
         const leftOrder =
@@ -270,8 +237,9 @@ export default async function SheetPage({
         id: skill.id,
         name: skill.name,
       })),
-    derived.skills,
-  );
+    skills: derived.skills,
+    toolProficiencies: derived.toolProficiencies,
+  });
   const saveProficiencies = new Set(derived.saveProficiencies ?? []);
   const attackSummary = derived.attack
     ? `${derived.attack.name} ${formatModifier(derived.attack.toHit)} (${derived.attack.damage})`
@@ -421,11 +389,16 @@ export default async function SheetPage({
               <div className="max-h-[360px] overflow-auto p-2">
                 <table className="w-full border-collapse text-xs">
                   <tbody>
-                    {orderedSkills.map((skill) => (
-                      <tr key={`skill-${skill.id}`} className="border-b border-slate-200">
-                        <td className="py-1 pr-2">{skill.name}</td>
+                    {skillAndToolRows.map((row) => (
+                      <tr key={`${row.kind}-${row.id}`} className="border-b border-slate-200">
+                        <td className="py-1 pr-2">
+                          <span className="mr-2 text-[10px] uppercase tracking-wide text-slate-500">
+                            {row.kind}
+                          </span>
+                          {row.label}
+                        </td>
                         <td className="py-1 text-right font-semibold">
-                          {formatModifier(derived.skills[skill.id] ?? 0)}
+                          {row.kind === "skill" ? formatModifier(row.value) : "Proficient"}
                         </td>
                       </tr>
                     ))}

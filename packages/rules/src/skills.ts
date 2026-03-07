@@ -8,6 +8,19 @@ export type ResolvedSkillDefinition = {
   ability: Ability;
 };
 
+export type SkillAndToolDisplayRow =
+  | {
+      kind: "skill";
+      id: string;
+      label: string;
+      value: number;
+    }
+  | {
+      kind: "tool";
+      id: string;
+      label: string;
+    };
+
 const ABILITY_SET = new Set<Ability>(["str", "dex", "con", "int", "wis", "cha"]);
 
 const DEFAULT_SKILL_DEFINITIONS: readonly ResolvedSkillDefinition[] = [
@@ -85,4 +98,72 @@ export function getResolvedSkillIds(
   content: Pick<MergedContent, "skillDefinitions">
 ): Set<string> {
   return new Set(getResolvedSkillDefinitions(content).map((definition) => definition.id));
+}
+
+function formatSkillLabel(skillId: string): string {
+  return skillId
+    .split("_")
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+type DisplaySkillDefinition = {
+  id: string;
+  name: string;
+};
+
+export function getSkillAndToolDisplayRows(input: {
+  skillDefinitions?: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+  toolProficiencies?: readonly string[];
+}): SkillAndToolDisplayRow[] {
+  const rows: SkillAndToolDisplayRow[] = [];
+  const seenSkillIds = new Set<string>();
+
+  for (const definition of input.skillDefinitions ?? []) {
+    if (!definition || typeof definition.id !== "string" || definition.id.length === 0) {
+      continue;
+    }
+    if (seenSkillIds.has(definition.id)) {
+      continue;
+    }
+    seenSkillIds.add(definition.id);
+    rows.push({
+      kind: "skill",
+      id: definition.id,
+      label: definition.name,
+      value: input.skills?.[definition.id] ?? 0,
+    });
+  }
+
+  const unknownSkillIds = Object.keys(input.skills ?? {})
+    .filter((skillId) => !seenSkillIds.has(skillId))
+    .sort((left, right) => left.localeCompare(right));
+  for (const skillId of unknownSkillIds) {
+    rows.push({
+      kind: "skill",
+      id: skillId,
+      label: formatSkillLabel(skillId),
+      value: input.skills?.[skillId] ?? 0,
+    });
+  }
+
+  const seenTools = new Set<string>();
+  const orderedTools = [...(input.toolProficiencies ?? [])]
+    .filter((tool): tool is string => typeof tool === "string" && tool.trim().length > 0)
+    .map((tool) => tool.trim())
+    .sort((left, right) => left.localeCompare(right));
+  for (const tool of orderedTools) {
+    if (seenTools.has(tool)) {
+      continue;
+    }
+    seenTools.add(tool);
+    rows.push({
+      kind: "tool",
+      id: tool,
+      label: tool,
+    });
+  }
+
+  return rows;
 }

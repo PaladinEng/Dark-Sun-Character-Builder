@@ -3,7 +3,12 @@ import { join } from "node:path";
 
 import { NextResponse } from "next/server";
 import type { CharacterState } from "@dark-sun/rules";
-import { buildPdfExportFromTemplate, computeDerivedState, validateCharacter } from "@dark-sun/rules";
+import {
+  buildPdfExportFromTemplate,
+  computeDerivedState,
+  getSkillAndToolDisplayRows,
+  validateCharacter,
+} from "@dark-sun/rules";
 
 import { getMergedContent } from "../../../../src/lib/content";
 
@@ -204,6 +209,28 @@ export async function POST(request: Request) {
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
   const spellAttackBonus = derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+  const orderedSkillDefinitions = [...merged.content.skillDefinitions]
+    .map((skill, index) => ({ skill, index }))
+    .sort((left, right) => {
+      const leftOrder =
+        typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
+      const rightOrder =
+        typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
+      if (leftOrder !== rightOrder) {
+        return leftOrder - rightOrder;
+      }
+      return left.index - right.index;
+    })
+    .map(({ skill }) => ({
+      id: skill.id,
+      name: skill.name,
+      ability: skill.ability,
+    }));
+  const skillAndToolRows = getSkillAndToolDisplayRows({
+    skillDefinitions: orderedSkillDefinitions,
+    skills: derived.skills,
+    toolProficiencies: derived.toolProficiencies,
+  });
   const templatePdfBytes = await loadTemplatePdfBytes();
   const pdfResult = buildPdfExportFromTemplate(templatePdfBytes, validation, {
     level: payload.characterState.level,
@@ -218,23 +245,8 @@ export async function POST(request: Request) {
     savingThrows: derived.savingThrows,
     saveProficiencies: derived.saveProficiencies,
     skills: derived.skills,
-    skillDefinitions: [...merged.content.skillDefinitions]
-      .map((skill, index) => ({ skill, index }))
-      .sort((left, right) => {
-        const leftOrder =
-          typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
-        const rightOrder =
-          typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
-        if (leftOrder !== rightOrder) {
-          return leftOrder - rightOrder;
-        }
-        return left.index - right.index;
-      })
-      .map(({ skill }) => ({
-        id: skill.id,
-        name: skill.name,
-        ability: skill.ability
-      })),
+    skillDefinitions: orderedSkillDefinitions,
+    skillAndToolRows,
     proficiencyBonus: derived.proficiencyBonus,
     armorClass: derived.armorClass,
     shieldAC: payload.characterState.equippedShieldId ? 2 : 0,
