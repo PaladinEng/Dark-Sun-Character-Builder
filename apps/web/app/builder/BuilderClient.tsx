@@ -928,6 +928,19 @@ export default function BuilderClient({
         }
         return Math.max(0, Math.floor(value ?? 0));
       };
+      const hitDiceTotal = Number.isFinite(state.hitDiceTotal)
+        ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
+        : null;
+      const rawHitDiceSpent = Number.isFinite(state.hitDiceSpent)
+        ? Math.max(0, Math.floor(state.hitDiceSpent ?? 0))
+        : 0;
+      const hitDiceSpent =
+        hitDiceTotal === null
+          ? rawHitDiceSpent
+          : Math.min(rawHitDiceSpent, hitDiceTotal);
+      const exhaustionLevel = Number.isFinite(state.exhaustionLevel)
+        ? Math.max(0, Math.min(10, Math.floor(state.exhaustionLevel ?? 0)))
+        : 0;
       return {
         level: Math.max(1, Math.floor(state.level || 1)),
         subclass: state.subclass ?? null,
@@ -943,21 +956,15 @@ export default function BuilderClient({
         shieldAC: state.equippedShieldId ? 2 : 0,
         HP: derived.maxHP,
         tempHP: Number.isFinite(state.tempHP) ? Math.max(0, Math.floor(state.tempHP ?? 0)) : 0,
-        hitDiceTotal: Number.isFinite(state.hitDiceTotal)
-          ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
-          : null,
-        hitDiceSpent: Number.isFinite(state.hitDiceSpent)
-          ? Math.max(0, Math.floor(state.hitDiceSpent ?? 0))
-          : 0,
+        hitDiceTotal,
+        hitDiceSpent,
         deathSaveSuccesses: Number.isFinite(state.deathSaveSuccesses)
           ? Math.max(0, Math.min(3, Math.floor(state.deathSaveSuccesses ?? 0)))
           : 0,
         deathSaveFailures: Number.isFinite(state.deathSaveFailures)
           ? Math.max(0, Math.min(3, Math.floor(state.deathSaveFailures ?? 0)))
           : 0,
-        exhaustionLevel: Number.isFinite(state.exhaustionLevel)
-          ? Math.max(0, Math.floor(state.exhaustionLevel ?? 0))
-          : 0,
+        exhaustionLevel,
         speed: derived.speed,
         attacks: derived.attack ? [derived.attack] : [],
         feats: derived.feats,

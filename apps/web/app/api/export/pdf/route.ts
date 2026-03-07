@@ -66,12 +66,19 @@ function normalizeOptionalString(value: unknown): string | undefined {
   return value;
 }
 
-function normalizeOptionalNonNegativeInt(value: unknown): number | undefined {
+function normalizeOptionalNonNegativeInt(
+  value: unknown,
+  maximum?: number
+): number | undefined {
   const parsed = Number(value);
   if (!Number.isFinite(parsed)) {
     return undefined;
   }
-  return Math.max(0, Math.floor(parsed));
+  const bounded = Math.max(0, Math.floor(parsed));
+  if (typeof maximum === "number") {
+    return Math.min(maximum, bounded);
+  }
+  return bounded;
 }
 
 function formatDelimitedLabel(value: string): string {
@@ -178,9 +185,9 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     tempHP: normalizeOptionalNonNegativeInt(input.tempHP),
     hitDiceTotal: normalizeOptionalNonNegativeInt(input.hitDiceTotal),
     hitDiceSpent: normalizeOptionalNonNegativeInt(input.hitDiceSpent),
-    deathSaveSuccesses: normalizeOptionalNonNegativeInt(input.deathSaveSuccesses),
-    deathSaveFailures: normalizeOptionalNonNegativeInt(input.deathSaveFailures),
-    exhaustionLevel: normalizeOptionalNonNegativeInt(input.exhaustionLevel),
+    deathSaveSuccesses: normalizeOptionalNonNegativeInt(input.deathSaveSuccesses, 3),
+    deathSaveFailures: normalizeOptionalNonNegativeInt(input.deathSaveFailures, 3),
+    exhaustionLevel: normalizeOptionalNonNegativeInt(input.exhaustionLevel, 10),
     otherWealth: normalizeOptionalString(input.otherWealth),
     appearance: normalizeOptionalString(input.appearance),
     physicalDescription: normalizeOptionalString(input.physicalDescription),
