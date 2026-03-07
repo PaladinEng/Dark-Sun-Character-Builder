@@ -3,6 +3,7 @@
   "name": "Sorcerer Core",
   "spellIds": [
     "srd52:spell:acid-splash",
+    "srd52:spell:blade-ward",
     "srd52:spell:dancing-lights",
     "srd52:spell:light",
     "srd52:spell:mage-hand",

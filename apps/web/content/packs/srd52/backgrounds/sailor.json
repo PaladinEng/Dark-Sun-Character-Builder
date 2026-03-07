@@ -13,6 +13,7 @@
   "grantsOriginFeatId": "srd52:feat:savage-attacker",
   "startingEquipment": {
     "itemIds": [
+      "srd52:equipment:navigators-tools",
       "srd52:equipment:rope-hempen-50ft",
       "srd52:equipment:waterskin"
     ]

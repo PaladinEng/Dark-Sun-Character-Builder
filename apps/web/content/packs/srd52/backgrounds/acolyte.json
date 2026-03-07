@@ -11,6 +11,11 @@
   },
   "grantsFeat": "srd52:feat:alert",
   "grantsOriginFeatId": "srd52:feat:alert",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:calligraphers-supplies"
+    ]
+  },
   "effects": [
     {
       "type": "grant_skill_proficiency",

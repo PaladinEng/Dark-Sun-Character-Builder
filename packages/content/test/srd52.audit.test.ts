@@ -121,4 +121,51 @@ describe("srd52 content audit", () => {
 
     expect(hasGamingSetGrant).toBe(true);
   });
+
+  it("ensures SRD spells are reachable and background tool proficiencies map to equipment", async () => {
+    const srdPackDir = await resolveSrdPackDir();
+    const pack = await loadPackFromDir(srdPackDir);
+
+    const spellcastingClasses = pack.entities.classes.filter((klass) => klass.spellcasting);
+    const spellListById = new Map(pack.entities.spellLists.map((spellList) => [spellList.id, spellList]));
+    const reachableSpellIds = new Set<string>();
+
+    for (const klass of spellcastingClasses) {
+      const refs = klass.spellListRefIds ?? klass.spellListRefs ?? [];
+      for (const spellListId of refs) {
+        const spellList = spellListById.get(spellListId);
+        if (!spellList) {
+          continue;
+        }
+        for (const spellId of spellList.spellIds) {
+          reachableSpellIds.add(spellId);
+        }
+      }
+    }
+
+    for (const spell of pack.entities.spells) {
+      expect(
+        reachableSpellIds.has(spell.id),
+        `${spell.id} should be reachable from at least one spellcasting class list`,
+      ).toBe(true);
+    }
+
+    const equipmentNames = new Set(pack.entities.equipment.map((item) => item.name));
+    const toolProficiencies = new Set<string>();
+
+    for (const background of pack.entities.backgrounds) {
+      for (const effect of background.effects ?? []) {
+        if (effect.type === "grant_tool_proficiency") {
+          toolProficiencies.add(effect.tool);
+        }
+      }
+    }
+
+    for (const tool of toolProficiencies) {
+      expect(
+        equipmentNames.has(tool),
+        `Background tool proficiency "${tool}" should have a matching SRD equipment entry`,
+      ).toBe(true);
+    }
+  });
 });
