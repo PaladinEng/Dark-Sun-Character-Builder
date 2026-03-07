@@ -471,6 +471,7 @@ export default function BuilderClient({
     exhaustionLevel: 0,
     attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
       name: "",
+      itemId: "",
       notes: "",
     })),
     appearance: "",
@@ -1080,6 +1081,7 @@ export default function BuilderClient({
     while (normalized.length < ATTUNEMENT_SLOT_COUNT) {
       normalized.push({
         name: "",
+        itemId: "",
         notes: "",
       });
     }
@@ -1184,7 +1186,7 @@ export default function BuilderClient({
     }));
   };
 
-  const updateAttunedItem = (index: number, field: "name" | "notes", value: string) => {
+  const updateAttunedItem = (index: number, field: "name" | "itemId" | "notes", value: string) => {
     setState((previous) => {
       const items = [...(previous.attunedItems ?? [])];
       while (items.length <= index) {
@@ -2092,7 +2094,7 @@ export default function BuilderClient({
             {attunementSlots.map((item, index) => (
               <div
                 key={`attuned-slot-${index}`}
-                className="grid gap-2 rounded border border-slate-700 bg-slate-950/30 p-2 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
+                className="grid gap-2 rounded border border-slate-700 bg-slate-950/30 p-2 md:grid-cols-3"
               >
                 <label className="text-xs">
                   <div className="font-semibold">Slot {index + 1} Item</div>
@@ -2102,6 +2104,16 @@ export default function BuilderClient({
                     onChange={(event) => updateAttunedItem(index, "name", event.target.value)}
                     className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
                     placeholder="Item name"
+                  />
+                </label>
+                <label className="text-xs">
+                  <div className="font-semibold">Slot {index + 1} Item ID</div>
+                  <input
+                    type="text"
+                    value={item.itemId ?? ""}
+                    onChange={(event) => updateAttunedItem(index, "itemId", event.target.value)}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    placeholder="Optional content id"
                   />
                 </label>
                 <label className="text-xs">

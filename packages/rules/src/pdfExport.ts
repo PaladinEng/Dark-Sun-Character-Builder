@@ -1,6 +1,6 @@
 import { getSkillAndToolDisplayRows, type SkillAndToolDisplayRow } from "./skills";
 import type { ValidationIssue, ValidationReport } from "./validate";
-import type { Ability, AbilityRecord, SpellSlots } from "./types";
+import type { Ability, AbilityRecord, AttunedItem, SpellSlots } from "./types";
 
 const PDF_EXPORT_BLOCKED_MESSAGE = "PDF export blocked: resolve validation errors first.";
 
@@ -31,6 +31,8 @@ export type PdfSpellListEntry = {
   notes?: string | null;
   reference?: string | null;
 };
+
+export type PdfAttunedItem = string | AttunedItem;
 
 export type PdfExportCharacterSnapshot = {
   level: number;
@@ -85,7 +87,7 @@ export type PdfExportCharacterSnapshot = {
   gp?: number | null;
   pp?: number | null;
   otherWealth?: string | null;
-  attunedItems?: readonly string[];
+  attunedItems?: readonly PdfAttunedItem[];
   inventoryItems?: readonly string[];
   inventorySummary?: readonly string[];
   cantripSpellNames?: readonly string[];
@@ -151,6 +153,33 @@ function normalizeLines(value: readonly string[] | undefined, fallback: string):
   }
   const normalized = value.map((entry) => entry.trim()).filter((entry) => entry.length > 0);
   return normalized.length > 0 ? normalized : [fallback];
+}
+
+function formatAttunedItemLine(item: PdfAttunedItem): string | null {
+  if (typeof item === "string") {
+    const normalized = item.trim();
+    return normalized.length > 0 ? normalized : null;
+  }
+
+  const name = item.name?.trim() ?? "";
+  const itemId = item.itemId?.trim() ?? "";
+  const notes = item.notes?.trim() ?? "";
+  const base =
+    name.length > 0 && itemId.length > 0 ? `${name} (${itemId})` : name || itemId;
+  if (!base) {
+    return notes || null;
+  }
+  return notes.length > 0 ? `${base}: ${notes}` : base;
+}
+
+function normalizeAttunedItemLines(items: readonly PdfAttunedItem[] | undefined): string[] {
+  if (!items || items.length === 0) {
+    return ["None"];
+  }
+  const lines = items
+    .map((item) => formatAttunedItemLine(item))
+    .filter((line): line is string => typeof line === "string" && line.length > 0);
+  return lines.length > 0 ? lines : ["None"];
 }
 
 function drawText(
@@ -556,8 +585,8 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   const knownLine = `Known: ${knownCount}`;
 
   const inventoryLines = normalizeLines(snapshot.inventoryItems ?? snapshot.inventorySummary, "Other Gear: None");
-  const attunedLines = normalizeLines(snapshot.attunedItems, "None");
-  const attunedCount = normalizeDisplayValues(snapshot.attunedItems).length;
+  const attunedLines = normalizeAttunedItemLines(snapshot.attunedItems);
+  const attunedCount = attunedLines[0] === "None" ? 0 : attunedLines.length;
 
   const companionSummary = [
     snapshot.companionName?.trim(),
@@ -808,7 +837,7 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     8,
     false
   );
-  drawText(commands, `Attuned Items (${attunedCount}/3):`, rightX + SECTION_INNER_PADDING, middleY + 62, 8, true);
+  drawText(commands, `Attuned Items (${attunedCount}):`, rightX + SECTION_INNER_PADDING, middleY + 62, 8, true);
   drawList(
     commands,
     attunedLines.map((line) => `- ${line}`),

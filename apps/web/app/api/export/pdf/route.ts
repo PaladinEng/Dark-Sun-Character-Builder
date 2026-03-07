@@ -307,8 +307,16 @@ export async function POST(request: Request) {
     })
     .sort((a, b) => a.localeCompare(b));
   const inventorySummaryItems = inventoryItems.slice(0, 6);
-  const attunedItemLabels = (payload.characterState.attunedItems ?? [])
-    .map((item) => item.name?.trim() || item.itemId?.trim() || "")
+  const attunedItems = payload.characterState.attunedItems ?? [];
+  const attunedItemLabels = attunedItems
+    .map((item) => {
+      const name = item.name?.trim() ?? "";
+      const itemId = item.itemId?.trim() ?? "";
+      if (name && itemId) {
+        return `${name} (${itemId})`;
+      }
+      return name || itemId || item.notes?.trim() || "";
+    })
     .filter((entry) => entry.length > 0);
   const inventorySummary = [
     `Coins: ${cpCoins} cp / ${spCoins} sp / ${epCoins} ep / ${gpCoins} gp / ${ppCoins} pp`,
@@ -508,7 +516,7 @@ export async function POST(request: Request) {
     gp: gpCoins,
     pp: ppCoins,
     otherWealth: payload.characterState.otherWealth ?? null,
-    attunedItems: attunedItemLabels,
+    attunedItems,
     inventoryItems: inventoryItems.slice(0, 16),
     inventorySummary,
     cantripSpellNames,

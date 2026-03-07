@@ -355,7 +355,14 @@ export default async function SheetPage({
     .sort((a, b) => a.localeCompare(b));
 
   const attunedItems = (payload.characterState.attunedItems ?? [])
-    .map((item) => item.name?.trim() || item.itemId?.trim() || "")
+    .map((item) => {
+      const name = item.name?.trim() ?? "";
+      const itemId = item.itemId?.trim() ?? "";
+      if (name && itemId) {
+        return `${name} (${itemId})`;
+      }
+      return name || itemId || item.notes?.trim() || "";
+    })
     .filter((entry) => entry.length > 0);
 
   const skillAndToolRows = getSkillAndToolDisplayRows({
