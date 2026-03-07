@@ -2,7 +2,7 @@ import { access, readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { NextResponse } from "next/server";
-import type { CharacterState } from "@dark-sun/rules";
+import type { AttunedItem, CharacterState } from "@dark-sun/rules";
 import {
   buildPdfExportFromTemplate,
   computeDerivedState,
@@ -28,6 +28,34 @@ function normalizeStringArray(value: unknown): string[] {
     return [];
   }
   return value.filter((entry): entry is string => typeof entry === "string");
+}
+
+function normalizeAttunedItems(value: unknown): AttunedItem[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  const normalized: AttunedItem[] = [];
+  for (const entry of value) {
+    if (typeof entry === "string") {
+      normalized.push({ name: entry });
+      continue;
+    }
+    if (!isObjectRecord(entry)) {
+      continue;
+    }
+    const name = normalizeOptionalString(entry.name);
+    const itemId = normalizeOptionalString(entry.itemId);
+    const notes = normalizeOptionalString(entry.notes);
+    if (
+      typeof name === "undefined" &&
+      typeof itemId === "undefined" &&
+      typeof notes === "undefined"
+    ) {
+      continue;
+    }
+    normalized.push({ name, itemId, notes });
+  }
+  return normalized;
 }
 
 function normalizeOptionalString(value: unknown): string | undefined {
@@ -68,7 +96,7 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     weaponProficiencies: normalizeStringArray(input.weaponProficiencies),
     toolProficiencies: normalizeStringArray(input.toolProficiencies),
     languages: normalizeStringArray(input.languages),
-    attunedItems: normalizeStringArray(input.attunedItems),
+    attunedItems: normalizeAttunedItems(input.attunedItems),
     subclass: normalizeOptionalString(input.subclass),
     xp: normalizeOptionalNonNegativeInt(input.xp),
     heroicInspiration: input.heroicInspiration === true,
@@ -197,8 +225,12 @@ export async function POST(request: Request) {
     })
     .sort((a, b) => a.localeCompare(b))
     .slice(0, 6);
+  const attunedItemLabels = (payload.characterState.attunedItems ?? [])
+    .map((item) => item.name?.trim() || item.itemId?.trim() || "")
+    .filter((entry) => entry.length > 0);
   const inventorySummary = [
     `Coins: ${cpCoins} cp / ${spCoins} sp / ${epCoins} ep / ${gpCoins} gp / ${ppCoins} pp`,
+    `Attuned: ${attunedItemLabels.join(", ") || "None"}`,
     ...(payload.characterState.otherWealth?.trim()
       ? [`Other Wealth: ${payload.characterState.otherWealth.trim()}`]
       : []),
@@ -278,7 +310,7 @@ export async function POST(request: Request) {
     gp: gpCoins,
     pp: ppCoins,
     otherWealth: payload.characterState.otherWealth ?? null,
-    attunedItems: payload.characterState.attunedItems ?? [],
+    attunedItems: attunedItemLabels,
     inventorySummary,
     appearance: payload.characterState.appearance ?? null,
     physicalDescription: payload.characterState.physicalDescription ?? null,

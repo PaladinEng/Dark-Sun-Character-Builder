@@ -33,6 +33,7 @@ export type {
   CharacterConditions,
   ConditionId,
   CharacterCoins,
+  AttunedItem,
   CompanionPlaceholder,
   DerivedModifier,
   DerivedModifierEffect,

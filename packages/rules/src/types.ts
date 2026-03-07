@@ -59,6 +59,12 @@ export interface CompanionPlaceholder {
   notes?: string;
 }
 
+export interface AttunedItem {
+  name?: string;
+  itemId?: string;
+  notes?: string;
+}
+
 export interface CharacterState {
   level: number;
   baseAbilities: AbilityRecord;
@@ -103,7 +109,7 @@ export interface CharacterState {
   deathSaveSuccesses?: number;
   deathSaveFailures?: number;
   exhaustionLevel?: number;
-  attunedItems?: string[];
+  attunedItems?: AttunedItem[];
   appearance?: string;
   physicalDescription?: string;
   backstory?: string;

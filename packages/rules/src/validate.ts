@@ -19,6 +19,7 @@ import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   CONDITION_IDS,
+  type AttunedItem,
   type Ability,
   type CharacterCoins,
   type CharacterState,
@@ -50,6 +51,14 @@ function isConditionId(value: string): value is ConditionId {
 }
 
 const COIN_DENOMINATIONS: Array<keyof CharacterCoins> = ["cp", "sp", "ep", "gp", "pp"];
+const OPTIONAL_TEXT_FIELDS = [
+  "otherWealth",
+  "appearance",
+  "physicalDescription",
+  "backstory",
+  "alignment",
+  "notes"
+] as const;
 
 function collectInventoryItemIds(state: CharacterState): string[] {
   const itemIds = state.inventoryItemIds ?? [];
@@ -441,6 +450,60 @@ export function validateCharacter(
         message: `Coin value for ${denomination.toUpperCase()} must be a non-negative integer.`,
         path: `coins.${denomination}`
       });
+    }
+  }
+
+  for (const field of OPTIONAL_TEXT_FIELDS) {
+    const value = state[field];
+    if (typeof value === "undefined") {
+      continue;
+    }
+    if (typeof value !== "string") {
+      pushError({
+        code: "OPTIONAL_TEXT_FIELD_INVALID",
+        message: `${field} must be a string when provided.`,
+        path: field
+      });
+    }
+  }
+
+  if (typeof state.attunedItems !== "undefined") {
+    if (!Array.isArray(state.attunedItems)) {
+      pushError({
+        code: "ATTUNED_ITEMS_INVALID",
+        message: "Attuned items must be an array when provided.",
+        path: "attunedItems"
+      });
+    } else {
+      for (const [index, item] of state.attunedItems.entries()) {
+        if (typeof item !== "object" || item === null || Array.isArray(item)) {
+          pushError({
+            code: "ATTUNED_ITEM_INVALID",
+            message: `Attuned item at index ${index} must be an object.`,
+            path: `attunedItems[${index}]`
+          });
+          continue;
+        }
+
+        const candidate = item as AttunedItem;
+        const fields: Array<[keyof AttunedItem, unknown]> = [
+          ["name", candidate.name],
+          ["itemId", candidate.itemId],
+          ["notes", candidate.notes]
+        ];
+        for (const [field, value] of fields) {
+          if (typeof value === "undefined") {
+            continue;
+          }
+          if (typeof value !== "string") {
+            pushError({
+              code: "ATTUNED_ITEM_FIELD_INVALID",
+              message: `Attuned item ${field} at index ${index} must be a string.`,
+              path: `attunedItems[${index}].${field}`
+            });
+          }
+        }
+      }
     }
   }
 

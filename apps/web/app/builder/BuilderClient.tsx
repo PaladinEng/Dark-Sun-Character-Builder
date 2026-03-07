@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import type { MergedContent, Spell } from "@dark-sun/content";
 import type {
+  AttunedItem,
   AbilityScoreMethod,
   CharacterState,
   DerivedState,
@@ -149,7 +150,7 @@ type ExportedDerivedState = {
     pp: number;
   };
   otherWealth: string | null;
-  attunedItems: string[];
+  attunedItems: AttunedItem[];
   appearance: string | null;
   physicalDescription: string | null;
   backstory: string | null;
@@ -189,6 +190,7 @@ type BuilderClientProps = {
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
 const COIN_DENOMINATIONS: CoinDenomination[] = ["cp", "sp", "ep", "gp", "pp"];
+const ATTUNEMENT_SLOT_COUNT = 5;
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
 const ABILITY_SCORE_METHOD_OPTIONS: Array<{ value: AbilityScoreMethod; label: string }> = [
   { value: "manual", label: "Manual" },
@@ -306,6 +308,16 @@ function sortInventoryEntries(
   entries: Array<{ itemId: string; quantity?: number }>,
 ): Array<{ itemId: string; quantity?: number }> {
   return [...entries].sort((a, b) => a.itemId.localeCompare(b.itemId));
+}
+
+function normalizeAttunedItemsForExport(items: AttunedItem[] | undefined): AttunedItem[] {
+  return (items ?? [])
+    .map((item) => ({
+      name: item.name?.trim() || undefined,
+      itemId: item.itemId?.trim() || undefined,
+      notes: item.notes?.trim() || undefined,
+    }))
+    .filter((item) => Boolean(item.name || item.itemId || item.notes));
 }
 
 function withSpellSelectionField(
@@ -457,7 +469,10 @@ export default function BuilderClient({
     deathSaveSuccesses: 0,
     deathSaveFailures: 0,
     exhaustionLevel: 0,
-    attunedItems: [],
+    attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
+      name: "",
+      notes: "",
+    })),
     appearance: "",
     physicalDescription: "",
     backstory: "",
@@ -978,7 +993,7 @@ export default function BuilderClient({
           pp: coin("pp"),
         },
         otherWealth: state.otherWealth?.trim() ? state.otherWealth.trim() : null,
-        attunedItems: sortStringIds(state.attunedItems ?? []),
+        attunedItems: normalizeAttunedItemsForExport(state.attunedItems),
         appearance: state.appearance?.trim() ? state.appearance.trim() : null,
         physicalDescription: state.physicalDescription?.trim() ? state.physicalDescription.trim() : null,
         backstory: state.backstory?.trim() ? state.backstory.trim() : null,
@@ -1067,6 +1082,19 @@ export default function BuilderClient({
   const hitDiceTotalForConstraints = Number.isFinite(state.hitDiceTotal)
     ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
     : null;
+  const attunementSlots = useMemo(() => {
+    const normalized = [...(state.attunedItems ?? [])];
+    if (normalized.length > ATTUNEMENT_SLOT_COUNT) {
+      return normalized.slice(0, ATTUNEMENT_SLOT_COUNT);
+    }
+    while (normalized.length < ATTUNEMENT_SLOT_COUNT) {
+      normalized.push({
+        name: "",
+        notes: "",
+      });
+    }
+    return normalized;
+  }, [state.attunedItems]);
   const standardArrayAllowedCounts = useMemo(() => {
     const counts = new Map<number, number>();
     for (const value of STANDARD_ARRAY) {
@@ -1164,6 +1192,24 @@ export default function BuilderClient({
         [denomination]: normalizeInteger(value),
       },
     }));
+  };
+
+  const updateAttunedItem = (index: number, field: "name" | "notes", value: string) => {
+    setState((previous) => {
+      const items = [...(previous.attunedItems ?? [])];
+      while (items.length <= index) {
+        items.push({});
+      }
+      const current = items[index] ?? {};
+      items[index] = {
+        ...current,
+        [field]: value,
+      };
+      return {
+        ...previous,
+        attunedItems: items,
+      };
+    });
   };
 
   const updateEncumberedCondition = (active: boolean) => {
@@ -2026,6 +2072,137 @@ export default function BuilderClient({
                 />
               </label>
             ))}
+          </div>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <label className="text-sm">
+            <div className="font-semibold">Other Wealth</div>
+            <input
+              type="text"
+              value={state.otherWealth ?? ""}
+              onChange={(event) =>
+                setState((previous) => ({
+                  ...previous,
+                  otherWealth: event.target.value,
+                }))
+              }
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              placeholder="Trade goods, gems, favors, caravans..."
+            />
+          </label>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Attunement</div>
+          <p className="mt-1 text-xs text-slate-300">
+            Optional item slots. Empty entries are ignored in exports.
+          </p>
+          <div className="mt-2 grid gap-2">
+            {attunementSlots.map((item, index) => (
+              <div
+                key={`attuned-slot-${index}`}
+                className="grid gap-2 rounded border border-slate-700 bg-slate-950/30 p-2 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
+              >
+                <label className="text-xs">
+                  <div className="font-semibold">Slot {index + 1} Item</div>
+                  <input
+                    type="text"
+                    value={item.name ?? ""}
+                    onChange={(event) => updateAttunedItem(index, "name", event.target.value)}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    placeholder="Item name"
+                  />
+                </label>
+                <label className="text-xs">
+                  <div className="font-semibold">Slot {index + 1} Notes</div>
+                  <input
+                    type="text"
+                    value={item.notes ?? ""}
+                    onChange={(event) => updateAttunedItem(index, "notes", event.target.value)}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    placeholder="Optional"
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Narrative</div>
+          <div className="mt-2 grid gap-2 md:grid-cols-2">
+            <label className="text-sm md:col-span-2">
+              <div className="font-semibold">Alignment</div>
+              <input
+                type="text"
+                value={state.alignment ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    alignment: event.target.value,
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                placeholder="e.g. Neutral Good"
+              />
+            </label>
+            <label className="text-sm">
+              <div className="font-semibold">Appearance</div>
+              <textarea
+                value={state.appearance ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    appearance: event.target.value,
+                  }))
+                }
+                rows={3}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+            <label className="text-sm">
+              <div className="font-semibold">Physical Description</div>
+              <textarea
+                value={state.physicalDescription ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    physicalDescription: event.target.value,
+                  }))
+                }
+                rows={3}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+            <label className="text-sm md:col-span-2">
+              <div className="font-semibold">Backstory</div>
+              <textarea
+                value={state.backstory ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    backstory: event.target.value,
+                  }))
+                }
+                rows={4}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+            <label className="text-sm md:col-span-2">
+              <div className="font-semibold">Notes</div>
+              <textarea
+                value={state.notes ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    notes: event.target.value,
+                  }))
+                }
+                rows={4}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
           </div>
         </div>
 

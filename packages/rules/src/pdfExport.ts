@@ -219,11 +219,24 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   const spellSlotsSummary = snapshot.spellSlots
     ? snapshot.spellSlots.map((count, index) => `L${index + 1}:${count}`).join(" ")
     : "None";
+  const attunedItemsSummary =
+    snapshot.attunedItems && snapshot.attunedItems.length > 0
+      ? snapshot.attunedItems.join(", ")
+      : "None";
   const inventoryLines = normalizeLines(snapshot.inventorySummary, "No additional equipment listed.");
   const featLines = normalizeLines(snapshot.featNames, "No feats selected.");
   const warningLines = normalizeLines(snapshot.warningMessages, "No validation warnings.");
   const toolLines = normalizeLines(snapshot.toolProficiencies, "None");
   const languageLines = normalizeLines(snapshot.languages, "None");
+  const narrativeLines = [
+    `Alignment: ${snapshot.alignment?.trim() || "-"}`,
+    `Appearance: ${snapshot.appearance?.trim() || "-"}`,
+    `Physical: ${snapshot.physicalDescription?.trim() || "-"}`,
+    `Backstory: ${snapshot.backstory?.trim() || "-"}`,
+    `Notes: ${snapshot.notes?.trim() || "-"}`,
+    `Companion: ${snapshot.companionName?.trim() || "-"}`,
+    `Familiar: ${snapshot.familiarName?.trim() || "-"}`,
+  ];
   const saveProficiencySet = new Set(snapshot.saveProficiencies ?? []);
   const skillAndToolRows =
     snapshot.skillAndToolRows ??
@@ -392,6 +405,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       `Armor: ${truncateText(snapshot.equippedArmorName ?? "None", 34)}`,
       `Shield: ${truncateText(snapshot.equippedShieldName ?? "None", 34)}`,
       `Weapon: ${truncateText(snapshot.equippedWeaponName ?? "None", 34)}`,
+      `Attuned: ${truncateText(attunedItemsSummary, 36)}`,
       ...inventoryLines.map((line) => truncateText(line, 44)),
     ],
     middleX + 8,
@@ -405,6 +419,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     const y = notesY + 108 - index * 14;
     commands.push(`${middleX + 8} ${y} m ${middleX + middleWidth - 8} ${y} l S`);
   }
+
+  drawList(commands, narrativeLines, middleX + 8, notesY + 110, 7, 14, 8);
 
   drawList(
     commands,

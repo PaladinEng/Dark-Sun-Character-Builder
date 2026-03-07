@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Ability, CharacterState } from "@dark-sun/rules";
+import type { Ability, AttunedItem, CharacterState } from "@dark-sun/rules";
 import { computeDerivedState, getSkillAndToolDisplayRows, validateCharacter } from "@dark-sun/rules";
 
 import { getMergedContent } from "../../src/lib/content";
@@ -30,6 +30,34 @@ function normalizeStringArray(value: unknown): string[] {
     return [];
   }
   return value.filter((entry): entry is string => typeof entry === "string");
+}
+
+function normalizeAttunedItems(value: unknown): AttunedItem[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  const normalized: AttunedItem[] = [];
+  for (const entry of value) {
+    if (typeof entry === "string") {
+      normalized.push({ name: entry });
+      continue;
+    }
+    if (!isObjectRecord(entry)) {
+      continue;
+    }
+    const name = normalizeOptionalString(entry.name);
+    const itemId = normalizeOptionalString(entry.itemId);
+    const notes = normalizeOptionalString(entry.notes);
+    if (
+      typeof name === "undefined" &&
+      typeof itemId === "undefined" &&
+      typeof notes === "undefined"
+    ) {
+      continue;
+    }
+    normalized.push({ name, itemId, notes });
+  }
+  return normalized;
 }
 
 function normalizeOptionalString(value: unknown): string | undefined {
@@ -70,7 +98,7 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     weaponProficiencies: normalizeStringArray(input.weaponProficiencies),
     toolProficiencies: normalizeStringArray(input.toolProficiencies),
     languages: normalizeStringArray(input.languages),
-    attunedItems: normalizeStringArray(input.attunedItems),
+    attunedItems: normalizeAttunedItems(input.attunedItems),
     subclass: normalizeOptionalString(input.subclass),
     xp: normalizeOptionalNonNegativeInt(input.xp),
     heroicInspiration: input.heroicInspiration === true,
@@ -219,6 +247,9 @@ export default async function SheetPage({
       return quantity > 1 ? `${label} x${quantity}` : label;
     })
     .sort((a, b) => a.localeCompare(b));
+  const attunedItems = (payload.characterState.attunedItems ?? [])
+    .map((item) => item.name?.trim() || item.itemId?.trim() || "")
+    .filter((entry) => entry.length > 0);
 
   const skillAndToolRows = getSkillAndToolDisplayRows({
     skillDefinitions: [...merged.content.skillDefinitions]
@@ -457,7 +488,7 @@ export default async function SheetPage({
                 <li>Weapon: {weapon?.name ?? "None"}</li>
                 <li>Coins: {cpCoins} cp / {spCoins} sp / {epCoins} ep / {gpCoins} gp / {ppCoins} pp</li>
                 <li>Other Wealth: {payload.characterState.otherWealth || "None"}</li>
-                <li>Attuned Items: {payload.characterState.attunedItems?.join(", ") || "None"}</li>
+                <li>Attuned Items: {attunedItems.join(", ") || "None"}</li>
                 <li>Other Gear: {inventoryItems.join(", ") || "None"}</li>
               </ul>
             </section>
