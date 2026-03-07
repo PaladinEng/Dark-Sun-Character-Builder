@@ -1,4 +1,4 @@
-import { getSkillAndToolDisplayRows, type SkillAndToolDisplayRow } from "./skills";
+import type { SkillAndToolDisplayRow } from "./skills";
 import type { ValidationIssue, ValidationReport } from "./validate";
 import type { Ability, AbilityRecord, AttunedItem, SpellSlots } from "./types";
 
@@ -981,7 +981,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   const margin = PDF_MARGIN;
   const contentWidth = pageWidth - margin * 2;
   const sectionGap = 8;
-  const leftWidth = 192;
+  const leftWidth = 188;
   const rightWidth = contentWidth - leftWidth - sectionGap;
   const leftX = margin;
   const rightX = leftX + leftWidth + sectionGap;
@@ -1039,29 +1039,28 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
         ? `DC ${snapshot.spellSaveDC}`
         : "-";
   const attackNotes = snapshot.attackNotes?.trim() || "-";
-  const classFeatureLines = normalizeLines(snapshot.classFeatureNames, "None");
+  const classFeatureLines = (() => {
+    const merged = normalizeDisplayValues([
+      ...(snapshot.classFeatureNames ?? []),
+      ...(snapshot.selectedFeatureNames ?? []),
+    ]);
+    return merged.length > 0 ? merged : ["None"];
+  })();
   const speciesTraitLines = normalizeLines(snapshot.speciesTraitNames, "None");
   const featLines = normalizeLines(snapshot.featNames, "None");
-  const otherFeatureLines = normalizeLines(snapshot.selectedFeatureNames, "None");
   const conditionLines = normalizeLines(snapshot.activeConditionNames, "None");
   const saveProficiencySet = new Set(snapshot.saveProficiencies ?? []);
-  const skillAndToolRows =
-    snapshot.skillAndToolRows ??
-    getSkillAndToolDisplayRows({
-      skillDefinitions: snapshot.skillDefinitions,
-      skills: snapshot.skills,
-      toolProficiencies: snapshot.toolProficiencies,
-    });
-  const featuresSummaryLines = [
-    "Class Features:",
-    ...classFeatureLines.map((line) => `- ${line}`),
-    "Species Traits:",
-    ...speciesTraitLines.map((line) => `- ${line}`),
-    "Feats:",
-    ...featLines.map((line) => `- ${line}`),
-    "Other Features:",
-    ...otherFeatureLines.map((line) => `- ${line}`),
-  ];
+  const cantripRows = (snapshot.cantripSpellNames ?? []).slice(0, 2).map((name) => ({
+    name: `Cantrip: ${name}`,
+    bonus:
+      typeof snapshot.spellAttackBonus === "number"
+        ? formatModifier(snapshot.spellAttackBonus)
+        : typeof snapshot.spellSaveDC === "number"
+          ? `DC ${snapshot.spellSaveDC}`
+          : "-",
+    damage: "See spell",
+    notes: "Cantrip",
+  }));
   const attackRows = [
     {
       name: snapshot.attackName?.trim() || "-",
@@ -1069,46 +1068,46 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       damage: snapshot.attackDamage?.trim() || "-",
       notes: attackNotes,
     },
-    { name: "-", bonus: "-", damage: "-", notes: "-" },
-    { name: "-", bonus: "-", damage: "-", notes: "-" },
-    { name: "-", bonus: "-", damage: "-", notes: "-" },
+    ...cantripRows,
   ];
+  while (attackRows.length < 6) {
+    attackRows.push({ name: "-", bonus: "-", damage: "-", notes: "-" });
+  }
 
-  const identityY = 704;
-  const identityHeight = 64;
-  const bodyTop = identityY - 8;
+  const identityY = 706;
+  const identityHeight = 62;
+  const combatY = 640;
+  const combatHeight = 58;
+  const survivabilityY = 572;
+  const survivabilityHeight = 60;
+  const bodyTop = survivabilityY - sectionGap;
   const bodyBottom = 24;
-  const bodyHeight = bodyTop - bodyBottom;
 
-  const abilityY = 268;
-  const abilityHeight = bodyHeight - 236 - sectionGap;
-  const skillsY = bodyBottom;
-  const skillsHeight = 236;
+  const abilityY = 186;
+  const abilityHeight = bodyTop - abilityY;
+  const trainingY = bodyBottom;
+  const trainingHeight = abilityY - bodyBottom - sectionGap;
 
-  const combatY = 600;
-  const combatHeight = 96;
-  const survivabilityY = 480;
-  const survivabilityHeight = 112;
-  const attacksY = 334;
-  const attacksHeight = 138;
-  const conditionsY = 248;
-  const conditionsHeight = 78;
+  const conditionsY = 514;
+  const conditionsHeight = bodyTop - conditionsY;
+  const attacksY = 362;
+  const attacksHeight = conditionsY - attacksY - sectionGap;
   const featuresY = bodyBottom;
-  const featuresHeight = 216;
+  const featuresHeight = attacksY - bodyBottom - sectionGap;
 
   commands.push("0.2 w");
   drawText(commands, "DARK SUN BUILDER CHARACTER SHEET", margin, 778, 11, true);
 
   drawSection(commands, margin, identityY, contentWidth, identityHeight, "Identity Header");
   const identityInnerX = margin + SECTION_INNER_PADDING;
-  const identityFieldHeight = 18;
-  const identityTopRowY = identityY + 24;
-  const identityBottomRowY = identityY + 3;
+  const identityFieldHeight = 20;
+  const identityTopRowY = identityY + 22;
+  const identityBottomRowY = identityY + 1;
   const idTop = [
-    { label: "Character Name", value: characterName, width: 226 },
-    { label: "Class / Subclass", value: classAndSubclass, width: 180 },
-    { label: "Level", value: `${level}`, width: 48 },
-    { label: "XP", value: xpValue === null ? "-" : `${xpValue}`, width: 76 },
+    { label: "Character Name", value: characterName, width: 222 },
+    { label: "Class / Subclass", value: classAndSubclass, width: 168 },
+    { label: "Level", value: `${level}`, width: 46 },
+    { label: "XP", value: xpValue === null ? "-" : `${xpValue}`, width: 94 },
   ] as const;
   let idCursor = identityInnerX;
   for (const field of idTop) {
@@ -1125,9 +1124,9 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     idCursor += field.width + 6;
   }
   const idBottom = [
-    { label: "Background", value: backgroundLabel, width: 210 },
-    { label: "Species", value: speciesLabel, width: 160 },
-    { label: "Heroic Inspiration", value: heroicInspirationLabel, width: 166 },
+    { label: "Background", value: backgroundLabel, width: 198 },
+    { label: "Species", value: speciesLabel, width: 140 },
+    { label: "Heroic Inspiration", value: heroicInspirationLabel, width: 198 },
   ] as const;
   idCursor = identityInnerX;
   for (const field of idBottom) {
@@ -1135,57 +1134,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     idCursor += field.width + 6;
   }
 
-  drawSection(commands, leftX, abilityY, leftWidth, abilityHeight, "Abilities");
-  const abilityBoxX = leftX + 8;
-  const abilityBoxWidth = leftWidth - 16;
-  const abilityBoxHeight = 63;
-  const abilityRowGap = 4;
-  const firstAbilityY = abilityY + abilityHeight - 20 - abilityBoxHeight;
-  const scoreDivider = abilityBoxX + 44;
-  const modDivider = scoreDivider + 38;
-  const saveDivider = modDivider + 40;
-  drawText(commands, "SCORE", scoreDivider + 4, abilityY + abilityHeight - 18, 6, true);
-  drawText(commands, "MOD", modDivider + 6, abilityY + abilityHeight - 18, 6, true);
-  drawText(commands, "SAVE", saveDivider + 6, abilityY + abilityHeight - 18, 6, true);
-  ABILITY_ORDER.forEach((ability, index) => {
-    const rowY = firstAbilityY - index * (abilityBoxHeight + abilityRowGap);
-    commands.push(`${abilityBoxX} ${rowY} ${abilityBoxWidth} ${abilityBoxHeight} re S`);
-    commands.push(`${scoreDivider} ${rowY} m ${scoreDivider} ${rowY + abilityBoxHeight} l S`);
-    commands.push(`${modDivider} ${rowY} m ${modDivider} ${rowY + abilityBoxHeight} l S`);
-    commands.push(`${saveDivider} ${rowY} m ${saveDivider} ${rowY + abilityBoxHeight} l S`);
-    drawText(commands, ABILITY_LABELS[ability], abilityBoxX + 4, rowY + 24, 10, true);
-    drawText(commands, `${snapshot.abilities[ability] ?? 0}`, scoreDivider + 8, rowY + 24, 12, true);
-    drawText(
-      commands,
-      formatModifier(snapshot.abilityMods[ability] ?? 0),
-      modDivider + 7,
-      rowY + 24,
-      11,
-      true
-    );
-    const saveValue = snapshot.savingThrows?.[ability] ?? snapshot.abilityMods[ability] ?? 0;
-    const saveText = `${saveProficiencySet.has(ability) ? "P " : ""}${formatModifier(saveValue)}`;
-    drawText(commands, saveText, saveDivider + 4, rowY + 24, 10, true);
-  });
-
-  drawSection(commands, leftX, skillsY, leftWidth, skillsHeight, "Skills & Tools");
-  drawList(
-    commands,
-    skillAndToolRows.map((row) =>
-      row.kind === "skill"
-        ? `${row.label} ${formatModifier(row.value)}`
-        : `Tool: ${row.label}`
-    ),
-    leftX + 8,
-    skillsY + skillsHeight - 22,
-    24,
-    9,
-    8,
-    56,
-    leftWidth - SECTION_INNER_PADDING * 2
-  );
-
-  drawSection(commands, rightX, combatY, rightWidth, combatHeight, "Combat");
+  drawSection(commands, margin, combatY, contentWidth, combatHeight, "Combat");
   const combatStats = [
     ["Armor Class", `${snapshot.armorClass}`],
     ["Shield", shieldContribution],
@@ -1194,84 +1143,135 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     ["Prof Bonus", proficiencyBonusLabel],
   ] as const;
   const combatBoxGap = 6;
-  const combatBoxWidth = (rightWidth - 16 - combatBoxGap * 4) / 5;
-  const combatBoxHeight = 42;
+  const combatBoxWidth = (contentWidth - 16 - combatBoxGap * 4) / 5;
+  const combatBoxHeight = 34;
   combatStats.forEach(([label, value], index) => {
-    const x = rightX + 8 + index * (combatBoxWidth + combatBoxGap);
-    const y = combatY + 24;
+    const x = margin + 8 + index * (combatBoxWidth + combatBoxGap);
+    const y = combatY + 8;
     commands.push(`${x} ${y} ${combatBoxWidth} ${combatBoxHeight} re S`);
-    drawTextInCell(commands, label, x, y + 27, combatBoxWidth, 6, true, "center", 24);
-    drawTextInCell(commands, value, x, y + 11, combatBoxWidth, 12, true, "center", 16);
+    drawTextInCell(commands, label, x, y + 23, combatBoxWidth, 6, true, "center", 24);
+    drawTextInCell(commands, value, x, y + 8, combatBoxWidth, 11, true, "center", 16);
   });
 
-  drawSection(commands, rightX, survivabilityY, rightWidth, survivabilityHeight, "Survivability");
-  const survivabilityTopY = survivabilityY + 44;
-  const survivabilityTopWidth = (rightWidth - 16 - 12) / 3;
-  drawField(
+  drawSection(commands, margin, survivabilityY, contentWidth, survivabilityHeight, "Survivability");
+  const survivabilityFields = [
+    ["Current HP", `${currentHP}`],
+    ["Max HP", `${snapshot.maxHP}`],
+    ["Temp HP", `${tempHP}`],
+    ["Hit Dice", `${hitDiceSpent}/${hitDiceTotal ?? "-"}`],
+    ["Death Saves", `${deathSaveSuccesses}/${deathSaveFailures}`],
+  ] as const;
+  const survivabilityGap = 6;
+  const survivabilityFieldWidth = (contentWidth - 16 - survivabilityGap * 4) / 5;
+  survivabilityFields.forEach(([label, value], index) => {
+    drawField(
+      commands,
+      margin + 8 + index * (survivabilityFieldWidth + survivabilityGap),
+      survivabilityY + 8,
+      survivabilityFieldWidth,
+      34,
+      label,
+      value,
+      18,
+      10
+    );
+  });
+
+  drawSection(commands, leftX, abilityY, leftWidth, abilityHeight, "Abilities");
+  const abilityInnerX = leftX + SECTION_INNER_PADDING;
+  const abilityInnerWidth = leftWidth - SECTION_INNER_PADDING * 2;
+  const abilityColumnGap = 6;
+  const abilityColumnWidth = (abilityInnerWidth - abilityColumnGap) / 2;
+  const abilityRowGap = 6;
+  const abilityBoxHeight = (abilityHeight - 26 - abilityRowGap * 2) / 3;
+  const firstAbilityY = abilityY + abilityHeight - 20 - abilityBoxHeight;
+  const abilityPairs: Array<[Ability, Ability]> = [
+    ["str", "int"],
+    ["dex", "wis"],
+    ["con", "cha"],
+  ];
+  abilityPairs.forEach(([leftAbility, rightAbility], rowIndex) => {
+    const rowY = firstAbilityY - rowIndex * (abilityBoxHeight + abilityRowGap);
+    [leftAbility, rightAbility].forEach((ability, columnIndex) => {
+      const boxX = abilityInnerX + columnIndex * (abilityColumnWidth + abilityColumnGap);
+      commands.push(`${boxX} ${rowY} ${abilityColumnWidth} ${abilityBoxHeight} re S`);
+      drawText(commands, ABILITY_LABELS[ability], boxX + 4, rowY + abilityBoxHeight - 12, 8, true);
+
+      const scoreFieldY = rowY + abilityBoxHeight - 48;
+      const scoreFieldWidth = abilityColumnWidth - 8;
+      drawField(
+        commands,
+        boxX + 4,
+        scoreFieldY,
+        scoreFieldWidth,
+        34,
+        "Score",
+        `${snapshot.abilities[ability] ?? 0}`,
+        4,
+        10
+      );
+
+      const saveValue = snapshot.savingThrows?.[ability] ?? snapshot.abilityMods[ability] ?? 0;
+      const saveText = `${saveProficiencySet.has(ability) ? "P " : ""}${formatModifier(saveValue)}`;
+      const bottomFieldGap = 4;
+      const bottomFieldWidth = (abilityColumnWidth - 8 - bottomFieldGap) / 2;
+      drawField(
+        commands,
+        boxX + 4,
+        rowY + 8,
+        bottomFieldWidth,
+        30,
+        "Mod",
+        formatModifier(snapshot.abilityMods[ability] ?? 0),
+        8,
+        9
+      );
+      drawField(
+        commands,
+        boxX + 4 + bottomFieldWidth + bottomFieldGap,
+        rowY + 8,
+        bottomFieldWidth,
+        30,
+        "Save",
+        saveText,
+        12,
+        9
+      );
+    });
+  });
+
+  drawSection(commands, leftX, trainingY, leftWidth, trainingHeight, "Proficiencies");
+  const trainingLines = [
+    toListLine("Armor", snapshot.armorProficiencies),
+    toListLine("Weapons", snapshot.weaponProficiencies),
+    toListLine("Tools", snapshot.toolProficiencies),
+    toListLine("Languages", snapshot.languages),
+  ];
+  drawList(
     commands,
-    rightX + 8,
-    survivabilityTopY,
-    survivabilityTopWidth,
-    34,
-    "Current HP",
-    `${currentHP}`,
-    16,
-    11
-  );
-  drawField(
-    commands,
-    rightX + 8 + survivabilityTopWidth + 6,
-    survivabilityTopY,
-    survivabilityTopWidth,
-    34,
-    "Max HP",
-    `${snapshot.maxHP}`,
-    16,
-    11
-  );
-  drawField(
-    commands,
-    rightX + 8 + (survivabilityTopWidth + 6) * 2,
-    survivabilityTopY,
-    survivabilityTopWidth,
-    34,
-    "Temp HP",
-    `${tempHP}`,
-    16,
-    11
-  );
-  const lowerWidth = (rightWidth - 16 - 6) / 2;
-  drawField(
-    commands,
-    rightX + 8,
-    survivabilityY + 7,
-    lowerWidth,
-    30,
-    "Hit Dice (Spent/Total)",
-    `${hitDiceSpent}/${hitDiceTotal ?? "-"}`,
-    26,
-    10
-  );
-  drawField(
-    commands,
-    rightX + 8 + lowerWidth + 6,
-    survivabilityY + 7,
-    lowerWidth,
-    30,
-    "Death Saves (S/F)",
-    `${deathSaveSuccesses}/${deathSaveFailures}`,
-    26,
-    10
+    trainingLines,
+    leftX + SECTION_INNER_PADDING,
+    trainingY + trainingHeight - 22,
+    10,
+    12,
+    8,
+    96,
+    leftWidth - SECTION_INNER_PADDING * 2
   );
 
   drawSection(commands, rightX, attacksY, rightWidth, attacksHeight, "Weapons / Attacks");
   const tableX = rightX + 8;
   const tableY = attacksY + 16;
   const tableWidth = rightWidth - 16;
-  const tableRowHeight = 19;
-  const tableRows = 5;
+  const tableRowHeight = 17;
+  const tableRows = 7;
   const tableHeight = tableRows * tableRowHeight;
-  const attackColumns = [118, 70, 96, 64] as const;
+  const attackColumns: readonly number[] = [
+    Math.floor(tableWidth * 0.3),
+    Math.floor(tableWidth * 0.15),
+    Math.floor(tableWidth * 0.28),
+    tableWidth - Math.floor(tableWidth * 0.3) - Math.floor(tableWidth * 0.15) - Math.floor(tableWidth * 0.28),
+  ];
   commands.push(`${tableX} ${tableY} ${tableWidth} ${tableHeight} re S`);
   for (let index = 1; index < tableRows; index += 1) {
     const y = tableY + tableHeight - index * tableRowHeight;
@@ -1285,7 +1285,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   drawTextInCell(commands, "NAME", tableX, tableY + tableHeight - 13, attackColumns[0], 6, true, "center", 20);
   drawTextInCell(
     commands,
-    "ATK/DC",
+    "ATK BONUS / DC",
     tableX + attackColumns[0],
     tableY + tableHeight - 13,
     attackColumns[1],
@@ -1319,8 +1319,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   attackRows.forEach((row, index) => {
     const rowTopY = tableY + tableHeight - tableRowHeight * (index + 1);
     const rowTextY = rowTopY - 13;
-    drawTextInCell(commands, row.name, tableX, rowTextY, attackColumns[0], 8, false, "left", 21);
-    drawTextInCell(commands, row.bonus, tableX + attackColumns[0], rowTextY, attackColumns[1], 8, false, "center", 10);
+    drawTextInCell(commands, row.name, tableX, rowTextY, attackColumns[0], 8, false, "left", 30);
+    drawTextInCell(commands, row.bonus, tableX + attackColumns[0], rowTextY, attackColumns[1], 8, false, "center", 14);
     drawTextInCell(
       commands,
       row.damage,
@@ -1330,7 +1330,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       8,
       false,
       "left",
-      17
+      24
     );
     drawTextInCell(
       commands,
@@ -1341,35 +1341,79 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       8,
       false,
       "left",
-      12
+      26
     );
   });
 
   drawSection(commands, rightX, conditionsY, rightWidth, conditionsHeight, "Conditions / Exhaustion");
-  drawField(commands, rightX + rightWidth - 92, conditionsY + 18, 84, 30, "Exhaustion", `${exhaustionLevel}`, 12, 11);
+  drawField(commands, rightX + rightWidth - 92, conditionsY + 9, 84, 30, "Exhaustion", `${exhaustionLevel}`, 12, 11);
   drawList(
     commands,
     conditionLines.map((line) => `- ${line}`),
     rightX + 8,
-    conditionsY + conditionsHeight - 22,
-    4,
-    11,
+    conditionsY + conditionsHeight - 20,
+    3,
+    10,
     8,
-    44,
+    52,
     rightWidth - 108
   );
 
   drawSection(commands, rightX, featuresY, rightWidth, featuresHeight, "Features Summary");
+  const featuresInnerX = rightX + SECTION_INNER_PADDING;
+  const featuresInnerY = featuresY + SECTION_INNER_PADDING;
+  const featuresInnerWidth = rightWidth - SECTION_INNER_PADDING * 2;
+  const featuresInnerHeight = featuresHeight - SECTION_HEADER_HEIGHT - 12;
+  const classPanelHeight = Math.floor(featuresInnerHeight * 0.58);
+  const lowerPanelsY = featuresInnerY;
+  const lowerPanelHeight = featuresInnerHeight - classPanelHeight - 6;
+  const classPanelY = lowerPanelsY + lowerPanelHeight + 6;
+  const lowerPanelGap = 6;
+  const lowerPanelWidth = (featuresInnerWidth - lowerPanelGap) / 2;
+  const speciesPanelX = featuresInnerX;
+  const featPanelX = speciesPanelX + lowerPanelWidth + lowerPanelGap;
+
+  commands.push(`${featuresInnerX} ${classPanelY} ${featuresInnerWidth} ${classPanelHeight} re S`);
+  commands.push(`${speciesPanelX} ${lowerPanelsY} ${lowerPanelWidth} ${lowerPanelHeight} re S`);
+  commands.push(`${featPanelX} ${lowerPanelsY} ${lowerPanelWidth} ${lowerPanelHeight} re S`);
+
+  drawText(commands, "CLASS FEATURES", featuresInnerX + 4, classPanelY + classPanelHeight - 10, 7, true);
   drawList(
     commands,
-    featuresSummaryLines,
-    rightX + 8,
-    featuresY + featuresHeight - 22,
-    19,
-    10,
+    classFeatureLines.map((line) => `- ${line}`),
+    featuresInnerX + 4,
+    classPanelY + classPanelHeight - 22,
+    Math.max(1, Math.floor((classPanelHeight - 20) / 9)),
+    9,
     8,
     84,
-    rightWidth - SECTION_INNER_PADDING * 2
+    featuresInnerWidth - 8
+  );
+
+  drawText(commands, "SPECIES TRAITS", speciesPanelX + 4, lowerPanelsY + lowerPanelHeight - 10, 7, true);
+  drawList(
+    commands,
+    speciesTraitLines.map((line) => `- ${line}`),
+    speciesPanelX + 4,
+    lowerPanelsY + lowerPanelHeight - 22,
+    Math.max(1, Math.floor((lowerPanelHeight - 20) / 9)),
+    9,
+    8,
+    56,
+    lowerPanelWidth - 8
+  );
+
+  drawText(commands, "FEATS", featPanelX + 4, lowerPanelsY + lowerPanelHeight - 10, 7, true);
+  drawList(
+    commands,
+    featLines.map((line) => `- ${line}`),
+    featPanelX + 4,
+    lowerPanelsY + lowerPanelHeight - 22,
+    Math.max(1, Math.floor((lowerPanelHeight - 20) / 9)),
+    9,
+    8,
+    56,
+    lowerPanelWidth - 8
   );
 
   const pageOneStream = commands.join("\n");
