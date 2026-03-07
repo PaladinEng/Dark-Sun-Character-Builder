@@ -8,18 +8,26 @@ export type ResolvedSkillDefinition = {
   ability: Ability;
 };
 
-export type SkillAndToolDisplayRow =
-  | {
-      kind: "skill";
-      id: string;
-      label: string;
-      value: number;
-    }
-  | {
-      kind: "tool";
-      id: string;
-      label: string;
-    };
+export type SkillDisplayRow = {
+  kind: "skill";
+  id: string;
+  label: string;
+  value: number;
+};
+
+export type ProficientToolDisplayRow = {
+  kind: "tool";
+  id: string;
+  label: string;
+};
+
+export type SkillAndToolDisplayRow = SkillDisplayRow | ProficientToolDisplayRow;
+
+export type SkillAndToolDisplayModel = {
+  skillRows: SkillDisplayRow[];
+  proficientToolRows: ProficientToolDisplayRow[];
+  rows: SkillAndToolDisplayRow[];
+};
 
 const ABILITY_SET = new Set<Ability>(["str", "dex", "con", "int", "wis", "cha"]);
 
@@ -107,32 +115,58 @@ function formatSkillLabel(skillId: string): string {
     .join(" ");
 }
 
-type DisplaySkillDefinition = {
+export type DisplaySkillDefinition = {
   id: string;
   name: string;
+  sortOrder?: number;
 };
 
-export function getSkillAndToolDisplayRows(input: {
-  skillDefinitions?: ReadonlyArray<DisplaySkillDefinition>;
-  skills?: Readonly<Record<string, number>>;
-  toolProficiencies?: readonly string[];
-}): SkillAndToolDisplayRow[] {
-  const rows: SkillAndToolDisplayRow[] = [];
+function getOrderedDisplaySkillDefinitions(
+  skillDefinitions: ReadonlyArray<DisplaySkillDefinition> | undefined
+): DisplaySkillDefinition[] {
   const seenSkillIds = new Set<string>();
+  return [...(skillDefinitions ?? [])]
+    .map((definition, index) => ({ definition, index }))
+    .filter(({ definition }) => {
+      if (!definition || typeof definition.id !== "string" || definition.id.length === 0) {
+        return false;
+      }
+      if (seenSkillIds.has(definition.id)) {
+        return false;
+      }
+      seenSkillIds.add(definition.id);
+      return true;
+    })
+    .sort((left, right) => {
+      const leftOrder =
+        typeof left.definition.sortOrder === "number"
+          ? left.definition.sortOrder
+          : Number.POSITIVE_INFINITY;
+      const rightOrder =
+        typeof right.definition.sortOrder === "number"
+          ? right.definition.sortOrder
+          : Number.POSITIVE_INFINITY;
+      if (leftOrder !== rightOrder) {
+        return leftOrder - rightOrder;
+      }
+      return left.index - right.index;
+    })
+    .map(({ definition }) => definition);
+}
 
-  for (const definition of input.skillDefinitions ?? []) {
-    if (!definition || typeof definition.id !== "string" || definition.id.length === 0) {
-      continue;
-    }
-    if (seenSkillIds.has(definition.id)) {
-      continue;
-    }
+function getSkillDisplayRows(input: {
+  skillDefinitions: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+}): SkillDisplayRow[] {
+  const rows: SkillDisplayRow[] = [];
+  const seenSkillIds = new Set<string>();
+  for (const definition of input.skillDefinitions) {
     seenSkillIds.add(definition.id);
     rows.push({
       kind: "skill",
       id: definition.id,
       label: definition.name,
-      value: input.skills?.[definition.id] ?? 0,
+      value: input.skills?.[definition.id] ?? 0
     });
   }
 
@@ -144,12 +178,17 @@ export function getSkillAndToolDisplayRows(input: {
       kind: "skill",
       id: skillId,
       label: formatSkillLabel(skillId),
-      value: input.skills?.[skillId] ?? 0,
+      value: input.skills?.[skillId] ?? 0
     });
   }
 
+  return rows;
+}
+
+export function getProficientToolDisplayRows(toolProficiencies?: readonly string[]): ProficientToolDisplayRow[] {
+  const rows: ProficientToolDisplayRow[] = [];
   const seenTools = new Set<string>();
-  const orderedTools = [...(input.toolProficiencies ?? [])]
+  const orderedTools = [...(toolProficiencies ?? [])]
     .filter((tool): tool is string => typeof tool === "string" && tool.trim().length > 0)
     .map((tool) => tool.trim())
     .sort((left, right) => left.localeCompare(right));
@@ -161,9 +200,35 @@ export function getSkillAndToolDisplayRows(input: {
     rows.push({
       kind: "tool",
       id: tool,
-      label: tool,
+      label: tool
     });
   }
-
   return rows;
+}
+
+export function getSkillAndToolDisplayModel(input: {
+  skillDefinitions?: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+  toolProficiencies?: readonly string[];
+}): SkillAndToolDisplayModel {
+  const orderedSkillDefinitions = getOrderedDisplaySkillDefinitions(input.skillDefinitions);
+  const skillRows = getSkillDisplayRows({
+    skillDefinitions: orderedSkillDefinitions,
+    skills: input.skills
+  });
+  const proficientToolRows = getProficientToolDisplayRows(input.toolProficiencies);
+
+  return {
+    skillRows,
+    proficientToolRows,
+    rows: [...skillRows, ...proficientToolRows]
+  };
+}
+
+export function getSkillAndToolDisplayRows(input: {
+  skillDefinitions?: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+  toolProficiencies?: readonly string[];
+}): SkillAndToolDisplayRow[] {
+  return getSkillAndToolDisplayModel(input).rows;
 }

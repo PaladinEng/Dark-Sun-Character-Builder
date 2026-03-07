@@ -442,25 +442,8 @@ export async function POST(request: Request) {
       }
       return (left.notes ?? "").localeCompare(right.notes ?? "");
     });
-  const orderedSkillDefinitions = [...merged.content.skillDefinitions]
-    .map((skill, index) => ({ skill, index }))
-    .sort((left, right) => {
-      const leftOrder =
-        typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
-      const rightOrder =
-        typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
-      if (leftOrder !== rightOrder) {
-        return leftOrder - rightOrder;
-      }
-      return left.index - right.index;
-    })
-    .map(({ skill }) => ({
-      id: skill.id,
-      name: skill.name,
-      ability: skill.ability,
-    }));
   const skillAndToolRows = getSkillAndToolDisplayRows({
-    skillDefinitions: orderedSkillDefinitions,
+    skillDefinitions: merged.content.skillDefinitions,
     skills: derived.skills,
     toolProficiencies: derived.toolProficiencies,
   });
@@ -479,7 +462,7 @@ export async function POST(request: Request) {
     savingThrows: derived.savingThrows,
     saveProficiencies: derived.saveProficiencies,
     skills: derived.skills,
-    skillDefinitions: orderedSkillDefinitions,
+    skillDefinitions: merged.content.skillDefinitions,
     skillAndToolRows,
     proficiencyBonus: derived.proficiencyBonus,
     armorClass: derived.armorClass,

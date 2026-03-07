@@ -616,25 +616,8 @@ export default function BuilderClient({
     [content, state],
   );
   const skillAndToolRows = useMemo(() => {
-    const orderedSkillDefinitions = [...(content.skillDefinitions ?? [])]
-      .map((skill, index) => ({ skill, index }))
-      .sort((left, right) => {
-        const leftOrder =
-          typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
-        const rightOrder =
-          typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
-        if (leftOrder !== rightOrder) {
-          return leftOrder - rightOrder;
-        }
-        return left.index - right.index;
-      })
-      .map(({ skill }) => ({
-        id: skill.id,
-        name: skill.name,
-      }));
-
     return getSkillAndToolDisplayRows({
-      skillDefinitions: orderedSkillDefinitions,
+      skillDefinitions: content.skillDefinitions,
       skills: derived.skills,
       toolProficiencies: derived.toolProficiencies,
     });

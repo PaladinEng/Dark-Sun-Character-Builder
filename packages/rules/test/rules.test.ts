@@ -7,6 +7,7 @@ import {
   computeProfBonus,
   deriveStartingEquipment,
   getAvailableAdvancementSlots,
+  getSkillAndToolDisplayModel,
   getSkillAndToolDisplayRows,
   validateCharacter
 } from "../src";
@@ -2314,6 +2315,31 @@ describe("validateCharacter", () => {
     });
 
     expect(rows).toEqual([{ kind: "skill", id: "stealth", label: "Stealth", value: 5 }]);
+  });
+
+  it("builds distinct skill and proficient tool display buckets from shared input", () => {
+    const model = getSkillAndToolDisplayModel({
+      skillDefinitions: [
+        { id: "arcana", name: "Arcana", sortOrder: 5 },
+        { id: "athletics", name: "Athletics", sortOrder: 2 },
+        { id: "arcana", name: "Arcana Duplicate", sortOrder: 0 },
+      ],
+      skills: {
+        athletics: 3,
+        arcana: 1,
+      },
+      toolProficiencies: ["Gaming Set", "Disguise Kit", "Gaming Set"],
+    });
+
+    expect(model.skillRows).toEqual([
+      { kind: "skill", id: "athletics", label: "Athletics", value: 3 },
+      { kind: "skill", id: "arcana", label: "Arcana", value: 1 },
+    ]);
+    expect(model.proficientToolRows).toEqual([
+      { kind: "tool", id: "Disguise Kit", label: "Disguise Kit" },
+      { kind: "tool", id: "Gaming Set", label: "Gaming Set" },
+    ]);
+    expect(model.rows).toEqual([...model.skillRows, ...model.proficientToolRows]);
   });
 
   it("buildPdfExportFromTemplate returns deterministic non-empty PDF bytes for valid export", () => {
