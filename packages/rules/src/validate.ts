@@ -48,7 +48,7 @@ function isConditionId(value: string): value is ConditionId {
   return CONDITION_IDS.includes(value as ConditionId);
 }
 
-const COIN_DENOMINATIONS: Array<keyof CharacterCoins> = ["gp", "sp", "cp"];
+const COIN_DENOMINATIONS: Array<keyof CharacterCoins> = ["cp", "sp", "ep", "gp", "pp"];
 
 function collectInventoryItemIds(state: CharacterState): string[] {
   const itemIds = state.inventoryItemIds ?? [];

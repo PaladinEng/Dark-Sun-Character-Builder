@@ -24,7 +24,7 @@ import {
 import { formatSpellNameWithFlags } from "../../src/lib/spells";
 
 type Ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
-type CoinDenomination = "gp" | "sp" | "cp";
+type CoinDenomination = "gp" | "sp" | "ep" | "cp" | "pp";
 type AbilityChanges = Partial<Record<Ability, number>>;
 
 type BackgroundAbilityOptions = {
@@ -112,6 +112,9 @@ type BuilderState = CharacterState;
 
 type ExportedDerivedState = {
   level: number;
+  subclass: string | null;
+  xp: number | null;
+  heroicInspiration: boolean;
   abilities: Record<Ability, number>;
   abilityModifiers: Record<Ability, number>;
   proficiencyBonus: number;
@@ -119,16 +122,46 @@ type ExportedDerivedState = {
   skills: Record<string, number>;
   savingThrows: Record<Ability, number>;
   AC: number;
+  shieldAC: number;
   HP: number;
+  tempHP: number;
+  hitDiceTotal: number | null;
+  hitDiceSpent: number;
+  deathSaveSuccesses: number;
+  deathSaveFailures: number;
+  exhaustionLevel: number;
   speed: number;
   attacks: Array<{ name: string; toHit: number; damage: string; mastery?: string[] }>;
   feats: { id: string; name: string }[];
   background: string | null;
   class: string | null;
   species: string | null;
+  armorProficiencies: string[];
+  weaponProficiencies: string[];
   toolProficiencies: string[];
   languages: string[];
+  coins: {
+    cp: number;
+    sp: number;
+    ep: number;
+    gp: number;
+    pp: number;
+  };
+  otherWealth: string | null;
+  attunedItems: string[];
+  appearance: string | null;
+  physicalDescription: string | null;
+  backstory: string | null;
+  alignment: string | null;
+  notes: string | null;
+  companion: {
+    name: string | null;
+    type: string | null;
+    summary: string | null;
+    notes: string | null;
+  } | null;
   spellcastingAbility: Ability | null;
+  spellcastingModifier: number | null;
   spellSaveDC: number | null;
   spellAttackBonus: number | null;
   spellSlots: DerivedState["spellSlots"];
@@ -148,7 +181,7 @@ type BuilderClientProps = {
 };
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
-const COIN_DENOMINATIONS: CoinDenomination[] = ["gp", "sp", "cp"];
+const COIN_DENOMINATIONS: CoinDenomination[] = ["cp", "sp", "ep", "gp", "pp"];
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
 const ABILITY_SCORE_METHOD_OPTIONS: Array<{ value: AbilityScoreMethod; label: string }> = [
   { value: "manual", label: "Manual" },
@@ -389,17 +422,42 @@ export default function BuilderClient({
     selectedSpeciesId: undefined,
     selectedBackgroundId: undefined,
     selectedClassId: undefined,
+    subclass: undefined,
+    xp: 0,
+    heroicInspiration: false,
     equippedArmorId: undefined,
     equippedShieldId: undefined,
     equippedWeaponId: undefined,
+    armorProficiencies: [],
+    weaponProficiencies: [],
     chosenSkillProficiencies: [],
     chosenClassSkills: [],
     chosenSaveProficiencies: [],
     toolProficiencies: [],
+    languages: [],
     knownSpellIds: [],
     preparedSpellIds: [],
     cantripsKnownIds: [],
-    coins: { gp: 0, sp: 0, cp: 0 },
+    coins: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
+    otherWealth: "",
+    tempHP: 0,
+    hitDiceTotal: undefined,
+    hitDiceSpent: 0,
+    deathSaveSuccesses: 0,
+    deathSaveFailures: 0,
+    exhaustionLevel: 0,
+    attunedItems: [],
+    appearance: "",
+    physicalDescription: "",
+    backstory: "",
+    alignment: "",
+    notes: "",
+    companion: {
+      name: "",
+      type: "",
+      summary: "",
+      notes: "",
+    },
     inventoryItemIds: [],
     inventoryEntries: [],
     featSelections: {
@@ -814,34 +872,90 @@ export default function BuilderClient({
   ]);
 
   const exportedDerivedState = useMemo<ExportedDerivedState>(
-    () => ({
-      level: Math.max(1, Math.floor(state.level || 1)),
-      abilities: derived.finalAbilities,
-      abilityModifiers: derived.abilityMods,
-      proficiencyBonus: derived.proficiencyBonus,
-      passivePerception: derived.passivePerception,
-      skills: derived.skills,
-      savingThrows: derived.savingThrows,
-      AC: derived.armorClass,
-      HP: derived.maxHP,
-      speed: derived.speed,
-      attacks: derived.attack ? [derived.attack] : [],
-      feats: derived.feats,
-      background: selectedBackground?.name ?? null,
-      class: selectedClass?.name ?? null,
-      species: selectedSpecies?.name ?? null,
-      toolProficiencies: derived.toolProficiencies,
-      languages: derived.languages,
-      spellcastingAbility: derived.spellcastingAbility,
-      spellSaveDC: derived.spellSaveDC,
-      spellAttackBonus: derived.spellAttackBonus,
-      spellSlots: derived.spellSlots,
-      spellcasting: derived.spellcasting,
-      activeConditionIds: derived.activeConditionIds,
-      appliedModifiers: derived.appliedModifiers,
-      warnings: derived.warnings,
-    }),
-    [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, state.level],
+    () => {
+      const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
+      const coinValues = state.coins ?? {};
+      const coin = (denomination: CoinDenomination): number => {
+        const value = coinValues[denomination];
+        if (!Number.isFinite(value)) {
+          return 0;
+        }
+        return Math.max(0, Math.floor(value ?? 0));
+      };
+      return {
+        level: Math.max(1, Math.floor(state.level || 1)),
+        subclass: state.subclass ?? null,
+        xp: Number.isFinite(state.xp) ? Math.max(0, Math.floor(state.xp ?? 0)) : null,
+        heroicInspiration: state.heroicInspiration === true,
+        abilities: derived.finalAbilities,
+        abilityModifiers: derived.abilityMods,
+        proficiencyBonus: derived.proficiencyBonus,
+        passivePerception: derived.passivePerception,
+        skills: derived.skills,
+        savingThrows: derived.savingThrows,
+        AC: derived.armorClass,
+        shieldAC: state.equippedShieldId ? 2 : 0,
+        HP: derived.maxHP,
+        tempHP: Number.isFinite(state.tempHP) ? Math.max(0, Math.floor(state.tempHP ?? 0)) : 0,
+        hitDiceTotal: Number.isFinite(state.hitDiceTotal)
+          ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
+          : null,
+        hitDiceSpent: Number.isFinite(state.hitDiceSpent)
+          ? Math.max(0, Math.floor(state.hitDiceSpent ?? 0))
+          : 0,
+        deathSaveSuccesses: Number.isFinite(state.deathSaveSuccesses)
+          ? Math.max(0, Math.min(3, Math.floor(state.deathSaveSuccesses ?? 0)))
+          : 0,
+        deathSaveFailures: Number.isFinite(state.deathSaveFailures)
+          ? Math.max(0, Math.min(3, Math.floor(state.deathSaveFailures ?? 0)))
+          : 0,
+        exhaustionLevel: Number.isFinite(state.exhaustionLevel)
+          ? Math.max(0, Math.floor(state.exhaustionLevel ?? 0))
+          : 0,
+        speed: derived.speed,
+        attacks: derived.attack ? [derived.attack] : [],
+        feats: derived.feats,
+        background: selectedBackground?.name ?? null,
+        class: selectedClass?.name ?? null,
+        species: selectedSpecies?.name ?? null,
+        armorProficiencies: sortStringIds(state.armorProficiencies ?? []),
+        weaponProficiencies: sortStringIds(state.weaponProficiencies ?? []),
+        toolProficiencies: derived.toolProficiencies,
+        languages: derived.languages,
+        coins: {
+          cp: coin("cp"),
+          sp: coin("sp"),
+          ep: coin("ep"),
+          gp: coin("gp"),
+          pp: coin("pp"),
+        },
+        otherWealth: state.otherWealth?.trim() ? state.otherWealth.trim() : null,
+        attunedItems: sortStringIds(state.attunedItems ?? []),
+        appearance: state.appearance?.trim() ? state.appearance.trim() : null,
+        physicalDescription: state.physicalDescription?.trim() ? state.physicalDescription.trim() : null,
+        backstory: state.backstory?.trim() ? state.backstory.trim() : null,
+        alignment: state.alignment?.trim() ? state.alignment.trim() : null,
+        notes: state.notes?.trim() ? state.notes.trim() : null,
+        companion: state.companion
+          ? {
+              name: state.companion.name?.trim() ? state.companion.name.trim() : null,
+              type: state.companion.type?.trim() ? state.companion.type.trim() : null,
+              summary: state.companion.summary?.trim() ? state.companion.summary.trim() : null,
+              notes: state.companion.notes?.trim() ? state.companion.notes.trim() : null,
+            }
+          : null,
+        spellcastingAbility,
+        spellcastingModifier: spellcastingAbility ? derived.abilityMods[spellcastingAbility] : null,
+        spellSaveDC: derived.spellSaveDC,
+        spellAttackBonus: derived.spellAttackBonus,
+        spellSlots: derived.spellSlots,
+        spellcasting: derived.spellcasting,
+        activeConditionIds: derived.activeConditionIds,
+        appliedModifiers: derived.appliedModifiers,
+        warnings: derived.warnings,
+      };
+    },
+    [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, state],
   );
 
   const advancementSlots = (derived.advancementSlots ?? []) as Array<Record<string, unknown>>;
@@ -1665,7 +1779,7 @@ export default function BuilderClient({
 
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Coins</div>
-          <div className="mt-1 grid grid-cols-3 gap-2">
+          <div className="mt-1 grid grid-cols-5 gap-2">
             {COIN_DENOMINATIONS.map((denomination) => (
               <label key={`coins-${denomination}`} className="text-sm">
                 <div className="font-semibold uppercase">{denomination}</div>

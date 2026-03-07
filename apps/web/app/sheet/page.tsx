@@ -45,7 +45,30 @@ function isObjectRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
+function normalizeStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.filter((entry): entry is string => typeof entry === "string");
+}
+
+function normalizeOptionalString(value: unknown): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+  return value;
+}
+
+function normalizeOptionalNonNegativeInt(value: unknown): number | undefined {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    return undefined;
+  }
+  return Math.max(0, Math.floor(parsed));
+}
+
 function normalizeCharacterState(input: CharacterState): CharacterState {
+  const coins = isObjectRecord(input.coins) ? input.coins : undefined;
   return {
     ...input,
     chosenSkillProficiencies: Array.isArray(input.chosenSkillProficiencies)
@@ -54,8 +77,6 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     chosenSaveProficiencies: Array.isArray(input.chosenSaveProficiencies)
       ? input.chosenSaveProficiencies
       : [],
-    toolProficiencies: Array.isArray(input.toolProficiencies) ? input.toolProficiencies : [],
-    languages: Array.isArray(input.languages) ? input.languages : [],
     knownSpellIds: Array.isArray(input.knownSpellIds) ? input.knownSpellIds : [],
     preparedSpellIds: Array.isArray(input.preparedSpellIds) ? input.preparedSpellIds : [],
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
@@ -65,7 +86,43 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
     inventoryEntries: Array.isArray(input.inventoryEntries) ? input.inventoryEntries : [],
-    coins: input.coins && typeof input.coins === "object" ? input.coins : undefined,
+    armorProficiencies: normalizeStringArray(input.armorProficiencies),
+    weaponProficiencies: normalizeStringArray(input.weaponProficiencies),
+    toolProficiencies: normalizeStringArray(input.toolProficiencies),
+    languages: normalizeStringArray(input.languages),
+    attunedItems: normalizeStringArray(input.attunedItems),
+    subclass: normalizeOptionalString(input.subclass),
+    xp: normalizeOptionalNonNegativeInt(input.xp),
+    heroicInspiration: input.heroicInspiration === true,
+    tempHP: normalizeOptionalNonNegativeInt(input.tempHP),
+    hitDiceTotal: normalizeOptionalNonNegativeInt(input.hitDiceTotal),
+    hitDiceSpent: normalizeOptionalNonNegativeInt(input.hitDiceSpent),
+    deathSaveSuccesses: normalizeOptionalNonNegativeInt(input.deathSaveSuccesses),
+    deathSaveFailures: normalizeOptionalNonNegativeInt(input.deathSaveFailures),
+    exhaustionLevel: normalizeOptionalNonNegativeInt(input.exhaustionLevel),
+    otherWealth: normalizeOptionalString(input.otherWealth),
+    appearance: normalizeOptionalString(input.appearance),
+    physicalDescription: normalizeOptionalString(input.physicalDescription),
+    backstory: normalizeOptionalString(input.backstory),
+    alignment: normalizeOptionalString(input.alignment),
+    notes: normalizeOptionalString(input.notes),
+    companion: isObjectRecord(input.companion)
+      ? {
+          name: normalizeOptionalString(input.companion.name),
+          type: normalizeOptionalString(input.companion.type),
+          summary: normalizeOptionalString(input.companion.summary),
+          notes: normalizeOptionalString(input.companion.notes),
+        }
+      : undefined,
+    coins: coins
+      ? {
+          cp: normalizeOptionalNonNegativeInt(coins.cp),
+          sp: normalizeOptionalNonNegativeInt(coins.sp),
+          ep: normalizeOptionalNonNegativeInt(coins.ep),
+          gp: normalizeOptionalNonNegativeInt(coins.gp),
+          pp: normalizeOptionalNonNegativeInt(coins.pp),
+        }
+      : undefined,
   };
 }
 
@@ -158,9 +215,11 @@ export default async function SheetPage({
     : undefined;
 
   const coinValues = payload.characterState.coins ?? {};
-  const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
-  const spCoins = Number.isFinite(coinValues.sp) ? Math.max(0, Math.floor(coinValues.sp ?? 0)) : 0;
   const cpCoins = Number.isFinite(coinValues.cp) ? Math.max(0, Math.floor(coinValues.cp ?? 0)) : 0;
+  const spCoins = Number.isFinite(coinValues.sp) ? Math.max(0, Math.floor(coinValues.sp ?? 0)) : 0;
+  const epCoins = Number.isFinite(coinValues.ep) ? Math.max(0, Math.floor(coinValues.ep ?? 0)) : 0;
+  const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
+  const ppCoins = Number.isFinite(coinValues.pp) ? Math.max(0, Math.floor(coinValues.pp ?? 0)) : 0;
 
   const inventoryCounts = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
@@ -191,19 +250,25 @@ export default async function SheetPage({
     ? `${derived.attack.name} ${formatModifier(derived.attack.toHit)} (${derived.attack.damage})`
     : "None";
   const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
+  const spellcastingModifier = spellcastingAbility ? derived.abilityMods[spellcastingAbility] : null;
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
   const spellAttackBonus = derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+  const shieldAC = payload.characterState.equippedShieldId ? 2 : 0;
 
   return (
     <main className="min-h-screen bg-slate-300 px-3 py-6 text-slate-950">
       <article className="mx-auto max-w-6xl overflow-hidden rounded border-2 border-slate-900 bg-white shadow-2xl">
         <header className="border-b-2 border-slate-900 px-4 py-3">
           <h1 className="text-xl font-bold tracking-wide">Dark Sun Character Sheet</h1>
-          <div className="mt-2 grid gap-2 text-sm md:grid-cols-4">
+          <div className="mt-2 grid gap-2 text-sm md:grid-cols-7">
             <div>
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Class</div>
               <div className="border-b border-slate-900 pb-0.5 font-semibold">{selectedClass?.name ?? "Unset"}</div>
+            </div>
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Subclass</div>
+              <div className="border-b border-slate-900 pb-0.5 font-semibold">{payload.characterState.subclass ?? "-"}</div>
             </div>
             <div>
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Species</div>
@@ -216,6 +281,16 @@ export default async function SheetPage({
             <div>
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Level</div>
               <div className="border-b border-slate-900 pb-0.5 font-semibold">{payload.characterState.level}</div>
+            </div>
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">XP</div>
+              <div className="border-b border-slate-900 pb-0.5 font-semibold">{payload.characterState.xp ?? 0}</div>
+            </div>
+            <div>
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Heroic Inspiration</div>
+              <div className="border-b border-slate-900 pb-0.5 font-semibold">
+                {payload.characterState.heroicInspiration ? "Yes" : "No"}
+              </div>
             </div>
           </div>
         </header>
@@ -270,12 +345,36 @@ export default async function SheetPage({
                   <div className="text-lg font-bold">{derived.armorClass}</div>
                 </div>
                 <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Shield AC</div>
+                  <div className="text-lg font-bold">{shieldAC}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Max HP</div>
                   <div className="text-lg font-bold">{derived.maxHP}</div>
                 </div>
                 <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Temp HP</div>
+                  <div className="text-lg font-bold">{payload.characterState.tempHP ?? 0}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Speed</div>
                   <div className="text-lg font-bold">{derived.speed} ft</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Hit Dice</div>
+                  <div className="text-lg font-bold">
+                    {payload.characterState.hitDiceSpent ?? 0}/{payload.characterState.hitDiceTotal ?? "-"}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Death Saves</div>
+                  <div className="text-lg font-bold">
+                    {payload.characterState.deathSaveSuccesses ?? 0} / {payload.characterState.deathSaveFailures ?? 0}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Exhaustion</div>
+                  <div className="text-lg font-bold">{payload.characterState.exhaustionLevel ?? 0}</div>
                 </div>
                 <div className="rounded border border-slate-900 p-2">
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Proficiency</div>
@@ -327,6 +426,12 @@ export default async function SheetPage({
                     <div className="font-semibold">{spellSaveDC ?? "-"}</div>
                   </div>
                   <div>
+                    <div className="text-[11px] uppercase tracking-wide text-slate-600">Spellcasting Modifier</div>
+                    <div className="font-semibold">
+                      {spellcastingModifier !== null ? formatModifier(spellcastingModifier) : "-"}
+                    </div>
+                  </div>
+                  <div>
                     <div className="text-[11px] uppercase tracking-wide text-slate-600">Spell Attack Bonus</div>
                     <div className="font-semibold">
                       {spellAttackBonus !== null ? formatModifier(spellAttackBonus) : "-"}
@@ -350,7 +455,9 @@ export default async function SheetPage({
                 <li>Armor: {armor?.name ?? "None"}</li>
                 <li>Shield: {shield?.name ?? "None"}</li>
                 <li>Weapon: {weapon?.name ?? "None"}</li>
-                <li>Coins: {gpCoins} gp / {spCoins} sp / {cpCoins} cp</li>
+                <li>Coins: {cpCoins} cp / {spCoins} sp / {epCoins} ep / {gpCoins} gp / {ppCoins} pp</li>
+                <li>Other Wealth: {payload.characterState.otherWealth || "None"}</li>
+                <li>Attuned Items: {payload.characterState.attunedItems?.join(", ") || "None"}</li>
                 <li>Other Gear: {inventoryItems.join(", ") || "None"}</li>
               </ul>
             </section>
@@ -376,12 +483,72 @@ export default async function SheetPage({
               </h2>
               <div className="space-y-2 p-2 text-sm">
                 <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Armor</div>
+                  <div>{payload.characterState.armorProficiencies?.join(", ") || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Weapons</div>
+                  <div>{payload.characterState.weaponProficiencies?.join(", ") || "None"}</div>
+                </div>
+                <div>
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Tools</div>
                   <div>{derived.toolProficiencies.join(", ") || "None"}</div>
                 </div>
                 <div>
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Languages</div>
                   <div>{derived.languages.join(", ") || "None"}</div>
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded border-2 border-slate-900">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Narrative
+              </h2>
+              <div className="space-y-2 p-2 text-sm">
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Alignment</div>
+                  <div>{payload.characterState.alignment || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Appearance</div>
+                  <div>{payload.characterState.appearance || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Physical Description</div>
+                  <div>{payload.characterState.physicalDescription || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Backstory</div>
+                  <div>{payload.characterState.backstory || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Notes</div>
+                  <div>{payload.characterState.notes || "None"}</div>
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded border-2 border-slate-900">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Companion / Familiar
+              </h2>
+              <div className="space-y-2 p-2 text-sm">
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Name</div>
+                  <div>{payload.characterState.companion?.name || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Type</div>
+                  <div>{payload.characterState.companion?.type || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Summary</div>
+                  <div>{payload.characterState.companion?.summary || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Notes</div>
+                  <div>{payload.characterState.companion?.notes || "None"}</div>
                 </div>
               </div>
             </section>

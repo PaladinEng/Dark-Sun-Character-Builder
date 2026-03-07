@@ -18,7 +18,30 @@ function isObjectRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
 
+function normalizeStringArray(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value.filter((entry): entry is string => typeof entry === "string");
+}
+
+function normalizeOptionalString(value: unknown): string | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+  return value;
+}
+
+function normalizeOptionalNonNegativeInt(value: unknown): number | undefined {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    return undefined;
+  }
+  return Math.max(0, Math.floor(parsed));
+}
+
 function normalizeCharacterState(input: CharacterState): CharacterState {
+  const coins = isObjectRecord(input.coins) ? input.coins : undefined;
   return {
     ...input,
     chosenSkillProficiencies: Array.isArray(input.chosenSkillProficiencies)
@@ -27,8 +50,6 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     chosenSaveProficiencies: Array.isArray(input.chosenSaveProficiencies)
       ? input.chosenSaveProficiencies
       : [],
-    toolProficiencies: Array.isArray(input.toolProficiencies) ? input.toolProficiencies : [],
-    languages: Array.isArray(input.languages) ? input.languages : [],
     knownSpellIds: Array.isArray(input.knownSpellIds) ? input.knownSpellIds : [],
     preparedSpellIds: Array.isArray(input.preparedSpellIds) ? input.preparedSpellIds : [],
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
@@ -38,7 +59,43 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
     inventoryEntries: Array.isArray(input.inventoryEntries) ? input.inventoryEntries : [],
-    coins: input.coins && typeof input.coins === "object" ? input.coins : undefined,
+    armorProficiencies: normalizeStringArray(input.armorProficiencies),
+    weaponProficiencies: normalizeStringArray(input.weaponProficiencies),
+    toolProficiencies: normalizeStringArray(input.toolProficiencies),
+    languages: normalizeStringArray(input.languages),
+    attunedItems: normalizeStringArray(input.attunedItems),
+    subclass: normalizeOptionalString(input.subclass),
+    xp: normalizeOptionalNonNegativeInt(input.xp),
+    heroicInspiration: input.heroicInspiration === true,
+    tempHP: normalizeOptionalNonNegativeInt(input.tempHP),
+    hitDiceTotal: normalizeOptionalNonNegativeInt(input.hitDiceTotal),
+    hitDiceSpent: normalizeOptionalNonNegativeInt(input.hitDiceSpent),
+    deathSaveSuccesses: normalizeOptionalNonNegativeInt(input.deathSaveSuccesses),
+    deathSaveFailures: normalizeOptionalNonNegativeInt(input.deathSaveFailures),
+    exhaustionLevel: normalizeOptionalNonNegativeInt(input.exhaustionLevel),
+    otherWealth: normalizeOptionalString(input.otherWealth),
+    appearance: normalizeOptionalString(input.appearance),
+    physicalDescription: normalizeOptionalString(input.physicalDescription),
+    backstory: normalizeOptionalString(input.backstory),
+    alignment: normalizeOptionalString(input.alignment),
+    notes: normalizeOptionalString(input.notes),
+    companion: isObjectRecord(input.companion)
+      ? {
+          name: normalizeOptionalString(input.companion.name),
+          type: normalizeOptionalString(input.companion.type),
+          summary: normalizeOptionalString(input.companion.summary),
+          notes: normalizeOptionalString(input.companion.notes),
+        }
+      : undefined,
+    coins: coins
+      ? {
+          cp: normalizeOptionalNonNegativeInt(coins.cp),
+          sp: normalizeOptionalNonNegativeInt(coins.sp),
+          ep: normalizeOptionalNonNegativeInt(coins.ep),
+          gp: normalizeOptionalNonNegativeInt(coins.gp),
+          pp: normalizeOptionalNonNegativeInt(coins.pp),
+        }
+      : undefined,
   };
 }
 
@@ -104,9 +161,11 @@ export async function POST(request: Request) {
     ? merged.content.equipmentById[payload.characterState.equippedWeaponId]
     : undefined;
   const coinValues = payload.characterState.coins ?? {};
-  const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
-  const spCoins = Number.isFinite(coinValues.sp) ? Math.max(0, Math.floor(coinValues.sp ?? 0)) : 0;
   const cpCoins = Number.isFinite(coinValues.cp) ? Math.max(0, Math.floor(coinValues.cp ?? 0)) : 0;
+  const spCoins = Number.isFinite(coinValues.sp) ? Math.max(0, Math.floor(coinValues.sp ?? 0)) : 0;
+  const epCoins = Number.isFinite(coinValues.ep) ? Math.max(0, Math.floor(coinValues.ep ?? 0)) : 0;
+  const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
+  const ppCoins = Number.isFinite(coinValues.pp) ? Math.max(0, Math.floor(coinValues.pp ?? 0)) : 0;
   const inventoryCounts = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
     inventoryCounts.set(itemId, Math.max(1, inventoryCounts.get(itemId) ?? 1));
@@ -126,15 +185,26 @@ export async function POST(request: Request) {
     .sort((a, b) => a.localeCompare(b))
     .slice(0, 6);
   const inventorySummary = [
-    `Coins: ${gpCoins} gp / ${spCoins} sp / ${cpCoins} cp`,
+    `Coins: ${cpCoins} cp / ${spCoins} sp / ${epCoins} ep / ${gpCoins} gp / ${ppCoins} pp`,
+    ...(payload.characterState.otherWealth?.trim()
+      ? [`Other Wealth: ${payload.characterState.otherWealth.trim()}`]
+      : []),
     ...(inventoryItems.length > 0 ? inventoryItems : ["Other Gear: None"]),
   ];
+  const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
+  const spellcastingModifier = spellcastingAbility ? derived.abilityMods[spellcastingAbility] : null;
+  const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
+  const spellAttackBonus = derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
+  const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
   const templatePdfBytes = await loadTemplatePdfBytes();
   const pdfResult = buildPdfExportFromTemplate(templatePdfBytes, validation, {
     level: payload.characterState.level,
     className: selectedClass?.name,
+    subclass: payload.characterState.subclass ?? null,
     speciesName: selectedSpecies?.name,
     backgroundName: selectedBackground?.name,
+    xp: payload.characterState.xp ?? null,
+    heroicInspiration: payload.characterState.heroicInspiration === true,
     abilities: derived.finalAbilities,
     abilityMods: derived.abilityMods,
     savingThrows: derived.savingThrows,
@@ -142,20 +212,46 @@ export async function POST(request: Request) {
     skills: derived.skills,
     proficiencyBonus: derived.proficiencyBonus,
     armorClass: derived.armorClass,
+    shieldAC: payload.characterState.equippedShieldId ? 2 : 0,
     maxHP: derived.maxHP,
+    tempHP: payload.characterState.tempHP ?? 0,
+    hitDiceTotal: payload.characterState.hitDiceTotal ?? null,
+    hitDiceSpent: payload.characterState.hitDiceSpent ?? 0,
+    deathSaveSuccesses: payload.characterState.deathSaveSuccesses ?? 0,
+    deathSaveFailures: payload.characterState.deathSaveFailures ?? 0,
+    exhaustionLevel: payload.characterState.exhaustionLevel ?? 0,
     speed: derived.speed,
     passivePerception: derived.passivePerception,
     attackName: derived.attack?.name,
     attackToHit: derived.attack?.toHit,
     attackDamage: derived.attack?.damage,
     featNames: derived.feats.map((feat) => feat.name),
-    spellcastingAbility: derived.spellcastingAbility,
-    spellSaveDC: derived.spellSaveDC,
-    spellAttackBonus: derived.spellAttackBonus,
-    spellSlots: derived.spellSlots,
+    spellcastingAbility,
+    spellcastingModifier,
+    spellSaveDC,
+    spellAttackBonus,
+    spellSlots,
+    armorProficiencies: payload.characterState.armorProficiencies ?? [],
+    weaponProficiencies: payload.characterState.weaponProficiencies ?? [],
     toolProficiencies: derived.toolProficiencies,
     languages: derived.languages,
+    cp: cpCoins,
+    sp: spCoins,
+    ep: epCoins,
+    gp: gpCoins,
+    pp: ppCoins,
+    otherWealth: payload.characterState.otherWealth ?? null,
+    attunedItems: payload.characterState.attunedItems ?? [],
     inventorySummary,
+    appearance: payload.characterState.appearance ?? null,
+    physicalDescription: payload.characterState.physicalDescription ?? null,
+    backstory: payload.characterState.backstory ?? null,
+    alignment: payload.characterState.alignment ?? null,
+    notes: payload.characterState.notes ?? null,
+    companionName: payload.characterState.companion?.name ?? null,
+    companionType: payload.characterState.companion?.type ?? null,
+    companionSummary: payload.characterState.companion?.summary ?? null,
+    companionNotes: payload.characterState.companion?.notes ?? null,
     equippedArmorName: armor?.name,
     equippedShieldName: shield?.name,
     equippedWeaponName: weapon?.name,

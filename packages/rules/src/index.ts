@@ -32,6 +32,7 @@ export type {
   CharacterConditions,
   ConditionId,
   CharacterCoins,
+  CompanionPlaceholder,
   DerivedModifier,
   DerivedModifierEffect,
   DerivedStartingEquipment,
