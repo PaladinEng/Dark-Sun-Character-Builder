@@ -2,6 +2,7 @@ import { access, readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { NextResponse } from "next/server";
+import { getClassFeatureIdsForLevel, type Effect } from "@dark-sun/content";
 import type { AttunedItem, CharacterState } from "@dark-sun/rules";
 import {
   buildPdfExportFromTemplate,
@@ -71,6 +72,46 @@ function normalizeOptionalNonNegativeInt(value: unknown): number | undefined {
     return undefined;
   }
   return Math.max(0, Math.floor(parsed));
+}
+
+function formatDelimitedLabel(value: string): string {
+  return value
+    .split(/[_\s-]+/g)
+    .filter((part) => part.length > 0)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatConditionLabel(conditionId: string): string {
+  return formatDelimitedLabel(conditionId);
+}
+
+function summarizeSpeciesTraits(
+  description: string | undefined,
+  effects: readonly Effect[] | undefined
+): string[] {
+  const lines: string[] = [];
+  const normalizedDescription = description?.trim();
+  if (normalizedDescription) {
+    lines.push(normalizedDescription);
+  }
+  for (const effect of effects ?? []) {
+    if (effect.type === "grant_trait") {
+      lines.push(effect.name);
+      continue;
+    }
+    if (effect.type === "grant_sense") {
+      const senseLabel = formatDelimitedLabel(effect.sense);
+      lines.push(
+        typeof effect.range === "number" ? `Sense: ${senseLabel} ${effect.range} ft` : `Sense: ${senseLabel}`
+      );
+      continue;
+    }
+    if (effect.type === "grant_resistance") {
+      lines.push(`Resistance: ${formatDelimitedLabel(effect.damageType)}`);
+    }
+  }
+  return [...new Set(lines)];
 }
 
 function normalizeCharacterState(input: CharacterState): CharacterState {
@@ -241,6 +282,40 @@ export async function POST(request: Request) {
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
   const spellAttackBonus = derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+  const normalizedLevel = Math.max(1, Math.floor(payload.characterState.level || 1));
+  const characterStateWithOptionalIdentity = payload.characterState as CharacterState & {
+    characterName?: unknown;
+    name?: unknown;
+    currentHP?: unknown;
+    currentHp?: unknown;
+    currentHitPoints?: unknown;
+  };
+  const rawCharacterName =
+    normalizeOptionalString(characterStateWithOptionalIdentity.characterName) ??
+    normalizeOptionalString(characterStateWithOptionalIdentity.name);
+  const characterName = rawCharacterName?.trim() ? rawCharacterName.trim() : null;
+  const currentHP = normalizeOptionalNonNegativeInt(
+    characterStateWithOptionalIdentity.currentHP ??
+      characterStateWithOptionalIdentity.currentHp ??
+      characterStateWithOptionalIdentity.currentHitPoints
+  );
+  const classFeatureNames = selectedClass
+    ? getClassFeatureIdsForLevel(selectedClass, normalizedLevel).map(
+        (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
+      )
+    : [];
+  const selectedFeatureNames = (payload.characterState.selectedFeatureIds ?? [])
+    .map((featureId) => merged.content.featuresById[featureId]?.name ?? featureId)
+    .filter((name) => name.trim().length > 0);
+  const speciesTraitNames = summarizeSpeciesTraits(selectedSpecies?.description, selectedSpecies?.effects);
+  const activeConditionNames = (derived.activeConditionIds ?? []).map((conditionId) =>
+    formatConditionLabel(conditionId)
+  );
+  const attackNotes = derived.attack?.mastery?.length
+    ? `Mastery: ${derived.attack.mastery
+        .map((mastery) => formatDelimitedLabel(mastery))
+        .join(", ")}`
+    : null;
   const orderedSkillDefinitions = [...merged.content.skillDefinitions]
     .map((skill, index) => ({ skill, index }))
     .sort((left, right) => {
@@ -265,7 +340,8 @@ export async function POST(request: Request) {
   });
   const templatePdfBytes = await loadTemplatePdfBytes();
   const pdfResult = buildPdfExportFromTemplate(templatePdfBytes, validation, {
-    level: payload.characterState.level,
+    level: normalizedLevel,
+    characterName,
     className: selectedClass?.name,
     subclass: payload.characterState.subclass ?? null,
     speciesName: selectedSpecies?.name,
@@ -282,6 +358,7 @@ export async function POST(request: Request) {
     proficiencyBonus: derived.proficiencyBonus,
     armorClass: derived.armorClass,
     shieldAC: payload.characterState.equippedShieldId ? 2 : 0,
+    currentHP: currentHP ?? null,
     maxHP: derived.maxHP,
     tempHP: payload.characterState.tempHP ?? 0,
     hitDiceTotal: payload.characterState.hitDiceTotal ?? null,
@@ -294,7 +371,12 @@ export async function POST(request: Request) {
     attackName: derived.attack?.name,
     attackToHit: derived.attack?.toHit,
     attackDamage: derived.attack?.damage,
+    attackNotes,
+    classFeatureNames,
+    speciesTraitNames,
+    selectedFeatureNames,
     featNames: derived.feats.map((feat) => feat.name),
+    activeConditionNames,
     spellcastingAbility,
     spellcastingModifier,
     spellSaveDC,

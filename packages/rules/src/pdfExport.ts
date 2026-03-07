@@ -22,6 +22,7 @@ export type PdfExportResult =
 
 export type PdfExportCharacterSnapshot = {
   level: number;
+  characterName?: string | null;
   className?: string | null;
   subclass?: string | null;
   speciesName?: string | null;
@@ -38,6 +39,7 @@ export type PdfExportCharacterSnapshot = {
   proficiencyBonus: number;
   armorClass: number;
   shieldAC?: number | null;
+  currentHP?: number | null;
   maxHP: number;
   tempHP?: number | null;
   hitDiceTotal?: number | null;
@@ -50,7 +52,12 @@ export type PdfExportCharacterSnapshot = {
   attackName?: string | null;
   attackToHit?: number | null;
   attackDamage?: string | null;
+  attackNotes?: string | null;
+  classFeatureNames?: readonly string[];
+  speciesTraitNames?: readonly string[];
+  selectedFeatureNames?: readonly string[];
   featNames?: readonly string[];
+  activeConditionNames?: readonly string[];
   spellcastingAbility?: Ability | null;
   spellcastingModifier?: number | null;
   spellSaveDC?: number | null;
@@ -115,7 +122,8 @@ function normalizeLines(value: readonly string[] | undefined, fallback: string):
   if (!value || value.length === 0) {
     return [fallback];
   }
-  return value.map((entry) => entry.trim()).filter((entry) => entry.length > 0);
+  const normalized = value.map((entry) => entry.trim()).filter((entry) => entry.length > 0);
+  return normalized.length > 0 ? normalized : [fallback];
 }
 
 function drawText(
@@ -160,38 +168,55 @@ function drawList(
   }
 }
 
+function drawField(
+  commands: string[],
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  label: string,
+  value: string,
+  maxLength = 34,
+  valueSize = 9
+): void {
+  commands.push(`${x} ${y} ${width} ${height} re S`);
+  drawText(commands, label.toUpperCase(), x + 3, y + height - 8, 6, true);
+  drawText(commands, truncateText(value, maxLength), x + 3, y + 5, valueSize, true);
+}
+
 function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint8Array {
   const commands: string[] = [];
   const pageWidth = 612;
-  const pageHeight = 792;
   const margin = 24;
-  const columnGap = 8;
-  const leftWidth = 140;
-  const middleWidth = 244;
-  const rightWidth = 164;
-
+  const contentWidth = pageWidth - margin * 2;
+  const sectionGap = 8;
+  const leftWidth = 192;
+  const rightWidth = contentWidth - leftWidth - sectionGap;
   const leftX = margin;
-  const middleX = leftX + leftWidth + columnGap;
-  const rightX = middleX + middleWidth + columnGap;
-  const columnTop = 692;
-  const columnBottom = 24;
+  const rightX = leftX + leftWidth + sectionGap;
 
-  const headerX = margin;
-  const headerY = 734;
-  const headerWidth = pageWidth - margin * 2;
-  const headerHeight = 34;
-
-  const attackSummary = snapshot.attackName
-    ? `${snapshot.attackName} ${formatModifier(snapshot.attackToHit ?? 0)} (${snapshot.attackDamage ?? "-"})`
-    : "None";
   const level = Math.max(1, Math.floor(snapshot.level || 1));
+  const characterName = snapshot.characterName?.trim() || "Unnamed Character";
+  const classLabel = snapshot.className?.trim() || "Class Unset";
   const subclassLabel = snapshot.subclass?.trim() ? snapshot.subclass.trim() : "None";
+  const classAndSubclass = `${classLabel} / ${subclassLabel}`;
+  const speciesLabel = snapshot.speciesName?.trim() || "Species Unset";
+  const backgroundLabel = snapshot.backgroundName?.trim() || "Background Unset";
   const xpValue =
     typeof snapshot.xp === "number" && Number.isFinite(snapshot.xp)
       ? Math.max(0, Math.floor(snapshot.xp))
       : null;
   const heroicInspirationLabel = snapshot.heroicInspiration ? "Yes" : "No";
-  const proficiencyBonus = formatModifier(snapshot.proficiencyBonus);
+  const proficiencyBonusLabel = formatModifier(snapshot.proficiencyBonus);
+  const shieldContribution =
+    typeof snapshot.shieldAC === "number" && Number.isFinite(snapshot.shieldAC) && snapshot.shieldAC > 0
+      ? `+${Math.floor(snapshot.shieldAC)}`
+      : "None";
+  const initiative = formatModifier(snapshot.abilityMods.dex ?? 0);
+  const currentHP =
+    typeof snapshot.currentHP === "number" && Number.isFinite(snapshot.currentHP)
+      ? Math.max(0, Math.floor(snapshot.currentHP))
+      : snapshot.maxHP;
   const tempHP =
     typeof snapshot.tempHP === "number" && Number.isFinite(snapshot.tempHP)
       ? Math.max(0, Math.floor(snapshot.tempHP))
@@ -216,27 +241,18 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     typeof snapshot.exhaustionLevel === "number" && Number.isFinite(snapshot.exhaustionLevel)
       ? Math.max(0, Math.min(10, Math.floor(snapshot.exhaustionLevel)))
       : 0;
-  const spellSlotsSummary = snapshot.spellSlots
-    ? snapshot.spellSlots.map((count, index) => `L${index + 1}:${count}`).join(" ")
-    : "None";
-  const attunedItemsSummary =
-    snapshot.attunedItems && snapshot.attunedItems.length > 0
-      ? snapshot.attunedItems.join(", ")
-      : "None";
-  const inventoryLines = normalizeLines(snapshot.inventorySummary, "No additional equipment listed.");
-  const featLines = normalizeLines(snapshot.featNames, "No feats selected.");
-  const warningLines = normalizeLines(snapshot.warningMessages, "No validation warnings.");
-  const toolLines = normalizeLines(snapshot.toolProficiencies, "None");
-  const languageLines = normalizeLines(snapshot.languages, "None");
-  const narrativeLines = [
-    `Alignment: ${snapshot.alignment?.trim() || "-"}`,
-    `Appearance: ${snapshot.appearance?.trim() || "-"}`,
-    `Physical: ${snapshot.physicalDescription?.trim() || "-"}`,
-    `Backstory: ${snapshot.backstory?.trim() || "-"}`,
-    `Notes: ${snapshot.notes?.trim() || "-"}`,
-    `Companion: ${snapshot.companionName?.trim() || "-"}`,
-    `Familiar: ${snapshot.familiarName?.trim() || "-"}`,
-  ];
+  const attackBonusOrDc =
+    typeof snapshot.attackToHit === "number"
+      ? formatModifier(snapshot.attackToHit)
+      : typeof snapshot.spellSaveDC === "number"
+        ? `DC ${snapshot.spellSaveDC}`
+        : "-";
+  const attackNotes = snapshot.attackNotes?.trim() || "-";
+  const classFeatureLines = normalizeLines(snapshot.classFeatureNames, "None");
+  const speciesTraitLines = normalizeLines(snapshot.speciesTraitNames, "None");
+  const featLines = normalizeLines(snapshot.featNames, "None");
+  const otherFeatureLines = normalizeLines(snapshot.selectedFeatureNames, "None");
+  const conditionLines = normalizeLines(snapshot.activeConditionNames, "None");
   const saveProficiencySet = new Set(snapshot.saveProficiencies ?? []);
   const skillAndToolRows =
     snapshot.skillAndToolRows ??
@@ -245,248 +261,289 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       skills: snapshot.skills,
       toolProficiencies: snapshot.toolProficiencies,
     });
+  const featuresSummaryLines = [
+    "Class Features:",
+    ...classFeatureLines.map((line) => `- ${line}`),
+    "Species Traits:",
+    ...speciesTraitLines.map((line) => `- ${line}`),
+    "Feats:",
+    ...featLines.map((line) => `- ${line}`),
+    "Other Features:",
+    ...otherFeatureLines.map((line) => `- ${line}`),
+  ];
+  const attackRows = [
+    {
+      name: snapshot.attackName?.trim() || "-",
+      bonus: attackBonusOrDc,
+      damage: snapshot.attackDamage?.trim() || "-",
+      notes: attackNotes,
+    },
+    { name: "-", bonus: "-", damage: "-", notes: "-" },
+    { name: "-", bonus: "-", damage: "-", notes: "-" },
+    { name: "-", bonus: "-", damage: "-", notes: "-" },
+  ];
+
+  const identityY = 704;
+  const identityHeight = 64;
+  const bodyTop = identityY - 8;
+  const bodyBottom = 24;
+  const bodyHeight = bodyTop - bodyBottom;
+
+  const abilityY = 268;
+  const abilityHeight = bodyHeight - 236 - sectionGap;
+  const skillsY = bodyBottom;
+  const skillsHeight = 236;
+
+  const combatY = 600;
+  const combatHeight = 96;
+  const survivabilityY = 480;
+  const survivabilityHeight = 112;
+  const attacksY = 334;
+  const attacksHeight = 138;
+  const conditionsY = 248;
+  const conditionsHeight = 78;
+  const featuresY = bodyBottom;
+  const featuresHeight = 216;
 
   commands.push("0.2 w");
-  commands.push(`${headerX} ${headerY} ${headerWidth} ${headerHeight} re S`);
-  drawText(commands, "DARK SUN CHARACTER SHEET", headerX + 10, headerY + 20, 16, true);
-  drawText(
-    commands,
-    `${truncateText(snapshot.className ?? "Class Unset", 20)} | ${truncateText(snapshot.speciesName ?? "Species Unset", 18)} | Lvl ${level}`,
-    headerX + 10,
-    headerY + 7,
-    9,
-    false
-  );
-  drawText(
-    commands,
-    `Background: ${truncateText(snapshot.backgroundName ?? "Unset", 28)}`,
-    headerX + 320,
-    headerY + 20,
-    9,
-    false
-  );
-  drawText(commands, `Export`, headerX + 320, headerY + 7, 9, true);
-  drawText(commands, "Dark Sun Builder", headerX + 356, headerY + 7, 9, false);
+  drawText(commands, "DARK SUN BUILDER CHARACTER SHEET", margin, 778, 11, true);
 
-  const abilitiesY = columnTop - 320;
-  const savingThrowsY = abilitiesY - columnGap - 130;
-  const skillsY = savingThrowsY - columnGap - 202;
-  const coreStatsY = columnTop - 120;
-  const attacksY = coreStatsY - columnGap - 90;
-  const summaryY = attacksY - columnGap - 170;
-  const equipmentY = summaryY - columnGap - 120;
-  const notesY = equipmentY - columnGap - 136;
-  const identityY = columnTop - 120;
-  const featsY = identityY - columnGap - 180;
-  const spellcastingY = featsY - columnGap - 110;
-  const validationY = spellcastingY - columnGap - 90;
-  const resourcesY = validationY - columnGap - 136;
+  drawSection(commands, margin, identityY, contentWidth, identityHeight, "Identity Header");
+  const identityInnerX = margin + 8;
+  const identityFieldHeight = 18;
+  const identityTopRowY = identityY + 24;
+  const identityBottomRowY = identityY + 3;
+  const idTop = [
+    { label: "Character Name", value: characterName, width: 226 },
+    { label: "Class / Subclass", value: classAndSubclass, width: 180 },
+    { label: "Level", value: `${level}`, width: 48 },
+    { label: "XP", value: xpValue === null ? "-" : `${xpValue}`, width: 76 },
+  ] as const;
+  let idCursor = identityInnerX;
+  for (const field of idTop) {
+    drawField(
+      commands,
+      idCursor,
+      identityTopRowY,
+      field.width,
+      identityFieldHeight,
+      field.label,
+      field.value,
+      field.label === "Character Name" ? 32 : 26
+    );
+    idCursor += field.width + 6;
+  }
+  const idBottom = [
+    { label: "Background", value: backgroundLabel, width: 210 },
+    { label: "Species", value: speciesLabel, width: 160 },
+    { label: "Heroic Inspiration", value: heroicInspirationLabel, width: 166 },
+  ] as const;
+  idCursor = identityInnerX;
+  for (const field of idBottom) {
+    drawField(commands, idCursor, identityBottomRowY, field.width, identityFieldHeight, field.label, field.value);
+    idCursor += field.width + 6;
+  }
 
-  drawSection(commands, leftX, abilitiesY, leftWidth, 320, "Abilities");
-  drawSection(commands, leftX, savingThrowsY, leftWidth, 130, "Saving Throws");
-  drawSection(commands, leftX, skillsY, leftWidth, 202, "Skills");
-
-  drawSection(commands, middleX, coreStatsY, middleWidth, 120, "Core Stats");
-  drawSection(commands, middleX, attacksY, middleWidth, 90, "Attack");
-  drawSection(commands, middleX, summaryY, middleWidth, 170, "Character Summary");
-  drawSection(commands, middleX, equipmentY, middleWidth, 120, "Equipment");
-  drawSection(commands, middleX, notesY, middleWidth, 136, "Notes");
-
-  drawSection(commands, rightX, identityY, rightWidth, 120, "Identity");
-  drawSection(commands, rightX, featsY, rightWidth, 180, "Feats");
-  drawSection(commands, rightX, spellcastingY, rightWidth, 110, "Spellcasting");
-  drawSection(commands, rightX, validationY, rightWidth, 90, "Validation");
-  drawSection(commands, rightX, resourcesY, rightWidth, 136, "Proficiencies");
-
+  drawSection(commands, leftX, abilityY, leftWidth, abilityHeight, "Abilities");
   const abilityBoxX = leftX + 8;
   const abilityBoxWidth = leftWidth - 16;
-  const abilityBoxHeight = 40;
-  const abilityRowGap = 6;
-  const firstAbilityY = abilitiesY + 320 - 20 - abilityBoxHeight;
+  const abilityBoxHeight = 63;
+  const abilityRowGap = 4;
+  const firstAbilityY = abilityY + abilityHeight - 20 - abilityBoxHeight;
+  const scoreDivider = abilityBoxX + 44;
+  const modDivider = scoreDivider + 38;
+  const saveDivider = modDivider + 40;
+  drawText(commands, "SCORE", scoreDivider + 4, abilityY + abilityHeight - 18, 6, true);
+  drawText(commands, "MOD", modDivider + 6, abilityY + abilityHeight - 18, 6, true);
+  drawText(commands, "SAVE", saveDivider + 6, abilityY + abilityHeight - 18, 6, true);
   ABILITY_ORDER.forEach((ability, index) => {
     const rowY = firstAbilityY - index * (abilityBoxHeight + abilityRowGap);
     commands.push(`${abilityBoxX} ${rowY} ${abilityBoxWidth} ${abilityBoxHeight} re S`);
-    commands.push(`${abilityBoxX + 56} ${rowY + 8} 26 22 re S`);
-    drawText(commands, ABILITY_LABELS[ability], abilityBoxX + 6, rowY + 24, 10, true);
+    commands.push(`${scoreDivider} ${rowY} m ${scoreDivider} ${rowY + abilityBoxHeight} l S`);
+    commands.push(`${modDivider} ${rowY} m ${modDivider} ${rowY + abilityBoxHeight} l S`);
+    commands.push(`${saveDivider} ${rowY} m ${saveDivider} ${rowY + abilityBoxHeight} l S`);
+    drawText(commands, ABILITY_LABELS[ability], abilityBoxX + 4, rowY + 24, 10, true);
+    drawText(commands, `${snapshot.abilities[ability] ?? 0}`, scoreDivider + 8, rowY + 24, 12, true);
     drawText(
       commands,
       formatModifier(snapshot.abilityMods[ability] ?? 0),
-      abilityBoxX + 60,
-      rowY + 16,
+      modDivider + 7,
+      rowY + 24,
       11,
       true
     );
-    drawText(commands, `${snapshot.abilities[ability] ?? 0}`, abilityBoxX + 92, rowY + 16, 14, true);
+    const saveValue = snapshot.savingThrows?.[ability] ?? snapshot.abilityMods[ability] ?? 0;
+    const saveText = `${saveProficiencySet.has(ability) ? "P " : ""}${formatModifier(saveValue)}`;
+    drawText(commands, saveText, saveDivider + 4, rowY + 24, 10, true);
   });
 
-  ABILITY_ORDER.forEach((ability, index) => {
-    const marker = saveProficiencySet.has(ability) ? "*" : " ";
-    const saveLine = `${marker} ${ABILITY_LABELS[ability]} ${formatModifier(
-      snapshot.savingThrows?.[ability] ?? snapshot.abilityMods[ability] ?? 0
-    )}`;
-    drawText(commands, saveLine, leftX + 8, savingThrowsY + 102 - index * 16, 9, false);
-  });
-
+  drawSection(commands, leftX, skillsY, leftWidth, skillsHeight, "Skills & Tools");
   drawList(
     commands,
     skillAndToolRows.map((row) =>
       row.kind === "skill"
         ? `${row.label} ${formatModifier(row.value)}`
-        : `Tool: ${row.label} (Proficient)`
+        : `Tool: ${row.label}`
     ),
     leftX + 8,
-    skillsY + 176,
+    skillsY + skillsHeight - 22,
     24,
-    7,
-    7
+    9,
+    8
   );
 
-  const statRows = [
+  drawSection(commands, rightX, combatY, rightWidth, combatHeight, "Combat");
+  const combatStats = [
     ["Armor Class", `${snapshot.armorClass}`],
-    ["Max HP", `${snapshot.maxHP}`],
-    ["Temp HP", `${tempHP}`],
+    ["Shield", shieldContribution],
     ["Speed", `${snapshot.speed} ft`],
-    ["Proficiency", proficiencyBonus],
-    ["Passive Perception", `${snapshot.passivePerception ?? 10}`],
+    ["Initiative", initiative],
+    ["Prof Bonus", proficiencyBonusLabel],
   ] as const;
-  const statBoxWidth = 112;
-  const statBoxHeight = 28;
-  statRows.forEach(([label, value], index) => {
-    const col = index % 2;
-    const row = Math.floor(index / 2);
-    const x = middleX + 8 + col * (statBoxWidth + 8);
-    const y = coreStatsY + 120 - 22 - statBoxHeight - row * (statBoxHeight + 6);
-    commands.push(`${x} ${y} ${statBoxWidth} ${statBoxHeight} re S`);
-    drawText(commands, label, x + 4, y + 18, 7, false);
-    drawText(commands, value, x + 4, y + 6, 11, true);
+  const combatBoxGap = 6;
+  const combatBoxWidth = (rightWidth - 16 - combatBoxGap * 4) / 5;
+  const combatBoxHeight = 42;
+  combatStats.forEach(([label, value], index) => {
+    const x = rightX + 8 + index * (combatBoxWidth + combatBoxGap);
+    const y = combatY + 24;
+    commands.push(`${x} ${y} ${combatBoxWidth} ${combatBoxHeight} re S`);
+    drawText(commands, label, x + 3, y + 27, 6, true);
+    drawText(commands, value, x + 3, y + 11, 12, true);
   });
 
+  drawSection(commands, rightX, survivabilityY, rightWidth, survivabilityHeight, "Survivability");
+  const survivabilityTopY = survivabilityY + 44;
+  const survivabilityTopWidth = (rightWidth - 16 - 12) / 3;
+  drawField(
+    commands,
+    rightX + 8,
+    survivabilityTopY,
+    survivabilityTopWidth,
+    34,
+    "Current HP",
+    `${currentHP}`,
+    16,
+    11
+  );
+  drawField(
+    commands,
+    rightX + 8 + survivabilityTopWidth + 6,
+    survivabilityTopY,
+    survivabilityTopWidth,
+    34,
+    "Max HP",
+    `${snapshot.maxHP}`,
+    16,
+    11
+  );
+  drawField(
+    commands,
+    rightX + 8 + (survivabilityTopWidth + 6) * 2,
+    survivabilityTopY,
+    survivabilityTopWidth,
+    34,
+    "Temp HP",
+    `${tempHP}`,
+    16,
+    11
+  );
+  const lowerWidth = (rightWidth - 16 - 6) / 2;
+  drawField(
+    commands,
+    rightX + 8,
+    survivabilityY + 7,
+    lowerWidth,
+    30,
+    "Hit Dice (Spent/Total)",
+    `${hitDiceSpent}/${hitDiceTotal ?? "-"}`,
+    26,
+    10
+  );
+  drawField(
+    commands,
+    rightX + 8 + lowerWidth + 6,
+    survivabilityY + 7,
+    lowerWidth,
+    30,
+    "Death Saves (S/F)",
+    `${deathSaveSuccesses}/${deathSaveFailures}`,
+    26,
+    10
+  );
+
+  drawSection(commands, rightX, attacksY, rightWidth, attacksHeight, "Weapons / Attacks");
+  const tableX = rightX + 8;
+  const tableY = attacksY + 16;
+  const tableWidth = rightWidth - 16;
+  const tableRowHeight = 19;
+  const tableRows = 5;
+  const tableHeight = tableRows * tableRowHeight;
+  const attackColumns = [118, 70, 96, 64] as const;
+  commands.push(`${tableX} ${tableY} ${tableWidth} ${tableHeight} re S`);
+  for (let index = 1; index < tableRows; index += 1) {
+    const y = tableY + tableHeight - index * tableRowHeight;
+    commands.push(`${tableX} ${y} m ${tableX + tableWidth} ${y} l S`);
+  }
+  let columnCursor = tableX;
+  for (let index = 0; index < attackColumns.length - 1; index += 1) {
+    columnCursor += attackColumns[index];
+    commands.push(`${columnCursor} ${tableY} m ${columnCursor} ${tableY + tableHeight} l S`);
+  }
+  drawText(commands, "NAME", tableX + 3, tableY + tableHeight - 13, 6, true);
+  drawText(commands, "ATK/DC", tableX + attackColumns[0] + 3, tableY + tableHeight - 13, 6, true);
   drawText(
     commands,
-    truncateText(snapshot.attackName ?? "No attack selected", 42),
-    middleX + 8,
-    attacksY + 58,
-    10,
+    "DAMAGE / TYPE",
+    tableX + attackColumns[0] + attackColumns[1] + 3,
+    tableY + tableHeight - 13,
+    6,
     true
   );
-  drawText(commands, `To Hit: ${formatModifier(snapshot.attackToHit ?? 0)}`, middleX + 8, attacksY + 40, 9, false);
   drawText(
     commands,
-    `Damage: ${truncateText(snapshot.attackDamage ?? "-", 34)}`,
-    middleX + 8,
-    attacksY + 24,
-    9,
-    false
-  );
-
-  drawList(
-    commands,
-    [
-      `Attack: ${truncateText(attackSummary, 52)}`,
-      `Class: ${truncateText(snapshot.className ?? "-", 44)}`,
-      `Subclass: ${truncateText(subclassLabel, 40)}`,
-      `Species: ${truncateText(snapshot.speciesName ?? "-", 44)}`,
-      `Background: ${truncateText(snapshot.backgroundName ?? "-", 42)}`,
-      `XP: ${xpValue ?? "-"}`,
-      `Heroic Inspiration: ${heroicInspirationLabel}`,
-      `Primary Ability: ${ABILITY_LABELS[snapshot.spellcastingAbility ?? "int"] ?? "-"}`,
-      `Export Level: ${level}`,
-    ],
-    middleX + 8,
-    summaryY + 146,
-    10,
-    14,
-    8
-  );
-
-  drawList(
-    commands,
-    [
-      `Armor: ${truncateText(snapshot.equippedArmorName ?? "None", 34)}`,
-      `Shield: ${truncateText(snapshot.equippedShieldName ?? "None", 34)}`,
-      `Weapon: ${truncateText(snapshot.equippedWeaponName ?? "None", 34)}`,
-      `Attuned: ${truncateText(attunedItemsSummary, 36)}`,
-      ...inventoryLines.map((line) => truncateText(line, 44)),
-    ],
-    middleX + 8,
-    equipmentY + 96,
-    7,
-    13,
-    8
-  );
-
-  for (let index = 0; index < 7; index += 1) {
-    const y = notesY + 108 - index * 14;
-    commands.push(`${middleX + 8} ${y} m ${middleX + middleWidth - 8} ${y} l S`);
-  }
-
-  drawList(commands, narrativeLines, middleX + 8, notesY + 110, 7, 14, 8);
-
-  drawList(
-    commands,
-    [
-      `Level ${level}`,
-      `XP: ${xpValue ?? "-"}`,
-      `Class: ${truncateText(snapshot.className ?? "-", 22)}`,
-      `Subclass: ${truncateText(subclassLabel, 18)}`,
-      `Species: ${truncateText(snapshot.speciesName ?? "-", 20)}`,
-      `Background: ${truncateText(snapshot.backgroundName ?? "-", 18)}`,
-      `Heroic Inspiration: ${heroicInspirationLabel}`,
-      `Speed: ${snapshot.speed} ft`,
-      `HP: ${snapshot.maxHP} / Temp ${tempHP}`,
-    ],
-    rightX + 8,
-    identityY + 98,
-    8,
-    14,
-    8
-  );
-
-  drawList(commands, featLines, rightX + 8, featsY + 156, 13, 12, 8);
-
-  drawList(
-    commands,
-    [
-      `Ability: ${
-        snapshot.spellcastingAbility
-          ? ABILITY_LABELS[snapshot.spellcastingAbility]
-          : "None"
-      }`,
-      `Save DC: ${snapshot.spellSaveDC ?? "-"}`,
-      `Atk Bonus: ${
-        typeof snapshot.spellAttackBonus === "number"
-          ? formatModifier(snapshot.spellAttackBonus)
-          : "-"
-      }`,
-      truncateText(`Slots: ${spellSlotsSummary}`, 34),
-    ],
-    rightX + 8,
-    spellcastingY + 84,
+    "NOTES",
+    tableX + attackColumns[0] + attackColumns[1] + attackColumns[2] + 3,
+    tableY + tableHeight - 13,
     6,
-    13,
-    8
+    true
   );
+  attackRows.forEach((row, index) => {
+    const rowTopY = tableY + tableHeight - tableRowHeight * (index + 1);
+    const rowTextY = rowTopY - 13;
+    drawText(commands, truncateText(row.name, 21), tableX + 3, rowTextY, 8, false);
+    drawText(commands, truncateText(row.bonus, 10), tableX + attackColumns[0] + 3, rowTextY, 8, false);
+    drawText(
+      commands,
+      truncateText(row.damage, 17),
+      tableX + attackColumns[0] + attackColumns[1] + 3,
+      rowTextY,
+      8,
+      false
+    );
+    drawText(
+      commands,
+      truncateText(row.notes, 12),
+      tableX + attackColumns[0] + attackColumns[1] + attackColumns[2] + 3,
+      rowTextY,
+      8,
+      false
+    );
+  });
 
-  drawList(commands, warningLines, rightX + 8, validationY + 64, 4, 12, 8);
-
+  drawSection(commands, rightX, conditionsY, rightWidth, conditionsHeight, "Conditions / Exhaustion");
+  drawField(commands, rightX + rightWidth - 92, conditionsY + 18, 84, 30, "Exhaustion", `${exhaustionLevel}`, 12, 11);
   drawList(
     commands,
-    [
-      `Tools: ${truncateText(toolLines.join(", "), 34)}`,
-      `Languages: ${truncateText(languageLines.join(", "), 34)}`,
-      `Proficiency Bonus: ${proficiencyBonus}`,
-      `Max HP: ${snapshot.maxHP}`,
-      `Temp HP: ${tempHP}`,
-      `Hit Dice: ${hitDiceSpent}/${hitDiceTotal ?? "-"}`,
-      `Death Saves: ${deathSaveSuccesses}/${deathSaveFailures}`,
-      `Exhaustion: ${exhaustionLevel}`,
-    ],
+    conditionLines.map((line) => `- ${line}`),
     rightX + 8,
-    resourcesY + 112,
-    8,
-    13,
+    conditionsY + conditionsHeight - 22,
+    4,
+    11,
     8
   );
+
+  drawSection(commands, rightX, featuresY, rightWidth, featuresHeight, "Features Summary");
+  drawList(commands, featuresSummaryLines, rightX + 8, featuresY + featuresHeight - 22, 19, 10, 8);
 
   const stream = `${commands.join("\n")}\n`;
   const objects = [
