@@ -1,8 +1,19 @@
 import Link from "next/link";
-import type { Ability, AttunedItem, CharacterState } from "@dark-sun/rules";
-import { computeDerivedState, getSkillAndToolDisplayRows, validateCharacter } from "@dark-sun/rules";
+import { getClassFeatureIdsForLevel } from "@dark-sun/content";
+import type {
+  Ability,
+  AttunedItem,
+  CharacterState,
+  CompanionPlaceholder,
+} from "@dark-sun/rules";
+import {
+  computeDerivedState,
+  getSkillAndToolDisplayRows,
+  validateCharacter,
+} from "@dark-sun/rules";
 
 import { getMergedContent } from "../../src/lib/content";
+import { formatSpellNameWithFlags } from "../../src/lib/spells";
 
 export const runtime = "nodejs";
 
@@ -12,6 +23,7 @@ type SheetPayload = {
 };
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
+
 const ABILITY_LABELS: Record<Ability, string> = {
   str: "STR",
   dex: "DEX",
@@ -36,6 +48,7 @@ function normalizeAttunedItems(value: unknown): AttunedItem[] {
   if (!Array.isArray(value)) {
     return [];
   }
+
   const normalized: AttunedItem[] = [];
   for (const entry of value) {
     if (typeof entry === "string") {
@@ -57,6 +70,7 @@ function normalizeAttunedItems(value: unknown): AttunedItem[] {
     }
     normalized.push({ name, itemId, notes });
   }
+
   return normalized;
 }
 
@@ -77,6 +91,7 @@ function normalizeOptionalNonNegativeInt(value: unknown): number | undefined {
 
 function normalizeCharacterState(input: CharacterState): CharacterState {
   const coins = isObjectRecord(input.coins) ? input.coins : undefined;
+
   return {
     ...input,
     chosenSkillProficiencies: Array.isArray(input.chosenSkillProficiencies)
@@ -87,9 +102,13 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
       : [],
     knownSpellIds: Array.isArray(input.knownSpellIds) ? input.knownSpellIds : [],
     preparedSpellIds: Array.isArray(input.preparedSpellIds) ? input.preparedSpellIds : [],
-    cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
+    cantripsKnownIds: Array.isArray(input.cantripsKnownIds)
+      ? input.cantripsKnownIds
+      : [],
     selectedFeats: Array.isArray(input.selectedFeats) ? input.selectedFeats : [],
-    selectedFeatureIds: Array.isArray(input.selectedFeatureIds) ? input.selectedFeatureIds : [],
+    selectedFeatureIds: Array.isArray(input.selectedFeatureIds)
+      ? input.selectedFeatureIds
+      : [],
     abilityIncreases: Array.isArray(input.abilityIncreases) ? input.abilityIncreases : [],
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
@@ -167,6 +186,13 @@ function decodePayload(raw: string | string[] | undefined): SheetPayload | null 
   }
 }
 
+function sortIds(values: string[] | undefined): string[] {
+  if (!values || values.length === 0) {
+    return [];
+  }
+  return [...values].sort((a, b) => a.localeCompare(b));
+}
+
 function formatModifier(value: number): string {
   return value >= 0 ? `+${value}` : String(value);
 }
@@ -176,6 +202,44 @@ function formatSpellSlots(slots: readonly number[] | null | undefined): string {
     return "None";
   }
   return slots.map((count, index) => `L${index + 1}:${count}`).join(" ");
+}
+
+function formatMasteryLabel(mastery: string): string {
+  return mastery
+    .split(/[_\s-]+/g)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatConditionLabel(conditionId: string): string {
+  return conditionId
+    .split(/[_\s-]+/g)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatSenseSummary(sense: { type: string; range?: number }): string {
+  const typeLabel = sense.type
+    .split(/[_\s-]+/g)
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+  return typeof sense.range === "number" ? `${typeLabel} ${sense.range} ft.` : typeLabel;
+}
+
+function hasCompanionData(entity: CompanionPlaceholder | undefined): boolean {
+  if (!entity) {
+    return false;
+  }
+  return Boolean(
+    entity.name?.trim() ||
+      entity.type?.trim() ||
+      entity.summary?.trim() ||
+      entity.notes?.trim(),
+  );
+}
+
+function dedupeStrings(values: string[]): string[] {
+  return [...new Set(values)];
 }
 
 export default async function SheetPage({
@@ -188,12 +252,13 @@ export default async function SheetPage({
 
   if (!payload) {
     return (
-      <main className="mx-auto max-w-5xl space-y-4 p-6 text-slate-100">
-        <h1 className="text-2xl font-semibold">Character Sheet</h1>
-        <p className="text-sm text-slate-300">
-          Missing payload. Open Builder and use Open HTML Sheet to generate a payload-backed sheet URL.
+      <main className="mx-auto max-w-5xl space-y-4 p-6 text-slate-900">
+        <h1 className="text-2xl font-semibold">Character Sheet (HTML)</h1>
+        <p className="text-sm text-slate-700">
+          Missing payload. Open Builder and use Open HTML Sheet to generate a
+          payload-backed sheet URL.
         </p>
-        <Link href="/builder" className="text-sm text-sky-300 underline">
+        <Link href="/builder" className="text-sm text-sky-700 underline">
           Back to Builder
         </Link>
       </main>
@@ -223,16 +288,49 @@ export default async function SheetPage({
     ? merged.content.equipmentById[payload.characterState.equippedWeaponId]
     : undefined;
 
+  const level = Math.max(1, Math.floor(payload.characterState.level || 1));
+  const xp = Number.isFinite(payload.characterState.xp)
+    ? Math.max(0, Math.floor(payload.characterState.xp ?? 0))
+    : 0;
+  const tempHP = Number.isFinite(payload.characterState.tempHP)
+    ? Math.max(0, Math.floor(payload.characterState.tempHP ?? 0))
+    : 0;
+  const hitDiceTotal = Number.isFinite(payload.characterState.hitDiceTotal)
+    ? Math.max(0, Math.floor(payload.characterState.hitDiceTotal ?? 0))
+    : null;
+  const hitDiceSpent = Number.isFinite(payload.characterState.hitDiceSpent)
+    ? Math.max(0, Math.floor(payload.characterState.hitDiceSpent ?? 0))
+    : 0;
+  const deathSaveSuccesses = Number.isFinite(payload.characterState.deathSaveSuccesses)
+    ? Math.max(0, Math.min(3, Math.floor(payload.characterState.deathSaveSuccesses ?? 0)))
+    : 0;
+  const deathSaveFailures = Number.isFinite(payload.characterState.deathSaveFailures)
+    ? Math.max(0, Math.min(3, Math.floor(payload.characterState.deathSaveFailures ?? 0)))
+    : 0;
+  const exhaustionLevel = Number.isFinite(payload.characterState.exhaustionLevel)
+    ? Math.max(0, Math.min(10, Math.floor(payload.characterState.exhaustionLevel ?? 0)))
+    : 0;
+
   const coinValues = payload.characterState.coins ?? {};
-  const cpCoins = Number.isFinite(coinValues.cp) ? Math.max(0, Math.floor(coinValues.cp ?? 0)) : 0;
-  const spCoins = Number.isFinite(coinValues.sp) ? Math.max(0, Math.floor(coinValues.sp ?? 0)) : 0;
-  const epCoins = Number.isFinite(coinValues.ep) ? Math.max(0, Math.floor(coinValues.ep ?? 0)) : 0;
-  const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
-  const ppCoins = Number.isFinite(coinValues.pp) ? Math.max(0, Math.floor(coinValues.pp ?? 0)) : 0;
+  const cpCoins = Number.isFinite(coinValues.cp)
+    ? Math.max(0, Math.floor(coinValues.cp ?? 0))
+    : 0;
+  const spCoins = Number.isFinite(coinValues.sp)
+    ? Math.max(0, Math.floor(coinValues.sp ?? 0))
+    : 0;
+  const epCoins = Number.isFinite(coinValues.ep)
+    ? Math.max(0, Math.floor(coinValues.ep ?? 0))
+    : 0;
+  const gpCoins = Number.isFinite(coinValues.gp)
+    ? Math.max(0, Math.floor(coinValues.gp ?? 0))
+    : 0;
+  const ppCoins = Number.isFinite(coinValues.pp)
+    ? Math.max(0, Math.floor(coinValues.pp ?? 0))
+    : 0;
 
   const inventoryCounts = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
-    inventoryCounts.set(itemId, Math.max(1, inventoryCounts.get(itemId) ?? 1));
+    inventoryCounts.set(itemId, (inventoryCounts.get(itemId) ?? 0) + 1);
   }
   for (const entry of payload.characterState.inventoryEntries ?? []) {
     const quantity =
@@ -241,12 +339,14 @@ export default async function SheetPage({
         : 1;
     inventoryCounts.set(entry.itemId, Math.max(quantity, inventoryCounts.get(entry.itemId) ?? 0));
   }
+
   const inventoryItems = [...inventoryCounts.entries()]
     .map(([itemId, quantity]) => {
       const label = merged.content.equipmentById[itemId]?.name ?? itemId;
       return quantity > 1 ? `${label} x${quantity}` : label;
     })
     .sort((a, b) => a.localeCompare(b));
+
   const attunedItems = (payload.characterState.attunedItems ?? [])
     .map((item) => item.name?.trim() || item.itemId?.trim() || "")
     .filter((entry) => entry.length > 0);
@@ -256,9 +356,13 @@ export default async function SheetPage({
       .map((skill, index) => ({ skill, index }))
       .sort((left, right) => {
         const leftOrder =
-          typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
+          typeof left.skill.sortOrder === "number"
+            ? left.skill.sortOrder
+            : Number.POSITIVE_INFINITY;
         const rightOrder =
-          typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
+          typeof right.skill.sortOrder === "number"
+            ? right.skill.sortOrder
+            : Number.POSITIVE_INFINITY;
         if (leftOrder !== rightOrder) {
           return leftOrder - rightOrder;
         }
@@ -271,10 +375,8 @@ export default async function SheetPage({
     skills: derived.skills,
     toolProficiencies: derived.toolProficiencies,
   });
+
   const saveProficiencies = new Set(derived.saveProficiencies ?? []);
-  const attackSummary = derived.attack
-    ? `${derived.attack.name} ${formatModifier(derived.attack.toHit)} (${derived.attack.damage})`
-    : "None";
   const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
   const spellcastingModifier = spellcastingAbility ? derived.abilityMods[spellcastingAbility] : null;
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
@@ -282,46 +384,156 @@ export default async function SheetPage({
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
   const shieldAC = payload.characterState.equippedShieldId ? 2 : 0;
 
+  const knownSpellIds = derived.spellcasting?.knownSpellIds ?? sortIds(payload.characterState.knownSpellIds);
+  const preparedSpellIds =
+    derived.spellcasting?.preparedSpellIds ?? sortIds(payload.characterState.preparedSpellIds);
+  const cantripIds =
+    derived.spellcasting?.cantripsKnownIds ?? sortIds(payload.characterState.cantripsKnownIds);
+  const knownSpellNames = knownSpellIds.map((id) => {
+    const spell = merged.content.spellsById[id];
+    return spell ? formatSpellNameWithFlags(spell) : id;
+  });
+  const preparedSpellNames = preparedSpellIds.map((id) => {
+    const spell = merged.content.spellsById[id];
+    return spell ? formatSpellNameWithFlags(spell) : id;
+  });
+  const cantripNames = cantripIds.map((id) => {
+    const spell = merged.content.spellsById[id];
+    return spell ? formatSpellNameWithFlags(spell) : id;
+  });
+  const spellListRefs = dedupeStrings([
+    ...(selectedClass?.spellListRefIds ?? []),
+    ...(selectedClass?.spellListRefs ?? []),
+  ]);
+
+  const classFeatureNames = selectedClass
+    ? getClassFeatureIdsForLevel(selectedClass, level).map(
+        (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
+      )
+    : [];
+  const selectedFeatureNames = (payload.characterState.selectedFeatureIds ?? [])
+    .map((featureId) => merged.content.featuresById[featureId]?.name ?? featureId)
+    .filter((entry) => entry.length > 0);
+
+  const speciesTraits = dedupeStrings([
+    ...derived.senses.map((sense) => `Sense: ${formatSenseSummary(sense)}`),
+    ...(derived.resistances.length > 0
+      ? [`Resistances: ${derived.resistances.join(", ")}`]
+      : []),
+    ...derived.traits.map((trait) => `Trait: ${trait}`),
+  ]);
+
+  const activeConditionLabels = (derived.activeConditionIds ?? []).map((conditionId) =>
+    formatConditionLabel(conditionId),
+  );
+  const activeModifierLabels = (derived.appliedModifiers ?? []).map((modifier) => {
+    const effectSummary = modifier.effects
+      .map((effect) => {
+        if (effect.type === "add_speed") {
+          const sign = effect.value >= 0 ? "+" : "";
+          return `${sign}${effect.value} ft speed`;
+        }
+        return effect.type;
+      })
+      .join(", ");
+    return effectSummary.length > 0
+      ? `${modifier.label} (${effectSummary})`
+      : modifier.label;
+  });
+
+  const attackRows: Array<{
+    name: string;
+    bonus: string;
+    damage: string;
+    notes: string;
+  }> = [];
+  if (derived.attack) {
+    attackRows.push({
+      name: derived.attack.name,
+      bonus: formatModifier(derived.attack.toHit),
+      damage: derived.attack.damage,
+      notes:
+        derived.attack.mastery && derived.attack.mastery.length > 0
+          ? `Mastery: ${derived.attack.mastery.map((mastery) => formatMasteryLabel(mastery)).join(", ")}`
+          : "",
+    });
+  } else if (weapon) {
+    attackRows.push({
+      name: weapon.name,
+      bonus: "-",
+      damage: weapon.damageDice ?? "-",
+      notes: "No resolved attack bonus",
+    });
+  }
+  while (attackRows.length < 3) {
+    attackRows.push({ name: "", bonus: "", damage: "", notes: "" });
+  }
+
+  const hasCompanion = hasCompanionData(payload.characterState.companion);
+  const hasFamiliar = hasCompanionData(payload.characterState.familiar);
+  const showCompanionSection = hasCompanion || hasFamiliar;
+
   return (
     <main className="min-h-screen bg-slate-300 px-3 py-6 text-slate-950">
-      <article className="mx-auto max-w-6xl overflow-hidden rounded border-2 border-slate-900 bg-white shadow-2xl">
+      <article className="mx-auto max-w-7xl overflow-hidden rounded border-2 border-slate-900 bg-white shadow-2xl">
         <header className="border-b-2 border-slate-900 px-4 py-3">
-          <h1 className="text-xl font-bold tracking-wide">Dark Sun Character Sheet</h1>
-          <div className="mt-2 grid gap-2 text-sm md:grid-cols-7">
+          <div className="flex flex-wrap items-end justify-between gap-2">
             <div>
+              <h1 className="text-xl font-bold tracking-wide">Character Sheet (HTML)</h1>
+              <p className="text-xs text-slate-600">
+                Payload-backed developer sheet aligned to 5E 2024 section structure.
+              </p>
+            </div>
+            <div className="text-xs text-slate-600">
+              Packs: {payload.enabledPackIds.join(", ") || "(none)"}
+            </div>
+          </div>
+
+          <div className="mt-3 grid gap-2 text-sm md:grid-cols-2 xl:grid-cols-5">
+            <div className="rounded border border-slate-900 p-2 md:col-span-2 xl:col-span-2">
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Character Name</div>
+              <div className="pt-3 text-base font-semibold leading-none text-slate-700">
+                ______________________________
+              </div>
+            </div>
+            <div className="rounded border border-slate-900 p-2">
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Class</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">{selectedClass?.name ?? "Unset"}</div>
+              <div className="font-semibold">{selectedClass?.name ?? "Unset"}</div>
             </div>
-            <div>
+            <div className="rounded border border-slate-900 p-2">
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Subclass</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">{payload.characterState.subclass ?? "-"}</div>
+              <div className="font-semibold">{payload.characterState.subclass ?? "-"}</div>
             </div>
-            <div>
-              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Species</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">{selectedSpecies?.name ?? "Unset"}</div>
-            </div>
-            <div>
+            <div className="rounded border border-slate-900 p-2">
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Background</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">{selectedBackground?.name ?? "Unset"}</div>
+              <div className="font-semibold">{selectedBackground?.name ?? "Unset"}</div>
             </div>
-            <div>
+            <div className="rounded border border-slate-900 p-2">
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Species</div>
+              <div className="font-semibold">{selectedSpecies?.name ?? "Unset"}</div>
+            </div>
+            <div className="rounded border border-slate-900 p-2">
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Level</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">{payload.characterState.level}</div>
+              <div className="font-semibold">{level}</div>
             </div>
-            <div>
+            <div className="rounded border border-slate-900 p-2">
               <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">XP</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">{payload.characterState.xp ?? 0}</div>
+              <div className="font-semibold">{xp}</div>
             </div>
-            <div>
-              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Heroic Inspiration</div>
-              <div className="border-b border-slate-900 pb-0.5 font-semibold">
+            <div className="rounded border border-slate-900 p-2">
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Inspiration</div>
+              <div className="font-semibold">
                 {payload.characterState.heroicInspiration ? "Yes" : "No"}
               </div>
+            </div>
+            <div className="rounded border border-slate-900 p-2">
+              <div className="text-[11px] uppercase tracking-[0.08em] text-slate-600">Alignment</div>
+              <div className="font-semibold">{payload.characterState.alignment || "-"}</div>
             </div>
           </div>
         </header>
 
-        <div className="grid gap-4 p-4 lg:grid-cols-[220px_minmax(0,1fr)_280px]">
+        <div className="grid gap-4 p-4 xl:grid-cols-[220px_minmax(0,1fr)_320px]">
           <div className="space-y-3">
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
@@ -329,10 +541,17 @@ export default async function SheetPage({
               </h2>
               <div className="grid gap-2 p-2">
                 {ABILITIES.map((ability) => (
-                  <div key={ability} className="grid grid-cols-[1fr_auto] items-center rounded border border-slate-900 p-2">
+                  <div
+                    key={ability}
+                    className="grid grid-cols-[1fr_auto] items-center rounded border border-slate-900 p-2"
+                  >
                     <div>
-                      <div className="text-xs font-semibold tracking-wide">{ABILITY_LABELS[ability]}</div>
-                      <div className="text-[11px] text-slate-700">Score {derived.finalAbilities[ability]}</div>
+                      <div className="text-xs font-semibold tracking-wide">
+                        {ABILITY_LABELS[ability]}
+                      </div>
+                      <div className="text-[11px] text-slate-700">
+                        Score {derived.finalAbilities[ability]}
+                      </div>
                     </div>
                     <div className="h-10 w-10 rounded-full border border-slate-900 text-center text-lg font-bold leading-10">
                       {formatModifier(derived.abilityMods[ability])}
@@ -353,78 +572,26 @@ export default async function SheetPage({
                       {saveProficiencies.has(ability) ? "* " : "- "}
                       {ABILITY_LABELS[ability]}
                     </span>
-                    <span className="font-semibold">{formatModifier(derived.savingThrows[ability])}</span>
+                    <span className="font-semibold">
+                      {formatModifier(derived.savingThrows[ability])}
+                    </span>
                   </div>
                 ))}
               </div>
             </section>
-          </div>
-
-          <div className="space-y-3">
-            <section className="rounded border-2 border-slate-900">
-              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Core Combat Stats
-              </h2>
-              <div className="grid grid-cols-2 gap-2 p-2 text-sm md:grid-cols-3">
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Armor Class</div>
-                  <div className="text-lg font-bold">{derived.armorClass}</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Shield AC</div>
-                  <div className="text-lg font-bold">{shieldAC}</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Max HP</div>
-                  <div className="text-lg font-bold">{derived.maxHP}</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Temp HP</div>
-                  <div className="text-lg font-bold">{payload.characterState.tempHP ?? 0}</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Speed</div>
-                  <div className="text-lg font-bold">{derived.speed} ft</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Hit Dice</div>
-                  <div className="text-lg font-bold">
-                    {payload.characterState.hitDiceSpent ?? 0}/{payload.characterState.hitDiceTotal ?? "-"}
-                  </div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Death Saves</div>
-                  <div className="text-lg font-bold">
-                    {payload.characterState.deathSaveSuccesses ?? 0} / {payload.characterState.deathSaveFailures ?? 0}
-                  </div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Exhaustion</div>
-                  <div className="text-lg font-bold">{payload.characterState.exhaustionLevel ?? 0}</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Proficiency</div>
-                  <div className="text-lg font-bold">{formatModifier(derived.proficiencyBonus)}</div>
-                </div>
-                <div className="rounded border border-slate-900 p-2">
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Passive Perception</div>
-                  <div className="text-lg font-bold">{derived.passivePerception}</div>
-                </div>
-              </div>
-            </section>
 
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Skills
+                Skills & Tool Proficiencies
               </h2>
-              <div className="max-h-[360px] overflow-auto p-2">
+              <div className="max-h-[460px] overflow-auto p-2">
                 <table className="w-full border-collapse text-xs">
                   <tbody>
                     {skillAndToolRows.map((row) => (
                       <tr key={`${row.kind}-${row.id}`} className="border-b border-slate-200">
                         <td className="py-1 pr-2">
                           <span className="mr-2 text-[10px] uppercase tracking-wide text-slate-500">
-                            {row.kind}
+                            {row.kind === "skill" ? "Skill" : "Tool"}
                           </span>
                           {row.label}
                         </td>
@@ -437,41 +604,183 @@ export default async function SheetPage({
                 </table>
               </div>
             </section>
+          </div>
+
+          <div className="space-y-3">
+            <section className="rounded border-2 border-slate-900">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Core Stats & Combat Summary
+              </h2>
+              <div className="grid grid-cols-2 gap-2 p-2 text-sm md:grid-cols-3">
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Armor Class
+                  </div>
+                  <div className="text-lg font-bold">{derived.armorClass}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Shield AC</div>
+                  <div className="text-lg font-bold">{shieldAC}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Initiative</div>
+                  <div className="text-lg font-bold">{formatModifier(derived.abilityMods.dex)}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Speed</div>
+                  <div className="text-lg font-bold">{derived.speed} ft</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Proficiency</div>
+                  <div className="text-lg font-bold">
+                    {formatModifier(derived.proficiencyBonus)}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Passive Perception
+                  </div>
+                  <div className="text-lg font-bold">{derived.passivePerception}</div>
+                </div>
+              </div>
+            </section>
 
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Attacks & Spellcasting
+                HP / Temp HP / Hit Dice / Death Saves
+              </h2>
+              <div className="grid grid-cols-2 gap-2 p-2 text-sm">
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Max HP</div>
+                  <div className="text-lg font-bold">{derived.maxHP}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Current HP
+                  </div>
+                  <div className="text-lg font-bold">_____</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Temp HP</div>
+                  <div className="text-lg font-bold">{tempHP}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Hit Dice</div>
+                  <div className="text-lg font-bold">
+                    {hitDiceSpent}/{hitDiceTotal ?? "-"}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Death Save Successes
+                  </div>
+                  <div className="text-lg font-bold">{deathSaveSuccesses}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Death Save Failures
+                  </div>
+                  <div className="text-lg font-bold">{deathSaveFailures}</div>
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded border-2 border-slate-900">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Weapons / Attacks
+              </h2>
+              <div className="p-2">
+                <table className="w-full border-collapse text-xs">
+                  <thead>
+                    <tr className="border-b border-slate-300 text-left uppercase tracking-wide text-slate-600">
+                      <th className="py-1 pr-2">Name</th>
+                      <th className="py-1 pr-2 text-right">Bonus</th>
+                      <th className="py-1 pr-2">Damage</th>
+                      <th className="py-1">Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {attackRows.map((attack, index) => (
+                      <tr key={`attack-row-${index}`} className="border-b border-slate-200">
+                        <td className="py-1 pr-2">{attack.name}</td>
+                        <td className="py-1 pr-2 text-right font-semibold">{attack.bonus}</td>
+                        <td className="py-1 pr-2">{attack.damage}</td>
+                        <td className="py-1">{attack.notes}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section className="rounded border-2 border-slate-900">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Spellcasting Summary
+              </h2>
+              <div className="grid gap-2 p-2 text-sm sm:grid-cols-2">
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Spellcasting Ability
+                  </div>
+                  <div className="font-semibold">
+                    {spellcastingAbility ? ABILITY_LABELS[spellcastingAbility] : "None"}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Mode</div>
+                  <div className="font-semibold">{selectedClass?.spellcasting?.mode ?? "None"}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Spellcasting Modifier
+                  </div>
+                  <div className="font-semibold">
+                    {spellcastingModifier !== null ? formatModifier(spellcastingModifier) : "-"}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Spell Save DC
+                  </div>
+                  <div className="font-semibold">{spellSaveDC ?? "-"}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Spell Attack Bonus
+                  </div>
+                  <div className="font-semibold">
+                    {spellAttackBonus !== null ? formatModifier(spellAttackBonus) : "-"}
+                  </div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Spell Slots</div>
+                  <div className="font-semibold">{formatSpellSlots(spellSlots)}</div>
+                </div>
+              </div>
+            </section>
+
+            <section className="rounded border-2 border-slate-900">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Spell List Summary
               </h2>
               <div className="space-y-2 p-2 text-sm">
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Primary Attack</div>
-                  <div className="font-semibold">{attackSummary}</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Cantrips</div>
+                  <div>{cantripNames.join(", ") || "None"}</div>
                 </div>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  <div>
-                    <div className="text-[11px] uppercase tracking-wide text-slate-600">Spellcasting Ability</div>
-                    <div className="font-semibold">{spellcastingAbility ? ABILITY_LABELS[spellcastingAbility] : "None"}</div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Known</div>
+                  <div>{knownSpellNames.join(", ") || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Prepared</div>
+                  <div>{preparedSpellNames.join(", ") || "None"}</div>
+                </div>
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Class Spell Lists
                   </div>
-                  <div>
-                    <div className="text-[11px] uppercase tracking-wide text-slate-600">Spell Save DC</div>
-                    <div className="font-semibold">{spellSaveDC ?? "-"}</div>
-                  </div>
-                  <div>
-                    <div className="text-[11px] uppercase tracking-wide text-slate-600">Spellcasting Modifier</div>
-                    <div className="font-semibold">
-                      {spellcastingModifier !== null ? formatModifier(spellcastingModifier) : "-"}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[11px] uppercase tracking-wide text-slate-600">Spell Attack Bonus</div>
-                    <div className="font-semibold">
-                      {spellAttackBonus !== null ? formatModifier(spellAttackBonus) : "-"}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-[11px] uppercase tracking-wide text-slate-600">Spell Slots</div>
-                    <div className="font-semibold">{formatSpellSlots(spellSlots)}</div>
-                  </div>
+                  <div>{spellListRefs.join(", ") || "None"}</div>
                 </div>
               </div>
             </section>
@@ -480,37 +789,49 @@ export default async function SheetPage({
           <div className="space-y-3">
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Equipment & Inventory
+                Equipment / Inventory
               </h2>
               <ul className="space-y-1 p-2 text-sm">
                 <li>Armor: {armor?.name ?? "None"}</li>
                 <li>Shield: {shield?.name ?? "None"}</li>
                 <li>Weapon: {weapon?.name ?? "None"}</li>
-                <li>Coins: {cpCoins} cp / {spCoins} sp / {epCoins} ep / {gpCoins} gp / {ppCoins} pp</li>
-                <li>Other Wealth: {payload.characterState.otherWealth || "None"}</li>
                 <li>Attuned Items: {attunedItems.join(", ") || "None"}</li>
-                <li>Other Gear: {inventoryItems.join(", ") || "None"}</li>
+                <li>Other Wealth: {payload.characterState.otherWealth || "None"}</li>
+                <li>Inventory: {inventoryItems.join(", ") || "None"}</li>
               </ul>
             </section>
 
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Feats
+                Currency
               </h2>
-              {derived.feats.length === 0 ? (
-                <p className="p-2 text-sm">None</p>
-              ) : (
-                <ul className="space-y-1 p-2 text-sm">
-                  {derived.feats.map((feat) => (
-                    <li key={feat.id}>{feat.name}</li>
-                  ))}
-                </ul>
-              )}
+              <div className="grid grid-cols-5 gap-2 p-2 text-center text-sm">
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[10px] uppercase tracking-wide text-slate-600">CP</div>
+                  <div className="font-semibold">{cpCoins}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[10px] uppercase tracking-wide text-slate-600">SP</div>
+                  <div className="font-semibold">{spCoins}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[10px] uppercase tracking-wide text-slate-600">EP</div>
+                  <div className="font-semibold">{epCoins}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[10px] uppercase tracking-wide text-slate-600">GP</div>
+                  <div className="font-semibold">{gpCoins}</div>
+                </div>
+                <div className="rounded border border-slate-900 p-2">
+                  <div className="text-[10px] uppercase tracking-wide text-slate-600">PP</div>
+                  <div className="font-semibold">{ppCoins}</div>
+                </div>
+              </div>
             </section>
 
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Proficiencies
+                Armor / Weapon / Tool / Language Proficiencies
               </h2>
               <div className="space-y-2 p-2 text-sm">
                 <div>
@@ -534,101 +855,214 @@ export default async function SheetPage({
 
             <section className="rounded border-2 border-slate-900">
               <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Narrative
+                Conditions / Exhaustion
               </h2>
               <div className="space-y-2 p-2 text-sm">
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Alignment</div>
-                  <div>{payload.characterState.alignment || "None"}</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Exhaustion Level
+                  </div>
+                  <div className="font-semibold">{exhaustionLevel}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Appearance</div>
-                  <div>{payload.characterState.appearance || "None"}</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Active Conditions
+                  </div>
+                  <div>{activeConditionLabels.join(", ") || "None"}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Physical Description</div>
-                  <div>{payload.characterState.physicalDescription || "None"}</div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Applied Modifiers
+                  </div>
+                  <div>{activeModifierLabels.join(" | ") || "None"}</div>
                 </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Backstory</div>
-                  <div>{payload.characterState.backstory || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Notes</div>
-                  <div>{payload.characterState.notes || "None"}</div>
-                </div>
-              </div>
-            </section>
-
-            <section className="rounded border-2 border-slate-900">
-              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Companion / Familiar
-              </h2>
-              <div className="space-y-2 p-2 text-sm">
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Name</div>
-                  <div>{payload.characterState.companion?.name || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Type</div>
-                  <div>{payload.characterState.companion?.type || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Summary</div>
-                  <div>{payload.characterState.companion?.summary || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Companion Notes</div>
-                  <div>{payload.characterState.companion?.notes || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Name</div>
-                  <div>{payload.characterState.familiar?.name || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Type</div>
-                  <div>{payload.characterState.familiar?.type || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Summary</div>
-                  <div>{payload.characterState.familiar?.summary || "None"}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] uppercase tracking-wide text-slate-600">Familiar Notes</div>
-                  <div>{payload.characterState.familiar?.notes || "None"}</div>
-                </div>
-              </div>
-            </section>
-
-            <section className="rounded border-2 border-slate-900">
-              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
-                Validation
-              </h2>
-              <div className="space-y-2 p-2 text-sm">
-                <div className="font-semibold">Export Ready: {validation.isValidForExport ? "YES" : "NO"}</div>
-                {validation.errors.length > 0 ? (
-                  <ul className="space-y-1 text-rose-700">
-                    {validation.errors.map((issue, index) => (
-                      <li key={`error-${index}`}>[{issue.code}] {issue.message}</li>
-                    ))}
-                  </ul>
-                ) : null}
-                {validation.warnings.length > 0 ? (
-                  <ul className="space-y-1 text-amber-700">
-                    {validation.warnings.map((issue, index) => (
-                      <li key={`warning-${index}`}>[{issue.code}] {issue.message}</li>
-                    ))}
-                  </ul>
-                ) : null}
               </div>
             </section>
           </div>
         </div>
+
+        <div className="grid gap-3 border-t-2 border-slate-900 p-4 lg:grid-cols-2">
+          <section className="rounded border-2 border-slate-900">
+            <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+              Class Features
+            </h2>
+            <div className="space-y-2 p-2 text-sm">
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                  Features By Class Level
+                </div>
+                {classFeatureNames.length === 0 ? (
+                  <p>None</p>
+                ) : (
+                  <ul className="list-disc space-y-1 pl-5">
+                    {classFeatureNames.map((name) => (
+                      <li key={`class-feature-${name}`}>{name}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                  Additional Selected Features
+                </div>
+                {selectedFeatureNames.length === 0 ? (
+                  <p>None</p>
+                ) : (
+                  <ul className="list-disc space-y-1 pl-5">
+                    {selectedFeatureNames.map((name) => (
+                      <li key={`selected-feature-${name}`}>{name}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded border-2 border-slate-900">
+            <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+              Species Traits
+            </h2>
+            <div className="space-y-2 p-2 text-sm">
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">Species</div>
+                <div>{selectedSpecies?.name ?? "Unset"}</div>
+              </div>
+              {selectedSpecies?.description ? (
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    Description
+                  </div>
+                  <div>{selectedSpecies.description}</div>
+                </div>
+              ) : null}
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                  Derived Trait Entries
+                </div>
+                {speciesTraits.length === 0 ? (
+                  <p>None</p>
+                ) : (
+                  <ul className="list-disc space-y-1 pl-5">
+                    {speciesTraits.map((entry) => (
+                      <li key={`species-trait-${entry}`}>{entry}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+          </section>
+
+          <section className="rounded border-2 border-slate-900">
+            <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+              Feats
+            </h2>
+            {derived.feats.length === 0 ? (
+              <p className="p-2 text-sm">None</p>
+            ) : (
+              <ul className="list-disc space-y-1 p-2 pl-7 text-sm">
+                {derived.feats.map((feat) => (
+                  <li key={feat.id}>{feat.name}</li>
+                ))}
+              </ul>
+            )}
+          </section>
+
+          <section className="rounded border-2 border-slate-900">
+            <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+              Narrative
+            </h2>
+            <div className="space-y-2 p-2 text-sm">
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">Alignment</div>
+                <div>{payload.characterState.alignment || "None"}</div>
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">Appearance</div>
+                <div>{payload.characterState.appearance || "None"}</div>
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                  Physical Description
+                </div>
+                <div>{payload.characterState.physicalDescription || "None"}</div>
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">Backstory</div>
+                <div>{payload.characterState.backstory || "None"}</div>
+              </div>
+              <div>
+                <div className="text-[11px] uppercase tracking-wide text-slate-600">Notes</div>
+                <div>{payload.characterState.notes || "None"}</div>
+              </div>
+            </div>
+          </section>
+
+          {showCompanionSection ? (
+            <section className="rounded border-2 border-slate-900 lg:col-span-2">
+              <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+                Companion Placeholder
+              </h2>
+              <div className="grid gap-3 p-2 text-sm md:grid-cols-2">
+                {hasCompanion ? (
+                  <div className="rounded border border-slate-900 p-2">
+                    <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600">
+                      Companion
+                    </div>
+                    <div>Name: {payload.characterState.companion?.name || "-"}</div>
+                    <div>Type: {payload.characterState.companion?.type || "-"}</div>
+                    <div>Summary: {payload.characterState.companion?.summary || "-"}</div>
+                    <div>Notes: {payload.characterState.companion?.notes || "-"}</div>
+                  </div>
+                ) : null}
+                {hasFamiliar ? (
+                  <div className="rounded border border-slate-900 p-2">
+                    <div className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-600">
+                      Familiar
+                    </div>
+                    <div>Name: {payload.characterState.familiar?.name || "-"}</div>
+                    <div>Type: {payload.characterState.familiar?.type || "-"}</div>
+                    <div>Summary: {payload.characterState.familiar?.summary || "-"}</div>
+                    <div>Notes: {payload.characterState.familiar?.notes || "-"}</div>
+                  </div>
+                ) : null}
+              </div>
+            </section>
+          ) : null}
+
+          <section className="rounded border-2 border-slate-900 lg:col-span-2">
+            <h2 className="border-b border-slate-900 bg-slate-100 px-2 py-1 text-[11px] font-semibold uppercase tracking-[0.08em]">
+              Validation
+            </h2>
+            <div className="space-y-2 p-2 text-sm">
+              <div className="font-semibold">
+                Export Ready: {validation.isValidForExport ? "YES" : "NO"}
+              </div>
+              {validation.errors.length > 0 ? (
+                <ul className="list-disc space-y-1 pl-5 text-rose-700">
+                  {validation.errors.map((issue, index) => (
+                    <li key={`error-${index}`}>
+                      [{issue.code}] {issue.message}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              {validation.warnings.length > 0 ? (
+                <ul className="list-disc space-y-1 pl-5 text-amber-700">
+                  {validation.warnings.map((issue, index) => (
+                    <li key={`warning-${index}`}>
+                      [{issue.code}] {issue.message}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          </section>
+        </div>
+
         <footer className="border-t-2 border-slate-900 bg-slate-100 px-4 py-2 text-xs">
           <Link href="/builder" className="underline">
             Back to Builder
           </Link>
-          <span className="ml-2 text-slate-600">Payload packs: {payload.enabledPackIds.join(", ") || "(none)"}</span>
         </footer>
       </article>
     </main>
