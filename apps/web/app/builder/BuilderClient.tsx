@@ -286,7 +286,7 @@ function labelFeat(feat: Option): string {
   return `${feat.name} (${feat.category})`;
 }
 
-function labelSkill(skillId: string): string {
+function formatSkillId(skillId: string): string {
   return skillId
     .split("_")
     .map((part) => part[0]?.toUpperCase() + part.slice(1))
@@ -576,6 +576,13 @@ export default function BuilderClient({
     [options.weapons, state.equippedWeaponId],
   );
   const selectedClassSkillChoices = selectedClass?.classSkillChoices;
+  const skillNameById = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const skill of content.skillDefinitions ?? []) {
+      map[skill.id] = skill.name;
+    }
+    return map;
+  }, [content.skillDefinitions]);
   const chosenClassSkills = state.chosenClassSkills ?? [];
   const originFeats = useMemo(
     () => collectArray(content, "feats").filter((feat) => feat.category === "origin"),
@@ -1997,7 +2004,7 @@ export default function BuilderClient({
                     disabled={disabled}
                     onChange={(event) => onToggleClassSkill(skillId, event.target.checked)}
                   />
-                  <span>{labelSkill(skillId)}</span>
+                  <span>{skillNameById[skillId] ?? formatSkillId(skillId)}</span>
                 </label>
               );
             })}

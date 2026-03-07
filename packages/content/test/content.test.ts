@@ -8,7 +8,24 @@ import {
 } from "../src/index.js";
 import type { Pack } from "../src/load";
 
-function makePack(input: Partial<Pack> & { id: string }): Pack {
+function makePack(
+  input: Omit<Partial<Pack>, "entities" | "manifest"> & {
+    id: string;
+    entities?: Partial<Pack["entities"]>;
+  }
+): Pack {
+  const defaultEntities: Pack["entities"] = {
+    species: [],
+    skillDefinitions: [],
+    backgrounds: [],
+    classes: [],
+    features: [],
+    feats: [],
+    equipment: [],
+    spells: [],
+    spellLists: []
+  };
+
   return {
     manifest: {
       id: input.id,
@@ -17,17 +34,11 @@ function makePack(input: Partial<Pack> & { id: string }): Pack {
       license: "MIT",
       source: "test"
     },
+    ...input,
     entities: {
-      species: [],
-      backgrounds: [],
-      classes: [],
-      features: [],
-      feats: [],
-      equipment: [],
-      spells: [],
-      spellLists: []
-    },
-    ...input
+      ...defaultEntities,
+      ...(input.entities ?? {})
+    }
   } as Pack;
 }
 

@@ -4,6 +4,7 @@ import type {
   Equipment,
   Feat,
   Feature,
+  SkillDefinition,
   Spell,
   SpellList,
   Species,
@@ -13,6 +14,7 @@ import type { SeedPack } from "./seed";
 
 export type NormalizedEntities = {
   species: Species[];
+  skillDefinitions: SkillDefinition[];
   backgrounds: Background[];
   classes: Class[];
   features: Feature[];
@@ -25,6 +27,7 @@ export type NormalizedEntities = {
 type SeedBackgroundEntry = NonNullable<SeedPack["backgrounds"]>[number];
 type SeedEquipmentEntry = NonNullable<SeedPack["equipment"]>[number];
 type SeedFeatEntry = NonNullable<SeedPack["feats"]>[number];
+type SeedSkillEntry = NonNullable<SeedPack["skills"]>[number];
 
 export function slugToId(packId: string, type: string, slug: string): string {
   return `${packId}:${type}:${slug}`;
@@ -58,6 +61,16 @@ function normalizeBackground(
     startingEquipment: metadata.startingEquipment,
     originFeatChoice: metadata.originFeatChoice,
     effects: entry.effects,
+  };
+}
+
+function normalizeSkill(entry: SeedSkillEntry): SkillDefinition {
+  return {
+    id: entry.slug,
+    name: entry.name,
+    description: entry.description,
+    ability: entry.ability,
+    sortOrder: entry.sortOrder,
   };
 }
 
@@ -165,6 +178,12 @@ export function normalizeSeedPack(
     effects: entry.effects,
   }));
 
+  const legacySeedSkills = seed.skillDefinitions;
+  const rawSkillEntries = seed.skills ?? legacySeedSkills ?? [];
+  const skillDefinitions: SkillDefinition[] = rawSkillEntries.map((entry) =>
+    normalizeSkill(entry),
+  );
+
   const backgrounds: Background[] = (seed.backgrounds ?? []).map((entry) =>
     normalizeBackground(packId, entry),
   );
@@ -224,6 +243,7 @@ export function normalizeSeedPack(
 
   return {
     species,
+    skillDefinitions,
     backgrounds,
     classes,
     features,

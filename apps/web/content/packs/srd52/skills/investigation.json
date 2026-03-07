@@ -1,0 +1,6 @@
+{
+  "id": "investigation",
+  "name": "Investigation",
+  "ability": "int",
+  "sortOrder": 7
+}

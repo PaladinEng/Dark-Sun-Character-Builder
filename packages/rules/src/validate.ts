@@ -14,6 +14,7 @@ import {
   computeProfBonus,
   isProficientWithWeapon
 } from "./compute";
+import { getResolvedSkillIds } from "./skills";
 import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
@@ -71,27 +72,6 @@ function parseLevelFeatSelections(state: CharacterState): Map<number, string> {
   return selections;
 }
 
-const STANDARD_SKILLS = new Set([
-  "athletics",
-  "acrobatics",
-  "sleight_of_hand",
-  "stealth",
-  "arcana",
-  "history",
-  "investigation",
-  "nature",
-  "religion",
-  "animal_handling",
-  "insight",
-  "medicine",
-  "perception",
-  "survival",
-  "deception",
-  "intimidation",
-  "performance",
-  "persuasion"
-]);
-
 export function validateCharacter(
   state: CharacterState,
   content: MergedContent
@@ -139,6 +119,7 @@ export function validateCharacter(
   const selectedOriginFeatId = state.featSelections?.origin ?? state.originFeatId;
   const effectiveOriginFeatId =
     fixedOriginFeatId ?? (originFeatChoice ? selectedOriginFeatId : undefined);
+  const knownSkillIds = getResolvedSkillIds(content);
   const asiIncreases = (state.advancements ?? [])
     .filter(
       (entry): entry is Extract<NonNullable<CharacterState["advancements"]>[number], { type: "asi" }> =>
@@ -459,7 +440,7 @@ export function validateCharacter(
   }
 
   const invalidSkillSelections = dedupe(
-    (state.chosenSkillProficiencies ?? []).filter((skill) => !STANDARD_SKILLS.has(skill))
+    (state.chosenSkillProficiencies ?? []).filter((skill) => !knownSkillIds.has(skill))
   );
   if (invalidSkillSelections.length > 0) {
     pushError({

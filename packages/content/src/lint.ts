@@ -6,6 +6,7 @@ import {
   EquipmentSchema,
   FeatSchema,
   FeatureSchema,
+  SkillDefinitionSchema,
   SpellListSchema,
   SpellSchema,
   SpeciesSchema,
@@ -15,6 +16,7 @@ import {
   type Equipment,
   type Feat,
   type Feature,
+  type SkillDefinition,
   type Spell,
   type SpellList,
   type Species
@@ -32,6 +34,7 @@ type StartingEquipmentBundle = {
 
 const ENTITY_TYPES = [
   "species",
+  "skillDefinitions",
   "backgrounds",
   "classes",
   "features",
@@ -45,6 +48,7 @@ type EntityType = (typeof ENTITY_TYPES)[number];
 
 type PackEntity =
   | Species
+  | SkillDefinition
   | Background
   | Class
   | Feature
@@ -59,6 +63,8 @@ function schemaFor(entityType: EntityType): EntitySchema {
   switch (entityType) {
     case "species":
       return SpeciesSchema;
+    case "skillDefinitions":
+      return SkillDefinitionSchema;
     case "backgrounds":
       return BackgroundSchema;
     case "classes":
@@ -170,6 +176,7 @@ function lintPerPackEntityShape(packs: Pack[], issues: ContentLintIssue[]): void
 function lintDanglingReplacements(packs: Pack[], issues: ContentLintIssue[]): void {
   const knownByType: Record<EntityType, Set<string>> = {
     species: new Set<string>(),
+    skillDefinitions: new Set<string>(),
     backgrounds: new Set<string>(),
     classes: new Set<string>(),
     features: new Set<string>(),
@@ -204,17 +211,27 @@ function lintDanglingReplacements(packs: Pack[], issues: ContentLintIssue[]): vo
 }
 
 function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]): void {
+  const knownSkillIds = new Set(content.skillDefinitions.map((skill) => skill.id));
+  const hasSkillDefinitions = knownSkillIds.size > 0;
+
   const lintEffectReference = (
-    ownerType: Exclude<EntityType, "equipment" | "spells" | "spellLists">,
+    ownerType: Exclude<EntityType, "equipment" | "spells" | "spellLists" | "skillDefinitions">,
     ownerId: string,
-    effects: Array<{ type: string; tool?: string; language?: string }> | undefined
+    effects: Array<{
+      type: string;
+      target?: string;
+      key?: string;
+      skill?: string;
+      tool?: string;
+      language?: string;
+    }> | undefined
   ) => {
     if (!effects) {
       return;
     }
 
     const ownerLabelMap: Record<
-      Exclude<EntityType, "equipment" | "spells" | "spellLists">,
+      Exclude<EntityType, "equipment" | "spells" | "spellLists" | "skillDefinitions">,
       string
     > = {
       species: "Species",
@@ -226,6 +243,37 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
     const ownerLabel = ownerLabelMap[ownerType];
 
     for (const [index, effect] of effects.entries()) {
+      if (
+        hasSkillDefinitions &&
+        effect.type === "grant_skill_proficiency" &&
+        typeof effect.skill === "string" &&
+        !knownSkillIds.has(effect.skill)
+      ) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" references unknown skill "${effect.skill}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: `effects[${index}].skill`,
+        });
+      }
+
+      if (
+        hasSkillDefinitions &&
+        effect.type === "add_bonus" &&
+        effect.target === "skill" &&
+        typeof effect.key === "string" &&
+        !knownSkillIds.has(effect.key)
+      ) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `${ownerLabel} "${ownerId}" references unknown skill bonus target "${effect.key}".`,
+          entityType: ownerType,
+          entityId: ownerId,
+          path: `effects[${index}].key`,
+        });
+      }
+
       if (effect.type === "grant_tool_proficiency") {
         const tool = effect.tool;
         if (typeof tool === "string" && !isKnownToolProficiency(tool)) {
@@ -382,6 +430,20 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
   }
 
   for (const klass of content.classes) {
+    if (hasSkillDefinitions) {
+      for (const skillId of klass.classSkillChoices?.from ?? []) {
+        if (!knownSkillIds.has(skillId)) {
+          issues.push({
+            code: "DANGLING_REFERENCE",
+            message: `Class "${klass.id}" classSkillChoices references unknown skill "${skillId}".`,
+            entityType: "classes",
+            entityId: klass.id,
+            path: "classSkillChoices.from"
+          });
+        }
+      }
+    }
+
     for (const weaponId of klass.weaponProficiencies?.weaponIds ?? []) {
       const weapon = content.equipmentById[weaponId];
       if (!weapon) {

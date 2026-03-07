@@ -10,6 +10,8 @@ export type {
   Class,
   ClassFeatureGrant,
   Feature,
+  Skill,
+  SkillDefinition,
   Feat,
   Equipment,
   WeaponMasteryProperty,
@@ -17,6 +19,8 @@ export type {
   SpellList
 } from "./entities";
 export {
+  SkillSchema,
+  SkillDefinitionSchema,
   SpeciesSchema,
   BackgroundSchema,
   ClassSchema,
@@ -36,6 +40,8 @@ export {
 export type {
   SeedPack,
   SeedSpecies,
+  SeedSkill,
+  SeedSkillDefinition,
   SeedBackground,
   SeedClass,
   SeedFeature,
@@ -47,6 +53,8 @@ export type {
 export {
   SeedPackSchema,
   SeedSpeciesSchema,
+  SeedSkillSchema,
+  SeedSkillDefinitionSchema,
   SeedBackgroundSchema,
   SeedClassSchema,
   SeedFeatureSchema,

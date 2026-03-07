@@ -11,6 +11,7 @@ import { getClassFeatureIdsForLevel } from "@dark-sun/content";
 import { getAvailableAdvancementSlots } from "./advancement";
 import { applyEffectsToCharacter } from "./effects";
 import { applyDerivedModifierPipeline } from "./modifiers";
+import { getResolvedSkillDefinitions } from "./skills";
 import { deriveStartingEquipment } from "./startingEquipment";
 import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
 import {
@@ -23,29 +24,6 @@ import {
   type SpellSlots,
   type SpellcastingAbility
 } from "./types";
-
-const SKILL_TO_ABILITY: Record<string, Ability> = {
-  athletics: "str",
-  acrobatics: "dex",
-  sleight_of_hand: "dex",
-  stealth: "dex",
-  arcana: "int",
-  history: "int",
-  investigation: "int",
-  nature: "int",
-  religion: "int",
-  animal_handling: "wis",
-  insight: "wis",
-  medicine: "wis",
-  perception: "wis",
-  survival: "wis",
-  deception: "cha",
-  intimidation: "cha",
-  performance: "cha",
-  persuasion: "cha"
-};
-
-const STANDARD_SKILLS = Object.keys(SKILL_TO_ABILITY);
 
 function dedupe<T>(values: T[]): T[] {
   return [...new Set(values)];
@@ -369,12 +347,12 @@ export function computeDerivedState(
     ...applied.grantedLanguages
   ]);
 
+  const skillDefinitions = getResolvedSkillDefinitions(merged);
   const skills: Record<string, number> = {};
-  for (const skill of STANDARD_SKILLS) {
-    const ability = SKILL_TO_ABILITY[skill] ?? "wis";
-    const bonus = getBonusTotal(applied.bonuses, "skill", skill);
-    const proficient = finalSkillProficiencies.includes(skill);
-    skills[skill] = abilityMods[ability] + (proficient ? proficiencyBonus : 0) + bonus;
+  for (const skill of skillDefinitions) {
+    const bonus = getBonusTotal(applied.bonuses, "skill", skill.id);
+    const proficient = finalSkillProficiencies.includes(skill.id);
+    skills[skill.id] = abilityMods[skill.ability] + (proficient ? proficiencyBonus : 0) + bonus;
   }
 
   const savingThrows: AbilityRecord = {

@@ -4,6 +4,7 @@ import {
   ClassSchema,
   EquipmentSchema,
   FeatureSchema,
+  SkillDefinitionSchema,
   SpellListSchema,
   SpellSchema,
   SeedPackSchema,
@@ -16,6 +17,7 @@ describe("normalizeSeedPack", () => {
   it("maps authoring-friendly equipment and ids into normalized entities", () => {
     const seed: SeedPack = {
       species: [{ slug: "human", name: "Human" }],
+      skills: [{ slug: "athletics", name: "Athletics", ability: "str" }],
       backgrounds: [{ slug: "acolyte", name: "Acolyte" }],
       classes: [
         {
@@ -95,6 +97,11 @@ describe("normalizeSeedPack", () => {
     const normalized = normalizeSeedPack(seed, "srd52");
 
     expect(normalized.species[0].id).toBe("srd52:species:human");
+    expect(normalized.skillDefinitions[0]).toMatchObject({
+      id: "athletics",
+      name: "Athletics",
+      ability: "str"
+    });
     expect(normalized.backgrounds[0].id).toBe("srd52:background:acolyte");
     expect(normalized.classes[0].id).toBe("srd52:class:fighter");
     expect(normalized.classes[0].classFeaturesByLevel).toEqual([
@@ -144,6 +151,7 @@ describe("normalizeSeedPack", () => {
   it("produces normalized entities that validate against pack schemas", () => {
     const parsedSeed = SeedPackSchema.parse({
       species: [{ slug: "human", name: "Human" }],
+      skills: [{ slug: "athletics", name: "Athletics", ability: "str" }],
       backgrounds: [{ slug: "sage", name: "Sage" }],
       classes: [{ slug: "wizard", name: "Wizard", hitDie: 6 }],
       features: [{ slug: "spellcasting", name: "Spellcasting" }],
@@ -173,6 +181,9 @@ describe("normalizeSeedPack", () => {
     }
     for (const background of normalized.backgrounds) {
       expect(BackgroundSchema.safeParse(background).success).toBe(true);
+    }
+    for (const skill of normalized.skillDefinitions) {
+      expect(SkillDefinitionSchema.safeParse(skill).success).toBe(true);
     }
     for (const klass of normalized.classes) {
       expect(ClassSchema.safeParse(klass).success).toBe(true);
@@ -205,5 +216,18 @@ describe("normalizeSeedPack", () => {
     const normalized = normalizeSeedPack(seed, "srd52");
     expect(normalized.classes[0].spellListRefIds).toEqual(["srd52:spelllist:wizard-core"]);
     expect(normalized.classes[0].spellListRefs).toBeUndefined();
+  });
+
+  it("accepts legacy skillDefinitions seed key", () => {
+    const seed = SeedPackSchema.parse({
+      skillDefinitions: [{ slug: "mysticism", name: "Mysticism", ability: "wis" }],
+    });
+
+    const normalized = normalizeSeedPack(seed, "srd52");
+    expect(normalized.skillDefinitions[0]).toMatchObject({
+      id: "mysticism",
+      name: "Mysticism",
+      ability: "wis"
+    });
   });
 });

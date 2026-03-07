@@ -7,6 +7,7 @@ describe("normalizeSeedPack", () => {
     const normalized = normalizeSeedPack({}, "srd52");
 
     expect(normalized.species).toEqual([]);
+    expect(normalized.skillDefinitions).toEqual([]);
     expect(normalized.backgrounds).toEqual([]);
     expect(normalized.classes).toEqual([]);
     expect(normalized.features).toEqual([]);

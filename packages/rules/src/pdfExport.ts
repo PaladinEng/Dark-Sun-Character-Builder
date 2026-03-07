@@ -32,6 +32,7 @@ export type PdfExportCharacterSnapshot = {
   savingThrows?: AbilityRecord;
   saveProficiencies?: readonly Ability[];
   skills?: Record<string, number>;
+  skillDefinitions?: ReadonlyArray<{ id: string; name: string; ability: Ability }>;
   proficiencyBonus: number;
   armorClass: number;
   shieldAC?: number | null;
@@ -101,27 +102,6 @@ const ABILITY_LABELS: Record<Ability, string> = {
   wis: "WIS",
   cha: "CHA",
 };
-const SKILL_ORDER = [
-  "athletics",
-  "acrobatics",
-  "sleight_of_hand",
-  "stealth",
-  "arcana",
-  "history",
-  "investigation",
-  "nature",
-  "religion",
-  "animal_handling",
-  "insight",
-  "medicine",
-  "perception",
-  "survival",
-  "deception",
-  "intimidation",
-  "performance",
-  "persuasion",
-] as const;
-
 function truncateText(value: string, maxLength: number): string {
   if (value.length <= maxLength) {
     return value;
@@ -302,12 +282,28 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     drawText(commands, saveLine, leftX + 8, savingThrowsY + 102 - index * 16, 9, false);
   });
 
-  const orderedSkills = [...SKILL_ORDER];
+  const orderedSkills: Array<{ id: string; label: string }> = [];
+  const seenSkills = new Set<string>();
+  for (const skill of snapshot.skillDefinitions ?? []) {
+    if (seenSkills.has(skill.id)) {
+      continue;
+    }
+    seenSkills.add(skill.id);
+    orderedSkills.push({ id: skill.id, label: skill.name });
+  }
+  for (const skillId of Object.keys(snapshot.skills ?? {}).sort((a, b) => a.localeCompare(b))) {
+    if (seenSkills.has(skillId)) {
+      continue;
+    }
+    seenSkills.add(skillId);
+    orderedSkills.push({ id: skillId, label: formatSkillLabel(skillId) });
+  }
+
   drawList(
     commands,
     orderedSkills.map(
-      (skillId) =>
-        `${formatSkillLabel(skillId)} ${formatModifier(snapshot.skills?.[skillId] ?? 0)}`
+      (skill) =>
+        `${skill.label} ${formatModifier(snapshot.skills?.[skill.id] ?? 0)}`
     ),
     leftX + 8,
     skillsY + 176,

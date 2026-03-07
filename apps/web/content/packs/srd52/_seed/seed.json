@@ -39,6 +39,26 @@
       ]
     }
   ],
+  "skills": [
+    { "slug": "athletics", "name": "Athletics", "ability": "str", "sortOrder": 1 },
+    { "slug": "acrobatics", "name": "Acrobatics", "ability": "dex", "sortOrder": 2 },
+    { "slug": "sleight_of_hand", "name": "Sleight of Hand", "ability": "dex", "sortOrder": 3 },
+    { "slug": "stealth", "name": "Stealth", "ability": "dex", "sortOrder": 4 },
+    { "slug": "arcana", "name": "Arcana", "ability": "int", "sortOrder": 5 },
+    { "slug": "history", "name": "History", "ability": "int", "sortOrder": 6 },
+    { "slug": "investigation", "name": "Investigation", "ability": "int", "sortOrder": 7 },
+    { "slug": "nature", "name": "Nature", "ability": "int", "sortOrder": 8 },
+    { "slug": "religion", "name": "Religion", "ability": "int", "sortOrder": 9 },
+    { "slug": "animal_handling", "name": "Animal Handling", "ability": "wis", "sortOrder": 10 },
+    { "slug": "insight", "name": "Insight", "ability": "wis", "sortOrder": 11 },
+    { "slug": "medicine", "name": "Medicine", "ability": "wis", "sortOrder": 12 },
+    { "slug": "perception", "name": "Perception", "ability": "wis", "sortOrder": 13 },
+    { "slug": "survival", "name": "Survival", "ability": "wis", "sortOrder": 14 },
+    { "slug": "deception", "name": "Deception", "ability": "cha", "sortOrder": 15 },
+    { "slug": "intimidation", "name": "Intimidation", "ability": "cha", "sortOrder": 16 },
+    { "slug": "performance", "name": "Performance", "ability": "cha", "sortOrder": 17 },
+    { "slug": "persuasion", "name": "Persuasion", "ability": "cha", "sortOrder": 18 }
+  ],
   "backgrounds": [
     {
       "slug": "acolyte",

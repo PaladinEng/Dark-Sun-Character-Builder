@@ -15,6 +15,7 @@ function baseMergedContent(overrides: Partial<MergedContent> = {}): MergedConten
   const base: MergedContent = {
     manifests: [],
     species: [],
+    skillDefinitions: [],
     backgrounds: [],
     classes: [],
     features: [],
@@ -23,6 +24,7 @@ function baseMergedContent(overrides: Partial<MergedContent> = {}): MergedConten
     spells: [],
     spellLists: [],
     speciesById: {},
+    skillDefinitionsById: {},
     backgroundsById: {},
     classesById: {},
     featuresById: {},
@@ -982,6 +984,40 @@ describe("rules", () => {
     expect(derived.warnings.some((warning) => warning.includes("class skill"))).toBe(false);
   });
 
+  it("computes custom content-defined skills from governing ability and proficiency", () => {
+    const derived = computeDerivedState(
+      baseState({
+        chosenSkillProficiencies: ["mysticism"],
+        baseAbilities: {
+          str: 10,
+          dex: 10,
+          con: 10,
+          int: 14,
+          wis: 10,
+          cha: 10
+        }
+      }),
+      baseMergedContent({
+        skillDefinitions: [
+          {
+            id: "mysticism",
+            name: "Mysticism",
+            ability: "int"
+          }
+        ],
+        skillDefinitionsById: {
+          mysticism: {
+            id: "mysticism",
+            name: "Mysticism",
+            ability: "int"
+          }
+        }
+      })
+    );
+
+    expect(derived.skills.mysticism).toBe(4);
+  });
+
   it("includes chosen origin feat in derived feats for choice-based backgrounds", () => {
     const background: Background = {
       id: "test:background:choice-origin",
@@ -1668,6 +1704,22 @@ describe("validateCharacter", () => {
     );
 
     expect(report.errors.some((issue) => issue.code === "SKILL_SELECTION_INVALID")).toBe(true);
+  });
+
+  it("accepts chosen custom skill ids when defined in content", () => {
+    const report = validateCharacter(
+      baseState({
+        chosenSkillProficiencies: ["mysticism"]
+      }),
+      baseMergedContent({
+        skillDefinitions: [{ id: "mysticism", name: "Mysticism", ability: "int" }],
+        skillDefinitionsById: {
+          mysticism: { id: "mysticism", name: "Mysticism", ability: "int" }
+        }
+      })
+    );
+
+    expect(report.errors.some((issue) => issue.code === "SKILL_SELECTION_INVALID")).toBe(false);
   });
 
   it("reports CONDITION_ID_INVALID for unknown condition ids", () => {

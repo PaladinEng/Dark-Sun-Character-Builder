@@ -1,0 +1,6 @@
+{
+  "id": "religion",
+  "name": "Religion",
+  "ability": "int",
+  "sortOrder": 9
+}

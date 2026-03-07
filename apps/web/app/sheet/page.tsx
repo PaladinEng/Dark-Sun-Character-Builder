@@ -20,26 +20,6 @@ const ABILITY_LABELS: Record<Ability, string> = {
   wis: "WIS",
   cha: "CHA",
 };
-const SKILL_ORDER = [
-  "athletics",
-  "acrobatics",
-  "sleight_of_hand",
-  "stealth",
-  "arcana",
-  "history",
-  "investigation",
-  "nature",
-  "religion",
-  "animal_handling",
-  "insight",
-  "medicine",
-  "perception",
-  "survival",
-  "deception",
-  "intimidation",
-  "performance",
-  "persuasion",
-] as const;
 
 function isObjectRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
@@ -170,6 +150,32 @@ function formatSkillName(skillId: string): string {
     .join(" ");
 }
 
+function getOrderedSkillRows(
+  skillDefinitions: Array<{ id: string; name: string }>,
+  skillValues: Record<string, number>,
+): Array<{ id: string; name: string }> {
+  const rows: Array<{ id: string; name: string }> = [];
+  const seen = new Set<string>();
+
+  for (const skill of skillDefinitions) {
+    if (seen.has(skill.id)) {
+      continue;
+    }
+    seen.add(skill.id);
+    rows.push({ id: skill.id, name: skill.name });
+  }
+
+  for (const skillId of Object.keys(skillValues).sort((a, b) => a.localeCompare(b))) {
+    if (seen.has(skillId)) {
+      continue;
+    }
+    seen.add(skillId);
+    rows.push({ id: skillId, name: formatSkillName(skillId) });
+  }
+
+  return rows;
+}
+
 function formatSpellSlots(slots: readonly number[] | null | undefined): string {
   if (!slots) {
     return "None";
@@ -247,12 +253,25 @@ export default async function SheetPage({
     })
     .sort((a, b) => a.localeCompare(b));
 
-  const orderedSkillIds = [
-    ...SKILL_ORDER,
-    ...Object.keys(derived.skills)
-      .filter((skillId) => !SKILL_ORDER.includes(skillId as (typeof SKILL_ORDER)[number]))
-      .sort((a, b) => a.localeCompare(b)),
-  ];
+  const orderedSkills = getOrderedSkillRows(
+    [...merged.content.skillDefinitions]
+      .map((skill, index) => ({ skill, index }))
+      .sort((left, right) => {
+        const leftOrder =
+          typeof left.skill.sortOrder === "number" ? left.skill.sortOrder : Number.POSITIVE_INFINITY;
+        const rightOrder =
+          typeof right.skill.sortOrder === "number" ? right.skill.sortOrder : Number.POSITIVE_INFINITY;
+        if (leftOrder !== rightOrder) {
+          return leftOrder - rightOrder;
+        }
+        return left.index - right.index;
+      })
+      .map(({ skill }) => ({
+        id: skill.id,
+        name: skill.name,
+      })),
+    derived.skills,
+  );
   const saveProficiencies = new Set(derived.saveProficiencies ?? []);
   const attackSummary = derived.attack
     ? `${derived.attack.name} ${formatModifier(derived.attack.toHit)} (${derived.attack.damage})`
@@ -402,11 +421,11 @@ export default async function SheetPage({
               <div className="max-h-[360px] overflow-auto p-2">
                 <table className="w-full border-collapse text-xs">
                   <tbody>
-                    {orderedSkillIds.map((skillId) => (
-                      <tr key={`skill-${skillId}`} className="border-b border-slate-200">
-                        <td className="py-1 pr-2">{formatSkillName(skillId)}</td>
+                    {orderedSkills.map((skill) => (
+                      <tr key={`skill-${skill.id}`} className="border-b border-slate-200">
+                        <td className="py-1 pr-2">{skill.name}</td>
                         <td className="py-1 text-right font-semibold">
-                          {formatModifier(derived.skills[skillId] ?? 0)}
+                          {formatModifier(derived.skills[skill.id] ?? 0)}
                         </td>
                       </tr>
                     ))}

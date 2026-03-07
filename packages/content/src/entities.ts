@@ -37,6 +37,18 @@ const EntityBaseSchema = z.object({
 });
 export const BaseEntitySchema = EntityBaseSchema;
 
+export const SkillSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string().optional(),
+  replaces: z.string().optional(),
+  ability: AbilitySchema,
+  sortOrder: z.number().int().optional(),
+});
+export type Skill = z.infer<typeof SkillSchema>;
+export const SkillDefinitionSchema = SkillSchema;
+export type SkillDefinition = Skill;
+
 export const SpeciesSchema = EntityBaseSchema;
 export type Species = z.infer<typeof SpeciesSchema>;
 
