@@ -94,6 +94,41 @@ export async function POST(request: Request) {
   const selectedBackground = payload.characterState.selectedBackgroundId
     ? merged.content.backgroundsById[payload.characterState.selectedBackgroundId]
     : undefined;
+  const armor = payload.characterState.equippedArmorId
+    ? merged.content.equipmentById[payload.characterState.equippedArmorId]
+    : undefined;
+  const shield = payload.characterState.equippedShieldId
+    ? merged.content.equipmentById[payload.characterState.equippedShieldId]
+    : undefined;
+  const weapon = payload.characterState.equippedWeaponId
+    ? merged.content.equipmentById[payload.characterState.equippedWeaponId]
+    : undefined;
+  const coinValues = payload.characterState.coins ?? {};
+  const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
+  const spCoins = Number.isFinite(coinValues.sp) ? Math.max(0, Math.floor(coinValues.sp ?? 0)) : 0;
+  const cpCoins = Number.isFinite(coinValues.cp) ? Math.max(0, Math.floor(coinValues.cp ?? 0)) : 0;
+  const inventoryCounts = new Map<string, number>();
+  for (const itemId of payload.characterState.inventoryItemIds ?? []) {
+    inventoryCounts.set(itemId, Math.max(1, inventoryCounts.get(itemId) ?? 1));
+  }
+  for (const entry of payload.characterState.inventoryEntries ?? []) {
+    const quantity =
+      typeof entry.quantity === "number" && Number.isFinite(entry.quantity)
+        ? Math.max(1, Math.floor(entry.quantity))
+        : 1;
+    inventoryCounts.set(entry.itemId, Math.max(quantity, inventoryCounts.get(entry.itemId) ?? 0));
+  }
+  const inventoryItems = [...inventoryCounts.entries()]
+    .map(([itemId, quantity]) => {
+      const label = merged.content.equipmentById[itemId]?.name ?? itemId;
+      return quantity > 1 ? `${label} x${quantity}` : label;
+    })
+    .sort((a, b) => a.localeCompare(b))
+    .slice(0, 6);
+  const inventorySummary = [
+    `Coins: ${gpCoins} gp / ${spCoins} sp / ${cpCoins} cp`,
+    ...(inventoryItems.length > 0 ? inventoryItems : ["Other Gear: None"]),
+  ];
   const templatePdfBytes = await loadTemplatePdfBytes();
   const pdfResult = buildPdfExportFromTemplate(templatePdfBytes, validation, {
     level: payload.characterState.level,
@@ -102,14 +137,29 @@ export async function POST(request: Request) {
     backgroundName: selectedBackground?.name,
     abilities: derived.finalAbilities,
     abilityMods: derived.abilityMods,
+    savingThrows: derived.savingThrows,
+    saveProficiencies: derived.saveProficiencies,
+    skills: derived.skills,
     proficiencyBonus: derived.proficiencyBonus,
     armorClass: derived.armorClass,
     maxHP: derived.maxHP,
     speed: derived.speed,
+    passivePerception: derived.passivePerception,
     attackName: derived.attack?.name,
     attackToHit: derived.attack?.toHit,
     attackDamage: derived.attack?.damage,
     featNames: derived.feats.map((feat) => feat.name),
+    spellcastingAbility: derived.spellcastingAbility,
+    spellSaveDC: derived.spellSaveDC,
+    spellAttackBonus: derived.spellAttackBonus,
+    spellSlots: derived.spellSlots,
+    toolProficiencies: derived.toolProficiencies,
+    languages: derived.languages,
+    inventorySummary,
+    equippedArmorName: armor?.name,
+    equippedShieldName: shield?.name,
+    equippedWeaponName: weapon?.name,
+    warningMessages: validation.warnings.map((issue) => `[${issue.code}] ${issue.message}`),
   });
 
   if (!pdfResult.ok) {

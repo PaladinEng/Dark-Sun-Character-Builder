@@ -355,6 +355,16 @@ function downloadFile(filename: string, contents: BlobPart, mimeType: string): v
   URL.revokeObjectURL(url);
 }
 
+function encodePayloadToBase64Url(payload: unknown): string {
+  const json = JSON.stringify(payload);
+  const utf8 = new TextEncoder().encode(json);
+  let binary = "";
+  for (const byte of utf8) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
 export default function BuilderClient({
   manifests,
   enabledSourceIds,
@@ -1174,6 +1184,22 @@ export default function BuilderClient({
     setExportNotice("JSON exported with validation report.");
   };
 
+  const onOpenHtmlSheet = () => {
+    const payload = encodePayloadToBase64Url({
+      characterState: state,
+      enabledPackIds: enabledSources,
+      generatedAt: new Date().toISOString(),
+    });
+    const url = `/sheet?payload=${encodeURIComponent(payload)}`;
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (opened) {
+      setExportNotice("Opened HTML sheet in a new tab.");
+      return;
+    }
+    window.location.assign(url);
+    setExportNotice("Opened HTML sheet.");
+  };
+
   const onDownloadPdf = async () => {
     if (!validation.isValidForExport) {
       const message = validation.errors
@@ -1306,6 +1332,13 @@ export default function BuilderClient({
           Download machine-readable data or a template-based printable PDF.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={onOpenHtmlSheet}
+            className="rounded border border-slate-600 px-3 py-1.5 text-sm hover:bg-slate-800"
+          >
+            Open HTML Sheet
+          </button>
           <button
             type="button"
             onClick={onDownloadJson}
