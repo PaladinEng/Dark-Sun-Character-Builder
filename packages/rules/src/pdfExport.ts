@@ -138,6 +138,16 @@ const SECTION_HEADER_HEIGHT = 14;
 const SECTION_INNER_PADDING = 8;
 const CELL_PADDING_X = 3;
 const AVERAGE_GLYPH_WIDTH_FACTOR = 0.52;
+const TEXT_WIDTH_SAFETY_FACTOR = 1.08;
+const FIELD_LABEL_SIZE = 6;
+const FIELD_LABEL_BASELINE_OFFSET = 8;
+const FIELD_VALUE_DEFAULT_BASELINE_OFFSET = 5;
+const FIELD_VALUE_MIN_BASELINE_OFFSET = 2;
+const FIELD_TEXT_ASCENT_FACTOR = 0.82;
+const FIELD_LABEL_VALUE_GAP = 2;
+const DETAIL_SECTION_CHROME_HEIGHT = SECTION_HEADER_HEIGHT + SECTION_INNER_PADDING * 2 + 4;
+const DETAIL_SECTION_SAFETY_BUFFER = 8;
+const DETAIL_PAGE_BREAK_THRESHOLD = 12;
 
 type TextAlign = "left" | "center" | "right";
 
@@ -196,7 +206,7 @@ function drawText(
 }
 
 function estimateTextWidth(text: string, size: number): number {
-  return text.length * size * AVERAGE_GLYPH_WIDTH_FACTOR;
+  return text.length * size * AVERAGE_GLYPH_WIDTH_FACTOR * TEXT_WIDTH_SAFETY_FACTOR;
 }
 
 function truncateTextToWidth(value: string, maxWidth: number, size: number, maxLength = 200): string {
@@ -244,12 +254,48 @@ function drawTextInCell(
     drawX = x + width - CELL_PADDING_X - textWidth;
   }
 
-  const clampedX = Math.max(x + CELL_PADDING_X, drawX);
+  const minDrawX = x + CELL_PADDING_X;
+  const maxDrawX = x + width - CELL_PADDING_X - textWidth;
+  const clampedX = Math.min(Math.max(minDrawX, drawX), Math.max(minDrawX, maxDrawX));
   drawText(commands, clipped, clampedX, y, size, bold);
 }
 
 function ensurePageSpace(currentY: number, bottomY: number, requiredHeight: number): boolean {
   return currentY - requiredHeight >= bottomY;
+}
+
+function hasActivePageContent(cursorY: number, topY: number): boolean {
+  return cursorY < topY - DETAIL_PAGE_BREAK_THRESHOLD;
+}
+
+function maxSectionLinesForPageSpace(availableHeight: number, lineHeight: number): number {
+  return Math.max(
+    1,
+    Math.floor((availableHeight - DETAIL_SECTION_CHROME_HEIGHT - DETAIL_SECTION_SAFETY_BUFFER) / lineHeight)
+  );
+}
+
+function detailSectionHeight(lineCount: number, lineHeight: number): number {
+  return DETAIL_SECTION_CHROME_HEIGHT + lineCount * lineHeight;
+}
+
+function rowTopY(tableY: number, tableHeight: number, rowHeight: number, rowIndexFromTop: number): number {
+  return tableY + tableHeight - rowHeight * rowIndexFromTop;
+}
+
+function rowBaselineY(rowTop: number, rowHeight: number, textSize: number): number {
+  const bottomPadding = Math.max(1.5, (rowHeight - textSize) / 2 + 1);
+  return Math.round((rowTop - rowHeight + bottomPadding) * 100) / 100;
+}
+
+function fieldValueBaselineY(y: number, height: number, valueSize: number): number {
+  const labelBaseline = y + height - FIELD_LABEL_BASELINE_OFFSET;
+  const maxValueTop = labelBaseline - FIELD_LABEL_VALUE_GAP;
+  const maxValueBaseline = maxValueTop - valueSize * FIELD_TEXT_ASCENT_FACTOR;
+  return Math.max(
+    y + FIELD_VALUE_MIN_BASELINE_OFFSET,
+    Math.min(y + FIELD_VALUE_DEFAULT_BASELINE_OFFSET, maxValueBaseline)
+  );
 }
 
 function paginateByPageSpace<T>(rows: readonly T[], topY: number, bottomY: number, rowHeight: number): T[][] {
@@ -321,19 +367,21 @@ function drawField(
 ): void {
   commands.push(`${x} ${y} ${width} ${height} re S`);
   const fieldTextWidth = Math.max(1, width - CELL_PADDING_X * 2);
+  const labelY = y + height - FIELD_LABEL_BASELINE_OFFSET;
+  const valueY = fieldValueBaselineY(y, height, valueSize);
   drawText(
     commands,
-    truncateTextToWidth(label.toUpperCase(), fieldTextWidth, 6, 40),
+    truncateTextToWidth(label.toUpperCase(), fieldTextWidth, FIELD_LABEL_SIZE, 40),
     x + CELL_PADDING_X,
-    y + height - 8,
-    6,
+    labelY,
+    FIELD_LABEL_SIZE,
     true
   );
   drawText(
     commands,
     truncateTextToWidth(value, fieldTextWidth, valueSize, maxLength),
     x + CELL_PADDING_X,
-    y + 5,
+    valueY,
     valueSize,
     true
   );
@@ -384,59 +432,6 @@ function wrapText(value: string, maxCharsPerLine: number): string[] {
   }
   flush();
   return lines;
-}
-
-function wrapTextToCellLines(
-  value: string,
-  width: number,
-  size: number,
-  maxLines: number,
-  maxLength: number
-): string[] {
-  const normalized = value.trim();
-  if (normalized.length === 0) {
-    return ["-"];
-  }
-
-  const maxTextWidth = Math.max(1, width - CELL_PADDING_X * 2);
-  const estimatedCharsPerLine = Math.max(
-    4,
-    Math.floor(maxTextWidth / Math.max(1, size * AVERAGE_GLYPH_WIDTH_FACTOR))
-  );
-  const wrapped = wrapText(truncateText(normalized, maxLength), estimatedCharsPerLine);
-  if (wrapped.length === 0) {
-    return ["-"];
-  }
-
-  const clipped = wrapped
-    .slice(0, Math.max(1, maxLines))
-    .map((line) => truncateTextToWidth(line, maxTextWidth, size, maxLength));
-  if (wrapped.length > maxLines) {
-    const lastIndex = clipped.length - 1;
-    const withEllipsis = clipped[lastIndex].endsWith("...") ? clipped[lastIndex] : `${clipped[lastIndex]}...`;
-    clipped[lastIndex] = truncateTextToWidth(withEllipsis, maxTextWidth, size, maxLength);
-  }
-  return clipped;
-}
-
-function drawWrappedTextInCell(
-  commands: string[],
-  lines: readonly string[],
-  x: number,
-  topY: number,
-  width: number,
-  rowHeight: number,
-  size: number,
-  align: TextAlign = "left"
-): void {
-  const lineHeight = size + 1.5;
-  const maxDrawableLines = Math.max(1, Math.floor((rowHeight - 4) / lineHeight));
-  const firstBaselineY = topY - 2 - size;
-  const drawLineCount = Math.min(maxDrawableLines, lines.length);
-
-  for (let index = 0; index < drawLineCount; index += 1) {
-    drawTextInCell(commands, lines[index], x, firstBaselineY - index * lineHeight, width, size, false, align, 220);
-  }
 }
 
 function toLabeledLines(
@@ -920,12 +915,22 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     `${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY} m ${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY + slotsTableHeight} l S`
   );
 
-  drawTextInCell(commands, "LEVEL", slotsTableX, slotsTableY + slotsTableHeight - 7, slotsLevelColumnWidth, 6, true, "center");
+  const slotsHeaderRowTopY = rowTopY(slotsTableY, slotsTableHeight, slotsRowHeight, 1);
+  drawTextInCell(
+    commands,
+    "LEVEL",
+    slotsTableX,
+    rowBaselineY(slotsHeaderRowTopY, slotsRowHeight, 6),
+    slotsLevelColumnWidth,
+    6,
+    true,
+    "center"
+  );
   drawTextInCell(
     commands,
     "TOTAL",
     slotsTableX + slotsLevelColumnWidth,
-    slotsTableY + slotsTableHeight - 7,
+    rowBaselineY(slotsHeaderRowTopY, slotsRowHeight, 6),
     slotsTotalColumnWidth,
     6,
     true,
@@ -935,14 +940,15 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     commands,
     "EXPENDED",
     slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth,
-    slotsTableY + slotsTableHeight - 7,
+    rowBaselineY(slotsHeaderRowTopY, slotsRowHeight, 6),
     slotsUsedColumnWidth,
     6,
     true,
     "center"
   );
   spellSlotRows.forEach((row, index) => {
-    const rowTextY = slotsTableY + slotsTableHeight - slotsRowHeight * (index + 2) + 2;
+    const rowTop = rowTopY(slotsTableY, slotsTableHeight, slotsRowHeight, index + 2);
+    const rowTextY = rowBaselineY(rowTop, slotsRowHeight, 7);
     drawTextInCell(commands, `Level ${row.level}`, slotsTableX, rowTextY, slotsLevelColumnWidth, 7, false, "left", 8);
     drawTextInCell(
       commands,
@@ -1331,12 +1337,9 @@ function createDetailsPageStreams(snapshot: PdfExportCharacterSnapshot): string[
 
     while (start < sourceLines.length) {
       const availableHeight = cursorY - usableBottomY;
-      const maxLines = Math.max(
-        1,
-        Math.floor((availableHeight - SECTION_HEADER_HEIGHT - SECTION_INNER_PADDING * 2 - 8) / lineHeight)
-      );
+      const maxLines = maxSectionLinesForPageSpace(availableHeight, lineHeight);
 
-      if (maxLines < 2 && cursorY < usableTopY - 12) {
+      if (maxLines < 2 && hasActivePageContent(cursorY, usableTopY)) {
         closePage();
         pageNumber += 1;
         startPage();
@@ -1345,9 +1348,9 @@ function createDetailsPageStreams(snapshot: PdfExportCharacterSnapshot): string[
 
       const remaining = sourceLines.length - start;
       const lineCount = Math.min(remaining, maxLines);
-      const sectionHeight = SECTION_HEADER_HEIGHT + SECTION_INNER_PADDING * 2 + lineCount * lineHeight + 4;
+      const sectionHeight = detailSectionHeight(lineCount, lineHeight);
 
-      if (!ensurePageSpace(cursorY, usableBottomY, sectionHeight) && cursorY < usableTopY - 12) {
+      if (!ensurePageSpace(cursorY, usableBottomY, sectionHeight) && hasActivePageContent(cursorY, usableTopY)) {
         closePage();
         pageNumber += 1;
         startPage();
@@ -1860,12 +1863,14 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     columnCursor += attackColumns[index];
     commands.push(`${columnCursor} ${tableY} m ${columnCursor} ${tableY + tableHeight} l S`);
   }
-  drawTextInCell(commands, "NAME", tableX, tableY + tableHeight - 13, attackColumns[0], 6, true, "center", 20);
+  const attackHeaderRowTopY = rowTopY(tableY, tableHeight, tableRowHeight, 1);
+  const attackHeaderTextY = rowBaselineY(attackHeaderRowTopY, tableRowHeight, 6);
+  drawTextInCell(commands, "NAME", tableX, attackHeaderTextY, attackColumns[0], 6, true, "center", 20);
   drawTextInCell(
     commands,
     "ATK BONUS / DC",
     tableX + attackColumns[0],
-    tableY + tableHeight - 13,
+    attackHeaderTextY,
     attackColumns[1],
     6,
     true,
@@ -1876,7 +1881,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     commands,
     "DAMAGE / TYPE",
     tableX + attackColumns[0] + attackColumns[1],
-    tableY + tableHeight - 13,
+    attackHeaderTextY,
     attackColumns[2],
     6,
     true,
@@ -1887,7 +1892,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     commands,
     "NOTES",
     tableX + attackColumns[0] + attackColumns[1] + attackColumns[2],
-    tableY + tableHeight - 13,
+    attackHeaderTextY,
     attackColumns[3],
     6,
     true,
@@ -1895,8 +1900,8 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     20
   );
   attackRows.forEach((row, index) => {
-    const rowTopY = tableY + tableHeight - tableRowHeight * (index + 1);
-    const rowTextY = rowTopY - 13;
+    const rowTop = rowTopY(tableY, tableHeight, tableRowHeight, index + 2);
+    const rowTextY = rowBaselineY(rowTop, tableRowHeight, 8);
     drawTextInCell(commands, row.name, tableX, rowTextY, attackColumns[0], 8, false, "left", 30);
     drawTextInCell(commands, row.bonus, tableX + attackColumns[0], rowTextY, attackColumns[1], 8, false, "center", 14);
     drawTextInCell(
