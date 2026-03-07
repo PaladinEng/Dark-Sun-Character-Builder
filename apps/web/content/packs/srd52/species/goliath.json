@@ -1,26 +1,22 @@
 {
-  "id": "srd52:species:halfling",
-  "name": "Halfling",
+  "id": "srd52:species:goliath",
+  "name": "Goliath",
   "effects": [
     {
       "type": "set_speed",
-      "value": 30
+      "value": 35
     },
     {
       "type": "grant_trait",
-      "name": "Brave"
+      "name": "Giant Ancestry"
     },
     {
       "type": "grant_trait",
-      "name": "Halfling Nimbleness"
+      "name": "Large Form"
     },
     {
       "type": "grant_trait",
-      "name": "Luck"
-    },
-    {
-      "type": "grant_trait",
-      "name": "Naturally Stealthy"
+      "name": "Powerful Build"
     },
     {
       "type": "grant_language",
@@ -28,7 +24,7 @@
     },
     {
       "type": "grant_language",
-      "language": "Halfling"
+      "language": "Giant"
     }
   ]
 }

@@ -29,6 +29,7 @@ describe("srd52 content audit", () => {
     const srdPackDir = await resolveSrdPackDir();
     const pack = await loadPackFromDir(srdPackDir);
 
+    expect(pack.entities.species.length).toBeGreaterThanOrEqual(9);
     expect(pack.entities.classes.length).toBeGreaterThanOrEqual(11);
     expect(pack.entities.backgrounds.length).toBeGreaterThanOrEqual(11);
     expect(pack.entities.features.length).toBeGreaterThanOrEqual(13);
@@ -50,6 +51,45 @@ describe("srd52 content audit", () => {
           `${klass.id} references missing spell list ${spellListId}`,
         ).toBe(true);
       }
+    }
+  });
+
+  it("includes core SRD species coverage with derived-speed support", async () => {
+    const srdPackDir = await resolveSrdPackDir();
+    const pack = await loadPackFromDir(srdPackDir);
+
+    const speciesById = new Map(pack.entities.species.map((species) => [species.id, species]));
+    const expectedSpeciesIds = [
+      "srd52:species:dragonborn",
+      "srd52:species:dwarf",
+      "srd52:species:elf",
+      "srd52:species:gnome",
+      "srd52:species:goliath",
+      "srd52:species:halfling",
+      "srd52:species:human",
+      "srd52:species:orc",
+      "srd52:species:tiefling",
+    ];
+
+    for (const speciesId of expectedSpeciesIds) {
+      expect(speciesById.has(speciesId), `Missing expected SRD species ${speciesId}`).toBe(true);
+      const species = speciesById.get(speciesId);
+      const speedEffect = species?.effects?.find((effect) => effect.type === "set_speed");
+      expect(speedEffect, `${speciesId} should define a speed effect`).toBeDefined();
+      if (speedEffect?.type === "set_speed") {
+        expect(speedEffect.value, `${speciesId} speed should be at least 30`).toBeGreaterThanOrEqual(30);
+      }
+    }
+
+    const dwarf = speciesById.get("srd52:species:dwarf");
+    const dwarfDarkvision = dwarf?.effects?.find(
+      (effect) => effect.type === "grant_sense" && effect.sense === "darkvision",
+    );
+    expect(dwarfDarkvision, "Dwarf should define Darkvision").toBeDefined();
+    if (dwarfDarkvision?.type === "grant_sense") {
+      expect(dwarfDarkvision.range, "Dwarf darkvision range should be at least 120").toBeGreaterThanOrEqual(
+        120,
+      );
     }
   });
 

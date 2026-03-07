@@ -4,16 +4,24 @@
   "effects": [
     {
       "type": "set_speed",
-      "value": 25
+      "value": 30
     },
     {
       "type": "grant_sense",
       "sense": "darkvision",
-      "range": 60
+      "range": 120
     },
     {
       "type": "grant_resistance",
       "damageType": "poison"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Dwarven Resilience"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Dwarven Toughness"
     },
     {
       "type": "grant_trait",

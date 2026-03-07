@@ -1,6 +1,6 @@
 {
-  "id": "srd52:species:elf",
-  "name": "Elf",
+  "id": "srd52:species:gnome",
+  "name": "Gnome",
   "effects": [
     {
       "type": "set_speed",
@@ -13,19 +13,11 @@
     },
     {
       "type": "grant_trait",
-      "name": "Elven Lineage"
+      "name": "Gnomish Cunning"
     },
     {
       "type": "grant_trait",
-      "name": "Fey Ancestry"
-    },
-    {
-      "type": "grant_trait",
-      "name": "Keen Senses"
-    },
-    {
-      "type": "grant_trait",
-      "name": "Trance"
+      "name": "Gnomish Lineage"
     },
     {
       "type": "grant_language",
@@ -33,7 +25,7 @@
     },
     {
       "type": "grant_language",
-      "language": "Elvish"
+      "language": "Gnomish"
     }
   ]
 }

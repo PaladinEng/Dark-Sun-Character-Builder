@@ -1,26 +1,33 @@
 {
   "species": [
     {
-      "slug": "human",
-      "name": "Human",
+      "slug": "dragonborn",
+      "name": "Dragonborn",
       "effects": [
         {
           "type": "set_speed",
           "value": 30
         },
         {
-          "type": "grant_language",
-          "language": "Common"
-        }
-      ]
-    },
-    {
-      "slug": "elf",
-      "name": "Elf",
-      "effects": [
+          "type": "grant_sense",
+          "sense": "darkvision",
+          "range": 60
+        },
         {
-          "type": "set_speed",
-          "value": 30
+          "type": "grant_trait",
+          "name": "Draconic Ancestry"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Breath Weapon"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Damage Resistance"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Draconic Flight"
         },
         {
           "type": "grant_language",
@@ -28,7 +35,7 @@
         },
         {
           "type": "grant_language",
-          "language": "Elvish"
+          "language": "Draconic"
         }
       ]
     },
@@ -38,16 +45,24 @@
       "effects": [
         {
           "type": "set_speed",
-          "value": 25
+          "value": 30
         },
         {
           "type": "grant_sense",
           "sense": "darkvision",
-          "range": 60
+          "range": 120
         },
         {
           "type": "grant_resistance",
           "damageType": "poison"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Dwarven Resilience"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Dwarven Toughness"
         },
         {
           "type": "grant_trait",
@@ -64,12 +79,128 @@
       ]
     },
     {
+      "slug": "elf",
+      "name": "Elf",
+      "effects": [
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_sense",
+          "sense": "darkvision",
+          "range": 60
+        },
+        {
+          "type": "grant_trait",
+          "name": "Elven Lineage"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Fey Ancestry"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Keen Senses"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Trance"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Elvish"
+        }
+      ]
+    },
+    {
+      "slug": "gnome",
+      "name": "Gnome",
+      "effects": [
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_sense",
+          "sense": "darkvision",
+          "range": 60
+        },
+        {
+          "type": "grant_trait",
+          "name": "Gnomish Cunning"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Gnomish Lineage"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Gnomish"
+        }
+      ]
+    },
+    {
+      "slug": "goliath",
+      "name": "Goliath",
+      "effects": [
+        {
+          "type": "set_speed",
+          "value": 35
+        },
+        {
+          "type": "grant_trait",
+          "name": "Giant Ancestry"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Large Form"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Powerful Build"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Giant"
+        }
+      ]
+    },
+    {
       "slug": "halfling",
       "name": "Halfling",
       "effects": [
         {
           "type": "set_speed",
-          "value": 25
+          "value": 30
+        },
+        {
+          "type": "grant_trait",
+          "name": "Brave"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Halfling Nimbleness"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Luck"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Naturally Stealthy"
         },
         {
           "type": "grant_language",
@@ -78,6 +209,94 @@
         {
           "type": "grant_language",
           "language": "Halfling"
+        }
+      ]
+    },
+    {
+      "slug": "human",
+      "name": "Human",
+      "effects": [
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_trait",
+          "name": "Resourceful"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Skillful"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Versatile"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        }
+      ]
+    },
+    {
+      "slug": "orc",
+      "name": "Orc",
+      "effects": [
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_sense",
+          "sense": "darkvision",
+          "range": 120
+        },
+        {
+          "type": "grant_trait",
+          "name": "Adrenaline Rush"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Relentless Endurance"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Orc"
+        }
+      ]
+    },
+    {
+      "slug": "tiefling",
+      "name": "Tiefling",
+      "effects": [
+        {
+          "type": "set_speed",
+          "value": 30
+        },
+        {
+          "type": "grant_sense",
+          "sense": "darkvision",
+          "range": 60
+        },
+        {
+          "type": "grant_trait",
+          "name": "Fiendish Legacy"
+        },
+        {
+          "type": "grant_trait",
+          "name": "Otherworldly Presence"
+        },
+        {
+          "type": "grant_language",
+          "language": "Common"
+        },
+        {
+          "type": "grant_language",
+          "language": "Infernal"
         }
       ]
     }

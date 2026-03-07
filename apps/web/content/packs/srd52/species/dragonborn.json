@@ -1,6 +1,6 @@
 {
-  "id": "srd52:species:elf",
-  "name": "Elf",
+  "id": "srd52:species:dragonborn",
+  "name": "Dragonborn",
   "effects": [
     {
       "type": "set_speed",
@@ -13,19 +13,19 @@
     },
     {
       "type": "grant_trait",
-      "name": "Elven Lineage"
+      "name": "Draconic Ancestry"
     },
     {
       "type": "grant_trait",
-      "name": "Fey Ancestry"
+      "name": "Breath Weapon"
     },
     {
       "type": "grant_trait",
-      "name": "Keen Senses"
+      "name": "Damage Resistance"
     },
     {
       "type": "grant_trait",
-      "name": "Trance"
+      "name": "Draconic Flight"
     },
     {
       "type": "grant_language",
@@ -33,7 +33,7 @@
     },
     {
       "type": "grant_language",
-      "language": "Elvish"
+      "language": "Draconic"
     }
   ]
 }
