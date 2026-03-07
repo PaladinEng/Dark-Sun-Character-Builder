@@ -1,5 +1,5 @@
 {
   "id": "srd52:equipment:bedroll",
-  "name": "Bedroll",
-  "type": "adventuring_gear"
+  "type": "adventuring_gear",
+  "name": "Bedroll"
 }

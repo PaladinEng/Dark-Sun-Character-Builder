@@ -14,10 +14,12 @@ import {
   computeProfBonus,
   isProficientWithWeapon
 } from "./compute";
+import { getResolvedSkillIds } from "./skills";
 import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   CONDITION_IDS,
+  type AttunedItem,
   type Ability,
   type CharacterCoins,
   type CharacterState,
@@ -48,7 +50,15 @@ function isConditionId(value: string): value is ConditionId {
   return CONDITION_IDS.includes(value as ConditionId);
 }
 
-const COIN_DENOMINATIONS: Array<keyof CharacterCoins> = ["gp", "sp", "cp"];
+const COIN_DENOMINATIONS: Array<keyof CharacterCoins> = ["cp", "sp", "ep", "gp", "pp"];
+const OPTIONAL_TEXT_FIELDS = [
+  "otherWealth",
+  "appearance",
+  "physicalDescription",
+  "backstory",
+  "alignment",
+  "notes"
+] as const;
 
 function collectInventoryItemIds(state: CharacterState): string[] {
   const itemIds = state.inventoryItemIds ?? [];
@@ -70,27 +80,6 @@ function parseLevelFeatSelections(state: CharacterState): Map<number, string> {
   }
   return selections;
 }
-
-const STANDARD_SKILLS = new Set([
-  "athletics",
-  "acrobatics",
-  "sleight_of_hand",
-  "stealth",
-  "arcana",
-  "history",
-  "investigation",
-  "nature",
-  "religion",
-  "animal_handling",
-  "insight",
-  "medicine",
-  "perception",
-  "survival",
-  "deception",
-  "intimidation",
-  "performance",
-  "persuasion"
-]);
 
 export function validateCharacter(
   state: CharacterState,
@@ -139,6 +128,7 @@ export function validateCharacter(
   const selectedOriginFeatId = state.featSelections?.origin ?? state.originFeatId;
   const effectiveOriginFeatId =
     fixedOriginFeatId ?? (originFeatChoice ? selectedOriginFeatId : undefined);
+  const knownSkillIds = getResolvedSkillIds(content);
   const asiIncreases = (state.advancements ?? [])
     .filter(
       (entry): entry is Extract<NonNullable<CharacterState["advancements"]>[number], { type: "asi" }> =>
@@ -200,6 +190,97 @@ export function validateCharacter(
       code: "LEVEL_OUT_OF_RANGE",
       message: "Character level must be an integer between 1 and 20.",
       path: "level"
+    });
+  }
+
+  if (typeof state.xp !== "undefined" && (!Number.isInteger(state.xp) || state.xp < 0)) {
+    pushError({
+      code: "XP_OUT_OF_RANGE",
+      message: "XP must be a non-negative integer.",
+      path: "xp"
+    });
+  }
+
+  if (typeof state.tempHP !== "undefined" && (!Number.isInteger(state.tempHP) || state.tempHP < 0)) {
+    pushError({
+      code: "TEMP_HP_OUT_OF_RANGE",
+      message: "Temporary HP must be a non-negative integer.",
+      path: "tempHP"
+    });
+  }
+
+  if (
+    typeof state.hitDiceTotal !== "undefined" &&
+    (!Number.isInteger(state.hitDiceTotal) || state.hitDiceTotal < 0)
+  ) {
+    pushError({
+      code: "HIT_DICE_TOTAL_OUT_OF_RANGE",
+      message: "Hit dice total must be a non-negative integer.",
+      path: "hitDiceTotal"
+    });
+  }
+
+  if (
+    typeof state.hitDiceSpent !== "undefined" &&
+    (!Number.isInteger(state.hitDiceSpent) || state.hitDiceSpent < 0)
+  ) {
+    pushError({
+      code: "HIT_DICE_SPENT_OUT_OF_RANGE",
+      message: "Hit dice spent must be a non-negative integer.",
+      path: "hitDiceSpent"
+    });
+  }
+
+  if (
+    typeof state.hitDiceTotal === "number" &&
+    Number.isInteger(state.hitDiceTotal) &&
+    state.hitDiceTotal >= 0 &&
+    typeof state.hitDiceSpent === "number" &&
+    Number.isInteger(state.hitDiceSpent) &&
+    state.hitDiceSpent >= 0 &&
+    state.hitDiceSpent > state.hitDiceTotal
+  ) {
+    pushError({
+      code: "HIT_DICE_SPENT_EXCEEDS_TOTAL",
+      message: "Hit dice spent cannot exceed hit dice total.",
+      path: "hitDiceSpent"
+    });
+  }
+
+  if (
+    typeof state.deathSaveSuccesses !== "undefined" &&
+    (!Number.isInteger(state.deathSaveSuccesses) ||
+      state.deathSaveSuccesses < 0 ||
+      state.deathSaveSuccesses > 3)
+  ) {
+    pushError({
+      code: "DEATH_SAVE_SUCCESSES_OUT_OF_RANGE",
+      message: "Death save successes must be an integer between 0 and 3.",
+      path: "deathSaveSuccesses"
+    });
+  }
+
+  if (
+    typeof state.deathSaveFailures !== "undefined" &&
+    (!Number.isInteger(state.deathSaveFailures) ||
+      state.deathSaveFailures < 0 ||
+      state.deathSaveFailures > 3)
+  ) {
+    pushError({
+      code: "DEATH_SAVE_FAILURES_OUT_OF_RANGE",
+      message: "Death save failures must be an integer between 0 and 3.",
+      path: "deathSaveFailures"
+    });
+  }
+
+  if (
+    typeof state.exhaustionLevel !== "undefined" &&
+    (!Number.isInteger(state.exhaustionLevel) || state.exhaustionLevel < 0 || state.exhaustionLevel > 10)
+  ) {
+    pushError({
+      code: "EXHAUSTION_LEVEL_OUT_OF_RANGE",
+      message: "Exhaustion level must be an integer between 0 and 10.",
+      path: "exhaustionLevel"
     });
   }
 
@@ -372,6 +453,60 @@ export function validateCharacter(
     }
   }
 
+  for (const field of OPTIONAL_TEXT_FIELDS) {
+    const value = state[field];
+    if (typeof value === "undefined") {
+      continue;
+    }
+    if (typeof value !== "string") {
+      pushError({
+        code: "OPTIONAL_TEXT_FIELD_INVALID",
+        message: `${field} must be a string when provided.`,
+        path: field
+      });
+    }
+  }
+
+  if (typeof state.attunedItems !== "undefined") {
+    if (!Array.isArray(state.attunedItems)) {
+      pushError({
+        code: "ATTUNED_ITEMS_INVALID",
+        message: "Attuned items must be an array when provided.",
+        path: "attunedItems"
+      });
+    } else {
+      for (const [index, item] of state.attunedItems.entries()) {
+        if (typeof item !== "object" || item === null || Array.isArray(item)) {
+          pushError({
+            code: "ATTUNED_ITEM_INVALID",
+            message: `Attuned item at index ${index} must be an object.`,
+            path: `attunedItems[${index}]`
+          });
+          continue;
+        }
+
+        const candidate = item as AttunedItem;
+        const fields: Array<[keyof AttunedItem, unknown]> = [
+          ["name", candidate.name],
+          ["itemId", candidate.itemId],
+          ["notes", candidate.notes]
+        ];
+        for (const [field, value] of fields) {
+          if (typeof value === "undefined") {
+            continue;
+          }
+          if (typeof value !== "string") {
+            pushError({
+              code: "ATTUNED_ITEM_FIELD_INVALID",
+              message: `Attuned item ${field} at index ${index} must be a string.`,
+              path: `attunedItems[${index}].${field}`
+            });
+          }
+        }
+      }
+    }
+  }
+
   const inventoryItemIds = new Set(collectInventoryItemIds(state));
   if (inventoryItemIds.size > 0) {
     const equippedChecks: Array<[string | undefined, string, string]> = [
@@ -459,7 +594,7 @@ export function validateCharacter(
   }
 
   const invalidSkillSelections = dedupe(
-    (state.chosenSkillProficiencies ?? []).filter((skill) => !STANDARD_SKILLS.has(skill))
+    (state.chosenSkillProficiencies ?? []).filter((skill) => !knownSkillIds.has(skill))
   );
   if (invalidSkillSelections.length > 0) {
     pushError({

@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import type { MergedContent, Spell } from "@dark-sun/content";
 import type {
+  AttunedItem,
   AbilityScoreMethod,
   CharacterState,
   DerivedState,
@@ -17,14 +18,15 @@ import {
   STANDARD_ARRAY,
   computePointBuyCost,
   computeDerivedState,
-  getPointBuyScoreCost,
   getAvailableAdvancementSlots,
+  getPointBuyScoreCost,
+  getSkillAndToolDisplayRows,
   validateCharacter,
 } from "@dark-sun/rules";
 import { formatSpellNameWithFlags } from "../../src/lib/spells";
 
 type Ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
-type CoinDenomination = "gp" | "sp" | "cp";
+type CoinDenomination = "gp" | "sp" | "ep" | "cp" | "pp";
 type AbilityChanges = Partial<Record<Ability, number>>;
 
 type BackgroundAbilityOptions = {
@@ -112,6 +114,9 @@ type BuilderState = CharacterState;
 
 type ExportedDerivedState = {
   level: number;
+  subclass: string | null;
+  xp: number | null;
+  heroicInspiration: boolean;
   abilities: Record<Ability, number>;
   abilityModifiers: Record<Ability, number>;
   proficiencyBonus: number;
@@ -119,16 +124,52 @@ type ExportedDerivedState = {
   skills: Record<string, number>;
   savingThrows: Record<Ability, number>;
   AC: number;
+  shieldAC: number;
   HP: number;
+  tempHP: number;
+  hitDiceTotal: number | null;
+  hitDiceSpent: number;
+  deathSaveSuccesses: number;
+  deathSaveFailures: number;
+  exhaustionLevel: number;
   speed: number;
   attacks: Array<{ name: string; toHit: number; damage: string; mastery?: string[] }>;
   feats: { id: string; name: string }[];
   background: string | null;
   class: string | null;
   species: string | null;
+  armorProficiencies: string[];
+  weaponProficiencies: string[];
   toolProficiencies: string[];
   languages: string[];
+  coins: {
+    cp: number;
+    sp: number;
+    ep: number;
+    gp: number;
+    pp: number;
+  };
+  otherWealth: string | null;
+  attunedItems: AttunedItem[];
+  appearance: string | null;
+  physicalDescription: string | null;
+  backstory: string | null;
+  alignment: string | null;
+  notes: string | null;
+  companion: {
+    name: string | null;
+    type: string | null;
+    summary: string | null;
+    notes: string | null;
+  } | null;
+  familiar: {
+    name: string | null;
+    type: string | null;
+    summary: string | null;
+    notes: string | null;
+  } | null;
   spellcastingAbility: Ability | null;
+  spellcastingModifier: number | null;
   spellSaveDC: number | null;
   spellAttackBonus: number | null;
   spellSlots: DerivedState["spellSlots"];
@@ -148,7 +189,8 @@ type BuilderClientProps = {
 };
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
-const COIN_DENOMINATIONS: CoinDenomination[] = ["gp", "sp", "cp"];
+const COIN_DENOMINATIONS: CoinDenomination[] = ["cp", "sp", "ep", "gp", "pp"];
+const ATTUNEMENT_SLOT_COUNT = 5;
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
 const ABILITY_SCORE_METHOD_OPTIONS: Array<{ value: AbilityScoreMethod; label: string }> = [
   { value: "manual", label: "Manual" },
@@ -247,11 +289,15 @@ function labelFeat(feat: Option): string {
   return `${feat.name} (${feat.category})`;
 }
 
-function labelSkill(skillId: string): string {
+function formatSkillId(skillId: string): string {
   return skillId
     .split("_")
     .map((part) => part[0]?.toUpperCase() + part.slice(1))
     .join(" ");
+}
+
+function formatSigned(value: number): string {
+  return value >= 0 ? `+${value}` : String(value);
 }
 
 function sortStringIds(values: string[]): string[] {
@@ -262,6 +308,16 @@ function sortInventoryEntries(
   entries: Array<{ itemId: string; quantity?: number }>,
 ): Array<{ itemId: string; quantity?: number }> {
   return [...entries].sort((a, b) => a.itemId.localeCompare(b.itemId));
+}
+
+function normalizeAttunedItemsForExport(items: AttunedItem[] | undefined): AttunedItem[] {
+  return (items ?? [])
+    .map((item) => ({
+      name: item.name?.trim() || undefined,
+      itemId: item.itemId?.trim() || undefined,
+      notes: item.notes?.trim() || undefined,
+    }))
+    .filter((item) => Boolean(item.name || item.itemId || item.notes));
 }
 
 function withSpellSelectionField(
@@ -389,17 +445,52 @@ export default function BuilderClient({
     selectedSpeciesId: undefined,
     selectedBackgroundId: undefined,
     selectedClassId: undefined,
+    subclass: undefined,
+    xp: 0,
+    heroicInspiration: false,
     equippedArmorId: undefined,
     equippedShieldId: undefined,
     equippedWeaponId: undefined,
+    armorProficiencies: [],
+    weaponProficiencies: [],
     chosenSkillProficiencies: [],
     chosenClassSkills: [],
     chosenSaveProficiencies: [],
     toolProficiencies: [],
+    languages: [],
     knownSpellIds: [],
     preparedSpellIds: [],
     cantripsKnownIds: [],
-    coins: { gp: 0, sp: 0, cp: 0 },
+    coins: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
+    otherWealth: "",
+    tempHP: 0,
+    hitDiceTotal: undefined,
+    hitDiceSpent: 0,
+    deathSaveSuccesses: 0,
+    deathSaveFailures: 0,
+    exhaustionLevel: 0,
+    attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
+      name: "",
+      itemId: "",
+      notes: "",
+    })),
+    appearance: "",
+    physicalDescription: "",
+    backstory: "",
+    alignment: "",
+    notes: "",
+    companion: {
+      name: "",
+      type: "",
+      summary: "",
+      notes: "",
+    },
+    familiar: {
+      name: "",
+      type: "",
+      summary: "",
+      notes: "",
+    },
     inventoryItemIds: [],
     inventoryEntries: [],
     featSelections: {
@@ -438,7 +529,7 @@ export default function BuilderClient({
       return;
     }
 
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() ?? "");
     params.set("sources", parsed.join(","));
     router.replace(`${pathname}?${params.toString()}`);
   }, [
@@ -506,6 +597,13 @@ export default function BuilderClient({
     [options.weapons, state.equippedWeaponId],
   );
   const selectedClassSkillChoices = selectedClass?.classSkillChoices;
+  const skillNameById = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const skill of content.skillDefinitions ?? []) {
+      map[skill.id] = skill.name;
+    }
+    return map;
+  }, [content.skillDefinitions]);
   const chosenClassSkills = state.chosenClassSkills ?? [];
   const originFeats = useMemo(
     () => collectArray(content, "feats").filter((feat) => feat.category === "origin"),
@@ -518,6 +616,13 @@ export default function BuilderClient({
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
   );
+  const skillAndToolRows = useMemo(() => {
+    return getSkillAndToolDisplayRows({
+      skillDefinitions: content.skillDefinitions,
+      skills: derived.skills,
+      toolProficiencies: derived.toolProficiencies,
+    });
+  }, [content.skillDefinitions, derived.skills, derived.toolProficiencies]);
   const selectedBackgroundFixedOriginFeat = selectedBackgroundFixedOriginFeatId
     ? originFeats.find((feat) => feat.id === selectedBackgroundFixedOriginFeatId)
     : undefined;
@@ -814,34 +919,105 @@ export default function BuilderClient({
   ]);
 
   const exportedDerivedState = useMemo<ExportedDerivedState>(
-    () => ({
-      level: Math.max(1, Math.floor(state.level || 1)),
-      abilities: derived.finalAbilities,
-      abilityModifiers: derived.abilityMods,
-      proficiencyBonus: derived.proficiencyBonus,
-      passivePerception: derived.passivePerception,
-      skills: derived.skills,
-      savingThrows: derived.savingThrows,
-      AC: derived.armorClass,
-      HP: derived.maxHP,
-      speed: derived.speed,
-      attacks: derived.attack ? [derived.attack] : [],
-      feats: derived.feats,
-      background: selectedBackground?.name ?? null,
-      class: selectedClass?.name ?? null,
-      species: selectedSpecies?.name ?? null,
-      toolProficiencies: derived.toolProficiencies,
-      languages: derived.languages,
-      spellcastingAbility: derived.spellcastingAbility,
-      spellSaveDC: derived.spellSaveDC,
-      spellAttackBonus: derived.spellAttackBonus,
-      spellSlots: derived.spellSlots,
-      spellcasting: derived.spellcasting,
-      activeConditionIds: derived.activeConditionIds,
-      appliedModifiers: derived.appliedModifiers,
-      warnings: derived.warnings,
-    }),
-    [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, state.level],
+    () => {
+      const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
+      const coinValues = state.coins ?? {};
+      const coin = (denomination: CoinDenomination): number => {
+        const value = coinValues[denomination];
+        if (!Number.isFinite(value)) {
+          return 0;
+        }
+        return Math.max(0, Math.floor(value ?? 0));
+      };
+      const hitDiceTotal = Number.isFinite(state.hitDiceTotal)
+        ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
+        : null;
+      const rawHitDiceSpent = Number.isFinite(state.hitDiceSpent)
+        ? Math.max(0, Math.floor(state.hitDiceSpent ?? 0))
+        : 0;
+      const hitDiceSpent =
+        hitDiceTotal === null
+          ? rawHitDiceSpent
+          : Math.min(rawHitDiceSpent, hitDiceTotal);
+      const exhaustionLevel = Number.isFinite(state.exhaustionLevel)
+        ? Math.max(0, Math.min(10, Math.floor(state.exhaustionLevel ?? 0)))
+        : 0;
+      return {
+        level: Math.max(1, Math.floor(state.level || 1)),
+        subclass: state.subclass ?? null,
+        xp: Number.isFinite(state.xp) ? Math.max(0, Math.floor(state.xp ?? 0)) : null,
+        heroicInspiration: state.heroicInspiration === true,
+        abilities: derived.finalAbilities,
+        abilityModifiers: derived.abilityMods,
+        proficiencyBonus: derived.proficiencyBonus,
+        passivePerception: derived.passivePerception,
+        skills: derived.skills,
+        savingThrows: derived.savingThrows,
+        AC: derived.armorClass,
+        shieldAC: state.equippedShieldId ? 2 : 0,
+        HP: derived.maxHP,
+        tempHP: Number.isFinite(state.tempHP) ? Math.max(0, Math.floor(state.tempHP ?? 0)) : 0,
+        hitDiceTotal,
+        hitDiceSpent,
+        deathSaveSuccesses: Number.isFinite(state.deathSaveSuccesses)
+          ? Math.max(0, Math.min(3, Math.floor(state.deathSaveSuccesses ?? 0)))
+          : 0,
+        deathSaveFailures: Number.isFinite(state.deathSaveFailures)
+          ? Math.max(0, Math.min(3, Math.floor(state.deathSaveFailures ?? 0)))
+          : 0,
+        exhaustionLevel,
+        speed: derived.speed,
+        attacks: derived.attack ? [derived.attack] : [],
+        feats: derived.feats,
+        background: selectedBackground?.name ?? null,
+        class: selectedClass?.name ?? null,
+        species: selectedSpecies?.name ?? null,
+        armorProficiencies: sortStringIds(state.armorProficiencies ?? []),
+        weaponProficiencies: sortStringIds(state.weaponProficiencies ?? []),
+        toolProficiencies: derived.toolProficiencies,
+        languages: derived.languages,
+        coins: {
+          cp: coin("cp"),
+          sp: coin("sp"),
+          ep: coin("ep"),
+          gp: coin("gp"),
+          pp: coin("pp"),
+        },
+        otherWealth: state.otherWealth?.trim() ? state.otherWealth.trim() : null,
+        attunedItems: normalizeAttunedItemsForExport(state.attunedItems),
+        appearance: state.appearance?.trim() ? state.appearance.trim() : null,
+        physicalDescription: state.physicalDescription?.trim() ? state.physicalDescription.trim() : null,
+        backstory: state.backstory?.trim() ? state.backstory.trim() : null,
+        alignment: state.alignment?.trim() ? state.alignment.trim() : null,
+        notes: state.notes?.trim() ? state.notes.trim() : null,
+        companion: state.companion
+          ? {
+              name: state.companion.name?.trim() ? state.companion.name.trim() : null,
+              type: state.companion.type?.trim() ? state.companion.type.trim() : null,
+              summary: state.companion.summary?.trim() ? state.companion.summary.trim() : null,
+              notes: state.companion.notes?.trim() ? state.companion.notes.trim() : null,
+            }
+          : null,
+        familiar: state.familiar
+          ? {
+              name: state.familiar.name?.trim() ? state.familiar.name.trim() : null,
+              type: state.familiar.type?.trim() ? state.familiar.type.trim() : null,
+              summary: state.familiar.summary?.trim() ? state.familiar.summary.trim() : null,
+              notes: state.familiar.notes?.trim() ? state.familiar.notes.trim() : null,
+            }
+          : null,
+        spellcastingAbility,
+        spellcastingModifier: spellcastingAbility ? derived.abilityMods[spellcastingAbility] : null,
+        spellSaveDC: derived.spellSaveDC,
+        spellAttackBonus: derived.spellAttackBonus,
+        spellSlots: derived.spellSlots,
+        spellcasting: derived.spellcasting,
+        activeConditionIds: derived.activeConditionIds,
+        appliedModifiers: derived.appliedModifiers,
+        warnings: derived.warnings,
+      };
+    },
+    [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, state],
   );
 
   const advancementSlots = (derived.advancementSlots ?? []) as Array<Record<string, unknown>>;
@@ -894,6 +1070,23 @@ export default function BuilderClient({
   const abilityScoreMethod = state.abilityScoreMethod ?? "manual";
   const pointBuySpent = useMemo(() => computePointBuyCost(state.baseAbilities), [state.baseAbilities]);
   const pointBuyRemaining = pointBuySpent === null ? null : POINT_BUY_BUDGET - pointBuySpent;
+  const hitDiceTotalForConstraints = Number.isFinite(state.hitDiceTotal)
+    ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
+    : null;
+  const attunementSlots = useMemo(() => {
+    const normalized = [...(state.attunedItems ?? [])];
+    if (normalized.length > ATTUNEMENT_SLOT_COUNT) {
+      return normalized.slice(0, ATTUNEMENT_SLOT_COUNT);
+    }
+    while (normalized.length < ATTUNEMENT_SLOT_COUNT) {
+      normalized.push({
+        name: "",
+        itemId: "",
+        notes: "",
+      });
+    }
+    return normalized;
+  }, [state.attunedItems]);
   const standardArrayAllowedCounts = useMemo(() => {
     const counts = new Map<number, number>();
     for (const value of STANDARD_ARRAY) {
@@ -915,7 +1108,7 @@ export default function BuilderClient({
     setEnabledSources(ordered);
     window.localStorage.setItem(SOURCE_STORAGE_KEY, ordered.join(","));
 
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() ?? "");
     params.set("sources", ordered.join(","));
     router.push(`${pathname}?${params.toString()}`);
   };
@@ -974,14 +1167,41 @@ export default function BuilderClient({
     }));
   };
 
+  const normalizeInteger = (value: number, minimum = 0, maximum?: number): number => {
+    const floored = Number.isFinite(value) ? Math.floor(value) : minimum;
+    const boundedMinimum = Math.max(minimum, floored);
+    if (typeof maximum === "number") {
+      return Math.min(maximum, boundedMinimum);
+    }
+    return boundedMinimum;
+  };
+
   const updateCoin = (denomination: CoinDenomination, value: number) => {
     setState((previous) => ({
       ...previous,
       coins: {
         ...(previous.coins ?? {}),
-        [denomination]: Math.max(0, Math.floor(value || 0)),
+        [denomination]: normalizeInteger(value),
       },
     }));
+  };
+
+  const updateAttunedItem = (index: number, field: "name" | "itemId" | "notes", value: string) => {
+    setState((previous) => {
+      const items = [...(previous.attunedItems ?? [])];
+      while (items.length <= index) {
+        items.push({});
+      }
+      const current = items[index] ?? {};
+      items[index] = {
+        ...current,
+        [field]: value,
+      };
+      return {
+        ...previous,
+        attunedItems: items,
+      };
+    });
   };
 
   const updateEncumberedCondition = (active: boolean) => {
@@ -1664,8 +1884,174 @@ export default function BuilderClient({
         </label>
 
         <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Identity & Combat Tracking</div>
+          <div className="mt-1 grid gap-2 md:grid-cols-3">
+            <label className="text-sm">
+              <div className="font-semibold">Subclass</div>
+              <input
+                type="text"
+                value={state.subclass ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    subclass: event.target.value.trim() ? event.target.value : undefined,
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                placeholder="e.g. Berserker"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">XP</div>
+              <input
+                type="number"
+                min={0}
+                value={state.xp ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    xp: normalizeInteger(Number(event.target.value)),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <div className="rounded border border-slate-700 bg-slate-950/30 px-2 py-2">
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={state.heroicInspiration === true}
+                  onChange={(event) =>
+                    setState((previous) => ({
+                      ...previous,
+                      heroicInspiration: event.target.checked,
+                    }))
+                  }
+                />
+                <span className="font-semibold">Heroic Inspiration</span>
+              </label>
+            </div>
+
+            <label className="text-sm">
+              <div className="font-semibold">Temp HP</div>
+              <input
+                type="number"
+                min={0}
+                value={state.tempHP ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    tempHP: normalizeInteger(Number(event.target.value)),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Hit Dice Total</div>
+              <input
+                type="number"
+                min={0}
+                value={state.hitDiceTotal ?? ""}
+                onChange={(event) =>
+                  setState((previous) => {
+                    const raw = event.target.value.trim();
+                    const nextHitDiceTotal = raw.length === 0 ? undefined : normalizeInteger(Number(raw));
+                    const nextHitDiceSpent =
+                      typeof nextHitDiceTotal === "number"
+                        ? Math.min(normalizeInteger(previous.hitDiceSpent ?? 0), nextHitDiceTotal)
+                        : normalizeInteger(previous.hitDiceSpent ?? 0);
+                    return {
+                      ...previous,
+                      hitDiceTotal: nextHitDiceTotal,
+                      hitDiceSpent: nextHitDiceSpent,
+                    };
+                  })
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                placeholder="Optional"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Hit Dice Spent</div>
+              <input
+                type="number"
+                min={0}
+                max={hitDiceTotalForConstraints ?? undefined}
+                value={state.hitDiceSpent ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    hitDiceSpent:
+                      hitDiceTotalForConstraints === null
+                        ? normalizeInteger(Number(event.target.value))
+                        : normalizeInteger(Number(event.target.value), 0, hitDiceTotalForConstraints),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Death Save Successes</div>
+              <input
+                type="number"
+                min={0}
+                max={3}
+                value={state.deathSaveSuccesses ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    deathSaveSuccesses: normalizeInteger(Number(event.target.value), 0, 3),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Death Save Failures</div>
+              <input
+                type="number"
+                min={0}
+                max={3}
+                value={state.deathSaveFailures ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    deathSaveFailures: normalizeInteger(Number(event.target.value), 0, 3),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Exhaustion Level</div>
+              <input
+                type="number"
+                min={0}
+                max={10}
+                value={state.exhaustionLevel ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    exhaustionLevel: normalizeInteger(Number(event.target.value), 0, 10),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="text-sm md:col-span-3">
           <div className="font-semibold">Coins</div>
-          <div className="mt-1 grid grid-cols-3 gap-2">
+          <div className="mt-1 grid grid-cols-5 gap-2">
             {COIN_DENOMINATIONS.map((denomination) => (
               <label key={`coins-${denomination}`} className="text-sm">
                 <div className="font-semibold uppercase">{denomination}</div>
@@ -1678,6 +2064,147 @@ export default function BuilderClient({
                 />
               </label>
             ))}
+          </div>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <label className="text-sm">
+            <div className="font-semibold">Other Wealth</div>
+            <input
+              type="text"
+              value={state.otherWealth ?? ""}
+              onChange={(event) =>
+                setState((previous) => ({
+                  ...previous,
+                  otherWealth: event.target.value,
+                }))
+              }
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              placeholder="Trade goods, gems, favors, caravans..."
+            />
+          </label>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Attunement</div>
+          <p className="mt-1 text-xs text-slate-300">
+            Optional item slots. Empty entries are ignored in exports.
+          </p>
+          <div className="mt-2 grid gap-2">
+            {attunementSlots.map((item, index) => (
+              <div
+                key={`attuned-slot-${index}`}
+                className="grid gap-2 rounded border border-slate-700 bg-slate-950/30 p-2 md:grid-cols-3"
+              >
+                <label className="text-xs">
+                  <div className="font-semibold">Slot {index + 1} Item</div>
+                  <input
+                    type="text"
+                    value={item.name ?? ""}
+                    onChange={(event) => updateAttunedItem(index, "name", event.target.value)}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    placeholder="Item name"
+                  />
+                </label>
+                <label className="text-xs">
+                  <div className="font-semibold">Slot {index + 1} Item ID</div>
+                  <input
+                    type="text"
+                    value={item.itemId ?? ""}
+                    onChange={(event) => updateAttunedItem(index, "itemId", event.target.value)}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    placeholder="Optional content id"
+                  />
+                </label>
+                <label className="text-xs">
+                  <div className="font-semibold">Slot {index + 1} Notes</div>
+                  <input
+                    type="text"
+                    value={item.notes ?? ""}
+                    onChange={(event) => updateAttunedItem(index, "notes", event.target.value)}
+                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    placeholder="Optional"
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Narrative</div>
+          <div className="mt-2 grid gap-2 md:grid-cols-2">
+            <label className="text-sm md:col-span-2">
+              <div className="font-semibold">Alignment</div>
+              <input
+                type="text"
+                value={state.alignment ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    alignment: event.target.value,
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                placeholder="e.g. Neutral Good"
+              />
+            </label>
+            <label className="text-sm">
+              <div className="font-semibold">Appearance</div>
+              <textarea
+                value={state.appearance ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    appearance: event.target.value,
+                  }))
+                }
+                rows={3}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+            <label className="text-sm">
+              <div className="font-semibold">Physical Description</div>
+              <textarea
+                value={state.physicalDescription ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    physicalDescription: event.target.value,
+                  }))
+                }
+                rows={3}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+            <label className="text-sm md:col-span-2">
+              <div className="font-semibold">Backstory</div>
+              <textarea
+                value={state.backstory ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    backstory: event.target.value,
+                  }))
+                }
+                rows={4}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+            <label className="text-sm md:col-span-2">
+              <div className="font-semibold">Notes</div>
+              <textarea
+                value={state.notes ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    notes: event.target.value,
+                  }))
+                }
+                rows={4}
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
           </div>
         </div>
 
@@ -1863,7 +2390,7 @@ export default function BuilderClient({
                     disabled={disabled}
                     onChange={(event) => onToggleClassSkill(skillId, event.target.checked)}
                   />
-                  <span>{labelSkill(skillId)}</span>
+                  <span>{skillNameById[skillId] ?? formatSkillId(skillId)}</span>
                 </label>
               );
             })}
@@ -2329,10 +2856,24 @@ export default function BuilderClient({
             </pre>
           </div>
           <div>
-            <div className="text-sm font-semibold">Skills</div>
-            <pre className="mt-1 overflow-auto rounded bg-slate-950 p-3 text-xs">
-              {JSON.stringify(derived.skills, null, 2)}
-            </pre>
+            <div className="text-sm font-semibold">Skills & Tools</div>
+            <div className="mt-1 max-h-56 overflow-auto rounded bg-slate-950 p-3">
+              <table className="w-full border-collapse text-xs">
+                <tbody>
+                  {skillAndToolRows.map((row) => (
+                    <tr key={`${row.kind}-${row.id}`} className="border-b border-slate-800 align-top">
+                      <td className="py-1 pr-2">
+                        <span className="mr-2 text-[10px] uppercase text-slate-400">{row.kind}</span>
+                        {row.label}
+                      </td>
+                      <td className="py-1 text-right font-semibold">
+                        {row.kind === "skill" ? formatSigned(row.value) : "Proficient"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

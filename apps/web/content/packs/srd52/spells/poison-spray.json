@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:poison-spray",
+  "name": "Poison Spray",
+  "description": "You project a puff of poisonous gas.",
+  "level": 0,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

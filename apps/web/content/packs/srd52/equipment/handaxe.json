@@ -1,0 +1,12 @@
+{
+  "id": "srd52:equipment:handaxe",
+  "type": "weapon",
+  "name": "Handaxe",
+  "damageDice": "1d6",
+  "weaponCategory": "simple",
+  "properties": [
+    "light",
+    "thrown",
+    "range 20/60"
+  ]
+}

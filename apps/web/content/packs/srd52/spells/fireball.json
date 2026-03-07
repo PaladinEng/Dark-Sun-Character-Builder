@@ -1,13 +1,17 @@
 {
   "id": "srd52:spell:fireball",
   "name": "Fireball",
+  "description": "A bright streak erupts into an explosion of fire in a 20-foot radius.",
   "level": 3,
   "school": "evocation",
   "ritual": false,
   "castingTime": "1 action",
   "range": "150 feet",
-  "components": ["V", "S", "M"],
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
   "duration": "Instantaneous",
-  "concentration": false,
-  "description": "A bright streak erupts into an explosion of fire in a 20-foot radius."
+  "concentration": false
 }

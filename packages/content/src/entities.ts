@@ -37,6 +37,18 @@ const EntityBaseSchema = z.object({
 });
 export const BaseEntitySchema = EntityBaseSchema;
 
+export const SkillSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string().optional(),
+  replaces: z.string().optional(),
+  ability: AbilitySchema,
+  sortOrder: z.number().int().optional(),
+});
+export type Skill = z.infer<typeof SkillSchema>;
+export const SkillDefinitionSchema = SkillSchema;
+export type SkillDefinition = Skill;
+
 export const SpeciesSchema = EntityBaseSchema;
 export type Species = z.infer<typeof SpeciesSchema>;
 
@@ -283,6 +295,9 @@ export const SpellSchema = EntityBaseSchema.extend({
   duration: z.string(),
   concentration: z.boolean().optional(),
   summary: z.string().optional(),
+  notes: z.string().optional(),
+  page: z.union([z.number().int().positive(), z.string().min(1)]).optional(),
+  reference: z.string().optional(),
 }).superRefine((value, ctx) => {
   if (!Object.prototype.hasOwnProperty.call(value, "ritual")) {
     ctx.addIssue({

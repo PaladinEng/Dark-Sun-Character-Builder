@@ -3,6 +3,13 @@
   "name": "Ranger Core",
   "spellIds": [
     "srd52:spell:cure-wounds",
-    "srd52:spell:hunters-mark"
+    "srd52:spell:detect-magic",
+    "srd52:spell:entangle",
+    "srd52:spell:goodberry",
+    "srd52:spell:hunters-mark",
+    "srd52:spell:speak-with-animals",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:pass-without-trace",
+    "srd52:spell:spike-growth"
   ]
 }

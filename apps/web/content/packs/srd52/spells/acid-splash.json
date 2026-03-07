@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:acid-splash",
+  "name": "Acid Splash",
+  "description": "You hurl a bubble of acid.",
+  "level": 0,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

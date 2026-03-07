@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:outlander",
+  "name": "Outlander",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:alert",
+  "grantsOriginFeatId": "srd52:feat:alert",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:bedroll",
+      "srd52:equipment:rations-1day",
+      "srd52:equipment:waterskin"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "athletics"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    },
+    {
+      "type": "grant_language",
+      "language": "Giant"
+    }
+  ]
+}

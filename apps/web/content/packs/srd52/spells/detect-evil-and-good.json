@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:detect-evil-and-good",
+  "name": "Detect Evil and Good",
+  "description": "For the duration, you know if aberrations and other creatures are nearby.",
+  "level": 1,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true
+}

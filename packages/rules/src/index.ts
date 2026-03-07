@@ -18,6 +18,7 @@ export {
   isProficientWithWeapon
 } from "./compute";
 export { getSpellSlots } from "./spellSlots";
+export { getSkillAndToolDisplayModel, getSkillAndToolDisplayRows } from "./skills";
 export { deriveStartingEquipment } from "./startingEquipment";
 export { applyDerivedModifierPipeline } from "./modifiers";
 export { validateCharacter } from "./validate";
@@ -32,6 +33,8 @@ export type {
   CharacterConditions,
   ConditionId,
   CharacterCoins,
+  AttunedItem,
+  CompanionPlaceholder,
   DerivedModifier,
   DerivedModifierEffect,
   DerivedStartingEquipment,
@@ -41,6 +44,7 @@ export type {
 export type { ValidationIssue, ValidationReport } from "./validate";
 export type { RulesCoverageReport } from "./coverage";
 export type { PdfExportError, PdfExportResult } from "./pdfExport";
+export type { ProficientToolDisplayRow, SkillAndToolDisplayModel, SkillAndToolDisplayRow, SkillDisplayRow } from "./skills";
 
 export function rulesPing(): string {
   return "rules-pong";

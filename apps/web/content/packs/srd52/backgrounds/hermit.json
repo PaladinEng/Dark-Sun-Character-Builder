@@ -1,0 +1,38 @@
+{
+  "id": "srd52:background:hermit",
+  "name": "Hermit",
+  "abilityOptions": {
+    "abilities": [
+      "con",
+      "wis",
+      "int"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:healer",
+  "grantsOriginFeatId": "srd52:feat:healer",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:herbalism-kit",
+      "srd52:equipment:bedroll"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "medicine"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "religion"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Herbalism Kit"
+    },
+    {
+      "type": "grant_language",
+      "language": "Primordial"
+    }
+  ]
+}

@@ -1,37 +1,234 @@
+import type { MergedContent } from "@dark-sun/content";
+
 import type { Ability } from "./types";
 
-export const SKILL_TO_ABILITY: Record<string, Ability> = {
-  athletics: "str",
-  acrobatics: "dex",
-  sleight_of_hand: "dex",
-  stealth: "dex",
-  arcana: "int",
-  history: "int",
-  investigation: "int",
-  nature: "int",
-  religion: "int",
-  animal_handling: "wis",
-  insight: "wis",
-  medicine: "wis",
-  perception: "wis",
-  survival: "wis",
-  deception: "cha",
-  intimidation: "cha",
-  performance: "cha",
-  persuasion: "cha"
+export type ResolvedSkillDefinition = {
+  id: string;
+  name: string;
+  ability: Ability;
 };
 
-export const STANDARD_SKILLS = Object.keys(SKILL_TO_ABILITY);
+export type SkillDisplayRow = {
+  kind: "skill";
+  id: string;
+  label: string;
+  value: number;
+};
 
-function normalizeSkillKey(skill: string): string {
-  return skill.trim().toLowerCase().replace(/\s+/g, "_");
+export type ProficientToolDisplayRow = {
+  kind: "tool";
+  id: string;
+  label: string;
+};
+
+export type SkillAndToolDisplayRow = SkillDisplayRow | ProficientToolDisplayRow;
+
+export type SkillAndToolDisplayModel = {
+  skillRows: SkillDisplayRow[];
+  proficientToolRows: ProficientToolDisplayRow[];
+  rows: SkillAndToolDisplayRow[];
+};
+
+const ABILITY_SET = new Set<Ability>(["str", "dex", "con", "int", "wis", "cha"]);
+
+const DEFAULT_SKILL_DEFINITIONS: readonly ResolvedSkillDefinition[] = [
+  { id: "athletics", name: "Athletics", ability: "str" },
+  { id: "acrobatics", name: "Acrobatics", ability: "dex" },
+  { id: "sleight_of_hand", name: "Sleight of Hand", ability: "dex" },
+  { id: "stealth", name: "Stealth", ability: "dex" },
+  { id: "arcana", name: "Arcana", ability: "int" },
+  { id: "history", name: "History", ability: "int" },
+  { id: "investigation", name: "Investigation", ability: "int" },
+  { id: "nature", name: "Nature", ability: "int" },
+  { id: "religion", name: "Religion", ability: "int" },
+  { id: "animal_handling", name: "Animal Handling", ability: "wis" },
+  { id: "insight", name: "Insight", ability: "wis" },
+  { id: "medicine", name: "Medicine", ability: "wis" },
+  { id: "perception", name: "Perception", ability: "wis" },
+  { id: "survival", name: "Survival", ability: "wis" },
+  { id: "deception", name: "Deception", ability: "cha" },
+  { id: "intimidation", name: "Intimidation", ability: "cha" },
+  { id: "performance", name: "Performance", ability: "cha" },
+  { id: "persuasion", name: "Persuasion", ability: "cha" }
+];
+
+export function getResolvedSkillDefinitions(
+  content: Pick<MergedContent, "skillDefinitions">
+): readonly ResolvedSkillDefinition[] {
+  if (!content.skillDefinitions || content.skillDefinitions.length === 0) {
+    return DEFAULT_SKILL_DEFINITIONS;
+  }
+
+  const seen = new Set<string>();
+  const resolved: Array<ResolvedSkillDefinition & { sortOrder: number; index: number }> = [];
+
+  for (const [index, definition] of content.skillDefinitions.entries()) {
+    if (!definition || typeof definition.id !== "string" || definition.id.length === 0) {
+      continue;
+    }
+    if (seen.has(definition.id)) {
+      continue;
+    }
+    seen.add(definition.id);
+
+    const normalizedAbility = ABILITY_SET.has(definition.ability as Ability)
+      ? (definition.ability as Ability)
+      : "wis";
+    const rawSortOrder =
+      typeof (definition as { sortOrder?: unknown }).sortOrder === "number"
+        ? Number((definition as { sortOrder: number }).sortOrder)
+        : Number.POSITIVE_INFINITY;
+
+    resolved.push({
+      id: definition.id,
+      name: definition.name,
+      ability: normalizedAbility,
+      sortOrder: Number.isFinite(rawSortOrder) ? rawSortOrder : Number.POSITIVE_INFINITY,
+      index
+    });
+  }
+
+  if (resolved.length === 0) {
+    return DEFAULT_SKILL_DEFINITIONS;
+  }
+
+  return resolved
+    .sort((left, right) => {
+      if (left.sortOrder !== right.sortOrder) {
+        return left.sortOrder - right.sortOrder;
+      }
+      return left.index - right.index;
+    })
+    .map(({ id, name, ability }) => ({ id, name, ability }));
 }
 
-export function getSkillAbility(skill: string): Ability {
-  const normalized = normalizeSkillKey(skill);
-  return SKILL_TO_ABILITY[normalized] ?? "wis";
+export function getResolvedSkillIds(
+  content: Pick<MergedContent, "skillDefinitions">
+): Set<string> {
+  return new Set(getResolvedSkillDefinitions(content).map((definition) => definition.id));
 }
 
-export function normalizeSkill(skill: string): string {
-  return normalizeSkillKey(skill);
+function formatSkillLabel(skillId: string): string {
+  return skillId
+    .split("_")
+    .map((part) => part[0]?.toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+export type DisplaySkillDefinition = {
+  id: string;
+  name: string;
+  sortOrder?: number;
+};
+
+function getOrderedDisplaySkillDefinitions(
+  skillDefinitions: ReadonlyArray<DisplaySkillDefinition> | undefined
+): DisplaySkillDefinition[] {
+  const seenSkillIds = new Set<string>();
+  return [...(skillDefinitions ?? [])]
+    .map((definition, index) => ({ definition, index }))
+    .filter(({ definition }) => {
+      if (!definition || typeof definition.id !== "string" || definition.id.length === 0) {
+        return false;
+      }
+      if (seenSkillIds.has(definition.id)) {
+        return false;
+      }
+      seenSkillIds.add(definition.id);
+      return true;
+    })
+    .sort((left, right) => {
+      const leftOrder =
+        typeof left.definition.sortOrder === "number"
+          ? left.definition.sortOrder
+          : Number.POSITIVE_INFINITY;
+      const rightOrder =
+        typeof right.definition.sortOrder === "number"
+          ? right.definition.sortOrder
+          : Number.POSITIVE_INFINITY;
+      if (leftOrder !== rightOrder) {
+        return leftOrder - rightOrder;
+      }
+      return left.index - right.index;
+    })
+    .map(({ definition }) => definition);
+}
+
+function getSkillDisplayRows(input: {
+  skillDefinitions: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+}): SkillDisplayRow[] {
+  const rows: SkillDisplayRow[] = [];
+  const seenSkillIds = new Set<string>();
+  for (const definition of input.skillDefinitions) {
+    seenSkillIds.add(definition.id);
+    rows.push({
+      kind: "skill",
+      id: definition.id,
+      label: definition.name,
+      value: input.skills?.[definition.id] ?? 0
+    });
+  }
+
+  const unknownSkillIds = Object.keys(input.skills ?? {})
+    .filter((skillId) => !seenSkillIds.has(skillId))
+    .sort((left, right) => left.localeCompare(right));
+  for (const skillId of unknownSkillIds) {
+    rows.push({
+      kind: "skill",
+      id: skillId,
+      label: formatSkillLabel(skillId),
+      value: input.skills?.[skillId] ?? 0
+    });
+  }
+
+  return rows;
+}
+
+export function getProficientToolDisplayRows(toolProficiencies?: readonly string[]): ProficientToolDisplayRow[] {
+  const rows: ProficientToolDisplayRow[] = [];
+  const seenTools = new Set<string>();
+  const orderedTools = [...(toolProficiencies ?? [])]
+    .filter((tool): tool is string => typeof tool === "string" && tool.trim().length > 0)
+    .map((tool) => tool.trim())
+    .sort((left, right) => left.localeCompare(right));
+  for (const tool of orderedTools) {
+    if (seenTools.has(tool)) {
+      continue;
+    }
+    seenTools.add(tool);
+    rows.push({
+      kind: "tool",
+      id: tool,
+      label: tool
+    });
+  }
+  return rows;
+}
+
+export function getSkillAndToolDisplayModel(input: {
+  skillDefinitions?: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+  toolProficiencies?: readonly string[];
+}): SkillAndToolDisplayModel {
+  const orderedSkillDefinitions = getOrderedDisplaySkillDefinitions(input.skillDefinitions);
+  const skillRows = getSkillDisplayRows({
+    skillDefinitions: orderedSkillDefinitions,
+    skills: input.skills
+  });
+  const proficientToolRows = getProficientToolDisplayRows(input.toolProficiencies);
+
+  return {
+    skillRows,
+    proficientToolRows,
+    rows: [...skillRows, ...proficientToolRows]
+  };
+}
+
+export function getSkillAndToolDisplayRows(input: {
+  skillDefinitions?: ReadonlyArray<DisplaySkillDefinition>;
+  skills?: Readonly<Record<string, number>>;
+  toolProficiencies?: readonly string[];
+}): SkillAndToolDisplayRow[] {
+  return getSkillAndToolDisplayModel(input).rows;
 }

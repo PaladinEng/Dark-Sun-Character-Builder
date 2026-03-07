@@ -1,0 +1,8 @@
+{
+  "id": "srd52:feat:sharpshooter",
+  "name": "Sharpshooter",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  }
+}

@@ -42,12 +42,27 @@ export interface FeatSelections {
 export interface CharacterCoins {
   gp: number;
   sp: number;
+  ep?: number;
+  pp?: number;
   cp: number;
 }
 
 export interface InventoryEntry {
   itemId: string;
   quantity?: number;
+}
+
+export interface CompanionPlaceholder {
+  name?: string;
+  type?: string;
+  summary?: string;
+  notes?: string;
+}
+
+export interface AttunedItem {
+  name?: string;
+  itemId?: string;
+  notes?: string;
 }
 
 export interface CharacterState {
@@ -77,11 +92,31 @@ export interface CharacterState {
   preparedSpellIds?: string[];
   cantripsKnownIds?: string[];
   coins?: Partial<CharacterCoins>;
+  otherWealth?: string;
   inventoryItemIds?: string[];
   inventoryEntries?: InventoryEntry[];
   equippedArmorId?: string;
   equippedShieldId?: string;
   equippedWeaponId?: string;
+  armorProficiencies?: string[];
+  weaponProficiencies?: string[];
+  subclass?: string;
+  xp?: number;
+  heroicInspiration?: boolean;
+  tempHP?: number;
+  hitDiceTotal?: number;
+  hitDiceSpent?: number;
+  deathSaveSuccesses?: number;
+  deathSaveFailures?: number;
+  exhaustionLevel?: number;
+  attunedItems?: AttunedItem[];
+  appearance?: string;
+  physicalDescription?: string;
+  backstory?: string;
+  alignment?: string;
+  notes?: string;
+  companion?: CompanionPlaceholder;
+  familiar?: CompanionPlaceholder;
   baseSpeed?: number;
   conditions?: CharacterConditions;
 }

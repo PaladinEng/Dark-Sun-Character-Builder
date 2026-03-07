@@ -1,0 +1,62 @@
+{
+  "id": "srd52:class:paladin",
+  "name": "Paladin",
+  "hitDie": 10,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "athletics",
+      "insight",
+      "intimidation",
+      "medicine",
+      "persuasion",
+      "religion"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true,
+    "martial": true
+  },
+  "spellcasting": {
+    "ability": "cha",
+    "progression": "half",
+    "mode": "prepared"
+  },
+  "spellListRefIds": [
+    "srd52:spelllist:paladin-core"
+  ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:lay-on-hands"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:divine-sense"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:spellcasting"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:chain-mail",
+      "srd52:equipment:shield",
+      "srd52:equipment:longsword"
+    ],
+    "equippedArmorId": "srd52:equipment:chain-mail",
+    "equippedShieldId": "srd52:equipment:shield",
+    "equippedWeaponId": "srd52:equipment:longsword"
+  },
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "wis"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "cha"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:equipment:light-hammer",
+  "type": "weapon",
+  "name": "Light Hammer",
+  "damageDice": "1d4",
+  "weaponCategory": "simple",
+  "properties": [
+    "light",
+    "thrown",
+    "range 20/60"
+  ]
+}

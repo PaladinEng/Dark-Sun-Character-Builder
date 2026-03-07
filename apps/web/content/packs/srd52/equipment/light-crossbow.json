@@ -1,0 +1,12 @@
+{
+  "id": "srd52:equipment:light-crossbow",
+  "type": "weapon",
+  "name": "Light Crossbow",
+  "damageDice": "1d8",
+  "weaponCategory": "simple",
+  "properties": [
+    "ranged",
+    "loading",
+    "two-handed"
+  ]
+}

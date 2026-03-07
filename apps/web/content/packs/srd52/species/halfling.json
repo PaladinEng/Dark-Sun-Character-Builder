@@ -4,7 +4,23 @@
   "effects": [
     {
       "type": "set_speed",
-      "value": 25
+      "value": 30
+    },
+    {
+      "type": "grant_trait",
+      "name": "Brave"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Halfling Nimbleness"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Luck"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Naturally Stealthy"
     },
     {
       "type": "grant_language",

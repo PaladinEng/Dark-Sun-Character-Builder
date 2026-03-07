@@ -1,0 +1,31 @@
+{
+  "id": "srd52:species:orc",
+  "name": "Orc",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 30
+    },
+    {
+      "type": "grant_sense",
+      "sense": "darkvision",
+      "range": 120
+    },
+    {
+      "type": "grant_trait",
+      "name": "Adrenaline Rush"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Relentless Endurance"
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
+    },
+    {
+      "type": "grant_language",
+      "language": "Orc"
+    }
+  ]
+}

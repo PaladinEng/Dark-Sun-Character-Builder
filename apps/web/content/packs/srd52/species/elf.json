@@ -7,6 +7,27 @@
       "value": 30
     },
     {
+      "type": "grant_sense",
+      "sense": "darkvision",
+      "range": 60
+    },
+    {
+      "type": "grant_trait",
+      "name": "Elven Lineage"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Fey Ancestry"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Keen Senses"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Trance"
+    },
+    {
       "type": "grant_language",
       "language": "Common"
     },

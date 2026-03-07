@@ -3,7 +3,24 @@ import { describe, expect, it } from "vitest";
 import { lintPacks } from "../src";
 import type { Pack } from "../src/load";
 
-function makePack(input: Partial<Pack> & { id: string }): Pack {
+function makePack(
+  input: Omit<Partial<Pack>, "entities" | "manifest"> & {
+    id: string;
+    entities?: Partial<Pack["entities"]>;
+  }
+): Pack {
+  const defaultEntities: Pack["entities"] = {
+    species: [],
+    skillDefinitions: [],
+    backgrounds: [],
+    classes: [],
+    features: [],
+    feats: [],
+    equipment: [],
+    spells: [],
+    spellLists: []
+  };
+
   return {
     manifest: {
       id: input.id,
@@ -12,17 +29,11 @@ function makePack(input: Partial<Pack> & { id: string }): Pack {
       license: "MIT",
       source: "test"
     },
+    ...input,
     entities: {
-      species: [],
-      backgrounds: [],
-      classes: [],
-      features: [],
-      feats: [],
-      equipment: [],
-      spells: [],
-      spellLists: []
-    },
-    ...input
+      ...defaultEntities,
+      ...(input.entities ?? {})
+    }
   } as Pack;
 }
 
@@ -649,6 +660,67 @@ describe("lintPacks", () => {
           issue.code === "DANGLING_REFERENCE" &&
           issue.entityType === "species" &&
           issue.path === "effects[0].language"
+      )
+    ).toBe(true);
+  });
+
+  it("reports dangling class skill choices when skill definitions exist", () => {
+    const report = lintPacks([
+      makePack({
+        id: "skill-ref",
+        entities: {
+          skillDefinitions: [
+            { id: "athletics", name: "Athletics", ability: "str" }
+          ],
+          classes: [
+            {
+              id: "skill-ref:class:scout",
+              name: "Scout",
+              classSkillChoices: {
+                count: 1,
+                from: ["athletics", "mysticism"]
+              }
+            }
+          ]
+        }
+      })
+    ]);
+
+    expect(
+      report.errors.some(
+        (issue) =>
+          issue.code === "DANGLING_REFERENCE" &&
+          issue.entityType === "classes" &&
+          issue.path === "classSkillChoices.from"
+      )
+    ).toBe(true);
+  });
+
+  it("reports dangling skill proficiency references in effects when skill definitions exist", () => {
+    const report = lintPacks([
+      makePack({
+        id: "skill-effect-ref",
+        entities: {
+          skillDefinitions: [
+            { id: "athletics", name: "Athletics", ability: "str" }
+          ],
+          backgrounds: [
+            {
+              id: "skill-effect-ref:background:bad-skill",
+              name: "Bad Skill",
+              effects: [{ type: "grant_skill_proficiency", skill: "mysticism" }]
+            }
+          ]
+        }
+      })
+    ]);
+
+    expect(
+      report.errors.some(
+        (issue) =>
+          issue.code === "DANGLING_REFERENCE" &&
+          issue.entityType === "backgrounds" &&
+          issue.path === "effects[0].skill"
       )
     ).toBe(true);
   });

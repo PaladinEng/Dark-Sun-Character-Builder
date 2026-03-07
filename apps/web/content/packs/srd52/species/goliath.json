@@ -1,0 +1,30 @@
+{
+  "id": "srd52:species:goliath",
+  "name": "Goliath",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 35
+    },
+    {
+      "type": "grant_trait",
+      "name": "Giant Ancestry"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Large Form"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Powerful Build"
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
+    },
+    {
+      "type": "grant_language",
+      "language": "Giant"
+    }
+  ]
+}

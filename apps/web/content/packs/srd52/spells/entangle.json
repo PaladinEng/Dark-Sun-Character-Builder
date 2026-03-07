@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:entangle",
+  "name": "Entangle",
+  "description": "Grasping weeds and vines sprout in a square area.",
+  "level": 1,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "90 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true
+}

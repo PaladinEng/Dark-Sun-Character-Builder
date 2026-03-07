@@ -7,6 +7,8 @@ import {
   computeProfBonus,
   deriveStartingEquipment,
   getAvailableAdvancementSlots,
+  getSkillAndToolDisplayModel,
+  getSkillAndToolDisplayRows,
   validateCharacter
 } from "../src";
 import type { CharacterState } from "../src/types";
@@ -15,6 +17,7 @@ function baseMergedContent(overrides: Partial<MergedContent> = {}): MergedConten
   const base: MergedContent = {
     manifests: [],
     species: [],
+    skillDefinitions: [],
     backgrounds: [],
     classes: [],
     features: [],
@@ -23,6 +26,7 @@ function baseMergedContent(overrides: Partial<MergedContent> = {}): MergedConten
     spells: [],
     spellLists: [],
     speciesById: {},
+    skillDefinitionsById: {},
     backgroundsById: {},
     classesById: {},
     featuresById: {},
@@ -982,6 +986,40 @@ describe("rules", () => {
     expect(derived.warnings.some((warning) => warning.includes("class skill"))).toBe(false);
   });
 
+  it("computes custom content-defined skills from governing ability and proficiency", () => {
+    const derived = computeDerivedState(
+      baseState({
+        chosenSkillProficiencies: ["mysticism"],
+        baseAbilities: {
+          str: 10,
+          dex: 10,
+          con: 10,
+          int: 14,
+          wis: 10,
+          cha: 10
+        }
+      }),
+      baseMergedContent({
+        skillDefinitions: [
+          {
+            id: "mysticism",
+            name: "Mysticism",
+            ability: "int"
+          }
+        ],
+        skillDefinitionsById: {
+          mysticism: {
+            id: "mysticism",
+            name: "Mysticism",
+            ability: "int"
+          }
+        }
+      })
+    );
+
+    expect(derived.skills.mysticism).toBe(4);
+  });
+
   it("includes chosen origin feat in derived feats for choice-based backgrounds", () => {
     const background: Background = {
       id: "test:background:choice-origin",
@@ -1362,6 +1400,41 @@ describe("validateCharacter", () => {
     expect(report.errors.some((issue) => issue.code === "CLASS_SKILLS_INCOMPLETE")).toBe(true);
   });
 
+  it("reports identity/combat numeric range errors", () => {
+    const report = validateCharacter(
+      baseState({
+        xp: -1,
+        tempHP: -2,
+        hitDiceTotal: -1,
+        hitDiceSpent: -1,
+        deathSaveSuccesses: 4,
+        deathSaveFailures: -1,
+        exhaustionLevel: 11,
+      }),
+      baseMergedContent()
+    );
+
+    expect(report.errors.some((issue) => issue.code === "XP_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "TEMP_HP_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "HIT_DICE_TOTAL_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "HIT_DICE_SPENT_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "DEATH_SAVE_SUCCESSES_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "DEATH_SAVE_FAILURES_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "EXHAUSTION_LEVEL_OUT_OF_RANGE")).toBe(true);
+  });
+
+  it("reports HIT_DICE_SPENT_EXCEEDS_TOTAL when spent hit dice exceeds total", () => {
+    const report = validateCharacter(
+      baseState({
+        hitDiceTotal: 2,
+        hitDiceSpent: 3,
+      }),
+      baseMergedContent()
+    );
+
+    expect(report.errors.some((issue) => issue.code === "HIT_DICE_SPENT_EXCEEDS_TOTAL")).toBe(true);
+  });
+
   it("reports ASI_INVALID_POINTS for invalid ASI point totals", () => {
     const report = validateCharacter(
       baseState({
@@ -1668,6 +1741,22 @@ describe("validateCharacter", () => {
     );
 
     expect(report.errors.some((issue) => issue.code === "SKILL_SELECTION_INVALID")).toBe(true);
+  });
+
+  it("accepts chosen custom skill ids when defined in content", () => {
+    const report = validateCharacter(
+      baseState({
+        chosenSkillProficiencies: ["mysticism"]
+      }),
+      baseMergedContent({
+        skillDefinitions: [{ id: "mysticism", name: "Mysticism", ability: "int" }],
+        skillDefinitionsById: {
+          mysticism: { id: "mysticism", name: "Mysticism", ability: "int" }
+        }
+      })
+    );
+
+    expect(report.errors.some((issue) => issue.code === "SKILL_SELECTION_INVALID")).toBe(false);
   });
 
   it("reports CONDITION_ID_INVALID for unknown condition ids", () => {
@@ -2192,6 +2281,65 @@ describe("validateCharacter", () => {
     );
 
     expect(report.errors.some((issue) => issue.code === "SPELL_ID_MISSING")).toBe(true);
+  });
+
+  it("builds skill and tool display rows with tools shown only when proficient", () => {
+    const rows = getSkillAndToolDisplayRows({
+      skillDefinitions: [
+        { id: "athletics", name: "Athletics" },
+        { id: "arcana", name: "Arcana" }
+      ],
+      skills: {
+        athletics: 4,
+        arcana: 0,
+        survival: 2
+      },
+      toolProficiencies: ["Disguise Kit", "Gaming Set", "Disguise Kit"]
+    });
+
+    expect(rows).toEqual([
+      { kind: "skill", id: "athletics", label: "Athletics", value: 4 },
+      { kind: "skill", id: "arcana", label: "Arcana", value: 0 },
+      { kind: "skill", id: "survival", label: "Survival", value: 2 },
+      { kind: "tool", id: "Disguise Kit", label: "Disguise Kit" },
+      { kind: "tool", id: "Gaming Set", label: "Gaming Set" }
+    ]);
+  });
+
+  it("does not emit tool rows when no tool proficiencies are present", () => {
+    const rows = getSkillAndToolDisplayRows({
+      skills: {
+        stealth: 5
+      },
+      toolProficiencies: []
+    });
+
+    expect(rows).toEqual([{ kind: "skill", id: "stealth", label: "Stealth", value: 5 }]);
+  });
+
+  it("builds distinct skill and proficient tool display buckets from shared input", () => {
+    const model = getSkillAndToolDisplayModel({
+      skillDefinitions: [
+        { id: "arcana", name: "Arcana", sortOrder: 5 },
+        { id: "athletics", name: "Athletics", sortOrder: 2 },
+        { id: "arcana", name: "Arcana Duplicate", sortOrder: 0 },
+      ],
+      skills: {
+        athletics: 3,
+        arcana: 1,
+      },
+      toolProficiencies: ["Gaming Set", "Disguise Kit", "Gaming Set"],
+    });
+
+    expect(model.skillRows).toEqual([
+      { kind: "skill", id: "athletics", label: "Athletics", value: 3 },
+      { kind: "skill", id: "arcana", label: "Arcana", value: 1 },
+    ]);
+    expect(model.proficientToolRows).toEqual([
+      { kind: "tool", id: "Disguise Kit", label: "Disguise Kit" },
+      { kind: "tool", id: "Gaming Set", label: "Gaming Set" },
+    ]);
+    expect(model.rows).toEqual([...model.skillRows, ...model.proficientToolRows]);
   });
 
   it("buildPdfExportFromTemplate returns deterministic non-empty PDF bytes for valid export", () => {

@@ -15,6 +15,7 @@ const SEED_FILE = path.join(PACK_ROOT, "_seed", "seed.json");
 
 const GENERATED_DIRS = {
   species: path.join(PACK_ROOT, "species"),
+  skillDefinitions: path.join(PACK_ROOT, "skills"),
   backgrounds: path.join(PACK_ROOT, "backgrounds"),
   classes: path.join(PACK_ROOT, "classes"),
   features: path.join(PACK_ROOT, "features"),
@@ -56,6 +57,7 @@ async function writeEntities(
 
 function validateNormalizedEntities(normalized: {
   species?: unknown[];
+  skillDefinitions?: unknown[];
   backgrounds?: unknown[];
   classes?: unknown[];
   features?: unknown[];
@@ -65,6 +67,9 @@ function validateNormalizedEntities(normalized: {
   spellLists?: unknown[];
 }): void {
   for (const _entry of normalized.species ?? []) {
+    void _entry;
+  }
+  for (const _entry of normalized.skillDefinitions ?? []) {
     void _entry;
   }
   for (const _entry of normalized.backgrounds ?? []) {
@@ -102,6 +107,7 @@ async function main(): Promise<void> {
   );
 
   await writeEntities(GENERATED_DIRS.species, normalized.species ?? []);
+  await writeEntities(GENERATED_DIRS.skillDefinitions, normalized.skillDefinitions ?? []);
   await writeEntities(GENERATED_DIRS.backgrounds, normalized.backgrounds ?? []);
   await writeEntities(GENERATED_DIRS.classes, normalized.classes ?? []);
   await writeEntities(GENERATED_DIRS.features, normalized.features ?? []);

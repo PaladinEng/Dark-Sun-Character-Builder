@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:lesser-restoration",
+  "name": "Lesser Restoration",
+  "description": "You end one disease or one condition affecting a creature.",
+  "level": 2,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

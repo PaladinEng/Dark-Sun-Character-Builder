@@ -1,0 +1,13 @@
+{
+  "id": "srd52:equipment:dart",
+  "type": "weapon",
+  "name": "Dart",
+  "damageDice": "1d4",
+  "weaponCategory": "simple",
+  "properties": [
+    "finesse",
+    "thrown",
+    "range 20/60",
+    "ranged"
+  ]
+}

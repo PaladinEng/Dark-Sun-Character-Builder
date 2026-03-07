@@ -1,0 +1,34 @@
+{
+  "id": "srd52:background:guild-artisan",
+  "name": "Guild Artisan",
+  "abilityOptions": {
+    "abilities": [
+      "int",
+      "con",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:skilled",
+  "grantsOriginFeatId": "srd52:feat:skilled",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:backpack",
+      "srd52:equipment:smiths-tools"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "insight"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "persuasion"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Smith's Tools"
+    }
+  ]
+}

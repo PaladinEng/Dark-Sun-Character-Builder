@@ -1,0 +1,10 @@
+{
+  "id": "srd52:equipment:quarterstaff",
+  "type": "weapon",
+  "name": "Quarterstaff",
+  "damageDice": "1d6",
+  "weaponCategory": "simple",
+  "properties": [
+    "versatile"
+  ]
+}

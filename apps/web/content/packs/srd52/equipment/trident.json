@@ -1,0 +1,12 @@
+{
+  "id": "srd52:equipment:trident",
+  "type": "weapon",
+  "name": "Trident",
+  "damageDice": "1d6",
+  "weaponCategory": "martial",
+  "properties": [
+    "thrown",
+    "range 20/60",
+    "versatile"
+  ]
+}

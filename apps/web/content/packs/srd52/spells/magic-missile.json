@@ -1,13 +1,16 @@
 {
   "id": "srd52:spell:magic-missile",
   "name": "Magic Missile",
+  "description": "You create darts of magical force that strike targets automatically.",
   "level": 1,
   "school": "evocation",
   "ritual": false,
   "castingTime": "1 action",
   "range": "120 feet",
-  "components": ["V", "S"],
+  "components": [
+    "V",
+    "S"
+  ],
   "duration": "Instantaneous",
-  "concentration": false,
-  "description": "You create darts of magical force that strike targets automatically."
+  "concentration": false
 }

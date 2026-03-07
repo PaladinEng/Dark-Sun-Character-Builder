@@ -19,6 +19,14 @@ export type SeedBase = z.infer<typeof SeedBaseSchema>;
 export const SeedSpeciesSchema = SeedBaseSchema;
 export type SeedSpecies = z.infer<typeof SeedSpeciesSchema>;
 
+export const SeedSkillSchema = SeedBaseSchema.extend({
+  ability: AbilitySchema,
+  sortOrder: z.number().int().optional(),
+});
+export type SeedSkill = z.infer<typeof SeedSkillSchema>;
+export const SeedSkillDefinitionSchema = SeedSkillSchema;
+export type SeedSkillDefinition = SeedSkill;
+
 export const SeedBackgroundSchema = SeedBaseSchema.extend({
   abilityOptions: BackgroundAbilityOptionsSchema.optional(),
   grantsFeat: z.string().optional(),
@@ -198,6 +206,9 @@ export const SeedSpellSchema = SeedBaseSchema.extend({
   duration: z.string(),
   concentration: z.boolean().optional(),
   summary: z.string().optional(),
+  notes: z.string().optional(),
+  page: z.union([z.number().int().positive(), z.string().min(1)]).optional(),
+  reference: z.string().optional(),
 }).superRefine((value, ctx) => {
   if (!Object.prototype.hasOwnProperty.call(value, "ritual")) {
     ctx.addIssue({
@@ -224,6 +235,8 @@ export type SeedSpellList = z.infer<typeof SeedSpellListSchema>;
 
 export const SeedPackSchema = z.object({
   species: z.array(SeedSpeciesSchema).optional(),
+  skills: z.array(SeedSkillSchema).optional(),
+  skillDefinitions: z.array(SeedSkillDefinitionSchema).optional(),
   backgrounds: z.array(SeedBackgroundSchema).optional(),
   classes: z.array(SeedClassSchema).optional(),
   features: z.array(SeedFeatureSchema).optional(),
@@ -231,6 +244,18 @@ export const SeedPackSchema = z.object({
   equipment: z.array(SeedEquipmentSchema).optional(),
   spells: z.array(SeedSpellSchema).optional(),
   spellLists: z.array(SeedSpellListSchema).optional(),
+}).superRefine((value, ctx) => {
+  if (
+    value.skills &&
+    value.skillDefinitions &&
+    JSON.stringify(value.skills) !== JSON.stringify(value.skillDefinitions)
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Seed pack skills and legacy skillDefinitions must match when both are provided.",
+      path: ["skills"],
+    });
+  }
 });
 export type SeedPack = z.infer<typeof SeedPackSchema>;
 

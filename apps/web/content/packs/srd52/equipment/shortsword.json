@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:shortsword",
+  "type": "weapon",
+  "name": "Shortsword",
+  "damageDice": "1d6",
+  "weaponCategory": "simple",
+  "properties": [
+    "finesse",
+    "light"
+  ]
+}

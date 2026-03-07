@@ -1,16 +1,30 @@
 {
   "id": "srd52:background:criminal",
   "name": "Criminal",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "int",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
   "originFeatChoice": {
     "featIds": [
       "srd52:feat:alert",
-      "srd52:feat:magic-initiate"
+      "srd52:feat:magic-initiate",
+      "srd52:feat:lucky",
+      "srd52:feat:skilled"
     ]
   },
   "effects": [
     {
       "type": "grant_skill_proficiency",
       "skill": "stealth"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "deception"
     },
     {
       "type": "grant_tool_proficiency",

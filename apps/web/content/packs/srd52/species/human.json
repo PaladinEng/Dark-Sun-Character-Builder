@@ -7,6 +7,18 @@
       "value": 30
     },
     {
+      "type": "grant_trait",
+      "name": "Resourceful"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Skillful"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Versatile"
+    },
+    {
       "type": "grant_language",
       "language": "Common"
     }

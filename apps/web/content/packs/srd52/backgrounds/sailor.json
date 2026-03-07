@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:sailor",
+  "name": "Sailor",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:savage-attacker",
+  "grantsOriginFeatId": "srd52:feat:savage-attacker",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:navigators-tools",
+      "srd52:equipment:rope-hempen-50ft",
+      "srd52:equipment:waterskin"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "athletics"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "perception"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Navigator's Tools"
+    }
+  ]
+}

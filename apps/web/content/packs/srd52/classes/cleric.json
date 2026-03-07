@@ -23,10 +23,30 @@
   "spellListRefIds": [
     "srd52:spelllist:cleric-core"
   ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:chain-shirt",
+      "srd52:equipment:shield",
+      "srd52:equipment:mace"
+    ],
+    "equippedArmorId": "srd52:equipment:chain-shirt",
+    "equippedShieldId": "srd52:equipment:shield",
+    "equippedWeaponId": "srd52:equipment:mace"
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",
       "ability": "wis"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "cha"
     }
   ]
 }

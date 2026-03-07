@@ -20,10 +20,15 @@
     "simple": true,
     "martial": true
   },
+  "spellListRefIds": [],
   "classFeaturesByLevel": [
     {
       "level": 1,
       "featureId": "srd52:feature:fighting-style-defense"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:second-wind"
     }
   ],
   "startingEquipment": {
@@ -38,6 +43,10 @@
     {
       "type": "grant_save_proficiency",
       "ability": "str"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "con"
     }
   ]
 }

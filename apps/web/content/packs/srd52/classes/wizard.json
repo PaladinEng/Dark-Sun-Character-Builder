@@ -24,10 +24,26 @@
   "spellListRefIds": [
     "srd52:spelllist:wizard-core"
   ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:dagger"
+    ],
+    "equippedWeaponId": "srd52:equipment:dagger"
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",
       "ability": "int"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "wis"
     }
   ]
 }

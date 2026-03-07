@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:greatsword",
+  "type": "weapon",
+  "name": "Greatsword",
+  "damageDice": "2d6",
+  "weaponCategory": "martial",
+  "properties": [
+    "heavy",
+    "two-handed"
+  ]
+}

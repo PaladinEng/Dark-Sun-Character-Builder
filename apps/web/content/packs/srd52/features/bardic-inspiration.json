@@ -1,0 +1,10 @@
+{
+  "id": "srd52:feature:bardic-inspiration",
+  "name": "Bardic Inspiration",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Bardic Inspiration"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "srd52:spell:faerie-fire",
+  "name": "Faerie Fire",
+  "description": "Each object in a cube is outlined in colored light.",
+  "level": 1,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true
+}

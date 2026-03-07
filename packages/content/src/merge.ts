@@ -4,6 +4,7 @@ import type {
   Equipment,
   Feat,
   Feature,
+  SkillDefinition,
   Spell,
   SpellList,
   Species
@@ -26,6 +27,7 @@ export interface MergeCount {
 
 export interface MergeReport {
   species: MergeCount;
+  skillDefinitions: MergeCount;
   backgrounds: MergeCount;
   classes: MergeCount;
   features: MergeCount;
@@ -52,6 +54,7 @@ export interface EntityProvenance {
 
 export interface MergeProvenance {
   speciesById: Record<string, EntityProvenance>;
+  skillDefinitionsById: Record<string, EntityProvenance>;
   backgroundsById: Record<string, EntityProvenance>;
   classesById: Record<string, EntityProvenance>;
   featuresById: Record<string, EntityProvenance>;
@@ -64,6 +67,7 @@ export interface MergeProvenance {
 export interface MergedContent {
   manifests: PackManifest[];
   species: Species[];
+  skillDefinitions: SkillDefinition[];
   backgrounds: Background[];
   classes: Class[];
   features: Feature[];
@@ -72,6 +76,7 @@ export interface MergedContent {
   spells: Spell[];
   spellLists: SpellList[];
   speciesById: Record<string, Species>;
+  skillDefinitionsById: Record<string, SkillDefinition>;
   backgroundsById: Record<string, Background>;
   classesById: Record<string, Class>;
   featuresById: Record<string, Feature>;
@@ -297,6 +302,10 @@ export function mergePacksWithProvenance(
   packs: Pack[]
 ): { content: MergedContent; report: MergeReport; provenance: MergeProvenance } {
   const species = mergeEntityType<Species & ReplaceableEntity>(packs, "species");
+  const skillDefinitions = mergeEntityType<SkillDefinition & ReplaceableEntity>(
+    packs,
+    "skillDefinitions"
+  );
   const backgrounds = mergeEntityType<Background & ReplaceableEntity>(
     packs,
     "backgrounds"
@@ -312,6 +321,7 @@ export function mergePacksWithProvenance(
     content: {
       manifests: packs.map((pack) => pack.manifest),
       species: species.items,
+      skillDefinitions: skillDefinitions.items,
       backgrounds: backgrounds.items,
       classes: classes.items,
       features: features.items,
@@ -320,6 +330,7 @@ export function mergePacksWithProvenance(
       spells: spells.items,
       spellLists: spellLists.items,
       speciesById: toById(species.items),
+      skillDefinitionsById: toById(skillDefinitions.items),
       backgroundsById: toById(backgrounds.items),
       classesById: toById(classes.items),
       featuresById: toById(features.items),
@@ -330,6 +341,7 @@ export function mergePacksWithProvenance(
     },
     report: {
       species: species.report,
+      skillDefinitions: skillDefinitions.report,
       backgrounds: backgrounds.report,
       classes: classes.report,
       features: features.report,
@@ -340,6 +352,7 @@ export function mergePacksWithProvenance(
     },
     provenance: {
       speciesById: species.provenanceById,
+      skillDefinitionsById: skillDefinitions.provenanceById,
       backgroundsById: backgrounds.provenanceById,
       classesById: classes.provenanceById,
       featuresById: features.provenanceById,

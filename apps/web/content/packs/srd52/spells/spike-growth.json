@@ -1,0 +1,17 @@
+{
+  "id": "srd52:spell:spike-growth",
+  "name": "Spike Growth",
+  "description": "The ground in an area twists and sprouts hard spikes.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "150 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true
+}

@@ -1,0 +1,37 @@
+{
+  "id": "srd52:background:noble",
+  "name": "Noble",
+  "abilityOptions": {
+    "abilities": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:lucky",
+  "grantsOriginFeatId": "srd52:feat:lucky",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:gaming-set"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "history"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "persuasion"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Gaming Set"
+    },
+    {
+      "type": "grant_language",
+      "language": "Elvish"
+    }
+  ]
+}

@@ -17,16 +17,29 @@
     "simple": true,
     "martial": true
   },
+  "spellListRefIds": [],
   "classFeaturesByLevel": [
     {
       "level": 1,
       "featureId": "srd52:feature:unarmored-defense"
     }
   ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:hide-armor",
+      "srd52:equipment:greataxe"
+    ],
+    "equippedArmorId": "srd52:equipment:hide-armor",
+    "equippedWeaponId": "srd52:equipment:greataxe"
+  },
   "effects": [
     {
       "type": "grant_save_proficiency",
       "ability": "con"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "str"
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:speak-with-animals",
+  "name": "Speak with Animals",
+  "description": "You gain the ability to understand and communicate with beasts.",
+  "level": 1,
+  "school": "divination",
+  "ritual": true,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 minutes",
+  "concentration": false
+}

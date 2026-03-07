@@ -1,0 +1,49 @@
+{
+  "id": "srd52:class:monk",
+  "name": "Monk",
+  "hitDie": 8,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "acrobatics",
+      "athletics",
+      "history",
+      "insight",
+      "religion",
+      "stealth"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true,
+    "weaponIds": [
+      "srd52:equipment:shortsword"
+    ]
+  },
+  "spellListRefIds": [],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:unarmored-defense-monk"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:martial-arts"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:shortsword"
+    ],
+    "equippedWeaponId": "srd52:equipment:shortsword"
+  },
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "str"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "dex"
+    }
+  ]
+}

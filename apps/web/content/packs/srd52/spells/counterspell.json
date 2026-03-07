@@ -1,0 +1,16 @@
+{
+  "id": "srd52:spell:counterspell",
+  "name": "Counterspell",
+  "description": "You attempt to interrupt a creature casting a spell.",
+  "level": 3,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 reaction",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false
+}

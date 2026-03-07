@@ -1,0 +1,10 @@
+{
+  "id": "srd52:equipment:club",
+  "type": "weapon",
+  "name": "Club",
+  "damageDice": "1d4",
+  "weaponCategory": "simple",
+  "properties": [
+    "light"
+  ]
+}

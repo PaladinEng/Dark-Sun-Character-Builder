@@ -1,10 +1,24 @@
 {
   "id": "srd52:background:sage",
   "name": "Sage",
+  "abilityOptions": {
+    "abilities": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:magic-initiate",
+  "grantsOriginFeatId": "srd52:feat:magic-initiate",
   "effects": [
     {
       "type": "grant_skill_proficiency",
       "skill": "arcana"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "history"
     },
     {
       "type": "grant_language",

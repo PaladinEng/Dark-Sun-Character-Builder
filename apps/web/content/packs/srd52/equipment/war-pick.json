@@ -1,0 +1,7 @@
+{
+  "id": "srd52:equipment:war-pick",
+  "type": "weapon",
+  "name": "War Pick",
+  "damageDice": "1d8",
+  "weaponCategory": "martial"
+}
