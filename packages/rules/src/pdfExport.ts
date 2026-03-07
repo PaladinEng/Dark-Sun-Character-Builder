@@ -386,6 +386,59 @@ function wrapText(value: string, maxCharsPerLine: number): string[] {
   return lines;
 }
 
+function wrapTextToCellLines(
+  value: string,
+  width: number,
+  size: number,
+  maxLines: number,
+  maxLength: number
+): string[] {
+  const normalized = value.trim();
+  if (normalized.length === 0) {
+    return ["-"];
+  }
+
+  const maxTextWidth = Math.max(1, width - CELL_PADDING_X * 2);
+  const estimatedCharsPerLine = Math.max(
+    4,
+    Math.floor(maxTextWidth / Math.max(1, size * AVERAGE_GLYPH_WIDTH_FACTOR))
+  );
+  const wrapped = wrapText(truncateText(normalized, maxLength), estimatedCharsPerLine);
+  if (wrapped.length === 0) {
+    return ["-"];
+  }
+
+  const clipped = wrapped
+    .slice(0, Math.max(1, maxLines))
+    .map((line) => truncateTextToWidth(line, maxTextWidth, size, maxLength));
+  if (wrapped.length > maxLines) {
+    const lastIndex = clipped.length - 1;
+    const withEllipsis = clipped[lastIndex].endsWith("...") ? clipped[lastIndex] : `${clipped[lastIndex]}...`;
+    clipped[lastIndex] = truncateTextToWidth(withEllipsis, maxTextWidth, size, maxLength);
+  }
+  return clipped;
+}
+
+function drawWrappedTextInCell(
+  commands: string[],
+  lines: readonly string[],
+  x: number,
+  topY: number,
+  width: number,
+  rowHeight: number,
+  size: number,
+  align: TextAlign = "left"
+): void {
+  const lineHeight = size + 1.5;
+  const maxDrawableLines = Math.max(1, Math.floor((rowHeight - 4) / lineHeight));
+  const firstBaselineY = topY - 2 - size;
+  const drawLineCount = Math.min(maxDrawableLines, lines.length);
+
+  for (let index = 0; index < drawLineCount; index += 1) {
+    drawTextInCell(commands, lines[index], x, firstBaselineY - index * lineHeight, width, size, false, align, 220);
+  }
+}
+
 function toLabeledLines(
   label: string,
   value: string | null | undefined,
@@ -467,9 +520,7 @@ function formatCoinTotalInGp(snapshot: PdfExportCharacterSnapshot): string | nul
   return `${asString} gp total`;
 }
 
-function normalizeSpellTableRows(
-  rows: readonly PdfSpellListEntry[] | undefined
-): Array<{
+type NormalizedSpellTableRow = {
   level: string;
   name: string;
   school: string;
@@ -479,7 +530,9 @@ function normalizeSpellTableRows(
   components: string;
   notes: string;
   reference: string;
-}> {
+};
+
+function normalizeSpellTableRows(rows: readonly PdfSpellListEntry[] | undefined): NormalizedSpellTableRow[] {
   if (!rows || rows.length === 0) {
     return [];
   }
@@ -508,6 +561,67 @@ function normalizeSpellTableRows(
       reference: toCell(row.reference),
     };
   });
+}
+
+type SupplementalSpellRow = {
+  level: string;
+  name: string;
+  castingTime: string;
+  range: string;
+  flags: string;
+  notes: string;
+};
+
+function toSpellLevelLabel(level: number | null | undefined): string {
+  if (typeof level !== "number" || !Number.isFinite(level)) {
+    return "-";
+  }
+  return level === 0 ? "C" : `${Math.max(0, Math.floor(level))}`;
+}
+
+function normalizeSupplementalSpellRows(
+  entries: readonly PdfSpellListEntry[] | undefined
+): SupplementalSpellRow[] {
+  if (!entries || entries.length === 0) {
+    return [];
+  }
+
+  const toCell = (value: string | null | undefined): string => {
+    const normalized = value?.trim();
+    return normalized && normalized.length > 0 ? normalized : "-";
+  };
+
+  return entries.map((entry) => {
+    const notes = toCell(entry.notes);
+    const components = toCell(entry.components);
+    const hasConcentration = /concentration/i.test(notes);
+    const hasRitual = /ritual/i.test(notes);
+    const hasMaterial = /(^|[^A-Za-z])M([^A-Za-z]|$)/i.test(components);
+    return {
+      level: toSpellLevelLabel(entry.level),
+      name: toCell(entry.name),
+      castingTime: toCell(entry.castingTime),
+      range: toCell(entry.range),
+      flags: `${hasConcentration ? "Y" : "-"} / ${hasRitual ? "Y" : "-"} / ${hasMaterial ? "Y" : "-"}`,
+      notes,
+    };
+  });
+}
+
+function maxLinesForSection(sectionHeight: number, lineHeight: number): number {
+  return Math.max(1, Math.floor((sectionHeight - SECTION_HEADER_HEIGHT - 16) / lineHeight));
+}
+
+function splitLinesForSection(
+  lines: readonly string[],
+  sectionHeight: number,
+  lineHeight: number
+): { visible: string[]; overflow: string[] } {
+  const maxLines = maxLinesForSection(sectionHeight, lineHeight);
+  return {
+    visible: lines.slice(0, maxLines),
+    overflow: lines.slice(maxLines),
+  };
 }
 
 function buildPdfDocument(pageStreams: readonly string[]): Uint8Array {
@@ -559,7 +673,11 @@ function buildPdfDocument(pageStreams: readonly string[]): Uint8Array {
   return new Uint8Array(Buffer.from(pdf, "utf8"));
 }
 
-function createNarrativeContinuationPageStream(lines: readonly string[], pageNumber: number): string {
+function createNarrativeContinuationPageStream(
+  lines: readonly string[],
+  pageNumber: number,
+  title = "Narrative / Companion / Familiar (continued)"
+): string {
   const commands: string[] = [];
   const contentWidth = PDF_PAGE_WIDTH - PDF_MARGIN * 2;
   const sectionY = PDF_MARGIN;
@@ -568,7 +686,7 @@ function createNarrativeContinuationPageStream(lines: readonly string[], pageNum
   const lineTopY = sectionY + sectionHeight - 22;
 
   commands.push("0.2 w");
-  drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - PAGE 2 (CONTINUED)", PDF_MARGIN, 778, 11, true);
+  drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - SUPPLEMENTAL", PDF_MARGIN, 778, 11, true);
   drawText(commands, `Continuation ${pageNumber}`, PDF_MARGIN, 764, 8, false);
   drawSection(
     commands,
@@ -576,7 +694,7 @@ function createNarrativeContinuationPageStream(lines: readonly string[], pageNum
     sectionY,
     contentWidth,
     sectionHeight,
-    "Narrative / Companion / Familiar (continued)"
+    title
   );
   drawList(
     commands,
@@ -597,16 +715,24 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   const commands: string[] = [];
   const contentWidth = PDF_PAGE_WIDTH - PDF_MARGIN * 2;
   const sectionGap = 8;
-  const columnWidth = (contentWidth - sectionGap) / 2;
+  const rightColumnWidth = 168;
+  const leftColumnWidth = contentWidth - rightColumnWidth - sectionGap;
   const leftX = PDF_MARGIN;
-  const rightX = PDF_MARGIN + columnWidth + sectionGap;
-
-  const topY = 506;
-  const topHeight = 246;
-  const middleY = 314;
-  const middleHeight = 184;
-  const bottomY = 24;
-  const bottomHeight = 282;
+  const rightX = leftX + leftColumnWidth + sectionGap;
+  const topY = 630;
+  const topHeight = 122;
+  const spellTableY = 24;
+  const spellTableHeight = topY - spellTableY - sectionGap;
+  const appearanceY = 674;
+  const appearanceHeight = 78;
+  const backstoryY = 498;
+  const backstoryHeight = 168;
+  const languageY = 430;
+  const languageHeight = 60;
+  const equipmentY = 124;
+  const equipmentHeight = 298;
+  const coinsY = 24;
+  const coinsHeight = 92;
 
   const spellSlots = snapshot.spellSlots ?? ([0, 0, 0, 0, 0, 0, 0, 0, 0] as const);
   const spellSlotsExpended = snapshot.spellSlotsExpended ?? [];
@@ -626,13 +752,36 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   });
   const hasAnySpellSlots = spellSlotRows.some((row) => row.total !== "-");
   const hasTrackedExpendedSlots = spellSlotRows.some((row) => row.used !== "-");
+  const spellRowsFromEntries = normalizeSupplementalSpellRows(snapshot.spellListEntries);
+  const spellRows = (() => {
+    if (spellRowsFromEntries.length > 0) {
+      return spellRowsFromEntries;
+    }
 
-  const cantripCount = snapshot.cantripSpellNames?.length ?? 0;
-  const preparedCount = snapshot.preparedSpellNames?.length ?? 0;
-  const knownCount = snapshot.knownSpellNames?.length ?? 0;
-  const cantripLine = `Cantrips: ${cantripCount}`;
-  const preparedLine = `Prepared: ${preparedCount}`;
-  const knownLine = `Known: ${knownCount}`;
+    const fallback: SupplementalSpellRow[] = [];
+    const seen = new Set<string>();
+    const register = (level: string, names: readonly string[] | undefined, notes: string): void => {
+      for (const name of normalizeDisplayValues(names)) {
+        const key = `${level}|${name.toLowerCase()}|${notes}`;
+        if (seen.has(key)) {
+          continue;
+        }
+        seen.add(key);
+        fallback.push({
+          level,
+          name,
+          castingTime: "-",
+          range: "-",
+          flags: "- / - / -",
+          notes,
+        });
+      }
+    };
+    register("C", snapshot.cantripSpellNames, "Cantrip");
+    register("-", snapshot.preparedSpellNames, "Prepared");
+    register("-", snapshot.knownSpellNames, "Known");
+    return fallback;
+  })();
 
   const inventoryLines = normalizeLines(snapshot.inventoryItems ?? snapshot.inventorySummary, "Other Gear: None");
   const attunedLines = normalizeAttunedItemLines(snapshot.attunedItems);
@@ -655,41 +804,49 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     .filter((part) => Boolean(part))
     .join(" ");
 
-  const narrativeLines = [
-    ...toLabeledLines("Alignment", snapshot.alignment, 95, 1),
-    ...toLabeledLines("Appearance", snapshot.appearance, 95, 3),
-    ...toLabeledLines("Physical", snapshot.physicalDescription, 95, 3),
-    ...toLabeledLines("Backstory", snapshot.backstory, 95, 6),
-    ...toLabeledLines("Notes", snapshot.notes, 95, 4),
-    ...toLabeledLines("Companion", companionSummary, 95, 3),
-    ...toLabeledLines("Familiar", familiarSummary, 95, 3),
+  const appearanceLines = [
+    ...toLabeledLines("Appearance", snapshot.appearance, 34, 3),
+    ...toLabeledLines("Physical", snapshot.physicalDescription, 34, 3),
   ];
-  const warningLines =
-    snapshot.warningMessages && snapshot.warningMessages.length > 0
-      ? ["Warnings:", ...snapshot.warningMessages.map((message) => `! ${message}`)]
-      : [];
-  const narrativeAndWarningLines = [...narrativeLines, ...warningLines];
-  const narrativeLineHeight = 10;
-  const narrativeTopLineY = bottomY + bottomHeight - 22;
-  const narrativeBottomLineY = bottomY + 12;
-  const narrativePages = paginateByPageSpace(
-    narrativeAndWarningLines,
-    narrativeTopLineY,
-    narrativeBottomLineY,
-    narrativeLineHeight
-  );
-  const firstPageNarrativeLines = narrativePages[0] ?? [];
+  const backstoryLines = [
+    ...toLabeledLines("Alignment", snapshot.alignment, 34, 1),
+    ...toLabeledLines("Backstory", snapshot.backstory, 34, 7),
+    ...toLabeledLines("Notes", snapshot.notes, 34, 3),
+  ];
+  const languageAndProficiencyLines = [
+    ...toWrappedListLines("Languages", snapshot.languages, 34, 2),
+    ...toWrappedListLines("Armor", snapshot.armorProficiencies, 34, 2),
+    ...toWrappedListLines("Weapons", snapshot.weaponProficiencies, 34, 2),
+    ...toWrappedListLines("Tools", snapshot.toolProficiencies, 34, 2),
+  ];
+  const equipmentLines = [
+    `Equipped Armor: ${snapshot.equippedArmorName?.trim() || "-"}`,
+    `Equipped Shield: ${snapshot.equippedShieldName?.trim() || "-"}`,
+    `Equipped Weapon: ${snapshot.equippedWeaponName?.trim() || "-"}`,
+    "Inventory:",
+    ...inventoryLines.map((line) => `- ${line}`),
+    `Attuned Items (${attunedCount}/3):`,
+    ...attunedLines.map((line) => `- ${line}`),
+  ];
+  const appearanceSplit = splitLinesForSection(appearanceLines, appearanceHeight, 9);
+  const backstorySplit = splitLinesForSection(backstoryLines, backstoryHeight, 9);
+  const languageSplit = splitLinesForSection(languageAndProficiencyLines, languageHeight, 9);
+  const equipmentSplit = splitLinesForSection(equipmentLines, equipmentHeight, 9);
 
   commands.push("0.2 w");
   drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - PAGE 2", PDF_MARGIN, 778, 11, true);
 
-  drawSection(commands, leftX, topY, columnWidth, topHeight, "Spellcasting");
+  const spellSummaryWidth = 122;
+  const spellSlotsWidth = leftColumnWidth - spellSummaryWidth - sectionGap;
+  drawSection(commands, leftX, topY, spellSummaryWidth, topHeight, "Spellcasting");
   const spellcastingFieldsX = leftX + SECTION_INNER_PADDING;
-  const spellcastingFieldsWidth = columnWidth - 16;
-  const spellcastingFieldGap = 6;
-  const spellcastingFieldWidth = (spellcastingFieldsWidth - spellcastingFieldGap) / 2;
-  const spellcastingFieldHeight = 30;
-  const spellcastingTopFieldY = topY + topHeight - 54;
+  const spellcastingFieldsWidth = spellSummaryWidth - SECTION_INNER_PADDING * 2;
+  const spellcastingFieldGap = 4;
+  const spellcastingFieldWidth = spellcastingFieldsWidth;
+  const spellcastingFieldHeight = Math.floor(
+    (topHeight - SECTION_HEADER_HEIGHT - 12 - spellcastingFieldGap * 3) / 4
+  );
+  const spellcastingTopFieldY = topY + topHeight - SECTION_HEADER_HEIGHT - 8 - spellcastingFieldHeight;
   drawField(
     commands,
     spellcastingFieldsX,
@@ -698,54 +855,57 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     spellcastingFieldHeight,
     "Ability",
     formatSpellcastingAbility(snapshot.spellcastingAbility),
-    18,
-    11
-  );
-  drawField(
-    commands,
-    spellcastingFieldsX + spellcastingFieldWidth + spellcastingFieldGap,
-    spellcastingTopFieldY,
-    spellcastingFieldWidth,
-    spellcastingFieldHeight,
-    "Modifier",
-    typeof snapshot.spellcastingModifier === "number" ? formatModifier(snapshot.spellcastingModifier) : "-",
-    12,
+    16,
     11
   );
   drawField(
     commands,
     spellcastingFieldsX,
-    spellcastingTopFieldY - spellcastingFieldHeight - 6,
+    spellcastingTopFieldY - spellcastingFieldHeight - spellcastingFieldGap,
     spellcastingFieldWidth,
     spellcastingFieldHeight,
-    "Save DC",
-    formatNumeric(snapshot.spellSaveDC),
-    12,
+    "Modifier",
+    typeof snapshot.spellcastingModifier === "number" ? formatModifier(snapshot.spellcastingModifier) : "-",
+    16,
     11
   );
   drawField(
     commands,
-    spellcastingFieldsX + spellcastingFieldWidth + spellcastingFieldGap,
-    spellcastingTopFieldY - spellcastingFieldHeight - 6,
+    spellcastingFieldsX,
+    spellcastingTopFieldY - (spellcastingFieldHeight + spellcastingFieldGap) * 2,
+    spellcastingFieldWidth,
+    spellcastingFieldHeight,
+    "Save DC",
+    formatNumeric(snapshot.spellSaveDC),
+    16,
+    11
+  );
+  drawField(
+    commands,
+    spellcastingFieldsX,
+    spellcastingTopFieldY - (spellcastingFieldHeight + spellcastingFieldGap) * 3,
     spellcastingFieldWidth,
     spellcastingFieldHeight,
     "Attack Bonus",
     typeof snapshot.spellAttackBonus === "number" ? formatModifier(snapshot.spellAttackBonus) : "-",
-    12,
+    16,
     11
   );
-  drawText(commands, cantripLine, spellcastingFieldsX, spellcastingTopFieldY - 44, 7, false);
-  drawText(commands, preparedLine, spellcastingFieldsX + 80, spellcastingTopFieldY - 44, 7, false);
-  drawText(commands, knownLine, spellcastingFieldsX + 160, spellcastingTopFieldY - 44, 7, false);
+  const spellCountLine = `Cantrips ${snapshot.cantripSpellNames?.length ?? 0} | Prepared ${
+    snapshot.preparedSpellNames?.length ?? 0
+  } | Known ${snapshot.knownSpellNames?.length ?? 0}`;
+  drawText(commands, truncateTextToWidth(spellCountLine, spellSummaryWidth - 16, 7, 72), spellcastingFieldsX, topY + 4, 7, false);
 
-  const slotsTableX = spellcastingFieldsX;
+  const spellSlotsX = leftX + spellSummaryWidth + sectionGap;
+  drawSection(commands, spellSlotsX, topY, spellSlotsWidth, topHeight, "Spell Slots");
+  const slotsTableX = spellSlotsX + SECTION_INNER_PADDING;
   const slotsTableY = topY + 16;
-  const slotsTableWidth = spellcastingFieldsWidth;
-  const slotsRowHeight = 11;
+  const slotsTableWidth = spellSlotsWidth - SECTION_INNER_PADDING * 2;
+  const slotsRowHeight = 9;
   const slotsTableRows = 10;
   const slotsTableHeight = slotsRowHeight * slotsTableRows;
-  const slotsLevelColumnWidth = 58;
-  const slotsTotalColumnWidth = 58;
+  const slotsLevelColumnWidth = Math.floor(slotsTableWidth * 0.46);
+  const slotsTotalColumnWidth = Math.floor(slotsTableWidth * 0.24);
   const slotsUsedColumnWidth = slotsTableWidth - slotsLevelColumnWidth - slotsTotalColumnWidth;
 
   commands.push(`${slotsTableX} ${slotsTableY} ${slotsTableWidth} ${slotsTableHeight} re S`);
@@ -760,12 +920,12 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     `${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY} m ${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY + slotsTableHeight} l S`
   );
 
-  drawTextInCell(commands, "LEVEL", slotsTableX, slotsTableY + slotsTableHeight - 9, slotsLevelColumnWidth, 6, true, "center");
+  drawTextInCell(commands, "LEVEL", slotsTableX, slotsTableY + slotsTableHeight - 7, slotsLevelColumnWidth, 6, true, "center");
   drawTextInCell(
     commands,
     "TOTAL",
     slotsTableX + slotsLevelColumnWidth,
-    slotsTableY + slotsTableHeight - 9,
+    slotsTableY + slotsTableHeight - 7,
     slotsTotalColumnWidth,
     6,
     true,
@@ -773,17 +933,17 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   );
   drawTextInCell(
     commands,
-    "USED",
+    "EXPENDED",
     slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth,
-    slotsTableY + slotsTableHeight - 9,
+    slotsTableY + slotsTableHeight - 7,
     slotsUsedColumnWidth,
     6,
     true,
     "center"
   );
   spellSlotRows.forEach((row, index) => {
-    const rowTextY = slotsTableY + slotsTableHeight - slotsRowHeight * (index + 2) + 3;
-    drawTextInCell(commands, `${row.level}`, slotsTableX, rowTextY, slotsLevelColumnWidth, 7, false, "center", 3);
+    const rowTextY = slotsTableY + slotsTableHeight - slotsRowHeight * (index + 2) + 2;
+    drawTextInCell(commands, `Level ${row.level}`, slotsTableX, rowTextY, slotsLevelColumnWidth, 7, false, "left", 8);
     drawTextInCell(
       commands,
       row.total,
@@ -815,54 +975,147 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
         : "Expended slot tracking is not currently modeled."
       : "No class spell slots at this level.",
     slotsTableX,
-    slotsTableY - 10,
+    slotsTableY - 8,
     7,
     false
   );
 
-  drawSection(commands, rightX, topY, columnWidth, topHeight, "Equipment / Inventory");
-  const equippedLines = [
-    `Armor: ${snapshot.equippedArmorName?.trim() || "-"}`,
-    `Shield: ${snapshot.equippedShieldName?.trim() || "-"}`,
-    `Weapon: ${snapshot.equippedWeaponName?.trim() || "-"}`,
-    "Inventory:",
-    ...inventoryLines.map((line) => `- ${line}`),
-  ];
+  drawSection(commands, leftX, spellTableY, leftColumnWidth, spellTableHeight, "Cantrips & Prepared Spells");
+  const spellGridX = leftX + SECTION_INNER_PADDING;
+  const spellGridY = spellTableY + 8;
+  const spellGridWidth = leftColumnWidth - SECTION_INNER_PADDING * 2;
+  const spellGridRowHeight = 16;
+  const spellBodyRows = 34;
+  const spellGridRows = spellBodyRows + 1;
+  const spellGridHeight = spellGridRows * spellGridRowHeight;
+  const spellColumns = [
+    { key: "level", label: "LVL", width: 24, align: "center" as const, maxLength: 3 },
+    { key: "name", label: "NAME", width: 110, align: "left" as const, maxLength: 24 },
+    { key: "castingTime", label: "CAST", width: 38, align: "left" as const, maxLength: 8 },
+    { key: "range", label: "RANGE", width: 42, align: "left" as const, maxLength: 10 },
+    { key: "flags", label: "C/R/M", width: 58, align: "center" as const, maxLength: 13 },
+    {
+      key: "notes",
+      label: "NOTES",
+      width: spellGridWidth - 24 - 110 - 38 - 42 - 58,
+      align: "left" as const,
+      maxLength: 26,
+    },
+  ] as const;
+  commands.push(`${spellGridX} ${spellGridY} ${spellGridWidth} ${spellGridHeight} re S`);
+  for (let rowIndex = 1; rowIndex < spellGridRows; rowIndex += 1) {
+    const y = spellGridY + spellGridHeight - rowIndex * spellGridRowHeight;
+    commands.push(`${spellGridX} ${y} m ${spellGridX + spellGridWidth} ${y} l S`);
+  }
+  let spellColumnCursor = spellGridX;
+  for (let columnIndex = 0; columnIndex < spellColumns.length - 1; columnIndex += 1) {
+    spellColumnCursor += spellColumns[columnIndex].width;
+    commands.push(`${spellColumnCursor} ${spellGridY} m ${spellColumnCursor} ${spellGridY + spellGridHeight} l S`);
+  }
+  spellColumnCursor = spellGridX;
+  for (const column of spellColumns) {
+    drawTextInCell(
+      commands,
+      column.label,
+      spellColumnCursor,
+      spellGridY + spellGridHeight - 12,
+      column.width,
+      6,
+      true,
+      column.align,
+      24
+    );
+    spellColumnCursor += column.width;
+  }
+  const visibleSpellRows = spellRows.slice(0, spellBodyRows);
+  for (let rowIndex = 0; rowIndex < spellBodyRows; rowIndex += 1) {
+    const row = visibleSpellRows[rowIndex];
+    const rowTextY = spellGridY + spellGridHeight - spellGridRowHeight * (rowIndex + 2) + 4;
+    let x = spellGridX;
+    for (const column of spellColumns) {
+      drawTextInCell(
+        commands,
+        row ? row[column.key] : "",
+        x,
+        rowTextY,
+        column.width,
+        7,
+        false,
+        column.align,
+        column.maxLength
+      );
+      x += column.width;
+    }
+  }
+  if (spellRows.length > spellBodyRows) {
+    drawText(
+      commands,
+      `+${spellRows.length - spellBodyRows} additional spells (see spell list pages).`,
+      spellGridX,
+      spellTableY + 2,
+      7,
+      false
+    );
+  } else if (spellRows.length === 0) {
+    drawText(commands, "No spells prepared or known.", spellGridX, spellTableY + 2, 7, false);
+  }
+
+  drawSection(commands, rightX, appearanceY, rightColumnWidth, appearanceHeight, "Appearance");
   drawList(
     commands,
-    equippedLines,
+    appearanceSplit.visible,
     rightX + SECTION_INNER_PADDING,
-    topY + topHeight - 22,
-    22,
-    10,
+    appearanceY + appearanceHeight - 22,
+    appearanceSplit.visible.length,
+    9,
     8,
-    90,
-    columnWidth - SECTION_INNER_PADDING * 2
+    120,
+    rightColumnWidth - SECTION_INNER_PADDING * 2
   );
 
-  drawSection(commands, leftX, middleY, columnWidth, middleHeight, "Training & Proficiencies");
-  const proficiencyLines = [
-    toListLine("Armor", snapshot.armorProficiencies),
-    toListLine("Weapons", snapshot.weaponProficiencies),
-    toListLine("Tools", snapshot.toolProficiencies),
-    toListLine("Languages", snapshot.languages),
-  ];
+  drawSection(commands, rightX, backstoryY, rightColumnWidth, backstoryHeight, "Backstory & Personality");
   drawList(
     commands,
-    proficiencyLines,
-    leftX + SECTION_INNER_PADDING,
-    middleY + middleHeight - 24,
-    12,
-    12,
+    backstorySplit.visible,
+    rightX + SECTION_INNER_PADDING,
+    backstoryY + backstoryHeight - 22,
+    backstorySplit.visible.length,
+    9,
     8,
-    96,
-    columnWidth - SECTION_INNER_PADDING * 2
+    120,
+    rightColumnWidth - SECTION_INNER_PADDING * 2
   );
 
-  drawSection(commands, rightX, middleY, columnWidth, middleHeight, "Currency & Attunement");
-  const coinFieldY = middleY + middleHeight - 54;
+  drawSection(commands, rightX, languageY, rightColumnWidth, languageHeight, "Languages & Proficiencies");
+  drawList(
+    commands,
+    languageSplit.visible,
+    rightX + SECTION_INNER_PADDING,
+    languageY + languageHeight - 22,
+    languageSplit.visible.length,
+    9,
+    8,
+    120,
+    rightColumnWidth - SECTION_INNER_PADDING * 2
+  );
+
+  drawSection(commands, rightX, equipmentY, rightColumnWidth, equipmentHeight, "Equipment");
+  drawList(
+    commands,
+    equipmentSplit.visible,
+    rightX + SECTION_INNER_PADDING,
+    equipmentY + equipmentHeight - 22,
+    equipmentSplit.visible.length,
+    9,
+    8,
+    120,
+    rightColumnWidth - SECTION_INNER_PADDING * 2
+  );
+
+  drawSection(commands, rightX, coinsY, rightColumnWidth, coinsHeight, "Coins");
+  const coinFieldY = coinsY + 34;
   const coinFieldGap = 4;
-  const coinFieldWidth = (columnWidth - 16 - coinFieldGap * 4) / 5;
+  const coinFieldWidth = (rightColumnWidth - 16 - coinFieldGap * 4) / 5;
   const coinFields: Array<[string, string]> = [
     ["CP", formatNumeric(snapshot.cp)],
     ["SP", formatNumeric(snapshot.sp)],
@@ -885,42 +1138,58 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   });
   drawText(
     commands,
-    truncateTextToWidth(`Other Wealth: ${snapshot.otherWealth?.trim() || "-"}`, columnWidth - 16, 8, 120),
+    truncateTextToWidth(`Other Wealth: ${snapshot.otherWealth?.trim() || "-"}`, rightColumnWidth - 16, 8, 120),
     rightX + SECTION_INNER_PADDING,
-    coinFieldY - 12,
+    coinsY + 14,
     8,
     false
   );
-  drawText(commands, `Attuned Items (${attunedCount}):`, rightX + SECTION_INNER_PADDING, middleY + 62, 8, true);
-  drawList(
-    commands,
-    attunedLines.map((line) => `- ${line}`),
-    rightX + SECTION_INNER_PADDING,
-    middleY + 50,
-    4,
-    10,
-    8,
-    96,
-    columnWidth - SECTION_INNER_PADDING * 2
-  );
-
-  drawSection(commands, PDF_MARGIN, bottomY, contentWidth, bottomHeight, "Narrative / Companion / Familiar");
-  drawList(
-    commands,
-    firstPageNarrativeLines,
-    PDF_MARGIN + SECTION_INNER_PADDING,
-    narrativeTopLineY,
-    firstPageNarrativeLines.length,
-    narrativeLineHeight,
-    8,
-    140,
-    contentWidth - SECTION_INNER_PADDING * 2
-  );
+  const coinTotalInGp = formatCoinTotalInGp(snapshot);
+  if (coinTotalInGp) {
+    drawText(commands, truncateTextToWidth(`Coin Value: ${coinTotalInGp}`, rightColumnWidth - 16, 7, 64), rightX + SECTION_INNER_PADDING, coinsY + 4, 7, false);
+  }
 
   const streams = [commands.join("\n")];
-  for (let pageIndex = 1; pageIndex < narrativePages.length; pageIndex += 1) {
-    streams.push(createNarrativeContinuationPageStream(narrativePages[pageIndex], pageIndex + 1));
+  const continuationLines: string[] = [];
+  const pushContinuationSection = (title: string, lines: readonly string[]) => {
+    if (lines.length === 0) {
+      return;
+    }
+    continuationLines.push(`${title}:`);
+    continuationLines.push(...lines.map((line) => `  ${line}`));
+    continuationLines.push("");
+  };
+  pushContinuationSection("Appearance (continued)", appearanceSplit.overflow);
+  pushContinuationSection("Backstory & Personality (continued)", backstorySplit.overflow);
+  pushContinuationSection("Languages & Proficiencies (continued)", languageSplit.overflow);
+  pushContinuationSection("Equipment (continued)", equipmentSplit.overflow);
+  if (companionSummary.trim().length > 0 || familiarSummary.trim().length > 0) {
+    continuationLines.push("Companion / Familiar:");
+    continuationLines.push(...toLabeledLines("Companion", companionSummary, 95, 8));
+    continuationLines.push(...toLabeledLines("Familiar", familiarSummary, 95, 8));
+    continuationLines.push("");
   }
+  if (snapshot.warningMessages && snapshot.warningMessages.length > 0) {
+    continuationLines.push("Warnings:");
+    continuationLines.push(...snapshot.warningMessages.map((message) => `! ${message}`));
+    continuationLines.push("");
+  }
+  const normalizedContinuationLines = continuationLines.filter(
+    (line, index, lines) => !(line === "" && (index === 0 || lines[index - 1] === ""))
+  );
+  if (normalizedContinuationLines.length > 0) {
+    const continuationPages = paginateByPageSpace(normalizedContinuationLines, 746, 36, 10);
+    for (let pageIndex = 0; pageIndex < continuationPages.length; pageIndex += 1) {
+      streams.push(
+        createNarrativeContinuationPageStream(
+          continuationPages[pageIndex],
+          pageIndex + 1,
+          "Narrative / Equipment / Proficiency (continued)"
+        )
+      );
+    }
+  }
+
   return streams;
 }
 
@@ -1132,23 +1401,69 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
   const contentWidth = PDF_PAGE_WIDTH - PDF_MARGIN * 2;
   const tableX = PDF_MARGIN;
   const tableTopY = 746;
-  const tableBottomY = 34;
-  const tableRowHeight = 13;
-  const pagedRows = paginateByPageSpace(rows, tableTopY - tableRowHeight, tableBottomY, tableRowHeight);
-  const pageCount = pagedRows.length;
+  const tableBottomY = 24;
+  const headerHeight = 14;
+  const bodyFontSize = 6.5;
+  const bodyLineHeight = 8;
+  const rowVerticalPadding = 2;
+  const maxTableHeight = tableTopY - tableBottomY;
 
   const columns = [
-    { key: "level", label: "LVL", width: 32, maxLength: 3, align: "center" as const },
-    { key: "name", label: "NAME", width: 120, maxLength: 24, align: "left" as const },
-    { key: "school", label: "SCHOOL", width: 58, maxLength: 11, align: "left" as const },
-    { key: "castingTime", label: "CASTING", width: 68, maxLength: 14, align: "left" as const },
-    { key: "range", label: "RANGE", width: 56, maxLength: 11, align: "left" as const },
-    { key: "duration", label: "DURATION", width: 72, maxLength: 14, align: "left" as const },
-    { key: "components", label: "COMP", width: 58, maxLength: 11, align: "left" as const },
-    { key: "notes", label: "NOTES", width: 70, maxLength: 15, align: "left" as const },
-    { key: "reference", label: "REF", width: 30, maxLength: 8, align: "center" as const },
+    { key: "level", label: "LVL", width: 24, maxLength: 3, maxLines: 1, align: "center" as const },
+    { key: "name", label: "NAME", width: 122, maxLength: 64, maxLines: 3, align: "left" as const },
+    { key: "school", label: "SCHOOL", width: 52, maxLength: 28, maxLines: 2, align: "left" as const },
+    { key: "castingTime", label: "CAST", width: 70, maxLength: 48, maxLines: 2, align: "left" as const },
+    { key: "range", label: "RANGE", width: 52, maxLength: 28, maxLines: 2, align: "left" as const },
+    { key: "duration", label: "DURATION", width: 66, maxLength: 44, maxLines: 2, align: "left" as const },
+    { key: "components", label: "COMP", width: 52, maxLength: 24, maxLines: 2, align: "left" as const },
+    { key: "notes", label: "NOTES", width: 92, maxLength: 220, maxLines: 4, align: "left" as const },
+    { key: "reference", label: "REF", width: 34, maxLength: 24, maxLines: 2, align: "center" as const },
   ] as const;
 
+  type SpellColumn = (typeof columns)[number];
+  type SpellColumnKey = SpellColumn["key"];
+  type PreparedSpellTableRow = {
+    rowHeight: number;
+    cellLines: Record<SpellColumnKey, string[]>;
+  };
+
+  const preparedRows: PreparedSpellTableRow[] = rows.map((row) => {
+    const cellLines = {} as Record<SpellColumnKey, string[]>;
+    let maxLineCount = 1;
+    for (const column of columns) {
+      const wrappedLines = wrapTextToCellLines(
+        row[column.key],
+        column.width,
+        bodyFontSize,
+        column.maxLines,
+        column.maxLength
+      );
+      cellLines[column.key] = wrappedLines;
+      maxLineCount = Math.max(maxLineCount, wrappedLines.length);
+    }
+    return {
+      rowHeight: rowVerticalPadding * 2 + maxLineCount * bodyLineHeight,
+      cellLines,
+    };
+  });
+
+  const pagedRows: PreparedSpellTableRow[][] = [];
+  let currentPageRows: PreparedSpellTableRow[] = [];
+  let currentPageHeight = headerHeight;
+  for (const row of preparedRows) {
+    if (currentPageRows.length > 0 && currentPageHeight + row.rowHeight > maxTableHeight) {
+      pagedRows.push(currentPageRows);
+      currentPageRows = [];
+      currentPageHeight = headerHeight;
+    }
+    currentPageRows.push(row);
+    currentPageHeight += row.rowHeight;
+  }
+  if (currentPageRows.length > 0) {
+    pagedRows.push(currentPageRows);
+  }
+
+  const pageCount = pagedRows.length;
   const streams: string[] = [];
   let rowCursor = 0;
   for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
@@ -1157,12 +1472,20 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
     const endIndex = rowCursor + pageRows.length;
     rowCursor += pageRows.length;
     const commands: string[] = [];
-    const tableRows = pageRows.length + 1;
-    const tableHeight = tableRows * tableRowHeight;
+    const tableHeight = headerHeight + pageRows.reduce((sum, row) => sum + row.rowHeight, 0);
     const tableY = tableTopY - tableHeight;
 
     commands.push("0.2 w");
-    drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - SPELL LIST", PDF_MARGIN, 778, 11, true);
+    drawText(
+      commands,
+      pageIndex === 0
+        ? "DARK SUN BUILDER CHARACTER SHEET - SPELL LIST"
+        : "DARK SUN BUILDER CHARACTER SHEET - SPELL LIST (CONTINUED)",
+      PDF_MARGIN,
+      778,
+      11,
+      true
+    );
     drawText(
       commands,
       truncateTextToWidth(
@@ -1186,9 +1509,11 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
     );
 
     commands.push(`${tableX} ${tableY} ${contentWidth} ${tableHeight} re S`);
-    for (let rowIndex = 1; rowIndex < tableRows; rowIndex += 1) {
-      const y = tableY + tableHeight - rowIndex * tableRowHeight;
-      commands.push(`${tableX} ${y} m ${tableX + contentWidth} ${y} l S`);
+    let rowBoundaryY = tableTopY - headerHeight;
+    commands.push(`${tableX} ${rowBoundaryY} m ${tableX + contentWidth} ${rowBoundaryY} l S`);
+    for (const row of pageRows) {
+      rowBoundaryY -= row.rowHeight;
+      commands.push(`${tableX} ${rowBoundaryY} m ${tableX + contentWidth} ${rowBoundaryY} l S`);
     }
 
     let columnCursor = tableX;
@@ -1203,7 +1528,7 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
         commands,
         column.label,
         columnCursor,
-        tableY + tableHeight - 9,
+        tableTopY - 10,
         column.width,
         6,
         true,
@@ -1213,13 +1538,23 @@ function createSpellListPageStreams(snapshot: PdfExportCharacterSnapshot): strin
       columnCursor += column.width;
     }
 
-    pageRows.forEach((row, rowIndex) => {
-      const rowTextY = tableY + tableHeight - tableRowHeight * (rowIndex + 2) + 3;
+    let rowTopY = tableTopY - headerHeight;
+    pageRows.forEach((row) => {
       let x = tableX;
       for (const column of columns) {
-        drawTextInCell(commands, row[column.key], x, rowTextY, column.width, 7, false, column.align, column.maxLength);
+        drawWrappedTextInCell(
+          commands,
+          row.cellLines[column.key],
+          x,
+          rowTopY,
+          column.width,
+          row.rowHeight,
+          bodyFontSize,
+          column.align
+        );
         x += column.width;
       }
+      rowTopY -= row.rowHeight;
     });
 
     streams.push(commands.join("\n"));
