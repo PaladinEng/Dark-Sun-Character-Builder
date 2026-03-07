@@ -1399,6 +1399,41 @@ describe("validateCharacter", () => {
     expect(report.errors.some((issue) => issue.code === "CLASS_SKILLS_INCOMPLETE")).toBe(true);
   });
 
+  it("reports identity/combat numeric range errors", () => {
+    const report = validateCharacter(
+      baseState({
+        xp: -1,
+        tempHP: -2,
+        hitDiceTotal: -1,
+        hitDiceSpent: -1,
+        deathSaveSuccesses: 4,
+        deathSaveFailures: -1,
+        exhaustionLevel: 11,
+      }),
+      baseMergedContent()
+    );
+
+    expect(report.errors.some((issue) => issue.code === "XP_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "TEMP_HP_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "HIT_DICE_TOTAL_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "HIT_DICE_SPENT_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "DEATH_SAVE_SUCCESSES_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "DEATH_SAVE_FAILURES_OUT_OF_RANGE")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "EXHAUSTION_LEVEL_OUT_OF_RANGE")).toBe(true);
+  });
+
+  it("reports HIT_DICE_SPENT_EXCEEDS_TOTAL when spent hit dice exceeds total", () => {
+    const report = validateCharacter(
+      baseState({
+        hitDiceTotal: 2,
+        hitDiceSpent: 3,
+      }),
+      baseMergedContent()
+    );
+
+    expect(report.errors.some((issue) => issue.code === "HIT_DICE_SPENT_EXCEEDS_TOTAL")).toBe(true);
+  });
+
   it("reports ASI_INVALID_POINTS for invalid ASI point totals", () => {
     const report = validateCharacter(
       baseState({

@@ -1064,6 +1064,9 @@ export default function BuilderClient({
   const abilityScoreMethod = state.abilityScoreMethod ?? "manual";
   const pointBuySpent = useMemo(() => computePointBuyCost(state.baseAbilities), [state.baseAbilities]);
   const pointBuyRemaining = pointBuySpent === null ? null : POINT_BUY_BUDGET - pointBuySpent;
+  const hitDiceTotalForConstraints = Number.isFinite(state.hitDiceTotal)
+    ? Math.max(0, Math.floor(state.hitDiceTotal ?? 0))
+    : null;
   const standardArrayAllowedCounts = useMemo(() => {
     const counts = new Map<number, number>();
     for (const value of STANDARD_ARRAY) {
@@ -1144,12 +1147,21 @@ export default function BuilderClient({
     }));
   };
 
+  const normalizeInteger = (value: number, minimum = 0, maximum?: number): number => {
+    const floored = Number.isFinite(value) ? Math.floor(value) : minimum;
+    const boundedMinimum = Math.max(minimum, floored);
+    if (typeof maximum === "number") {
+      return Math.min(maximum, boundedMinimum);
+    }
+    return boundedMinimum;
+  };
+
   const updateCoin = (denomination: CoinDenomination, value: number) => {
     setState((previous) => ({
       ...previous,
       coins: {
         ...(previous.coins ?? {}),
-        [denomination]: Math.max(0, Math.floor(value || 0)),
+        [denomination]: normalizeInteger(value),
       },
     }));
   };
@@ -1832,6 +1844,172 @@ export default function BuilderClient({
             ))}
           </select>
         </label>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Identity & Combat Tracking</div>
+          <div className="mt-1 grid gap-2 md:grid-cols-3">
+            <label className="text-sm">
+              <div className="font-semibold">Subclass</div>
+              <input
+                type="text"
+                value={state.subclass ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    subclass: event.target.value.trim() ? event.target.value : undefined,
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                placeholder="e.g. Berserker"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">XP</div>
+              <input
+                type="number"
+                min={0}
+                value={state.xp ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    xp: normalizeInteger(Number(event.target.value)),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <div className="rounded border border-slate-700 bg-slate-950/30 px-2 py-2">
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={state.heroicInspiration === true}
+                  onChange={(event) =>
+                    setState((previous) => ({
+                      ...previous,
+                      heroicInspiration: event.target.checked,
+                    }))
+                  }
+                />
+                <span className="font-semibold">Heroic Inspiration</span>
+              </label>
+            </div>
+
+            <label className="text-sm">
+              <div className="font-semibold">Temp HP</div>
+              <input
+                type="number"
+                min={0}
+                value={state.tempHP ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    tempHP: normalizeInteger(Number(event.target.value)),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Hit Dice Total</div>
+              <input
+                type="number"
+                min={0}
+                value={state.hitDiceTotal ?? ""}
+                onChange={(event) =>
+                  setState((previous) => {
+                    const raw = event.target.value.trim();
+                    const nextHitDiceTotal = raw.length === 0 ? undefined : normalizeInteger(Number(raw));
+                    const nextHitDiceSpent =
+                      typeof nextHitDiceTotal === "number"
+                        ? Math.min(normalizeInteger(previous.hitDiceSpent ?? 0), nextHitDiceTotal)
+                        : normalizeInteger(previous.hitDiceSpent ?? 0);
+                    return {
+                      ...previous,
+                      hitDiceTotal: nextHitDiceTotal,
+                      hitDiceSpent: nextHitDiceSpent,
+                    };
+                  })
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                placeholder="Optional"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Hit Dice Spent</div>
+              <input
+                type="number"
+                min={0}
+                max={hitDiceTotalForConstraints ?? undefined}
+                value={state.hitDiceSpent ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    hitDiceSpent:
+                      hitDiceTotalForConstraints === null
+                        ? normalizeInteger(Number(event.target.value))
+                        : normalizeInteger(Number(event.target.value), 0, hitDiceTotalForConstraints),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Death Save Successes</div>
+              <input
+                type="number"
+                min={0}
+                max={3}
+                value={state.deathSaveSuccesses ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    deathSaveSuccesses: normalizeInteger(Number(event.target.value), 0, 3),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Death Save Failures</div>
+              <input
+                type="number"
+                min={0}
+                max={3}
+                value={state.deathSaveFailures ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    deathSaveFailures: normalizeInteger(Number(event.target.value), 0, 3),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+
+            <label className="text-sm">
+              <div className="font-semibold">Exhaustion Level</div>
+              <input
+                type="number"
+                min={0}
+                max={10}
+                value={state.exhaustionLevel ?? 0}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    exhaustionLevel: normalizeInteger(Number(event.target.value), 0, 10),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
+          </div>
+        </div>
 
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Coins</div>

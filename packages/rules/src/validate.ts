@@ -184,6 +184,97 @@ export function validateCharacter(
     });
   }
 
+  if (typeof state.xp !== "undefined" && (!Number.isInteger(state.xp) || state.xp < 0)) {
+    pushError({
+      code: "XP_OUT_OF_RANGE",
+      message: "XP must be a non-negative integer.",
+      path: "xp"
+    });
+  }
+
+  if (typeof state.tempHP !== "undefined" && (!Number.isInteger(state.tempHP) || state.tempHP < 0)) {
+    pushError({
+      code: "TEMP_HP_OUT_OF_RANGE",
+      message: "Temporary HP must be a non-negative integer.",
+      path: "tempHP"
+    });
+  }
+
+  if (
+    typeof state.hitDiceTotal !== "undefined" &&
+    (!Number.isInteger(state.hitDiceTotal) || state.hitDiceTotal < 0)
+  ) {
+    pushError({
+      code: "HIT_DICE_TOTAL_OUT_OF_RANGE",
+      message: "Hit dice total must be a non-negative integer.",
+      path: "hitDiceTotal"
+    });
+  }
+
+  if (
+    typeof state.hitDiceSpent !== "undefined" &&
+    (!Number.isInteger(state.hitDiceSpent) || state.hitDiceSpent < 0)
+  ) {
+    pushError({
+      code: "HIT_DICE_SPENT_OUT_OF_RANGE",
+      message: "Hit dice spent must be a non-negative integer.",
+      path: "hitDiceSpent"
+    });
+  }
+
+  if (
+    typeof state.hitDiceTotal === "number" &&
+    Number.isInteger(state.hitDiceTotal) &&
+    state.hitDiceTotal >= 0 &&
+    typeof state.hitDiceSpent === "number" &&
+    Number.isInteger(state.hitDiceSpent) &&
+    state.hitDiceSpent >= 0 &&
+    state.hitDiceSpent > state.hitDiceTotal
+  ) {
+    pushError({
+      code: "HIT_DICE_SPENT_EXCEEDS_TOTAL",
+      message: "Hit dice spent cannot exceed hit dice total.",
+      path: "hitDiceSpent"
+    });
+  }
+
+  if (
+    typeof state.deathSaveSuccesses !== "undefined" &&
+    (!Number.isInteger(state.deathSaveSuccesses) ||
+      state.deathSaveSuccesses < 0 ||
+      state.deathSaveSuccesses > 3)
+  ) {
+    pushError({
+      code: "DEATH_SAVE_SUCCESSES_OUT_OF_RANGE",
+      message: "Death save successes must be an integer between 0 and 3.",
+      path: "deathSaveSuccesses"
+    });
+  }
+
+  if (
+    typeof state.deathSaveFailures !== "undefined" &&
+    (!Number.isInteger(state.deathSaveFailures) ||
+      state.deathSaveFailures < 0 ||
+      state.deathSaveFailures > 3)
+  ) {
+    pushError({
+      code: "DEATH_SAVE_FAILURES_OUT_OF_RANGE",
+      message: "Death save failures must be an integer between 0 and 3.",
+      path: "deathSaveFailures"
+    });
+  }
+
+  if (
+    typeof state.exhaustionLevel !== "undefined" &&
+    (!Number.isInteger(state.exhaustionLevel) || state.exhaustionLevel < 0 || state.exhaustionLevel > 10)
+  ) {
+    pushError({
+      code: "EXHAUSTION_LEVEL_OUT_OF_RANGE",
+      message: "Exhaustion level must be an integer between 0 and 10.",
+      path: "exhaustionLevel"
+    });
+  }
+
   if (Array.isArray(selectedClassIdsMaybe) && selectedClassIdsMaybe.length > 1) {
     pushError({
       code: "MULTICLASS_UNSUPPORTED",

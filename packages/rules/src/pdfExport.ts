@@ -185,7 +185,37 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     ? `${snapshot.attackName} ${formatModifier(snapshot.attackToHit ?? 0)} (${snapshot.attackDamage ?? "-"})`
     : "None";
   const level = Math.max(1, Math.floor(snapshot.level || 1));
+  const subclassLabel = snapshot.subclass?.trim() ? snapshot.subclass.trim() : "None";
+  const xpValue =
+    typeof snapshot.xp === "number" && Number.isFinite(snapshot.xp)
+      ? Math.max(0, Math.floor(snapshot.xp))
+      : null;
+  const heroicInspirationLabel = snapshot.heroicInspiration ? "Yes" : "No";
   const proficiencyBonus = formatModifier(snapshot.proficiencyBonus);
+  const tempHP =
+    typeof snapshot.tempHP === "number" && Number.isFinite(snapshot.tempHP)
+      ? Math.max(0, Math.floor(snapshot.tempHP))
+      : 0;
+  const hitDiceTotal =
+    typeof snapshot.hitDiceTotal === "number" && Number.isFinite(snapshot.hitDiceTotal)
+      ? Math.max(0, Math.floor(snapshot.hitDiceTotal))
+      : null;
+  const hitDiceSpent =
+    typeof snapshot.hitDiceSpent === "number" && Number.isFinite(snapshot.hitDiceSpent)
+      ? Math.max(0, Math.floor(snapshot.hitDiceSpent))
+      : 0;
+  const deathSaveSuccesses =
+    typeof snapshot.deathSaveSuccesses === "number" && Number.isFinite(snapshot.deathSaveSuccesses)
+      ? Math.max(0, Math.min(3, Math.floor(snapshot.deathSaveSuccesses)))
+      : 0;
+  const deathSaveFailures =
+    typeof snapshot.deathSaveFailures === "number" && Number.isFinite(snapshot.deathSaveFailures)
+      ? Math.max(0, Math.min(3, Math.floor(snapshot.deathSaveFailures)))
+      : 0;
+  const exhaustionLevel =
+    typeof snapshot.exhaustionLevel === "number" && Number.isFinite(snapshot.exhaustionLevel)
+      ? Math.max(0, Math.min(10, Math.floor(snapshot.exhaustionLevel)))
+      : 0;
   const spellSlotsSummary = snapshot.spellSlots
     ? snapshot.spellSlots.map((count, index) => `L${index + 1}:${count}`).join(" ")
     : "None";
@@ -301,6 +331,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   const statRows = [
     ["Armor Class", `${snapshot.armorClass}`],
     ["Max HP", `${snapshot.maxHP}`],
+    ["Temp HP", `${tempHP}`],
     ["Speed", `${snapshot.speed} ft`],
     ["Proficiency", proficiencyBonus],
     ["Passive Perception", `${snapshot.passivePerception ?? 10}`],
@@ -340,8 +371,11 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     [
       `Attack: ${truncateText(attackSummary, 52)}`,
       `Class: ${truncateText(snapshot.className ?? "-", 44)}`,
+      `Subclass: ${truncateText(subclassLabel, 40)}`,
       `Species: ${truncateText(snapshot.speciesName ?? "-", 44)}`,
       `Background: ${truncateText(snapshot.backgroundName ?? "-", 42)}`,
+      `XP: ${xpValue ?? "-"}`,
+      `Heroic Inspiration: ${heroicInspirationLabel}`,
       `Primary Ability: ${ABILITY_LABELS[snapshot.spellcastingAbility ?? "int"] ?? "-"}`,
       `Export Level: ${level}`,
     ],
@@ -376,11 +410,14 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     commands,
     [
       `Level ${level}`,
+      `XP: ${xpValue ?? "-"}`,
       `Class: ${truncateText(snapshot.className ?? "-", 22)}`,
+      `Subclass: ${truncateText(subclassLabel, 18)}`,
       `Species: ${truncateText(snapshot.speciesName ?? "-", 20)}`,
       `Background: ${truncateText(snapshot.backgroundName ?? "-", 18)}`,
+      `Heroic Inspiration: ${heroicInspirationLabel}`,
       `Speed: ${snapshot.speed} ft`,
-      `HP: ${snapshot.maxHP}`,
+      `HP: ${snapshot.maxHP} / Temp ${tempHP}`,
     ],
     rightX + 8,
     identityY + 98,
@@ -422,9 +459,11 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       `Tools: ${truncateText(toolLines.join(", "), 34)}`,
       `Languages: ${truncateText(languageLines.join(", "), 34)}`,
       `Proficiency Bonus: ${proficiencyBonus}`,
-      `Armor Class: ${snapshot.armorClass}`,
       `Max HP: ${snapshot.maxHP}`,
-      `Speed: ${snapshot.speed} ft`,
+      `Temp HP: ${tempHP}`,
+      `Hit Dice: ${hitDiceSpent}/${hitDiceTotal ?? "-"}`,
+      `Death Saves: ${deathSaveSuccesses}/${deathSaveFailures}`,
+      `Exhaustion: ${exhaustionLevel}`,
     ],
     rightX + 8,
     resourcesY + 112,

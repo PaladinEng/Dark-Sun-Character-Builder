@@ -103,6 +103,22 @@ function sortIds(values: string[] | undefined): string[] {
   return [...values].sort((a, b) => a.localeCompare(b));
 }
 
+function normalizeOptionalString(value: unknown): string | undefined {
+  return typeof value === "string" ? value : undefined;
+}
+
+function normalizeOptionalNonNegativeInt(value: unknown, maximum?: number): number | undefined {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) {
+    return undefined;
+  }
+  const bounded = Math.max(0, Math.floor(parsed));
+  if (typeof maximum === "number") {
+    return Math.min(maximum, bounded);
+  }
+  return bounded;
+}
+
 function normalizeCharacterState(input: CharacterState): CharacterState {
   return {
     ...input,
@@ -123,6 +139,15 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
     inventoryEntries: Array.isArray(input.inventoryEntries) ? input.inventoryEntries : [],
+    subclass: normalizeOptionalString(input.subclass),
+    xp: normalizeOptionalNonNegativeInt(input.xp),
+    heroicInspiration: input.heroicInspiration === true,
+    tempHP: normalizeOptionalNonNegativeInt(input.tempHP),
+    hitDiceTotal: normalizeOptionalNonNegativeInt(input.hitDiceTotal),
+    hitDiceSpent: normalizeOptionalNonNegativeInt(input.hitDiceSpent),
+    deathSaveSuccesses: normalizeOptionalNonNegativeInt(input.deathSaveSuccesses, 3),
+    deathSaveFailures: normalizeOptionalNonNegativeInt(input.deathSaveFailures, 3),
+    exhaustionLevel: normalizeOptionalNonNegativeInt(input.exhaustionLevel, 10),
     coins: input.coins && typeof input.coins === "object" ? input.coins : undefined,
   };
 }
@@ -260,6 +285,27 @@ export default async function PrintPage({
   const toolProficiencies = sortIds(derived.toolProficiencies);
   const languages = sortIds(derived.languages);
   const level = Math.max(1, Math.floor(payload.characterState.level || 1));
+  const xp = Number.isFinite(payload.characterState.xp)
+    ? Math.max(0, Math.floor(payload.characterState.xp ?? 0))
+    : 0;
+  const tempHP = Number.isFinite(payload.characterState.tempHP)
+    ? Math.max(0, Math.floor(payload.characterState.tempHP ?? 0))
+    : 0;
+  const hitDiceTotal = Number.isFinite(payload.characterState.hitDiceTotal)
+    ? Math.max(0, Math.floor(payload.characterState.hitDiceTotal ?? 0))
+    : null;
+  const hitDiceSpent = Number.isFinite(payload.characterState.hitDiceSpent)
+    ? Math.max(0, Math.floor(payload.characterState.hitDiceSpent ?? 0))
+    : 0;
+  const deathSaveSuccesses = Number.isFinite(payload.characterState.deathSaveSuccesses)
+    ? Math.max(0, Math.min(3, Math.floor(payload.characterState.deathSaveSuccesses ?? 0)))
+    : 0;
+  const deathSaveFailures = Number.isFinite(payload.characterState.deathSaveFailures)
+    ? Math.max(0, Math.min(3, Math.floor(payload.characterState.deathSaveFailures ?? 0)))
+    : 0;
+  const exhaustionLevel = Number.isFinite(payload.characterState.exhaustionLevel)
+    ? Math.max(0, Math.min(10, Math.floor(payload.characterState.exhaustionLevel ?? 0)))
+    : 0;
 
   const featureNames = (payload.characterState.selectedFeatureIds ?? [])
     .map((id) => merged.content.featuresById[id]?.name)
@@ -388,8 +434,16 @@ export default async function PrintPage({
                     <div className="small-value">{klass?.name ?? "Unspecified"}</div>
                   </div>
                   <div>
+                    <div className="small-label">Subclass</div>
+                    <div className="small-value">{payload.characterState.subclass ?? "None"}</div>
+                  </div>
+                  <div>
                     <div className="small-label">Level</div>
                     <div className="small-value">{level}</div>
+                  </div>
+                  <div>
+                    <div className="small-label">XP</div>
+                    <div className="small-value">{xp}</div>
                   </div>
                   <div>
                     <div className="small-label">Species</div>
@@ -400,12 +454,14 @@ export default async function PrintPage({
                     <div className="small-value">{background?.name ?? "Unspecified"}</div>
                   </div>
                   <div>
-                    <div className="small-label">Player</div>
-                    <div className="small-value">-</div>
+                    <div className="small-label">Heroic Inspiration</div>
+                    <div className="small-value">
+                      {payload.characterState.heroicInspiration ? "Yes" : "No"}
+                    </div>
                   </div>
                   <div>
                     <div className="small-label">Alignment</div>
-                    <div className="small-value">-</div>
+                    <div className="small-value">{payload.characterState.alignment ?? "-"}</div>
                   </div>
                 </div>
               </div>
@@ -497,7 +553,7 @@ export default async function PrintPage({
                     </div>
                     <div className="stat">
                       <div className="small-label">Temp HP</div>
-                      <div className="stat-value">_____</div>
+                      <div className="stat-value">{tempHP}</div>
                     </div>
                   </div>
                 </section>
@@ -709,7 +765,11 @@ export default async function PrintPage({
                 </section>
                 <section className="panel resources-panel">
                   <div className="section-head">Conditions / Resources</div>
-                  <div className="notes-area short" />
+                  <ul className="trimmed-list compact">
+                    <li>Hit Dice: {hitDiceSpent}/{hitDiceTotal ?? "-"}</li>
+                    <li>Death Saves: {deathSaveSuccesses}/{deathSaveFailures}</li>
+                    <li>Exhaustion: {exhaustionLevel}</li>
+                  </ul>
                 </section>
               </div>
             </div>
