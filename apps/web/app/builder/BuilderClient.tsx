@@ -508,7 +508,7 @@ export default function BuilderClient({
       return;
     }
 
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() ?? "");
     params.set("sources", parsed.join(","));
     router.replace(`${pathname}?${params.toString()}`);
   }, [
@@ -1056,7 +1056,7 @@ export default function BuilderClient({
     setEnabledSources(ordered);
     window.localStorage.setItem(SOURCE_STORAGE_KEY, ordered.join(","));
 
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams(searchParams?.toString() ?? "");
     params.set("sources", ordered.join(","));
     router.push(`${pathname}?${params.toString()}`);
   };
