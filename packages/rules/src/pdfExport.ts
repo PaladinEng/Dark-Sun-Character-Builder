@@ -74,7 +74,11 @@ export type PdfExportCharacterSnapshot = {
   pp?: number | null;
   otherWealth?: string | null;
   attunedItems?: readonly string[];
+  inventoryItems?: readonly string[];
   inventorySummary?: readonly string[];
+  cantripSpellNames?: readonly string[];
+  knownSpellNames?: readonly string[];
+  preparedSpellNames?: readonly string[];
   appearance?: string | null;
   physicalDescription?: string | null;
   backstory?: string | null;
@@ -161,10 +165,11 @@ function drawList(
   topY: number,
   maxLines: number,
   lineHeight: number,
-  size = 8
+  size = 8,
+  maxLength = 56
 ): void {
   for (let index = 0; index < Math.min(maxLines, lines.length); index += 1) {
-    drawText(commands, truncateText(lines[index], 56), x, topY - index * lineHeight, size, false);
+    drawText(commands, truncateText(lines[index], maxLength), x, topY - index * lineHeight, size, false);
   }
 }
 
@@ -182,6 +187,378 @@ function drawField(
   commands.push(`${x} ${y} ${width} ${height} re S`);
   drawText(commands, label.toUpperCase(), x + 3, y + height - 8, 6, true);
   drawText(commands, truncateText(value, maxLength), x + 3, y + 5, valueSize, true);
+}
+
+function normalizeDisplayValues(values: readonly string[] | undefined): string[] {
+  if (!values || values.length === 0) {
+    return [];
+  }
+  return [...new Set(values.map((value) => value.trim()).filter((value) => value.length > 0))].sort((a, b) =>
+    a.localeCompare(b)
+  );
+}
+
+function wrapText(value: string, maxCharsPerLine: number): string[] {
+  const normalized = value.trim().replace(/\s+/g, " ");
+  if (normalized.length === 0) {
+    return [];
+  }
+  const words = normalized.split(" ");
+  const lines: string[] = [];
+  let current = "";
+
+  const flush = () => {
+    if (current.length > 0) {
+      lines.push(current);
+      current = "";
+    }
+  };
+
+  for (const word of words) {
+    if (word.length > maxCharsPerLine) {
+      flush();
+      let cursor = 0;
+      while (cursor < word.length) {
+        lines.push(word.slice(cursor, cursor + maxCharsPerLine));
+        cursor += maxCharsPerLine;
+      }
+      continue;
+    }
+    const candidate = current.length === 0 ? word : `${current} ${word}`;
+    if (candidate.length <= maxCharsPerLine) {
+      current = candidate;
+    } else {
+      flush();
+      current = word;
+    }
+  }
+  flush();
+  return lines;
+}
+
+function toLabeledLines(
+  label: string,
+  value: string | null | undefined,
+  maxCharsPerLine: number,
+  maxLines: number
+): string[] {
+  const normalizedValue = value?.trim();
+  if (!normalizedValue) {
+    return [`${label}: -`];
+  }
+  const labelPrefix = `${label}: `;
+  const remainingOnFirstLine = Math.max(8, maxCharsPerLine - labelPrefix.length);
+  const wrapped = wrapText(normalizedValue, remainingOnFirstLine);
+  if (wrapped.length === 0) {
+    return [`${label}: -`];
+  }
+  const lines = [`${labelPrefix}${wrapped[0]}`];
+  for (let index = 1; index < wrapped.length && lines.length < maxLines; index += 1) {
+    lines.push(`  ${wrapped[index]}`);
+  }
+  return lines;
+}
+
+function toListLine(label: string, values: readonly string[] | undefined): string {
+  const normalized = normalizeDisplayValues(values);
+  return `${label}: ${normalized.length > 0 ? normalized.join(", ") : "-"}`;
+}
+
+function formatSpellcastingAbility(value: Ability | null | undefined): string {
+  if (!value) {
+    return "-";
+  }
+  return ABILITY_LABELS[value] ?? value.toUpperCase();
+}
+
+function formatNumeric(value: number | null | undefined): string {
+  return typeof value === "number" && Number.isFinite(value) ? `${Math.floor(value)}` : "-";
+}
+
+function buildPdfDocument(pageStreams: readonly string[]): Uint8Array {
+  const normalizedStreams = pageStreams.map((stream) => `${stream.trimEnd()}\n`);
+  const pageCount = normalizedStreams.length;
+  const pageObjectStart = 3;
+  const pageObjectEnd = pageObjectStart + pageCount - 1;
+  const fontObjectStart = pageObjectEnd + 1;
+  const contentObjectStart = fontObjectStart + 2;
+  const fontRegularObjectId = fontObjectStart;
+  const fontBoldObjectId = fontObjectStart + 1;
+
+  const objects: string[] = [];
+  objects.push("<< /Type /Catalog /Pages 2 0 R >>");
+  objects.push(
+    `<< /Type /Pages /Kids [${normalizedStreams
+      .map((_stream, index) => `${pageObjectStart + index} 0 R`)
+      .join(" ")}] /Count ${pageCount} >>`
+  );
+
+  normalizedStreams.forEach((_stream, index) => {
+    objects.push(
+      `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 ${fontRegularObjectId} 0 R /F2 ${fontBoldObjectId} 0 R >> >> /Contents ${contentObjectStart + index} 0 R >>`
+    );
+  });
+
+  objects.push("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
+  objects.push("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>");
+
+  normalizedStreams.forEach((stream) => {
+    objects.push(`<< /Length ${Buffer.byteLength(stream, "utf8")} >>\nstream\n${stream}endstream`);
+  });
+
+  let pdf = "%PDF-1.4\n";
+  const offsets = [0];
+  for (let index = 0; index < objects.length; index += 1) {
+    offsets[index + 1] = Buffer.byteLength(pdf, "utf8");
+    pdf += `${index + 1} 0 obj\n${objects[index]}\nendobj\n`;
+  }
+
+  const xrefStart = Buffer.byteLength(pdf, "utf8");
+  pdf += `xref\n0 ${objects.length + 1}\n`;
+  pdf += "0000000000 65535 f \n";
+  for (let index = 1; index <= objects.length; index += 1) {
+    pdf += `${String(offsets[index]).padStart(10, "0")} 00000 n \n`;
+  }
+  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF\n`;
+
+  return new Uint8Array(Buffer.from(pdf, "utf8"));
+}
+
+function createSupplementalPageStream(snapshot: PdfExportCharacterSnapshot): string {
+  const commands: string[] = [];
+  const margin = 24;
+  const pageWidth = 612;
+  const contentWidth = pageWidth - margin * 2;
+  const sectionGap = 8;
+  const columnWidth = (contentWidth - sectionGap) / 2;
+  const leftX = margin;
+  const rightX = margin + columnWidth + sectionGap;
+
+  const topY = 506;
+  const topHeight = 246;
+  const middleY = 314;
+  const middleHeight = 184;
+  const bottomY = 24;
+  const bottomHeight = 282;
+
+  const spellSlots = snapshot.spellSlots ?? ([0, 0, 0, 0, 0, 0, 0, 0, 0] as const);
+  const spellSlotRows = Array.from({ length: 9 }, (_, index) => {
+    const level = index + 1;
+    const total = spellSlots[index] ?? 0;
+    return {
+      level,
+      total: total > 0 ? `${total}` : "-",
+      used: total > 0 ? "-" : "-",
+    };
+  });
+  const hasAnySpellSlots = spellSlotRows.some((row) => row.total !== "-");
+
+  const cantripCount = snapshot.cantripSpellNames?.length ?? 0;
+  const preparedCount = snapshot.preparedSpellNames?.length ?? 0;
+  const knownCount = snapshot.knownSpellNames?.length ?? 0;
+  const cantripLine = `Cantrips: ${cantripCount}`;
+  const preparedLine = `Prepared: ${preparedCount}`;
+  const knownLine = `Known: ${knownCount}`;
+
+  const inventoryLines = normalizeLines(snapshot.inventoryItems ?? snapshot.inventorySummary, "Other Gear: None");
+  const attunedLines = normalizeLines(snapshot.attunedItems, "None");
+  const attunedCount = normalizeDisplayValues(snapshot.attunedItems).length;
+
+  const companionSummary = [
+    snapshot.companionName?.trim(),
+    snapshot.companionType?.trim() ? `(${snapshot.companionType.trim()})` : "",
+    snapshot.companionSummary?.trim(),
+    snapshot.companionNotes?.trim(),
+  ]
+    .filter((part) => Boolean(part))
+    .join(" ");
+  const familiarSummary = [
+    snapshot.familiarName?.trim(),
+    snapshot.familiarType?.trim() ? `(${snapshot.familiarType.trim()})` : "",
+    snapshot.familiarSummary?.trim(),
+    snapshot.familiarNotes?.trim(),
+  ]
+    .filter((part) => Boolean(part))
+    .join(" ");
+
+  const narrativeLines = [
+    ...toLabeledLines("Alignment", snapshot.alignment, 95, 1),
+    ...toLabeledLines("Appearance", snapshot.appearance, 95, 3),
+    ...toLabeledLines("Physical", snapshot.physicalDescription, 95, 3),
+    ...toLabeledLines("Backstory", snapshot.backstory, 95, 6),
+    ...toLabeledLines("Notes", snapshot.notes, 95, 4),
+    ...toLabeledLines("Companion", companionSummary, 95, 3),
+    ...toLabeledLines("Familiar", familiarSummary, 95, 3),
+  ];
+
+  commands.push("0.2 w");
+  drawText(commands, "DARK SUN BUILDER CHARACTER SHEET - PAGE 2", margin, 778, 11, true);
+
+  drawSection(commands, leftX, topY, columnWidth, topHeight, "Spellcasting");
+  const spellcastingFieldsX = leftX + 8;
+  const spellcastingFieldsWidth = columnWidth - 16;
+  const spellcastingFieldGap = 6;
+  const spellcastingFieldWidth = (spellcastingFieldsWidth - spellcastingFieldGap) / 2;
+  const spellcastingFieldHeight = 30;
+  const spellcastingTopFieldY = topY + topHeight - 54;
+  drawField(
+    commands,
+    spellcastingFieldsX,
+    spellcastingTopFieldY,
+    spellcastingFieldWidth,
+    spellcastingFieldHeight,
+    "Ability",
+    formatSpellcastingAbility(snapshot.spellcastingAbility),
+    18,
+    11
+  );
+  drawField(
+    commands,
+    spellcastingFieldsX + spellcastingFieldWidth + spellcastingFieldGap,
+    spellcastingTopFieldY,
+    spellcastingFieldWidth,
+    spellcastingFieldHeight,
+    "Modifier",
+    typeof snapshot.spellcastingModifier === "number" ? formatModifier(snapshot.spellcastingModifier) : "-",
+    12,
+    11
+  );
+  drawField(
+    commands,
+    spellcastingFieldsX,
+    spellcastingTopFieldY - spellcastingFieldHeight - 6,
+    spellcastingFieldWidth,
+    spellcastingFieldHeight,
+    "Save DC",
+    formatNumeric(snapshot.spellSaveDC),
+    12,
+    11
+  );
+  drawField(
+    commands,
+    spellcastingFieldsX + spellcastingFieldWidth + spellcastingFieldGap,
+    spellcastingTopFieldY - spellcastingFieldHeight - 6,
+    spellcastingFieldWidth,
+    spellcastingFieldHeight,
+    "Attack Bonus",
+    typeof snapshot.spellAttackBonus === "number" ? formatModifier(snapshot.spellAttackBonus) : "-",
+    12,
+    11
+  );
+  drawText(commands, cantripLine, spellcastingFieldsX, spellcastingTopFieldY - 44, 7, false);
+  drawText(commands, preparedLine, spellcastingFieldsX + 80, spellcastingTopFieldY - 44, 7, false);
+  drawText(commands, knownLine, spellcastingFieldsX + 160, spellcastingTopFieldY - 44, 7, false);
+
+  const slotsTableX = spellcastingFieldsX;
+  const slotsTableY = topY + 16;
+  const slotsTableWidth = spellcastingFieldsWidth;
+  const slotsRowHeight = 11;
+  const slotsTableRows = 10;
+  const slotsTableHeight = slotsRowHeight * slotsTableRows;
+  const slotsLevelColumnWidth = 58;
+  const slotsTotalColumnWidth = 58;
+  const slotsUsedColumnWidth = slotsTableWidth - slotsLevelColumnWidth - slotsTotalColumnWidth;
+
+  commands.push(`${slotsTableX} ${slotsTableY} ${slotsTableWidth} ${slotsTableHeight} re S`);
+  for (let index = 1; index < slotsTableRows; index += 1) {
+    const y = slotsTableY + slotsTableHeight - index * slotsRowHeight;
+    commands.push(`${slotsTableX} ${y} m ${slotsTableX + slotsTableWidth} ${y} l S`);
+  }
+  commands.push(
+    `${slotsTableX + slotsLevelColumnWidth} ${slotsTableY} m ${slotsTableX + slotsLevelColumnWidth} ${slotsTableY + slotsTableHeight} l S`
+  );
+  commands.push(
+    `${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY} m ${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY + slotsTableHeight} l S`
+  );
+
+  drawText(commands, "LEVEL", slotsTableX + 3, slotsTableY + slotsTableHeight - 9, 6, true);
+  drawText(commands, "TOTAL", slotsTableX + slotsLevelColumnWidth + 3, slotsTableY + slotsTableHeight - 9, 6, true);
+  drawText(
+    commands,
+    "USED",
+    slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth + 3,
+    slotsTableY + slotsTableHeight - 9,
+    6,
+    true
+  );
+  spellSlotRows.forEach((row, index) => {
+    const rowTextY = slotsTableY + slotsTableHeight - slotsRowHeight * (index + 2) + 3;
+    drawText(commands, `${row.level}`, slotsTableX + 4, rowTextY, 7, false);
+    drawText(commands, row.total, slotsTableX + slotsLevelColumnWidth + 3, rowTextY, 7, false);
+    drawText(commands, row.used, slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth + 3, rowTextY, 7, false);
+  });
+  drawText(
+    commands,
+    hasAnySpellSlots ? "Expended slot tracking is not currently modeled." : "No class spell slots at this level.",
+    slotsTableX,
+    slotsTableY - 10,
+    7,
+    false
+  );
+
+  drawSection(commands, rightX, topY, columnWidth, topHeight, "Equipment / Inventory");
+  const equippedLines = [
+    `Armor: ${snapshot.equippedArmorName?.trim() || "-"}`,
+    `Shield: ${snapshot.equippedShieldName?.trim() || "-"}`,
+    `Weapon: ${snapshot.equippedWeaponName?.trim() || "-"}`,
+    "Inventory:",
+    ...inventoryLines.map((line) => `- ${line}`),
+  ];
+  drawList(commands, equippedLines, rightX + 8, topY + topHeight - 22, 22, 10, 8, 65);
+
+  drawSection(commands, leftX, middleY, columnWidth, middleHeight, "Training & Proficiencies");
+  const proficiencyLines = [
+    toListLine("Armor", snapshot.armorProficiencies),
+    toListLine("Weapons", snapshot.weaponProficiencies),
+    toListLine("Tools", snapshot.toolProficiencies),
+    toListLine("Languages", snapshot.languages),
+  ];
+  drawList(commands, proficiencyLines, leftX + 8, middleY + middleHeight - 24, 12, 12, 8, 64);
+
+  drawSection(commands, rightX, middleY, columnWidth, middleHeight, "Currency & Attunement");
+  const coinFieldY = middleY + middleHeight - 54;
+  const coinFieldGap = 4;
+  const coinFieldWidth = (columnWidth - 16 - coinFieldGap * 4) / 5;
+  const coinFields: Array<[string, string]> = [
+    ["CP", formatNumeric(snapshot.cp)],
+    ["SP", formatNumeric(snapshot.sp)],
+    ["EP", formatNumeric(snapshot.ep)],
+    ["GP", formatNumeric(snapshot.gp)],
+    ["PP", formatNumeric(snapshot.pp)],
+  ];
+  coinFields.forEach(([label, value], index) => {
+    drawField(
+      commands,
+      rightX + 8 + index * (coinFieldWidth + coinFieldGap),
+      coinFieldY,
+      coinFieldWidth,
+      30,
+      label,
+      value,
+      8,
+      10
+    );
+  });
+  drawText(
+    commands,
+    truncateText(`Other Wealth: ${snapshot.otherWealth?.trim() || "-"}`, 67),
+    rightX + 8,
+    coinFieldY - 12,
+    8,
+    false
+  );
+  drawText(commands, `Attuned Items (${attunedCount}/3):`, rightX + 8, middleY + 62, 8, true);
+  drawList(commands, attunedLines.map((line) => `- ${line}`), rightX + 8, middleY + 50, 4, 10, 8, 64);
+
+  drawSection(commands, margin, bottomY, contentWidth, bottomHeight, "Narrative / Companion / Familiar");
+  drawList(commands, narrativeLines, margin + 8, bottomY + bottomHeight - 22, 24, 10, 8, 110);
+
+  if (snapshot.warningMessages && snapshot.warningMessages.length > 0) {
+    const warningLines = snapshot.warningMessages.map((message) => `! ${message}`);
+    drawList(commands, warningLines, margin + 8, bottomY + 26, 2, 10, 7, 108);
+  }
+
+  return commands.join("\n");
 }
 
 function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint8Array {
@@ -545,33 +922,9 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   drawSection(commands, rightX, featuresY, rightWidth, featuresHeight, "Features Summary");
   drawList(commands, featuresSummaryLines, rightX + 8, featuresY + featuresHeight - 22, 19, 10, 8);
 
-  const stream = `${commands.join("\n")}\n`;
-  const objects = [
-    "<< /Type /Catalog /Pages 2 0 R >>",
-    "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
-    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /Contents 6 0 R >>",
-    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>",
-    "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>",
-    `<< /Length ${Buffer.byteLength(stream, "utf8")} >>\nstream\n${stream}endstream`,
-  ];
-
-  let pdf = "%PDF-1.4\n";
-  const offsets = [0];
-
-  for (let index = 0; index < objects.length; index += 1) {
-    offsets[index + 1] = Buffer.byteLength(pdf, "utf8");
-    pdf += `${index + 1} 0 obj\n${objects[index]}\nendobj\n`;
-  }
-
-  const xrefStart = Buffer.byteLength(pdf, "utf8");
-  pdf += `xref\n0 ${objects.length + 1}\n`;
-  pdf += "0000000000 65535 f \n";
-  for (let index = 1; index <= objects.length; index += 1) {
-    pdf += `${String(offsets[index]).padStart(10, "0")} 00000 n \n`;
-  }
-  pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF\n`;
-
-  return new Uint8Array(Buffer.from(pdf, "utf8"));
+  const pageOneStream = commands.join("\n");
+  const pageTwoStream = createSupplementalPageStream(snapshot);
+  return buildPdfDocument([pageOneStream, pageTwoStream]);
 }
 
 export function buildPdfExportFromTemplate(

@@ -250,7 +250,7 @@ export async function POST(request: Request) {
   const ppCoins = Number.isFinite(coinValues.pp) ? Math.max(0, Math.floor(coinValues.pp ?? 0)) : 0;
   const inventoryCounts = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
-    inventoryCounts.set(itemId, Math.max(1, inventoryCounts.get(itemId) ?? 1));
+    inventoryCounts.set(itemId, (inventoryCounts.get(itemId) ?? 0) + 1);
   }
   for (const entry of payload.characterState.inventoryEntries ?? []) {
     const quantity =
@@ -264,8 +264,8 @@ export async function POST(request: Request) {
       const label = merged.content.equipmentById[itemId]?.name ?? itemId;
       return quantity > 1 ? `${label} x${quantity}` : label;
     })
-    .sort((a, b) => a.localeCompare(b))
-    .slice(0, 6);
+    .sort((a, b) => a.localeCompare(b));
+  const inventorySummaryItems = inventoryItems.slice(0, 6);
   const attunedItemLabels = (payload.characterState.attunedItems ?? [])
     .map((item) => item.name?.trim() || item.itemId?.trim() || "")
     .filter((entry) => entry.length > 0);
@@ -275,7 +275,7 @@ export async function POST(request: Request) {
     ...(payload.characterState.otherWealth?.trim()
       ? [`Other Wealth: ${payload.characterState.otherWealth.trim()}`]
       : []),
-    ...(inventoryItems.length > 0 ? inventoryItems : ["Other Gear: None"]),
+    ...(inventorySummaryItems.length > 0 ? inventorySummaryItems : ["Other Gear: None"]),
   ];
   const spellcastingAbility = derived.spellcastingAbility ?? derived.spellcasting?.ability ?? null;
   const spellcastingModifier = spellcastingAbility ? derived.abilityMods[spellcastingAbility] : null;
@@ -316,6 +316,20 @@ export async function POST(request: Request) {
         .map((mastery) => formatDelimitedLabel(mastery))
         .join(", ")}`
     : null;
+  const resolveSpellNames = (spellIds: readonly string[] | undefined): string[] =>
+    [...new Set(spellIds ?? [])]
+      .map((spellId) => merged.content.spellsById[spellId]?.name ?? spellId)
+      .filter((name) => name.trim().length > 0)
+      .sort((a, b) => a.localeCompare(b));
+  const cantripSpellNames = resolveSpellNames(
+    derived.spellcasting?.cantripsKnownIds ?? payload.characterState.cantripsKnownIds
+  );
+  const knownSpellNames = resolveSpellNames(
+    derived.spellcasting?.knownSpellIds ?? payload.characterState.knownSpellIds
+  );
+  const preparedSpellNames = resolveSpellNames(
+    derived.spellcasting?.preparedSpellIds ?? payload.characterState.preparedSpellIds
+  );
   const orderedSkillDefinitions = [...merged.content.skillDefinitions]
     .map((skill, index) => ({ skill, index }))
     .sort((left, right) => {
@@ -393,7 +407,11 @@ export async function POST(request: Request) {
     pp: ppCoins,
     otherWealth: payload.characterState.otherWealth ?? null,
     attunedItems: attunedItemLabels,
+    inventoryItems: inventoryItems.slice(0, 16),
     inventorySummary,
+    cantripSpellNames,
+    knownSpellNames,
+    preparedSpellNames,
     appearance: payload.characterState.appearance ?? null,
     physicalDescription: payload.characterState.physicalDescription ?? null,
     backstory: payload.characterState.backstory ?? null,
