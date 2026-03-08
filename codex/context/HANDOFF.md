@@ -41,3 +41,53 @@ Use after substantial UI/export/content merges or when builder behavior looks in
    - `pnpm loop:check`
    - `LOOPDEV_STRICT=1 pnpm loop:check` (when practical)
 5. Log notable findings in `codex/context/PROJECT_STATE.md` and `codex/context/SPRINT_LOG.md`.
+
+# Codex Resume Instructions
+
+Repository baseline:
+
+Tag: codex-integration-20260308
+
+Before any development work:
+
+Run:
+
+pnpm loop:check
+
+If any stage fails:
+
+1. identify failing stage
+2. repair code
+3. rerun harness
+
+Do not proceed until ALL_PASS.
+
+### Runtime Diagnostics
+
+If Next.js dev instability occurs:
+
+Run:
+
+node scripts/dev-forensics.mjs
+
+Artifacts will be written to:
+
+codex/harness/dev-forensics
+
+These artifacts capture:
+
+- server logs
+- emitted runtime artifacts
+- vendor chunk generation
+- first-hit route behavior
+
+### Development Safety Rules
+
+Never bypass the harness.
+
+All commits must preserve:
+
+- sheet invariants
+- golden sheet tests
+- dev-smoke runtime verification
+- API smoke tests

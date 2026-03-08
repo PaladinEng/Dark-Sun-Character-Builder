@@ -156,3 +156,14 @@ After substantial UI/export/content integration work (or if builder behavior loo
 5. Run `pnpm loop:check`
 6. When applicable, run `LOOPDEV_STRICT=1 pnpm loop:check`
 7. Record significant findings in `codex/context/HANDOFF.md` and `codex/context/PROJECT_STATE.md`.
+
+## Mandatory Development Loop
+
+All development must follow this loop:
+
+1. run `pnpm loop:check`
+2. identify failing stage
+3. repair code
+4. repeat until ALL_PASS
+
+Never commit changes that fail the harness.

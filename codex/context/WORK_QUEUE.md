@@ -10,3 +10,40 @@ Ordered, actionable, and short. Keep only near-term items.
 ## Deferred
 1. Deep mechanical automation for invocation and pact boon effects beyond current trait/validation representation.
 2. Full standalone Mystic Arcanum casting subsystem beyond current tracked-selection model.
+
+## Phase 1 - Builder Verification
+
+Validate rule correctness:
+
+- subclass feature application
+- spell slot calculations
+- warlock invocation tracking
+- pact progression behavior
+- PDF sheet completeness
+
+## Phase 2 - Builder UX Improvements
+
+Add UI support for:
+
+- subclass selection clarity
+- warlock invocation selection
+- pact boon selection
+- mystic arcanum spell selection
+
+## Phase 3 - Dark Sun Integration
+
+Integrate custom content packs:
+
+- Athas species
+- psionics system
+- Dark Sun equipment
+- Dark Sun subclasses
+
+## Phase 4 - Deployment
+
+Prepare the builder for public hosting:
+
+- static deployment configuration
+- GitHub Pages support
+- content pack loading
+- marketplace architecture
