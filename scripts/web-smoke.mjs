@@ -51,6 +51,16 @@ async function main() {
       requiredAll: [],
     },
     {
+      path: "/builder?sources=srd52",
+      requiredAny: ["Builder", "Export Ready"],
+      requiredAll: [],
+    },
+    {
+      path: "/builder?sources=srd52,darksun",
+      requiredAny: ["Builder", "Export Ready"],
+      requiredAll: [],
+    },
+    {
       path: `/print?payload=${encodeURIComponent(encodedPrintPayload)}`,
       requiredAny: ["Character Name", "Dark Sun Character Builder Sheet"],
       requiredAll: [],
@@ -67,7 +77,7 @@ async function main() {
     },
   ];
 
-  const server = await startWebDevServer({ repoRoot, port, readyPath: "/builder" });
+  const server = await startWebDevServer({ repoRoot, port, readyPath: "/" });
 
   try {
     for (const route of routes) {

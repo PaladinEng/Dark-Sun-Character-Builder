@@ -37,7 +37,7 @@ async function main() {
     process.env.API_SMOKE_MIN_PDF_BYTES ?? `${DEFAULT_MIN_PDF_BYTES}`,
     10
   );
-  const server = await startWebDevServer({ repoRoot, port, readyPath: "/builder" });
+  const server = await startWebDevServer({ repoRoot, port, readyPath: "/" });
   const templatePdfBytes = await loadTemplatePdfBytesIfPresent();
 
   try {

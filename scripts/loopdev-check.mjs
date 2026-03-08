@@ -20,6 +20,7 @@ const FULL_STAGES = [
     strictWarningsFail: true,
   },
   { name: "web:smoke", command: ["pnpm", "web:smoke"] },
+  { name: "web:dev-smoke", command: ["pnpm", "web:dev-smoke"] },
   { name: "api:smoke", command: ["pnpm", "api:smoke"] },
   { name: "pdf:sanity", command: ["pnpm", "pdf:sanity"] },
   { name: "boundary:imports", command: ["pnpm", "boundary:imports"] },

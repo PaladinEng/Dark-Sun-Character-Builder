@@ -27,13 +27,13 @@ importers:
         specifier: workspace:*
         version: link:../../packages/rules
       next:
-        specifier: ^15.2.0
+        specifier: 15.5.12
         version: 15.5.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
-        specifier: ^19.0.0
+        specifier: 19.2.4
         version: 19.2.4
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.2.4
         version: 19.2.4(react@19.2.4)
     devDependencies:
       '@types/node':
@@ -52,7 +52,7 @@ importers:
         specifier: ^9.39.3
         version: 9.39.3(jiti@1.21.7)
       eslint-config-next:
-        specifier: ^15.5.12
+        specifier: 15.5.12
         version: 15.5.12(eslint@9.39.3(jiti@1.21.7))(typescript@5.9.3)
       postcss:
         specifier: ^8.4.49

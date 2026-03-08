@@ -137,3 +137,22 @@ Before ending a work session that changes project state:
 4. Refresh `codex/context/HANDOFF.md` with immediate next-step commands and any blockers/assumptions.
 
 Keep context concise, factual, and durable across fresh Codex sessions.
+
+## Post-Integration Verification Checklist
+
+After substantial UI/export/content integration work (or if builder behavior looks inconsistent), run:
+
+1. `pnpm clean:web` (or `rm -rf apps/web/.next`)
+2. `pnpm --filter @dark-sun/content build`
+3. Verify routes:
+   - `/builder?sources=srd52`
+   - `/builder?sources=srd52,darksun`
+   - `/sheet?payload=...`
+   - `/api/export/pdf`
+4. Verify builder actions:
+   - Open HTML Sheet
+   - Download JSON
+   - Download PDF
+5. Run `pnpm loop:check`
+6. When applicable, run `LOOPDEV_STRICT=1 pnpm loop:check`
+7. Record significant findings in `codex/context/HANDOFF.md` and `codex/context/PROJECT_STATE.md`.

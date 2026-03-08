@@ -1,5 +1,7 @@
 import { spawn } from "node:child_process";
+import { rm } from "node:fs/promises";
 import process from "node:process";
+import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 
 function truncate(text, max = 4000) {
@@ -49,6 +51,8 @@ export async function startWebDevServer({
   startupTimeoutMs = 120000,
   pollMs = 400,
 } = {}) {
+  await rm(join(repoRoot, "apps", "web", ".next"), { recursive: true, force: true });
+
   const logs = [];
   const args = ["--filter", "web", "dev", "--hostname", host, "--port", String(port)];
   const child = spawn("pnpm", args, {

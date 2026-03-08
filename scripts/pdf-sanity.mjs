@@ -38,7 +38,7 @@ async function main() {
     10
   );
   const templateInfo = await loadTemplatePdfBytesIfPresent();
-  const server = await startWebDevServer({ repoRoot, port, readyPath: "/builder" });
+  const server = await startWebDevServer({ repoRoot, port, readyPath: "/" });
 
   try {
     const payload = makeKnownValidExportPayload();
