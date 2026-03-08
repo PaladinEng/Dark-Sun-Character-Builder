@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "Choose one creature, object, or magical effect to end spells on it.",
+  "notes": "No additional casting notes."
 }

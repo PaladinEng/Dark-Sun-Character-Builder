@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "A frigid beam of blue-white light streaks toward a creature.",
+  "notes": "No additional casting notes."
 }

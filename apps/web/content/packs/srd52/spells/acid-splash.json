@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You hurl a bubble of acid.",
+  "notes": "No additional casting notes."
 }

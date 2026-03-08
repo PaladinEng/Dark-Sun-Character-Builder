@@ -6,5 +6,6 @@
   "weaponCategory": "simple",
   "properties": [
     "ranged"
-  ]
+  ],
+  "description": "Sling is a simple weapon that deals 1d4 damage."
 }

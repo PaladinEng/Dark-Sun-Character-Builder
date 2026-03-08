@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:eldritch-knight-improved-war-magic",
+  "name": "Improved War Magic",
+  "description": "Eldritch Knight feature gained at level 18.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Improved War Magic",
+      "description": "Eldritch Knight feature (level 18)."
+    }
+  ]
+}

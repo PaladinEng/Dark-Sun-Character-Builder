@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:nature-domain-nature-domain-spells",
+  "name": "Nature Domain Spells",
+  "description": "Nature Domain feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Nature Domain Spells",
+      "description": "Nature Domain feature (level 3)."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:water-breathing",
+  "name": "Water Breathing",
+  "description": "You grant creatures the ability to breathe underwater for an extended period.",
+  "level": 3,
+  "school": "transmutation",
+  "ritual": true,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "24 hours",
+  "concentration": false,
+  "summary": "You grant creatures the ability to breathe underwater for an extended period.",
+  "notes": "Can be cast as a ritual."
+}

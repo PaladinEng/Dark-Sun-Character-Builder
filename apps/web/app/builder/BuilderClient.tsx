@@ -37,6 +37,7 @@ type BackgroundAbilityOptions = {
 type Option = {
   id: string;
   name: string;
+  description?: string;
   type?:
     | "armor_light"
     | "armor_medium"
@@ -87,8 +88,19 @@ type Option = {
       cantripsKnown?: number;
     }>;
   };
+  invocationSelectionLimitsByLevel?: Array<{
+    level: number;
+    max: number;
+  }>;
   spellListRefIds?: string[];
   spellListRefs?: string[];
+  classId?: string;
+  subclassFeaturesByLevel?: Array<{
+    level: number;
+    featureId: string;
+  }>;
+  selectable?: boolean;
+  tags?: string[];
 };
 
 type SpellSelectionField = "knownSpellIds" | "preparedSpellIds" | "cantripsKnownIds";
@@ -97,6 +109,7 @@ type BuilderOptions = {
   species: Option[];
   backgrounds: Option[];
   classes: Option[];
+  subclasses: Option[];
   armor: Option[];
   shields: Option[];
   weapons: Option[];
@@ -401,14 +414,101 @@ function isFeatEligibleForState(
   return true;
 }
 
+function isFeatureOptionEligibleForState(
+  feature: Option,
+  state: BuilderState,
+  derived: DerivedState,
+  selectedFeatureIds: Set<string>,
+): boolean {
+  const prereq = feature.prerequisites;
+  if (!prereq) {
+    return true;
+  }
+
+  if (typeof prereq.minLevel === "number" && state.level < prereq.minLevel) {
+    return false;
+  }
+
+  if (
+    prereq.classIds &&
+    prereq.classIds.length > 0 &&
+    (!state.selectedClassId || !prereq.classIds.includes(state.selectedClassId))
+  ) {
+    return false;
+  }
+
+  if (
+    prereq.speciesIds &&
+    prereq.speciesIds.length > 0 &&
+    (!state.selectedSpeciesId || !prereq.speciesIds.includes(state.selectedSpeciesId))
+  ) {
+    return false;
+  }
+
+  if (prereq.featureIds && prereq.featureIds.length > 0) {
+    const hasAllRequiredFeatures = prereq.featureIds.every((featureId) =>
+      selectedFeatureIds.has(featureId),
+    );
+    if (!hasAllRequiredFeatures) {
+      return false;
+    }
+  }
+
+  if (
+    prereq.requiresSpellcasting &&
+    !derived.spellcastingAbility &&
+    !derived.spellcasting
+  ) {
+    return false;
+  }
+
+  if (prereq.abilities) {
+    const reqs = Object.entries(prereq.abilities).filter(
+      (entry): entry is [Ability, number] => typeof entry[1] === "number",
+    );
+    for (const [ability, minimum] of reqs) {
+      if ((derived.finalAbilities[ability] ?? 0) < minimum) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+function getInvocationSelectionLimit(
+  klass: Option | undefined,
+  level: number,
+): number | undefined {
+  const entries = klass?.invocationSelectionLimitsByLevel;
+  if (!entries || entries.length === 0) {
+    return undefined;
+  }
+  const sorted = [...entries].sort((a, b) => a.level - b.level);
+  let current: number | undefined;
+  for (const entry of sorted) {
+    if (entry.level > level) {
+      break;
+    }
+    current = entry.max;
+  }
+  return current;
+}
+
 function downloadFile(filename: string, contents: BlobPart, mimeType: string): void {
   const blob = new Blob([contents], { type: mimeType });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = url;
   anchor.download = filename;
+  anchor.rel = "noopener";
+  anchor.style.display = "none";
+  document.body.appendChild(anchor);
   anchor.click();
-  URL.revokeObjectURL(url);
+  anchor.remove();
+  window.setTimeout(() => {
+    URL.revokeObjectURL(url);
+  }, 0);
 }
 
 function encodePayloadToBase64Url(payload: unknown): string {
@@ -419,6 +519,14 @@ function encodePayloadToBase64Url(payload: unknown): string {
     binary += String.fromCharCode(byte);
   }
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function createCharacterPayload(state: BuilderState, enabledPackIds: string[]) {
+  return {
+    characterState: state,
+    enabledPackIds: enabledPackIds,
+    generatedAt: new Date().toISOString(),
+  };
 }
 
 export default function BuilderClient({
@@ -446,6 +554,9 @@ export default function BuilderClient({
     selectedBackgroundId: undefined,
     selectedClassId: undefined,
     subclass: undefined,
+    warlockInvocationFeatureIds: [],
+    warlockPactBoonFeatureId: undefined,
+    warlockMysticArcanumByLevel: {},
     xp: 0,
     heroicInspiration: false,
     equippedArmorId: undefined,
@@ -553,15 +664,80 @@ export default function BuilderClient({
     () => options.classes.find((entry) => entry.id === state.selectedClassId),
     [options.classes, state.selectedClassId],
   );
+  const availableSubclasses = useMemo(
+    () =>
+      options.subclasses
+        .filter((entry) => entry.classId === state.selectedClassId)
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    [options.subclasses, state.selectedClassId],
+  );
+  const selectedSubclass = useMemo(
+    () =>
+      availableSubclasses.find((entry) => entry.id === state.subclass) ??
+      options.subclasses.find((entry) => entry.id === state.subclass),
+    [availableSubclasses, options.subclasses, state.subclass],
+  );
+  const isWarlockClass = selectedClass?.spellcasting?.progression === "pact";
+  const selectedSpellcasting = selectedSubclass?.spellcasting ?? selectedClass?.spellcasting;
+  const selectableFeatures = useMemo(
+    () => content.features.filter((feature) => feature.selectable === true) as Option[],
+    [content.features],
+  );
+  const selectedWarlockFeatureIdsForPrereqs = useMemo(
+    () =>
+      new Set([
+        ...(state.selectedFeatureIds ?? []),
+        ...(state.warlockInvocationFeatureIds ?? []),
+        ...(state.warlockPactBoonFeatureId ? [state.warlockPactBoonFeatureId] : []),
+      ]),
+    [state.selectedFeatureIds, state.warlockInvocationFeatureIds, state.warlockPactBoonFeatureId],
+  );
+  const warlockInvocationOptions = useMemo(
+    () =>
+      selectableFeatures.filter((feature) => feature.tags?.includes("warlock_invocation")),
+    [selectableFeatures],
+  );
+  const warlockPactBoonOptions = useMemo(
+    () =>
+      selectableFeatures.filter((feature) => feature.tags?.includes("warlock_pact_boon")),
+    [selectableFeatures],
+  );
+  const warlockInvocationLimit = useMemo(
+    () => getInvocationSelectionLimit(selectedClass, state.level),
+    [selectedClass, state.level],
+  );
+  const selectedWarlockInvocationIds = useMemo(
+    () => sortStringIds(state.warlockInvocationFeatureIds ?? []),
+    [state.warlockInvocationFeatureIds],
+  );
+  const selectedWarlockPactBoonId = state.warlockPactBoonFeatureId;
+  const unlockedMysticArcanumTiers = useMemo(() => {
+    if (!isWarlockClass) {
+      return [];
+    }
+    const tiers: Array<{ tier: 6 | 7 | 8 | 9; unlockLevel: number }> = [
+      { tier: 6, unlockLevel: 11 },
+      { tier: 7, unlockLevel: 13 },
+      { tier: 8, unlockLevel: 15 },
+      { tier: 9, unlockLevel: 17 },
+    ];
+    return tiers.filter((entry) => state.level >= entry.unlockLevel);
+  }, [isWarlockClass, state.level]);
   const classSpellSelectionLimits = useMemo(() => {
-    return selectedClass?.spellcasting?.selectionLimitsByLevel?.find(
+    return selectedSpellcasting?.selectionLimitsByLevel?.find(
       (entry) => entry.level === state.level,
     );
-  }, [selectedClass?.spellcasting?.selectionLimitsByLevel, state.level]);
-  const classSpellListRefIds = useMemo(
-    () => selectedClass?.spellListRefIds ?? selectedClass?.spellListRefs ?? [],
-    [selectedClass?.spellListRefIds, selectedClass?.spellListRefs],
-  );
+  }, [selectedSpellcasting?.selectionLimitsByLevel, state.level]);
+  const classSpellListRefIds = useMemo(() => {
+    const classRefs = selectedClass?.spellListRefIds ?? selectedClass?.spellListRefs ?? [];
+    const subclassRefs = selectedSubclass?.spellListRefIds ?? selectedSubclass?.spellListRefs ?? [];
+    return sortStringIds(Array.from(new Set([...classRefs, ...subclassRefs])));
+  }, [
+    selectedClass?.spellListRefIds,
+    selectedClass?.spellListRefs,
+    selectedSubclass?.spellListRefIds,
+    selectedSubclass?.spellListRefs,
+  ]);
   const missingClassSpellListRefIds = useMemo(() => {
     return classSpellListRefIds.filter((spellListId) => !content.spellListsById[spellListId]);
   }, [classSpellListRefIds, content.spellListsById]);
@@ -592,6 +768,13 @@ export default function BuilderClient({
     () => availableClassSpells.filter((spell) => spell.level > 0),
     [availableClassSpells],
   );
+  const availableMysticArcanumSpellsByTier = useMemo(() => {
+    const byTier: Record<number, Spell[]> = {};
+    for (const { tier } of unlockedMysticArcanumTiers) {
+      byTier[tier] = availableClassSpells.filter((spell) => spell.level === tier);
+    }
+    return byTier;
+  }, [availableClassSpells, unlockedMysticArcanumTiers]);
   const selectedWeapon = useMemo(
     () => options.weapons.find((entry) => entry.id === state.equippedWeaponId),
     [options.weapons, state.equippedWeaponId],
@@ -809,18 +992,57 @@ export default function BuilderClient({
         }
         return undefined;
       };
+      const selectedClassId = valid(previous.selectedClassId, options.classes);
+      const availableFeatureById = content.featuresById;
+      const nextInvocationIds = sortStringIds(
+        (previous.warlockInvocationFeatureIds ?? []).filter((featureId) => {
+          const feature = availableFeatureById[featureId] as Option | undefined;
+          return Boolean(feature && feature.tags?.includes("warlock_invocation"));
+        }),
+      );
+      const nextPactBoonId = (() => {
+        const featureId = previous.warlockPactBoonFeatureId;
+        if (!featureId) {
+          return undefined;
+        }
+        const feature = availableFeatureById[featureId] as Option | undefined;
+        return feature?.tags?.includes("warlock_pact_boon") ? featureId : undefined;
+      })();
+      const nextMysticArcanumByLevel = Object.fromEntries(
+        Object.entries(previous.warlockMysticArcanumByLevel ?? {}).filter(([tierKey, spellId]) => {
+          const tier = Number(tierKey);
+          return (
+            (tier === 6 || tier === 7 || tier === 8 || tier === 9) &&
+            typeof spellId === "string" &&
+            spellId.length > 0 &&
+            Boolean(content.spellsById[spellId])
+          );
+        }),
+      ) as BuilderState["warlockMysticArcanumByLevel"];
 
       return {
         ...previous,
         selectedSpeciesId: valid(previous.selectedSpeciesId, options.species),
         selectedBackgroundId: valid(previous.selectedBackgroundId, options.backgrounds),
-        selectedClassId: valid(previous.selectedClassId, options.classes),
+        selectedClassId,
+        subclass:
+          previous.subclass &&
+          options.subclasses.some(
+            (entry) =>
+              entry.id === previous.subclass &&
+              (!selectedClassId || entry.classId === selectedClassId),
+          )
+            ? previous.subclass
+            : undefined,
         equippedArmorId: valid(previous.equippedArmorId, options.armor),
         equippedShieldId: valid(previous.equippedShieldId, options.shields),
         equippedWeaponId: valid(previous.equippedWeaponId, options.weapons),
+        warlockInvocationFeatureIds: nextInvocationIds,
+        warlockPactBoonFeatureId: nextPactBoonId,
+        warlockMysticArcanumByLevel: nextMysticArcanumByLevel,
       };
     });
-  }, [options]);
+  }, [content.featuresById, content.spellsById, options]);
 
   useEffect(() => {
     setState((previous) => {
@@ -944,7 +1166,7 @@ export default function BuilderClient({
         : 0;
       return {
         level: Math.max(1, Math.floor(state.level || 1)),
-        subclass: state.subclass ?? null,
+        subclass: selectedSubclass?.name ?? state.subclass ?? null,
         xp: Number.isFinite(state.xp) ? Math.max(0, Math.floor(state.xp ?? 0)) : null,
         heroicInspiration: state.heroicInspiration === true,
         abilities: derived.finalAbilities,
@@ -1017,7 +1239,7 @@ export default function BuilderClient({
         warnings: derived.warnings,
       };
     },
-    [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, state],
+    [derived, selectedBackground?.name, selectedClass?.name, selectedSpecies?.name, selectedSubclass?.name, state],
   );
 
   const advancementSlots = (derived.advancementSlots ?? []) as Array<Record<string, unknown>>;
@@ -1392,27 +1614,73 @@ export default function BuilderClient({
     });
   };
 
+  const onToggleWarlockInvocation = (featureId: string, checked: boolean) => {
+    setState((previous) => {
+      const next = new Set(previous.warlockInvocationFeatureIds ?? []);
+      if (checked) {
+        if (next.has(featureId)) {
+          return previous;
+        }
+        const max = getInvocationSelectionLimit(selectedClass, previous.level);
+        if (typeof max === "number" && next.size >= max) {
+          return previous;
+        }
+        next.add(featureId);
+      } else {
+        if (!next.has(featureId)) {
+          return previous;
+        }
+        next.delete(featureId);
+      }
+      return {
+        ...previous,
+        warlockInvocationFeatureIds: sortStringIds(Array.from(next)),
+      };
+    });
+  };
+
+  const onSelectWarlockPactBoon = (featureId: string | undefined) => {
+    setState((previous) => ({
+      ...previous,
+      warlockPactBoonFeatureId: featureId,
+    }));
+  };
+
+  const onSelectMysticArcanumSpell = (tier: 6 | 7 | 8 | 9, spellId: string | undefined) => {
+    setState((previous) => {
+      const next = { ...(previous.warlockMysticArcanumByLevel ?? {}) };
+      if (spellId && spellId.length > 0) {
+        next[tier] = spellId;
+      } else {
+        delete next[tier];
+      }
+      return {
+        ...previous,
+        warlockMysticArcanumByLevel: next,
+      };
+    });
+  };
+
   const onDownloadJson = () => {
+    const characterPayload = createCharacterPayload(state, enabledSources);
     const payload = {
-      state,
+      characterState: characterPayload.characterState,
+      state: characterPayload.characterState,
       derived: exportedDerivedState,
       validation,
-      enabledPackIds: enabledSources,
-      generatedAt: new Date().toISOString(),
+      enabledPackIds: characterPayload.enabledPackIds,
+      generatedAt: characterPayload.generatedAt,
     };
     downloadFile("character-sheet.json", `${JSON.stringify(payload, null, 2)}\n`, "application/json");
     setExportNotice("JSON exported with validation report.");
   };
 
   const onOpenHtmlSheet = () => {
-    const payload = encodePayloadToBase64Url({
-      characterState: state,
-      enabledPackIds: enabledSources,
-      generatedAt: new Date().toISOString(),
-    });
+    const payload = encodePayloadToBase64Url(createCharacterPayload(state, enabledSources));
     const url = `/sheet?payload=${encodeURIComponent(payload)}`;
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    const opened = window.open(url, "_blank");
     if (opened) {
+      opened.opener = null;
       setExportNotice("Opened HTML sheet in a new tab.");
       return;
     }
@@ -1441,15 +1709,13 @@ export default function BuilderClient({
     }
 
     try {
+      const characterPayload = createCharacterPayload(state, enabledSources);
       const response = await fetch("/api/export/pdf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          characterState: state,
-          enabledPackIds: enabledSources,
-        }),
+        body: JSON.stringify(characterPayload),
       });
 
       if (!response.ok) {
@@ -1812,6 +2078,10 @@ export default function BuilderClient({
               setState((previous) => ({
                 ...previous,
                 selectedClassId: event.target.value || undefined,
+                subclass: undefined,
+                warlockInvocationFeatureIds: [],
+                warlockPactBoonFeatureId: undefined,
+                warlockMysticArcanumByLevel: {},
                 chosenClassSkills: [],
                 touched: {
                   ...(previous.touched ?? {}),
@@ -1822,6 +2092,28 @@ export default function BuilderClient({
           >
             <option value="">None</option>
             {options.classes.map((entry) => (
+              <option key={entry.id} value={entry.id}>
+                {entry.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="text-sm">
+          <div className="font-semibold">Subclass</div>
+          <select
+            className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+            value={state.subclass ?? ""}
+            onChange={(event) =>
+              setState((previous) => ({
+                ...previous,
+                subclass: event.target.value || undefined,
+              }))
+            }
+            disabled={!state.selectedClassId || availableSubclasses.length === 0}
+          >
+            <option value="">None</option>
+            {availableSubclasses.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
               </option>
@@ -1886,22 +2178,6 @@ export default function BuilderClient({
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Identity & Combat Tracking</div>
           <div className="mt-1 grid gap-2 md:grid-cols-3">
-            <label className="text-sm">
-              <div className="font-semibold">Subclass</div>
-              <input
-                type="text"
-                value={state.subclass ?? ""}
-                onChange={(event) =>
-                  setState((previous) => ({
-                    ...previous,
-                    subclass: event.target.value.trim() ? event.target.value : undefined,
-                  }))
-                }
-                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
-                placeholder="e.g. Berserker"
-              />
-            </label>
-
             <label className="text-sm">
               <div className="font-semibold">XP</div>
               <input
@@ -2633,11 +2909,11 @@ export default function BuilderClient({
         </div>
       </section>
 
-      {selectedClass?.spellcasting ? (
+      {selectedSpellcasting ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold">Spell Selection</h2>
           <p className="mt-1 text-sm text-slate-300">
-            Available spells come from the selected class spell list references (
+            Available spells come from selected class/subclass spell list references (
             {classSpellListRefIds.length} list{classSpellListRefIds.length === 1 ? "" : "s"}).
           </p>
           {missingClassSpellListRefIds.length > 0 ? (
@@ -2738,6 +3014,134 @@ export default function BuilderClient({
               );
             })}
           </div>
+        </section>
+      ) : null}
+
+      {isWarlockClass ? (
+        <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+          <h2 className="text-sm font-semibold">Warlock Options</h2>
+
+          <div className="mt-3 rounded border border-slate-700 p-3">
+            <div className="flex items-center justify-between gap-2">
+              <div className="text-sm font-semibold">Eldritch Invocations</div>
+              <div className="text-xs text-slate-300">
+                {selectedWarlockInvocationIds.length}/
+                {typeof warlockInvocationLimit === "number" ? warlockInvocationLimit : "∞"}
+              </div>
+            </div>
+            <div className="mt-2 grid gap-2 md:grid-cols-2">
+              {warlockInvocationOptions.length === 0 ? (
+                <p className="text-xs text-slate-300">
+                  No invocation options are available in enabled content.
+                </p>
+              ) : (
+                [...warlockInvocationOptions]
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((feature) => {
+                    const checked = selectedWarlockInvocationIds.includes(feature.id);
+                    const atLimit =
+                      typeof warlockInvocationLimit === "number" &&
+                      selectedWarlockInvocationIds.length >= warlockInvocationLimit;
+                    const eligible = isFeatureOptionEligibleForState(
+                      feature,
+                      state,
+                      derived,
+                      selectedWarlockFeatureIdsForPrereqs,
+                    );
+                    const disabled = !checked && (atLimit || !eligible);
+                    return (
+                      <label key={`warlock-invocation-${feature.id}`} className="rounded border border-slate-800 px-2 py-2 text-xs">
+                        <div className="flex items-start gap-2">
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            disabled={disabled}
+                            onChange={(event) =>
+                              onToggleWarlockInvocation(feature.id, event.target.checked)
+                            }
+                          />
+                          <span>
+                            <span className="font-semibold">{feature.name}</span>
+                            {feature.description ? (
+                              <span className="block text-slate-400">{feature.description}</span>
+                            ) : null}
+                            {!eligible ? (
+                              <span className="mt-1 block text-amber-300">Prerequisites not met.</span>
+                            ) : null}
+                          </span>
+                        </div>
+                      </label>
+                    );
+                  })
+              )}
+            </div>
+          </div>
+
+          <div className="mt-3 rounded border border-slate-700 p-3">
+            <div className="text-sm font-semibold">Pact Boon</div>
+            <label className="mt-2 block text-sm">
+              <select
+                className="w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                value={selectedWarlockPactBoonId ?? ""}
+                onChange={(event) =>
+                  onSelectWarlockPactBoon(event.target.value || undefined)
+                }
+              >
+                <option value="">Select pact boon…</option>
+                {[...warlockPactBoonOptions]
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((feature) => (
+                    <option key={`warlock-pact-${feature.id}`} value={feature.id}>
+                      {feature.name}
+                    </option>
+                  ))}
+              </select>
+            </label>
+            {!selectedWarlockPactBoonId && state.level >= 3 ? (
+              <p className="mt-2 text-xs text-amber-300">
+                Select one pact boon at level 3 or higher.
+              </p>
+            ) : null}
+          </div>
+
+          {unlockedMysticArcanumTiers.length > 0 ? (
+            <div className="mt-3 rounded border border-slate-700 p-3">
+              <div className="text-sm font-semibold">Mystic Arcanum</div>
+              <div className="mt-2 grid gap-2 md:grid-cols-2">
+                {unlockedMysticArcanumTiers.map(({ tier }) => {
+                  const selectedSpellId = state.warlockMysticArcanumByLevel?.[tier] ?? "";
+                  const tierSpells = availableMysticArcanumSpellsByTier[tier] ?? [];
+                  return (
+                    <label key={`warlock-arcanum-${tier}`} className="text-sm">
+                      <div className="font-semibold">{tier}th-level Arcanum</div>
+                      <select
+                        className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                        value={selectedSpellId}
+                        onChange={(event) =>
+                          onSelectMysticArcanumSpell(
+                            tier,
+                            event.target.value || undefined,
+                          )
+                        }
+                      >
+                        <option value="">Select {tier}th-level spell…</option>
+                        {tierSpells.map((spell) => (
+                          <option key={`warlock-arcanum-${tier}-${spell.id}`} value={spell.id}>
+                            {formatSpellNameWithFlags(spell)}
+                          </option>
+                        ))}
+                      </select>
+                      {tierSpells.length === 0 ? (
+                        <span className="mt-1 block text-xs text-amber-300">
+                          No {tier}th-level warlock spells are available in enabled content.
+                        </span>
+                      ) : null}
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
         </section>
       ) : null}
 

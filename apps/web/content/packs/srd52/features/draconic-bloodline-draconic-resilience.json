@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:draconic-bloodline-draconic-resilience",
+  "name": "Draconic Resilience",
+  "description": "Draconic Bloodline feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Draconic Resilience",
+      "description": "Draconic Bloodline feature (level 3)."
+    }
+  ]
+}

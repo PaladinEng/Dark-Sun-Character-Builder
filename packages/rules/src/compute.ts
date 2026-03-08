@@ -6,14 +6,14 @@ import type {
   Feature,
   MergedContent
 } from "@dark-sun/content";
-import { getClassFeatureIdsForLevel } from "@dark-sun/content";
+import { getClassFeatureIdsForLevel, getSubclassFeatureIdsForLevel, type Subclass } from "@dark-sun/content";
 
 import { getAvailableAdvancementSlots } from "./advancement";
 import { applyEffectsToCharacter } from "./effects";
 import { applyDerivedModifierPipeline } from "./modifiers";
 import { getResolvedSkillDefinitions } from "./skills";
 import { deriveStartingEquipment } from "./startingEquipment";
-import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
+import { getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   type Ability,
@@ -133,9 +133,43 @@ function resolveSelectedFeatures(
   state: CharacterState,
   merged: MergedContent
 ): Feature[] {
-  return (state.selectedFeatureIds ?? [])
+  const selectedIds = dedupe([
+    ...(state.selectedFeatureIds ?? []),
+    ...(state.warlockInvocationFeatureIds ?? []),
+    ...(state.warlockPactBoonFeatureId ? [state.warlockPactBoonFeatureId] : [])
+  ]);
+  return selectedIds
     .map((id) => merged.featuresById[id])
     .filter((feature): feature is Feature => Boolean(feature));
+}
+
+function getWarlockMysticArcanumTraits(
+  state: CharacterState,
+  merged: MergedContent
+): string[] {
+  const raw = state.warlockMysticArcanumByLevel;
+  if (!raw) {
+    return [];
+  }
+
+  const entries: Array<[number, string]> = [];
+  for (const [key, value] of Object.entries(raw)) {
+    if (typeof value !== "string" || value.length === 0) {
+      continue;
+    }
+    const tier = Number(key);
+    if (!Number.isInteger(tier) || tier < 6 || tier > 9) {
+      continue;
+    }
+    entries.push([tier, value]);
+  }
+
+  entries.sort((a, b) => a[0] - b[0]);
+  return entries.map(([tier, spellId]) => {
+    const spell = merged.spellsById[spellId];
+    const spellName = spell?.name ?? spellId;
+    return `Mystic Arcanum (${tier}th): ${spellName}`;
+  });
 }
 
 function resolveClassFeatures(
@@ -148,6 +182,35 @@ function resolveClassFeatures(
   }
 
   return getClassFeatureIdsForLevel(klass, level)
+    .map((id) => merged.featuresById[id])
+    .filter((feature): feature is Feature => Boolean(feature));
+}
+
+function resolveSelectedSubclass(
+  state: CharacterState,
+  klass: Class | undefined,
+  merged: MergedContent
+): Subclass | undefined {
+  if (!state.subclass) {
+    return undefined;
+  }
+  const subclass = merged.subclassesById?.[state.subclass];
+  if (!subclass || !klass) {
+    return undefined;
+  }
+  return subclass.classId === klass.id ? subclass : undefined;
+}
+
+function resolveSubclassFeatures(
+  subclass: Subclass | undefined,
+  level: number,
+  merged: MergedContent
+): Feature[] {
+  if (!subclass) {
+    return [];
+  }
+
+  return getSubclassFeatureIdsForLevel(subclass, level)
     .map((id) => merged.featuresById[id])
     .filter((feature): feature is Feature => Boolean(feature));
 }
@@ -272,8 +335,10 @@ export function computeDerivedState(
   const klass: Class | undefined = state.selectedClassId
     ? merged.classesById[state.selectedClassId]
     : undefined;
+  const subclass = resolveSelectedSubclass(state, klass, merged);
   const features = resolveSelectedFeatures(state, merged);
   const classFeatures = resolveClassFeatures(klass, level, merged);
+  const subclassFeatures = resolveSubclassFeatures(subclass, level, merged);
   const levelFeatIds = [...advancementsByLevel.entries()]
     .filter(
       (entry): entry is [number, Extract<Advancement, { type: "feat" }>] =>
@@ -289,7 +354,10 @@ export function computeDerivedState(
     ...speciesEffects,
     ...(background?.effects ?? []),
     ...(klass?.effects ?? []),
+    ...(subclass?.effects ?? []),
+    ...(subclass?.passiveModifiers ?? []),
     ...classFeatures.flatMap((feature) => feature.effects ?? []),
+    ...subclassFeatures.flatMap((feature) => feature.effects ?? []),
     ...features.flatMap((feature) => feature.effects ?? []),
     ...feats.flatMap((feat) => feat.effects ?? [])
   ];
@@ -306,7 +374,8 @@ export function computeDerivedState(
       : [];
   const senses = speciesApplied.senses;
   const resistances = speciesApplied.resistances;
-  const traits = dedupe([...speedTraits, ...applied.traits]);
+  const mysticArcanumTraits = getWarlockMysticArcanumTraits(state, merged);
+  const traits = dedupe([...speedTraits, ...applied.traits, ...mysticArcanumTraits]);
 
   const skillProficiencies = dedupe([
     ...(state.chosenSkillProficiencies ?? []),
@@ -486,14 +555,12 @@ export function computeDerivedState(
   const preparedSpellIds = sortIds(state.preparedSpellIds);
   const cantripsKnownIds = sortIds(state.cantripsKnownIds);
 
-  const spellcasting = klass?.spellcasting
+  const spellcastingConfig = subclass?.spellcasting ?? klass?.spellcasting;
+  const spellcasting = spellcastingConfig
     ? (() => {
-        const spellAbility = klass.spellcasting.ability;
+        const spellAbility = spellcastingConfig.ability;
         const abilityMod = abilityMods[spellAbility];
-        const slots =
-          klass.spellcasting.progression === "pact"
-            ? createEmptySpellSlots()
-            : getSpellSlots(level, klass.spellcasting.progression);
+        const slots = getSpellSlots(level, spellcastingConfig.progression);
         const saveDC = 8 + proficiencyBonus + abilityMod;
         const attackBonus = proficiencyBonus + abilityMod;
 
@@ -507,7 +574,7 @@ export function computeDerivedState(
           abilityMod,
           saveDC,
           attackBonus,
-          progression: klass.spellcasting.progression,
+          progression: spellcastingConfig.progression,
           slots,
           knownSpellIds,
           preparedSpellIds,

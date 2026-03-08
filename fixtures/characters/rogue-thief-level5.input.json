@@ -1,0 +1,197 @@
+{
+  "state": {
+    "level": 5,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 12,
+      "int": 13,
+      "wis": 12,
+      "cha": 10
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:background:none",
+    "selectedClassId": "test:class:rogue",
+    "subclass": "test:subclass:thief",
+    "featSelections": {
+      "level": {
+        "4": "test:feat:durable-training"
+      }
+    },
+    "chosenClassSkills": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "languages": [],
+    "selectedFeats": [],
+    "selectedFeatureIds": [],
+    "advancements": []
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Fixture Test Pack",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "fixture-test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    ],
+    "skillDefinitions": [],
+    "backgrounds": [
+      {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:rogue",
+        "name": "Rogue",
+        "hitDie": 8,
+        "classFeaturesByLevel": [
+          {
+            "level": 1,
+            "featureId": "test:feature:sneak-attack"
+          }
+        ]
+      }
+    ],
+    "subclasses": [
+      {
+        "id": "test:subclass:thief",
+        "classId": "test:class:rogue",
+        "name": "Thief",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 3,
+            "featureId": "test:feature:thief-fast-hands"
+          }
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "test:feature:sneak-attack",
+        "name": "Sneak Attack",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Sneak Attack"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:thief-fast-hands",
+        "name": "Fast Hands",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Fast Hands"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    ],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    },
+    "skillDefinitionsById": {},
+    "backgroundsById": {
+      "test:background:none": {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    },
+    "classesById": {
+      "test:class:rogue": {
+        "id": "test:class:rogue",
+        "name": "Rogue",
+        "hitDie": 8,
+        "classFeaturesByLevel": [
+          {
+            "level": 1,
+            "featureId": "test:feature:sneak-attack"
+          }
+        ]
+      }
+    },
+    "subclassesById": {
+      "test:subclass:thief": {
+        "id": "test:subclass:thief",
+        "classId": "test:class:rogue",
+        "name": "Thief",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 3,
+            "featureId": "test:feature:thief-fast-hands"
+          }
+        ]
+      }
+    },
+    "featuresById": {
+      "test:feature:sneak-attack": {
+        "id": "test:feature:sneak-attack",
+        "name": "Sneak Attack",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Sneak Attack"
+          }
+        ]
+      },
+      "test:feature:thief-fast-hands": {
+        "id": "test:feature:thief-fast-hands",
+        "name": "Fast Hands",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Fast Hands"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:durable-training": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    },
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

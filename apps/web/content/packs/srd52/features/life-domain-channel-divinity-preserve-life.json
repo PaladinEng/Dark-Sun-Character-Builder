@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:life-domain-channel-divinity-preserve-life",
+  "name": "Channel Divinity: Preserve Life",
+  "description": "Life Domain feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Channel Divinity: Preserve Life",
+      "description": "Life Domain feature (level 6)."
+    }
+  ]
+}

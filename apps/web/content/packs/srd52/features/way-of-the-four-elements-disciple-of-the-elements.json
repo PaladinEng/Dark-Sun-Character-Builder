@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:way-of-the-four-elements-disciple-of-the-elements",
+  "name": "Disciple of the Elements",
+  "description": "Way of the Four Elements feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Disciple of the Elements",
+      "description": "Way of the Four Elements feature (level 3)."
+    }
+  ]
+}

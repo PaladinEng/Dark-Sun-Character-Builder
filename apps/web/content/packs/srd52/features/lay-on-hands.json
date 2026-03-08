@@ -6,5 +6,6 @@
       "type": "grant_trait",
       "name": "Lay on Hands"
     }
-  ]
+  ],
+  "description": "Lay on Hands class feature."
 }

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:necromancy-command-undead",
+  "name": "Command Undead",
+  "description": "School of Necromancy feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Command Undead",
+      "description": "School of Necromancy feature (level 14)."
+    }
+  ]
+}

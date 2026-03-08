@@ -6,5 +6,6 @@
       "type": "grant_trait",
       "name": "Sorcerous Origin"
     }
-  ]
+  ],
+  "description": "Sorcerous Origin class feature."
 }

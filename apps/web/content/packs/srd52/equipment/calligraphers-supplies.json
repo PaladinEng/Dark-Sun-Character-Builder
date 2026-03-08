@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:calligraphers-supplies",
   "type": "adventuring_gear",
-  "name": "Calligrapher's Supplies"
+  "name": "Calligrapher's Supplies",
+  "description": "Calligrapher's Supplies is adventuring gear for exploration and utility."
 }

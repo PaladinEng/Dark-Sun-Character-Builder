@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:illusion-illusory-self",
+  "name": "Illusory Self",
+  "description": "School of Illusion feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Illusory Self",
+      "description": "School of Illusion feature (level 10)."
+    }
+  ]
+}

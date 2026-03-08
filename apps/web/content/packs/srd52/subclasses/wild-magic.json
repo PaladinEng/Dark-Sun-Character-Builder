@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:wild-magic",
+  "classId": "srd52:class:sorcerer",
+  "name": "Wild Magic",
+  "description": "A volatile origin defined by unstable surges and chaotic arcane potential.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:wild-magic-wild-magic-surge"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:wild-magic-tides-of-chaos"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:wild-magic-bend-luck"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:wild-magic-controlled-chaos"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:wild-magic-spell-bombardment"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Wild Magic Training",
+      "description": "Wild Magic features apply according to subclass progression."
+    }
+  ]
+}

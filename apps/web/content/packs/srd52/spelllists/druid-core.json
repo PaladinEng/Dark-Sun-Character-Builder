@@ -17,6 +17,10 @@
     "srd52:spell:lesser-restoration",
     "srd52:spell:pass-without-trace",
     "srd52:spell:spike-growth",
-    "srd52:spell:daylight"
+    "srd52:spell:daylight",
+    "srd52:spell:fog-cloud",
+    "srd52:spell:longstrider",
+    "srd52:spell:darkvision",
+    "srd52:spell:water-breathing"
   ]
 }

@@ -1,0 +1,178 @@
+{
+  "state": {
+    "level": 5,
+    "baseAbilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 12,
+      "int": 16,
+      "wis": 10,
+      "cha": 10
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:background:none",
+    "selectedClassId": "test:class:wizard",
+    "subclass": "test:subclass:evocation",
+    "featSelections": {
+      "level": {
+        "4": "test:feat:durable-training"
+      }
+    },
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "cantripsKnownIds": [],
+    "chosenClassSkills": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "languages": [],
+    "selectedFeats": [],
+    "selectedFeatureIds": [],
+    "advancements": []
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Fixture Test Pack",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "fixture-test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    ],
+    "skillDefinitions": [],
+    "backgrounds": [
+      {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:wizard",
+        "name": "Wizard",
+        "hitDie": 6,
+        "spellcasting": {
+          "ability": "int",
+          "progression": "full",
+          "mode": "prepared"
+        }
+      }
+    ],
+    "subclasses": [
+      {
+        "id": "test:subclass:evocation",
+        "classId": "test:class:wizard",
+        "name": "School of Evocation",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 2,
+            "featureId": "test:feature:evocation-sculpt-spells"
+          }
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "test:feature:evocation-sculpt-spells",
+        "name": "Sculpt Spells",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Sculpt Spells"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    ],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    },
+    "skillDefinitionsById": {},
+    "backgroundsById": {
+      "test:background:none": {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    },
+    "classesById": {
+      "test:class:wizard": {
+        "id": "test:class:wizard",
+        "name": "Wizard",
+        "hitDie": 6,
+        "spellcasting": {
+          "ability": "int",
+          "progression": "full",
+          "mode": "prepared"
+        }
+      }
+    },
+    "subclassesById": {
+      "test:subclass:evocation": {
+        "id": "test:subclass:evocation",
+        "classId": "test:class:wizard",
+        "name": "School of Evocation",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 2,
+            "featureId": "test:feature:evocation-sculpt-spells"
+          }
+        ]
+      }
+    },
+    "featuresById": {
+      "test:feature:evocation-sculpt-spells": {
+        "id": "test:feature:evocation-sculpt-spells",
+        "name": "Sculpt Spells",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Sculpt Spells"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:durable-training": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    },
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

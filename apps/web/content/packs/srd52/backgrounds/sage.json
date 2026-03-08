@@ -11,6 +11,12 @@
   },
   "grantsFeat": "srd52:feat:magic-initiate",
   "grantsOriginFeatId": "srd52:feat:magic-initiate",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:backpack",
+      "srd52:equipment:calligraphers-supplies"
+    ]
+  },
   "effects": [
     {
       "type": "grant_skill_proficiency",
@@ -24,5 +30,6 @@
       "type": "grant_language",
       "language": "Draconic"
     }
-  ]
+  ],
+  "description": "A learned researcher devoted to scholarship, study, and collected lore."
 }

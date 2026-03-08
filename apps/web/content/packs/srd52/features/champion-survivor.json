@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:champion-survivor",
+  "name": "Survivor",
+  "description": "Champion feature gained at level 18.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Survivor",
+      "description": "Champion feature (level 18)."
+    }
+  ]
+}

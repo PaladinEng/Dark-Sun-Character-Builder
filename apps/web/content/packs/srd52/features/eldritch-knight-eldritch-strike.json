@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:eldritch-knight-eldritch-strike",
+  "name": "Eldritch Strike",
+  "description": "Eldritch Knight feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Eldritch Strike",
+      "description": "Eldritch Knight feature (level 10)."
+    }
+  ]
+}

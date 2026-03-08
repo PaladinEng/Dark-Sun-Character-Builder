@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:chill-touch",
+  "name": "Chill Touch",
+  "description": "You create a spectral hand that deals necrotic damage and hinders healing.",
+  "level": 0,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You create a spectral hand that deals necrotic damage and hinders healing.",
+  "notes": "No additional casting notes."
+}

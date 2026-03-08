@@ -1,0 +1,205 @@
+{
+  "state": {
+    "level": 3,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 12,
+      "int": 14,
+      "wis": 12,
+      "cha": 10
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:bg:scout",
+    "selectedClassId": "test:class:rogue",
+    "selectedFeatureIds": [],
+    "chosenSkillProficiencies": [
+      "stealth",
+      "sleight_of_hand"
+    ],
+    "chosenSaveProficiencies": [
+      "dex"
+    ],
+    "toolProficiencies": [
+      "Thieves' Tools"
+    ],
+    "equippedArmorId": "test:armor:leather",
+    "equippedWeaponId": "test:weapon:rapier",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "features": [],
+    "featuresById": {},
+    "spells": [
+      {
+        "id": "test:spell:magic-missile",
+        "name": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    ],
+    "spellsById": {
+      "test:spell:magic-missile": {
+        "id": "test:spell:magic-missile",
+        "name": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    },
+    "spellLists": [],
+    "spellListsById": {},
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": []
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:scout",
+        "name": "Scout",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "stealth"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:rogue",
+        "name": "Rogue",
+        "hitDie": 8,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "dex"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:weapon:rapier",
+        "name": "Rapier",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "finesse"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": []
+      }
+    },
+    "backgroundsById": {
+      "test:bg:scout": {
+        "id": "test:bg:scout",
+        "name": "Scout",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "stealth"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:rogue": {
+        "id": "test:class:rogue",
+        "name": "Rogue",
+        "hitDie": 8,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "dex"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      }
+    },
+    "equipmentById": {
+      "test:armor:leather": {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:weapon:rapier": {
+        "id": "test:weapon:rapier",
+        "name": "Rapier",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "finesse"
+        ]
+      }
+    }
+  }
+}

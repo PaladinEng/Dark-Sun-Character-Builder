@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:path-of-the-berserker",
+  "classId": "srd52:class:barbarian",
+  "name": "Path of the Berserker",
+  "description": "A primal path that channels rage into fearless, punishing aggression.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:path-of-the-berserker-frenzy"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:path-of-the-berserker-mindless-rage"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:path-of-the-berserker-intimidating-presence"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:path-of-the-berserker-retaliation"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Path of the Berserker Training",
+      "description": "Path of the Berserker features apply according to subclass progression."
+    }
+  ]
+}

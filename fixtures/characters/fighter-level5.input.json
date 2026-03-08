@@ -1,0 +1,226 @@
+{
+  "state": {
+    "level": 5,
+    "baseAbilities": {
+      "str": 16,
+      "dex": 14,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 8
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:bg:scout",
+    "selectedClassId": "test:class:fighter",
+    "selectedFeatureIds": [],
+    "featSelections": {
+      "level": {
+        "4": "test:feat:tough"
+      }
+    },
+    "chosenSkillProficiencies": [
+      "athletics",
+      "perception"
+    ],
+    "chosenSaveProficiencies": [
+      "str"
+    ],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:chain-shirt",
+    "equippedWeaponId": "test:weapon:longsword",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "features": [],
+    "featuresById": {},
+    "spells": [
+      {
+        "id": "test:spell:magic-missile",
+        "name": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    ],
+    "spellsById": {
+      "test:spell:magic-missile": {
+        "id": "test:spell:magic-missile",
+        "name": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    },
+    "spellLists": [],
+    "spellListsById": {},
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": []
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:scout",
+        "name": "Scout",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "stealth"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      {
+        "id": "test:feat:tough",
+        "name": "Tough",
+        "category": "general",
+        "prerequisites": {
+          "minLevel": 4
+        }
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      {
+        "id": "test:weapon:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "versatile"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human",
+        "effects": []
+      }
+    },
+    "backgroundsById": {
+      "test:bg:scout": {
+        "id": "test:bg:scout",
+        "name": "Scout",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "stealth"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "weaponProficiencies": {
+          "simple": true,
+          "martial": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "str"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      "test:feat:tough": {
+        "id": "test:feat:tough",
+        "name": "Tough",
+        "category": "general",
+        "prerequisites": {
+          "minLevel": 4
+        }
+      }
+    },
+    "equipmentById": {
+      "test:armor:chain-shirt": {
+        "id": "test:armor:chain-shirt",
+        "name": "Chain Shirt",
+        "type": "armor_medium",
+        "armorClassBase": 13,
+        "dexCap": 2
+      },
+      "test:weapon:longsword": {
+        "id": "test:weapon:longsword",
+        "name": "Longsword",
+        "type": "weapon",
+        "damageDice": "1d8",
+        "weaponCategory": "martial",
+        "properties": [
+          "versatile"
+        ]
+      }
+    }
+  }
+}

@@ -32,6 +32,22 @@
     {
       "level": 1,
       "featureId": "srd52:feature:sorcerous-origin"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:font-of-magic"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:metamagic"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:metamagic-adept"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:sorcerous-restoration"
     }
   ],
   "startingEquipment": {
@@ -49,5 +65,6 @@
       "type": "grant_save_proficiency",
       "ability": "cha"
     }
-  ]
+  ],
+  "description": "An innate spellcaster who shapes magic through personal arcane power."
 }

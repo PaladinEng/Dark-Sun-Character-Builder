@@ -1,0 +1,21 @@
+{
+  "id": "srd52:feature:invocation-beast-speech",
+  "name": "Beast Speech",
+  "description": "You can converse with beasts through your patron's occult language.",
+  "selectable": true,
+  "tags": [
+    "warlock_invocation"
+  ],
+  "prerequisites": {
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Beast Speech",
+      "description": "Invocation selected: speak with beasts utility option."
+    }
+  ]
+}

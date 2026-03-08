@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "1 round",
-  "concentration": false
+  "concentration": false,
+  "summary": "An invisible barrier of magical force appears and protects you.",
+  "notes": "No additional casting notes."
 }

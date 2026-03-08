@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:champion-improved-critical",
+  "name": "Improved Critical",
+  "description": "Champion feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Improved Critical",
+      "description": "Champion feature (level 3)."
+    }
+  ]
+}

@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 1 hour",
-  "concentration": true
+  "concentration": true,
+  "summary": "You conjure a mass of thick, sticky webbing.",
+  "notes": "Requires concentration while active."
 }

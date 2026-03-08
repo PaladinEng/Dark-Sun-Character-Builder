@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:battle-master",
+  "classId": "srd52:class:fighter",
+  "name": "Battle Master",
+  "description": "A tactical combatant who turns technique and battlefield study into decisive advantages.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:battle-master-combat-superiority"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:battle-master-student-of-war"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:battle-master-know-your-enemy"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:battle-master-improved-combat-superiority"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:battle-master-relentless"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Battle Master Training",
+      "description": "Battle Master features apply according to subclass progression."
+    }
+  ]
+}

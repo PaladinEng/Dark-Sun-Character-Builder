@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:navigators-tools",
   "type": "adventuring_gear",
-  "name": "Navigator's Tools"
+  "name": "Navigator's Tools",
+  "description": "Navigator's Tools is adventuring gear for exploration and utility."
 }

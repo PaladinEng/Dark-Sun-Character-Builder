@@ -3,5 +3,6 @@
   "type": "weapon",
   "name": "Morningstar",
   "damageDice": "1d8",
-  "weaponCategory": "martial"
+  "weaponCategory": "martial",
+  "description": "Morningstar is a martial weapon that deals 1d8 damage."
 }

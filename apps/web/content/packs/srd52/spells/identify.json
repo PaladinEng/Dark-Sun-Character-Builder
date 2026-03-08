@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:identify",
+  "name": "Identify",
+  "description": "You learn the properties of a magic item or the nature of a magical effect.",
+  "level": 1,
+  "school": "divination",
+  "ritual": true,
+  "castingTime": "1 minute",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You learn the properties of a magic item or the nature of a magical effect.",
+  "notes": "Can be cast as a ritual."
+}

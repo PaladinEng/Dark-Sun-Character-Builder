@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You project a puff of poisonous gas.",
+  "notes": "No additional casting notes."
 }

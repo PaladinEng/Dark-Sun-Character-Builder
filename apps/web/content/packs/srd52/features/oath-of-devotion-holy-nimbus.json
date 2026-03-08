@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-devotion-holy-nimbus",
+  "name": "Holy Nimbus",
+  "description": "Oath of Devotion feature gained at level 20.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Holy Nimbus",
+      "description": "Oath of Devotion feature (level 20)."
+    }
+  ]
+}

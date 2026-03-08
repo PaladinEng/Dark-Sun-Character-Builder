@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "1 minute",
-  "concentration": false
+  "concentration": false,
+  "summary": "A spectral hand appears at a point you choose.",
+  "notes": "No additional casting notes."
 }

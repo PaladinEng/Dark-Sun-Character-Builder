@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:brewers-supplies",
   "type": "adventuring_gear",
-  "name": "Brewer's Supplies"
+  "name": "Brewer's Supplies",
+  "description": "Brewer's Supplies is adventuring gear for exploration and utility."
 }

@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:rations-1day",
   "type": "adventuring_gear",
-  "name": "Rations (1 day)"
+  "name": "Rations (1 day)",
+  "description": "Rations (1 day) is adventuring gear for exploration and utility."
 }

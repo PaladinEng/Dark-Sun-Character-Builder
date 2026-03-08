@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:knowledge-domain-potent-spellcasting-knowledge",
+  "name": "Potent Spellcasting: Knowledge",
+  "description": "Knowledge Domain feature gained at level 8.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Potent Spellcasting: Knowledge",
+      "description": "Knowledge Domain feature (level 8)."
+    }
+  ]
+}

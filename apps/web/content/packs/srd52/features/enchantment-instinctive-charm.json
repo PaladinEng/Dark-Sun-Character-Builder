@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:enchantment-instinctive-charm",
+  "name": "Instinctive Charm",
+  "description": "School of Enchantment feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Instinctive Charm",
+      "description": "School of Enchantment feature (level 6)."
+    }
+  ]
+}

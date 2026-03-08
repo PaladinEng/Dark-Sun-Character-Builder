@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:trickery-domain-improved-duplicity",
+  "name": "Improved Duplicity",
+  "description": "Trickery Domain feature gained at level 17.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Improved Duplicity",
+      "description": "Trickery Domain feature (level 17)."
+    }
+  ]
+}

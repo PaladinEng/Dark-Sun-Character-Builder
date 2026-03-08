@@ -21,7 +21,55 @@
   "classFeaturesByLevel": [
     {
       "level": 1,
+      "featureId": "srd52:feature:rage"
+    },
+    {
+      "level": 1,
       "featureId": "srd52:feature:unarmored-defense"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:reckless-attack"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:danger-sense"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:primal-path"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:extra-attack"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:fast-movement"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:feral-instinct"
+    },
+    {
+      "level": 9,
+      "featureId": "srd52:feature:brutal-critical"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:relentless-rage"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:persistent-rage"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:indomitable-might"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:primal-champion"
     }
   ],
   "startingEquipment": {
@@ -41,5 +89,6 @@
       "type": "grant_save_proficiency",
       "ability": "str"
     }
-  ]
+  ],
+  "description": "A primal warrior who channels fury and resilience in melee combat."
 }

@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 10 minutes",
-  "concentration": true
+  "concentration": true,
+  "summary": "The ground in an area twists and sprouts hard spikes.",
+  "notes": "Requires concentration while active."
 }

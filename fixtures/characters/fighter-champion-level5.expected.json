@@ -1,0 +1,85 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 2,
+    "dex": 1,
+    "int": 0,
+    "str": 3,
+    "wis": 0
+  },
+  "advancementSlots": [
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training"
+      },
+      "filled": true,
+      "level": 4
+    }
+  ],
+  "armorClass": 11,
+  "attack": null,
+  "feats": [
+    {
+      "id": "test:feat:durable-training",
+      "name": "Durable Training"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 12,
+    "int": 10,
+    "str": 16,
+    "wis": 10
+  },
+  "languages": [],
+  "maxHP": 44,
+  "passivePerception": 10,
+  "proficiencyBonus": 3,
+  "resistances": [],
+  "saveProficiencies": [],
+  "savingThrows": {
+    "cha": -1,
+    "con": 2,
+    "dex": 1,
+    "int": 0,
+    "str": 3,
+    "wis": 0
+  },
+  "senses": [],
+  "skillProficiencies": [],
+  "skills": {
+    "acrobatics": 1,
+    "animal_handling": 0,
+    "arcana": 0,
+    "athletics": 3,
+    "deception": -1,
+    "history": 0,
+    "insight": 0,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 0,
+    "nature": 0,
+    "perception": 0,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 0,
+    "sleight_of_hand": 1,
+    "stealth": 1,
+    "survival": 0
+  },
+  "speed": 30,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [],
+  "traits": [
+    "Durable Training: Fixture feat for advancement slot.",
+    "Improved Critical",
+    "Second Wind"
+  ],
+  "warnings": []
+}

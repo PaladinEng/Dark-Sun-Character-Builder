@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:thief-fast-hands",
+  "name": "Fast Hands",
+  "description": "Thief feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Fast Hands",
+      "description": "Thief feature (level 3)."
+    }
+  ]
+}

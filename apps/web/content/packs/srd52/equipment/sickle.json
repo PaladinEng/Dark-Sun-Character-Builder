@@ -6,5 +6,6 @@
   "weaponCategory": "simple",
   "properties": [
     "light"
-  ]
+  ],
+  "description": "Sickle is a simple weapon that deals 1d4 damage."
 }

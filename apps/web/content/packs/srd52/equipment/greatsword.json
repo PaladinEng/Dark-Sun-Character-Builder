@@ -7,5 +7,6 @@
   "properties": [
     "heavy",
     "two-handed"
-  ]
+  ],
+  "description": "Greatsword is a martial weapon that deals 2d6 damage."
 }

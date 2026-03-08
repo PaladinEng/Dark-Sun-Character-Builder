@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:abjuration-improved-abjuration",
+  "name": "Improved Abjuration",
+  "description": "School of Abjuration feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Improved Abjuration",
+      "description": "School of Abjuration feature (level 10)."
+    }
+  ]
+}

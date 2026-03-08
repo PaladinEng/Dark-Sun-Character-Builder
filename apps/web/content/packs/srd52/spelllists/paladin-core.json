@@ -11,6 +11,8 @@
     "srd52:spell:aid",
     "srd52:spell:lesser-restoration",
     "srd52:spell:prayer-of-healing",
-    "srd52:spell:revivify"
+    "srd52:spell:revivify",
+    "srd52:spell:heroism",
+    "srd52:spell:remove-curse"
   ]
 }

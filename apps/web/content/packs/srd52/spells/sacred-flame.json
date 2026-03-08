@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "Flame-like radiance descends on a creature that fails a Dexterity save.",
+  "notes": "No additional casting notes."
 }

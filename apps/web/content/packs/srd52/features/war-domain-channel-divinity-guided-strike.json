@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:war-domain-channel-divinity-guided-strike",
+  "name": "Channel Divinity: Guided Strike",
+  "description": "War Domain feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Channel Divinity: Guided Strike",
+      "description": "War Domain feature (level 6)."
+    }
+  ]
+}

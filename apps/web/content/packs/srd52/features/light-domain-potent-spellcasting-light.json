@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:light-domain-potent-spellcasting-light",
+  "name": "Potent Spellcasting: Light",
+  "description": "Light Domain feature gained at level 8.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Potent Spellcasting: Light",
+      "description": "Light Domain feature (level 8)."
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:smiths-tools",
   "type": "adventuring_gear",
-  "name": "Smith's Tools"
+  "name": "Smith's Tools",
+  "description": "Smith's Tools is adventuring gear for exploration and utility."
 }

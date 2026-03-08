@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:beast-master-ranger-s-companion",
+  "name": "Ranger's Companion",
+  "description": "Beast Master feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Ranger's Companion",
+      "description": "Beast Master feature (level 3)."
+    }
+  ]
+}

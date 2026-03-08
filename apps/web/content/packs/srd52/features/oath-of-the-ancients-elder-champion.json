@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-the-ancients-elder-champion",
+  "name": "Elder Champion",
+  "description": "Oath of the Ancients feature gained at level 20.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Elder Champion",
+      "description": "Oath of the Ancients feature (level 20)."
+    }
+  ]
+}

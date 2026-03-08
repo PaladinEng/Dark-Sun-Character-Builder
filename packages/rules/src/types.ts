@@ -75,6 +75,9 @@ export interface CharacterState {
   selectedBackgroundId?: string;
   selectedClassId?: string;
   selectedFeatureIds?: string[];
+  warlockInvocationFeatureIds?: string[];
+  warlockPactBoonFeatureId?: string;
+  warlockMysticArcanumByLevel?: Partial<Record<6 | 7 | 8 | 9, string>>;
   featSelections?: FeatSelections;
   // Legacy fields retained for backwards compatibility with older saves/fixtures.
   selectedFeats?: string[];

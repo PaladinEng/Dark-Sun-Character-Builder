@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:wild-magic-bend-luck",
+  "name": "Bend Luck",
+  "description": "Wild Magic feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Bend Luck",
+      "description": "Wild Magic feature (level 6)."
+    }
+  ]
+}

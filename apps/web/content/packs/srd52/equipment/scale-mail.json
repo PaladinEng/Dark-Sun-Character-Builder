@@ -4,5 +4,6 @@
   "name": "Scale Mail",
   "armorClassBase": 14,
   "dexCap": 2,
-  "stealthDisadvantage": true
+  "stealthDisadvantage": true,
+  "description": "Scale Mail provides base AC 14 and allows Dexterity modifier up to +2."
 }

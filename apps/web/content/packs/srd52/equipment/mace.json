@@ -3,5 +3,6 @@
   "type": "weapon",
   "name": "Mace",
   "damageDice": "1d6",
-  "weaponCategory": "simple"
+  "weaponCategory": "simple",
+  "description": "Mace is a simple weapon that deals 1d6 damage."
 }

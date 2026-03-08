@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You touch a creature that has died recently and restore it to life.",
+  "notes": "No additional casting notes."
 }

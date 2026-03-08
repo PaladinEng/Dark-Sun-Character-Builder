@@ -44,6 +44,34 @@
     {
       "level": 1,
       "featureId": "srd52:feature:bardic-inspiration"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:jack-of-all-trades"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:song-of-rest"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:bard-college"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:expertise"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:font-of-inspiration"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:magical-secrets"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:superior-inspiration"
     }
   ],
   "startingEquipment": {
@@ -64,5 +92,6 @@
       "type": "grant_save_proficiency",
       "ability": "cha"
     }
-  ]
+  ],
+  "description": "An inspiring performer and versatile spellcaster who supports allies through magic and skill."
 }

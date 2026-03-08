@@ -2,7 +2,7 @@ import { access, readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { NextResponse } from "next/server";
-import { getClassFeatureIdsForLevel, type Effect, type Spell } from "@dark-sun/content";
+import { getClassFeatureIdsForLevel, getSubclassFeatureIdsForLevel, type Effect, type Spell } from "@dark-sun/content";
 import type { AttunedItem, CharacterState } from "@dark-sun/rules";
 import {
   buildPdfExportFromTemplate,
@@ -79,6 +79,25 @@ function normalizeOptionalNonNegativeInt(
     return Math.min(maximum, bounded);
   }
   return bounded;
+}
+
+function normalizeWarlockMysticArcanumByLevel(
+  value: unknown
+): Partial<Record<6 | 7 | 8 | 9, string>> {
+  if (!isObjectRecord(value)) {
+    return {};
+  }
+  const out: Partial<Record<6 | 7 | 8 | 9, string>> = {};
+  for (const [key, spellId] of Object.entries(value)) {
+    const tier = Number(key);
+    if ((tier !== 6 && tier !== 7 && tier !== 8 && tier !== 9) || typeof spellId !== "string") {
+      continue;
+    }
+    if (spellId.length > 0) {
+      out[tier] = spellId;
+    }
+  }
+  return out;
 }
 
 function normalizeSpellSlotUsage(value: unknown): Array<number | null> | null {
@@ -194,6 +213,13 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
     selectedFeats: Array.isArray(input.selectedFeats) ? input.selectedFeats : [],
     selectedFeatureIds: Array.isArray(input.selectedFeatureIds) ? input.selectedFeatureIds : [],
+    warlockInvocationFeatureIds: Array.isArray(input.warlockInvocationFeatureIds)
+      ? input.warlockInvocationFeatureIds.filter((entry): entry is string => typeof entry === "string")
+      : [],
+    warlockPactBoonFeatureId: normalizeOptionalString(input.warlockPactBoonFeatureId),
+    warlockMysticArcanumByLevel: normalizeWarlockMysticArcanumByLevel(
+      input.warlockMysticArcanumByLevel
+    ),
     abilityIncreases: Array.isArray(input.abilityIncreases) ? input.abilityIncreases : [],
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
@@ -306,6 +332,9 @@ export async function POST(request: Request) {
   const selectedClass = payload.characterState.selectedClassId
     ? merged.content.classesById[payload.characterState.selectedClassId]
     : undefined;
+  const selectedSubclass = payload.characterState.subclass
+    ? merged.content.subclassesById?.[payload.characterState.subclass]
+    : undefined;
   const selectedSpecies = payload.characterState.selectedSpeciesId
     ? merged.content.speciesById[payload.characterState.selectedSpeciesId]
     : undefined;
@@ -398,7 +427,20 @@ export async function POST(request: Request) {
         (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
       )
     : [];
-  const selectedFeatureNames = (payload.characterState.selectedFeatureIds ?? [])
+  const subclassFeatureNames =
+    selectedSubclass && selectedClass && selectedSubclass.classId === selectedClass.id
+      ? getSubclassFeatureIdsForLevel(selectedSubclass, normalizedLevel).map(
+          (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
+        )
+      : [];
+  const allProgressionFeatureNames = [...new Set([...classFeatureNames, ...subclassFeatureNames])];
+  const selectedFeatureNames = [...new Set([
+    ...(payload.characterState.selectedFeatureIds ?? []),
+    ...(payload.characterState.warlockInvocationFeatureIds ?? []),
+    ...(payload.characterState.warlockPactBoonFeatureId
+      ? [payload.characterState.warlockPactBoonFeatureId]
+      : [])
+  ])]
     .map((featureId) => merged.content.featuresById[featureId]?.name ?? featureId)
     .filter((name) => name.trim().length > 0);
   const speciesTraitNames = summarizeSpeciesTraits(selectedSpecies?.description, selectedSpecies?.effects);
@@ -512,7 +554,7 @@ export async function POST(request: Request) {
     level: normalizedLevel,
     characterName,
     className: selectedClass?.name,
-    subclass: payload.characterState.subclass ?? null,
+    subclass: selectedSubclass?.name ?? payload.characterState.subclass ?? null,
     speciesName: selectedSpecies?.name,
     backgroundName: selectedBackground?.name,
     xp: payload.characterState.xp ?? null,
@@ -541,7 +583,7 @@ export async function POST(request: Request) {
     attackToHit: derived.attack?.toHit,
     attackDamage: derived.attack?.damage,
     attackNotes,
-    classFeatureNames,
+    classFeatureNames: allProgressionFeatureNames,
     speciesTraitNames,
     selectedFeatureNames,
     featNames: derived.feats.map((feat) => feat.name),

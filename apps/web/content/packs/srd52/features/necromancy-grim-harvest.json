@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:necromancy-grim-harvest",
+  "name": "Grim Harvest",
+  "description": "School of Necromancy feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Grim Harvest",
+      "description": "School of Necromancy feature (level 2)."
+    }
+  ]
+}

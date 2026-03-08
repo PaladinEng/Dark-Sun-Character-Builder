@@ -34,5 +34,6 @@
       "type": "grant_tool_proficiency",
       "tool": "Disguise Kit"
     }
-  ]
+  ],
+  "description": "A practiced performer skilled at captivating crowds and social encounters."
 }

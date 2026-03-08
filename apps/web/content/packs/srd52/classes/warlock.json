@@ -1,0 +1,116 @@
+{
+  "id": "srd52:class:warlock",
+  "name": "Warlock",
+  "description": "A pact-bound arcane caster who channels magic through a supernatural patron.",
+  "hitDie": 8,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "arcana",
+      "deception",
+      "history",
+      "intimidation",
+      "investigation",
+      "nature",
+      "religion"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true
+  },
+  "spellcasting": {
+    "ability": "cha",
+    "progression": "pact",
+    "mode": "known",
+    "selectionLimitsByLevel": [
+      { "level": 1, "known": 2, "prepared": 0, "cantripsKnown": 2 },
+      { "level": 2, "known": 3, "prepared": 0, "cantripsKnown": 2 },
+      { "level": 3, "known": 4, "prepared": 0, "cantripsKnown": 2 },
+      { "level": 4, "known": 5, "prepared": 0, "cantripsKnown": 3 },
+      { "level": 5, "known": 6, "prepared": 0, "cantripsKnown": 3 },
+      { "level": 6, "known": 7, "prepared": 0, "cantripsKnown": 3 },
+      { "level": 7, "known": 8, "prepared": 0, "cantripsKnown": 3 },
+      { "level": 8, "known": 9, "prepared": 0, "cantripsKnown": 3 },
+      { "level": 9, "known": 10, "prepared": 0, "cantripsKnown": 3 },
+      { "level": 10, "known": 10, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 11, "known": 11, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 12, "known": 11, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 13, "known": 12, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 14, "known": 12, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 15, "known": 13, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 16, "known": 13, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 17, "known": 14, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 18, "known": 14, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 19, "known": 15, "prepared": 0, "cantripsKnown": 4 },
+      { "level": 20, "known": 15, "prepared": 0, "cantripsKnown": 4 }
+    ]
+  },
+  "invocationSelectionLimitsByLevel": [
+    { "level": 2, "max": 2 },
+    { "level": 3, "max": 2 },
+    { "level": 4, "max": 2 },
+    { "level": 5, "max": 3 },
+    { "level": 6, "max": 3 },
+    { "level": 7, "max": 4 },
+    { "level": 8, "max": 4 },
+    { "level": 9, "max": 5 },
+    { "level": 10, "max": 5 },
+    { "level": 11, "max": 5 },
+    { "level": 12, "max": 6 },
+    { "level": 13, "max": 6 },
+    { "level": 14, "max": 6 },
+    { "level": 15, "max": 7 },
+    { "level": 16, "max": 7 },
+    { "level": 17, "max": 7 },
+    { "level": 18, "max": 8 },
+    { "level": 19, "max": 8 },
+    { "level": 20, "max": 8 }
+  ],
+  "spellListRefIds": [
+    "srd52:spelllist:warlock-core"
+  ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:otherworldly-patron"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:eldritch-invocations"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:pact-boon"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:mystic-arcanum"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:eldritch-master"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:leather-armor",
+      "srd52:equipment:dagger"
+    ],
+    "equippedArmorId": "srd52:equipment:leather-armor",
+    "equippedWeaponId": "srd52:equipment:dagger"
+  },
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "wis"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "cha"
+    }
+  ]
+}

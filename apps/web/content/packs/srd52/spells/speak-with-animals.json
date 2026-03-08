@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "10 minutes",
-  "concentration": false
+  "concentration": false,
+  "summary": "You gain the ability to understand and communicate with beasts.",
+  "notes": "Can be cast as a ritual."
 }

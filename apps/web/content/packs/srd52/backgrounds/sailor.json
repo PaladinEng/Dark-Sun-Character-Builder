@@ -31,5 +31,6 @@
       "type": "grant_tool_proficiency",
       "tool": "Navigator's Tools"
     }
-  ]
+  ],
+  "description": "A seasoned mariner familiar with ships, navigation, and hard travel."
 }

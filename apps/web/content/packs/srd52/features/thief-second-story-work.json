@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:thief-second-story-work",
+  "name": "Second-Story Work",
+  "description": "Thief feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Second-Story Work",
+      "description": "Thief feature (level 3)."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:divination-portent",
+  "name": "Portent",
+  "description": "School of Divination feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Portent",
+      "description": "School of Divination feature (level 2)."
+    }
+  ]
+}

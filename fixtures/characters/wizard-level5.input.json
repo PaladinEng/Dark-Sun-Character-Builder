@@ -1,0 +1,255 @@
+{
+  "state": {
+    "level": 5,
+    "baseAbilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 14,
+      "int": 16,
+      "wis": 12,
+      "cha": 10
+    },
+    "selectedSpeciesId": "test:species:elf",
+    "selectedBackgroundId": "test:bg:scholar",
+    "selectedClassId": "test:class:wizard",
+    "selectedFeatureIds": [],
+    "featSelections": {
+      "level": {
+        "4": "test:feat:sprinter"
+      }
+    },
+    "chosenSkillProficiencies": [
+      "arcana",
+      "investigation"
+    ],
+    "chosenSaveProficiencies": [
+      "int"
+    ],
+    "knownSpellIds": [
+      "test:spell:magic-missile"
+    ],
+    "preparedSpellIds": [
+      "test:spell:magic-missile"
+    ],
+    "cantripsKnownIds": [],
+    "toolProficiencies": [],
+    "equippedArmorId": "test:armor:leather",
+    "equippedWeaponId": "test:weapon:dagger",
+    "baseSpeed": 30
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Test",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "test"
+      }
+    ],
+    "features": [],
+    "featuresById": {},
+    "spells": [
+      {
+        "id": "test:spell:magic-missile",
+        "name": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    ],
+    "spellsById": {
+      "test:spell:magic-missile": {
+        "id": "test:spell:magic-missile",
+        "name": "Magic Missile",
+        "level": 1,
+        "school": "evocation",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    },
+    "spellLists": [],
+    "spellListsById": {},
+    "species": [
+      {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    ],
+    "backgrounds": [
+      {
+        "id": "test:bg:scholar",
+        "name": "Scholar",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "arcana"
+          }
+        ]
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:wizard",
+        "name": "Wizard",
+        "hitDie": 6,
+        "spellcasting": {
+          "ability": "int",
+          "progression": "full",
+          "mode": "prepared"
+        },
+        "weaponProficiencies": {
+          "simple": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "int"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      {
+        "id": "test:feat:sprinter",
+        "name": "Sprinter",
+        "category": "general",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 35
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:weapon:dagger",
+        "name": "Dagger",
+        "type": "weapon",
+        "damageDice": "1d4",
+        "weaponCategory": "simple",
+        "properties": [
+          "finesse"
+        ]
+      }
+    ],
+    "speciesById": {
+      "test:species:elf": {
+        "id": "test:species:elf",
+        "name": "Elf",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "perception"
+          }
+        ]
+      }
+    },
+    "backgroundsById": {
+      "test:bg:scholar": {
+        "id": "test:bg:scholar",
+        "name": "Scholar",
+        "grantsOriginFeatId": "test:feat:origin-alert",
+        "effects": [
+          {
+            "type": "grant_skill_proficiency",
+            "skill": "arcana"
+          }
+        ]
+      }
+    },
+    "classesById": {
+      "test:class:wizard": {
+        "id": "test:class:wizard",
+        "name": "Wizard",
+        "hitDie": 6,
+        "spellcasting": {
+          "ability": "int",
+          "progression": "full",
+          "mode": "prepared"
+        },
+        "weaponProficiencies": {
+          "simple": true
+        },
+        "effects": [
+          {
+            "type": "grant_save_proficiency",
+            "ability": "int"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:origin-alert": {
+        "id": "test:feat:origin-alert",
+        "name": "Origin Alert",
+        "category": "origin",
+        "effects": []
+      },
+      "test:feat:sprinter": {
+        "id": "test:feat:sprinter",
+        "name": "Sprinter",
+        "category": "general",
+        "effects": [
+          {
+            "type": "set_speed",
+            "value": 35
+          }
+        ]
+      }
+    },
+    "equipmentById": {
+      "test:armor:leather": {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:weapon:dagger": {
+        "id": "test:weapon:dagger",
+        "name": "Dagger",
+        "type": "weapon",
+        "damageDice": "1d4",
+        "weaponCategory": "simple",
+        "properties": [
+          "finesse"
+        ]
+      }
+    }
+  }
+}

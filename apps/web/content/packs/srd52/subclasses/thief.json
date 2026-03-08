@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:thief",
+  "classId": "srd52:class:rogue",
+  "name": "Thief",
+  "description": "A practical specialist in infiltration, nimble movement, and daring theft.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:thief-fast-hands"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:thief-second-story-work"
+    },
+    {
+      "level": 9,
+      "featureId": "srd52:feature:thief-supreme-sneak"
+    },
+    {
+      "level": 13,
+      "featureId": "srd52:feature:thief-use-magic-device"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:thief-thief-s-reflexes"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Thief Training",
+      "description": "Thief features apply according to subclass progression."
+    }
+  ]
+}

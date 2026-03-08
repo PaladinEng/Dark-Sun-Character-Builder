@@ -3,5 +3,6 @@
   "type": "armor_medium",
   "name": "Chain Shirt",
   "armorClassBase": 13,
-  "dexCap": 2
+  "dexCap": 2,
+  "description": "Chain Shirt provides base AC 13 and allows Dexterity modifier up to +2."
 }

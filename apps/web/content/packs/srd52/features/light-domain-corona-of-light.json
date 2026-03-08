@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:light-domain-corona-of-light",
+  "name": "Corona of Light",
+  "description": "Light Domain feature gained at level 17.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Corona of Light",
+      "description": "Light Domain feature (level 17)."
+    }
+  ]
+}

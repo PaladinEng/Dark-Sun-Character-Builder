@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-land-circle-spells-land",
+  "name": "Circle Spells: Land",
+  "description": "Circle of the Land feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Circle Spells: Land",
+      "description": "Circle of the Land feature (level 3)."
+    }
+  ]
+}

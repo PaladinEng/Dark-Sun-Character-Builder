@@ -1,5 +1,6 @@
 {
   "id": "srd52:feat:tavern-brawler",
   "name": "Tavern Brawler",
-  "category": "origin"
+  "category": "origin",
+  "description": "You turn improvised combat and close-quarters scrapping to your advantage."
 }

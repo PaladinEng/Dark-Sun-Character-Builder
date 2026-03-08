@@ -6,5 +6,6 @@
       "type": "grant_trait",
       "name": "Divine Sense"
     }
-  ]
+  ],
+  "description": "Divine Sense class feature."
 }

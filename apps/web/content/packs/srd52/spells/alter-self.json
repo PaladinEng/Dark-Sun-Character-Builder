@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:alter-self",
+  "name": "Alter Self",
+  "description": "You reshape your body to adapt to threats, terrain, or disguise needs.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "summary": "You reshape your body to adapt to threats, terrain, or disguise needs.",
+  "notes": "Requires concentration while active."
+}

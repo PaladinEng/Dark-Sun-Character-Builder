@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:beast-master-exceptional-training",
+  "name": "Exceptional Training",
+  "description": "Beast Master feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Exceptional Training",
+      "description": "Beast Master feature (level 7)."
+    }
+  ]
+}

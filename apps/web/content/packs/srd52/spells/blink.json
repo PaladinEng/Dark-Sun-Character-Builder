@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:blink",
+  "name": "Blink",
+  "description": "You phase in and out of the plane unpredictably at the end of your turns.",
+  "level": 3,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 minute",
+  "concentration": false,
+  "summary": "You phase in and out of the plane unpredictably at the end of your turns.",
+  "notes": "No additional casting notes."
+}

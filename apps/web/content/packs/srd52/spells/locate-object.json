@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:locate-object",
+  "name": "Locate Object",
+  "description": "You sense the direction to a familiar object within range.",
+  "level": 2,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true,
+  "summary": "You sense the direction to a familiar object within range.",
+  "notes": "Requires concentration while active."
+}

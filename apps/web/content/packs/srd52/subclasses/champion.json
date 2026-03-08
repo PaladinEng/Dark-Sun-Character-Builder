@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:champion",
+  "classId": "srd52:class:fighter",
+  "name": "Champion",
+  "description": "An athletic martial archetype focused on straightforward, relentless excellence.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:champion-improved-critical"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:champion-remarkable-athlete"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:champion-additional-fighting-style"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:champion-superior-critical"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:champion-survivor"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Champion Training",
+      "description": "Champion features apply according to subclass progression."
+    }
+  ]
+}

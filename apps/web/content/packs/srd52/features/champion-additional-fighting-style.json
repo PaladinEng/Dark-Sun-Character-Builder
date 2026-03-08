@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:champion-additional-fighting-style",
+  "name": "Additional Fighting Style",
+  "description": "Champion feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Additional Fighting Style",
+      "description": "Champion feature (level 10)."
+    }
+  ]
+}

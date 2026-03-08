@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:silent-image",
+  "name": "Silent Image",
+  "description": "You create a moving visual illusion that can mislead observers.",
+  "level": 1,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true,
+  "summary": "You create a moving visual illusion that can mislead observers.",
+  "notes": "Requires concentration while active."
+}

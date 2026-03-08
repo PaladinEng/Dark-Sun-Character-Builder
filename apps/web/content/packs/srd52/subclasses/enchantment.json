@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:enchantment",
+  "classId": "srd52:class:wizard",
+  "name": "School of Enchantment",
+  "description": "A subtle tradition that bends will, attention, and hostile intent.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 2,
+      "featureId": "srd52:feature:enchantment-enchantment-savant"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:enchantment-hypnotic-gaze"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:enchantment-instinctive-charm"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:enchantment-split-enchantment"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:enchantment-alter-memories"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "School of Enchantment Training",
+      "description": "School of Enchantment features apply according to subclass progression."
+    }
+  ]
+}

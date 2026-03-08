@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-berserker-intimidating-presence",
+  "name": "Intimidating Presence",
+  "description": "Path of the Berserker feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Intimidating Presence",
+      "description": "Path of the Berserker feature (level 10)."
+    }
+  ]
+}

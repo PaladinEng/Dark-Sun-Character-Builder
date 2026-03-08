@@ -6,5 +6,6 @@
       "type": "grant_trait",
       "name": "Druidic"
     }
-  ]
+  ],
+  "description": "Druidic class feature."
 }

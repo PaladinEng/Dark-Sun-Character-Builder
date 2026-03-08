@@ -7,5 +7,6 @@
   "properties": [
     "finesse",
     "light"
-  ]
+  ],
+  "description": "Shortsword is a simple weapon that deals 1d6 damage."
 }

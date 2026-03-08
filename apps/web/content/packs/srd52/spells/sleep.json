@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "1 minute",
-  "concentration": false
+  "concentration": false,
+  "summary": "This spell sends creatures into a magical slumber.",
+  "notes": "No additional casting notes."
 }

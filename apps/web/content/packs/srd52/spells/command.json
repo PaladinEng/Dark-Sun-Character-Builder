@@ -11,5 +11,7 @@
     "V"
   ],
   "duration": "1 round",
-  "concentration": false
+  "concentration": false,
+  "summary": "You speak a one-word command that a creature obeys.",
+  "notes": "No additional casting notes."
 }

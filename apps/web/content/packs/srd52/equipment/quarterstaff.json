@@ -6,5 +6,6 @@
   "weaponCategory": "simple",
   "properties": [
     "versatile"
-  ]
+  ],
+  "description": "Quarterstaff is a simple weapon that deals 1d6 damage."
 }

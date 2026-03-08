@@ -6,5 +6,6 @@
       "type": "grant_trait",
       "name": "Bardic Inspiration"
     }
-  ]
+  ],
+  "description": "Bardic Inspiration class feature."
 }

@@ -11,5 +11,7 @@
     "V"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "Briefly surrounded by mist, you teleport a short distance.",
+  "notes": "No additional casting notes."
 }

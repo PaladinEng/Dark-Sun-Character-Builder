@@ -30,5 +30,13 @@
       "type": "grant_tool_proficiency",
       "tool": "Thieves' Tools"
     }
-  ]
+  ],
+  "description": "A life of illicit work has honed your stealth, deception, and underworld instincts.",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:thieves-tools",
+      "srd52:equipment:disguise-kit",
+      "srd52:equipment:rope-hempen-50ft"
+    ]
+  }
 }

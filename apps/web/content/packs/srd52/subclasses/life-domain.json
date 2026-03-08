@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:life-domain",
+  "classId": "srd52:class:cleric",
+  "name": "Life Domain",
+  "description": "A holy calling centered on restoration, vitality, and enduring protection.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:life-domain-life-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:life-domain-channel-divinity-preserve-life"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:life-domain-divine-strike-life"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:life-domain-supreme-healing"
+    }
+  ],
+  "domain": "life",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Life Domain Training",
+      "description": "Life Domain features apply according to subclass progression."
+    }
+  ]
+}

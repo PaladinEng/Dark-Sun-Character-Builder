@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "A wave of thunderous force sweeps out from you.",
+  "notes": "No additional casting notes."
 }

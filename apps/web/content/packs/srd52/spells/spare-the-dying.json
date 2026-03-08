@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "A living creature with 0 hit points becomes stable.",
+  "notes": "No additional casting notes."
 }

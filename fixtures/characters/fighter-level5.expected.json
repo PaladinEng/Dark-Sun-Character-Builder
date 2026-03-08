@@ -1,0 +1,95 @@
+{
+  "abilityMods": {
+    "cha": -1,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": 3,
+    "wis": 1
+  },
+  "advancementSlots": [
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:tough",
+        "name": "Tough"
+      },
+      "filled": true,
+      "level": 4
+    }
+  ],
+  "armorClass": 15,
+  "attack": {
+    "damage": "1d8+3",
+    "name": "Longsword",
+    "toHit": 6
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    },
+    {
+      "id": "test:feat:tough",
+      "name": "Tough"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 8,
+    "con": 14,
+    "dex": 14,
+    "int": 10,
+    "str": 16,
+    "wis": 12
+  },
+  "languages": [],
+  "maxHP": 44,
+  "passivePerception": 14,
+  "proficiencyBonus": 3,
+  "resistances": [],
+  "saveProficiencies": [
+    "str"
+  ],
+  "savingThrows": {
+    "cha": -1,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": 6,
+    "wis": 1
+  },
+  "senses": [],
+  "skillProficiencies": [
+    "athletics",
+    "perception",
+    "stealth"
+  ],
+  "skills": {
+    "acrobatics": 2,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": 6,
+    "deception": -1,
+    "history": 0,
+    "insight": 1,
+    "intimidation": -1,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 4,
+    "performance": -1,
+    "persuasion": -1,
+    "religion": 0,
+    "sleight_of_hand": 2,
+    "stealth": 5,
+    "survival": 1
+  },
+  "speed": 30,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [],
+  "traits": [],
+  "warnings": []
+}

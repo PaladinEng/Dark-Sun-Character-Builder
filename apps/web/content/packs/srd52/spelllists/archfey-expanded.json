@@ -1,0 +1,10 @@
+{
+  "id": "srd52:spelllist:archfey-expanded",
+  "name": "Archfey Expanded",
+  "spellIds": [
+    "srd52:spell:faerie-fire",
+    "srd52:spell:sleep",
+    "srd52:spell:blink",
+    "srd52:spell:invisibility"
+  ]
+}

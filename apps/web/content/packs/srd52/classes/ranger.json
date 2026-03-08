@@ -151,12 +151,48 @@
   ],
   "classFeaturesByLevel": [
     {
+      "level": 1,
+      "featureId": "srd52:feature:favored-enemy"
+    },
+    {
+      "level": 1,
+      "featureId": "srd52:feature:natural-explorer"
+    },
+    {
       "level": 2,
       "featureId": "srd52:feature:spellcasting"
     },
     {
       "level": 2,
       "featureId": "srd52:feature:fighting-style-archery"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:ranger-archetype"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:extra-attack"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:lands-stride"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:hide-in-plain-sight"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:vanish"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:feral-senses"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:foe-slayer"
     }
   ],
   "startingEquipment": {
@@ -177,5 +213,6 @@
       "type": "grant_save_proficiency",
       "ability": "str"
     }
-  ]
+  ],
+  "description": "A skilled hunter and scout who combines martial techniques with nature magic."
 }

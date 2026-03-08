@@ -4,6 +4,7 @@ import {
   ClassSchema,
   EquipmentSchema,
   FeatureSchema,
+  SubclassSchema,
   SkillDefinitionSchema,
   SpellListSchema,
   SpellSchema,
@@ -187,6 +188,9 @@ describe("normalizeSeedPack", () => {
     }
     for (const klass of normalized.classes) {
       expect(ClassSchema.safeParse(klass).success).toBe(true);
+    }
+    for (const subclass of normalized.subclasses) {
+      expect(SubclassSchema.safeParse(subclass).success).toBe(true);
     }
     for (const feature of normalized.features) {
       expect(FeatureSchema.safeParse(feature).success).toBe(true);

@@ -11,5 +11,6 @@
       "type": "grant_trait",
       "name": "Fighting Style: Defense"
     }
-  ]
+  ],
+  "description": "Fighting Style: Defense class feature."
 }

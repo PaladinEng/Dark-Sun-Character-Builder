@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:college-of-lore",
+  "classId": "srd52:class:bard",
+  "name": "College of Lore",
+  "description": "A versatile college that weaponizes wit, erudition, and all-purpose mastery.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:college-of-lore-bonus-proficiencies-lore"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:college-of-lore-cutting-words"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:college-of-lore-additional-magical-secrets"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:college-of-lore-peerless-skill"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "College of Lore Training",
+      "description": "College of Lore features apply according to subclass progression."
+    }
+  ]
+}

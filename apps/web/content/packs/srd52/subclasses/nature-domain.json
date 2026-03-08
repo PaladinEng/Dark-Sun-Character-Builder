@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:nature-domain",
+  "classId": "srd52:class:cleric",
+  "name": "Nature Domain",
+  "description": "A primal domain that channels the cycles and endurance of the natural world.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:nature-domain-nature-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:nature-domain-channel-divinity-charm-animals-and-plants"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:nature-domain-divine-strike-nature"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:nature-domain-master-of-nature"
+    }
+  ],
+  "domain": "nature",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Nature Domain Training",
+      "description": "Nature Domain features apply according to subclass progression."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:light-domain-light-domain-spells",
+  "name": "Light Domain Spells",
+  "description": "Light Domain feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Light Domain Spells",
+      "description": "Light Domain feature (level 3)."
+    }
+  ]
+}

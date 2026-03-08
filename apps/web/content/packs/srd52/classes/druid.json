@@ -34,6 +34,26 @@
     {
       "level": 1,
       "featureId": "srd52:feature:druidic"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:wild-shape"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:druid-circle"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:wild-resurgence"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:beast-spells"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:archdruid"
     }
   ],
   "startingEquipment": {
@@ -55,5 +75,6 @@
       "type": "grant_save_proficiency",
       "ability": "wis"
     }
-  ]
+  ],
+  "description": "A primal spellcaster who commands nature and adapts through wild transformation."
 }

@@ -2,5 +2,6 @@
   "id": "srd52:equipment:shield",
   "type": "shield",
   "name": "Shield",
-  "hasShieldBonus": true
+  "hasShieldBonus": true,
+  "description": "Shield grants a +2 AC bonus when equipped."
 }

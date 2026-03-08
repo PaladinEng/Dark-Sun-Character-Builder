@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:assassin-bonus-proficiencies-assassin",
+  "name": "Bonus Proficiencies: Assassin",
+  "description": "Assassin feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Bonus Proficiencies: Assassin",
+      "description": "Assassin feature (level 3)."
+    }
+  ]
+}

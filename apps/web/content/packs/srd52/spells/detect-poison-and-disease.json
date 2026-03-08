@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 10 minutes",
-  "concentration": true
+  "concentration": true,
+  "summary": "For the duration, you can sense poison and disease.",
+  "notes": "Can be cast as a ritual; requires concentration while active."
 }

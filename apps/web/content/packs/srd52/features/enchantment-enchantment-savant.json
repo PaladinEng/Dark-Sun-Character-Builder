@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:enchantment-enchantment-savant",
+  "name": "Enchantment Savant",
+  "description": "School of Enchantment feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Enchantment Savant",
+      "description": "School of Enchantment feature (level 2)."
+    }
+  ]
+}

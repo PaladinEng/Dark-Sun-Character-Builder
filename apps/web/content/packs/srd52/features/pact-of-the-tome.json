@@ -1,0 +1,22 @@
+{
+  "id": "srd52:feature:pact-of-the-tome",
+  "name": "Pact of the Tome",
+  "description": "You receive a grimoire that expands your occult cantrip practice.",
+  "selectable": true,
+  "tags": [
+    "warlock_pact_boon"
+  ],
+  "prerequisites": {
+    "minLevel": 3,
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Pact of the Tome",
+      "description": "Your pact boon focuses on expanded ritual and cantrip lore."
+    }
+  ]
+}

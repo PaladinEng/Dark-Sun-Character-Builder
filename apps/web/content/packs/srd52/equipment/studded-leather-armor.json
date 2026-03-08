@@ -2,5 +2,6 @@
   "id": "srd52:equipment:studded-leather-armor",
   "type": "armor_light",
   "name": "Studded Leather Armor",
-  "armorClassBase": 12
+  "armorClassBase": 12,
+  "description": "Studded Leather Armor provides base AC 12."
 }

@@ -8,6 +8,7 @@ import {
   EquipmentSchema,
   FeatSchema,
   FeatureSchema,
+  SubclassSchema,
   SkillDefinitionSchema,
   SpellListSchema,
   SpellSchema,
@@ -17,6 +18,7 @@ import {
   type Equipment,
   type Feat,
   type Feature,
+  type Subclass,
   type SkillDefinition,
   type Spell,
   type SpellList,
@@ -31,6 +33,7 @@ export interface Pack {
     skillDefinitions: SkillDefinition[];
     backgrounds: Background[];
     classes: Class[];
+    subclasses?: Subclass[];
     features: Feature[];
     feats: Feat[];
     equipment: Equipment[];
@@ -96,6 +99,11 @@ export async function loadPackFromDir(dir: string): Promise<Pack> {
         BackgroundSchema
       ),
       classes: await readEntityDir(manifest.id, path.join(dir, "classes"), ClassSchema),
+      subclasses: await readEntityDir(
+        manifest.id,
+        path.join(dir, "subclasses"),
+        SubclassSchema
+      ),
       features: await readEntityDir(manifest.id, path.join(dir, "features"), FeatureSchema),
       feats: await readEntityDir(manifest.id, path.join(dir, "feats"), FeatSchema),
       equipment: await readEntityDir(

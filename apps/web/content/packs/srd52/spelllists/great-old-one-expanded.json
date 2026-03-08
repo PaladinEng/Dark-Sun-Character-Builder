@@ -1,0 +1,10 @@
+{
+  "id": "srd52:spelllist:great-old-one-expanded",
+  "name": "Great Old One Expanded",
+  "spellIds": [
+    "srd52:spell:detect-magic",
+    "srd52:spell:levitate",
+    "srd52:spell:slow",
+    "srd52:spell:web"
+  ]
+}

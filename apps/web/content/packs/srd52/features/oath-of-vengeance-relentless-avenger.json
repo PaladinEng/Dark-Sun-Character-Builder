@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-vengeance-relentless-avenger",
+  "name": "Relentless Avenger",
+  "description": "Oath of Vengeance feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Relentless Avenger",
+      "description": "Oath of Vengeance feature (level 7)."
+    }
+  ]
+}

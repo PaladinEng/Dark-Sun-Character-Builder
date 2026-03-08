@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:enchantment-alter-memories",
+  "name": "Alter Memories",
+  "description": "School of Enchantment feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Alter Memories",
+      "description": "School of Enchantment feature (level 14)."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:nature-domain-channel-divinity-charm-animals-and-plants",
+  "name": "Channel Divinity: Charm Animals and Plants",
+  "description": "Nature Domain feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Channel Divinity: Charm Animals and Plants",
+      "description": "Nature Domain feature (level 6)."
+    }
+  ]
+}

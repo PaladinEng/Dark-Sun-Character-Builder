@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:nature-domain-divine-strike-nature",
+  "name": "Divine Strike: Nature",
+  "description": "Nature Domain feature gained at level 8.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Divine Strike: Nature",
+      "description": "Nature Domain feature (level 8)."
+    }
+  ]
+}

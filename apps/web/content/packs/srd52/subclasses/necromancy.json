@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:necromancy",
+  "classId": "srd52:class:wizard",
+  "name": "School of Necromancy",
+  "description": "A tradition focused on life-force manipulation, grim endurance, and command of the dead.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 2,
+      "featureId": "srd52:feature:necromancy-necromancy-savant"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:necromancy-grim-harvest"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:necromancy-undead-thralls"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:necromancy-inured-to-undeath"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:necromancy-command-undead"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "School of Necromancy Training",
+      "description": "School of Necromancy features apply according to subclass progression."
+    }
+  ]
+}

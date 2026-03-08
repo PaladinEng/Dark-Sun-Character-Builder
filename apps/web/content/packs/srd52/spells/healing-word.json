@@ -11,5 +11,7 @@
     "V"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "A creature regains hit points from your spoken word.",
+  "notes": "No additional casting notes."
 }

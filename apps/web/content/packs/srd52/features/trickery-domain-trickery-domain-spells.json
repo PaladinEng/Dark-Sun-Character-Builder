@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:trickery-domain-trickery-domain-spells",
+  "name": "Trickery Domain Spells",
+  "description": "Trickery Domain feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Trickery Domain Spells",
+      "description": "Trickery Domain feature (level 3)."
+    }
+  ]
+}

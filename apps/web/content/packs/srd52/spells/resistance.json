@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 1 minute",
-  "concentration": true
+  "concentration": true,
+  "summary": "A willing creature gains a brief bonus on a saving throw.",
+  "notes": "Requires concentration while active."
 }

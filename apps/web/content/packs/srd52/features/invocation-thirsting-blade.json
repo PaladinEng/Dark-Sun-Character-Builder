@@ -1,0 +1,25 @@
+{
+  "id": "srd52:feature:invocation-thirsting-blade",
+  "name": "Thirsting Blade",
+  "description": "Your pact blade training grants additional martial strikes in combat.",
+  "selectable": true,
+  "tags": [
+    "warlock_invocation"
+  ],
+  "prerequisites": {
+    "minLevel": 5,
+    "classIds": [
+      "srd52:class:warlock"
+    ],
+    "featureIds": [
+      "srd52:feature:pact-of-the-blade"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Thirsting Blade",
+      "description": "Invocation selected: pact blade martial enhancement."
+    }
+  ]
+}

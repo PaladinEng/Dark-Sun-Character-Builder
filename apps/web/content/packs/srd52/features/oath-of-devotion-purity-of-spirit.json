@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-devotion-purity-of-spirit",
+  "name": "Purity of Spirit",
+  "description": "Oath of Devotion feature gained at level 15.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Purity of Spirit",
+      "description": "Oath of Devotion feature (level 15)."
+    }
+  ]
+}

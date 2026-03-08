@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:unseen-servant",
+  "name": "Unseen Servant",
+  "description": "You conjure an invisible force to perform simple tasks at your command.",
+  "level": 1,
+  "school": "conjuration",
+  "ritual": true,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false,
+  "summary": "You conjure an invisible force to perform simple tasks at your command.",
+  "notes": "Can be cast as a ritual."
+}

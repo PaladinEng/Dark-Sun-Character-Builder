@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:conjuration-durable-summons",
+  "name": "Durable Summons",
+  "description": "School of Conjuration feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Durable Summons",
+      "description": "School of Conjuration feature (level 14)."
+    }
+  ]
+}

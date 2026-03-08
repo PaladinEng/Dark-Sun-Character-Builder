@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You create three rays of fire and hurl them at targets.",
+  "notes": "No additional casting notes."
 }

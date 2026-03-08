@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "1 round",
-  "concentration": false
+  "concentration": false,
+  "summary": "A flash of light streaks toward a creature.",
+  "notes": "No additional casting notes."
 }

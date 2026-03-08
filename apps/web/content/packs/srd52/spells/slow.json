@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:slow",
+  "name": "Slow",
+  "description": "You hamper a group of creatures, reducing their speed and combat efficiency.",
+  "level": 3,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "You hamper a group of creatures, reducing their speed and combat efficiency.",
+  "notes": "Requires concentration while active."
+}

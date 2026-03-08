@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:minor-illusion",
+  "name": "Minor Illusion",
+  "description": "You create a brief sound or image to distract or deceive nearby creatures.",
+  "level": 0,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "S",
+    "M"
+  ],
+  "duration": "1 minute",
+  "concentration": false,
+  "summary": "You create a brief sound or image to distract or deceive nearby creatures.",
+  "notes": "No additional casting notes."
+}

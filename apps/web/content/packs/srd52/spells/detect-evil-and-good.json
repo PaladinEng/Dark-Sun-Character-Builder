@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Concentration, up to 10 minutes",
-  "concentration": true
+  "concentration": true,
+  "summary": "For the duration, you know if aberrations and other creatures are nearby.",
+  "notes": "Requires concentration while active."
 }

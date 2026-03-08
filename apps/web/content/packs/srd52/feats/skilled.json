@@ -1,5 +1,6 @@
 {
   "id": "srd52:feat:skilled",
   "name": "Skilled",
-  "category": "origin"
+  "category": "origin",
+  "description": "You gain additional broad proficiency across practical disciplines."
 }

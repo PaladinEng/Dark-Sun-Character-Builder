@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:necromancy-necromancy-savant",
+  "name": "Necromancy Savant",
+  "description": "School of Necromancy feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Necromancy Savant",
+      "description": "School of Necromancy feature (level 2)."
+    }
+  ]
+}

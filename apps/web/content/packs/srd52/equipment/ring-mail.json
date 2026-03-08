@@ -4,5 +4,6 @@
   "name": "Ring Mail",
   "armorClassBase": 14,
   "dexCap": 0,
-  "stealthDisadvantage": true
+  "stealthDisadvantage": true,
+  "description": "Ring Mail provides base AC 14 and allows Dexterity modifier up to +0."
 }

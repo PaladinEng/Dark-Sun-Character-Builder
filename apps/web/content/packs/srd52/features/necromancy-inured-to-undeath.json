@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:necromancy-inured-to-undeath",
+  "name": "Inured to Undeath",
+  "description": "School of Necromancy feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Inured to Undeath",
+      "description": "School of Necromancy feature (level 10)."
+    }
+  ]
+}

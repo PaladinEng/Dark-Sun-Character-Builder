@@ -8,6 +8,8 @@ export type {
   Species,
   Background,
   Class,
+  Subclass,
+  Spellcasting,
   ClassFeatureGrant,
   Feature,
   Skill,
@@ -24,6 +26,7 @@ export {
   SpeciesSchema,
   BackgroundSchema,
   ClassSchema,
+  SubclassSchema,
   FeatureSchema,
   FeatSchema,
   EquipmentSchema,
@@ -34,7 +37,9 @@ export {
   SpellSchoolSchema,
   SpellComponentSchema,
   getClassSpellListRefIds,
-  getClassFeatureIdsForLevel
+  getClassFeatureIdsForLevel,
+  getSubclassSpellListRefIds,
+  getSubclassFeatureIdsForLevel
 } from "./entities";
 
 export type {
@@ -44,6 +49,8 @@ export type {
   SeedSkillDefinition,
   SeedBackground,
   SeedClass,
+  SeedSubclass,
+  SeedSpellcasting,
   SeedFeature,
   SeedFeat,
   SeedEquipment,
@@ -57,6 +64,8 @@ export {
   SeedSkillDefinitionSchema,
   SeedBackgroundSchema,
   SeedClassSchema,
+  SeedSubclassSchema,
+  SeedSpellcastingSchema,
   SeedFeatureSchema,
   SeedFeatSchema,
   SeedEquipmentSchema,

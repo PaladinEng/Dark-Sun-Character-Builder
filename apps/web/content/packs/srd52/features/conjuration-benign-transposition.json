@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:conjuration-benign-transposition",
+  "name": "Benign Transposition",
+  "description": "School of Conjuration feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Benign Transposition",
+      "description": "School of Conjuration feature (level 6)."
+    }
+  ]
+}

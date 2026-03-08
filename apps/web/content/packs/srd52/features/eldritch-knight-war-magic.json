@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:eldritch-knight-war-magic",
+  "name": "War Magic",
+  "description": "Eldritch Knight feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "War Magic",
+      "description": "Eldritch Knight feature (level 7)."
+    }
+  ]
+}

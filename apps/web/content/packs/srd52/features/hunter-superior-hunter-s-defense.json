@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:hunter-superior-hunter-s-defense",
+  "name": "Superior Hunter's Defense",
+  "description": "Hunter feature gained at level 15.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Superior Hunter's Defense",
+      "description": "Hunter feature (level 15)."
+    }
+  ]
+}

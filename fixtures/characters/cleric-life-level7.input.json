@@ -1,0 +1,210 @@
+{
+  "state": {
+    "level": 7,
+    "baseAbilities": {
+      "str": 10,
+      "dex": 10,
+      "con": 14,
+      "int": 10,
+      "wis": 16,
+      "cha": 12
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:background:none",
+    "selectedClassId": "test:class:cleric",
+    "subclass": "test:subclass:life-domain",
+    "featSelections": {
+      "level": {
+        "4": "test:feat:durable-training"
+      }
+    },
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "cantripsKnownIds": [],
+    "chosenClassSkills": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "languages": [],
+    "selectedFeats": [],
+    "selectedFeatureIds": [],
+    "advancements": []
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Fixture Test Pack",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "fixture-test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    ],
+    "skillDefinitions": [],
+    "backgrounds": [
+      {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:cleric",
+        "name": "Cleric",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "full",
+          "mode": "prepared"
+        },
+        "classFeaturesByLevel": [
+          {
+            "level": 2,
+            "featureId": "test:feature:channel-divinity"
+          }
+        ]
+      }
+    ],
+    "subclasses": [
+      {
+        "id": "test:subclass:life-domain",
+        "classId": "test:class:cleric",
+        "name": "Life Domain",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 3,
+            "featureId": "test:feature:life-preserve-life"
+          }
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "test:feature:channel-divinity",
+        "name": "Channel Divinity",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Channel Divinity"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:life-preserve-life",
+        "name": "Preserve Life",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Preserve Life"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    ],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    },
+    "skillDefinitionsById": {},
+    "backgroundsById": {
+      "test:background:none": {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    },
+    "classesById": {
+      "test:class:cleric": {
+        "id": "test:class:cleric",
+        "name": "Cleric",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "wis",
+          "progression": "full",
+          "mode": "prepared"
+        },
+        "classFeaturesByLevel": [
+          {
+            "level": 2,
+            "featureId": "test:feature:channel-divinity"
+          }
+        ]
+      }
+    },
+    "subclassesById": {
+      "test:subclass:life-domain": {
+        "id": "test:subclass:life-domain",
+        "classId": "test:class:cleric",
+        "name": "Life Domain",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 3,
+            "featureId": "test:feature:life-preserve-life"
+          }
+        ]
+      }
+    },
+    "featuresById": {
+      "test:feature:channel-divinity": {
+        "id": "test:feature:channel-divinity",
+        "name": "Channel Divinity",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Channel Divinity"
+          }
+        ]
+      },
+      "test:feature:life-preserve-life": {
+        "id": "test:feature:life-preserve-life",
+        "name": "Preserve Life",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Preserve Life"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:durable-training": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    },
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "srd52:feature:invocation-armor-of-shadows",
+  "name": "Armor of Shadows",
+  "description": "You can ward yourself with protective arcane force without expending spell slots.",
+  "selectable": true,
+  "tags": [
+    "warlock_invocation"
+  ],
+  "prerequisites": {
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Armor of Shadows",
+      "description": "Invocation selected: defensive self-warding option."
+    }
+  ]
+}

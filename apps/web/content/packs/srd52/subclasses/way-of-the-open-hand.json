@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:way-of-the-open-hand",
+  "classId": "srd52:class:monk",
+  "name": "Way of the Open Hand",
+  "description": "A disciplined monastic path focused on precise strikes and internal mastery.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:way-of-the-open-hand-open-hand-technique"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:way-of-the-open-hand-wholeness-of-body"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:way-of-the-open-hand-tranquility"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:way-of-the-open-hand-quivering-palm"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Way of the Open Hand Training",
+      "description": "Way of the Open Hand features apply according to subclass progression."
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:war-domain",
+  "classId": "srd52:class:cleric",
+  "name": "War Domain",
+  "description": "A martial domain that blesses relentless offense and stalwart battlefield leadership.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:war-domain-war-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:war-domain-channel-divinity-guided-strike"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:war-domain-divine-strike-war"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:war-domain-avatar-of-battle"
+    }
+  ],
+  "domain": "war",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "War Domain Training",
+      "description": "War Domain features apply according to subclass progression."
+    }
+  ]
+}

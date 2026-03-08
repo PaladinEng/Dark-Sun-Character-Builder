@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:see-invisibility",
+  "name": "See Invisibility",
+  "description": "You perceive invisible creatures and objects for a limited time.",
+  "level": 2,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false,
+  "summary": "You perceive invisible creatures and objects for a limited time.",
+  "notes": "No additional casting notes."
+}

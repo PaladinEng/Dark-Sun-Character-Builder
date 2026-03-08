@@ -4,12 +4,13 @@ import type {
   Equipment,
   Feat,
   Feature,
+  Subclass,
   SkillDefinition,
   Spell,
   SpellList,
   Species,
 } from "./entities";
-import { getClassSpellListRefIds } from "./entities";
+import { getClassSpellListRefIds, getSubclassSpellListRefIds } from "./entities";
 import type { SeedPack } from "./seed";
 
 export type NormalizedEntities = {
@@ -17,6 +18,7 @@ export type NormalizedEntities = {
   skillDefinitions: SkillDefinition[];
   backgrounds: Background[];
   classes: Class[];
+  subclasses: Subclass[];
   features: Feature[];
   feats: Feat[];
   equipment: Equipment[];
@@ -196,9 +198,24 @@ export function normalizeSeedPack(
     classSkillChoices: entry.classSkillChoices,
     weaponProficiencies: entry.weaponProficiencies,
     spellcasting: entry.spellcasting,
+    invocationSelectionLimitsByLevel: entry.invocationSelectionLimitsByLevel,
     spellListRefIds: getClassSpellListRefIds(entry),
     classFeaturesByLevel: entry.classFeaturesByLevel,
     startingEquipment: entry.startingEquipment,
+    effects: entry.effects,
+  }));
+
+  const subclasses: Subclass[] = (seed.subclasses ?? []).map((entry) => ({
+    id: slugToId(packId, "subclass", entry.slug),
+    classId: entry.classId,
+    name: entry.name,
+    description: entry.description,
+    subclassFeaturesByLevel: entry.subclassFeaturesByLevel,
+    spellcasting: entry.spellcasting,
+    spellListRefIds: getSubclassSpellListRefIds(entry),
+    grantedProficiencies: entry.grantedProficiencies,
+    passiveModifiers: entry.passiveModifiers,
+    domain: entry.domain,
     effects: entry.effects,
   }));
 
@@ -206,6 +223,9 @@ export function normalizeSeedPack(
     id: slugToId(packId, "feature", entry.slug),
     name: entry.name,
     description: entry.description,
+    selectable: entry.selectable,
+    tags: entry.tags,
+    prerequisites: entry.prerequisites,
     effects: entry.effects,
   }));
 
@@ -249,6 +269,7 @@ export function normalizeSeedPack(
     skillDefinitions,
     backgrounds,
     classes,
+    subclasses,
     features,
     feats,
     equipment,

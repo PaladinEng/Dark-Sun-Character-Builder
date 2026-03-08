@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:divination",
+  "classId": "srd52:class:wizard",
+  "name": "School of Divination",
+  "description": "A predictive tradition that manipulates foresight and magical certainty.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 2,
+      "featureId": "srd52:feature:divination-divination-savant"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:divination-portent"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:divination-expert-divination"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:divination-the-third-eye"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:divination-greater-portent"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "School of Divination Training",
+      "description": "School of Divination features apply according to subclass progression."
+    }
+  ]
+}

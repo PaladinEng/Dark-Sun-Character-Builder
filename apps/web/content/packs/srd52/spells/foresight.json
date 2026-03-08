@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:foresight",
+  "name": "Foresight",
+  "description": "You grant a creature heightened prescience that improves awareness and defense.",
+  "level": 9,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 minute",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "8 hours",
+  "concentration": false,
+  "summary": "You grant a creature heightened prescience that improves awareness and defense.",
+  "notes": "No additional casting notes."
+}

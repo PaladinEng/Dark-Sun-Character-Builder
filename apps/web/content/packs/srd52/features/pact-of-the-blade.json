@@ -1,0 +1,22 @@
+{
+  "id": "srd52:feature:pact-of-the-blade",
+  "name": "Pact of the Blade",
+  "description": "You bind your pact magic into a conjured or bonded weapon.",
+  "selectable": true,
+  "tags": [
+    "warlock_pact_boon"
+  ],
+  "prerequisites": {
+    "minLevel": 3,
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Pact of the Blade",
+      "description": "Your pact boon is bound to martial conjuration and weapon focus."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-vengeance-avenging-angel",
+  "name": "Avenging Angel",
+  "description": "Oath of Vengeance feature gained at level 20.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Avenging Angel",
+      "description": "Oath of Vengeance feature (level 20)."
+    }
+  ]
+}

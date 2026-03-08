@@ -27,6 +27,30 @@
     {
       "level": 1,
       "featureId": "srd52:feature:spellcasting"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:channel-divinity"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:divine-domain"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:destroy-undead"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:blessed-strikes"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:divine-intervention"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:greater-divine-intervention"
     }
   ],
   "startingEquipment": {
@@ -48,5 +72,6 @@
       "type": "grant_save_proficiency",
       "ability": "cha"
     }
-  ]
+  ],
+  "description": "A divine spellcaster empowered by sacred devotion, healing, and protective magic."
 }

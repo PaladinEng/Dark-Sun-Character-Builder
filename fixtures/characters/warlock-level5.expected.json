@@ -1,0 +1,127 @@
+{
+  "abilityMods": {
+    "cha": 3,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": -1,
+    "wis": 1
+  },
+  "advancementSlots": [
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training"
+      },
+      "filled": true,
+      "level": 4
+    }
+  ],
+  "armorClass": 13,
+  "attack": {
+    "damage": "1d4+2",
+    "name": "Dagger",
+    "toHit": 5
+  },
+  "feats": [
+    {
+      "id": "test:feat:durable-training",
+      "name": "Durable Training"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 16,
+    "con": 14,
+    "dex": 14,
+    "int": 10,
+    "str": 8,
+    "wis": 12
+  },
+  "languages": [],
+  "maxHP": 38,
+  "passivePerception": 11,
+  "proficiencyBonus": 3,
+  "resistances": [],
+  "saveProficiencies": [],
+  "savingThrows": {
+    "cha": 3,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": -1,
+    "wis": 1
+  },
+  "senses": [],
+  "skillProficiencies": [],
+  "skills": {
+    "acrobatics": 2,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": -1,
+    "deception": 3,
+    "history": 0,
+    "insight": 1,
+    "intimidation": 3,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 1,
+    "performance": 3,
+    "persuasion": 3,
+    "religion": 0,
+    "sleight_of_hand": 2,
+    "stealth": 2,
+    "survival": 1
+  },
+  "speed": 30,
+  "spellAttackBonus": 6,
+  "spellcasting": {
+    "ability": "cha",
+    "abilityMod": 3,
+    "attackBonus": 6,
+    "cantripsKnownIds": [
+      "test:spell:chill-touch",
+      "test:spell:mage-hand",
+      "test:spell:minor-illusion"
+    ],
+    "knownSpellIds": [
+      "test:spell:charm-person",
+      "test:spell:fear",
+      "test:spell:misty-step"
+    ],
+    "preparedSpellIds": [],
+    "progression": "pact",
+    "saveDC": 14,
+    "slots": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "spellcastingAbility": "cha",
+  "spellSaveDC": 14,
+  "spellSlots": [
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "toolProficiencies": [],
+  "traits": [
+    "Durable Training: Fixture feat for advancement slot.",
+    "Eldritch Invocations"
+  ],
+  "warnings": []
+}

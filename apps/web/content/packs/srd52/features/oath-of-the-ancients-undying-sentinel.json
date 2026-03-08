@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-the-ancients-undying-sentinel",
+  "name": "Undying Sentinel",
+  "description": "Oath of the Ancients feature gained at level 15.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Undying Sentinel",
+      "description": "Oath of the Ancients feature (level 15)."
+    }
+  ]
+}

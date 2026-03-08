@@ -1,0 +1,197 @@
+{
+  "state": {
+    "level": 5,
+    "baseAbilities": {
+      "str": 16,
+      "dex": 12,
+      "con": 14,
+      "int": 10,
+      "wis": 10,
+      "cha": 8
+    },
+    "selectedSpeciesId": "test:species:human",
+    "selectedBackgroundId": "test:background:none",
+    "selectedClassId": "test:class:fighter",
+    "subclass": "test:subclass:champion",
+    "featSelections": {
+      "level": {
+        "4": "test:feat:durable-training"
+      }
+    },
+    "chosenClassSkills": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "languages": [],
+    "selectedFeats": [],
+    "selectedFeatureIds": [],
+    "advancements": []
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Fixture Test Pack",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "fixture-test"
+      }
+    ],
+    "species": [
+      {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    ],
+    "skillDefinitions": [],
+    "backgrounds": [
+      {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    ],
+    "classes": [
+      {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "classFeaturesByLevel": [
+          {
+            "level": 1,
+            "featureId": "test:feature:second-wind"
+          }
+        ]
+      }
+    ],
+    "subclasses": [
+      {
+        "id": "test:subclass:champion",
+        "classId": "test:class:fighter",
+        "name": "Champion",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 3,
+            "featureId": "test:feature:champion-improved-critical"
+          }
+        ]
+      }
+    ],
+    "features": [
+      {
+        "id": "test:feature:second-wind",
+        "name": "Second Wind",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Second Wind"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:champion-improved-critical",
+        "name": "Improved Critical",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Improved Critical"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    ],
+    "equipment": [],
+    "spells": [],
+    "spellLists": [],
+    "speciesById": {
+      "test:species:human": {
+        "id": "test:species:human",
+        "name": "Human"
+      }
+    },
+    "skillDefinitionsById": {},
+    "backgroundsById": {
+      "test:background:none": {
+        "id": "test:background:none",
+        "name": "None"
+      }
+    },
+    "classesById": {
+      "test:class:fighter": {
+        "id": "test:class:fighter",
+        "name": "Fighter",
+        "hitDie": 10,
+        "classFeaturesByLevel": [
+          {
+            "level": 1,
+            "featureId": "test:feature:second-wind"
+          }
+        ]
+      }
+    },
+    "subclassesById": {
+      "test:subclass:champion": {
+        "id": "test:subclass:champion",
+        "classId": "test:class:fighter",
+        "name": "Champion",
+        "subclassFeaturesByLevel": [
+          {
+            "level": 3,
+            "featureId": "test:feature:champion-improved-critical"
+          }
+        ]
+      }
+    },
+    "featuresById": {
+      "test:feature:second-wind": {
+        "id": "test:feature:second-wind",
+        "name": "Second Wind",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Second Wind"
+          }
+        ]
+      },
+      "test:feature:champion-improved-critical": {
+        "id": "test:feature:champion-improved-critical",
+        "name": "Improved Critical",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Improved Critical"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:durable-training": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      }
+    },
+    "equipmentById": {},
+    "spellsById": {},
+    "spellListsById": {}
+  }
+}

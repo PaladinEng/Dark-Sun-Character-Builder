@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:battle-master-combat-superiority",
+  "name": "Combat Superiority",
+  "description": "Battle Master feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Combat Superiority",
+      "description": "Battle Master feature (level 3)."
+    }
+  ]
+}

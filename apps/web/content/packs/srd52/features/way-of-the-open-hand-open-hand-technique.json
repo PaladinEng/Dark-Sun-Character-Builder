@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:way-of-the-open-hand-open-hand-technique",
+  "name": "Open Hand Technique",
+  "description": "Way of the Open Hand feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Open Hand Technique",
+      "description": "Way of the Open Hand feature (level 3)."
+    }
+  ]
+}

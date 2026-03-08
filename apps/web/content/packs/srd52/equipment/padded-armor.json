@@ -3,5 +3,6 @@
   "type": "armor_light",
   "name": "Padded Armor",
   "armorClassBase": 11,
-  "stealthDisadvantage": true
+  "stealthDisadvantage": true,
+  "description": "Padded Armor provides base AC 11."
 }

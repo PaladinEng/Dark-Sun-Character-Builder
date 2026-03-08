@@ -1,0 +1,34 @@
+{
+  "id": "srd52:subclass:great-old-one",
+  "classId": "srd52:class:warlock",
+  "name": "The Great Old One",
+  "description": "A pact with an alien entity that grants telepathic and reality-bending talents.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:great-old-one-awakened-mind"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:great-old-one-entropic-ward"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:great-old-one-thought-shield"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:great-old-one-create-thrall"
+    }
+  ],
+  "spellListRefIds": [
+    "srd52:spelllist:great-old-one-expanded"
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Great Old One Patron",
+      "description": "Great Old One patron features apply according to subclass progression."
+    }
+  ]
+}

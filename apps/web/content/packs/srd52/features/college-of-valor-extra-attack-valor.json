@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:college-of-valor-extra-attack-valor",
+  "name": "Extra Attack: Valor",
+  "description": "College of Valor feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Extra Attack: Valor",
+      "description": "College of Valor feature (level 6)."
+    }
+  ]
+}

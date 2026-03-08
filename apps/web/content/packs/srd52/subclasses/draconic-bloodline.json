@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:draconic-bloodline",
+  "classId": "srd52:class:sorcerer",
+  "name": "Draconic Bloodline",
+  "description": "A sorcerous origin marked by draconic ancestry and scaled arcane resilience.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:draconic-bloodline-draconic-resilience"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:draconic-bloodline-elemental-affinity"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:draconic-bloodline-dragon-wings"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:draconic-bloodline-draconic-presence"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Draconic Bloodline Training",
+      "description": "Draconic Bloodline features apply according to subclass progression."
+    }
+  ]
+}

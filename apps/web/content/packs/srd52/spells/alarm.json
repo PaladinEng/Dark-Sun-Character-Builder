@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:alarm",
+  "name": "Alarm",
+  "description": "You ward an area against intrusion and receive an alert when it is breached.",
+  "level": 1,
+  "school": "abjuration",
+  "ritual": true,
+  "castingTime": "1 minute",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "8 hours",
+  "concentration": false,
+  "summary": "You ward an area against intrusion and receive an alert when it is breached.",
+  "notes": "Can be cast as a ritual."
+}

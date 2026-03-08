@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "10 minutes",
-  "concentration": false
+  "concentration": false,
+  "summary": "A flickering flame appears in your hand.",
+  "notes": "No additional casting notes."
 }

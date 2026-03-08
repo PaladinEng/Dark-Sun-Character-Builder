@@ -6,5 +6,6 @@
   "weaponCategory": "martial",
   "properties": [
     "versatile"
-  ]
+  ],
+  "description": "Warhammer is a martial weapon that deals 1d8 damage."
 }

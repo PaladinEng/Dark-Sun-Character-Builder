@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:light-domain-channel-divinity-radiance-of-the-dawn",
+  "name": "Channel Divinity: Radiance of the Dawn",
+  "description": "Light Domain feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Channel Divinity: Radiance of the Dawn",
+      "description": "Light Domain feature (level 6)."
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "abilityMods": {
+    "cha": 0,
+    "con": 1,
+    "dex": 2,
+    "int": 3,
+    "str": -1,
+    "wis": 0
+  },
+  "advancementSlots": [
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training"
+      },
+      "filled": true,
+      "level": 4
+    }
+  ],
+  "armorClass": 12,
+  "attack": null,
+  "feats": [
+    {
+      "id": "test:feat:durable-training",
+      "name": "Durable Training"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 10,
+    "con": 12,
+    "dex": 14,
+    "int": 16,
+    "str": 8,
+    "wis": 10
+  },
+  "languages": [],
+  "maxHP": 27,
+  "passivePerception": 10,
+  "proficiencyBonus": 3,
+  "resistances": [],
+  "saveProficiencies": [],
+  "savingThrows": {
+    "cha": 0,
+    "con": 1,
+    "dex": 2,
+    "int": 3,
+    "str": -1,
+    "wis": 0
+  },
+  "senses": [],
+  "skillProficiencies": [],
+  "skills": {
+    "acrobatics": 2,
+    "animal_handling": 0,
+    "arcana": 3,
+    "athletics": -1,
+    "deception": 0,
+    "history": 3,
+    "insight": 0,
+    "intimidation": 0,
+    "investigation": 3,
+    "medicine": 0,
+    "nature": 3,
+    "perception": 0,
+    "performance": 0,
+    "persuasion": 0,
+    "religion": 3,
+    "sleight_of_hand": 2,
+    "stealth": 2,
+    "survival": 0
+  },
+  "speed": 30,
+  "spellAttackBonus": 6,
+  "spellcasting": {
+    "ability": "int",
+    "abilityMod": 3,
+    "attackBonus": 6,
+    "cantripsKnownIds": [],
+    "knownSpellIds": [],
+    "preparedSpellIds": [],
+    "progression": "full",
+    "saveDC": 14,
+    "slots": [
+      4,
+      3,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "spellcastingAbility": "int",
+  "spellSaveDC": 14,
+  "spellSlots": [
+    4,
+    3,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "toolProficiencies": [],
+  "traits": [
+    "Durable Training: Fixture feat for advancement slot.",
+    "Sculpt Spells"
+  ],
+  "warnings": []
+}

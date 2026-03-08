@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 1 hour",
-  "concentration": true
+  "concentration": true,
+  "summary": "A creature gains magical enhancement to one ability.",
+  "notes": "Requires concentration while active."
 }

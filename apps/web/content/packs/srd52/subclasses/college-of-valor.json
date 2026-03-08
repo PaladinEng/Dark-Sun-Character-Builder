@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:college-of-valor",
+  "classId": "srd52:class:bard",
+  "name": "College of Valor",
+  "description": "A heroic college blending martial valor with inspiring battlefield performance.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:college-of-valor-bonus-proficiencies-valor"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:college-of-valor-combat-inspiration"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:college-of-valor-extra-attack-valor"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:college-of-valor-battle-magic"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "College of Valor Training",
+      "description": "College of Valor features apply according to subclass progression."
+    }
+  ]
+}

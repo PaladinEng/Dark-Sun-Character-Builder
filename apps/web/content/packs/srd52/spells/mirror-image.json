@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:mirror-image",
+  "name": "Mirror Image",
+  "description": "You create illusory duplicates that make you harder to strike in combat.",
+  "level": 2,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 minute",
+  "concentration": false,
+  "summary": "You create illusory duplicates that make you harder to strike in combat.",
+  "notes": "No additional casting notes."
+}

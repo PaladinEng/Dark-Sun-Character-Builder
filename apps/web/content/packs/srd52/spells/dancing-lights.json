@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 1 minute",
-  "concentration": true
+  "concentration": true,
+  "summary": "Create up to four torch-sized lights.",
+  "notes": "Requires concentration while active."
 }

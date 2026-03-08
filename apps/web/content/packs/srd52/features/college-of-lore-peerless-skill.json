@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:college-of-lore-peerless-skill",
+  "name": "Peerless Skill",
+  "description": "College of Lore feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Peerless Skill",
+      "description": "College of Lore feature (level 14)."
+    }
+  ]
+}

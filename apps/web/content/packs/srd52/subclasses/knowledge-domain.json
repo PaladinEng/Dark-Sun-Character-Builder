@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:knowledge-domain",
+  "classId": "srd52:class:cleric",
+  "name": "Knowledge Domain",
+  "description": "A contemplative domain devoted to secrets, scholarship, and sacred lore.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:knowledge-domain-knowledge-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:knowledge-domain-channel-divinity-knowledge-of-the-ages"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:knowledge-domain-potent-spellcasting-knowledge"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:knowledge-domain-visions-of-the-past"
+    }
+  ],
+  "domain": "knowledge",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Knowledge Domain Training",
+      "description": "Knowledge Domain features apply according to subclass progression."
+    }
+  ]
+}

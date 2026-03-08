@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:suggestion",
+  "name": "Suggestion",
+  "description": "You influence a creature to follow a reasonable course of action.",
+  "level": 2,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "M"
+  ],
+  "duration": "Concentration, up to 8 hours",
+  "concentration": true,
+  "summary": "You influence a creature to follow a reasonable course of action.",
+  "notes": "Requires concentration while active."
+}

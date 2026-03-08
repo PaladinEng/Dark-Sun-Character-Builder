@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:champion-superior-critical",
+  "name": "Superior Critical",
+  "description": "Champion feature gained at level 15.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Superior Critical",
+      "description": "Champion feature (level 15)."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:arcane-trickster-mage-hand-legerdemain",
+  "name": "Mage Hand Legerdemain",
+  "description": "Arcane Trickster feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Mage Hand Legerdemain",
+      "description": "Arcane Trickster feature (level 3)."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:oath-of-the-ancients",
+  "classId": "srd52:class:paladin",
+  "name": "Oath of the Ancients",
+  "description": "An oath to preserve light and life against encroaching despair and corruption.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:oath-of-the-ancients-nature-s-wrath"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:oath-of-the-ancients-turn-the-faithless"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:oath-of-the-ancients-aura-of-warding"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:oath-of-the-ancients-undying-sentinel"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:oath-of-the-ancients-elder-champion"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Oath of the Ancients Training",
+      "description": "Oath of the Ancients features apply according to subclass progression."
+    }
+  ]
+}

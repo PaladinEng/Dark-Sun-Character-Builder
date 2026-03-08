@@ -1,0 +1,22 @@
+{
+  "id": "srd52:feature:invocation-mire-the-mind",
+  "name": "Mire the Mind",
+  "description": "At higher levels, you can impose slowing magic through invocation power.",
+  "selectable": true,
+  "tags": [
+    "warlock_invocation"
+  ],
+  "prerequisites": {
+    "minLevel": 5,
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Mire the Mind",
+      "description": "Invocation selected: higher-level control option."
+    }
+  ]
+}

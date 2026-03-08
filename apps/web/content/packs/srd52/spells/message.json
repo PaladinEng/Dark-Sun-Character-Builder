@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "1 round",
-  "concentration": false
+  "concentration": false,
+  "summary": "You whisper a message that only the target hears.",
+  "notes": "No additional casting notes."
 }

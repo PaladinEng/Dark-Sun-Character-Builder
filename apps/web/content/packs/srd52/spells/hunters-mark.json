@@ -11,5 +11,7 @@
     "V"
   ],
   "duration": "Concentration, up to 1 hour",
-  "concentration": true
+  "concentration": true,
+  "summary": "You mark a target and deal extra weapon damage to it.",
+  "notes": "Requires concentration while active."
 }

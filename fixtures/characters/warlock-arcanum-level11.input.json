@@ -1,0 +1,677 @@
+{
+  "state": {
+    "level": 11,
+    "baseAbilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 16
+    },
+    "selectedClassId": "test:class:warlock",
+    "featSelections": {
+      "level": {
+        "4": "test:feat:durable-training",
+        "8": "test:feat:resilient-training"
+      }
+    },
+    "knownSpellIds": [
+      "test:spell:charm-person",
+      "test:spell:misty-step",
+      "test:spell:fear"
+    ],
+    "preparedSpellIds": [],
+    "cantripsKnownIds": [
+      "test:spell:chill-touch",
+      "test:spell:mage-hand",
+      "test:spell:minor-illusion"
+    ],
+    "chosenClassSkills": [],
+    "chosenSkillProficiencies": [],
+    "chosenSaveProficiencies": [],
+    "toolProficiencies": [],
+    "languages": [],
+    "selectedFeats": [],
+    "selectedFeatureIds": [],
+    "advancements": [],
+    "equippedArmorId": "test:armor:leather",
+    "equippedWeaponId": "test:weapon:dagger",
+    "warlockInvocationFeatureIds": [
+      "test:feature:invocation-devils-sight",
+      "test:feature:invocation-mask-of-many-faces",
+      "test:feature:invocation-book-of-ancient-secrets"
+    ],
+    "warlockPactBoonFeatureId": "test:feature:pact-of-the-tome",
+    "warlockMysticArcanumByLevel": {
+      "6": "test:spell:circle-of-death"
+    }
+  },
+  "content": {
+    "manifests": [
+      {
+        "id": "test",
+        "name": "Fixture Test Pack",
+        "version": "0.0.1",
+        "license": "MIT",
+        "source": "fixture-test"
+      }
+    ],
+    "species": [],
+    "skillDefinitions": [],
+    "backgrounds": [],
+    "classes": [
+      {
+        "id": "test:class:warlock",
+        "name": "Warlock",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "cha",
+          "progression": "pact",
+          "mode": "known"
+        },
+        "spellListRefIds": [
+          "test:spelllist:warlock-core"
+        ],
+        "classFeaturesByLevel": [
+          {
+            "level": 2,
+            "featureId": "test:feature:eldritch-invocations"
+          }
+        ],
+        "weaponProficiencies": {
+          "simple": true
+        },
+        "invocationSelectionLimitsByLevel": [
+          {
+            "level": 2,
+            "max": 2
+          },
+          {
+            "level": 5,
+            "max": 3
+          },
+          {
+            "level": 11,
+            "max": 5
+          }
+        ]
+      }
+    ],
+    "subclasses": [],
+    "features": [
+      {
+        "id": "test:feature:eldritch-invocations",
+        "name": "Eldritch Invocations",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Eldritch Invocations"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:pact-of-the-tome",
+        "name": "Pact of the Tome",
+        "description": "Your patron gives you a grimoire called a Book of Shadows.",
+        "selectable": true,
+        "tags": [
+          "warlock_pact_boon"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 3
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Pact of the Tome"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:invocation-devils-sight",
+        "name": "Devil's Sight",
+        "description": "You can see normally in darkness, both magical and nonmagical, to a distance of 120 feet.",
+        "selectable": true,
+        "tags": [
+          "warlock_invocation"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 2
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Devil's Sight"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:invocation-mask-of-many-faces",
+        "name": "Mask of Many Faces",
+        "description": "You can cast Disguise Self at will without expending a spell slot.",
+        "selectable": true,
+        "tags": [
+          "warlock_invocation"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 2
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Mask of Many Faces"
+          }
+        ]
+      },
+      {
+        "id": "test:feature:invocation-book-of-ancient-secrets",
+        "name": "Book of Ancient Secrets",
+        "description": "You can inscribe magical rituals in your Book of Shadows.",
+        "selectable": true,
+        "tags": [
+          "warlock_invocation"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 2,
+          "featureIds": [
+            "test:feature:pact-of-the-tome"
+          ]
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Book of Ancient Secrets"
+          }
+        ]
+      }
+    ],
+    "feats": [
+      {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      },
+      {
+        "id": "test:feat:resilient-training",
+        "name": "Resilient Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Resilient Training",
+            "description": "Fixture feat for higher-level advancement slot."
+          }
+        ]
+      }
+    ],
+    "equipment": [
+      {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      {
+        "id": "test:weapon:dagger",
+        "name": "Dagger",
+        "type": "weapon",
+        "damageDice": "1d4",
+        "weaponCategory": "simple",
+        "properties": [
+          "finesse"
+        ]
+      }
+    ],
+    "spells": [
+      {
+        "id": "test:spell:chill-touch",
+        "name": "Chill Touch",
+        "level": 0,
+        "school": "necromancy",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "1 round",
+        "concentration": false
+      },
+      {
+        "id": "test:spell:mage-hand",
+        "name": "Mage Hand",
+        "level": 0,
+        "school": "conjuration",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "30 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "1 minute",
+        "concentration": false
+      },
+      {
+        "id": "test:spell:minor-illusion",
+        "name": "Minor Illusion",
+        "level": 0,
+        "school": "illusion",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "30 feet",
+        "components": [
+          "S",
+          "M"
+        ],
+        "duration": "1 minute",
+        "concentration": false
+      },
+      {
+        "id": "test:spell:charm-person",
+        "name": "Charm Person",
+        "level": 1,
+        "school": "enchantment",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "30 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "1 hour",
+        "concentration": false
+      },
+      {
+        "id": "test:spell:misty-step",
+        "name": "Misty Step",
+        "level": 2,
+        "school": "conjuration",
+        "ritual": false,
+        "castingTime": "1 bonus action",
+        "range": "Self",
+        "components": [
+          "V"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      },
+      {
+        "id": "test:spell:fear",
+        "name": "Fear",
+        "level": 3,
+        "school": "illusion",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "Self (30-foot cone)",
+        "components": [
+          "V",
+          "S",
+          "M"
+        ],
+        "duration": "Up to 1 minute",
+        "concentration": true
+      },
+      {
+        "id": "test:spell:circle-of-death",
+        "name": "Circle of Death",
+        "level": 6,
+        "school": "necromancy",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "150 feet",
+        "components": [
+          "V",
+          "S",
+          "M"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    ],
+    "spellLists": [
+      {
+        "id": "test:spelllist:warlock-core",
+        "name": "Warlock Core",
+        "spellIds": [
+          "test:spell:chill-touch",
+          "test:spell:mage-hand",
+          "test:spell:minor-illusion",
+          "test:spell:charm-person",
+          "test:spell:misty-step",
+          "test:spell:fear",
+          "test:spell:circle-of-death"
+        ]
+      }
+    ],
+    "speciesById": {},
+    "skillDefinitionsById": {},
+    "backgroundsById": {},
+    "classesById": {
+      "test:class:warlock": {
+        "id": "test:class:warlock",
+        "name": "Warlock",
+        "hitDie": 8,
+        "spellcasting": {
+          "ability": "cha",
+          "progression": "pact",
+          "mode": "known"
+        },
+        "spellListRefIds": [
+          "test:spelllist:warlock-core"
+        ],
+        "classFeaturesByLevel": [
+          {
+            "level": 2,
+            "featureId": "test:feature:eldritch-invocations"
+          }
+        ],
+        "weaponProficiencies": {
+          "simple": true
+        },
+        "invocationSelectionLimitsByLevel": [
+          {
+            "level": 2,
+            "max": 2
+          },
+          {
+            "level": 5,
+            "max": 3
+          },
+          {
+            "level": 11,
+            "max": 5
+          }
+        ]
+      }
+    },
+    "subclassesById": {},
+    "featuresById": {
+      "test:feature:eldritch-invocations": {
+        "id": "test:feature:eldritch-invocations",
+        "name": "Eldritch Invocations",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Eldritch Invocations"
+          }
+        ]
+      },
+      "test:feature:pact-of-the-tome": {
+        "id": "test:feature:pact-of-the-tome",
+        "name": "Pact of the Tome",
+        "description": "Your patron gives you a grimoire called a Book of Shadows.",
+        "selectable": true,
+        "tags": [
+          "warlock_pact_boon"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 3
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Pact of the Tome"
+          }
+        ]
+      },
+      "test:feature:invocation-devils-sight": {
+        "id": "test:feature:invocation-devils-sight",
+        "name": "Devil's Sight",
+        "description": "You can see normally in darkness, both magical and nonmagical, to a distance of 120 feet.",
+        "selectable": true,
+        "tags": [
+          "warlock_invocation"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 2
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Devil's Sight"
+          }
+        ]
+      },
+      "test:feature:invocation-mask-of-many-faces": {
+        "id": "test:feature:invocation-mask-of-many-faces",
+        "name": "Mask of Many Faces",
+        "description": "You can cast Disguise Self at will without expending a spell slot.",
+        "selectable": true,
+        "tags": [
+          "warlock_invocation"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 2
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Mask of Many Faces"
+          }
+        ]
+      },
+      "test:feature:invocation-book-of-ancient-secrets": {
+        "id": "test:feature:invocation-book-of-ancient-secrets",
+        "name": "Book of Ancient Secrets",
+        "description": "You can inscribe magical rituals in your Book of Shadows.",
+        "selectable": true,
+        "tags": [
+          "warlock_invocation"
+        ],
+        "prerequisites": {
+          "classIds": [
+            "test:class:warlock"
+          ],
+          "minLevel": 2,
+          "featureIds": [
+            "test:feature:pact-of-the-tome"
+          ]
+        },
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Book of Ancient Secrets"
+          }
+        ]
+      }
+    },
+    "featsById": {
+      "test:feat:durable-training": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Durable Training",
+            "description": "Fixture feat for advancement slot."
+          }
+        ]
+      },
+      "test:feat:resilient-training": {
+        "id": "test:feat:resilient-training",
+        "name": "Resilient Training",
+        "category": "general",
+        "effects": [
+          {
+            "type": "grant_trait",
+            "name": "Resilient Training",
+            "description": "Fixture feat for higher-level advancement slot."
+          }
+        ]
+      }
+    },
+    "equipmentById": {
+      "test:armor:leather": {
+        "id": "test:armor:leather",
+        "name": "Leather Armor",
+        "type": "armor_light",
+        "armorClassBase": 11
+      },
+      "test:weapon:dagger": {
+        "id": "test:weapon:dagger",
+        "name": "Dagger",
+        "type": "weapon",
+        "damageDice": "1d4",
+        "weaponCategory": "simple",
+        "properties": [
+          "finesse"
+        ]
+      }
+    },
+    "spellsById": {
+      "test:spell:chill-touch": {
+        "id": "test:spell:chill-touch",
+        "name": "Chill Touch",
+        "level": 0,
+        "school": "necromancy",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "120 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "1 round",
+        "concentration": false
+      },
+      "test:spell:mage-hand": {
+        "id": "test:spell:mage-hand",
+        "name": "Mage Hand",
+        "level": 0,
+        "school": "conjuration",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "30 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "1 minute",
+        "concentration": false
+      },
+      "test:spell:minor-illusion": {
+        "id": "test:spell:minor-illusion",
+        "name": "Minor Illusion",
+        "level": 0,
+        "school": "illusion",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "30 feet",
+        "components": [
+          "S",
+          "M"
+        ],
+        "duration": "1 minute",
+        "concentration": false
+      },
+      "test:spell:charm-person": {
+        "id": "test:spell:charm-person",
+        "name": "Charm Person",
+        "level": 1,
+        "school": "enchantment",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "30 feet",
+        "components": [
+          "V",
+          "S"
+        ],
+        "duration": "1 hour",
+        "concentration": false
+      },
+      "test:spell:misty-step": {
+        "id": "test:spell:misty-step",
+        "name": "Misty Step",
+        "level": 2,
+        "school": "conjuration",
+        "ritual": false,
+        "castingTime": "1 bonus action",
+        "range": "Self",
+        "components": [
+          "V"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      },
+      "test:spell:fear": {
+        "id": "test:spell:fear",
+        "name": "Fear",
+        "level": 3,
+        "school": "illusion",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "Self (30-foot cone)",
+        "components": [
+          "V",
+          "S",
+          "M"
+        ],
+        "duration": "Up to 1 minute",
+        "concentration": true
+      },
+      "test:spell:circle-of-death": {
+        "id": "test:spell:circle-of-death",
+        "name": "Circle of Death",
+        "level": 6,
+        "school": "necromancy",
+        "ritual": false,
+        "castingTime": "1 action",
+        "range": "150 feet",
+        "components": [
+          "V",
+          "S",
+          "M"
+        ],
+        "duration": "Instantaneous",
+        "concentration": false
+      }
+    },
+    "spellListsById": {
+      "test:spelllist:warlock-core": {
+        "id": "test:spelllist:warlock-core",
+        "name": "Warlock Core",
+        "spellIds": [
+          "test:spell:chill-touch",
+          "test:spell:mage-hand",
+          "test:spell:minor-illusion",
+          "test:spell:charm-person",
+          "test:spell:misty-step",
+          "test:spell:fear",
+          "test:spell:circle-of-death"
+        ]
+      }
+    }
+  }
+}

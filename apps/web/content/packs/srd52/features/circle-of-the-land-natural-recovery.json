@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-land-natural-recovery",
+  "name": "Natural Recovery",
+  "description": "Circle of the Land feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Natural Recovery",
+      "description": "Circle of the Land feature (level 6)."
+    }
+  ]
+}

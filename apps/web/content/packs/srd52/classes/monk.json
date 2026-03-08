@@ -23,11 +23,63 @@
   "classFeaturesByLevel": [
     {
       "level": 1,
-      "featureId": "srd52:feature:unarmored-defense-monk"
+      "featureId": "srd52:feature:martial-arts"
     },
     {
       "level": 1,
-      "featureId": "srd52:feature:martial-arts"
+      "featureId": "srd52:feature:unarmored-defense-monk"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:ki"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:unarmored-movement"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:monastic-tradition"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:deflect-missiles"
+    },
+    {
+      "level": 4,
+      "featureId": "srd52:feature:slow-fall"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:extra-attack"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:stunning-strike"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:evasion"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:stillness-of-mind"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:purity-of-body"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:diamond-soul"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:empty-body"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:perfect-self"
     }
   ],
   "startingEquipment": {
@@ -45,5 +97,6 @@
       "type": "grant_save_proficiency",
       "ability": "dex"
     }
-  ]
+  ],
+  "description": "A disciplined martial artist who combines speed, precision, and spiritual focus."
 }

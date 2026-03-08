@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:wild-magic-wild-magic-surge",
+  "name": "Wild Magic Surge",
+  "description": "Wild Magic feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Wild Magic Surge",
+      "description": "Wild Magic feature (level 3)."
+    }
+  ]
+}

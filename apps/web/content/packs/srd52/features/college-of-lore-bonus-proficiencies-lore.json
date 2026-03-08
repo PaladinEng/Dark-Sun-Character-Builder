@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:college-of-lore-bonus-proficiencies-lore",
+  "name": "Bonus Proficiencies: Lore",
+  "description": "College of Lore feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Bonus Proficiencies: Lore",
+      "description": "College of Lore feature (level 3)."
+    }
+  ]
+}

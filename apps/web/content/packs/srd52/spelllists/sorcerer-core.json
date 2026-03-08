@@ -29,6 +29,25 @@
     "srd52:spell:fireball",
     "srd52:spell:fly",
     "srd52:spell:haste",
-    "srd52:spell:lightning-bolt"
+    "srd52:spell:lightning-bolt",
+    "srd52:spell:fire-bolt",
+    "srd52:spell:minor-illusion",
+    "srd52:spell:chill-touch",
+    "srd52:spell:friends",
+    "srd52:spell:feather-fall",
+    "srd52:spell:fog-cloud",
+    "srd52:spell:identify",
+    "srd52:spell:heroism",
+    "srd52:spell:silent-image",
+    "srd52:spell:alter-self",
+    "srd52:spell:darkvision",
+    "srd52:spell:levitate",
+    "srd52:spell:mirror-image",
+    "srd52:spell:shatter",
+    "srd52:spell:suggestion",
+    "srd52:spell:see-invisibility",
+    "srd52:spell:blink",
+    "srd52:spell:hypnotic-pattern",
+    "srd52:spell:slow"
   ]
 }

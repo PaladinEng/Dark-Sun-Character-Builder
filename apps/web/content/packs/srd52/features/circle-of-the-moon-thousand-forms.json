@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-moon-thousand-forms",
+  "name": "Thousand Forms",
+  "description": "Circle of the Moon feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Thousand Forms",
+      "description": "Circle of the Moon feature (level 14)."
+    }
+  ]
+}

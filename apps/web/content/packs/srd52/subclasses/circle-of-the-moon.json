@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:circle-of-the-moon",
+  "classId": "srd52:class:druid",
+  "name": "Circle of the Moon",
+  "description": "A primal circle that refines Wild Shape into a dominant combat discipline.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:circle-of-the-moon-combat-wild-shape"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:circle-of-the-moon-circle-forms"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:circle-of-the-moon-primal-strike"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:circle-of-the-moon-elemental-wild-shape"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:circle-of-the-moon-thousand-forms"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Circle of the Moon Training",
+      "description": "Circle of the Moon features apply according to subclass progression."
+    }
+  ]
+}

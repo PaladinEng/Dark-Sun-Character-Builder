@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:weavers-tools",
   "type": "adventuring_gear",
-  "name": "Weaver's Tools"
+  "name": "Weaver's Tools",
+  "description": "Weaver's Tools is adventuring gear for exploration and utility."
 }

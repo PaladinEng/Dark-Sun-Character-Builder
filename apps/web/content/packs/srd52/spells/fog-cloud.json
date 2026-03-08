@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:fog-cloud",
+  "name": "Fog Cloud",
+  "description": "You create a sphere of heavy fog that obscures vision in the area.",
+  "level": 1,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "summary": "You create a sphere of heavy fog that obscures vision in the area.",
+  "notes": "Requires concentration while active."
+}

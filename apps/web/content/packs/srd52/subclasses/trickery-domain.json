@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:trickery-domain",
+  "classId": "srd52:class:cleric",
+  "name": "Trickery Domain",
+  "description": "A deceptive domain that prizes stealth, misdirection, and divine guile.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:trickery-domain-trickery-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:trickery-domain-channel-divinity-invoke-duplicity"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:trickery-domain-divine-strike-trickery"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:trickery-domain-improved-duplicity"
+    }
+  ],
+  "domain": "trickery",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Trickery Domain Training",
+      "description": "Trickery Domain features apply according to subclass progression."
+    }
+  ]
+}

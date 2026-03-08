@@ -1,0 +1,82 @@
+{
+  "abilityMods": {
+    "cha": 0,
+    "con": 1,
+    "dex": 3,
+    "int": 2,
+    "str": 0,
+    "wis": 1
+  },
+  "advancementSlots": [],
+  "armorClass": 14,
+  "attack": {
+    "damage": "1d8+3",
+    "name": "Rapier",
+    "toHit": 5
+  },
+  "feats": [
+    {
+      "id": "test:feat:origin-alert",
+      "name": "Origin Alert"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 10,
+    "con": 12,
+    "dex": 16,
+    "int": 14,
+    "str": 10,
+    "wis": 12
+  },
+  "languages": [],
+  "maxHP": 21,
+  "passivePerception": 11,
+  "proficiencyBonus": 2,
+  "resistances": [],
+  "saveProficiencies": [
+    "dex"
+  ],
+  "savingThrows": {
+    "cha": 0,
+    "con": 1,
+    "dex": 5,
+    "int": 2,
+    "str": 0,
+    "wis": 1
+  },
+  "senses": [],
+  "skillProficiencies": [
+    "sleight_of_hand",
+    "stealth"
+  ],
+  "skills": {
+    "acrobatics": 3,
+    "animal_handling": 1,
+    "arcana": 2,
+    "athletics": 0,
+    "deception": 0,
+    "history": 2,
+    "insight": 1,
+    "intimidation": 0,
+    "investigation": 2,
+    "medicine": 1,
+    "nature": 2,
+    "perception": 1,
+    "performance": 0,
+    "persuasion": 0,
+    "religion": 2,
+    "sleight_of_hand": 5,
+    "stealth": 5,
+    "survival": 1
+  },
+  "speed": 30,
+  "spellAttackBonus": null,
+  "spellcastingAbility": null,
+  "spellSaveDC": null,
+  "spellSlots": null,
+  "toolProficiencies": [
+    "Thieves' Tools"
+  ],
+  "traits": [],
+  "warnings": []
+}

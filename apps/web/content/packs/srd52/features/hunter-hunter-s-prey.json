@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:hunter-hunter-s-prey",
+  "name": "Hunter's Prey",
+  "description": "Hunter feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Hunter's Prey",
+      "description": "Hunter feature (level 3)."
+    }
+  ]
+}

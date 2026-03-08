@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-land-nature-s-sanctuary",
+  "name": "Nature's Sanctuary",
+  "description": "Circle of the Land feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Nature's Sanctuary",
+      "description": "Circle of the Land feature (level 14)."
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 {
   "id": "srd52:feat:savage-attacker",
   "name": "Savage Attacker",
-  "category": "origin"
+  "category": "origin",
+  "description": "You deliver harder-hitting weapon strikes through aggressive technique."
 }

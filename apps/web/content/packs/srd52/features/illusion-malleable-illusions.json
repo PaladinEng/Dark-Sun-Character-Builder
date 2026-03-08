@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:illusion-malleable-illusions",
+  "name": "Malleable Illusions",
+  "description": "School of Illusion feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Malleable Illusions",
+      "description": "School of Illusion feature (level 6)."
+    }
+  ]
+}

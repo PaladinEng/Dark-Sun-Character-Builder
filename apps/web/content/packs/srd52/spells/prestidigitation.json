@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Up to 1 hour",
-  "concentration": false
+  "concentration": false,
+  "summary": "You perform a minor magical trick.",
+  "notes": "No additional casting notes."
 }

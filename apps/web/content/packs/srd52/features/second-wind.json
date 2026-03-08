@@ -1,4 +1,5 @@
 {
   "id": "srd52:feature:second-wind",
-  "name": "Second Wind"
+  "name": "Second Wind",
+  "description": "Second Wind class feature."
 }

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:way-of-shadow-shadow-arts",
+  "name": "Shadow Arts",
+  "description": "Way of Shadow feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Shadow Arts",
+      "description": "Way of Shadow feature (level 3)."
+    }
+  ]
+}

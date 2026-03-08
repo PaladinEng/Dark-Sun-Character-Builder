@@ -1235,6 +1235,39 @@ describe("rules", () => {
     expect(derived.spellcasting?.slots).toEqual([3, 0, 0, 0, 0, 0, 0, 0, 0]);
   });
 
+  it("computes pact-caster slot table at level 5", () => {
+    const warlock: Class = {
+      id: "test:class:warlock",
+      name: "Warlock",
+      spellcasting: {
+        ability: "cha",
+        progression: "pact",
+        mode: "known"
+      }
+    };
+
+    const derived = computeDerivedState(
+      baseState({
+        level: 5,
+        selectedClassId: warlock.id,
+        baseAbilities: {
+          str: 10,
+          dex: 12,
+          con: 12,
+          int: 10,
+          wis: 10,
+          cha: 16
+        }
+      }),
+      baseMergedContent({
+        classes: [warlock],
+        classesById: { [warlock.id]: warlock }
+      })
+    );
+
+    expect(derived.spellcasting?.slots).toEqual([0, 0, 2, 0, 0, 0, 0, 0, 0]);
+  });
+
   it("keeps spellcasting undefined for non-spellcasting classes", () => {
     const fighter: Class = {
       id: "test:class:fighter",
@@ -1256,6 +1289,141 @@ describe("rules", () => {
 });
 
 describe("validateCharacter", () => {
+  function warlockOptionContent(): MergedContent {
+    const warlock: Class = {
+      id: "test:class:warlock",
+      name: "Warlock",
+      spellcasting: {
+        ability: "cha",
+        progression: "pact",
+        mode: "known"
+      },
+      invocationSelectionLimitsByLevel: [
+        { level: 2, max: 2 },
+        { level: 5, max: 3 },
+        { level: 11, max: 5 }
+      ],
+      spellListRefIds: ["test:spelllist:warlock-core"]
+    };
+
+    const pactTome = {
+      id: "test:feature:pact-of-the-tome",
+      name: "Pact of the Tome",
+      selectable: true,
+      tags: ["warlock_pact_boon"],
+      prerequisites: {
+        classIds: [warlock.id],
+        minLevel: 3
+      }
+    };
+    const invocationDevilsSight = {
+      id: "test:feature:invocation-devils-sight",
+      name: "Devil's Sight",
+      selectable: true,
+      tags: ["warlock_invocation"],
+      prerequisites: {
+        classIds: [warlock.id],
+        minLevel: 2
+      }
+    };
+    const invocationBook = {
+      id: "test:feature:invocation-book-of-ancient-secrets",
+      name: "Book of Ancient Secrets",
+      selectable: true,
+      tags: ["warlock_invocation"],
+      prerequisites: {
+        classIds: [warlock.id],
+        minLevel: 2,
+        featureIds: [pactTome.id]
+      }
+    };
+    const invocationMask = {
+      id: "test:feature:invocation-mask-of-many-faces",
+      name: "Mask of Many Faces",
+      selectable: true,
+      tags: ["warlock_invocation"],
+      prerequisites: {
+        classIds: [warlock.id],
+        minLevel: 2
+      }
+    };
+
+    const charmPerson: Spell = {
+      id: "test:spell:charm-person",
+      name: "Charm Person",
+      level: 1,
+      school: "enchantment",
+      ritual: false,
+      castingTime: "1 action",
+      range: "30 feet",
+      components: ["V", "S"],
+      duration: "1 hour",
+      concentration: false
+    };
+    const fear: Spell = {
+      id: "test:spell:fear",
+      name: "Fear",
+      level: 3,
+      school: "illusion",
+      ritual: false,
+      castingTime: "1 action",
+      range: "Self (30-foot cone)",
+      components: ["V", "S", "M"],
+      duration: "Up to 1 minute",
+      concentration: true
+    };
+    const circleOfDeath: Spell = {
+      id: "test:spell:circle-of-death",
+      name: "Circle of Death",
+      level: 6,
+      school: "necromancy",
+      ritual: false,
+      castingTime: "1 action",
+      range: "150 feet",
+      components: ["V", "S", "M"],
+      duration: "Instantaneous",
+      concentration: false
+    };
+
+    const feat4: Feat = {
+      id: "test:feat:slot4",
+      name: "Level 4 Feat",
+      category: "general"
+    };
+    const feat8: Feat = {
+      id: "test:feat:slot8",
+      name: "Level 8 Feat",
+      category: "general"
+    };
+    const warlockCore = {
+      id: "test:spelllist:warlock-core",
+      name: "Warlock Core",
+      spellIds: [charmPerson.id, fear.id, circleOfDeath.id]
+    };
+
+    return baseMergedContent({
+      classes: [warlock],
+      classesById: { [warlock.id]: warlock },
+      features: [pactTome, invocationDevilsSight, invocationBook, invocationMask],
+      featuresById: {
+        [pactTome.id]: pactTome,
+        [invocationDevilsSight.id]: invocationDevilsSight,
+        [invocationBook.id]: invocationBook,
+        [invocationMask.id]: invocationMask
+      },
+      spells: [charmPerson, fear, circleOfDeath],
+      spellsById: {
+        [charmPerson.id]: charmPerson,
+        [fear.id]: fear,
+        [circleOfDeath.id]: circleOfDeath
+      },
+      spellLists: [warlockCore],
+      spellListsById: { [warlockCore.id]: warlockCore },
+      feats: [feat4, feat8],
+      featsById: { [feat4.id]: feat4, [feat8.id]: feat8 }
+    });
+  }
+
   it("reports ORIGIN_FEAT_REQUIRED when background requires origin feat choice", () => {
     const background: Background = {
       id: "test:background:needs-origin-choice",
@@ -2237,7 +2405,7 @@ describe("validateCharacter", () => {
     expect(report.errors.some((issue) => issue.code === "SPELLCASTING_DERIVED_INVALID")).toBe(true);
   });
 
-  it("reports SPELLCASTING_PACT_UNIMPLEMENTED for pact progression", () => {
+  it("accepts pact progression when derived slots are valid", () => {
     const warlock: Class = {
       id: "test:class:warlock",
       name: "Warlock",
@@ -2266,8 +2434,111 @@ describe("validateCharacter", () => {
       })
     );
 
-    expect(report.errors.some((issue) => issue.code === "SPELLCASTING_PACT_UNIMPLEMENTED")).toBe(true);
-    expect(report.isValidForExport).toBe(false);
+    expect(report.errors.some((issue) => issue.code === "SPELLCASTING_PACT_UNIMPLEMENTED")).toBe(false);
+    expect(report.errors.some((issue) => issue.code === "SPELLCASTING_SLOTS_MISSING")).toBe(false);
+    expect(report.isValidForExport).toBe(true);
+  });
+
+  it("accepts valid warlock invocation, pact boon, and mystic arcanum selections", () => {
+    const report = validateCharacter(
+      baseState({
+        level: 11,
+        selectedClassId: "test:class:warlock",
+        baseAbilities: {
+          str: 8,
+          dex: 14,
+          con: 14,
+          int: 10,
+          wis: 10,
+          cha: 16
+        },
+        knownSpellIds: ["test:spell:charm-person", "test:spell:fear"],
+        featSelections: {
+          level: {
+            4: "test:feat:slot4",
+            8: "test:feat:slot8"
+          }
+        },
+        warlockInvocationFeatureIds: [
+          "test:feature:invocation-devils-sight",
+          "test:feature:invocation-book-of-ancient-secrets"
+        ],
+        warlockPactBoonFeatureId: "test:feature:pact-of-the-tome",
+        warlockMysticArcanumByLevel: {
+          6: "test:spell:circle-of-death"
+        }
+      }),
+      warlockOptionContent()
+    );
+
+    expect(report.errors.some((issue) => issue.code.startsWith("WARLOCK_"))).toBe(false);
+    expect(report.errors.some((issue) => issue.code.startsWith("MYSTIC_ARCANUM_"))).toBe(false);
+    expect(report.isValidForExport).toBe(true);
+  });
+
+  it("requires pact boon and matching invocation prerequisites for warlock", () => {
+    const report = validateCharacter(
+      baseState({
+        level: 4,
+        selectedClassId: "test:class:warlock",
+        baseAbilities: {
+          str: 8,
+          dex: 14,
+          con: 14,
+          int: 10,
+          wis: 10,
+          cha: 16
+        },
+        knownSpellIds: ["test:spell:charm-person", "test:spell:fear"],
+        featSelections: {
+          level: {
+            4: "test:feat:slot4"
+          }
+        },
+        warlockInvocationFeatureIds: ["test:feature:invocation-book-of-ancient-secrets"]
+      }),
+      warlockOptionContent()
+    );
+
+    expect(report.errors.some((issue) => issue.code === "WARLOCK_PACT_BOON_REQUIRED")).toBe(true);
+    expect(report.errors.some((issue) => issue.code === "WARLOCK_INVOCATION_PREREQ_UNMET")).toBe(
+      true
+    );
+  });
+
+  it("enforces invocation limits and arcanum spell level constraints", () => {
+    const report = validateCharacter(
+      baseState({
+        level: 2,
+        selectedClassId: "test:class:warlock",
+        baseAbilities: {
+          str: 8,
+          dex: 14,
+          con: 14,
+          int: 10,
+          wis: 10,
+          cha: 16
+        },
+        knownSpellIds: ["test:spell:charm-person", "test:spell:fear"],
+        warlockInvocationFeatureIds: [
+          "test:feature:invocation-devils-sight",
+          "test:feature:invocation-book-of-ancient-secrets",
+          "test:feature:invocation-mask-of-many-faces"
+        ],
+        warlockPactBoonFeatureId: "test:feature:pact-of-the-tome",
+        warlockMysticArcanumByLevel: {
+          6: "test:spell:fear"
+        }
+      }),
+      warlockOptionContent()
+    );
+
+    expect(
+      report.errors.some((issue) => issue.code === "WARLOCK_INVOCATION_LIMIT_EXCEEDED")
+    ).toBe(true);
+    expect(
+      report.errors.some((issue) => issue.code === "MYSTIC_ARCANUM_SPELL_LEVEL_INVALID")
+    ).toBe(true);
   });
 
   it("reports SPELL_ID_MISSING when prepared/known spell ids are unknown", () => {
@@ -2340,6 +2611,94 @@ describe("validateCharacter", () => {
       { kind: "tool", id: "Gaming Set", label: "Gaming Set" },
     ]);
     expect(model.rows).toEqual([...model.skillRows, ...model.proficientToolRows]);
+  });
+
+  it("applies subclass feature effects when subclass matches selected class", () => {
+    const fighter: Class = {
+      id: "test:class:fighter",
+      name: "Fighter",
+      hitDie: 10
+    };
+    const champion = {
+      id: "test:subclass:champion",
+      classId: fighter.id,
+      name: "Champion",
+      subclassFeaturesByLevel: [{ level: 3, featureId: "test:feature:improved-critical" }]
+    };
+    const improvedCritical = {
+      id: "test:feature:improved-critical",
+      name: "Improved Critical",
+      effects: [{ type: "grant_trait" as const, name: "Improved Critical" }]
+    };
+
+    const derived = computeDerivedState(
+      baseState({
+        level: 5,
+        selectedClassId: fighter.id,
+        subclass: champion.id,
+        featSelections: { level: { 4: "test:feat:sprinter" } }
+      }),
+      baseMergedContent({
+        classes: [fighter],
+        classesById: { [fighter.id]: fighter },
+        subclasses: [champion],
+        subclassesById: { [champion.id]: champion },
+        features: [improvedCritical],
+        featuresById: { [improvedCritical.id]: improvedCritical },
+        feats: [
+          {
+            id: "test:feat:sprinter",
+            name: "Sprinter",
+            category: "general",
+            effects: []
+          }
+        ],
+        featsById: {
+          "test:feat:sprinter": {
+            id: "test:feat:sprinter",
+            name: "Sprinter",
+            category: "general",
+            effects: []
+          }
+        }
+      })
+    );
+
+    expect(derived.traits).toContain("Improved Critical");
+  });
+
+  it("reports subclass mismatch when subclass does not belong to selected class", () => {
+    const fighter: Class = {
+      id: "test:class:fighter",
+      name: "Fighter",
+      hitDie: 10
+    };
+    const wizard: Class = {
+      id: "test:class:wizard",
+      name: "Wizard",
+      hitDie: 6
+    };
+    const evoker = {
+      id: "test:subclass:evoker",
+      classId: wizard.id,
+      name: "School of Evocation",
+      subclassFeaturesByLevel: [{ level: 2, featureId: "test:feature:evoker" }]
+    };
+
+    const report = validateCharacter(
+      baseState({
+        selectedClassId: fighter.id,
+        subclass: evoker.id
+      }),
+      baseMergedContent({
+        classes: [fighter, wizard],
+        classesById: { [fighter.id]: fighter, [wizard.id]: wizard },
+        subclasses: [evoker],
+        subclassesById: { [evoker.id]: evoker }
+      })
+    );
+
+    expect(report.errors.some((issue) => issue.code === "SUBCLASS_CLASS_MISMATCH")).toBe(true);
   });
 
   it("buildPdfExportFromTemplate returns deterministic non-empty PDF bytes for valid export", () => {

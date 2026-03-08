@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:wild-magic-tides-of-chaos",
+  "name": "Tides of Chaos",
+  "description": "Wild Magic feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Tides of Chaos",
+      "description": "Wild Magic feature (level 3)."
+    }
+  ]
+}

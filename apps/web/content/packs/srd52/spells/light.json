@@ -12,5 +12,7 @@
     "M"
   ],
   "duration": "1 hour",
-  "concentration": false
+  "concentration": false,
+  "summary": "You touch an object that sheds bright light.",
+  "notes": "No additional casting notes."
 }

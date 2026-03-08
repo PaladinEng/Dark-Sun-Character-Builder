@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:evocation-overchannel",
+  "name": "Overchannel",
+  "description": "School of Evocation feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Overchannel",
+      "description": "School of Evocation feature (level 14)."
+    }
+  ]
+}

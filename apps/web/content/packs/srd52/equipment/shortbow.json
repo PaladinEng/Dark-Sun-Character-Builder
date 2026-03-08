@@ -9,5 +9,6 @@
   ],
   "masteryProperties": [
     "vex"
-  ]
+  ],
+  "description": "Shortbow is a simple weapon that deals 1d6 damage."
 }

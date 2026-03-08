@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:circle-of-death",
+  "name": "Circle of Death",
+  "description": "You unleash a sphere of necrotic power that withers creatures in a wide area.",
+  "level": 6,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "150 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You unleash a sphere of necrotic power that withers creatures in a wide area.",
+  "notes": "No additional casting notes."
+}

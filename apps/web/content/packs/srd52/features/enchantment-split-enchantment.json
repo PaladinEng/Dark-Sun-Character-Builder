@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:enchantment-split-enchantment",
+  "name": "Split Enchantment",
+  "description": "School of Enchantment feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Split Enchantment",
+      "description": "School of Enchantment feature (level 10)."
+    }
+  ]
+}

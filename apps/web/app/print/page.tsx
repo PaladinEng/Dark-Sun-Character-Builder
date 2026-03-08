@@ -2,6 +2,7 @@ import { access } from "node:fs/promises";
 import { join } from "node:path";
 
 import Link from "next/link";
+import { getSubclassFeatureIdsForLevel } from "@dark-sun/content";
 import type { CharacterState } from "@dark-sun/rules";
 import { computeDerivedState } from "@dark-sun/rules";
 
@@ -119,6 +120,25 @@ function normalizeOptionalNonNegativeInt(value: unknown, maximum?: number): numb
   return bounded;
 }
 
+function normalizeWarlockMysticArcanumByLevel(
+  value: unknown,
+): Partial<Record<6 | 7 | 8 | 9, string>> {
+  if (typeof value !== "object" || value === null || Array.isArray(value)) {
+    return {};
+  }
+  const out: Partial<Record<6 | 7 | 8 | 9, string>> = {};
+  for (const [key, spellId] of Object.entries(value)) {
+    const tier = Number(key);
+    if ((tier !== 6 && tier !== 7 && tier !== 8 && tier !== 9) || typeof spellId !== "string") {
+      continue;
+    }
+    if (spellId.length > 0) {
+      out[tier] = spellId;
+    }
+  }
+  return out;
+}
+
 function normalizeCharacterState(input: CharacterState): CharacterState {
   return {
     ...input,
@@ -135,6 +155,13 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
     selectedFeats: Array.isArray(input.selectedFeats) ? input.selectedFeats : [],
     selectedFeatureIds: Array.isArray(input.selectedFeatureIds) ? input.selectedFeatureIds : [],
+    warlockInvocationFeatureIds: Array.isArray(input.warlockInvocationFeatureIds)
+      ? input.warlockInvocationFeatureIds.filter((entry): entry is string => typeof entry === "string")
+      : [],
+    warlockPactBoonFeatureId: normalizeOptionalString(input.warlockPactBoonFeatureId),
+    warlockMysticArcanumByLevel: normalizeWarlockMysticArcanumByLevel(
+      input.warlockMysticArcanumByLevel,
+    ),
     abilityIncreases: Array.isArray(input.abilityIncreases) ? input.abilityIncreases : [],
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
@@ -238,6 +265,9 @@ export default async function PrintPage({
   const klass = payload.characterState.selectedClassId
     ? merged.content.classesById[payload.characterState.selectedClassId]
     : undefined;
+  const selectedSubclass = payload.characterState.subclass
+    ? merged.content.subclassesById?.[payload.characterState.subclass]
+    : undefined;
   const armor = payload.characterState.equippedArmorId
     ? merged.content.equipmentById[payload.characterState.equippedArmorId]
     : undefined;
@@ -307,7 +337,13 @@ export default async function PrintPage({
     ? Math.max(0, Math.min(10, Math.floor(payload.characterState.exhaustionLevel ?? 0)))
     : 0;
 
-  const featureNames = (payload.characterState.selectedFeatureIds ?? [])
+  const featureNames = [...new Set([
+    ...(payload.characterState.selectedFeatureIds ?? []),
+    ...(payload.characterState.warlockInvocationFeatureIds ?? []),
+    ...(payload.characterState.warlockPactBoonFeatureId
+      ? [payload.characterState.warlockPactBoonFeatureId]
+      : []),
+  ])]
     .map((id) => merged.content.featuresById[id]?.name)
     .filter((name): name is string => Boolean(name));
   const classFeatureIds = new Set<string>();
@@ -327,6 +363,12 @@ export default async function PrintPage({
       return true;
     })
     .map((entry) => merged.content.featuresById[entry.featureId]?.name ?? entry.featureId);
+  const subclassFeatureNames =
+    selectedSubclass && klass && selectedSubclass.classId === klass.id
+      ? getSubclassFeatureIdsForLevel(selectedSubclass, level).map(
+          (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
+        )
+      : [];
 
   const sensesSummary =
     derived.senses.length > 0
@@ -364,7 +406,9 @@ export default async function PrintPage({
     species ? `Species: ${species.name}` : null,
     background ? `Background: ${background.name}` : null,
     klass ? `Class: ${klass.name}` : null,
+    selectedSubclass ? `Subclass: ${selectedSubclass.name}` : null,
     ...classFeatureNames.map((name) => `Class Feature: ${name}`),
+    ...subclassFeatureNames.map((name) => `Subclass Feature: ${name}`),
     ...featureNames.map((name) => `Feature: ${name}`),
     ...derived.feats.map((feat) => `Feat: ${feat.name}`),
   ].filter((entry): entry is string => Boolean(entry));
@@ -434,9 +478,9 @@ export default async function PrintPage({
                     <div className="small-value">{klass?.name ?? "Unspecified"}</div>
                   </div>
                   <div>
-                    <div className="small-label">Subclass</div>
-                    <div className="small-value">{payload.characterState.subclass ?? "None"}</div>
-                  </div>
+                  <div className="small-label">Subclass</div>
+                    <div className="small-value">{selectedSubclass?.name ?? payload.characterState.subclass ?? "None"}</div>
+                </div>
                   <div>
                     <div className="small-label">Level</div>
                     <div className="small-value">{level}</div>

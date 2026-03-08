@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getClassFeatureIdsForLevel } from "@dark-sun/content";
+import { getClassFeatureIdsForLevel, getSubclassFeatureIdsForLevel } from "@dark-sun/content";
 import type {
   Ability,
   AttunedItem,
@@ -134,6 +134,25 @@ function normalizeOptionalNonNegativeInt(
   return bounded;
 }
 
+function normalizeWarlockMysticArcanumByLevel(
+  value: unknown,
+): Partial<Record<6 | 7 | 8 | 9, string>> {
+  if (!isObjectRecord(value)) {
+    return {};
+  }
+  const out: Partial<Record<6 | 7 | 8 | 9, string>> = {};
+  for (const [key, spellId] of Object.entries(value)) {
+    const tier = Number(key);
+    if ((tier !== 6 && tier !== 7 && tier !== 8 && tier !== 9) || typeof spellId !== "string") {
+      continue;
+    }
+    if (spellId.length > 0) {
+      out[tier] = spellId;
+    }
+  }
+  return out;
+}
+
 function normalizeCharacterState(input: CharacterState): CharacterState {
   const coins = isObjectRecord(input.coins) ? input.coins : undefined;
 
@@ -154,6 +173,15 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     selectedFeatureIds: Array.isArray(input.selectedFeatureIds)
       ? input.selectedFeatureIds
       : [],
+    warlockInvocationFeatureIds: Array.isArray(input.warlockInvocationFeatureIds)
+      ? input.warlockInvocationFeatureIds.filter(
+          (entry): entry is string => typeof entry === "string",
+        )
+      : [],
+    warlockPactBoonFeatureId: normalizeOptionalString(input.warlockPactBoonFeatureId),
+    warlockMysticArcanumByLevel: normalizeWarlockMysticArcanumByLevel(
+      input.warlockMysticArcanumByLevel,
+    ),
     abilityIncreases: Array.isArray(input.abilityIncreases) ? input.abilityIncreases : [],
     advancements: Array.isArray(input.advancements) ? input.advancements : [],
     inventoryItemIds: Array.isArray(input.inventoryItemIds) ? input.inventoryItemIds : [],
@@ -317,6 +345,9 @@ export default async function SheetPage({
   const selectedClass = payload.characterState.selectedClassId
     ? merged.content.classesById[payload.characterState.selectedClassId]
     : undefined;
+  const selectedSubclass = payload.characterState.subclass
+    ? merged.content.subclassesById?.[payload.characterState.subclass]
+    : undefined;
   const selectedSpecies = payload.characterState.selectedSpeciesId
     ? merged.content.speciesById[payload.characterState.selectedSpeciesId]
     : undefined;
@@ -452,6 +483,8 @@ export default async function SheetPage({
   const spellListRefs = dedupeStrings([
     ...(selectedClass?.spellListRefIds ?? []),
     ...(selectedClass?.spellListRefs ?? []),
+    ...(selectedSubclass?.spellListRefIds ?? []),
+    ...(selectedSubclass?.spellListRefs ?? []),
   ]);
 
   const classFeatureNames = selectedClass
@@ -459,7 +492,20 @@ export default async function SheetPage({
         (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
       )
     : [];
-  const selectedFeatureNames = (payload.characterState.selectedFeatureIds ?? [])
+  const subclassFeatureNames =
+    selectedSubclass && selectedClass && selectedSubclass.classId === selectedClass.id
+      ? getSubclassFeatureIdsForLevel(selectedSubclass, level).map(
+          (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
+        )
+      : [];
+  const progressionFeatureNames = dedupeStrings([...classFeatureNames, ...subclassFeatureNames]);
+  const selectedFeatureNames = dedupeStrings([
+    ...(payload.characterState.selectedFeatureIds ?? []),
+    ...(payload.characterState.warlockInvocationFeatureIds ?? []),
+    ...(payload.characterState.warlockPactBoonFeatureId
+      ? [payload.characterState.warlockPactBoonFeatureId]
+      : []),
+  ])
     .map((featureId) => merged.content.featuresById[featureId]?.name ?? featureId)
     .filter((entry) => entry.length > 0);
 
@@ -571,7 +617,11 @@ export default async function SheetPage({
     label,
     active: activeConditionSet.has(label.toLowerCase()),
   }));
-  const allClassFeatures = dedupeStrings([...classFeatureNames, ...selectedFeatureNames]);
+  const allClassFeatures = dedupeStrings([
+    ...classFeatureNames,
+    ...subclassFeatureNames,
+    ...selectedFeatureNames,
+  ]);
 
   const hasCompanion = hasCompanionData(payload.characterState.companion);
   const hasFamiliar = hasCompanionData(payload.characterState.familiar);
@@ -609,7 +659,7 @@ export default async function SheetPage({
                 </div>
                 <div className="rounded border border-slate-900 p-2">
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Subclass</div>
-                  <div className="font-semibold">{payload.characterState.subclass ?? "-"}</div>
+                  <div className="font-semibold">{selectedSubclass?.name ?? payload.characterState.subclass ?? "-"}</div>
                 </div>
                 <div className="rounded border border-slate-900 p-2">
                   <div className="text-[11px] uppercase tracking-wide text-slate-600">Background</div>
@@ -894,11 +944,11 @@ export default async function SheetPage({
                 <div className="space-y-2 p-2 text-sm">
                   <div>
                     <div className="text-[11px] uppercase tracking-wide text-slate-600">Features By Class Level</div>
-                    {classFeatureNames.length === 0 ? (
+                    {progressionFeatureNames.length === 0 ? (
                       <p>None</p>
                     ) : (
                       <ul className="list-disc space-y-1 pl-5">
-                        {classFeatureNames.map((name) => (
+                        {progressionFeatureNames.map((name) => (
                           <li key={`class-feature-${name}`}>{name}</li>
                         ))}
                       </ul>

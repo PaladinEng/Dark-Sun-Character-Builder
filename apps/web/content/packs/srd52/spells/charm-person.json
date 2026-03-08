@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "1 hour",
-  "concentration": false
+  "concentration": false,
+  "summary": "You attempt to charm a humanoid you can see.",
+  "notes": "No additional casting notes."
 }

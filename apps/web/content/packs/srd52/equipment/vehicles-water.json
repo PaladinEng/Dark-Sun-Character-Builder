@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:vehicles-water",
   "type": "adventuring_gear",
-  "name": "Vehicles (Water)"
+  "name": "Vehicles (Water)",
+  "description": "Vehicles (Water) is adventuring gear for exploration and utility."
 }

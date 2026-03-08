@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:assassin",
+  "classId": "srd52:class:rogue",
+  "name": "Assassin",
+  "description": "A lethal infiltrator who strikes from shadows with premeditated precision.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:assassin-bonus-proficiencies-assassin"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:assassin-assassinate"
+    },
+    {
+      "level": 9,
+      "featureId": "srd52:feature:assassin-infiltration-expertise"
+    },
+    {
+      "level": 13,
+      "featureId": "srd52:feature:assassin-impostor"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:assassin-death-strike"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Assassin Training",
+      "description": "Assassin features apply according to subclass progression."
+    }
+  ]
+}

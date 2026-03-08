@@ -1,5 +1,6 @@
 {
   "id": "srd52:feat:magic-initiate",
   "name": "Magic Initiate",
-  "category": "origin"
+  "category": "origin",
+  "description": "You learn introductory spellcasting from a chosen magical tradition."
 }

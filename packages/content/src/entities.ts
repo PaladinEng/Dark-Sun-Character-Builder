@@ -113,6 +113,27 @@ const SpellSelectionLimitByLevelSchema = z.object({
   cantripsKnown: z.number().int().min(0).optional(),
 });
 
+const InvocationSelectionLimitByLevelSchema = z.object({
+  level: z.number().int().min(1).max(20),
+  max: z.number().int().min(0),
+});
+
+const InvocationSelectionLimitsByLevelSchema = z
+  .array(InvocationSelectionLimitByLevelSchema)
+  .superRefine((value, ctx) => {
+    const seen = new Set<number>();
+    for (const entry of value) {
+      if (seen.has(entry.level)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `Duplicate invocation selection limit level: ${entry.level}.`,
+          path: ["level"],
+        });
+      }
+      seen.add(entry.level);
+    }
+  });
+
 const SpellSelectionLimitsByLevelSchema = z
   .array(SpellSelectionLimitByLevelSchema)
   .superRefine((value, ctx) => {
@@ -129,6 +150,14 @@ const SpellSelectionLimitsByLevelSchema = z
     }
   });
 
+export const SpellcastingSchema = z.object({
+  ability: AbilitySchema,
+  progression: z.enum(["full", "half", "third", "pact"]),
+  mode: z.enum(["prepared", "known"]).optional(),
+  selectionLimitsByLevel: SpellSelectionLimitsByLevelSchema.optional(),
+});
+export type Spellcasting = z.infer<typeof SpellcastingSchema>;
+
 export const ClassSchema = EntityBaseSchema.extend({
   hitDie: z.number().int().positive().optional(),
   classSkillChoices: z
@@ -144,14 +173,8 @@ export const ClassSchema = EntityBaseSchema.extend({
       weaponIds: z.array(z.string()).optional(),
     })
     .optional(),
-  spellcasting: z
-    .object({
-      ability: AbilitySchema,
-      progression: z.enum(["full", "half", "third", "pact"]),
-      mode: z.enum(["prepared", "known"]).optional(),
-      selectionLimitsByLevel: SpellSelectionLimitsByLevelSchema.optional(),
-    })
-    .optional(),
+  spellcasting: SpellcastingSchema.optional(),
+  invocationSelectionLimitsByLevel: InvocationSelectionLimitsByLevelSchema.optional(),
   spellListRefIds: z.array(z.string()).optional(),
   spellListRefs: z.array(z.string()).optional(),
   classFeaturesByLevel: ClassFeaturesByLevelSchema.optional(),
@@ -205,32 +228,104 @@ export function getClassFeatureIdsForLevel(
   return ids;
 }
 
-export const FeatureSchema = EntityBaseSchema;
+export const SubclassSchema = EntityBaseSchema.extend({
+  classId: z.string().min(1),
+  subclassFeaturesByLevel: ClassFeaturesByLevelSchema,
+  spellcasting: SpellcastingSchema.optional(),
+  spellListRefIds: z.array(z.string()).optional(),
+  spellListRefs: z.array(z.string()).optional(),
+  grantedProficiencies: z
+    .object({
+      armor: z.array(z.string()).optional(),
+      weapons: z.array(z.string()).optional(),
+      tools: z.array(z.string()).optional(),
+      skills: z.array(z.string()).optional(),
+      saves: z.array(AbilitySchema).optional(),
+      languages: z.array(z.string()).optional(),
+    })
+    .optional(),
+  passiveModifiers: z.array(EffectSchema).optional(),
+  domain: z.string().optional(),
+}).superRefine((value, ctx) => {
+  if (
+    value.spellListRefIds &&
+    value.spellListRefs &&
+    JSON.stringify(value.spellListRefIds) !== JSON.stringify(value.spellListRefs)
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message:
+        "Subclass spellListRefIds and legacy spellListRefs must match when both are provided.",
+      path: ["spellListRefIds"],
+    });
+  }
+});
+export type Subclass = z.infer<typeof SubclassSchema>;
+
+export function getSubclassSpellListRefIds(
+  subclass: Pick<Subclass, "spellListRefIds" | "spellListRefs">,
+): string[] {
+  return subclass.spellListRefIds ?? subclass.spellListRefs ?? [];
+}
+
+export function getSubclassFeatureIdsForLevel(
+  subclass: Pick<Subclass, "subclassFeaturesByLevel">,
+  level: number,
+): string[] {
+  const normalizedLevel = Math.max(1, Math.min(20, Math.floor(level)));
+  const entries = subclass.subclassFeaturesByLevel ?? [];
+  const seen = new Set<string>();
+  const ids: string[] = [];
+
+  const sorted = [...entries].sort((a, b) => {
+    if (a.level !== b.level) {
+      return a.level - b.level;
+    }
+    return a.featureId.localeCompare(b.featureId);
+  });
+
+  for (const entry of sorted) {
+    if (entry.level > normalizedLevel || seen.has(entry.featureId)) {
+      continue;
+    }
+    seen.add(entry.featureId);
+    ids.push(entry.featureId);
+  }
+
+  return ids;
+}
+
+const SelectionPrerequisitesSchema = z.object({
+  minLevel: z.number().int().positive().optional(),
+  abilities: z
+    .object({
+      str: z.number().int().min(1).max(30).optional(),
+      dex: z.number().int().min(1).max(30).optional(),
+      con: z.number().int().min(1).max(30).optional(),
+      int: z.number().int().min(1).max(30).optional(),
+      wis: z.number().int().min(1).max(30).optional(),
+      cha: z.number().int().min(1).max(30).optional(),
+    })
+    .optional(),
+  classIds: z.array(z.string()).min(1).optional(),
+  speciesIds: z.array(z.string()).min(1).optional(),
+  featureIds: z.array(z.string()).min(1).optional(),
+  requiresSpellcasting: z.boolean().optional(),
+});
+export type SelectionPrerequisites = z.infer<typeof SelectionPrerequisitesSchema>;
+
+export const FeatureSchema = EntityBaseSchema.extend({
+  selectable: z.boolean().optional(),
+  tags: z.array(z.string().min(1)).optional(),
+  prerequisites: SelectionPrerequisitesSchema.optional(),
+});
 export type Feature = z.infer<typeof FeatureSchema>;
 
 export const FeatSchema = EntityBaseSchema.extend({
   category: z.enum(["origin", "general"]).optional(),
   grantsAbilityIncreases: z.boolean().optional(),
   repeatable: z.boolean().optional(),
-  prerequisites: z
-    .object({
-      minLevel: z.number().int().positive().optional(),
-      abilities: z
-        .object({
-          str: z.number().int().min(1).max(30).optional(),
-          dex: z.number().int().min(1).max(30).optional(),
-          con: z.number().int().min(1).max(30).optional(),
-          int: z.number().int().min(1).max(30).optional(),
-          wis: z.number().int().min(1).max(30).optional(),
-          cha: z.number().int().min(1).max(30).optional(),
-        })
-        .optional(),
-      classIds: z.array(z.string()).min(1).optional(),
-      speciesIds: z.array(z.string()).min(1).optional(),
-      featureIds: z.array(z.string()).min(1).optional(),
-      requiresSpellcasting: z.boolean().optional(),
-    })
-    .optional(),
+  prerequisites: SelectionPrerequisitesSchema.optional(),
 });
 export type Feat = z.infer<typeof FeatSchema>;
 

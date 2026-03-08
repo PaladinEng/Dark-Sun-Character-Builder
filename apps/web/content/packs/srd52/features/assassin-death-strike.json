@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:assassin-death-strike",
+  "name": "Death Strike",
+  "description": "Assassin feature gained at level 17.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Death Strike",
+      "description": "Assassin feature (level 17)."
+    }
+  ]
+}

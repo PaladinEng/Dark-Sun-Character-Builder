@@ -3,5 +3,6 @@
   "type": "armor_medium",
   "name": "Breastplate",
   "armorClassBase": 14,
-  "dexCap": 2
+  "dexCap": 2,
+  "description": "Breastplate provides base AC 14 and allows Dexterity modifier up to +2."
 }

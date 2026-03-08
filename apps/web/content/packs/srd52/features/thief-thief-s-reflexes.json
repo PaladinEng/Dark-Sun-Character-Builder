@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:thief-thief-s-reflexes",
+  "name": "Thief's Reflexes",
+  "description": "Thief feature gained at level 17.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Thief's Reflexes",
+      "description": "Thief feature (level 17)."
+    }
+  ]
+}

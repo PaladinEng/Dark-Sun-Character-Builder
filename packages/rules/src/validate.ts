@@ -1,4 +1,10 @@
-import type { MergedContent } from "@dark-sun/content";
+import {
+  getClassSpellListRefIds,
+  getSubclassSpellListRefIds,
+  type Class,
+  type Feature,
+  type MergedContent
+} from "@dark-sun/content";
 
 import { getAvailableAdvancementSlots } from "./advancement";
 import {
@@ -15,7 +21,7 @@ import {
   isProficientWithWeapon
 } from "./compute";
 import { getResolvedSkillIds } from "./skills";
-import { createEmptySpellSlots, getSpellSlots } from "./spellSlots";
+import { getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   CONDITION_IDS,
@@ -81,6 +87,107 @@ function parseLevelFeatSelections(state: CharacterState): Map<number, string> {
   return selections;
 }
 
+function isPactMagicClass(klass: Class | undefined): boolean {
+  return klass?.spellcasting?.progression === "pact";
+}
+
+function getInvocationLimitForLevel(klass: Class | undefined, level: number): number | undefined {
+  const entries = klass?.invocationSelectionLimitsByLevel;
+  if (!entries || entries.length === 0) {
+    return undefined;
+  }
+  const sorted = [...entries].sort((a, b) => a.level - b.level);
+  let current: number | undefined;
+  for (const entry of sorted) {
+    if (entry.level > level) {
+      break;
+    }
+    current = entry.max;
+  }
+  return current;
+}
+
+function getWarlockMysticArcanumSelections(
+  state: CharacterState
+): Array<{ tier: 6 | 7 | 8 | 9; spellId: string }> {
+  const raw = state.warlockMysticArcanumByLevel;
+  if (!raw || typeof raw !== "object") {
+    return [];
+  }
+  const entries: Array<{ tier: 6 | 7 | 8 | 9; spellId: string }> = [];
+  for (const [key, value] of Object.entries(raw)) {
+    const tier = Number(key);
+    if ((tier !== 6 && tier !== 7 && tier !== 8 && tier !== 9) || typeof value !== "string" || value.length === 0) {
+      continue;
+    }
+    entries.push({ tier, spellId: value });
+  }
+  return entries.sort((a, b) => a.tier - b.tier);
+}
+
+function validateFeaturePrerequisites(
+  feature: Feature,
+  context: {
+    level: number;
+    selectedClassId?: string;
+    selectedSpeciesId?: string;
+    selectedFeatureIds: Set<string>;
+    selectedSpellcasting: unknown;
+    finalAbilities: ReturnType<typeof computeFinalAbilities>;
+  }
+): string[] {
+  const prereq = feature.prerequisites;
+  if (!prereq) {
+    return [];
+  }
+
+  const failures: string[] = [];
+
+  if (typeof prereq.minLevel === "number" && context.level < prereq.minLevel) {
+    failures.push(`requires level ${prereq.minLevel}`);
+  }
+
+  if (
+    prereq.classIds &&
+    prereq.classIds.length > 0 &&
+    (!context.selectedClassId || !prereq.classIds.includes(context.selectedClassId))
+  ) {
+    failures.push(`requires class (${prereq.classIds.join(", ")})`);
+  }
+
+  if (
+    prereq.speciesIds &&
+    prereq.speciesIds.length > 0 &&
+    (!context.selectedSpeciesId || !prereq.speciesIds.includes(context.selectedSpeciesId))
+  ) {
+    failures.push(`requires species (${prereq.speciesIds.join(", ")})`);
+  }
+
+  if (prereq.featureIds && prereq.featureIds.length > 0) {
+    const missing = prereq.featureIds.filter((featureId) => !context.selectedFeatureIds.has(featureId));
+    if (missing.length > 0) {
+      failures.push(`missing required feature(s): ${missing.join(", ")}`);
+    }
+  }
+
+  if (prereq.requiresSpellcasting && !context.selectedSpellcasting) {
+    failures.push("requires spellcasting");
+  }
+
+  if (prereq.abilities) {
+    const reqEntries = Object.entries(prereq.abilities).filter(
+      (entry): entry is [Ability, number] => typeof entry[1] === "number"
+    );
+    for (const [ability, minimum] of reqEntries) {
+      if ((context.finalAbilities[ability] ?? 0) < minimum) {
+        failures.push(`requires ${ability.toUpperCase()} ${minimum}`);
+      }
+    }
+  }
+
+  return failures;
+}
+
 export function validateCharacter(
   state: CharacterState,
   content: MergedContent
@@ -101,6 +208,14 @@ export function validateCharacter(
   const selectedClass = state.selectedClassId
     ? content.classesById[state.selectedClassId]
     : undefined;
+  const selectedSubclass = state.subclass
+    ? content.subclassesById?.[state.subclass]
+    : undefined;
+  const selectedSpellcasting = selectedSubclass?.spellcasting ?? selectedClass?.spellcasting;
+  const isWarlockClass = isPactMagicClass(selectedClass);
+  const warlockInvocationFeatureIds = dedupe(state.warlockInvocationFeatureIds ?? []);
+  const warlockPactBoonFeatureId = state.warlockPactBoonFeatureId;
+  const warlockMysticArcanumSelections = getWarlockMysticArcanumSelections(state);
   const selectedWeapon = state.equippedWeaponId
     ? content.equipmentById[state.equippedWeaponId]
     : undefined;
@@ -142,6 +257,11 @@ export function validateCharacter(
     ...state,
     abilityIncreases: [...(state.abilityIncreases ?? []), ...asiIncreases]
   });
+  const selectedFeatureIdsForPrereqs = new Set<string>([
+    ...(state.selectedFeatureIds ?? []),
+    ...warlockInvocationFeatureIds,
+    ...(warlockPactBoonFeatureId ? [warlockPactBoonFeatureId] : [])
+  ]);
   const nonAsiFinalAbilities = computeFinalAbilities({
     ...state,
     abilityIncreases: state.abilityIncreases ?? []
@@ -316,6 +436,31 @@ export function validateCharacter(
     });
   }
 
+  if (state.subclass && !selectedSubclass) {
+    pushError({
+      code: "INVALID_SUBCLASS_ID",
+      message: `Selected subclass id not found: ${state.subclass}.`,
+      path: "subclass"
+    });
+  }
+
+  if (selectedSubclass) {
+    if (!selectedClass) {
+      pushError({
+        code: "SUBCLASS_REQUIRES_CLASS",
+        message: `Subclass ${selectedSubclass.id} requires a selected class.`,
+        path: "subclass"
+      });
+    } else if (selectedSubclass.classId !== selectedClass.id) {
+      pushError({
+        code: "SUBCLASS_CLASS_MISMATCH",
+        message:
+          `Subclass ${selectedSubclass.id} does not belong to selected class ${selectedClass.id}.`,
+        path: "subclass"
+      });
+    }
+  }
+
   const rawConditions = (state as CharacterState & { conditions?: unknown }).conditions;
   if (typeof rawConditions !== "undefined") {
     if (typeof rawConditions !== "object" || rawConditions === null || Array.isArray(rawConditions)) {
@@ -351,6 +496,186 @@ export function validateCharacter(
         code: "INVALID_FEATURE_ID",
         message: `Selected feature id not found: ${featureId}.`,
         path: `selectedFeatureIds[${index}]`
+      });
+    }
+  }
+
+  if (!isWarlockClass && warlockInvocationFeatureIds.length > 0) {
+    pushError({
+      code: "WARLOCK_INVOCATION_CLASS_MISMATCH",
+      message: "Warlock invocation selections require the Warlock class.",
+      path: "warlockInvocationFeatureIds"
+    });
+  }
+
+  if (isWarlockClass) {
+    const invocationLimit = getInvocationLimitForLevel(selectedClass, level);
+    if (typeof invocationLimit === "number" && warlockInvocationFeatureIds.length > invocationLimit) {
+      pushError({
+        code: "WARLOCK_INVOCATION_LIMIT_EXCEEDED",
+        message:
+          `Warlock allows at most ${invocationLimit} invocation selections at level ${level} ` +
+          `(selected ${warlockInvocationFeatureIds.length}).`,
+        path: "warlockInvocationFeatureIds"
+      });
+    }
+  }
+
+  for (const [index, featureId] of warlockInvocationFeatureIds.entries()) {
+    const feature = content.featuresById[featureId];
+    if (!feature) {
+      pushError({
+        code: "INVALID_WARLOCK_INVOCATION_ID",
+        message: `Selected invocation id not found: ${featureId}.`,
+        path: `warlockInvocationFeatureIds[${index}]`
+      });
+      continue;
+    }
+    if (!(feature.tags ?? []).includes("warlock_invocation")) {
+      pushError({
+        code: "WARLOCK_INVOCATION_TAG_INVALID",
+        message: `Feature ${featureId} is not tagged as a warlock invocation option.`,
+        path: `warlockInvocationFeatureIds[${index}]`
+      });
+      continue;
+    }
+
+    const prereqFailures = validateFeaturePrerequisites(feature, {
+      level,
+      selectedClassId: state.selectedClassId,
+      selectedSpeciesId: state.selectedSpeciesId,
+      selectedFeatureIds: selectedFeatureIdsForPrereqs,
+      selectedSpellcasting,
+      finalAbilities
+    });
+    if (prereqFailures.length > 0) {
+      pushError({
+        code: "WARLOCK_INVOCATION_PREREQ_UNMET",
+        message: `Invocation ${feature.name} ${prereqFailures.join("; ")}.`,
+        path: `warlockInvocationFeatureIds[${index}]`
+      });
+    }
+  }
+
+  if (!isWarlockClass && typeof warlockPactBoonFeatureId === "string" && warlockPactBoonFeatureId.length > 0) {
+    pushError({
+      code: "WARLOCK_PACT_BOON_CLASS_MISMATCH",
+      message: "Pact boon selection requires the Warlock class.",
+      path: "warlockPactBoonFeatureId"
+    });
+  }
+
+  if (isWarlockClass && level >= 3 && !warlockPactBoonFeatureId) {
+    pushError({
+      code: "WARLOCK_PACT_BOON_REQUIRED",
+      message: "Warlock level 3+ requires selecting exactly one pact boon.",
+      path: "warlockPactBoonFeatureId"
+    });
+  }
+
+  if (warlockPactBoonFeatureId) {
+    const pactFeature = content.featuresById[warlockPactBoonFeatureId];
+    if (!pactFeature) {
+      pushError({
+        code: "INVALID_WARLOCK_PACT_BOON_ID",
+        message: `Selected pact boon feature id not found: ${warlockPactBoonFeatureId}.`,
+        path: "warlockPactBoonFeatureId"
+      });
+    } else {
+      if (!(pactFeature.tags ?? []).includes("warlock_pact_boon")) {
+        pushError({
+          code: "WARLOCK_PACT_BOON_TAG_INVALID",
+          message: `Feature ${warlockPactBoonFeatureId} is not tagged as a pact boon option.`,
+          path: "warlockPactBoonFeatureId"
+        });
+      }
+      const prereqFailures = validateFeaturePrerequisites(pactFeature, {
+        level,
+        selectedClassId: state.selectedClassId,
+        selectedSpeciesId: state.selectedSpeciesId,
+        selectedFeatureIds: selectedFeatureIdsForPrereqs,
+        selectedSpellcasting,
+        finalAbilities
+      });
+      if (prereqFailures.length > 0) {
+        pushError({
+          code: "WARLOCK_PACT_BOON_PREREQ_UNMET",
+          message: `Pact boon ${pactFeature.name} ${prereqFailures.join("; ")}.`,
+          path: "warlockPactBoonFeatureId"
+        });
+      }
+    }
+  }
+
+  if (state.warlockMysticArcanumByLevel && typeof state.warlockMysticArcanumByLevel === "object") {
+    for (const [tierKey, spellId] of Object.entries(state.warlockMysticArcanumByLevel)) {
+      const tier = Number(tierKey);
+      if ((tier !== 6 && tier !== 7 && tier !== 8 && tier !== 9) || typeof spellId !== "string" || spellId.length === 0) {
+        pushError({
+          code: "MYSTIC_ARCANUM_SELECTION_INVALID",
+          message: `Invalid Mystic Arcanum selection entry for key ${tierKey}.`,
+          path: `warlockMysticArcanumByLevel.${tierKey}`
+        });
+      }
+    }
+  }
+
+  const arcanumUnlockLevelByTier = new Map<number, number>([
+    [6, 11],
+    [7, 13],
+    [8, 15],
+    [9, 17]
+  ]);
+  const warlockMysticArcanumSpellIds = warlockMysticArcanumSelections.map((entry) => entry.spellId);
+
+  if (!isWarlockClass && warlockMysticArcanumSelections.length > 0) {
+    pushError({
+      code: "MYSTIC_ARCANUM_CLASS_MISMATCH",
+      message: "Mystic Arcanum selections require the Warlock class.",
+      path: "warlockMysticArcanumByLevel"
+    });
+  }
+
+  if (isWarlockClass) {
+    for (const [tier, unlockLevel] of arcanumUnlockLevelByTier.entries()) {
+      if (level < unlockLevel) {
+        continue;
+      }
+      const hasSelection = warlockMysticArcanumSelections.some((entry) => entry.tier === tier);
+      if (!hasSelection) {
+        pushError({
+          code: "MYSTIC_ARCANUM_SELECTION_REQUIRED",
+          message: `Warlock level ${level} requires a Mystic Arcanum (${tier}th-level) spell selection.`,
+          path: `warlockMysticArcanumByLevel.${tier}`
+        });
+      }
+    }
+  }
+
+  for (const entry of warlockMysticArcanumSelections) {
+    const unlockLevel = arcanumUnlockLevelByTier.get(entry.tier) ?? 99;
+    if (level < unlockLevel) {
+      pushError({
+        code: "MYSTIC_ARCANUM_TIER_LOCKED",
+        message: `Mystic Arcanum (${entry.tier}th) unlocks at level ${unlockLevel}.`,
+        path: `warlockMysticArcanumByLevel.${entry.tier}`
+      });
+    }
+    const spell = content.spellsById[entry.spellId];
+    if (!spell) {
+      pushError({
+        code: "MYSTIC_ARCANUM_SPELL_MISSING",
+        message: `Mystic Arcanum spell id not found: ${entry.spellId}.`,
+        path: `warlockMysticArcanumByLevel.${entry.tier}`
+      });
+      continue;
+    }
+    if (spell.level !== entry.tier) {
+      pushError({
+        code: "MYSTIC_ARCANUM_SPELL_LEVEL_INVALID",
+        message:
+          `Mystic Arcanum (${entry.tier}th) requires a ${entry.tier}th-level spell (selected ${spell.name}, level ${spell.level}).`,
+        path: `warlockMysticArcanumByLevel.${entry.tier}`
       });
     }
   }
@@ -815,7 +1140,7 @@ export function validateCharacter(
     }
   }
 
-  const selectedFeatureIds = new Set(state.selectedFeatureIds ?? []);
+  const selectedFeatureIds = selectedFeatureIdsForPrereqs;
 
   for (const featId of dedupe(chosenFeatIds)) {
     const feat = content.featsById[featId];
@@ -870,7 +1195,7 @@ export function validateCharacter(
       }
     }
 
-    if (prereq.requiresSpellcasting && !selectedClass?.spellcasting) {
+    if (prereq.requiresSpellcasting && !selectedSpellcasting) {
       pushError({
         code: "FEAT_PREREQ_UNMET",
         message: `Feat ${feat.name} requires spellcasting.`,
@@ -915,10 +1240,10 @@ export function validateCharacter(
     }
   }
 
-  if (selectedClass?.spellcasting) {
-    const progression = selectedClass.spellcasting.progression;
-    const slots = progression === "pact" ? createEmptySpellSlots() : getSpellSlots(level, progression);
-    const abilityMod = computeAbilityMod(finalAbilities[selectedClass.spellcasting.ability] ?? NaN);
+  if (selectedSpellcasting) {
+    const progression = selectedSpellcasting.progression;
+    const slots = getSpellSlots(level, progression);
+    const abilityMod = computeAbilityMod(finalAbilities[selectedSpellcasting.ability] ?? NaN);
     const profBonus = computeProfBonus(level);
     const saveDC = 8 + profBonus + abilityMod;
     const attackBonus = profBonus + abilityMod;
@@ -926,16 +1251,8 @@ export function validateCharacter(
     if (!Number.isFinite(saveDC) || !Number.isFinite(attackBonus)) {
       pushError({
         code: "SPELLCASTING_DERIVED_INVALID",
-        message: `Unable to derive spell save DC/attack bonus for ${selectedClass.name}.`,
+        message: `Unable to derive spell save DC/attack bonus for ${selectedClass?.name ?? selectedSubclass?.name ?? "selected spellcaster"}.`,
         path: "spellcasting"
-      });
-    }
-
-    if (progression === "pact") {
-      pushError({
-        code: "SPELLCASTING_PACT_UNIMPLEMENTED",
-        message: `Pact spell slot progression is not implemented for ${selectedClass.name}.`,
-        path: "spellcasting.progression"
       });
     }
 
@@ -946,16 +1263,16 @@ export function validateCharacter(
           ? level >= 2
           : progression === "third"
             ? level >= 3
-            : false;
+            : level >= 1;
     if (shouldHaveSlots && !slots.some((count) => count > 0)) {
       pushError({
         code: "SPELLCASTING_SLOTS_MISSING",
-        message: `Spell slots are missing for ${selectedClass.name} at level ${level}.`,
+        message: `Spell slots are missing for ${selectedClass?.name ?? selectedSubclass?.name ?? "selected spellcaster"} at level ${level}.`,
         path: "spellcasting.slots"
       });
     }
 
-    const selectionLimits = selectedClass.spellcasting.selectionLimitsByLevel?.find(
+    const selectionLimits = selectedSpellcasting.selectionLimitsByLevel?.find(
       (entry) => entry.level === level
     );
     if (selectionLimits) {
@@ -967,7 +1284,7 @@ export function validateCharacter(
         pushError({
           code: "SPELL_KNOWN_LIMIT_EXCEEDED",
           message:
-            `${selectedClass.name} allows at most ${selectionLimits.known} known spells at level ${level} ` +
+            `${selectedClass?.name ?? selectedSubclass?.name ?? "Selected spellcaster"} allows at most ${selectionLimits.known} known spells at level ${level} ` +
             `(selected ${knownCount}).`,
           path: "spellcasting.knownSpellIds"
         });
@@ -980,7 +1297,7 @@ export function validateCharacter(
         pushError({
           code: "SPELL_PREPARED_LIMIT_EXCEEDED",
           message:
-            `${selectedClass.name} allows at most ${selectionLimits.prepared} prepared spells at level ${level} ` +
+            `${selectedClass?.name ?? selectedSubclass?.name ?? "Selected spellcaster"} allows at most ${selectionLimits.prepared} prepared spells at level ${level} ` +
             `(selected ${preparedCount}).`,
           path: "spellcasting.preparedSpellIds"
         });
@@ -993,7 +1310,7 @@ export function validateCharacter(
         pushError({
           code: "SPELL_CANTRIPS_KNOWN_LIMIT_EXCEEDED",
           message:
-            `${selectedClass.name} allows at most ${selectionLimits.cantripsKnown} cantrips at level ${level} ` +
+            `${selectedClass?.name ?? selectedSubclass?.name ?? "Selected spellcaster"} allows at most ${selectionLimits.cantripsKnown} cantrips at level ${level} ` +
             `(selected ${cantripsKnownCount}).`,
           path: "spellcasting.cantripsKnownIds"
         });
@@ -1004,7 +1321,8 @@ export function validateCharacter(
   const referencedSpellIds = dedupe([
     ...(state.knownSpellIds ?? []),
     ...(state.preparedSpellIds ?? []),
-    ...(state.cantripsKnownIds ?? [])
+    ...(state.cantripsKnownIds ?? []),
+    ...warlockMysticArcanumSpellIds
   ]);
   for (const spellId of referencedSpellIds) {
     if (!content.spellsById[spellId]) {
@@ -1013,6 +1331,30 @@ export function validateCharacter(
         message: `Spell id not found in content: ${spellId}.`,
         path: "spells"
       });
+    }
+  }
+
+  if (selectedSpellcasting) {
+    const classSpellListRefIds = selectedClass ? getClassSpellListRefIds(selectedClass) : [];
+    const subclassSpellListRefIds = selectedSubclass ? getSubclassSpellListRefIds(selectedSubclass) : [];
+    const spellListRefIds = dedupe([...classSpellListRefIds, ...subclassSpellListRefIds]);
+    const allowedSpellIds = new Set<string>();
+    for (const spellListId of spellListRefIds) {
+      const spellList = content.spellListsById[spellListId];
+      for (const spellId of spellList?.spellIds ?? []) {
+        allowedSpellIds.add(spellId);
+      }
+    }
+
+    if (allowedSpellIds.size > 0) {
+      const invalidSelectedSpellIds = referencedSpellIds.filter((spellId) => !allowedSpellIds.has(spellId));
+      for (const spellId of invalidSelectedSpellIds) {
+        pushError({
+          code: "SPELL_NOT_ON_ACTIVE_LIST",
+          message: `Selected spell is not available to current class/subclass: ${spellId}.`,
+          path: "spells"
+        });
+      }
     }
   }
 

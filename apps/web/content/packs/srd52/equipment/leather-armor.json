@@ -2,5 +2,6 @@
   "id": "srd52:equipment:leather-armor",
   "type": "armor_light",
   "name": "Leather Armor",
-  "armorClassBase": 11
+  "armorClassBase": 11,
+  "description": "Leather Armor provides base AC 11."
 }

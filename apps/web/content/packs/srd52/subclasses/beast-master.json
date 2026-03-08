@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:beast-master",
+  "classId": "srd52:class:ranger",
+  "name": "Beast Master",
+  "description": "A bonded archetype that fights beside a loyal primal companion.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:beast-master-ranger-s-companion"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:beast-master-exceptional-training"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:beast-master-bestial-fury"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:beast-master-share-spells"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Beast Master Training",
+      "description": "Beast Master features apply according to subclass progression."
+    }
+  ]
+}

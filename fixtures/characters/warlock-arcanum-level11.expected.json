@@ -1,0 +1,146 @@
+{
+  "abilityMods": {
+    "cha": 3,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": -1,
+    "wis": 1
+  },
+  "advancementSlots": [
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:durable-training",
+        "name": "Durable Training"
+      },
+      "filled": true,
+      "level": 4
+    },
+    {
+      "choice": "feat",
+      "feat": {
+        "id": "test:feat:resilient-training",
+        "name": "Resilient Training"
+      },
+      "filled": true,
+      "level": 8
+    }
+  ],
+  "armorClass": 13,
+  "attack": {
+    "damage": "1d4+2",
+    "name": "Dagger",
+    "toHit": 6
+  },
+  "feats": [
+    {
+      "id": "test:feat:durable-training",
+      "name": "Durable Training"
+    },
+    {
+      "id": "test:feat:resilient-training",
+      "name": "Resilient Training"
+    }
+  ],
+  "finalAbilities": {
+    "cha": 16,
+    "con": 14,
+    "dex": 14,
+    "int": 10,
+    "str": 8,
+    "wis": 12
+  },
+  "languages": [],
+  "maxHP": 80,
+  "passivePerception": 11,
+  "proficiencyBonus": 4,
+  "resistances": [],
+  "saveProficiencies": [],
+  "savingThrows": {
+    "cha": 3,
+    "con": 2,
+    "dex": 2,
+    "int": 0,
+    "str": -1,
+    "wis": 1
+  },
+  "senses": [],
+  "skillProficiencies": [],
+  "skills": {
+    "acrobatics": 2,
+    "animal_handling": 1,
+    "arcana": 0,
+    "athletics": -1,
+    "deception": 3,
+    "history": 0,
+    "insight": 1,
+    "intimidation": 3,
+    "investigation": 0,
+    "medicine": 1,
+    "nature": 0,
+    "perception": 1,
+    "performance": 3,
+    "persuasion": 3,
+    "religion": 0,
+    "sleight_of_hand": 2,
+    "stealth": 2,
+    "survival": 1
+  },
+  "speed": 30,
+  "spellAttackBonus": 7,
+  "spellcasting": {
+    "ability": "cha",
+    "abilityMod": 3,
+    "attackBonus": 7,
+    "cantripsKnownIds": [
+      "test:spell:chill-touch",
+      "test:spell:mage-hand",
+      "test:spell:minor-illusion"
+    ],
+    "knownSpellIds": [
+      "test:spell:charm-person",
+      "test:spell:fear",
+      "test:spell:misty-step"
+    ],
+    "preparedSpellIds": [],
+    "progression": "pact",
+    "saveDC": 15,
+    "slots": [
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "spellcastingAbility": "cha",
+  "spellSaveDC": 15,
+  "spellSlots": [
+    0,
+    0,
+    0,
+    0,
+    3,
+    0,
+    0,
+    0,
+    0
+  ],
+  "toolProficiencies": [],
+  "traits": [
+    "Book of Ancient Secrets",
+    "Devil's Sight",
+    "Durable Training: Fixture feat for advancement slot.",
+    "Eldritch Invocations",
+    "Mask of Many Faces",
+    "Mystic Arcanum (6th): Circle of Death",
+    "Pact of the Tome",
+    "Resilient Training: Fixture feat for higher-level advancement slot."
+  ],
+  "warnings": []
+}

@@ -4,5 +4,6 @@
   "name": "Half Plate Armor",
   "armorClassBase": 15,
   "dexCap": 2,
-  "stealthDisadvantage": true
+  "stealthDisadvantage": true,
+  "description": "Half Plate Armor provides base AC 15 and allows Dexterity modifier up to +2."
 }

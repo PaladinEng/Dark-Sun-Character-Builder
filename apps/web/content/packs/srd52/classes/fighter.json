@@ -29,6 +29,30 @@
     {
       "level": 1,
       "featureId": "srd52:feature:second-wind"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:action-surge"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:extra-attack"
+    },
+    {
+      "level": 9,
+      "featureId": "srd52:feature:indomitable"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:extra-attack-2"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:indomitable-improved"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:fighter-capstone"
     }
   ],
   "startingEquipment": {
@@ -48,5 +72,6 @@
       "type": "grant_save_proficiency",
       "ability": "con"
     }
-  ]
+  ],
+  "description": "A master of martial combat with broad weapon training and battlefield endurance."
 }

@@ -11,5 +11,7 @@
     "V"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You unleash a string of insults laced with subtle enchantment.",
+  "notes": "No additional casting notes."
 }

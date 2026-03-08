@@ -11,5 +11,7 @@
     "V"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "Up to five creatures of your choice regain hit points.",
+  "notes": "No additional casting notes."
 }

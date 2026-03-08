@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-the-ancients-aura-of-warding",
+  "name": "Aura of Warding",
+  "description": "Oath of the Ancients feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Aura of Warding",
+      "description": "Oath of the Ancients feature (level 7)."
+    }
+  ]
+}

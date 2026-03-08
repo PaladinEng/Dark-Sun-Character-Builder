@@ -9,5 +9,6 @@
   ],
   "masteryProperties": [
     "sap"
-  ]
+  ],
+  "description": "Longsword is a martial weapon that deals 1d8 damage."
 }

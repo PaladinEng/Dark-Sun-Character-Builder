@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "1 hour",
-  "concentration": false
+  "concentration": false,
+  "summary": "A sphere of bright light spreads out from a point.",
+  "notes": "No additional casting notes."
 }

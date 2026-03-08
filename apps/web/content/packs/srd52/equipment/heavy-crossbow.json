@@ -9,5 +9,6 @@
     "heavy",
     "loading",
     "two-handed"
-  ]
+  ],
+  "description": "Heavy Crossbow is a martial weapon that deals 1d10 damage."
 }

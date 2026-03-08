@@ -19,6 +19,15 @@
     "srd52:spell:hold-person",
     "srd52:spell:invisibility",
     "srd52:spell:lesser-restoration",
-    "srd52:spell:fear"
+    "srd52:spell:fear",
+    "srd52:spell:friends",
+    "srd52:spell:heroism",
+    "srd52:spell:minor-illusion",
+    "srd52:spell:silent-image",
+    "srd52:spell:suggestion",
+    "srd52:spell:hypnotic-pattern",
+    "srd52:spell:see-invisibility",
+    "srd52:spell:locate-object",
+    "srd52:spell:water-breathing"
   ]
 }

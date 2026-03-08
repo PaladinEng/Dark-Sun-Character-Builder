@@ -10,5 +10,6 @@
       "type": "grant_trait",
       "name": "Unarmored Defense"
     }
-  ]
+  ],
+  "description": "Unarmored Defense (Monk) class feature."
 }

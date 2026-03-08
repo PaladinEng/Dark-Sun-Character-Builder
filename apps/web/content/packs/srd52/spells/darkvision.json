@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:darkvision",
+  "name": "Darkvision",
+  "description": "You grant a creature the ability to see in darkness for many hours.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "8 hours",
+  "concentration": false,
+  "summary": "You grant a creature the ability to see in darkness for many hours.",
+  "notes": "No additional casting notes."
+}

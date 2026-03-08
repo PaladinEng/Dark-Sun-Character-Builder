@@ -33,5 +33,6 @@
       "type": "grant_tool_proficiency",
       "tool": "Calligrapher's Supplies"
     }
-  ]
+  ],
+  "description": "A devotee trained in religious tradition, ritual knowledge, and service."
 }

@@ -1,5 +1,6 @@
 {
   "id": "srd52:feat:musician",
   "name": "Musician",
-  "category": "origin"
+  "category": "origin",
+  "description": "You use performance to bolster allies and shape group morale."
 }

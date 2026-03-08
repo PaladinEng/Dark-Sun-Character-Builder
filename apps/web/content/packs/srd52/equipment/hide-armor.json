@@ -3,5 +3,6 @@
   "type": "armor_medium",
   "name": "Hide Armor",
   "armorClassBase": 12,
-  "dexCap": 2
+  "dexCap": 2,
+  "description": "Hide Armor provides base AC 12 and allows Dexterity modifier up to +2."
 }

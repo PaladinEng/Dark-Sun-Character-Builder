@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:circle-of-the-land",
+  "classId": "srd52:class:druid",
+  "name": "Circle of the Land",
+  "description": "A druidic circle tied to regional terrain and broader natural spell mastery.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:circle-of-the-land-circle-spells-land"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:circle-of-the-land-natural-recovery"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:circle-of-the-land-nature-s-ward"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:circle-of-the-land-nature-s-sanctuary"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Circle of the Land Training",
+      "description": "Circle of the Land features apply according to subclass progression."
+    }
+  ]
+}

@@ -5,5 +5,6 @@
   "armorClassBase": 17,
   "dexCap": 0,
   "strengthRequirement": 15,
-  "stealthDisadvantage": true
+  "stealthDisadvantage": true,
+  "description": "Splint Armor provides base AC 17 and allows Dexterity modifier up to +0."
 }

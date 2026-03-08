@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:longstrider",
+  "name": "Longstrider",
+  "description": "You increase a creature's speed for an extended duration.",
+  "level": 1,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false,
+  "summary": "You increase a creature's speed for an extended duration.",
+  "notes": "No additional casting notes."
+}

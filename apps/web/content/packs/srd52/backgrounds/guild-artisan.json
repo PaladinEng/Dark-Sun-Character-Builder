@@ -30,5 +30,6 @@
       "type": "grant_tool_proficiency",
       "tool": "Smith's Tools"
     }
-  ]
+  ],
+  "description": "A trained craftsperson connected to a guild and trade community."
 }

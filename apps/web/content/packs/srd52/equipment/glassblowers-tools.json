@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:glassblowers-tools",
   "type": "adventuring_gear",
-  "name": "Glassblower's Tools"
+  "name": "Glassblower's Tools",
+  "description": "Glassblower's Tools is adventuring gear for exploration and utility."
 }

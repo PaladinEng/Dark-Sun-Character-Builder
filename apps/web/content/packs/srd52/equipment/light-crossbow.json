@@ -8,5 +8,6 @@
     "ranged",
     "loading",
     "two-handed"
-  ]
+  ],
+  "description": "Light Crossbow is a simple weapon that deals 1d8 damage."
 }

@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:rope-hempen-50ft",
   "type": "adventuring_gear",
-  "name": "Rope, Hempen (50 ft.)"
+  "name": "Rope, Hempen (50 ft.)",
+  "description": "Rope, Hempen (50 ft.) is adventuring gear for exploration and utility."
 }

@@ -1,0 +1,21 @@
+{
+  "id": "srd52:feature:invocation-devils-sight",
+  "name": "Devil's Sight",
+  "description": "Your senses pierce mundane and magical darkness at significant range.",
+  "selectable": true,
+  "tags": [
+    "warlock_invocation"
+  ],
+  "prerequisites": {
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Devil's Sight",
+      "description": "Invocation selected: enhanced darkvision and darkness perception."
+    }
+  ]
+}

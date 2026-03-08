@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:divination-expert-divination",
+  "name": "Expert Divination",
+  "description": "School of Divination feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Expert Divination",
+      "description": "School of Divination feature (level 6)."
+    }
+  ]
+}

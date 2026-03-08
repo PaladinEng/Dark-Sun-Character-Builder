@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:way-of-the-open-hand-wholeness-of-body",
+  "name": "Wholeness of Body",
+  "description": "Way of the Open Hand feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Wholeness of Body",
+      "description": "Way of the Open Hand feature (level 6)."
+    }
+  ]
+}

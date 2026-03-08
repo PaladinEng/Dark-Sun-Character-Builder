@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:battle-master-know-your-enemy",
+  "name": "Know Your Enemy",
+  "description": "Battle Master feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Know Your Enemy",
+      "description": "Battle Master feature (level 7)."
+    }
+  ]
+}

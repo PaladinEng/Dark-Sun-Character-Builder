@@ -19,6 +19,7 @@
     "srd52:spell:lesser-restoration",
     "srd52:spell:prayer-of-healing",
     "srd52:spell:daylight",
-    "srd52:spell:revivify"
+    "srd52:spell:revivify",
+    "srd52:spell:remove-curse"
   ]
 }

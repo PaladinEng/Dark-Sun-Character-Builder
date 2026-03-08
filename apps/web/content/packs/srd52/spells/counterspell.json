@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You attempt to interrupt a creature casting a spell.",
+  "notes": "No additional casting notes."
 }

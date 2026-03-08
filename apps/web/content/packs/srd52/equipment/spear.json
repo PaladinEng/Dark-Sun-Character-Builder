@@ -8,5 +8,6 @@
     "thrown",
     "range 20/60",
     "versatile"
-  ]
+  ],
+  "description": "Spear is a simple weapon that deals 1d6 damage."
 }

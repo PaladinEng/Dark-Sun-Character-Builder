@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:life-domain-supreme-healing",
+  "name": "Supreme Healing",
+  "description": "Life Domain feature gained at level 17.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Supreme Healing",
+      "description": "Life Domain feature (level 17)."
+    }
+  ]
+}

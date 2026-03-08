@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "8 hours",
-  "concentration": false
+  "concentration": false,
+  "summary": "Your spell bolsters allies with toughness and resolve.",
+  "notes": "No additional casting notes."
 }

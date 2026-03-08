@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:forcecage",
+  "name": "Forcecage",
+  "description": "You create an invisible prison of force that confines creatures inside.",
+  "level": 7,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "100 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false,
+  "summary": "You create an invisible prison of force that confines creatures inside.",
+  "notes": "No additional casting notes."
+}

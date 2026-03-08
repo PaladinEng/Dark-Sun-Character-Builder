@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:shatter",
+  "name": "Shatter",
+  "description": "A loud burst of force damages creatures and objects in a small area.",
+  "level": 2,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A loud burst of force damages creatures and objects in a small area.",
+  "notes": "No additional casting notes."
+}

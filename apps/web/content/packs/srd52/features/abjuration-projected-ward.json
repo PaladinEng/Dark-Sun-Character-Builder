@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:abjuration-projected-ward",
+  "name": "Projected Ward",
+  "description": "School of Abjuration feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Projected Ward",
+      "description": "School of Abjuration feature (level 6)."
+    }
+  ]
+}

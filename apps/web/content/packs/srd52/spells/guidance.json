@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Concentration, up to 1 minute",
-  "concentration": true
+  "concentration": true,
+  "summary": "You touch a willing creature and grant a brief bonus to an ability check.",
+  "notes": "Requires concentration while active."
 }

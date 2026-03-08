@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:war-domain-war-domain-spells",
+  "name": "War Domain Spells",
+  "description": "War Domain feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "War Domain Spells",
+      "description": "War Domain feature (level 3)."
+    }
+  ]
+}

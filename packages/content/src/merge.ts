@@ -4,6 +4,7 @@ import type {
   Equipment,
   Feat,
   Feature,
+  Subclass,
   SkillDefinition,
   Spell,
   SpellList,
@@ -30,6 +31,7 @@ export interface MergeReport {
   skillDefinitions: MergeCount;
   backgrounds: MergeCount;
   classes: MergeCount;
+  subclasses: MergeCount;
   features: MergeCount;
   feats: MergeCount;
   equipment: MergeCount;
@@ -57,6 +59,7 @@ export interface MergeProvenance {
   skillDefinitionsById: Record<string, EntityProvenance>;
   backgroundsById: Record<string, EntityProvenance>;
   classesById: Record<string, EntityProvenance>;
+  subclassesById?: Record<string, EntityProvenance>;
   featuresById: Record<string, EntityProvenance>;
   featsById: Record<string, EntityProvenance>;
   equipmentById: Record<string, EntityProvenance>;
@@ -70,6 +73,7 @@ export interface MergedContent {
   skillDefinitions: SkillDefinition[];
   backgrounds: Background[];
   classes: Class[];
+  subclasses?: Subclass[];
   features: Feature[];
   feats: Feat[];
   equipment: Equipment[];
@@ -79,6 +83,7 @@ export interface MergedContent {
   skillDefinitionsById: Record<string, SkillDefinition>;
   backgroundsById: Record<string, Background>;
   classesById: Record<string, Class>;
+  subclassesById?: Record<string, Subclass>;
   featuresById: Record<string, Feature>;
   featsById: Record<string, Feat>;
   equipmentById: Record<string, Equipment>;
@@ -311,6 +316,10 @@ export function mergePacksWithProvenance(
     "backgrounds"
   );
   const classes = mergeEntityType<Class & ReplaceableEntity>(packs, "classes");
+  const subclasses = mergeEntityType<Subclass & ReplaceableEntity>(
+    packs,
+    "subclasses"
+  );
   const features = mergeEntityType<Feature & ReplaceableEntity>(packs, "features");
   const feats = mergeEntityType<Feat & ReplaceableEntity>(packs, "feats");
   const equipment = mergeEntityType<Equipment & ReplaceableEntity>(packs, "equipment");
@@ -324,6 +333,7 @@ export function mergePacksWithProvenance(
       skillDefinitions: skillDefinitions.items,
       backgrounds: backgrounds.items,
       classes: classes.items,
+      subclasses: subclasses.items,
       features: features.items,
       feats: feats.items,
       equipment: equipment.items,
@@ -333,6 +343,7 @@ export function mergePacksWithProvenance(
       skillDefinitionsById: toById(skillDefinitions.items),
       backgroundsById: toById(backgrounds.items),
       classesById: toById(classes.items),
+      subclassesById: toById(subclasses.items),
       featuresById: toById(features.items),
       featsById: toById(feats.items),
       equipmentById: toById(equipment.items),
@@ -344,6 +355,7 @@ export function mergePacksWithProvenance(
       skillDefinitions: skillDefinitions.report,
       backgrounds: backgrounds.report,
       classes: classes.report,
+      subclasses: subclasses.report,
       features: features.report,
       feats: feats.report,
       equipment: equipment.report,
@@ -355,6 +367,7 @@ export function mergePacksWithProvenance(
       skillDefinitionsById: skillDefinitions.provenanceById,
       backgroundsById: backgrounds.provenanceById,
       classesById: classes.provenanceById,
+      subclassesById: subclasses.provenanceById,
       featuresById: features.provenanceById,
       featsById: feats.provenanceById,
       equipmentById: equipment.provenanceById,

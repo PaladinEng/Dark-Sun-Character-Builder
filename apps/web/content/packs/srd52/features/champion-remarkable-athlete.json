@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:champion-remarkable-athlete",
+  "name": "Remarkable Athlete",
+  "description": "Champion feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Remarkable Athlete",
+      "description": "Champion feature (level 7)."
+    }
+  ]
+}

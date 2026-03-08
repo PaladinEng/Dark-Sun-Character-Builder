@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:evocation-evocation-savant",
+  "name": "Evocation Savant",
+  "description": "School of Evocation feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Evocation Savant",
+      "description": "School of Evocation feature (level 2)."
+    }
+  ]
+}

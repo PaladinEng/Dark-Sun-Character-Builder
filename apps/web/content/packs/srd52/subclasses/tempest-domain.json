@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:tempest-domain",
+  "classId": "srd52:class:cleric",
+  "name": "Tempest Domain",
+  "description": "A storm-forged domain of thunder, lightning, and righteous fury.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:tempest-domain-tempest-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:tempest-domain-channel-divinity-destructive-wrath"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:tempest-domain-divine-strike-tempest"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:tempest-domain-stormborn"
+    }
+  ],
+  "domain": "tempest",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Tempest Domain Training",
+      "description": "Tempest Domain features apply according to subclass progression."
+    }
+  ]
+}

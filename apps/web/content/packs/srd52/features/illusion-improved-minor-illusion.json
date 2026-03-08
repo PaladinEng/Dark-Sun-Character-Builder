@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:illusion-improved-minor-illusion",
+  "name": "Improved Minor Illusion",
+  "description": "School of Illusion feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Improved Minor Illusion",
+      "description": "School of Illusion feature (level 2)."
+    }
+  ]
+}

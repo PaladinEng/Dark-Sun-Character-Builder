@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-the-ancients-nature-s-wrath",
+  "name": "Nature's Wrath",
+  "description": "Oath of the Ancients feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Nature's Wrath",
+      "description": "Oath of the Ancients feature (level 3)."
+    }
+  ]
+}

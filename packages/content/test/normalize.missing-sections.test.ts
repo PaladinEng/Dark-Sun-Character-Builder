@@ -10,6 +10,7 @@ describe("normalizeSeedPack", () => {
     expect(normalized.skillDefinitions).toEqual([]);
     expect(normalized.backgrounds).toEqual([]);
     expect(normalized.classes).toEqual([]);
+    expect(normalized.subclasses).toEqual([]);
     expect(normalized.features).toEqual([]);
     expect(normalized.feats).toEqual([]);
     expect(normalized.equipment).toEqual([]);

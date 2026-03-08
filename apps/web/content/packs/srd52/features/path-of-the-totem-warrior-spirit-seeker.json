@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-totem-warrior-spirit-seeker",
+  "name": "Spirit Seeker",
+  "description": "Path of the Totem Warrior feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Spirit Seeker",
+      "description": "Path of the Totem Warrior feature (level 3)."
+    }
+  ]
+}

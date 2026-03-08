@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:arcane-trickster-magical-ambush",
+  "name": "Magical Ambush",
+  "description": "Arcane Trickster feature gained at level 9.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Magical Ambush",
+      "description": "Arcane Trickster feature (level 9)."
+    }
+  ]
+}

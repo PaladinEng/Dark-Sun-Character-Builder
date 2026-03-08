@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "1 round",
-  "concentration": false
+  "concentration": false,
+  "summary": "You ward yourself against weapon strikes.",
+  "notes": "No additional casting notes."
 }

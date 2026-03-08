@@ -1,0 +1,32 @@
+{
+  "id": "srd52:subclass:light-domain",
+  "classId": "srd52:class:cleric",
+  "name": "Light Domain",
+  "description": "A radiant domain that burns away darkness and fear with searing divine power.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:light-domain-light-domain-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:light-domain-channel-divinity-radiance-of-the-dawn"
+    },
+    {
+      "level": 8,
+      "featureId": "srd52:feature:light-domain-potent-spellcasting-light"
+    },
+    {
+      "level": 17,
+      "featureId": "srd52:feature:light-domain-corona-of-light"
+    }
+  ],
+  "domain": "light",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Light Domain Training",
+      "description": "Light Domain features apply according to subclass progression."
+    }
+  ]
+}

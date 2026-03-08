@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You end one disease or one condition affecting a creature.",
+  "notes": "No additional casting notes."
 }

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:conjuration-minor-conjuration",
+  "name": "Minor Conjuration",
+  "description": "School of Conjuration feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Minor Conjuration",
+      "description": "School of Conjuration feature (level 2)."
+    }
+  ]
+}

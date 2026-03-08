@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:remove-curse",
+  "name": "Remove Curse",
+  "description": "You end one curse affecting a creature or object you touch.",
+  "level": 3,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You end one curse affecting a creature or object you touch.",
+  "notes": "No additional casting notes."
+}

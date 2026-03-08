@@ -1,0 +1,21 @@
+{
+  "id": "srd52:feature:invocation-mask-of-many-faces",
+  "name": "Mask of Many Faces",
+  "description": "You can alter your appearance at will through patron-granted illusion.",
+  "selectable": true,
+  "tags": [
+    "warlock_invocation"
+  ],
+  "prerequisites": {
+    "classIds": [
+      "srd52:class:warlock"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Mask of Many Faces",
+      "description": "Invocation selected: at-will disguise utility option."
+    }
+  ]
+}

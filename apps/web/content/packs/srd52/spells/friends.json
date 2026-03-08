@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:friends",
+  "name": "Friends",
+  "description": "You gain a brief edge on social interaction with one creature of your choice.",
+  "level": 0,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "You gain a brief edge on social interaction with one creature of your choice.",
+  "notes": "Requires concentration while active."
+}

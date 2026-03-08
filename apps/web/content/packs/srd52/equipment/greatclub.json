@@ -6,5 +6,6 @@
   "weaponCategory": "simple",
   "properties": [
     "two-handed"
-  ]
+  ],
+  "description": "Greatclub is a simple weapon that deals 1d8 damage."
 }

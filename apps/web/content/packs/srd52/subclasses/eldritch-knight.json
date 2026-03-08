@@ -1,0 +1,43 @@
+{
+  "id": "srd52:subclass:eldritch-knight",
+  "classId": "srd52:class:fighter",
+  "name": "Eldritch Knight",
+  "description": "A warrior who weaves wizardly spellcraft into disciplined martial training.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:eldritch-knight-weapon-bond"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:eldritch-knight-war-magic"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:eldritch-knight-eldritch-strike"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:eldritch-knight-arcane-charge"
+    },
+    {
+      "level": 18,
+      "featureId": "srd52:feature:eldritch-knight-improved-war-magic"
+    }
+  ],
+  "spellcasting": {
+    "ability": "int",
+    "progression": "third",
+    "mode": "known"
+  },
+  "spellListRefIds": [
+    "srd52:spelllist:wizard-core"
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Eldritch Knight Training",
+      "description": "Eldritch Knight features apply according to subclass progression."
+    }
+  ]
+}

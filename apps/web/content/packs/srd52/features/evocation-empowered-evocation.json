@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:evocation-empowered-evocation",
+  "name": "Empowered Evocation",
+  "description": "School of Evocation feature gained at level 10.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Empowered Evocation",
+      "description": "School of Evocation feature (level 10)."
+    }
+  ]
+}

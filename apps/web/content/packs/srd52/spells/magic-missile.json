@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "You create darts of magical force that strike targets automatically.",
+  "notes": "No additional casting notes."
 }

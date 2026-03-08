@@ -12,6 +12,7 @@ import type {
   MergeReport,
   PackManifest,
   Species,
+  Subclass,
 } from "@dark-sun/content";
 import { mergePacks, mergePacksWithProvenance } from "@dark-sun/content";
 import type { Pack } from "@dark-sun/content/node";
@@ -38,6 +39,7 @@ type ContentOptions = {
   species: Species[];
   backgrounds: Background[];
   classes: Class[];
+  subclasses: Subclass[];
   armor: Equipment[];
   shields: Equipment[];
   weapons: Equipment[];
@@ -240,12 +242,14 @@ export function getContentOptionsFromMerged(content: MergedContent): ContentOpti
   const species = sortByName(content.species);
   const backgrounds = sortByName(content.backgrounds);
   const classes = sortByName(content.classes);
+  const subclasses = sortByName(content.subclasses ?? []);
   const equipment = sortByName(content.equipment);
 
   return {
     species,
     backgrounds,
     classes,
+    subclasses,
     armor: equipment.filter(
       (item) =>
         item.type === "armor_light" ||

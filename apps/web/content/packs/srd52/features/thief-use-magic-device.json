@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:thief-use-magic-device",
+  "name": "Use Magic Device",
+  "description": "Thief feature gained at level 13.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Use Magic Device",
+      "description": "Thief feature (level 13)."
+    }
+  ]
+}

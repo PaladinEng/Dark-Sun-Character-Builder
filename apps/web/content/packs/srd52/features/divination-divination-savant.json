@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:divination-divination-savant",
+  "name": "Divination Savant",
+  "description": "School of Divination feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Divination Savant",
+      "description": "School of Divination feature (level 2)."
+    }
+  ]
+}

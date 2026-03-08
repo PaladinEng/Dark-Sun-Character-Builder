@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 10 minutes",
-  "concentration": true
+  "concentration": true,
+  "summary": "A shimmering field appears around a creature and boosts defense.",
+  "notes": "Requires concentration while active."
 }

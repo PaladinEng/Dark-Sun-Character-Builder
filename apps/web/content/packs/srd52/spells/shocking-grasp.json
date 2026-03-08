@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "Lightning springs from your hand to deliver a shock.",
+  "notes": "No additional casting notes."
 }

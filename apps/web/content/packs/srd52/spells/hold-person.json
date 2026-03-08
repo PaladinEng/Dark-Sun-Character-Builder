@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 1 minute",
-  "concentration": true
+  "concentration": true,
+  "summary": "Choose a humanoid that can be paralyzed on a failed save.",
+  "notes": "Requires concentration while active."
 }

@@ -13,5 +13,7 @@
     "M"
   ],
   "duration": "Concentration, up to 10 minutes",
-  "concentration": true
+  "concentration": true,
+  "summary": "You touch a willing creature and grant it a flying speed.",
+  "notes": "Requires concentration while active."
 }

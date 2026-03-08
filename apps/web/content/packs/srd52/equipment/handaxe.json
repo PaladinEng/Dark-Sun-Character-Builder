@@ -8,5 +8,6 @@
     "light",
     "thrown",
     "range 20/60"
-  ]
+  ],
+  "description": "Handaxe is a simple weapon that deals 1d6 damage."
 }

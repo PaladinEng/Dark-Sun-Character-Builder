@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:transmutation-transmutation-savant",
+  "name": "Transmutation Savant",
+  "description": "School of Transmutation feature gained at level 2.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Transmutation Savant",
+      "description": "School of Transmutation feature (level 2)."
+    }
+  ]
+}

@@ -12,5 +12,7 @@
     "S"
   ],
   "duration": "Instantaneous",
-  "concentration": false
+  "concentration": false,
+  "summary": "A creature you touch regains hit points.",
+  "notes": "No additional casting notes."
 }

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-totem-warrior-aspect-of-the-beast",
+  "name": "Aspect of the Beast",
+  "description": "Path of the Totem Warrior feature gained at level 6.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Aspect of the Beast",
+      "description": "Path of the Totem Warrior feature (level 6)."
+    }
+  ]
+}

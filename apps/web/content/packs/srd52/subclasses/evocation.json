@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:evocation",
+  "classId": "srd52:class:wizard",
+  "name": "School of Evocation",
+  "description": "A focused arcane tradition dedicated to explosive, controlled elemental power.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 2,
+      "featureId": "srd52:feature:evocation-evocation-savant"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:evocation-sculpt-spells"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:evocation-potent-cantrip"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:evocation-empowered-evocation"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:evocation-overchannel"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "School of Evocation Training",
+      "description": "School of Evocation features apply according to subclass progression."
+    }
+  ]
+}

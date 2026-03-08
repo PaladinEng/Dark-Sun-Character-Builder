@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:heroism",
+  "name": "Heroism",
+  "description": "You inspire a willing creature with bravery and temporary vitality.",
+  "level": 1,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "You inspire a willing creature with bravery and temporary vitality.",
+  "notes": "Requires concentration while active."
+}

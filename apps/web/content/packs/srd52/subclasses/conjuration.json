@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:conjuration",
+  "classId": "srd52:class:wizard",
+  "name": "School of Conjuration",
+  "description": "A summoning tradition that bends space to call objects and creatures at will.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 2,
+      "featureId": "srd52:feature:conjuration-conjuration-savant"
+    },
+    {
+      "level": 2,
+      "featureId": "srd52:feature:conjuration-minor-conjuration"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:conjuration-benign-transposition"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:conjuration-focused-conjuration"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:conjuration-durable-summons"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "School of Conjuration Training",
+      "description": "School of Conjuration features apply according to subclass progression."
+    }
+  ]
+}

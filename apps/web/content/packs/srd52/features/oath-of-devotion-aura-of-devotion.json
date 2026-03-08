@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:oath-of-devotion-aura-of-devotion",
+  "name": "Aura of Devotion",
+  "description": "Oath of Devotion feature gained at level 7.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Aura of Devotion",
+      "description": "Oath of Devotion feature (level 7)."
+    }
+  ]
+}

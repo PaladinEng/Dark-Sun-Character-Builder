@@ -1,5 +1,6 @@
 {
   "id": "srd52:equipment:potters-tools",
   "type": "adventuring_gear",
-  "name": "Potter's Tools"
+  "name": "Potter's Tools",
+  "description": "Potter's Tools is adventuring gear for exploration and utility."
 }

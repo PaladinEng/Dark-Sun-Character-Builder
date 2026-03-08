@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:feather-fall",
+  "name": "Feather Fall",
+  "description": "You slow the descent of falling creatures, reducing impact from great heights.",
+  "level": 1,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 reaction",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "M"
+  ],
+  "duration": "1 minute",
+  "concentration": false,
+  "summary": "You slow the descent of falling creatures, reducing impact from great heights.",
+  "notes": "No additional casting notes."
+}

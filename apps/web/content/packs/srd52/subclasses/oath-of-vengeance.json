@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:oath-of-vengeance",
+  "classId": "srd52:class:paladin",
+  "name": "Oath of Vengeance",
+  "description": "A grim oath that pursues sworn foes with relentless focus and divine wrath.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:oath-of-vengeance-abjure-enemy"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:oath-of-vengeance-vow-of-enmity"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:oath-of-vengeance-relentless-avenger"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:oath-of-vengeance-soul-of-vengeance"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:oath-of-vengeance-avenging-angel"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Oath of Vengeance Training",
+      "description": "Oath of Vengeance features apply according to subclass progression."
+    }
+  ]
+}

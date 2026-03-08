@@ -6,16 +6,20 @@ import {
   EquipmentSchema,
   FeatSchema,
   FeatureSchema,
+  SubclassSchema,
   SkillDefinitionSchema,
   SpellListSchema,
   SpellSchema,
   SpeciesSchema,
   getClassSpellListRefIds,
+  getSubclassFeatureIdsForLevel,
+  getSubclassSpellListRefIds,
   type Background,
   type Class,
   type Equipment,
   type Feat,
   type Feature,
+  type Subclass,
   type SkillDefinition,
   type Spell,
   type SpellList,
@@ -37,6 +41,7 @@ const ENTITY_TYPES = [
   "skillDefinitions",
   "backgrounds",
   "classes",
+  "subclasses",
   "features",
   "feats",
   "equipment",
@@ -51,6 +56,7 @@ type PackEntity =
   | SkillDefinition
   | Background
   | Class
+  | Subclass
   | Feature
   | Feat
   | Equipment
@@ -69,6 +75,8 @@ function schemaFor(entityType: EntityType): EntitySchema {
       return BackgroundSchema;
     case "classes":
       return ClassSchema;
+    case "subclasses":
+      return SubclassSchema;
     case "features":
       return FeatureSchema;
     case "feats":
@@ -110,7 +118,7 @@ function lintPerPackEntityShape(packs: Pack[], issues: ContentLintIssue[]): void
     const seenEntityTypeById = new Map<string, EntityType>();
 
     for (const entityType of ENTITY_TYPES) {
-      const entities = pack.entities[entityType] as PackEntity[];
+      const entities = (pack.entities[entityType] ?? []) as PackEntity[];
       const schema = schemaFor(entityType);
       const seenIds = new Set<string>();
       const seenReplaceTargets = new Set<string>();
@@ -179,6 +187,7 @@ function lintDanglingReplacements(packs: Pack[], issues: ContentLintIssue[]): vo
     skillDefinitions: new Set<string>(),
     backgrounds: new Set<string>(),
     classes: new Set<string>(),
+    subclasses: new Set<string>(),
     features: new Set<string>(),
     feats: new Set<string>(),
     equipment: new Set<string>(),
@@ -189,7 +198,7 @@ function lintDanglingReplacements(packs: Pack[], issues: ContentLintIssue[]): vo
   for (const pack of packs) {
     for (const entityType of ENTITY_TYPES) {
       const known = knownByType[entityType];
-      const entities = pack.entities[entityType] as PackEntity[];
+      const entities = (pack.entities[entityType] ?? []) as PackEntity[];
       for (const entity of entities) {
         const replaceTarget = (entity as { replaces?: string }).replaces;
         if (replaceTarget && !known.has(replaceTarget)) {
@@ -237,6 +246,7 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
       species: "Species",
       backgrounds: "Background",
       classes: "Class",
+      subclasses: "Subclass",
       features: "Feature",
       feats: "Feat"
     };
@@ -494,7 +504,83 @@ function lintMergedReferences(content: MergedContent, issues: ContentLintIssue[]
     lintEffectReference("classes", klass.id, klass.effects);
   }
 
+  for (const subclass of content.subclasses ?? []) {
+    if (!content.classesById[subclass.classId]) {
+      issues.push({
+        code: "DANGLING_REFERENCE",
+        message: `Subclass "${subclass.id}" references missing class "${subclass.classId}".`,
+        entityType: "subclasses",
+        entityId: subclass.id,
+        path: "classId"
+      });
+    }
+
+    const subclassSpellListRefIds = getSubclassSpellListRefIds(subclass);
+    for (const spellListId of subclassSpellListRefIds) {
+      if (!content.spellListsById[spellListId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Subclass "${subclass.id}" references missing spell list "${spellListId}" in spellListRefIds.`,
+          entityType: "subclasses",
+          entityId: subclass.id,
+          path: "spellListRefIds"
+        });
+      }
+    }
+
+    for (const featureId of getSubclassFeatureIdsForLevel(subclass, 20)) {
+      if (!content.featuresById[featureId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Subclass "${subclass.id}" subclassFeaturesByLevel references missing feature "${featureId}".`,
+          entityType: "subclasses",
+          entityId: subclass.id,
+          path: "subclassFeaturesByLevel"
+        });
+      }
+    }
+
+    lintEffectReference("subclasses", subclass.id, subclass.effects);
+    lintEffectReference("subclasses", subclass.id, subclass.passiveModifiers);
+  }
+
   for (const feature of content.features) {
+    for (const classId of feature.prerequisites?.classIds ?? []) {
+      if (!content.classesById[classId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Feature "${feature.id}" prerequisite references missing class "${classId}".`,
+          entityType: "features",
+          entityId: feature.id,
+          path: "prerequisites.classIds"
+        });
+      }
+    }
+
+    for (const speciesId of feature.prerequisites?.speciesIds ?? []) {
+      if (!content.speciesById[speciesId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Feature "${feature.id}" prerequisite references missing species "${speciesId}".`,
+          entityType: "features",
+          entityId: feature.id,
+          path: "prerequisites.speciesIds"
+        });
+      }
+    }
+
+    for (const featureId of feature.prerequisites?.featureIds ?? []) {
+      if (!content.featuresById[featureId]) {
+        issues.push({
+          code: "DANGLING_REFERENCE",
+          message: `Feature "${feature.id}" prerequisite references missing feature "${featureId}".`,
+          entityType: "features",
+          entityId: feature.id,
+          path: "prerequisites.featureIds"
+        });
+      }
+    }
+
     lintEffectReference("features", feature.id, feature.effects);
   }
 

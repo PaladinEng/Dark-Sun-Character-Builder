@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:eldritch-knight-weapon-bond",
+  "name": "Weapon Bond",
+  "description": "Eldritch Knight feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Weapon Bond",
+      "description": "Eldritch Knight feature (level 3)."
+    }
+  ]
+}

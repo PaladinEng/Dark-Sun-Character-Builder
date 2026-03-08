@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:hunter",
+  "classId": "srd52:class:ranger",
+  "name": "Hunter",
+  "description": "A pragmatic archetype that studies prey and adapts to every battlefield threat.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:hunter-hunter-s-prey"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:hunter-defensive-tactics"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:hunter-multiattack"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:hunter-superior-hunter-s-defense"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Hunter Training",
+      "description": "Hunter features apply according to subclass progression."
+    }
+  ]
+}

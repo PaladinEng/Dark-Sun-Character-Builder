@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:arcane-trickster-spell-thief",
+  "name": "Spell Thief",
+  "description": "Arcane Trickster feature gained at level 17.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Spell Thief",
+      "description": "Arcane Trickster feature (level 17)."
+    }
+  ]
+}

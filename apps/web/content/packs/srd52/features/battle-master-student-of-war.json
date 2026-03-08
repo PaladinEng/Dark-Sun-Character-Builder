@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:battle-master-student-of-war",
+  "name": "Student of War",
+  "description": "Battle Master feature gained at level 3.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Student of War",
+      "description": "Battle Master feature (level 3)."
+    }
+  ]
+}

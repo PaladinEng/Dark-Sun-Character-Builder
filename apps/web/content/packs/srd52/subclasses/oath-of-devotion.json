@@ -1,0 +1,35 @@
+{
+  "id": "srd52:subclass:oath-of-devotion",
+  "classId": "srd52:class:paladin",
+  "name": "Oath of Devotion",
+  "description": "A sacred oath devoted to honesty, courage, and unwavering righteousness.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:oath-of-devotion-sacred-weapon"
+    },
+    {
+      "level": 3,
+      "featureId": "srd52:feature:oath-of-devotion-turn-the-unholy"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:oath-of-devotion-aura-of-devotion"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:oath-of-devotion-purity-of-spirit"
+    },
+    {
+      "level": 20,
+      "featureId": "srd52:feature:oath-of-devotion-holy-nimbus"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Oath of Devotion Training",
+      "description": "Oath of Devotion features apply according to subclass progression."
+    }
+  ]
+}

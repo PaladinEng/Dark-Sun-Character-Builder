@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:divination-greater-portent",
+  "name": "Greater Portent",
+  "description": "School of Divination feature gained at level 14.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Greater Portent",
+      "description": "School of Divination feature (level 14)."
+    }
+  ]
+}
