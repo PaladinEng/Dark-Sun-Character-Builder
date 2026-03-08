@@ -19,6 +19,13 @@ Work is NOT complete until pnpm loop:check passes.
 
 Do not commit changes unless pnpm loop:check is green.
 
+## Edit-In-Place Policy
+
+- Edit existing files in place whenever the target file already exists.
+- Do not create copy-style siblings like `* 2.ts`, `* 2.tsx`, `* 2.json`, `* 2.md`.
+- When replacing behavior, modify the canonical file path and delete obsolete duplicates.
+- If a new file is required, create it at the intended final path only (no temporary copy names).
+
 ## Harness
 
 Entrypoint:
@@ -42,6 +49,9 @@ pnpm sheet:golden
 
 4) Character sheet invariant tests
 pnpm sheet:invariants
+
+5) Duplicate-copy file guard
+pnpm guard:duplicates
 
 ## Development Policy
 
@@ -68,6 +78,37 @@ packages/content
 scripts/loopdev-check.mjs
   Closed-loop validation harness
 
+codex/context
+  Persistent session context
+
+## Allowed Write Zones
+
+Default writable paths for development work:
+
+- apps/**
+- packages/**
+- scripts/**
+- fixtures/**
+- docs/**
+- codex/prompts/**
+- codex/context/**
+- Root project docs/configs (`AGENTS.md`, `README.md`, `package.json`, `pnpm-workspace.yaml`, `tsconfig.base.json`)
+
+Avoid writing outside these zones unless the task explicitly requires it.
+
+## Excluded Generated/Vendor Paths
+
+Do not edit or validate duplicate-file guardrails against generated/vendor paths:
+
+- .git/**
+- node_modules/**
+- .next/** and apps/web/.next/**
+- packages/**/dist/**
+- codex/runs/**
+- codex/harness/**
+- coverage/**
+- vendor/**
+
 ## Design Goals
 
 Strict D&D 2024 RAW rules implementation.
@@ -85,3 +126,14 @@ Do not introduce new dependencies without justification.
 Do not modify build tooling unless necessary.
 
 Always prefer minimal diffs.
+
+## Persistent Context Responsibilities
+
+Before ending a work session that changes project state:
+
+1. Update `codex/context/PROJECT_STATE.md` with current objective, branch/commit, latest harness status, and key risks.
+2. Update `codex/context/WORK_QUEUE.md` so the next 1-3 actionable tasks are explicit and ordered.
+3. Append a dated entry to `codex/context/SPRINT_LOG.md` summarizing what changed and validation results.
+4. Refresh `codex/context/HANDOFF.md` with immediate next-step commands and any blockers/assumptions.
+
+Keep context concise, factual, and durable across fresh Codex sessions.

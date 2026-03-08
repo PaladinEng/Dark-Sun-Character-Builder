@@ -261,7 +261,21 @@ function parseRequestPayload(value: unknown): PdfExportRequestPayload | null {
 async function loadTemplatePdfBytes(): Promise<Uint8Array> {
   const candidates = [
     join(process.cwd(), "assets", "sheets", "template.pdf"),
+    join(
+      process.cwd(),
+      "assets",
+      "sheets",
+      "DLDM - 5E24 CHARACTER SHEET - 5pg - Updated Form Fields.pdf"
+    ),
     join(process.cwd(), "apps", "web", "assets", "sheets", "template.pdf"),
+    join(
+      process.cwd(),
+      "apps",
+      "web",
+      "assets",
+      "sheets",
+      "DLDM - 5E24 CHARACTER SHEET - 5pg - Updated Form Fields.pdf"
+    ),
   ];
 
   for (const candidate of candidates) {

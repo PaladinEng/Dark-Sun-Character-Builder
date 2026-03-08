@@ -1,26 +1,29 @@
-# Project State Template
+# Project State
 
 Last updated:
-- YYYY-MM-DD HH:MM (local)
+- 2026-03-07 14:25 EST
 
 ## Current Objective
-- Describe the current sprint objective in 1-2 lines.
+- Harden workflow against duplicate copy-file creation (`* 2.*`) and strengthen in-repo persistent context for fresh Codex sessions.
 
 ## Repository Snapshot
-- Branch:
-- Latest checkpoint tag:
-- Harness status (`pnpm loop:check`):
+- Branch: `main`
+- HEAD: `af6dd65` (pre-hardening)
+- Latest checkpoint tag: `codex-sprint-032-20260307T180930Z`
+- Harness status for this hardening pass:
+  - `pnpm loop:fast` -> `=== ALL_PASS ===`
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+  - `LOOPDEV_STRICT=1 pnpm loop:check` -> `=== ALL_PASS ===`
 
-## Completed Work
-- Item 1
-- Item 2
+## Completed Work (Current Session)
+- Added duplicate-suffix guard stage to harness flow.
+- Removed tracked duplicate-copy files in source/config paths.
+- Expanded `AGENTS.md` with explicit edit/write/context guardrails.
+- Refined `codex/context` files for recoverable handoff state.
 
 ## Open Risks / Blockers
-- Risk or blocker
-
-## Next Prompt Range
-- Planned start sprint:
-- Planned end sprint:
+- None identified.
 
 ## Notes for Next Runner Session
-- Any constraints, gotchas, or required manual checks.
+- Keep edits in place and avoid copy-style duplicate filenames.
+- If duplicate-file guard fails, delete/rename copy-style files instead of widening exclusions.

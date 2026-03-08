@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 import process from "node:process";
 
 const FULL_STAGES = [
+  { name: "repo:duplicate-suffix", command: ["pnpm", "guard:duplicates"] },
   { name: "content:lint", command: ["pnpm", "content:lint"] },
   { name: "rules:typecheck", command: ["pnpm", "--filter", "@dark-sun/rules", "typecheck"] },
   { name: "rules:unit", command: ["pnpm", "--filter", "@dark-sun/rules", "test:unit"] },
@@ -25,6 +26,7 @@ const FULL_STAGES = [
 ];
 
 const FAST_STAGE_NAMES = new Set([
+  "repo:duplicate-suffix",
   "content:lint",
   "rules:typecheck",
   "rules:unit",

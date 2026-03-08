@@ -9,6 +9,7 @@
     "test:watch": "pnpm --filter @dark-sun/content test:watch & pnpm --filter @dark-sun/rules test:watch",
     "sheet:golden": "pnpm --filter @dark-sun/rules sheet:golden",
     "sheet:invariants": "pnpm --filter @dark-sun/rules sheet:invariants",
+    "guard:duplicates": "node scripts/check-duplicate-suffix-files.mjs",
     "web:smoke": "node scripts/web-smoke.mjs",
     "api:smoke": "node scripts/api-smoke.mjs",
     "pdf:sanity": "node scripts/pdf-sanity.mjs",
