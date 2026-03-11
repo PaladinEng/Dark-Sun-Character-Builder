@@ -4,7 +4,7 @@ Last updated:
 - 2026-03-11 EDT
 
 ## Current Objective
-- Keep the Dark Sun builder deployment-ready by aligning Vercel monorepo settings with a standard Next.js deployment and documenting that `Output Directory` must not be overridden.
+- Keep the Dark Sun builder deployment-ready by aligning the committed repo guidance with the live Vercel project settings: Next.js app root `apps/web`, explicit pnpm commands, and no repo-root Vercel config.
 
 ## Repository Snapshot
 - Branch: `main`
@@ -12,7 +12,7 @@ Last updated:
 - Harness status for this pass:
   - `pnpm install` -> PASS
   - `pnpm --filter web build` -> PASS
-  - `pnpm loop:check` -> `=== ALL_PASS ===` after Vercel settings note/config update
+  - `pnpm loop:check` -> `=== ALL_PASS ===` after Vercel follow-up cleanup
 
 ## Completed Work (Current Session)
 - Kept the normalized Dark Sun pack in place under `apps/web/content/packs/darksun` with:
@@ -33,6 +33,15 @@ Last updated:
   - `vercel.json` now declares the monorepo install/build commands and `nextjs` framework preset without forcing an output directory
   - `README.md` now documents the expected Vercel project settings and explicitly warns against `Output Directory = public`
 - Confirmed the remaining failure mode is a Vercel dashboard override, not a local build problem.
+- Recreated the Vercel project from the CLI, connected the GitHub repo, and patched the live project settings to:
+  - `framework = nextjs`
+  - `rootDirectory = apps/web`
+  - `installCommand = pnpm install`
+  - `buildCommand = pnpm --filter web build`
+  - `outputDirectory = Next.js default`
+  - `sourceFilesOutsideRootDirectory = true`
+- Removed the repo-root `vercel.json` because it conflicts with the new `apps/web` project root and causes an unnecessary Vercel CLI warning.
+- Kept `.vercel` ignored in git via `.gitignore`.
 
 ## Remaining Limitations (Explicit)
 - Defiler casting remains a stub.
@@ -49,5 +58,5 @@ Last updated:
   - `apps/web/content/packs/darksun/settings/*.json`
   - `apps/web/src/lib/packSettings.ts`
 - Keep internal workspace packages consumable from source for web builds unless a deliberate dist-build pipeline replaces that approach.
-- For Vercel, keep the project rooted at `/` and leave `Output Directory` unset in the dashboard for this Next.js app.
+- For Vercel, keep the project rooted at `apps/web`, keep `Output Directory` unset, and rely on the live project settings rather than a repo-root `vercel.json`.
 - Re-run `pnpm loop:check` after any content, builder, or context edit.

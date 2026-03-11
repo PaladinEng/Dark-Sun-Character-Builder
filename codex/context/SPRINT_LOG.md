@@ -68,3 +68,20 @@ Append one dated section per completed work block.
 - Fixes:
   - Added repo-level Vercel config for `framework`, `installCommand`, and `buildCommand` without setting `outputDirectory`.
   - Documented the required dashboard settings and the fact that `Output Directory` must remain unset for this Next.js deployment.
+
+## 2026-03-11 - Vercel Project Recreation And Cleanup
+- Scope: Recreate the Vercel project from the CLI, connect GitHub, patch the live monorepo settings to the real app root, and remove the now-conflicting repo-root Vercel config.
+- Result: PASS.
+- Validation:
+  - Production deployment `https://dark-sun-character-builder.vercel.app` -> READY
+  - `pnpm install` -> PASS
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `.gitignore`
+  - `README.md`
+  - `codex/context/*`
+- Fixes:
+  - Live Vercel project now uses `apps/web` as the root directory with `Next.js` framework detection and explicit pnpm commands.
+  - Git auto-deploy is connected to `PaladinEng/Dark-Sun-Character-Builder` on branch `main`.
+  - Removed the need for a repo-root `vercel.json`, which only generated warnings once the project root moved to `apps/web`.

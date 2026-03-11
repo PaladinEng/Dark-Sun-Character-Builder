@@ -11,7 +11,12 @@
 - `apps/web/src/lib/packSettings.ts` loads Dark Sun setting metadata from `apps/web/content/packs/darksun/settings/`.
 - Builder behavior now filters Dark Sun class/subclass availability, hides classes replaced by setting rules, and surfaces Wild Talent + setting notes when `darksun` is enabled.
 - `@dark-sun/content` is now consumed from workspace source, and `apps/web/next.config.ts` transpiles both internal packages needed for Next builds.
-- `vercel.json` now pins the monorepo to `pnpm install` + `pnpm --filter web build` with the `nextjs` framework preset and no explicit output directory.
+- The live Vercel project is now configured directly with:
+  - root directory `apps/web`
+  - framework `Next.js`
+  - install command `pnpm install`
+  - build command `pnpm --filter web build`
+  - default Next.js output handling
 - Unsupported systems remain explicit stubs:
   - Defiler casting
   - Psionicist mechanics
@@ -27,7 +32,8 @@
 - Dark Sun spell lists only include spells that already exist as native spell entities.
 - Full language-pick enforcement is not yet implemented; the setting is currently surfaced as metadata and notes.
 - Preserver/Defiler behavior is preserved in settings JSON, not automated in rules resolution.
-- A Vercel dashboard-level `Output Directory` override can still break deployment even though the repo config is now correct; it must be unset for this Next.js app.
+- A Vercel dashboard-level `Output Directory` override can still break deployment; it must remain unset for this Next.js app.
+- Do not reintroduce a repo-root `vercel.json` unless the Vercel project root moves back to `/`.
 
 ## Immediate Next-Step Commands
 1. `git status --short`
