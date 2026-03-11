@@ -85,3 +85,20 @@ Append one dated section per completed work block.
   - Live Vercel project now uses `apps/web` as the root directory with `Next.js` framework detection and explicit pnpm commands.
   - Git auto-deploy is connected to `PaladinEng/Dark-Sun-Character-Builder` on branch `main`.
   - Removed the need for a repo-root `vercel.json`, which only generated warnings once the project root moved to `apps/web`.
+
+## 2026-03-11 - Dark Sun Species And Background Replacement
+- Scope: Fix Dark Sun setting behavior so species and backgrounds are replaced by setting-defined whitelists instead of merging with SRD content.
+- Result: PASS.
+- Validation:
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `apps/web/src/lib/packSettings.ts`
+  - `apps/web/content/packs/darksun/settings/profile.json`
+  - `scripts/ingest-dark-sun-homebrew.mjs`
+  - `codex/context/*`
+- Findings:
+  - Class restrictions were already applied in the setting filter, but species/backgrounds still came from the merged content pool because the setting profile had no replacement ids for those categories.
+- Fixes:
+  - Added `speciesReplacementIds` and `backgroundReplacementIds` to Dark Sun setting parsing and restriction application.
+  - Declared the exact 8 Athasian species ids and 13 Dark Sun background ids in the Dark Sun profile.
+  - Updated the ingest script so future Dark Sun regenerations preserve the replacement behavior.

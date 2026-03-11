@@ -2,6 +2,31 @@
   "id": "darksun:setting:profile",
   "packId": "darksun",
   "name": "Dark Sun",
+  "speciesReplacementIds": [
+    "darksun:species:athasian-aarakocra",
+    "darksun:species:athasian-dwarf",
+    "darksun:species:athasian-elf",
+    "darksun:species:athasian-half-giant",
+    "darksun:species:athasian-halfling",
+    "darksun:species:athasian-human",
+    "darksun:species:mul",
+    "darksun:species:thri-kreen"
+  ],
+  "backgroundReplacementIds": [
+    "darksun:background:acrobat",
+    "darksun:background:athasian-minstrel",
+    "darksun:background:dune-trader",
+    "darksun:background:gladiator",
+    "darksun:background:noble-adept",
+    "darksun:background:nomad",
+    "darksun:background:primal-guardian",
+    "darksun:background:psionic-adept",
+    "darksun:background:slave",
+    "darksun:background:templar",
+    "darksun:background:veiled-alliance",
+    "darksun:background:wastelander",
+    "darksun:background:wilder"
+  ],
   "disabledClassIds": [
     "srd52:class:paladin",
     "srd52:class:sorcerer"

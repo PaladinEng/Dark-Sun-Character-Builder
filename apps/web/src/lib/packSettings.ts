@@ -49,6 +49,8 @@ export type PackSettingProfile = {
   id: string;
   packId: string;
   name: string;
+  speciesReplacementIds: string[];
+  backgroundReplacementIds: string[];
   disabledClassIds: string[];
   classReplacements: Record<string, string>;
   disabledSubclassIds: string[];
@@ -132,6 +134,12 @@ function parseProfile(raw: unknown): Omit<PackSettingProfile, "languages" | "tra
     id: value.id,
     packId: value.packId,
     name: value.name,
+    speciesReplacementIds: isStringArray(value.speciesReplacementIds)
+      ? value.speciesReplacementIds
+      : [],
+    backgroundReplacementIds: isStringArray(value.backgroundReplacementIds)
+      ? value.backgroundReplacementIds
+      : [],
     disabledClassIds: value.disabledClassIds,
     classReplacements,
     disabledSubclassIds: value.disabledSubclassIds,
@@ -316,6 +324,12 @@ export async function getResolvedPackSettings(
 
     merged = {
       ...merged,
+      speciesReplacementIds: Array.from(
+        new Set([...merged.speciesReplacementIds, ...next.speciesReplacementIds]),
+      ),
+      backgroundReplacementIds: Array.from(
+        new Set([...merged.backgroundReplacementIds, ...next.backgroundReplacementIds]),
+      ),
       disabledClassIds: Array.from(new Set([...merged.disabledClassIds, ...next.disabledClassIds])),
       classReplacements: {
         ...merged.classReplacements,
@@ -360,9 +374,21 @@ export function applySettingRestrictions(
     disabledClassIds.add(replacedClassId);
   }
   const disabledSubclassIds = new Set(settings.disabledSubclassIds);
+  const speciesReplacementIds =
+    settings.speciesReplacementIds.length > 0 ? new Set(settings.speciesReplacementIds) : null;
+  const backgroundReplacementIds =
+    settings.backgroundReplacementIds.length > 0
+      ? new Set(settings.backgroundReplacementIds)
+      : null;
 
   return {
     ...options,
+    species: speciesReplacementIds
+      ? options.species.filter((entry) => speciesReplacementIds.has(entry.id))
+      : options.species,
+    backgrounds: backgroundReplacementIds
+      ? options.backgrounds.filter((entry) => backgroundReplacementIds.has(entry.id))
+      : options.backgrounds,
     classes: options.classes.filter((entry) => !disabledClassIds.has(entry.id)),
     subclasses: options.subclasses.filter((entry) => !disabledSubclassIds.has(entry.id)),
   };

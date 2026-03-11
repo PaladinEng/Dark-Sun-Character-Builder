@@ -4,15 +4,13 @@ Last updated:
 - 2026-03-11 EDT
 
 ## Current Objective
-- Keep the Dark Sun builder deployment-ready by aligning the committed repo guidance with the live Vercel project settings: Next.js app root `apps/web`, explicit pnpm commands, and no repo-root Vercel config.
+- Keep the Dark Sun builder setting behavior correct by treating Dark Sun species and backgrounds as replacement lists instead of additive content, while preserving the current deployment and validation state.
 
 ## Repository Snapshot
 - Branch: `main`
-- HEAD at last context refresh: `3368502`
+- HEAD at last context refresh: `6f32b34`
 - Harness status for this pass:
-  - `pnpm install` -> PASS
-  - `pnpm --filter web build` -> PASS
-  - `pnpm loop:check` -> `=== ALL_PASS ===` after Vercel follow-up cleanup
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
 
 ## Completed Work (Current Session)
 - Kept the normalized Dark Sun pack in place under `apps/web/content/packs/darksun` with:
@@ -42,6 +40,14 @@ Last updated:
   - `sourceFilesOutsideRootDirectory = true`
 - Removed the repo-root `vercel.json` because it conflicts with the new `apps/web` project root and causes an unnecessary Vercel CLI warning.
 - Kept `.vercel` ignored in git via `.gitignore`.
+- Fixed Dark Sun species/background availability so the setting now behaves as a replacement list instead of merging with SRD options:
+  - `apps/web/src/lib/packSettings.ts` now supports setting-level `speciesReplacementIds` and `backgroundReplacementIds`
+  - `apps/web/content/packs/darksun/settings/profile.json` now declares the exact Athasian species whitelist and Dark Sun background whitelist
+  - `scripts/ingest-dark-sun-homebrew.mjs` now regenerates those replacement lists so the behavior is stable across future ingests
+- Verified the replacement behavior locally:
+  - Dark Sun species resolve to exactly 8 options
+  - Dark Sun backgrounds resolve to exactly 13 options
+  - SRD `Human` and SRD `Acolyte` no longer appear as builder option ids in Dark Sun mode
 
 ## Remaining Limitations (Explicit)
 - Defiler casting remains a stub.
@@ -57,6 +63,7 @@ Last updated:
 - Keep Dark Sun filtering data-driven via:
   - `apps/web/content/packs/darksun/settings/*.json`
   - `apps/web/src/lib/packSettings.ts`
+- For Dark Sun mode, species/background availability is now controlled by setting-level replacement ids rather than pack-merging alone.
 - Keep internal workspace packages consumable from source for web builds unless a deliberate dist-build pipeline replaces that approach.
 - For Vercel, keep the project rooted at `apps/web`, keep `Output Directory` unset, and rely on the live project settings rather than a repo-root `vercel.json`.
 - Re-run `pnpm loop:check` after any content, builder, or context edit.
