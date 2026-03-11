@@ -1,0 +1,56 @@
+{
+  "setting": "dark_sun",
+  "description": "Dark Sun setting overrides and source configuration.",
+  "disabledClasses": [
+    "cleric",
+    "paladin",
+    "sorcerer"
+  ],
+  "classReplacements": {
+    "cleric": "elemental_cleric"
+  },
+  "enabledClasses": [
+    "barbarian",
+    "bard",
+    "druid",
+    "fighter",
+    "monk",
+    "ranger",
+    "rogue",
+    "warlock",
+    "wizard",
+    "elemental_cleric",
+    "psionicist"
+  ],
+  "wildTalentAtCreation": true,
+  "spellSystem": "traditions",
+  "magicTraditions": [
+    "arcane",
+    "divine",
+    "nature",
+    "elemental",
+    "psionics"
+  ],
+  "languageSystem": {
+    "selection": {
+      "baseLanguages": [
+        "common"
+      ],
+      "additionalChoices": 2,
+      "literacyDefault": false
+    },
+    "notes": [
+      "Languages grant speech, not literacy.",
+      "Literacy may be granted by class or other features."
+    ]
+  },
+  "skillSystem": "extended",
+  "arcaneCastingModes": [
+    "preserver",
+    "defiler"
+  ],
+  "notes": [
+    "Defiler rules not yet implemented.",
+    "Resurrection should be governed by spell-list availability."
+  ]
+}

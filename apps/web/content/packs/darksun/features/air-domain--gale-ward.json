@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:air-domain:gale-ward",
+  "name": "Gale Ward",
+  "description": "Reaction. When a creature you can see within 30 feet makes a ranged attack roll, you buffet the shot and impose disadvantage on the roll. Uses equal to your Wisdom modifier, minimum 1, regained on a Long Rest."
+}

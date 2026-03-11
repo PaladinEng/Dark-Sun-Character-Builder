@@ -1,0 +1,8 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:silt",
+  "name": "Elemental Cleric - Silt Patron Spell List",
+  "description": "Preparatory spell list for the Silt patron, combining All spells, and Domain(Silt) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:silt are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:circle-of-death"
+  ]
+}

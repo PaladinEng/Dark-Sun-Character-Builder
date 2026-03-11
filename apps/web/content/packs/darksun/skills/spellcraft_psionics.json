@@ -1,0 +1,7 @@
+{
+  "id": "spellcraft_psionics",
+  "name": "Spellcraft (Psionics)",
+  "ability": "int",
+  "sortOrder": 23,
+  "description": "Dark Sun expanded skill. These skills exist alongside Arcana, Religion, and Nature."
+}

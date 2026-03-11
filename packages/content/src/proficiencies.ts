@@ -29,23 +29,36 @@ export const TOOL_PROFICIENCY_VALUES = [
 ] as const;
 
 export const LANGUAGE_VALUES = [
+  "Aarakocra",
+  "Ancient",
   "Abyssal",
+  "Balic",
   "Celestial",
   "Common",
   "Deep Speech",
   "Draconic",
+  "Draj",
+  "Draxa",
   "Dwarvish",
   "Elvish",
   "Giant",
   "Gnomish",
   "Goblin",
+  "Gulg",
   "Halfling",
+  "Hand Sign",
   "Infernal",
+  "Kreen",
+  "Nibenay",
   "Orc",
   "Primordial",
+  "Raam",
   "Sylvan",
   "Thri-kreen",
-  "Undercommon"
+  "Trade Tongue",
+  "Tyr",
+  "Undercommon",
+  "Urik",
 ] as const;
 
 const TOOL_PROFICIENCY_SET = new Set<string>(TOOL_PROFICIENCY_VALUES);

@@ -1,0 +1,34 @@
+{
+  "id": "darksun:background:acrobat",
+  "name": "Acrobat",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "int",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "acrobatics"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "deception"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Disguise Kit"
+    }
+  ],
+  "description": "A nimble performer and infiltrator who uses spectacle, access, and agility to gather secrets. Skill Proficiencies: Acrobatics, Deception. Tool Proficiency: Disguise Kit. Feat: Skilled.",
+  "grantsFeat": "srd52:feat:skilled",
+  "grantsOriginFeatId": "srd52:feat:skilled",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:disguise-kit"
+    ]
+  }
+}

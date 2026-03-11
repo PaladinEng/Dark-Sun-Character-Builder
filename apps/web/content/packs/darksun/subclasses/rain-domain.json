@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:rain-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Rain Domain",
+  "description": "Rain Domain is an Athasian paraelemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:rain-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:rain-domain:elemental-channeling-thunderburst"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:rain-domain:storm-ward"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:rain-domain:channel-the-squall"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:rain-domain:incarnate-of-the-monsoon"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:rain"
+  ],
+  "domain": "rain",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Rain Domain Training",
+      "description": "Rain Domain features apply according to subclass progression."
+    }
+  ]
+}

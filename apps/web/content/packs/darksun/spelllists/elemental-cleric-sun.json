@@ -1,0 +1,10 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:sun",
+  "name": "Elemental Cleric - Sun Patron Spell List",
+  "description": "Preparatory spell list for the Sun patron, combining All spells, and Domain(Sun) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:sun are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:sacred-flame",
+    "srd52:spell:guiding-bolt",
+    "srd52:spell:daylight"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:sixth_sense",
+  "name": "Sixth Sense",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Sixth Sense is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Sixth Sense",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

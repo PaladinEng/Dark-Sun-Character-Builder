@@ -1,0 +1,11 @@
+{
+  "id": "darksun:class:psionicist",
+  "name": "Psionicist",
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "darksun:feature:psionicist-stub"
+    }
+  ],
+  "description": "Stub class. The Dark Sun setting reserves Psionicist as a selectable class, but its mechanics are intentionally not implemented yet."
+}

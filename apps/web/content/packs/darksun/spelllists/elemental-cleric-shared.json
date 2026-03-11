@@ -1,0 +1,29 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:shared",
+  "name": "Elemental Cleric Shared Spells",
+  "description": "Native subset of the Dark Sun shared elemental cleric spell access. TODO: additional source spells for darksun:spelllist:elemental-cleric:all-shared are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:blade-ward",
+    "srd52:spell:guidance",
+    "srd52:spell:mending",
+    "srd52:spell:message",
+    "srd52:spell:resistance",
+    "srd52:spell:thaumaturgy",
+    "srd52:spell:bane",
+    "srd52:spell:command",
+    "srd52:spell:comprehend-languages",
+    "srd52:spell:detect-magic",
+    "srd52:spell:detect-poison-and-disease",
+    "srd52:spell:heroism",
+    "srd52:spell:identify",
+    "srd52:spell:longstrider",
+    "srd52:spell:shield-of-faith",
+    "srd52:spell:darkvision",
+    "srd52:spell:enhance-ability",
+    "srd52:spell:hold-person",
+    "srd52:spell:locate-object",
+    "srd52:spell:dispel-magic",
+    "srd52:spell:remove-curse",
+    "srd52:spell:foresight"
+  ]
+}

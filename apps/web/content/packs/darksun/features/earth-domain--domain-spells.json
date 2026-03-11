@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:earth-domain:domain-spells",
+  "name": "Earth Domain Spells",
+  "description": "Earth Domain always-prepared domain spell source list:\nTier 1: Earth Tremor, Sanctuary, Earthbind, Spider Climb\nTier 2: Meld into Stone, Protection from Energy\nTier 3: Stone Shape, Stoneskin\nTier 4: Wall of Stone, Conjure Elemental (Earth only - rework)\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

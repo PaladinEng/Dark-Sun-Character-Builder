@@ -1,0 +1,21 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:air",
+  "name": "Elemental Cleric - Air Patron Spell List",
+  "description": "Preparatory spell list for the Air patron, combining All spells, Elemental spells, and Domain(Air) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:air are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:minor-illusion",
+    "srd52:spell:spare-the-dying",
+    "srd52:spell:bless",
+    "srd52:spell:cure-wounds",
+    "srd52:spell:feather-fall",
+    "srd52:spell:fog-cloud",
+    "srd52:spell:healing-word",
+    "srd52:spell:magic-missile",
+    "srd52:spell:sanctuary",
+    "srd52:spell:silent-image",
+    "srd52:spell:aid",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:prayer-of-healing",
+    "srd52:spell:revivify"
+  ]
+}

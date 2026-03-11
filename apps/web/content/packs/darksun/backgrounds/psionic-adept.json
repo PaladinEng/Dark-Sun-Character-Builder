@@ -1,0 +1,34 @@
+{
+  "id": "darksun:background:psionic-adept",
+  "name": "Psionic Adept",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "con",
+      "int"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "arcana"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "athletics"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Calligrapher's Supplies"
+    }
+  ],
+  "description": "A disciplined psionic practitioner trained to align endurance, physical rigor, and mental focus. Skill Proficiencies: Arcana, Athletics. Tool Proficiency: Calligrapher's Supplies. Feat: Telepathic.",
+  "grantsFeat": "darksun:feat:telepathic",
+  "grantsOriginFeatId": "darksun:feat:telepathic",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:calligraphers-supplies"
+    ]
+  }
+}

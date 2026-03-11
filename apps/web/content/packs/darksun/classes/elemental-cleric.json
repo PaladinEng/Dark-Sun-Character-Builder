@@ -1,0 +1,91 @@
+{
+  "id": "darksun:class:elemental-cleric",
+  "name": "Elemental Cleric",
+  "hitDie": 8,
+  "classSkillChoices": {
+    "count": 2,
+    "from": [
+      "history",
+      "insight",
+      "medicine",
+      "nature",
+      "persuasion",
+      "religion",
+      "survival"
+    ]
+  },
+  "weaponProficiencies": {
+    "simple": true
+  },
+  "spellcasting": {
+    "ability": "wis",
+    "progression": "full",
+    "mode": "prepared"
+  },
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:shared"
+  ],
+  "classFeaturesByLevel": [
+    {
+      "level": 1,
+      "featureId": "srd52:feature:spellcasting"
+    },
+    {
+      "level": 1,
+      "featureId": "darksun:feature:elemental-calling"
+    },
+    {
+      "level": 2,
+      "featureId": "darksun:feature:elemental-channeling"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:elemental-domain"
+    },
+    {
+      "level": 5,
+      "featureId": "darksun:feature:sear-undead"
+    },
+    {
+      "level": 5,
+      "featureId": "darksun:feature:sacrifice-for-the-land"
+    },
+    {
+      "level": 7,
+      "featureId": "darksun:feature:elemental-strikes"
+    },
+    {
+      "level": 10,
+      "featureId": "darksun:feature:elemental-intervention"
+    },
+    {
+      "level": 14,
+      "featureId": "darksun:feature:improved-elemental-strikes"
+    },
+    {
+      "level": 20,
+      "featureId": "darksun:feature:greater-elemental-intervention"
+    }
+  ],
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:chain-shirt",
+      "srd52:equipment:shield",
+      "srd52:equipment:mace"
+    ],
+    "equippedArmorId": "srd52:equipment:chain-shirt",
+    "equippedShieldId": "srd52:equipment:shield",
+    "equippedWeaponId": "srd52:equipment:mace"
+  },
+  "effects": [
+    {
+      "type": "grant_save_proficiency",
+      "ability": "wis"
+    },
+    {
+      "type": "grant_save_proficiency",
+      "ability": "cha"
+    }
+  ],
+  "description": "A Dark Sun replacement for the standard Cleric. Elemental Clerics forge a pact with Earth, Air, Fire, Water, or the paraelements Sun, Silt, Magma, and Rain. They use the Athasian elemental spell list, gain Elemental Calling at 1st level, Elemental Channeling at 2nd, select an elemental or paraelemental domain at 3rd, gain Sear Undead and Sacrifice for the Land at 5th, choose Elemental Strike or Potent Spellcasting at 7th, gain Elemental Intervention at 10th, Improved Elemental Strikes at 14th, and Greater Elemental Intervention at 20th. There are no divine clerics on Athas."
+}

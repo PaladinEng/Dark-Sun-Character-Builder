@@ -2,8 +2,38 @@
   "id": "darksun:species:thri-kreen",
   "name": "Thri-kreen",
   "effects": [
-    { "type": "set_speed", "value": 35 },
-    { "type": "grant_language", "language": "Common" },
-    { "type": "grant_language", "language": "Thri-kreen" }
-  ]
+    {
+      "type": "set_speed",
+      "value": 40
+    },
+    {
+      "type": "grant_trait",
+      "name": "Thri-kreen Anatomy"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Natural Weapons"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Claws"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Bite"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Leap"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Desert Adapted"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Sleepless"
+    }
+  ],
+  "description": "Monstrosity. Medium. Thri-kreen are insectoid nomads with secondary arms and a chitinous shell. Thri-kreen Anatomy: you cannot wear items fitted for humanoids such as armor, bracers, cloaks, or rings; you understand humanoid languages but cannot speak them; your secondary arms can stow or retrieve items freely each turn but cannot wield weapons or shields; your natural armor is 13 + Dexterity modifier; you cannot wear armor but may carry a shield. Natural Weapons: you are proficient with your claws and bite. Claws and Bite: when you take the Attack action, you can replace one attack with a claw or bite attack dealing 1d4 + Strength modifier damage, increasing by 1d4 at character levels 5, 11, and 17. Beginning at 5th level, your bite can inject venom a number of times equal to your Proficiency Bonus per Long Rest; the target must save against Poisoned, then possibly Paralyzed after 1 minute if still affected. Leap: at 3rd level, you can leap 50 feet forward or 20 feet straight up from a standing position, but not backward. Desert Adapted: you need only 1 gallon of water per week, cannot swim, and do not gain exhaustion from a forced march. Sleepless: you do not need to sleep, magic can't put you to sleep, and 4 hours of light activity provide adequate rest."
 }

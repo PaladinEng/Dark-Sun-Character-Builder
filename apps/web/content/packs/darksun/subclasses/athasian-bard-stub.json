@@ -1,0 +1,19 @@
+{
+  "id": "darksun:subclass:athasian-bard-stub",
+  "classId": "srd52:class:bard",
+  "name": "Athasian Bard (Stub)",
+  "description": "Stub subclass. Dark Sun uses an Athasian bard replacement, but its mechanics are intentionally deferred.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:athasian-bard-stub"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Athasian Bard Stub",
+      "description": "TODO: replace baseline bard subclass support with Athasian bard mechanics when that rules package exists."
+    }
+  ]
+}

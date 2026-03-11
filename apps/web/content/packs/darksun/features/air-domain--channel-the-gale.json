@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:air-domain:channel-the-gale",
+  "name": "Channel the Gale",
+  "description": "When you use Elemental Channeling, you may instead cast Gust of Wind or Silence without expending a spell slot or requiring concentration. Gust of Wind lasts 1 minute and can be re-aimed as a bonus action; Silence is a 20-foot-radius sphere you can slide up to 10 feet as a bonus action. Slipstream: you and allies within 10 feet ignore wind-based difficult terrain, and you have advantage on checks to escape a grapple."
+}

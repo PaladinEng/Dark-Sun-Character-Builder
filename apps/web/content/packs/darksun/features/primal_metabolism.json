@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:primal_metabolism",
+  "name": "Primal Metabolism",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Primal Metabolism is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Primal Metabolism",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

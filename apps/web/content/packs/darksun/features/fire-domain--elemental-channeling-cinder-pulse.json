@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:fire-domain:elemental-channeling-cinder-pulse",
+  "name": "Elemental Channeling - Cinder Pulse",
+  "description": "Creatures of your choice within 30 feet make a Dexterity save. On a failure, a creature takes 2d10 + your cleric level fire damage; on a success it takes half. A 10-foot-radius area centered on you becomes embered ground and counts as difficult terrain. The first time a creature enters that area on a turn, it takes fire damage equal to your Wisdom modifier."
+}

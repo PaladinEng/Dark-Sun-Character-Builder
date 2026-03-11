@@ -1,0 +1,32 @@
+{
+  "id": "darksun:species:athasian-elf",
+  "name": "Athasian Elf",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 35
+    },
+    {
+      "type": "grant_sense",
+      "sense": "darkvision",
+      "range": 60
+    },
+    {
+      "type": "grant_trait",
+      "name": "Elven Lineage"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Elven Resilience"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Keen Senses"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Trance"
+    }
+  ],
+  "description": "Humanoid. Medium. Athasian elves are tall desert runners adapted to the wastes. Elven Lineage grants supernatural abilities at character levels 1, 3, and 5, each usable once per day: Weather Sense (predict the weather at your location for the next 24 hours), Dune Runner (your speed increases by 10 for 1 hour), and Mask of the Wild (while in natural terrain, you and chosen creatures within 30 feet gain +10 to Dexterity (Stealth) checks and leave no tracks for 1 hour). Elven Resilience: you have advantage on saving throws against extreme heat or cold. Keen Senses: gain proficiency in Insight, Perception, or Survival. Trance: you do not need to sleep, magic can't put you to sleep, and 4 hours of trancelike meditation provide adequate rest."
+}

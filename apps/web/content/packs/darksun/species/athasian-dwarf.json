@@ -1,0 +1,32 @@
+{
+  "id": "darksun:species:athasian-dwarf",
+  "name": "Athasian Dwarf",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 30
+    },
+    {
+      "type": "grant_sense",
+      "sense": "darkvision",
+      "range": 120
+    },
+    {
+      "type": "grant_trait",
+      "name": "Dwarven Focus"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Dwarven Resilience"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Dwarven Toughness"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Stonecunning"
+    }
+  ],
+  "description": "Humanoid. Medium. Athasian dwarves are relentless survivors defined by focus and endurance. Dwarven Focus: when making an ability check or saving throw directly related to your Focus, you are considered proficient. Dwarven Resilience: you have resistance to Poison damage and advantage on saving throws to avoid or end the Poisoned condition. Dwarven Toughness: your Hit Point maximum increases by 1, and it increases by 1 again whenever you gain a level. Stonecunning: as a Bonus Action, you gain Tremorsense 60 feet for 10 minutes while on or touching stone. You can use this a number of times equal to your Proficiency Bonus per Long Rest."
+}

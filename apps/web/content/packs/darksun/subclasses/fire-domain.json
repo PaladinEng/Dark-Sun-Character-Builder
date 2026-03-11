@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:fire-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Fire Domain",
+  "description": "Fire Domain is an Athasian elemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:fire-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:fire-domain:elemental-channeling-cinder-pulse"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:fire-domain:searing-rebuke"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:fire-domain:channel-the-inferno"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:fire-domain:incarnate-of-flame"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:fire"
+  ],
+  "domain": "fire",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Fire Domain Training",
+      "description": "Fire Domain features apply according to subclass progression."
+    }
+  ]
+}

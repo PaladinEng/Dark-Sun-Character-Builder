@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:imbue_psicrystal",
+  "name": "Imbue Psicrystal",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Imbue Psicrystal is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Imbue Psicrystal",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

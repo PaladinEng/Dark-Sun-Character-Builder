@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:water-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Water Domain",
+  "description": "Water Domain is an Athasian elemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:water-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:water-domain:elemental-channeling-rime-surge"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:water-domain:quenching-veil"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:water-domain:channel-the-current"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:water-domain:master-of-the-oasis"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:water"
+  ],
+  "domain": "water",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Water Domain Training",
+      "description": "Water Domain features apply according to subclass progression."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:fire",
+  "name": "Elemental Cleric - Fire Patron Spell List",
+  "description": "Preparatory spell list for the Fire patron, combining All spells, Elemental spells, and Domain(Fire) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:fire are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:fire-bolt",
+    "srd52:spell:produce-flame",
+    "srd52:spell:spare-the-dying",
+    "srd52:spell:bless",
+    "srd52:spell:burning-hands",
+    "srd52:spell:cure-wounds",
+    "srd52:spell:healing-word",
+    "srd52:spell:sanctuary",
+    "srd52:spell:aid",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:prayer-of-healing",
+    "srd52:spell:revivify"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "darksun:feature:athasian-bard-stub",
+  "name": "Athasian Bard Stub",
+  "description": "TODO: Athasian bard mechanics are intentionally left as a stub. This placeholder preserves the setting-specific replacement without inventing rules.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Athasian Bard Stub",
+      "description": "TODO: Athasian bard mechanics are pending a future implementation."
+    }
+  ]
+}

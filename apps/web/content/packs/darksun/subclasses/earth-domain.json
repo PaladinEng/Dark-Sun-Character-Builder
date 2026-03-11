@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:earth-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Earth Domain",
+  "description": "Earth Domain is an Athasian elemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:earth-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:earth-domain:elemental-channeling-stone-burst"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:earth-domain:earthen-bulwark"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:earth-domain:stonewalk"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:earth-domain:adamant-step"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:earth"
+  ],
+  "domain": "earth",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Earth Domain Training",
+      "description": "Earth Domain features apply according to subclass progression."
+    }
+  ]
+}

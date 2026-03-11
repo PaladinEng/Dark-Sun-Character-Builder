@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:true_shot",
+  "name": "True Shot",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "True Shot is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "True Shot",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

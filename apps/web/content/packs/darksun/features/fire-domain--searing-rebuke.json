@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:fire-domain:searing-rebuke",
+  "name": "Searing Rebuke",
+  "description": "Reaction. When a creature you can see within 30 feet hits you or an ally with a melee attack, it takes fire damage equal to your Wisdom modifier + proficiency bonus. It must succeed on a Constitution save or become ignited until the start of its next turn, taking 1d6 fire damage at the start of that turn. Uses equal to your Wisdom modifier, minimum 1, regained on a Long Rest."
+}

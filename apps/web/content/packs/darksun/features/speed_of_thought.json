@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:speed_of_thought",
+  "name": "Speed of Thought",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Speed of Thought is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Speed of Thought",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

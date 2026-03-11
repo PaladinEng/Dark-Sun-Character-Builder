@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:sun-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Sun Domain",
+  "description": "Sun Domain is an Athasian paraelemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:sun-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:sun-domain:elemental-channeling-solar-flare"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:sun-domain:glare-ward"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:sun-domain:channel-the-zenith"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:sun-domain:incarnate-of-the-sun"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:sun"
+  ],
+  "domain": "sun",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Sun Domain Training",
+      "description": "Sun Domain features apply according to subclass progression."
+    }
+  ]
+}

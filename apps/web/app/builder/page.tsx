@@ -6,6 +6,10 @@ import {
   loadAllPacks,
   parseSourcesParam,
 } from "../../src/lib/content";
+import {
+  applySettingRestrictions,
+  getResolvedPackSettings,
+} from "../../src/lib/packSettings";
 
 export const runtime = "nodejs";
 
@@ -20,7 +24,11 @@ export default async function BuilderPage({
     loadAllPacks(),
     getMergedContent(parsedIds),
   ]);
-  const options = getContentOptionsFromMerged(merged.content);
+  const settingProfile = await getResolvedPackSettings(merged.enabledPackIds);
+  const options = applySettingRestrictions(
+    getContentOptionsFromMerged(merged.content),
+    settingProfile,
+  );
 
   const manifests = allPacks.map((pack) => ({
     id: pack.manifest.id,
@@ -36,6 +44,7 @@ export default async function BuilderPage({
       sourcesParamPresent={typeof sp.sources !== "undefined"}
       content={merged.content}
       options={options}
+      settingProfile={settingProfile}
       mergeReport={merged.report}
     />
   );

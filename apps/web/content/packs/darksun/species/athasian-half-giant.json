@@ -1,0 +1,23 @@
+{
+  "id": "darksun:species:athasian-half-giant",
+  "name": "Athasian Half-Giant",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 45
+    },
+    {
+      "type": "grant_trait",
+      "name": "Giant Ancestry"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Large Form"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Powerful Build"
+    }
+  ],
+  "description": "Humanoid. Large. Athasian half-giants tower over most folk and require twice as much food and water as a Medium creature each day. Your reach is 5 feet. Giant Ancestry: when you hit a Large or smaller creature with an attack roll and deal damage, you can knock that target Prone a number of times equal to your Proficiency Bonus per Long Rest. Large Form: you have advantage on Strength checks. Powerful Build: you have advantage on ability checks made to end the Grappled condition."
+}

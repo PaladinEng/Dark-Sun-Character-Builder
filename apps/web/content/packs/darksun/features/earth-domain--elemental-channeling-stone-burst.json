@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:earth-domain:elemental-channeling-stone-burst",
+  "name": "Elemental Channeling - Stone Burst",
+  "description": "Creatures of your choice on the ground within 30 feet make a Strength save. On a failure, a creature takes 2d10 + your cleric level bludgeoning damage and is knocked prone; on a success it takes half damage and is not knocked prone. The ground in a 10-foot radius centered on you becomes rubble and counts as difficult terrain until the end of your next turn."
+}

@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:water-domain:channel-the-current",
+  "name": "Channel the Current",
+  "description": "When you use Elemental Channeling, you may instead cast Wall of Water or Sleet Storm without expending a spell slot or requiring concentration. Wall of Water lasts 1 minute and can be moved up to 10 feet as a bonus action. Tidal Step: you ignore water, mud, and ice difficult terrain and have advantage on checks to escape a grapple until the end of your turn."
+}

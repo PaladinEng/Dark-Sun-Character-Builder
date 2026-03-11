@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:magma-domain:incarnate-of-slag",
+  "name": "Incarnate of Slag",
+  "description": "You have immunity to acid and poison damage, your acid and poison damage ignore resistance, spaces within 10 feet of you are difficult terrain for enemies, and the first time each turn a creature starts its turn in that area it takes acid damage equal to your Wisdom modifier."
+}

@@ -1,0 +1,35 @@
+{
+  "id": "darksun:background:dune-trader",
+  "name": "Dune Trader",
+  "abilityOptions": {
+    "abilities": [
+      "con",
+      "int",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "animal_handling"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "persuasion"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "insight"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Navigator's Tools"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Cartographer's Tools"
+    }
+  ],
+  "description": "A caravan merchant and negotiator tied to the merchant houses. Skill Proficiencies: Animal Handling, Persuasion, Insight. Tool Proficiencies: Navigator's Tools, Cartographer's Tools, and either a Gaming Set or Musical Instrument. Equipment Option A: Navigator's Tools, 2 Pouches, Traveler's Clothes, 22 CP. Equipment Option B: 50 CP. Feature: Merchant House Membership."
+}

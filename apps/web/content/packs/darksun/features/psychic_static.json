@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:psychic_static",
+  "name": "Psychic Static",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Psychic Static is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Psychic Static",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

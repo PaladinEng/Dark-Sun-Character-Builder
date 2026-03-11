@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:fire-domain:domain-spells",
+  "name": "Fire Domain Spells",
+  "description": "Fire Domain always-prepared domain spell source list:\nTier 1: Burning Hands, Searing Smite, Flaming Sphere, Heat Metal\nTier 2: Fireball, Melf's Minute Meteors\nTier 3: Wall of Fire, Fire Shield\nTier 4: Flame Strike, Conjure Elemental (Fire only - rework)\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

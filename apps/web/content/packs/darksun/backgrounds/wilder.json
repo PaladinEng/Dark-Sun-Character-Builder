@@ -1,0 +1,29 @@
+{
+  "id": "darksun:background:wilder",
+  "name": "Wilder",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "con",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "intimidation"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "athletics"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Vehicles (Land)"
+    }
+  ],
+  "description": "A psionically gifted individual without formal training whose force of personality drives raw talent into action. Skill Proficiencies: Intimidation, Athletics. Tool Proficiency: Vehicles (Land). Feat: Telekinetic.",
+  "grantsFeat": "darksun:feat:telekinetic",
+  "grantsOriginFeatId": "darksun:feat:telekinetic"
+}

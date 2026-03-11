@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:mindlink",
+  "name": "Mindlink",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Mindlink is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Mindlink",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

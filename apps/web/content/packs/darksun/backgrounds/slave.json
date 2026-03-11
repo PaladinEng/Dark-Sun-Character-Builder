@@ -1,0 +1,25 @@
+{
+  "id": "darksun:background:slave",
+  "name": "Slave",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "con",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "animal_handling"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "nature"
+    }
+  ],
+  "description": "A laborer hardened by deprivation, toil, and survival under oppression. Skill Proficiencies: Animal Handling, Nature. Tool Proficiency: choose one Artisan's Tool. Equipment Option A: Sickle, Artisan's Tool, Healer's Kit, Iron Pot, Shovel, Traveler's Clothes, 30 CP. Equipment Option B: 50 CP.",
+  "grantsFeat": "srd52:feat:tough",
+  "grantsOriginFeatId": "srd52:feat:tough"
+}

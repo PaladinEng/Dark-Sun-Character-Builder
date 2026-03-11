@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:earth-domain:earthen-bulwark",
+  "name": "Earthen Bulwark",
+  "description": "Reaction. When a creature you can see within 30 feet is targeted by an attack, you churn a ridge of stone to impose disadvantage on the attack roll. Uses equal to your Wisdom modifier, minimum 1, regained on a Long Rest."
+}

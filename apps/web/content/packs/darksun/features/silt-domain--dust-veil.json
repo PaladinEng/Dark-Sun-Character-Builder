@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:silt-domain:dust-veil",
+  "name": "Dust Veil",
+  "description": "Reaction. When a creature you can see within 30 feet makes an attack roll, impose disadvantage; if the attack misses, the attacker takes necrotic damage equal to your Wisdom modifier. Uses equal to your Wisdom modifier, minimum 1, regained on a Long Rest."
+}

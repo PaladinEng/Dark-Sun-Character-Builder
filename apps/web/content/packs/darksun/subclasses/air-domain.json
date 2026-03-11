@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:air-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Air Domain",
+  "description": "Air Domain is an Athasian elemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:air-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:air-domain:elemental-channeling-pressure-wave"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:air-domain:gale-ward"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:air-domain:channel-the-gale"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:air-domain:master-of-the-open-sky"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:air"
+  ],
+  "domain": "air",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Air Domain Training",
+      "description": "Air Domain features apply according to subclass progression."
+    }
+  ]
+}

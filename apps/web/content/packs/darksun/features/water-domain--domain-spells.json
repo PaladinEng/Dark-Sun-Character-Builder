@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:water-domain:domain-spells",
+  "name": "Water Domain Spells",
+  "description": "Water Domain always-prepared domain spell source list:\nTier 1: Ice Knife, Healing Word, Snilloc's Snowball Swarm, Protection from Poison\nTier 2: Sleet Storm, Wall of Water\nTier 3: Control Water, Watery Sphere\nTier 4: Cone of Cold, Mass Cure Wounds\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

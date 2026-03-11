@@ -1,22 +1,23 @@
 {
   "id": "darksun:species:mul",
   "name": "Mul",
-  "replaces": "srd52:species:human",
-  "description": "Bred for endurance under brutal conditions.",
   "effects": [
     {
       "type": "set_speed",
       "value": 30
     },
     {
-      "type": "add_bonus",
-      "target": "save",
-      "key": "con",
-      "value": 1
+      "type": "grant_trait",
+      "name": "Relentless Endurance"
     },
     {
-      "type": "grant_language",
-      "language": "Common"
+      "type": "grant_trait",
+      "name": "Inexhaustible"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Toughness"
     }
-  ]
+  ],
+  "description": "Humanoid. Medium. Muls are bred for endurance and labor. Relentless Endurance: when you are reduced to 0 Hit Points but not killed outright, you can drop to 1 Hit Point instead once per Long Rest. Inexhaustible: when you would gain exhaustion from natural hazards such as dehydration, malnutrition, lack of sleep, or extended exertion, you may make a DC 10 Constitution saving throw to resist the effect; this does not apply to spells or spell-like abilities. Toughness: your Hit Point maximum increases by 1, and it increases by 1 again whenever you gain a level."
 }

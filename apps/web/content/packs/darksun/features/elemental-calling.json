@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:elemental-calling",
+  "name": "Elemental Calling",
+  "description": "Choose one calling at 1st level:\nChoose one calling at 1st level: Wanderer, Guardian of the Shrine, Cleric of the Cities, or Shaman.\n\nCallings preserved as TODO metadata:\nWanderer - gain Survival proficiency or expertise\nGuardian of the Shrine - gain martial weapon and heavy armor proficiency\nCleric of the Cities - gain Deception or Persuasion and one tool proficiency\nShaman - gain Animal Handling or Nature and advantage on Charisma checks to influence creatures tied to your element"
+}

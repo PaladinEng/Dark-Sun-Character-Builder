@@ -1,0 +1,29 @@
+{
+  "id": "darksun:background:wastelander",
+  "name": "Wastelander",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "wis",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "animal_handling"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Herbalism Kit"
+    }
+  ],
+  "description": "A survivor of the open wastes, drawn from tribes, raider bands, and desert clans beyond the city-states. Skill Proficiencies: Survival, Animal Handling. Tool Proficiency: Herbalism Kit. Feat: Tough.",
+  "grantsFeat": "srd52:feat:tough",
+  "grantsOriginFeatId": "srd52:feat:tough"
+}

@@ -1,0 +1,39 @@
+{
+  "id": "darksun:subclass:elemental-cleric:silt-domain",
+  "classId": "darksun:class:elemental-cleric",
+  "name": "Silt Domain",
+  "description": "Silt Domain is an Athasian paraelemental domain for the Elemental Cleric. At 3rd level it grants always-prepared domain spells, a domain-specific Elemental Channeling option, and a 3rd-level feature. It also grants a 6th-level enhancement and a 17th-level capstone.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "darksun:feature:silt-domain:domain-spells"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:silt-domain:elemental-channeling-withering-wave"
+    },
+    {
+      "level": 3,
+      "featureId": "darksun:feature:silt-domain:dust-veil"
+    },
+    {
+      "level": 6,
+      "featureId": "darksun:feature:silt-domain:channel-the-dust"
+    },
+    {
+      "level": 17,
+      "featureId": "darksun:feature:silt-domain:incarnate-of-dust"
+    }
+  ],
+  "spellListRefIds": [
+    "darksun:spelllist:elemental-cleric:silt"
+  ],
+  "domain": "silt",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Silt Domain Training",
+      "description": "Silt Domain features apply according to subclass progression."
+    }
+  ]
+}

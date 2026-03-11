@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:sun-domain:incarnate-of-the-sun",
+  "name": "Incarnate of the Sun",
+  "description": "You have immunity to radiant damage, your radiant damage ignores resistance, and once on each of your turns when you deal radiant damage to a creature it must succeed on a Constitution save or be blinded until the start of your next turn."
+}

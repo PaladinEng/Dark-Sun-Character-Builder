@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:air-domain:domain-spells",
+  "name": "Air Domain Spells",
+  "description": "Air Domain always-prepared domain spell source list:\nTier 1: Feather Fall, Fog Cloud, Gust of Wind, Levitate\nTier 2: Fly, Wind Wall\nTier 3: Hallucinatory Terrain, Freedom of Movement\nTier 4: Control Winds, Wall of Force (as compressed air/pressure)\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

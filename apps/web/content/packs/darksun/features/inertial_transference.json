@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:inertial_transference",
+  "name": "Inertial Transference",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Inertial Transference is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Inertial Transference",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

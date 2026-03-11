@@ -1,0 +1,10 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:magma",
+  "name": "Elemental Cleric - Magma Patron Spell List",
+  "description": "Preparatory spell list for the Magma patron, combining All spells, and Domain(Magma) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:magma are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:acid-splash",
+    "srd52:spell:poison-spray",
+    "srd52:spell:burning-hands"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:water-domain:quenching-veil",
+  "name": "Quenching Veil",
+  "description": "Reaction. When a creature you can see within 30 feet takes fire damage, reduce that damage by your Wisdom modifier + proficiency bonus and extinguish any burning condition on that creature. Uses equal to your Wisdom modifier, minimum 1, regained on a Long Rest."
+}

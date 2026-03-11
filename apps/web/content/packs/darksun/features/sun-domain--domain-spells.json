@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:sun-domain:domain-spells",
+  "name": "Sun Domain Spells",
+  "description": "Sun Domain always-prepared domain spell source list:\nTier 1: Guiding Bolt, Shield of Faith, Continual Flame, Moonbeam\nTier 2: Daylight, Blinding Smite\nTier 3: Sickening Radiance, Divination\nTier 4: Dawn, Wall of Light\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

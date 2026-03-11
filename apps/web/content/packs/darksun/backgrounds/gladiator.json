@@ -1,0 +1,23 @@
+{
+  "id": "darksun:background:gladiator",
+  "name": "Gladiator",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "performance"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "intimidation"
+    }
+  ],
+  "description": "An arena-trained combatant whose presence is as dangerous as their weapon. Skill Proficiencies: Performance, Intimidation. Equipment Option A: Spear, Shortbow, 20 Arrows, Healer's Kit, Quiver, Traveler's Clothes, 14 CP. Equipment Option B: 50 CP. Features: Arena Training; Armor Optimization. Custom feat: Gladiator Training (see Tavern Brawler)."
+}

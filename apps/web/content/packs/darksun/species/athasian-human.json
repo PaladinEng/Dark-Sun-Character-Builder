@@ -1,0 +1,27 @@
+{
+  "id": "darksun:species:athasian-human",
+  "name": "Athasian Human",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 30
+    },
+    {
+      "type": "grant_trait",
+      "name": "Water Sense"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Resourceful"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Skillful"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Versatile"
+    }
+  ],
+  "description": "Humanoid. Medium or Small, chosen when you select this species. Athasian humans are resilient and broadly adaptable. Water Sense: you have advantage on checks to detect small water sources at a distance and to detect rain falling upwind by smell. Resourceful: you gain Heroic Inspiration whenever you finish a Long Rest. Skillful: gain proficiency in one skill of your choice. Versatile: gain an Origin feat of your choice."
+}

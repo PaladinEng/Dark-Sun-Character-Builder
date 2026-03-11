@@ -1,0 +1,7 @@
+{
+  "id": "psionics",
+  "name": "Psionics",
+  "ability": "int",
+  "sortOrder": 24,
+  "description": "Dark Sun expanded skill. These skills exist alongside Arcana, Religion, and Nature."
+}

@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:water-domain:elemental-channeling-rime-surge",
+  "name": "Elemental Channeling - Rime Surge",
+  "description": "Creatures of your choice within 30 feet make a Constitution save. On a failure, a creature takes 2d10 + your cleric level cold damage and its speed is halved until the end of your next turn; on a success it takes half damage and is not slowed. A 10-foot-radius area centered on you becomes slick ice and counts as difficult terrain until the end of your next turn."
+}

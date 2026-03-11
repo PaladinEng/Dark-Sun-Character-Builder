@@ -1,0 +1,56 @@
+{
+  "system": "preserver_magic",
+  "appliesToTradition": "arcane",
+  "spellcastingResource": "spell_points",
+  "reactionSpellPenalty": {
+    "type": "exhaustion",
+    "levels": 1
+  },
+  "preserverCastingPenalty": {
+    "selection": 1,
+    "options": [
+      {
+        "id": "reduce_effect_by_proficiency",
+        "name": "Reduce Effect by Proficiency Bonus",
+        "effect": "Reduce damage dealt or healing received by proficiency bonus."
+      },
+      {
+        "id": "spell_save_dc_minus_2",
+        "name": "Spell Save DC -2",
+        "effect": "Lower spell save DC by 2."
+      },
+      {
+        "id": "increase_cast_time",
+        "name": "Increase Casting Time",
+        "effect": "Bonus Action -> Action; Action -> Movement plus Action."
+      }
+    ]
+  },
+  "ritualCasting": {
+    "allSpellsEligible": true,
+    "storeSpell": true,
+    "penaltyImmunity": true,
+    "endsOn": [
+      "caster_unconscious",
+      "caster_gains_exhaustion"
+    ]
+  },
+  "groupCasting": {
+    "enabled": true,
+    "requiresPrimaryCaster": true,
+    "primaryMustKnowSpell": true,
+    "maxContribution": "proficiency_bonus"
+  },
+  "riteOfBlood": {
+    "required": true,
+    "damagePerSpellPoint": "1d4",
+    "notes": [
+      "Should be performed as soon as possible after casting and as close as possible to the casting location.",
+      "Unmitigated spell points may be tracked for later conservation work."
+    ]
+  },
+  "defilerRules": {
+    "implemented": false,
+    "status": "stub"
+  }
+}

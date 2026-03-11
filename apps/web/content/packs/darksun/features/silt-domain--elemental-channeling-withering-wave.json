@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:silt-domain:elemental-channeling-withering-wave",
+  "name": "Elemental Channeling - Withering Wave",
+  "description": "Creatures of your choice within 30 feet make a Constitution save. On a failure, a creature takes 2d10 + your cleric level necrotic damage and is desiccated until the end of your next turn; a desiccated creature cannot regain hit points and its speed is reduced by 10 feet. On a success, the creature takes half damage and is not desiccated. The area in a 10-foot radius centered on you becomes a choking dust cloud and is lightly obscured until the end of your next turn."
+}

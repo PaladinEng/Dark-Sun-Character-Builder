@@ -1,0 +1,34 @@
+{
+  "id": "darksun:background:veiled-alliance",
+  "name": "Veiled Alliance",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "con",
+      "int"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "sleight_of_hand"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "history"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Disguise Kit"
+    }
+  ],
+  "description": "A clandestine operative within the hidden preservers' network. Skill Proficiencies: Sleight of Hand, History. Tool Proficiency: Disguise Kit. Equipment Option A: 2 Daggers, Disguise Kit, 2 Pouches, Traveler's Clothes, 16 CP. Equipment Option B: 50 CP. Features: Safe Haven; Criminal Contact.",
+  "grantsFeat": "srd52:feat:alert",
+  "grantsOriginFeatId": "srd52:feat:alert",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:disguise-kit"
+    ]
+  }
+}

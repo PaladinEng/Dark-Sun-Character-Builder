@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:sear-undead",
+  "name": "Sear Undead",
+  "description": "When you use Turn Undead, deal force damage equal to Wisdom modifier d8s to each undead that fails its save."
+}

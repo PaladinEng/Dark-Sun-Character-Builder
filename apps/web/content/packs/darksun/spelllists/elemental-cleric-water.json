@@ -1,0 +1,18 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:water",
+  "name": "Elemental Cleric - Water Patron Spell List",
+  "description": "Preparatory spell list for the Water patron, combining All spells, Elemental spells, and Domain(Water) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:water are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:spare-the-dying",
+    "srd52:spell:bless",
+    "srd52:spell:cure-wounds",
+    "srd52:spell:fog-cloud",
+    "srd52:spell:healing-word",
+    "srd52:spell:sanctuary",
+    "srd52:spell:aid",
+    "srd52:spell:lesser-restoration",
+    "srd52:spell:prayer-of-healing",
+    "srd52:spell:revivify",
+    "srd52:spell:water-breathing"
+  ]
+}

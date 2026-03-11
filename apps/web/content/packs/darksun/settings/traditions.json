@@ -1,0 +1,36 @@
+{
+  "traditions": [
+    {
+      "id": "arcane",
+      "name": "Arcane"
+    },
+    {
+      "id": "divine",
+      "name": "Divine"
+    },
+    {
+      "id": "nature",
+      "name": "Nature"
+    },
+    {
+      "id": "elemental",
+      "name": "Elemental"
+    },
+    {
+      "id": "psionics",
+      "name": "Psionics"
+    }
+  ],
+  "statusValues": [
+    "Exclusive",
+    "Primary",
+    "Secondary",
+    "Soft Ban",
+    "Hard Ban",
+    "Unique"
+  ],
+  "notes": [
+    "Spell access is determined by tradition status in the revised spell dataset.",
+    "Wish is handled as Unique."
+  ]
+}

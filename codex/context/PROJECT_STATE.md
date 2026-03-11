@@ -1,131 +1,41 @@
 # Project State
 
 Last updated:
-- 2026-03-08 EST
+- 2026-03-11 EDT
 
 ## Current Objective
-- Complete the final narrow SRD Warlock pass (invocations, pact boon, and Mystic Arcanum tracking/validation) within existing engine/content-pack scope.
+- Finish the Dark Sun smoke test and audit pass, keep the setting integration stable, and preserve unsupported mechanics as explicit stubs.
 
 ## Repository Snapshot
-- Branch: `main`
-- HEAD: `cc15116`
+- Branch: `main` (audit-pass commit pending)
+- HEAD at last context refresh: `8f25eca`
 - Harness status for this pass:
-  - `pnpm loop:check` -> `=== ALL_PASS ===`
-  - `LOOPDEV_STRICT=1 pnpm loop:check` -> `=== ALL_PASS ===`
+  - `pnpm loop:check` -> `=== ALL_PASS ===` after Dark Sun audit fixes
 
 ## Completed Work (Current Session)
-- Added Warlock option model wiring to state/compute/validate:
-  - `warlockInvocationFeatureIds`
-  - `warlockPactBoonFeatureId`
-  - `warlockMysticArcanumByLevel`
-- Added selectable/tagged SRD warlock option features in-pack:
-  - pact boons (`warlock_pact_boon`)
-  - invocations (`warlock_invocation`) with prerequisite metadata support
-- Added narrow Arcanum spell support for tier validation/display (levels 6-9 available on warlock list).
-- Added builder UI controls for invocations, pact boon, and unlocked Arcanum selections.
-- Added fixture coverage:
-  - `warlock-invocations-level5`
-  - `warlock-arcanum-level11`
-- Added rule/content audit assertions for Warlock option validation and SRD option-entity coverage.
+- Kept the normalized Dark Sun pack in place under `apps/web/content/packs/darksun` with:
+  - 13 backgrounds
+  - 8 Athasian species
+  - Elemental Cleric class and elemental domain subclasses
+  - Dark Sun skills, setting metadata, Wild Talent data, Psionicist stub, and Athasian Bard stub
+- Audited Dark Sun setting selection and content filtering in the builder.
+- Fixed the concrete Dark Sun bug found during the audit:
+  - classes listed in `classReplacements` are now treated as unavailable in Dark Sun mode, so SRD `Cleric` no longer appears alongside `Elemental Cleric`
+- Improved Dark Sun builder notes so restricted classes resolve to display names even after filtering.
+- Reconfirmed the closed-loop harness with `pnpm loop:check`.
 
 ## Remaining Limitations (Explicit)
-- Pact Magic remains represented via the shared 9-slot array model (single active pact slot level).
-- Invocation and pact boon effects are modeled primarily as selectable content + validation + trait/display surfaces; deep mechanical automation remains limited to existing effect system support.
-- Mystic Arcanum is modeled as tracked level-tier spell selections with validation/display, not a full standalone casting subsystem.
-- Patron expanded spell breadth is bounded by the current in-pack SRD spell catalog.
+- Defiler casting remains a stub.
+- Psionicist is selectable only as a stub class.
+- Athasian Bard is selectable only as a stub subclass.
+- Wild Talent currently supports table-backed selection/display only; mechanical effects are not automated.
+- Elemental Cleric spell lists only reference spells that already exist as native spell entities; unsupported source spells are preserved in `apps/web/content/packs/darksun/settings/elemental-cleric-spell-source.json`.
+- Dark Sun language rules are surfaced in setting metadata/UI notes, not a full language-pick workflow.
 
 ## Notes for Next Runner Session
-- Prefer content-first SRD additions; avoid broad spellcasting refactors.
-- Keep strict harness green (`LOOPDEV_STRICT=1 pnpm loop:check`) before closeout.
-
-## Milestone - Codex Integration Stabilization
-Date: 2026-03-08
-
-Tag: codex-integration-20260308  
-Commit: d4612cf
-
-### Major Achievements
-
-SRD content population expanded across:
-
-- classes
-- subclasses
-- spells
-- feats
-- equipment
-- species
-- spell lists
-- features
-
-Warlock class implemented with:
-
-- pact progression
-- invocation selection
-- mystic arcanum scaffolding
-- subclass support (Fiend, Archfey, Great Old One)
-
-### Builder Capabilities
-
-The builder currently supports:
-
-- SRD character creation
-- subclass selection
-- warlock option tracking
-- HTML sheet rendering
-- printable sheet rendering
-- PDF export
-- JSON export
-
-### Runtime Stability Fix
-
-Resolved intermittent Next.js dev runtime failure.
-
-Observed failures included:
-
-- missing vendor chunks
-- missing next-font-manifest.json
-- missing pages-manifest.json
-- missing app-paths-manifest.json
-- missing server modules
-
-Root cause:
-
-Next.js dev lazily emits `.next/server` artifacts on first request.  
-Previous readiness logic consumed the first-hit window and masked failures.
-
-Fix:
-
-- switch readiness from HTTP probe to port-listen detection
-- enforce first-hit route checks
-- add artifact assertions
-- add runtime forensic harness
-
-### Version Pinning
-
-Working dependency set:
-
-next: 15.5.12  
-react: 19.2.4  
-react-dom: 19.2.4  
-eslint-config-next: 15.5.12
-
-This version set must remain pinned unless a controlled upgrade experiment is performed.
-
-### Harness Status
-
-Current harness stages:
-
-repo:duplicate-suffix  
-content:lint  
-rules:typecheck  
-rules:unit  
-sheet:golden  
-sheet:invariants  
-web:build  
-web:smoke  
-web:dev-smoke  
-api:smoke  
-pdf:sanity  
-boundary:imports
-
-All stages currently pass.
+- If the Dark Sun source bundle changes, regenerate with:
+  - `node scripts/ingest-dark-sun-homebrew.mjs`
+- Keep Dark Sun filtering data-driven via:
+  - `apps/web/content/packs/darksun/settings/*.json`
+  - `apps/web/src/lib/packSettings.ts`
+- Re-run `pnpm loop:check` after any content, builder, or context edit.

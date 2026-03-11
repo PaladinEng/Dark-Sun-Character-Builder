@@ -1,0 +1,27 @@
+{
+  "id": "darksun:species:athasian-halfling",
+  "name": "Athasian Halfling",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 30
+    },
+    {
+      "type": "grant_trait",
+      "name": "Fierce"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Halfling Nimbleness"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Luck"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Naturally Stealthy"
+    }
+  ],
+  "description": "Humanoid. Small. Athasian halflings are fierce, nimble, and difficult to pin down. Fierce: you have advantage on saving throws to avoid or end the Frightened condition. Halfling Nimbleness: you can move through the space of any creature that is a size larger than you, but you can't stop there. Luck: when you roll a 1 on the d20 of a d20 Test, you can reroll the die and must use the new roll. Naturally Stealthy: you can take the Hide action even when obscured only by a creature at least one size larger than you."
+}

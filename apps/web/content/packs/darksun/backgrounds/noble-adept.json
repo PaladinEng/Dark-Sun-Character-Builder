@@ -1,0 +1,29 @@
+{
+  "id": "darksun:background:noble-adept",
+  "name": "Noble Adept",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "int",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "history"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "persuasion"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "religion"
+    }
+  ],
+  "description": "A literate courtier from the noble houses, trained for politics and influence. Skill Proficiencies: History, Persuasion. Equipment Option A: Gaming Set, Fine Clothes, Perfume, 29 CP. Equipment Option B: 50 CP. Feature: Courtier. Feat: Skilled, with Literacy, Religion, and one other skill or tool proficiency.",
+  "grantsFeat": "srd52:feat:skilled",
+  "grantsOriginFeatId": "srd52:feat:skilled"
+}

@@ -1,0 +1,12 @@
+{
+  "id": "darksun:feature:psionicist-stub",
+  "name": "Psionicist Stub",
+  "description": "TODO: Psionicist mechanics remain intentionally unimplemented. This class stub exists so Dark Sun availability can be wired without inventing rules.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Psionicist Stub",
+      "description": "TODO: Psionicist class mechanics are pending a future engine implementation."
+    }
+  ]
+}

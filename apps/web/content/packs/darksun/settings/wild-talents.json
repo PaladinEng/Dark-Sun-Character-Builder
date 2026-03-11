@@ -1,0 +1,115 @@
+{
+  "system": "wild_talents",
+  "enabled": true,
+  "selection": {
+    "method": "table",
+    "dice": "1d20",
+    "requiredAtCharacterCreation": true
+  },
+  "table": [
+    {
+      "roll": 1,
+      "id": "aura_beacon",
+      "name": "Aura Beacon"
+    },
+    {
+      "roll": 2,
+      "id": "autonomous_vitality",
+      "name": "Autonomous Vitality"
+    },
+    {
+      "roll": 3,
+      "id": "battle_trance",
+      "name": "Battle Trance"
+    },
+    {
+      "roll": 4,
+      "id": "blind_spot",
+      "name": "Blind Spot"
+    },
+    {
+      "roll": 5,
+      "id": "ectoplasmic_object",
+      "name": "Ectoplasmic Object"
+    },
+    {
+      "roll": 6,
+      "id": "energy_ray",
+      "name": "Energy Ray"
+    },
+    {
+      "roll": 7,
+      "id": "imbue_psicrystal",
+      "name": "Imbue Psicrystal"
+    },
+    {
+      "roll": 8,
+      "id": "inertial_transference",
+      "name": "Inertial Transference"
+    },
+    {
+      "roll": 9,
+      "id": "mind_thrust",
+      "name": "Mind Thrust"
+    },
+    {
+      "roll": 10,
+      "id": "mindblade",
+      "name": "Mindblade"
+    },
+    {
+      "roll": 11,
+      "id": "mindlink",
+      "name": "Mindlink"
+    },
+    {
+      "roll": 12,
+      "id": "mystic_displacement",
+      "name": "Mystic Displacement"
+    },
+    {
+      "roll": 13,
+      "id": "primal_metabolism",
+      "name": "Primal Metabolism"
+    },
+    {
+      "roll": 14,
+      "id": "psychic_hammer",
+      "name": "Psychic Hammer"
+    },
+    {
+      "roll": 15,
+      "id": "psychic_static",
+      "name": "Psychic Static"
+    },
+    {
+      "roll": 16,
+      "id": "sixth_sense",
+      "name": "Sixth Sense"
+    },
+    {
+      "roll": 17,
+      "id": "speed_of_thought",
+      "name": "Speed of Thought"
+    },
+    {
+      "roll": 18,
+      "id": "true_shot",
+      "name": "True Shot"
+    },
+    {
+      "roll": 19,
+      "id": "verve",
+      "name": "Verve"
+    },
+    {
+      "roll": 20,
+      "id": "wild_talent",
+      "name": "Wild Talent"
+    }
+  ],
+  "notes": [
+    "Roll 20 is the actual Wild Talent ability, not a reroll or roll-twice result.",
+    "Full mechanical implementations may be added later."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:wild_talent",
+  "name": "Wild Talent",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Wild Talent is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Wild Talent",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

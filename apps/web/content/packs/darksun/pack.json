@@ -1,7 +1,7 @@
 {
   "id": "darksun",
   "name": "Dark Sun Homebrew",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "Proprietary",
-  "source": "Local homebrew"
+  "source": "Local dark-sun-homebrew bundle"
 }

@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:sun-domain:elemental-channeling-solar-flare",
+  "name": "Elemental Channeling - Solar Flare",
+  "description": "Creatures of your choice within 30 feet make a Constitution save. On a failure, a creature takes 2d10 + your cleric level radiant damage and is sun-scorched until the end of your next turn. A sun-scorched creature sheds bright light in a 10-foot radius, cannot benefit from invisibility, and has disadvantage on its next attack roll before your next turn. On a success, the creature takes half damage and is not sun-scorched."
+}

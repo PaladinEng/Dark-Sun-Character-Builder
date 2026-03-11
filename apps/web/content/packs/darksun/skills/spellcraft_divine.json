@@ -1,0 +1,7 @@
+{
+  "id": "spellcraft_divine",
+  "name": "Spellcraft (Divine)",
+  "ability": "int",
+  "sortOrder": 20,
+  "description": "Dark Sun expanded skill. These skills exist alongside Arcana, Religion, and Nature."
+}

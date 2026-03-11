@@ -1,0 +1,123 @@
+{
+  "selectionRules": {
+    "baseLanguages": [
+      "common"
+    ],
+    "additionalChoices": 2,
+    "literacyDefault": false
+  },
+  "categories": [
+    {
+      "id": "city_languages",
+      "name": "City Languages",
+      "languages": [
+        {
+          "id": "tyr",
+          "name": "Tyr",
+          "speakers": "Tyrians"
+        },
+        {
+          "id": "urik",
+          "name": "Urik",
+          "speakers": "Uriki / Urikites"
+        },
+        {
+          "id": "gulg",
+          "name": "Gulg",
+          "speakers": "Gulgans"
+        },
+        {
+          "id": "balic",
+          "name": "Balic",
+          "speakers": "Balicans"
+        },
+        {
+          "id": "raam",
+          "name": "Raam",
+          "speakers": "Raamites"
+        },
+        {
+          "id": "nibenay",
+          "name": "Nibenay",
+          "speakers": "Nibenese"
+        },
+        {
+          "id": "draj",
+          "name": "Draj",
+          "speakers": "Draji"
+        }
+      ]
+    },
+    {
+      "id": "standard_languages",
+      "name": "Standard Languages",
+      "languages": [
+        {
+          "id": "trade_tongue",
+          "name": "Trade Tongue",
+          "speakers": "All but Halfling and Thri-kreen"
+        },
+        {
+          "id": "dwarvish",
+          "name": "Dwarvish",
+          "speakers": "Dwarves, some muls"
+        },
+        {
+          "id": "elvish",
+          "name": "Elvish",
+          "speakers": "Elves"
+        },
+        {
+          "id": "giant",
+          "name": "Giant",
+          "speakers": "Beast headed giants, braxat, tareks"
+        },
+        {
+          "id": "halfling",
+          "name": "Halfling",
+          "speakers": "Halflings, Forest Ridge residents"
+        },
+        {
+          "id": "hand_sign",
+          "name": "Hand Sign",
+          "speakers": "Humans, Elves"
+        },
+        {
+          "id": "kreen",
+          "name": "Kreen",
+          "speakers": "Thri-kreen"
+        }
+      ]
+    },
+    {
+      "id": "exotic_languages",
+      "name": "Exotic Languages",
+      "languages": [
+        {
+          "id": "aarakocra",
+          "name": "Aarakocra",
+          "speakers": "Aarakocra"
+        },
+        {
+          "id": "ancient",
+          "name": "Ancient",
+          "speakers": "Historical texts, psionic lore"
+        },
+        {
+          "id": "draxa",
+          "name": "Draxa",
+          "speakers": "Historical texts"
+        },
+        {
+          "id": "primordial",
+          "name": "Primordial",
+          "speakers": "Elemental clerics, elementals, drakes"
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Common is the universal base language for player characters.",
+    "Languages grant speech only, not literacy."
+  ]
+}

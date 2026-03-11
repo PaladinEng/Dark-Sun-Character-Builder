@@ -1,0 +1,29 @@
+{
+  "id": "darksun:background:nomad",
+  "name": "Nomad",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "con",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "nature"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Navigator's Tools"
+    }
+  ],
+  "description": "A wanderer of the deserts with strong navigation and survival instincts. Skill Proficiencies: Nature, Survival. Tool Proficiency: Navigator's Tools. Equipment Option A: Shortbow, 20 Arrows, Navigator's Tools, Bedroll, Quiver, Tent, Traveler's Clothes, 3 CP. Equipment Option B: 50 CP. Feature: Wanderer.",
+  "grantsFeat": "srd52:feat:alert",
+  "grantsOriginFeatId": "srd52:feat:alert"
+}

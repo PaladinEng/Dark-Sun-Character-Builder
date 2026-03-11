@@ -1,0 +1,29 @@
+{
+  "id": "darksun:background:primal-guardian",
+  "name": "Primal Guardian",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "con",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "stealth"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Herbalism Kit"
+    }
+  ],
+  "description": "A protector of a sacred place or guarded region in the wastes. Skill Proficiencies: Stealth, Survival. Tool Proficiency: Herbalism Kit. Equipment Option A: Quarterstaff, Herbalism Kit, Bedroll, Book (philosophy), Lamp, Oil (3 flasks), Traveler's Clothes, 16 CP. Equipment Option B: 50 CP. Feature: Guarded Lands. Feat: Magic Initiate (Druid).",
+  "grantsFeat": "srd52:feat:magic-initiate",
+  "grantsOriginFeatId": "srd52:feat:magic-initiate"
+}

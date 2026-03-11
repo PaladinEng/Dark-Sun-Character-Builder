@@ -1,0 +1,23 @@
+{
+  "id": "darksun:background:templar",
+  "name": "Templar",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "int",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "history"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "intimidation"
+    }
+  ],
+  "description": "An agent of a sorcerer-king's bureaucracy trained in coercion and record-keeping. Skill Proficiencies: History, Intimidation. Tool Proficiency: choose Calligrapher's Supplies or Forgery Kit. Equipment Option A: Spear, Light Crossbow, 20 Bolts, Gaming Set, Hooded Lantern, Manacles, Quiver, Templar's Clothes, 12 CP. Equipment Option B: 50 CP. Features: Templar Hierarchy; Official Inquiry. Custom feat: Templar Training (Literacy plus choose two other skills)."
+}

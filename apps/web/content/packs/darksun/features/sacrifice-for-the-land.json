@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:sacrifice-for-the-land",
+  "name": "Sacrifice For The Land",
+  "description": "Elemental clerics only. Spend HP to prevent defiling when a creature finishes casting an arcane spell that would create a defile zone.\nTODO: defiler interaction remains a stub until defiling mechanics are implemented."
+}

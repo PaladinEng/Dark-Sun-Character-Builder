@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:magma-domain:domain-spells",
+  "name": "Magma Domain Spells",
+  "description": "Magma Domain always-prepared domain spell source list:\nTier 1: Ray of Sickness, Tasha's Caustic Brew, Melf's Acid Arrow, Ray of Enfeeblement\nTier 2: Stinking Cloud, Elemental Bane (Acid)\nTier 3: Vitriolic Sphere, Transmute Stone to Slag (rework of Transmute Rock)\nTier 4: Cloudkill, Blight of the Ash Wastes (rename of Contagion)\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

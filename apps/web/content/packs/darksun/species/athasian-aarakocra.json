@@ -1,0 +1,19 @@
+{
+  "id": "darksun:species:athasian-aarakocra",
+  "name": "Athasian Aarakocra",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 25
+    },
+    {
+      "type": "grant_trait",
+      "name": "Flight"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Talons"
+    }
+  ],
+  "description": "Humanoid. Medium. Athasian aarakocra are swift aerial hunters of the wastes. Flight: you have a flying speed of 50 feet, but you can't use it while wearing medium or heavy armor or while encumbered. Talons: your talons are natural weapons that deal 1d4 + Strength modifier slashing damage in place of the normal bludgeoning damage for an unarmed strike."
+}

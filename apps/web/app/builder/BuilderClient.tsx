@@ -24,6 +24,7 @@ import {
   validateCharacter,
 } from "@dark-sun/rules";
 import { formatSpellNameWithFlags } from "../../src/lib/spells";
+import type { PackSettingProfile } from "../../src/lib/packSettings";
 
 type Ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
 type CoinDenomination = "gp" | "sp" | "ep" | "cp" | "pp";
@@ -198,6 +199,7 @@ type BuilderClientProps = {
   sourcesParamPresent: boolean;
   content: MergedContent;
   options: BuilderOptions;
+  settingProfile: PackSettingProfile | null;
   mergeReport: unknown;
 };
 
@@ -535,6 +537,7 @@ export default function BuilderClient({
   sourcesParamPresent,
   content,
   options,
+  settingProfile,
   mergeReport,
 }: BuilderClientProps) {
   const router = useRouter();
@@ -683,6 +686,20 @@ export default function BuilderClient({
     () => content.features.filter((feature) => feature.selectable === true) as Option[],
     [content.features],
   );
+  const wildTalentFeatureTag = settingProfile?.wildTalentFeatureTag ?? "wild_talent";
+  const wildTalentOptions = useMemo(
+    () =>
+      selectableFeatures
+        .filter((feature) => feature.tags?.includes(wildTalentFeatureTag))
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    [selectableFeatures, wildTalentFeatureTag],
+  );
+  const selectedWildTalentId = useMemo(() => {
+    const selectedFeatureIds = state.selectedFeatureIds ?? [];
+    return (
+      wildTalentOptions.find((feature) => selectedFeatureIds.includes(feature.id))?.id ?? undefined
+    );
+  }, [state.selectedFeatureIds, wildTalentOptions]);
   const selectedWarlockFeatureIdsForPrereqs = useMemo(
     () =>
       new Set([
@@ -795,6 +812,13 @@ export default function BuilderClient({
   const selectedBackgroundOriginChoice = selectedBackground?.originFeatChoice;
   const selectedBackgroundFixedOriginFeatId =
     selectedBackground?.grantsOriginFeatId ?? selectedBackground?.grantsFeat;
+  const classNameById = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const klass of content.classes ?? []) {
+      map[klass.id] = klass.name;
+    }
+    return map;
+  }, [content.classes]);
   const derived = useMemo(
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
@@ -1019,6 +1043,9 @@ export default function BuilderClient({
           );
         }),
       ) as BuilderState["warlockMysticArcanumByLevel"];
+      const nextSelectedFeatureIds = sortStringIds(
+        (previous.selectedFeatureIds ?? []).filter((featureId) => Boolean(availableFeatureById[featureId])),
+      );
 
       return {
         ...previous,
@@ -1037,12 +1064,32 @@ export default function BuilderClient({
         equippedArmorId: valid(previous.equippedArmorId, options.armor),
         equippedShieldId: valid(previous.equippedShieldId, options.shields),
         equippedWeaponId: valid(previous.equippedWeaponId, options.weapons),
+        selectedFeatureIds: nextSelectedFeatureIds,
         warlockInvocationFeatureIds: nextInvocationIds,
         warlockPactBoonFeatureId: nextPactBoonId,
         warlockMysticArcanumByLevel: nextMysticArcanumByLevel,
       };
     });
   }, [content.featuresById, content.spellsById, options]);
+
+  useEffect(() => {
+    if (!settingProfile?.wildTalentRequired || wildTalentOptions.length === 0) {
+      return;
+    }
+
+    setState((previous) => {
+      const selectedFeatureIds = new Set(previous.selectedFeatureIds ?? []);
+      const hasWildTalent = wildTalentOptions.some((feature) => selectedFeatureIds.has(feature.id));
+      if (hasWildTalent) {
+        return previous;
+      }
+      selectedFeatureIds.add(wildTalentOptions[0].id);
+      return {
+        ...previous,
+        selectedFeatureIds: sortStringIds(Array.from(selectedFeatureIds)),
+      };
+    });
+  }, [settingProfile?.wildTalentRequired, wildTalentOptions]);
 
   useEffect(() => {
     setState((previous) => {
@@ -1346,6 +1393,22 @@ export default function BuilderClient({
       return;
     }
     applySources(Array.from(next));
+  };
+
+  const onChangeWildTalent = (featureId: string) => {
+    setState((previous) => {
+      const selected = new Set(previous.selectedFeatureIds ?? []);
+      for (const option of wildTalentOptions) {
+        selected.delete(option.id);
+      }
+      if (featureId) {
+        selected.add(featureId);
+      }
+      return {
+        ...previous,
+        selectedFeatureIds: sortStringIds(Array.from(selected)),
+      };
+    });
   };
 
   const updateAbility = (ability: Ability, value: number) => {
@@ -1898,6 +1961,71 @@ export default function BuilderClient({
           })}
         </div>
       </section>
+
+      {settingProfile ? (
+        <section className="rounded-lg border border-amber-700 bg-amber-950/30 p-4">
+          <h2 className="text-sm font-semibold text-amber-100">{settingProfile.name} Setting</h2>
+          <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <div className="space-y-2 text-sm text-amber-50">
+              <div>
+                Class restrictions:
+                {" "}
+                {settingProfile.disabledClassIds.length > 0
+                  ? settingProfile.disabledClassIds
+                      .map((id) => classNameById[id] ?? id.split(":").at(-1))
+                      .join(", ")
+                  : "none"}
+              </div>
+              {settingProfile.languages ? (
+                <div>
+                  Languages: {settingProfile.languages.selectionRules.baseLanguages.join(", ")} plus{" "}
+                  {settingProfile.languages.selectionRules.additionalChoices} additional language
+                  {settingProfile.languages.selectionRules.additionalChoices === 1 ? "" : "s"}.
+                  {settingProfile.languages.selectionRules.literacyDefault ? " Literacy is automatic." : " Literacy is not automatic."}
+                </div>
+              ) : null}
+              {settingProfile.traditions && settingProfile.traditions.length > 0 ? (
+                <div>
+                  Traditions: {settingProfile.traditions.map((entry) => entry.name).join(", ")}.
+                </div>
+              ) : null}
+              {settingProfile.arcaneCastingModes.length > 0 ? (
+                <div>Arcane casting modes: {settingProfile.arcaneCastingModes.join(", ")}.</div>
+              ) : null}
+            </div>
+
+            <div className="space-y-2">
+              {wildTalentOptions.length > 0 ? (
+                <label className="text-sm">
+                  <div className="font-semibold text-amber-100">Wild Talent</div>
+                  <select
+                    className="mt-1 w-full rounded border border-amber-800 bg-slate-950 px-2 py-1 text-slate-100"
+                    value={selectedWildTalentId ?? ""}
+                    onChange={(event) => onChangeWildTalent(event.target.value)}
+                  >
+                    {wildTalentOptions.map((entry) => (
+                      <option key={entry.id} value={entry.id}>
+                        {entry.name}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="mt-1 text-xs text-amber-200">
+                    Required at character creation. This is currently a table-backed stub selection.
+                  </div>
+                </label>
+              ) : null}
+
+              {settingProfile.notes.length > 0 ? (
+                <ul className="list-disc space-y-1 pl-5 text-xs text-amber-100">
+                  {settingProfile.notes.map((note) => (
+                    <li key={note}>{note}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="grid gap-4 rounded-lg border border-slate-700 bg-slate-900/60 p-4 md:grid-cols-2">
         <div className="space-y-3">

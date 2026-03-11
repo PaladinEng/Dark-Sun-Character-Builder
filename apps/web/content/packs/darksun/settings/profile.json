@@ -1,0 +1,50 @@
+{
+  "id": "darksun:setting:profile",
+  "packId": "darksun",
+  "name": "Dark Sun",
+  "disabledClassIds": [
+    "srd52:class:paladin",
+    "srd52:class:sorcerer"
+  ],
+  "classReplacements": {
+    "srd52:class:cleric": "darksun:class:elemental-cleric"
+  },
+  "disabledSubclassIds": [
+    "srd52:subclass:archfey",
+    "srd52:subclass:arcane-trickster",
+    "srd52:subclass:eldritch-knight",
+    "srd52:subclass:way-of-shadow",
+    "srd52:subclass:college-of-lore",
+    "srd52:subclass:college-of-valor"
+  ],
+  "unresolvedDisabledSubclassKeys": [
+    "barbarian_path_of_the_zealot",
+    "druid_circle_of_the_sea",
+    "fighter_eldritch_knight",
+    "monk_warrior_of_shadow",
+    "ranger_fey_wanderer",
+    "ranger_gloom_stalker",
+    "rogue_arcane_trickster",
+    "warlock_archfey"
+  ],
+  "wildTalentRequired": true,
+  "wildTalentFeatureTag": "wild_talent",
+  "arcaneCastingModes": [
+    "preserver",
+    "defiler"
+  ],
+  "notes": [
+    "Defiler rules not yet implemented.",
+    "Resurrection should be governed by spell-list availability.",
+    "Bard uses an Athasian Bard stub subclass.",
+    "Psionicist remains a stub class.",
+    "Wild Talent selection is currently a table-backed stub."
+  ],
+  "unsupportedMechanics": [
+    "Defiler casting",
+    "Psionicist class mechanics",
+    "Athasian Bard mechanics",
+    "Wild Talent mechanical effects beyond table assignment",
+    "Preserver spell-point and Rite of Blood automation"
+  ]
+}

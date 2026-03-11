@@ -1,0 +1,1270 @@
+{
+  "id": "darksun:setting:elemental-cleric-spell-source",
+  "description": "Authoritative source spell names preserved for future native spell import. Native spell lists currently reference only existing spell entities.",
+  "shared": {
+    "id": "darksun:spelllist:elemental-cleric:all-shared",
+    "name": "Elemental Cleric - All Patron Shared Spells",
+    "classId": "darksun:class:elemental-cleric",
+    "spellNamesByLevel": {
+      "0": [
+        "Blade Ward",
+        "Guidance",
+        "Mending",
+        "Message",
+        "Resistance",
+        "Thaumaturgy"
+      ],
+      "1": [
+        "Bane",
+        "Ceremony",
+        "Command",
+        "Comprehend Languages",
+        "Detect Magic",
+        "Detect Poison and Disease",
+        "Elemental Aegis",
+        "Elemental Favor",
+        "Heroism",
+        "Identify",
+        "Inflict Wounds",
+        "Jump",
+        "Longstrider",
+        "Shield of Faith"
+      ],
+      "2": [
+        "Augury",
+        "Blindness/Deafness",
+        "Calm Emotions",
+        "Darkvision",
+        "Enhance Ability",
+        "Hold Person",
+        "Locate Object",
+        "Protection from Poison",
+        "Spiritual Weapon"
+      ],
+      "3": [
+        "Bestow Curse",
+        "Dispel Magic",
+        "Feign Death",
+        "Glyph of Warding",
+        "Protection from Energy",
+        "Remove Curse",
+        "Sending",
+        "Speak with Dead",
+        "Tongues"
+      ],
+      "4": [
+        "Divination",
+        "Locate Creature"
+      ],
+      "5": [
+        "Circle of Power",
+        "Commune",
+        "Geas",
+        "Legend Lore",
+        "Scrying"
+      ],
+      "6": [
+        "Find the Path",
+        "Forbiddance",
+        "Harm",
+        "Planar Ally",
+        "True Seeing",
+        "Word of Recall"
+      ],
+      "7": [
+        "Elemental Edict",
+        "Power Word Fortify",
+        "Symbol",
+        "Temple of the Elements"
+      ],
+      "8": [
+        "Antimagic Field"
+      ],
+      "9": [
+        "Blade of Disaster",
+        "Foresight",
+        "Gate (Elemental)"
+      ]
+    },
+    "description": "Shared spells available to every elemental and paraelemental patron.",
+    "notes": {
+      "schemaStatus": "Inferred spell-list schema."
+    }
+  },
+  "elementalOnly": {
+    "id": "darksun:spelllist:elemental-cleric:elemental-only",
+    "name": "Elemental Cleric - Elemental-Only Spells",
+    "classId": "darksun:class:elemental-cleric",
+    "spellNamesByLevel": {
+      "0": [
+        "Spare the Dying"
+      ],
+      "1": [
+        "Bless",
+        "Cure Wounds",
+        "Healing Word",
+        "Purify Food and Drink",
+        "Sanctuary"
+      ],
+      "2": [
+        "Aid",
+        "Gentle Repose",
+        "Lesser Restoration",
+        "Prayer of Healing"
+      ],
+      "3": [
+        "Aura of Vitality",
+        "Beacon of Hope",
+        "Mass Healing Word",
+        "Revivify",
+        "Spirit Guardians"
+      ],
+      "4": [
+        "Aura of Life",
+        "Aura of Purity",
+        "Death Ward",
+        "Guardian of the Shrine"
+      ],
+      "5": [
+        "Greater Restoration",
+        "Mass Cure Wounds",
+        "Raise Dead"
+      ],
+      "6": [
+        "Heal",
+        "Heroes' Feast"
+      ],
+      "7": [
+        "Regenerate",
+        "Resurrection"
+      ],
+      "8": [
+        "Elemental Aura"
+      ],
+      "9": [
+        "Mass Heal",
+        "Power Word Heal"
+      ]
+    },
+    "description": "Life-preserving and restorative spells available only to elemental patrons (Earth, Air, Fire, Water).",
+    "notes": {
+      "schemaStatus": "Inferred spell-list schema."
+    }
+  },
+  "patrons": {
+    "air": {
+      "id": "darksun:spelllist:elemental-cleric:air",
+      "name": "Elemental Cleric - Air Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "air",
+      "kind": "elemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Guidance",
+          "Gust",
+          "Mending",
+          "Message",
+          "Minor Illusion",
+          "Resistance",
+          "Spare the Dying",
+          "Sword Burst",
+          "Thaumaturgy"
+        ],
+        "1": [
+          "Bane",
+          "Bless",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Cure Wounds",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Feather Fall",
+          "Fog Cloud",
+          "Healing Word",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Magic Missile",
+          "Purify Food and Drink",
+          "Sanctuary",
+          "Shield of Faith",
+          "Silent Image"
+        ],
+        "2": [
+          "Aid",
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Darkvision",
+          "Enhance Ability",
+          "Gentle Repose",
+          "Gust of Wind",
+          "Hold Person",
+          "Lesser Restoration",
+          "Locate Object",
+          "Prayer of Healing",
+          "Protection from Poison",
+          "Silence",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Aura of Vitality",
+          "Beacon of Hope",
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Mass Healing Word",
+          "Protection from Energy",
+          "Remove Curse",
+          "Revivify",
+          "Sending",
+          "Speak with Dead",
+          "Spirit Guardians",
+          "Tongues"
+        ],
+        "4": [
+          "Aura of Life",
+          "Aura of Purity",
+          "Death Ward",
+          "Divination",
+          "Freedom of Movement",
+          "Guardian of the Shrine",
+          "Locate Creature"
+        ],
+        "5": [
+          "Circle of Power",
+          "Commune",
+          "Geas",
+          "Greater Restoration",
+          "Legend Lore",
+          "Mass Cure Wounds",
+          "Raise Dead",
+          "Scrying"
+        ],
+        "6": [
+          "Blade Barrier",
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Heal",
+          "Heroes' Feast",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Power Word Fortify",
+          "Regenerate",
+          "Resurrection",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Control Weather",
+          "Elemental Aura"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Mass Heal",
+          "Power Word Heal",
+          "Storm of Vengeance"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Feather Fall",
+          "Fog Cloud",
+          "Gust of Wind",
+          "Levitate"
+        ],
+        "2": [
+          "Fly",
+          "Wind Wall"
+        ],
+        "3": [
+          "Hallucinatory Terrain",
+          "Freedom of Movement"
+        ],
+        "4": [
+          "Control Winds",
+          "Wall of Force (as compressed air/pressure)"
+        ]
+      },
+      "description": "Preparatory spell list for the Air patron, combining All spells, Elemental spells, and Domain(Air) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "earth": {
+      "id": "darksun:spelllist:elemental-cleric:earth",
+      "name": "Elemental Cleric - Earth Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "earth",
+      "kind": "elemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Mold Earth",
+          "Resistance",
+          "Spare the Dying",
+          "Thaumaturgy"
+        ],
+        "1": [
+          "Bane",
+          "Bless",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Cure Wounds",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Earth Tremor",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Healing Word",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Purify Food and Drink",
+          "Sanctuary",
+          "Shield of Faith"
+        ],
+        "2": [
+          "Aid",
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Darkvision",
+          "Earthbind",
+          "Enhance Ability",
+          "Gentle Repose",
+          "Hold Person",
+          "Lesser Restoration",
+          "Locate Object",
+          "Prayer of Healing",
+          "Protection from Poison",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Aura of Vitality",
+          "Beacon of Hope",
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Mass Healing Word",
+          "Meld into Stone",
+          "Protection from Energy",
+          "Remove Curse",
+          "Revivify",
+          "Sending",
+          "Speak with Dead",
+          "Spirit Guardians",
+          "Tongues",
+          "Wall of Sand"
+        ],
+        "4": [
+          "Aura of Life",
+          "Aura of Purity",
+          "Death Ward",
+          "Divination",
+          "Guardian of the Shrine",
+          "Locate Creature",
+          "Stone Shape",
+          "Stoneskin"
+        ],
+        "5": [
+          "Circle of Power",
+          "Commune",
+          "Geas",
+          "Greater Restoration",
+          "Legend Lore",
+          "Mass Cure Wounds",
+          "Raise Dead",
+          "Scrying",
+          "Wall of Stone"
+        ],
+        "6": [
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Heal",
+          "Heroes' Feast",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Power Word Fortify",
+          "Regenerate",
+          "Resurrection",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Earthquake",
+          "Elemental Aura"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Mass Heal",
+          "Power Word Heal"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Earth Tremor",
+          "Sanctuary",
+          "Earthbind",
+          "Spider Climb"
+        ],
+        "2": [
+          "Meld into Stone",
+          "Protection from Energy"
+        ],
+        "3": [
+          "Stone Shape",
+          "Stoneskin"
+        ],
+        "4": [
+          "Wall of Stone",
+          "Conjure Elemental (Earth only - rework)"
+        ]
+      },
+      "description": "Preparatory spell list for the Earth patron, combining All spells, Elemental spells, and Domain(Earth) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "fire": {
+      "id": "darksun:spelllist:elemental-cleric:fire",
+      "name": "Elemental Cleric - Fire Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "fire",
+      "kind": "elemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Control Flames",
+          "Create Bonfire",
+          "Fire Bolt",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Produce Flame",
+          "Resistance",
+          "Spare the Dying",
+          "Thaumaturgy"
+        ],
+        "1": [
+          "Bane",
+          "Bless",
+          "Burning Hands",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Cure Wounds",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Healing Word",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Purify Food and Drink",
+          "Sanctuary",
+          "Searing Smite",
+          "Shield of Faith"
+        ],
+        "2": [
+          "Aid",
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Continual Flame",
+          "Darkvision",
+          "Enhance Ability",
+          "Flame Blade",
+          "Gentle Repose",
+          "Hold Person",
+          "Lesser Restoration",
+          "Locate Object",
+          "Prayer of Healing",
+          "Protection from Poison",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Aura of Vitality",
+          "Beacon of Hope",
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Mass Healing Word",
+          "Protection from Energy",
+          "Remove Curse",
+          "Revivify",
+          "Sending",
+          "Speak with Dead",
+          "Spirit Guardians",
+          "Tongues"
+        ],
+        "4": [
+          "Aura of Life",
+          "Aura of Purity",
+          "Death Ward",
+          "Divination",
+          "Guardian of the Shrine",
+          "Locate Creature",
+          "Wall of Fire"
+        ],
+        "5": [
+          "Circle of Power",
+          "Commune",
+          "Flame Strike",
+          "Geas",
+          "Greater Restoration",
+          "Legend Lore",
+          "Mass Cure Wounds",
+          "Raise Dead",
+          "Scrying"
+        ],
+        "6": [
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Heal",
+          "Heroes' Feast",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Fire Storm",
+          "Power Word Fortify",
+          "Regenerate",
+          "Resurrection",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Elemental Aura",
+          "Incendiary Cloud"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Mass Heal",
+          "Meteor Swarm",
+          "Power Word Heal"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Burning Hands",
+          "Searing Smite",
+          "Flaming Sphere",
+          "Heat Metal"
+        ],
+        "2": [
+          "Fireball",
+          "Melf's Minute Meteors"
+        ],
+        "3": [
+          "Wall of Fire",
+          "Fire Shield"
+        ],
+        "4": [
+          "Flame Strike",
+          "Conjure Elemental (Fire only - rework)"
+        ]
+      },
+      "description": "Preparatory spell list for the Fire patron, combining All spells, Elemental spells, and Domain(Fire) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "magma": {
+      "id": "darksun:spelllist:elemental-cleric:magma",
+      "name": "Elemental Cleric - Magma Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "magma",
+      "kind": "paraelemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Acid Splash",
+          "Blade Ward",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Poison Spray",
+          "Resistance",
+          "Thaumaturgy"
+        ],
+        "1": [
+          "Bane",
+          "Burning Hands",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Shield of Faith",
+          "Tasha's Caustic Brew"
+        ],
+        "2": [
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Continual Flame",
+          "Darkvision",
+          "Enhance Ability",
+          "Flame Blade",
+          "Hold Person",
+          "Locate Object",
+          "Protection from Poison",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Protection from Energy",
+          "Remove Curse",
+          "Sending",
+          "Speak with Dead",
+          "Tongues"
+        ],
+        "4": [
+          "Divination",
+          "Locate Creature",
+          "Wall of Fire"
+        ],
+        "5": [
+          "Blight of the Ash Wastes",
+          "Circle of Power",
+          "Commune",
+          "Flame Strike",
+          "Geas",
+          "Legend Lore",
+          "Scrying"
+        ],
+        "6": [
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Fire Storm",
+          "Power Word Fortify",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Earthquake",
+          "Incendiary Cloud"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Meteor Swarm"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Ray of Sickness",
+          "Tasha's Caustic Brew",
+          "Melf's Acid Arrow",
+          "Ray of Enfeeblement"
+        ],
+        "2": [
+          "Stinking Cloud",
+          "Elemental Bane (Acid)"
+        ],
+        "3": [
+          "Vitriolic Sphere",
+          "Transmute Stone to Slag (rework of Transmute Rock)"
+        ],
+        "4": [
+          "Cloudkill",
+          "Blight of the Ash Wastes (rename of Contagion)"
+        ]
+      },
+      "description": "Preparatory spell list for the Magma patron, combining All spells, and Domain(Magma) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "rain": {
+      "id": "darksun:spelllist:elemental-cleric:rain",
+      "name": "Elemental Cleric - Rain Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "rain",
+      "kind": "paraelemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Resistance",
+          "Shocking Grasp",
+          "Thaumaturgy",
+          "Thunderclap"
+        ],
+        "1": [
+          "Bane",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Fog Cloud",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Shield of Faith",
+          "Thunderous Smite",
+          "Thunderwave",
+          "Witch Bolt"
+        ],
+        "2": [
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Darkvision",
+          "Enhance Ability",
+          "Hold Person",
+          "Locate Object",
+          "Protection from Poison",
+          "Shatter",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Protection from Energy",
+          "Remove Curse",
+          "Sending",
+          "Speak with Dead",
+          "Tongues"
+        ],
+        "4": [
+          "Control Water",
+          "Divination",
+          "Ice Storm",
+          "Locate Creature"
+        ],
+        "5": [
+          "Circle of Power",
+          "Commune",
+          "Geas",
+          "Legend Lore",
+          "Scrying"
+        ],
+        "6": [
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Power Word Fortify",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Control Weather",
+          "Tsunami"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Storm of Vengeance"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Thunderwave",
+          "Thunderous Smite",
+          "Shatter",
+          "Gust of Wind"
+        ],
+        "2": [
+          "Call Lightning",
+          "Lightning Bolt"
+        ],
+        "3": [
+          "Storm Sphere",
+          "Storm Step (rework of Dimension Door)"
+        ],
+        "4": [
+          "Control Winds",
+          "Destructive Squall (rework of Destructive Wave)"
+        ]
+      },
+      "description": "Preparatory spell list for the Rain patron, combining All spells, and Domain(Rain) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "silt": {
+      "id": "darksun:spelllist:elemental-cleric:silt",
+      "name": "Elemental Cleric - Silt Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "silt",
+      "kind": "paraelemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Resistance",
+          "Thaumaturgy",
+          "Toll the Dead",
+          "Withering Grasp"
+        ],
+        "1": [
+          "Bane",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Shield of Faith",
+          "Silt Horror's Grasp"
+        ],
+        "2": [
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Darkvision",
+          "Enhance Ability",
+          "Hold Person",
+          "Locate Object",
+          "Protection from Poison",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Maw of the Silt Sea",
+          "Protection from Energy",
+          "Remove Curse",
+          "Sending",
+          "Speak with Dead",
+          "Tongues"
+        ],
+        "4": [
+          "Divination",
+          "Locate Creature"
+        ],
+        "5": [
+          "Blight of the Ash Wastes",
+          "Circle of Power",
+          "Commune",
+          "Geas",
+          "Legend Lore",
+          "Scrying"
+        ],
+        "6": [
+          "Circle of Death",
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Power Word Fortify",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Abi-Dalzim's Horrid Wilting",
+          "Antimagic Field"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Inflict Wounds",
+          "Silt Horror's Grasp (rework of Arms of Hadar)",
+          "Blindness/Deafness",
+          "Ray of Enfeeblement"
+        ],
+        "2": [
+          "Hunger of Hadar",
+          "Vampiric Touch"
+        ],
+        "3": [
+          "Blight",
+          "Shadow of Moil"
+        ],
+        "4": [
+          "Blight of the Ash Wastes (rename of Contagion)",
+          "Enervation"
+        ]
+      },
+      "description": "Preparatory spell list for the Silt patron, combining All spells, and Domain(Silt) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "sun": {
+      "id": "darksun:spelllist:elemental-cleric:sun",
+      "name": "Elemental Cleric - Sun Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "sun",
+      "kind": "paraelemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Resistance",
+          "Sacred Flame",
+          "Thaumaturgy",
+          "Word of Radiance"
+        ],
+        "1": [
+          "Bane",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Guiding Bolt",
+          "Heroism",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Shield of Faith"
+        ],
+        "2": [
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Continual Flame",
+          "Darkvision",
+          "Enhance Ability",
+          "Hold Person",
+          "Locate Object",
+          "Moonbeam",
+          "Protection from Poison",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Bestow Curse",
+          "Daylight",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Protection from Energy",
+          "Remove Curse",
+          "Sending",
+          "Speak with Dead",
+          "Tongues"
+        ],
+        "4": [
+          "Divination",
+          "Locate Creature"
+        ],
+        "5": [
+          "Circle of Power",
+          "Commune",
+          "Flame Strike",
+          "Geas",
+          "Legend Lore",
+          "Scrying"
+        ],
+        "6": [
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Planar Ally",
+          "Sunbeam",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Fire Storm",
+          "Power Word Fortify",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Control Weather",
+          "Sunburst"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Meteor Swarm",
+          "Prismatic Wall",
+          "Storm of Vengeance"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Guiding Bolt",
+          "Shield of Faith",
+          "Continual Flame",
+          "Moonbeam"
+        ],
+        "2": [
+          "Daylight",
+          "Blinding Smite"
+        ],
+        "3": [
+          "Sickening Radiance",
+          "Divination"
+        ],
+        "4": [
+          "Dawn",
+          "Wall of Light"
+        ]
+      },
+      "description": "Preparatory spell list for the Sun patron, combining All spells, and Domain(Sun) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    },
+    "water": {
+      "id": "darksun:spelllist:elemental-cleric:water",
+      "name": "Elemental Cleric - Water Patron Spell List",
+      "classId": "darksun:class:elemental-cleric",
+      "patron": "water",
+      "kind": "elemental",
+      "spellNamesByLevel": {
+        "0": [
+          "Blade Ward",
+          "Frostbite",
+          "Guidance",
+          "Mending",
+          "Message",
+          "Resistance",
+          "Shape Water",
+          "Spare the Dying",
+          "Thaumaturgy"
+        ],
+        "1": [
+          "Bane",
+          "Bless",
+          "Ceremony",
+          "Command",
+          "Comprehend Languages",
+          "Cure Wounds",
+          "Detect Magic",
+          "Detect Poison and Disease",
+          "Elemental Aegis",
+          "Elemental Favor",
+          "Fog Cloud",
+          "Healing Word",
+          "Heroism",
+          "Ice Knife",
+          "Identify",
+          "Inflict Wounds",
+          "Jump",
+          "Longstrider",
+          "Purify Food and Drink",
+          "Sanctuary",
+          "Shield of Faith"
+        ],
+        "2": [
+          "Aid",
+          "Augury",
+          "Blindness/Deafness",
+          "Calm Emotions",
+          "Darkvision",
+          "Enhance Ability",
+          "Gentle Repose",
+          "Hold Person",
+          "Lesser Restoration",
+          "Locate Object",
+          "Prayer of Healing",
+          "Protection from Poison",
+          "Spiritual Weapon"
+        ],
+        "3": [
+          "Aura of Vitality",
+          "Beacon of Hope",
+          "Bestow Curse",
+          "Dispel Magic",
+          "Feign Death",
+          "Glyph of Warding",
+          "Mass Healing Word",
+          "Protection from Energy",
+          "Remove Curse",
+          "Revivify",
+          "Sending",
+          "Speak with Dead",
+          "Spirit Guardians",
+          "Tidal Wave",
+          "Tongues",
+          "Wall of Water",
+          "Water Breathing",
+          "Water Walk"
+        ],
+        "4": [
+          "Aura of Life",
+          "Aura of Purity",
+          "Control Water",
+          "Death Ward",
+          "Divination",
+          "Guardian of the Shrine",
+          "Ice Storm",
+          "Locate Creature"
+        ],
+        "5": [
+          "Circle of Power",
+          "Commune",
+          "Geas",
+          "Greater Restoration",
+          "Legend Lore",
+          "Mass Cure Wounds",
+          "Raise Dead",
+          "Scrying"
+        ],
+        "6": [
+          "Find the Path",
+          "Forbiddance",
+          "Harm",
+          "Heal",
+          "Heroes' Feast",
+          "Planar Ally",
+          "True Seeing",
+          "Word of Recall"
+        ],
+        "7": [
+          "Elemental Edict",
+          "Power Word Fortify",
+          "Regenerate",
+          "Resurrection",
+          "Symbol",
+          "Temple of the Elements"
+        ],
+        "8": [
+          "Antimagic Field",
+          "Control Weather",
+          "Elemental Aura",
+          "Tsunami"
+        ],
+        "9": [
+          "Blade of Disaster",
+          "Foresight",
+          "Gate (Elemental)",
+          "Mass Heal",
+          "Power Word Heal",
+          "Storm of Vengeance"
+        ]
+      },
+      "alwaysPreparedDomainSpellsBySubclassTier": {
+        "1": [
+          "Ice Knife",
+          "Healing Word",
+          "Snilloc's Snowball Swarm",
+          "Protection from Poison"
+        ],
+        "2": [
+          "Sleet Storm",
+          "Wall of Water"
+        ],
+        "3": [
+          "Control Water",
+          "Watery Sphere"
+        ],
+        "4": [
+          "Cone of Cold",
+          "Mass Cure Wounds"
+        ]
+      },
+      "description": "Preparatory spell list for the Water patron, combining All spells, Elemental spells, and Domain(Water) spells from the Dark Sun Elemental Cleric master list.",
+      "notes": {
+        "schemaStatus": "Inferred spell-list schema. The repo class JSON references spellListRefIds, but no native spell-list JSON examples were uploaded.",
+        "selectionRule": "This file is intended to be attached by patron/domain selection. Domain spell grants remain always-prepared and are also listed separately here."
+      }
+    }
+  }
+}

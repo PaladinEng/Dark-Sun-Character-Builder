@@ -1,0 +1,16 @@
+{
+  "id": "darksun:feature:wild-talent:battle_trance",
+  "name": "Battle Trance",
+  "selectable": true,
+  "tags": [
+    "wild_talent"
+  ],
+  "description": "Battle Trance is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Battle Trance",
+      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+    }
+  ]
+}

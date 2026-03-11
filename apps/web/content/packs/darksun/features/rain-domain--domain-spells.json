@@ -1,0 +1,5 @@
+{
+  "id": "darksun:feature:rain-domain:domain-spells",
+  "name": "Rain Domain Spells",
+  "description": "Rain Domain always-prepared domain spell source list:\nTier 1: Thunderwave, Thunderous Smite, Shatter, Gust of Wind\nTier 2: Call Lightning, Lightning Bolt\nTier 3: Storm Sphere, Storm Step (rework of Dimension Door)\nTier 4: Control Winds, Destructive Squall (rework of Destructive Wave)\nTODO: unsupported spell entities remain preserved in settings/elemental-cleric-spell-source.json."
+}

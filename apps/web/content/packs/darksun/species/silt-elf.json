@@ -1,9 +1,0 @@
-{
-  "id": "darksun:species:silt-elf",
-  "name": "Silt Elf",
-  "effects": [
-    { "type": "set_speed", "value": 35 },
-    { "type": "grant_language", "language": "Common" },
-    { "type": "grant_language", "language": "Elvish" }
-  ]
-}

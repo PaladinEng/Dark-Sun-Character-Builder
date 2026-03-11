@@ -1,0 +1,11 @@
+{
+  "id": "darksun:spelllist:elemental-cleric:rain",
+  "name": "Elemental Cleric - Rain Patron Spell List",
+  "description": "Preparatory spell list for the Rain patron, combining All spells, and Domain(Rain) spells from the Dark Sun Elemental Cleric master list. TODO: additional source spells for darksun:spelllist:elemental-cleric:rain are preserved in settings/elemental-cleric-spell-source.json because native spell entities do not yet exist.",
+  "spellIds": [
+    "srd52:spell:shocking-grasp",
+    "srd52:spell:fog-cloud",
+    "srd52:spell:thunderwave",
+    "srd52:spell:shatter"
+  ]
+}
