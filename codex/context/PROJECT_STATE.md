@@ -4,13 +4,14 @@ Last updated:
 - 2026-03-11 EDT
 
 ## Current Objective
-- Finish the Dark Sun smoke test and audit pass, keep the setting integration stable, and preserve unsupported mechanics as explicit stubs.
+- Keep the Dark Sun builder deployment-ready by fixing monorepo package resolution for `@dark-sun/content` in Next/Vercel builds without regressing the validated local state.
 
 ## Repository Snapshot
-- Branch: `main` (audit-pass commit pending)
-- HEAD at last context refresh: `8f25eca`
+- Branch: `main`
+- HEAD at last context refresh: `ae61761`
 - Harness status for this pass:
-  - `pnpm loop:check` -> `=== ALL_PASS ===` after Dark Sun audit fixes
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===` after workspace-resolution fix
 
 ## Completed Work (Current Session)
 - Kept the normalized Dark Sun pack in place under `apps/web/content/packs/darksun` with:
@@ -23,6 +24,10 @@ Last updated:
   - classes listed in `classReplacements` are now treated as unavailable in Dark Sun mode, so SRD `Cleric` no longer appears alongside `Elemental Cleric`
 - Improved Dark Sun builder notes so restricted classes resolve to display names even after filtering.
 - Reconfirmed the closed-loop harness with `pnpm loop:check`.
+- Fixed internal workspace resolution for `@dark-sun/content` so web builds do not depend on a prebuilt `packages/content/dist` directory:
+  - `packages/content/package.json` now exposes workspace source entrypoints
+  - `apps/web/next.config.ts` now transpiles both `@dark-sun/content` and `@dark-sun/rules`
+- Re-ran `pnpm install`, `pnpm --filter web build`, and `pnpm loop:check`.
 
 ## Remaining Limitations (Explicit)
 - Defiler casting remains a stub.
@@ -38,4 +43,5 @@ Last updated:
 - Keep Dark Sun filtering data-driven via:
   - `apps/web/content/packs/darksun/settings/*.json`
   - `apps/web/src/lib/packSettings.ts`
+- Keep internal workspace packages consumable from source for web builds unless a deliberate dist-build pipeline replaces that approach.
 - Re-run `pnpm loop:check` after any content, builder, or context edit.

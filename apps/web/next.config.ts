@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const isProduction = process.env.NODE_ENV === "production";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@dark-sun/rules"],
+  transpilePackages: ["@dark-sun/content", "@dark-sun/rules"],
   experimental: isProduction
     ? {
         webpackBuildWorker: false,

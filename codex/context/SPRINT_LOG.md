@@ -35,3 +35,18 @@ Append one dated section per completed work block.
 - Fixes:
   - Replaced classes are now hidden by the Dark Sun setting filter.
   - Dark Sun class restriction notes now render human-readable class names after filtering.
+
+## 2026-03-11 - Vercel Workspace Resolution Fix
+- Scope: Fix `@dark-sun/content` monorepo resolution so Next/Vercel builds do not fail when `packages/content/dist` is absent.
+- Result: PASS.
+- Validation:
+  - `pnpm install` -> PASS
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `packages/content/package.json`
+  - `apps/web/next.config.ts`
+  - `codex/context/*`
+- Fixes:
+  - `@dark-sun/content` now exposes workspace source entrypoints instead of requiring prebuilt dist output.
+  - Next now transpiles both internal workspace packages consumed by the app: `@dark-sun/content` and `@dark-sun/rules`.
