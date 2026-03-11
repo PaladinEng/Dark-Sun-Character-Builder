@@ -4,14 +4,15 @@ Last updated:
 - 2026-03-11 EDT
 
 ## Current Objective
-- Keep the Dark Sun builder deployment-ready by fixing monorepo package resolution for `@dark-sun/content` in Next/Vercel builds without regressing the validated local state.
+- Keep the Dark Sun builder deployment-ready by aligning Vercel monorepo settings with a standard Next.js deployment and documenting that `Output Directory` must not be overridden.
 
 ## Repository Snapshot
 - Branch: `main`
-- HEAD at last context refresh: `ae61761`
+- HEAD at last context refresh: `3368502`
 - Harness status for this pass:
+  - `pnpm install` -> PASS
   - `pnpm --filter web build` -> PASS
-  - `pnpm loop:check` -> `=== ALL_PASS ===` after workspace-resolution fix
+  - `pnpm loop:check` -> `=== ALL_PASS ===` after Vercel settings note/config update
 
 ## Completed Work (Current Session)
 - Kept the normalized Dark Sun pack in place under `apps/web/content/packs/darksun` with:
@@ -28,6 +29,10 @@ Last updated:
   - `packages/content/package.json` now exposes workspace source entrypoints
   - `apps/web/next.config.ts` now transpiles both `@dark-sun/content` and `@dark-sun/rules`
 - Re-ran `pnpm install`, `pnpm --filter web build`, and `pnpm loop:check`.
+- Added repo-level Vercel deployment guidance:
+  - `vercel.json` now declares the monorepo install/build commands and `nextjs` framework preset without forcing an output directory
+  - `README.md` now documents the expected Vercel project settings and explicitly warns against `Output Directory = public`
+- Confirmed the remaining failure mode is a Vercel dashboard override, not a local build problem.
 
 ## Remaining Limitations (Explicit)
 - Defiler casting remains a stub.
@@ -44,4 +49,5 @@ Last updated:
   - `apps/web/content/packs/darksun/settings/*.json`
   - `apps/web/src/lib/packSettings.ts`
 - Keep internal workspace packages consumable from source for web builds unless a deliberate dist-build pipeline replaces that approach.
+- For Vercel, keep the project rooted at `/` and leave `Output Directory` unset in the dashboard for this Next.js app.
 - Re-run `pnpm loop:check` after any content, builder, or context edit.

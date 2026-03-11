@@ -50,3 +50,21 @@ Append one dated section per completed work block.
 - Fixes:
   - `@dark-sun/content` now exposes workspace source entrypoints instead of requiring prebuilt dist output.
   - Next now transpiles both internal workspace packages consumed by the app: `@dark-sun/content` and `@dark-sun/rules`.
+
+## 2026-03-11 - Vercel Next.js Deployment Settings
+- Scope: Align the monorepo's committed Vercel config/docs with a standard Next.js deployment and document the dashboard settings required to avoid static-site output errors.
+- Result: PASS.
+- Validation:
+  - `pnpm install` -> PASS
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `vercel.json`
+  - `README.md`
+  - `codex/context/*`
+- Findings:
+  - No committed repo config was forcing `Output Directory = public`.
+  - The bad `public` output expectation is consistent with a Vercel dashboard override on the project itself.
+- Fixes:
+  - Added repo-level Vercel config for `framework`, `installCommand`, and `buildCommand` without setting `outputDirectory`.
+  - Documented the required dashboard settings and the fact that `Output Directory` must remain unset for this Next.js deployment.
