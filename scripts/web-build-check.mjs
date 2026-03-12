@@ -8,6 +8,7 @@ import process from "node:process";
 
 const repoRoot = process.cwd();
 const nextDir = path.join(repoRoot, "apps", "web", ".next");
+const CLEANUP_ATTEMPTS = 5;
 
 const REQUIRED_ARTIFACTS = [
   ".next/server/pages-manifest.json",
@@ -35,9 +36,29 @@ const FAILURE_PATTERNS = [
     help: "Next failed while collecting output trace JSON for a server entrypoint.",
   },
   {
+    id: "next-artifact-race",
+    pattern: /E(?:NOENT|NOTEMPTY): .*\.next\//i,
+    help: "Next hit a transient filesystem race while moving or cleaning build artifacts under .next.",
+  },
+  {
     id: "missing-app-route-bundle",
     pattern: /Cannot find module '.*\.next\/server\/app\/.*\/page\.js'/i,
     help: "Next attempted to prerender an app route before its server bundle was available.",
+  },
+  {
+    id: "missing-pages-bundle-during-finalize",
+    pattern: /ENOENT: no such file or directory, unlink '.*\.next\/server\/pages\/.*\.js'/i,
+    help: "Next removed a pages-router server bundle before the production build fully finalized.",
+  },
+  {
+    id: "missing-404-pages-bundle",
+    pattern: /Cannot find module '.*\.next\/server\/pages\/404\.js'/i,
+    help: "Next attempted to prerender the pages-router 404 entry before its server bundle was available.",
+  },
+  {
+    id: "missing-404-export-artifact",
+    pattern: /ENOENT: no such file or directory, rename '.*\.next\/export\/404\.html' -> '.*\.next\/server\/pages\/404\.html'/i,
+    help: "Next dropped the temporary 404 export artifact before finishing the server-pages handoff.",
   },
 ];
 
@@ -59,8 +80,37 @@ function detectFailureClass(output) {
   return null;
 }
 
+function isKnownCleanupFailure(error) {
+  return Boolean(
+    error &&
+      typeof error === "object" &&
+      "code" in error &&
+      (error.code === "ENOTEMPTY" || error.code === "ENOENT"),
+  );
+}
+
+async function sleep(ms) {
+  await new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function cleanNextDir() {
+  for (let attempt = 1; attempt <= CLEANUP_ATTEMPTS; attempt += 1) {
+    try {
+      await rm(nextDir, { recursive: true, force: true });
+      return;
+    } catch (error) {
+      if (!isKnownCleanupFailure(error) || attempt === CLEANUP_ATTEMPTS) {
+        throw error;
+      }
+      await sleep(50 * attempt);
+    }
+  }
+}
+
 async function main() {
-  await rm(nextDir, { recursive: true, force: true });
+  await cleanNextDir();
 
   const result = spawnSync("pnpm", ["--filter", "web", "build"], {
     cwd: repoRoot,

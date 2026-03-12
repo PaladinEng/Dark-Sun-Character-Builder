@@ -4,9 +4,18 @@ This is the canonical workspace.
 
 Use commands from this directory:
 
+- `nvm use` (after installing Node 24)
 - `pnpm install`
 - `pnpm verify`
 - `pnpm start:dev`
+
+## Node Version
+
+This repo is pinned to Node 24 for local development, Codex runs, CI, and Vercel builds.
+
+- Supported Node version: `24.x`
+- Repo version files: `.nvmrc` and `.node-version`
+- If your shell is on a different major version, switch before running `pnpm install` or the validation harness
 
 ## Vercel Deployment
 

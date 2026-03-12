@@ -165,3 +165,36 @@ Append one dated section per completed work block.
   - Switched the developer-facing `pnpm --filter web build` command to a bounded clean-retry wrapper, while keeping the harness responsible for artifact assertions.
   - Added minimal app/pages fallback files plus `outputFileTracingRoot` and a `runAfterProductionCompile` placeholder hook to stabilize the hybrid app/pages local build path.
   - Added `caniuse-lite` to the web workspace and repaired the install with `pnpm install --force` after a transient broken pnpm symlink state.
+
+## 2026-03-12 - Node 24 Pinning
+- Scope: Pin the repo to Node 24 across local version files, package metadata, CI, and repo docs without pushing, then revalidate the local build/harness.
+- Result: PASS.
+- Validation:
+  - `node -v` -> `v20.20.1` (manual machine switch to Node 24 still pending)
+  - `pnpm install` -> PASS with engine warnings
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `.nvmrc`
+  - `.node-version`
+  - `package.json`
+  - `apps/web/package.json`
+  - `packages/content/package.json`
+  - `packages/rules/package.json`
+  - `.github/workflows/verify.yml`
+  - `README.md`
+  - `pnpm-lock.yaml`
+  - `scripts/web-build-check.mjs`
+  - `scripts/web-build-stable.mjs`
+  - `codex/context/*`
+- Findings:
+  - The repo had no committed local version files and CI was still pinned to Node 20.
+  - The current shell remains on Node 20, so the new engine pin emits warnings until the machine switches to Node 24.
+  - The existing local Next artifact race needed one more round of retry/cleanup hardening to keep the harness green after the reinstall.
+- Fixes:
+  - Added `.nvmrc` and `.node-version` with `24`.
+  - Added `engines.node = 24.x` across the root workspace and all current packages.
+  - Upgraded `@types/node` to `^24.0.0` across the same packages.
+  - Updated GitHub Actions verification to use Node 24.
+  - Documented Node 24 as the supported version in `README.md`.
+  - Generalized the web-build retry classifier to cover broader `.next` `ENOENT`/`ENOTEMPTY` races and added bounded cleanup retries for `.next` removal.
