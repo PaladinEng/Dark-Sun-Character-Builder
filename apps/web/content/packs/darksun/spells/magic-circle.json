@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:magic-circle",
+  "name": "Magic Circle",
+  "description": "You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the Cylinder intersects with the floor or other surface.\n\nChoose one or more of the following types of creatures: Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:\n\nThe creature can’t willingly enter the Cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a Charisma saving throw.\n\nThe creature has Disadvantage on attack rolls against targets within the Cylinder.\n\nTargets within the Cylinder can’t be possessed by or gain the Charmed or Frightened condition from the creature.\n\nEach time you cast this spell, you can cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the Cylinder and protecting targets outside it.\n\nUsing a Higher-Level Spell Slot. The duration increases by 1 hour for each spell slot level above 3.",
+  "level": 3,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 Minute",
+  "range": "10 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the Cylinder intersects with the floor or other surface.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619018-magic-circle",
+    "area": "(10 ft. *)",
+    "materials": "",
+    "attackSave": "CHA Save",
+    "damageEffect": "",
+    "primaryEffectCategory": "Wards & Sanctuaries",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Magic Circle",
+      "School": "Abjuration",
+      "Casting Time": "1 Minute",
+      "Range": "10 ft.",
+      "Area": "(10 ft. *)",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CHA Save",
+      "Damage/Effect": "",
+      "Source": "",
+      "Description": "You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the Cylinder intersects with the floor or other surface.\n\nChoose one or more of the following types of creatures: Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:\n\nThe creature can’t willingly enter the Cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a Charisma saving throw.\n\nThe creature has Disadvantage on attack rolls against targets within the Cylinder.\n\nTargets within the Cylinder can’t be possessed by or gain the Charmed or Frightened condition from the creature.\n\nEach time you cast this spell, you can cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the Cylinder and protecting targets outside it.\n\nUsing a Higher-Level Spell Slot. The duration increases by 1 hour for each spell slot level above 3.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619018-magic-circle",
+      "Primary Effect Category": "Wards & Sanctuaries",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

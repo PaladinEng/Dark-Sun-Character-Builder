@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:pyrotechnics",
+  "name": "Pyrotechnics",
+  "description": "Choose an area of nonmagical flame that you can see and that fits within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke when you do so.\n\nFireworks . The target explodes with a dazzling display of colors. Each creature within 10 feet of the target must succeed on a Constitution saving throw or become blinded until the end of your next turn.\n\nSmoke. Thick black smoke spreads out from the target in a 20-foot radius, moving around corners. The area of the smoke is heavily obscured. The smoke persists for 1 minute or until a strong wind disperses it.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Choose an area of nonmagical flame that you can see and that fits within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke when you do so.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2396-pyrotechnics",
+    "area": "(5 ft. *)",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Blinded",
+    "primaryEffectCategory": "Conditions & Debuffs",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Secondary"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Pyrotechnics",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "(5 ft. *)",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Blinded",
+      "Source": "",
+      "Description": "Choose an area of nonmagical flame that you can see and that fits within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke when you do so.\n\nFireworks . The target explodes with a dazzling display of colors. Each creature within 10 feet of the target must succeed on a Constitution saving throw or become blinded until the end of your next turn.\n\nSmoke. Thick black smoke spreads out from the target in a 20-foot radius, moving around corners. The area of the smoke is heavily obscured. The smoke persists for 1 minute or until a strong wind disperses it.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2396-pyrotechnics",
+      "Primary Effect Category": "Conditions & Debuffs",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Secondary"
+    }
+  }
+}

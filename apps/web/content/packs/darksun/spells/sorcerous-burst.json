@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:sorcerous-burst",
+  "name": "Sorcerous Burst",
+  "description": "You cast sorcerous energy at one creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Lightning, Poison, Psychic, or Thunder.\n\nIf you roll an 8 on a d8 for this spell, you can roll another d8, and add it to the damage. When you cast this spell, the maximum number of these d8s you can add to the spell’s damage equals your spellcasting ability modifier.\n\nCantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
+  "level": 0,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You cast sorcerous energy at one creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Lightning, Poison, Psychic, or Thunder.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618839-sorcerous-burst",
+    "area": "",
+    "materials": "",
+    "attackSave": "Ranged",
+    "damageEffect": "Acid (...)",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "Cantrip",
+      "Name": "Sorcerous Burst",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "120 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "Ranged",
+      "Damage/Effect": "Acid (...)",
+      "Source": "",
+      "Description": "You cast sorcerous energy at one creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Lightning, Poison, Psychic, or Thunder.\n\nIf you roll an 8 on a d8 for this spell, you can roll another d8, and add it to the damage. When you cast this spell, the maximum number of these d8s you can add to the spell’s damage equals your spellcasting ability modifier.\n\nCantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618839-sorcerous-burst",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

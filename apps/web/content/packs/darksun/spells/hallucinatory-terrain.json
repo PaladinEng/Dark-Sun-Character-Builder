@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:hallucinatory-terrain",
+  "name": "Hallucinatory Terrain",
+  "description": "You make natural terrain in a 150-foot Cube in range look, sound, and smell like another sort of natural terrain. Thus, open fields or a road can be made to resemble a swamp, hill, crevasse, or some other difficult or impassable terrain. A pond can be made to seem like a grassy meadow, a precipice like a gentle slope, or a rock-strewn gully like a wide and smooth road. Manufactured structures, equipment, and creatures within the area aren’t changed.\n\nThe tactile characteristics of the terrain are unchanged, so creatures entering the area are likely to notice the illusion. If the difference isn’t obvious by touch, a creature examining the illusion can take the Study action to make an Intelligence ( Investigation ) check against your spell save DC to disbelieve it. If a creature discerns that the terrain is illusory, the creature sees a vague image superimposed on the real terrain.",
+  "level": 4,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "10 Minutes",
+  "range": "300 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "24 Hours",
+  "concentration": false,
+  "summary": "You make natural terrain in a 150-foot Cube in range look, sound, and smell like another sort of natural terrain. Thus, open fields or a road can be made to resemble a swamp, hill, crevasse, or some other difficult or impassable terrain. A pond can be made to seem like a grassy meadow, a precipice like a gentle slope, or a rock-strewn gully like a wide and smooth road. Manufactured structures, equipment, and creatures within the area aren’t changed.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619139-hallucinatory-terrain",
+    "area": "(150 ft. )",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Control",
+    "primaryEffectCategory": "Illusions & Glamours",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Hallucinatory Terrain",
+      "School": "Illusion",
+      "Casting Time": "10 Minutes",
+      "Range": "300 ft.",
+      "Area": "(150 ft. )",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "24 Hours",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Control",
+      "Source": "",
+      "Description": "You make natural terrain in a 150-foot Cube in range look, sound, and smell like another sort of natural terrain. Thus, open fields or a road can be made to resemble a swamp, hill, crevasse, or some other difficult or impassable terrain. A pond can be made to seem like a grassy meadow, a precipice like a gentle slope, or a rock-strewn gully like a wide and smooth road. Manufactured structures, equipment, and creatures within the area aren’t changed.\n\nThe tactile characteristics of the terrain are unchanged, so creatures entering the area are likely to notice the illusion. If the difference isn’t obvious by touch, a creature examining the illusion can take the Study action to make an Intelligence ( Investigation ) check against your spell save DC to disbelieve it. If a creature discerns that the terrain is illusory, the creature sees a vague image superimposed on the real terrain.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619139-hallucinatory-terrain",
+      "Primary Effect Category": "Illusions & Glamours",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

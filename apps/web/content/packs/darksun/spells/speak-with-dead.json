@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:speak-with-dead",
+  "name": "Speak with Dead",
+  "description": "You grant the semblance of life to a corpse of your choice within range, allowing it to answer questions you pose. The corpse must have a mouth, and this spell fails if the deceased creature was Undead when it died. The spell also fails if the corpse was the target of this spell within the past 10 days.\n\nUntil the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are antagonistic toward it or it recognizes you as an enemy. This spell doesn’t return the creature’s soul to its body, only its animating spirit. Thus, the corpse can’t learn new information, doesn’t comprehend anything that has happened since it died, and can’t speculate about future events.",
+  "level": 3,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "10 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You grant the semblance of life to a corpse of your choice within range, allowing it to answer questions you pose. The corpse must have a mouth, and this spell fails if the deceased creature was Undead when it died. The spell also fails if the corpse was the target of this spell within the past 10 days.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619068-speak-with-dead",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Communication (...)",
+    "primaryEffectCategory": "Communication & Language",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Secondary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Exclusive"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Speak with Dead",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "10 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Communication (...)",
+      "Source": "",
+      "Description": "You grant the semblance of life to a corpse of your choice within range, allowing it to answer questions you pose. The corpse must have a mouth, and this spell fails if the deceased creature was Undead when it died. The spell also fails if the corpse was the target of this spell within the past 10 days.\n\nUntil the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are antagonistic toward it or it recognizes you as an enemy. This spell doesn’t return the creature’s soul to its body, only its animating spirit. Thus, the corpse can’t learn new information, doesn’t comprehend anything that has happened since it died, and can’t speculate about future events.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619068-speak-with-dead",
+      "Primary Effect Category": "Communication & Language",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Secondary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Exclusive"
+    }
+  }
+}

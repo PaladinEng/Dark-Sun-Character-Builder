@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:animal-messenger",
+  "name": "Animal Messenger",
+  "description": "A Tiny Beast of your choice that you can see within range must succeed on a Charisma saving throw, or it attempts to deliver a message for you (if the target’s Challenge Rating isn’t 0, it automatically succeeds). You specify a location you have visited and a recipient who matches a general description, such as “a person dressed in the uniform of the town guard” or “a red-haired dwarf wearing a pointed hat.” You also communicate a message of up to twenty-five words. The Beast travels for the duration toward the specified location, covering about 25 miles per 24 hours or 50 miles if the Beast can fly.\n\nWhen the Beast arrives, it delivers your message to the creature that you described, mimicking your communication. If the Beast doesn’t reach its destination before the spell ends, the message is lost, and the Beast returns to where you cast the spell.\n\nUsing a Higher-Level Spell Slot. The spell’s duration increases by 48 hours for each spell slot level above 2.",
+  "level": 2,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "30 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "24 Hours",
+  "concentration": false,
+  "summary": "A Tiny Beast of your choice that you can see within range must succeed on a Charisma saving throw, or it attempts to deliver a message for you (if the target’s Challenge Rating isn’t 0, it automatically succeeds). You specify a location you have visited and a recipient who matches a general description, such as “a person dressed in the uniform of the town guard” or “a red-haired dwarf wearing a pointed hat.” You also communicate a message of up to twenty-five words. The Beast travels for the duration toward the specified location, covering about 25 miles per 24 hours or 50 miles if the Beast can fly.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618850-animal-messenger",
+    "area": "",
+    "materials": "",
+    "attackSave": "CHA Save",
+    "damageEffect": "Communication (...)",
+    "primaryEffectCategory": "Movement Enhancement",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Animal Messenger",
+      "School": "Enchantment",
+      "Casting Time": "1 Action",
+      "Range": "30 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "24 Hours",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CHA Save",
+      "Damage/Effect": "Communication (...)",
+      "Source": "",
+      "Description": "A Tiny Beast of your choice that you can see within range must succeed on a Charisma saving throw, or it attempts to deliver a message for you (if the target’s Challenge Rating isn’t 0, it automatically succeeds). You specify a location you have visited and a recipient who matches a general description, such as “a person dressed in the uniform of the town guard” or “a red-haired dwarf wearing a pointed hat.” You also communicate a message of up to twenty-five words. The Beast travels for the duration toward the specified location, covering about 25 miles per 24 hours or 50 miles if the Beast can fly.\n\nWhen the Beast arrives, it delivers your message to the creature that you described, mimicking your communication. If the Beast doesn’t reach its destination before the spell ends, the message is lost, and the Beast returns to where you cast the spell.\n\nUsing a Higher-Level Spell Slot. The spell’s duration increases by 48 hours for each spell slot level above 2.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618850-animal-messenger",
+      "Primary Effect Category": "Movement Enhancement",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Primary"
+    }
+  }
+}

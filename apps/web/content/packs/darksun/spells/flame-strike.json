@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:flame-strike",
+  "name": "Flame Strike",
+  "description": "A vertical column of brilliant fire roars down from above. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range makes a Dexterity saving throw, taking 5d6 Fire damage and 5d6 Radiant damage on a failed save or half as much damage on a successful one.\n\nUsing a Higher-Level Spell Slot. The Fire damage and the Radiant damage increase by 1d6 for each spell slot level above 5.",
+  "level": 5,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A vertical column of brilliant fire roars down from above. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range makes a Dexterity saving throw, taking 5d6 Fire damage and 5d6 Radiant damage on a failed save or half as much damage on a successful one.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618920-flame-strike",
+    "area": "(10 ft. *)",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Fire (...)",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Flame Strike",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "(10 ft. *)",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Fire (...)",
+      "Source": "",
+      "Description": "A vertical column of brilliant fire roars down from above. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range makes a Dexterity saving throw, taking 5d6 Fire damage and 5d6 Radiant damage on a failed save or half as much damage on a successful one.\n\nUsing a Higher-Level Spell Slot. The Fire damage and the Radiant damage increase by 1d6 for each spell slot level above 5.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618920-flame-strike",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:ottos-irresistible-dance",
+  "name": "Otto's Irresistible Dance",
+  "description": "One creature that you can see within range must make a Wisdom saving throw. On a successful save, the target dances comically until the end of its next turn, during which it must spend all its movement to dance in place.\n\nOn a failed save, the target has the Charmed condition for the duration. While Charmed, the target dances comically, must use all its movement to dance in place, and has Disadvantage on Dexterity saving throws and attack rolls, and other creatures have Advantage on attack rolls against it. On each of its turns, the target can take an action to collect itself and repeat the save, ending the spell on itself on a success.",
+  "level": 6,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "30 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "One creature that you can see within range must make a Wisdom saving throw. On a successful save, the target dances comically until the end of its next turn, during which it must spend all its movement to dance in place.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619130-ottos-irresistible-dance",
+    "area": "",
+    "materials": "",
+    "attackSave": "WIS Save",
+    "damageEffect": "Control (...)",
+    "primaryEffectCategory": "Mind Control & Mental Influence",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Exclusive"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Otto's Irresistible Dance",
+      "School": "Enchantment",
+      "Casting Time": "1 Action",
+      "Range": "30 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "WIS Save",
+      "Damage/Effect": "Control (...)",
+      "Source": "",
+      "Description": "One creature that you can see within range must make a Wisdom saving throw. On a successful save, the target dances comically until the end of its next turn, during which it must spend all its movement to dance in place.\n\nOn a failed save, the target has the Charmed condition for the duration. While Charmed, the target dances comically, must use all its movement to dance in place, and has Disadvantage on Dexterity saving throws and attack rolls, and other creatures have Advantage on attack rolls against it. On each of its turns, the target can take an action to collect itself and repeat the save, ending the spell on itself on a success.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619130-ottos-irresistible-dance",
+      "Primary Effect Category": "Mind Control & Mental Influence",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Exclusive"
+    }
+  }
+}

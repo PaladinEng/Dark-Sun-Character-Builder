@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:enervation",
+  "name": "Enervation",
+  "description": "A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell’s range, or if the target has total cover from you.\n\nWhenever the spell deals damage to a target, you regain hit points equal to half the amount of necrotic damage the target takes.\n\nAt Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",
+  "level": 5,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell’s range, or if the target has total cover from you.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14869-enervation",
+    "area": "",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Necrotic",
+    "primaryEffectCategory": "Healing & Restoration",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Enervation",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Necrotic",
+      "Source": "",
+      "Description": "A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell’s range, or if the target has total cover from you.\n\nWhenever the spell deals damage to a target, you regain hit points equal to half the amount of necrotic damage the target takes.\n\nAt Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14869-enervation",
+      "Primary Effect Category": "Healing & Restoration",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:water-walk",
+  "name": "Water Walk",
+  "description": "This spell grants the ability to move across any liquid surface—such as water, acid, mud, snow, quicksand, or lava—as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat). Up to ten willing creatures of your choice within range gain this ability for the duration.\n\nAn affected target must take a Bonus Action to pass from the liquid’s surface into the liquid itself and vice versa, but if the target falls into the liquid, the target passes through the surface into the liquid below.",
+  "level": 3,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "30 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "This spell grants the ability to move across any liquid surface—such as water, acid, mud, snow, quicksand, or lava—as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat). Up to ten willing creatures of your choice within range gain this ability for the duration.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619207-water-walk",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Movement",
+    "primaryEffectCategory": "Movement Enhancement",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Water Walk",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "30 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Movement",
+      "Source": "",
+      "Description": "This spell grants the ability to move across any liquid surface—such as water, acid, mud, snow, quicksand, or lava—as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat). Up to ten willing creatures of your choice within range gain this ability for the duration.\n\nAn affected target must take a Bonus Action to pass from the liquid’s surface into the liquid itself and vice versa, but if the target falls into the liquid, the target passes through the surface into the liquid below.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619207-water-walk",
+      "Primary Effect Category": "Movement Enhancement",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Primary"
+    }
+  }
+}

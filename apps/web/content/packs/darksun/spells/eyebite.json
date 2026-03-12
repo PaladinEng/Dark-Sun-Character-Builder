@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:eyebite",
+  "name": "Eyebite",
+  "description": "For the duration, your eyes become an inky void. One creature of your choice within 60 feet of you that you can see must succeed on a Wisdom saving throw or be affected by one of the following effects of your choice for the duration.\n\nOn each of your turns until the spell ends, you can take a Magic action to target another creature but can’t target a creature again if it has succeeded on a save against this casting of the spell.\n\nAsleep. The target has the Unconscious condition. It wakes up if it takes any damage or if another creature takes an action to shake it awake.\n\nPanicked. The target has the Frightened condition. On each of its turns, the Frightened target must take the Dash action and move away from you by the safest and shortest route available. If the target moves to a space at least 60 feet away from you where it can’t see you, this effect ends.\n\nSickened. The target has the Poisoned condition.",
+  "level": 6,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "For the duration, your eyes become an inky void. One creature of your choice within 60 feet of you that you can see must succeed on a Wisdom saving throw or be affected by one of the following effects of your choice for the duration.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619191-eyebite",
+    "area": "",
+    "materials": "",
+    "attackSave": "WIS Save",
+    "damageEffect": "Unconscious (...)",
+    "primaryEffectCategory": "Mind Control & Mental Influence",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Exclusive"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Eyebite",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "WIS Save",
+      "Damage/Effect": "Unconscious (...)",
+      "Source": "",
+      "Description": "For the duration, your eyes become an inky void. One creature of your choice within 60 feet of you that you can see must succeed on a Wisdom saving throw or be affected by one of the following effects of your choice for the duration.\n\nOn each of your turns until the spell ends, you can take a Magic action to target another creature but can’t target a creature again if it has succeeded on a save against this casting of the spell.\n\nAsleep. The target has the Unconscious condition. It wakes up if it takes any damage or if another creature takes an action to shake it awake.\n\nPanicked. The target has the Frightened condition. On each of its turns, the Frightened target must take the Dash action and move away from you by the safest and shortest route available. If the target moves to a space at least 60 feet away from you where it can’t see you, this effect ends.\n\nSickened. The target has the Poisoned condition.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619191-eyebite",
+      "Primary Effect Category": "Mind Control & Mental Influence",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Exclusive"
+    }
+  }
+}

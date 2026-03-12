@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:find-greater-steed",
+  "name": "Find Greater Steed",
+  "description": "You summon a spirit that assumes the form of a loyal, majestic mount. Appearing in an unoccupied space within range, the spirit takes on a form you choose: a griffon , a pegasus , a peryton , a dire wolf , a rhinoceros , or a saber-toothed tiger . The creature has the statistics provided in the Monster Manual for the chosen form, though it is a celestial, a fey, or a fiend (your choice) instead of its normal creature type. Additionally, if it has an Intelligence score of 5 or lower, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak.\n\nYou control the mount in combat. While the mount is within 1 mile of you, you can communicate with it telepathically. While mounted on it, you can make any spell you cast that targets only you also target the mount.\n\nThe mount disappears temporarily when it drops to 0 hit points or when you dismiss it as an action. Casting this spell again re-summons the bonded mount, with all its hit points restored and any conditions removed.\n\nYou can’t have more than one mount bonded by this spell or find steed at the same time. As an action, you can release a mount from its bond, causing it to disappear permanently.\n\nWhenever the mount disappears, it leaves behind any objects it was wearing or carrying.",
+  "level": 4,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "10 Minutes",
+  "range": "30 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You summon a spirit that assumes the form of a loyal, majestic mount. Appearing in an unoccupied space within range, the spirit takes on a form you choose: a griffon , a pegasus , a peryton , a dire wolf , a rhinoceros , or a saber-toothed tiger . The creature has the statistics provided in the Monster Manual for the chosen form, though it is a celestial, a fey, or a fiend (your choice) instead of its normal creature type. Additionally, if it has an Intelligence score of 5 or lower, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14871-find-greater-steed",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Summoning — Extraplanar",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Secondary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Find Greater Steed",
+      "School": "Conjuration",
+      "Casting Time": "10 Minutes",
+      "Range": "30 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You summon a spirit that assumes the form of a loyal, majestic mount. Appearing in an unoccupied space within range, the spirit takes on a form you choose: a griffon , a pegasus , a peryton , a dire wolf , a rhinoceros , or a saber-toothed tiger . The creature has the statistics provided in the Monster Manual for the chosen form, though it is a celestial, a fey, or a fiend (your choice) instead of its normal creature type. Additionally, if it has an Intelligence score of 5 or lower, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak.\n\nYou control the mount in combat. While the mount is within 1 mile of you, you can communicate with it telepathically. While mounted on it, you can make any spell you cast that targets only you also target the mount.\n\nThe mount disappears temporarily when it drops to 0 hit points or when you dismiss it as an action. Casting this spell again re-summons the bonded mount, with all its hit points restored and any conditions removed.\n\nYou can’t have more than one mount bonded by this spell or find steed at the same time. As an action, you can release a mount from its bond, causing it to disappear permanently.\n\nWhenever the mount disappears, it leaves behind any objects it was wearing or carrying.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14871-find-greater-steed",
+      "Primary Effect Category": "Summoning — Extraplanar",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Secondary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

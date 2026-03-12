@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:maelstrom",
+  "name": "Maelstrom",
+  "description": "A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is difficult terrain, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.",
+  "level": 5,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is difficult terrain, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2390-maelstrom",
+    "area": "",
+    "materials": "",
+    "attackSave": "STR Save",
+    "damageEffect": "Bludgeoning",
+    "primaryEffectCategory": "Terrain Manipulation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Primary",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Maelstrom",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "120 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "STR Save",
+      "Damage/Effect": "Bludgeoning",
+      "Source": "",
+      "Description": "A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is difficult terrain, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2390-maelstrom",
+      "Primary Effect Category": "Terrain Manipulation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Primary",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

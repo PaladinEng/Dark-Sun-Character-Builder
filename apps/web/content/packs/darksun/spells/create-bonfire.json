@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:create-bonfire",
+  "name": "Create Bonfire",
+  "description": "You create a bonfire on ground that you can see within range. Until the spell ends, the magic bonfire fills a 5-foot cube. Any creature in the bonfire’s space when you cast the spell must succeed on a Dexterity saving throw or take 1d8 fire damage. A creature must also make the saving throw when it moves into the bonfire’s space for the first time on a turn or ends its turn there.\n\nThe bonfire ignites flammable objects in its area that aren’t being worn or carried.\n\nThe spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+  "level": 0,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You create a bonfire on ground that you can see within range. Until the spell ends, the magic bonfire fills a 5-foot cube. Any creature in the bonfire’s space when you cast the spell must succeed on a Dexterity saving throw or take 1d8 fire damage. A creature must also make the saving throw when it moves into the bonfire’s space for the first time on a turn or ends its turn there.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2373-create-bonfire",
+    "area": "(5 ft. )",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Fire",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "Cantrip",
+      "Name": "Create Bonfire",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "(5 ft. )",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Fire",
+      "Source": "",
+      "Description": "You create a bonfire on ground that you can see within range. Until the spell ends, the magic bonfire fills a 5-foot cube. Any creature in the bonfire’s space when you cast the spell must succeed on a Dexterity saving throw or take 1d8 fire damage. A creature must also make the saving throw when it moves into the bonfire’s space for the first time on a turn or ends its turn there.\n\nThe bonfire ignites flammable objects in its area that aren’t being worn or carried.\n\nThe spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2373-create-bonfire",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

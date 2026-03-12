@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:meld-into-stone",
+  "name": "Meld into Stone",
+  "description": "You step into a stone object or surface large enough to fully contain your body, merging yourself and your equipment with the stone for the duration. You must touch the stone to do so. Nothing of your presence remains visible or otherwise detectable by nonmagical senses.\n\nWhile merged with the stone, you can’t see what occurs outside it, and any Wisdom ( Perception ) checks you make to hear sounds outside it are made with Disadvantage. You remain aware of the passage of time and can cast spells on yourself while merged in the stone. You can use 5 feet of movement to leave the stone where you entered it, which ends the spell. You otherwise can’t move.\n\nMinor physical damage to the stone doesn’t harm you, but its partial destruction or a change in its shape (to the extent that you no longer fit within it) expels you and deals 6d6 Force damage to you. The stone’s complete destruction (or transmutation into a different substance) expels you and deals 50 Force damage to you. If expelled, you move into an unoccupied space closest to where you first entered and have the Prone condition.",
+  "level": 3,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "8 Hours",
+  "concentration": false,
+  "summary": "You step into a stone object or surface large enough to fully contain your body, merging yourself and your equipment with the stone for the duration. You must touch the stone to do so. Nothing of your presence remains visible or otherwise detectable by nonmagical senses.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619031-meld-into-stone",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Movement",
+    "primaryEffectCategory": "Transformation / Polymorph",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Meld into Stone",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "8 Hours",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Movement",
+      "Source": "",
+      "Description": "You step into a stone object or surface large enough to fully contain your body, merging yourself and your equipment with the stone for the duration. You must touch the stone to do so. Nothing of your presence remains visible or otherwise detectable by nonmagical senses.\n\nWhile merged with the stone, you can’t see what occurs outside it, and any Wisdom ( Perception ) checks you make to hear sounds outside it are made with Disadvantage. You remain aware of the passage of time and can cast spells on yourself while merged in the stone. You can use 5 feet of movement to leave the stone where you entered it, which ends the spell. You otherwise can’t move.\n\nMinor physical damage to the stone doesn’t harm you, but its partial destruction or a change in its shape (to the extent that you no longer fit within it) expels you and deals 6d6 Force damage to you. The stone’s complete destruction (or transmutation into a different substance) expels you and deals 50 Force damage to you. If expelled, you move into an unoccupied space closest to where you first entered and have the Prone condition.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619031-meld-into-stone",
+      "Primary Effect Category": "Transformation / Polymorph",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:immolation",
+  "name": "Immolation",
+  "description": "Flames wreathe one creature you can see within range. The target must make a Dexterity saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for the spell’s duration. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can’t be extinguished by nonmagical means.\n\nIf damage from this spell kills a target, the target is turned to ash.",
+  "level": 5,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "Flames wreathe one creature you can see within range. The target must make a Dexterity saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for the spell’s duration. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can’t be extinguished by nonmagical means.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2385-immolation",
+    "area": "",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Fire (...)",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Immolation",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Fire (...)",
+      "Source": "",
+      "Description": "Flames wreathe one creature you can see within range. The target must make a Dexterity saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for the spell’s duration. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can’t be extinguished by nonmagical means.\n\nIf damage from this spell kills a target, the target is turned to ash.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2385-immolation",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

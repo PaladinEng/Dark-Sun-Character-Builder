@@ -2,6 +2,7 @@ import "server-only";
 
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import type { MergedContent } from "@dark-sun/content";
 
 type BuilderOptions = {
   species: Array<{ id: string; name: string }>;
@@ -51,6 +52,7 @@ export type PackSettingProfile = {
   name: string;
   speciesReplacementIds: string[];
   backgroundReplacementIds: string[];
+  classSpellListOverrides: Record<string, string[]>;
   disabledClassIds: string[];
   classReplacements: Record<string, string>;
   disabledSubclassIds: string[];
@@ -76,6 +78,14 @@ export type PackSettingProfile = {
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((entry) => typeof entry === "string");
+}
+
+function isRecordOfStringArrays(value: unknown): value is Record<string, string[]> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    Object.values(value).every((entry) => isStringArray(entry))
+  );
 }
 
 async function readJson(filePath: string): Promise<unknown> {
@@ -129,6 +139,11 @@ function parseProfile(raw: unknown): Omit<PackSettingProfile, "languages" | "tra
         typeof replacement === "string" ? ([[key, replacement]] as Array<[string, string]>) : [],
     ),
   ) as Record<string, string>;
+  const classSpellListOverrides = Object.fromEntries(
+    Object.entries(
+      isRecordOfStringArrays(value.classSpellListOverrides) ? value.classSpellListOverrides : {},
+    ).map(([key, spellListIds]) => [key, [...spellListIds]]),
+  ) as Record<string, string[]>;
 
   return {
     id: value.id,
@@ -140,6 +155,7 @@ function parseProfile(raw: unknown): Omit<PackSettingProfile, "languages" | "tra
     backgroundReplacementIds: isStringArray(value.backgroundReplacementIds)
       ? value.backgroundReplacementIds
       : [],
+    classSpellListOverrides,
     disabledClassIds: value.disabledClassIds,
     classReplacements,
     disabledSubclassIds: value.disabledSubclassIds,
@@ -330,6 +346,10 @@ export async function getResolvedPackSettings(
       backgroundReplacementIds: Array.from(
         new Set([...merged.backgroundReplacementIds, ...next.backgroundReplacementIds]),
       ),
+      classSpellListOverrides: {
+        ...merged.classSpellListOverrides,
+        ...next.classSpellListOverrides,
+      },
       disabledClassIds: Array.from(new Set([...merged.disabledClassIds, ...next.disabledClassIds])),
       classReplacements: {
         ...merged.classReplacements,
@@ -391,5 +411,45 @@ export function applySettingRestrictions(
       : options.backgrounds,
     classes: options.classes.filter((entry) => !disabledClassIds.has(entry.id)),
     subclasses: options.subclasses.filter((entry) => !disabledSubclassIds.has(entry.id)),
+  };
+}
+
+export function applySettingContentOverrides(
+  content: MergedContent,
+  settings: PackSettingProfile | null,
+): MergedContent {
+  if (!settings || Object.keys(settings.classSpellListOverrides).length === 0) {
+    return content;
+  }
+
+  let changed = false;
+  const classes = content.classes.map((entry) => {
+    const overrideIds = settings.classSpellListOverrides[entry.id];
+    if (!overrideIds) {
+      return entry;
+    }
+    const normalizedOverrideIds = [...overrideIds];
+    const currentIds = entry.spellListRefIds ?? entry.spellListRefs ?? [];
+    if (JSON.stringify(currentIds) === JSON.stringify(normalizedOverrideIds)) {
+      return entry;
+    }
+    changed = true;
+    return {
+      ...entry,
+      spellListRefIds: normalizedOverrideIds,
+      spellListRefs: normalizedOverrideIds,
+    };
+  });
+
+  if (!changed) {
+    return content;
+  }
+
+  const classesById = Object.fromEntries(classes.map((entry) => [entry.id, entry]));
+
+  return {
+    ...content,
+    classes,
+    classesById,
   };
 }

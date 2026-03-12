@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:stinking-cloud",
+  "name": "Stinking Cloud",
+  "description": "You create a 20-foot-radius Sphere of yellow, nauseating gas centered on a point within range. The cloud is Heavily Obscured . The cloud lingers in the air for the duration or until a strong wind (such as the one created by Gust of Wind ) disperses it.\n\nEach creature that starts its turn in the Sphere must succeed on a Constitution saving throw or have the Poisoned condition until the end of the current turn. While Poisoned in this way, the creature can’t take an action or a Bonus Action.",
+  "level": 3,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You create a 20-foot-radius Sphere of yellow, nauseating gas centered on a point within range. The cloud is Heavily Obscured . The cloud lingers in the air for the duration or until a strong wind (such as the one created by Gust of Wind ) disperses it.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619091-stinking-cloud",
+    "area": "(20 ft. )",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Poisoned",
+    "primaryEffectCategory": "Conditions & Debuffs",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Secondary"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Stinking Cloud",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "(20 ft. )",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Poisoned",
+      "Source": "",
+      "Description": "You create a 20-foot-radius Sphere of yellow, nauseating gas centered on a point within range. The cloud is Heavily Obscured . The cloud lingers in the air for the duration or until a strong wind (such as the one created by Gust of Wind ) disperses it.\n\nEach creature that starts its turn in the Sphere must succeed on a Constitution saving throw or have the Poisoned condition until the end of the current turn. While Poisoned in this way, the creature can’t take an action or a Bonus Action.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619091-stinking-cloud",
+      "Primary Effect Category": "Conditions & Debuffs",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Secondary"
+    }
+  }
+}

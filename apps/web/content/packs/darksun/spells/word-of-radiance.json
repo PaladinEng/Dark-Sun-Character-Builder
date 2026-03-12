@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:word-of-radiance",
+  "name": "Word of Radiance",
+  "description": "Burning radiance erupts from you in a 5-foot Emanation . Each creature of your choice that you can see in it must succeed on a Constitution saving throw or take 1d6 Radiant damage.\n\nCantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",
+  "level": 0,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Burning radiance erupts from you in a 5-foot Emanation . Each creature of your choice that you can see in it must succeed on a Constitution saving throw or take 1d6 Radiant damage.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619217-word-of-radiance",
+    "area": "(5 ft. )",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Radiant",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "Cantrip",
+      "Name": "Word of Radiance",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "(5 ft. )",
+      "Components": "V, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Radiant",
+      "Source": "",
+      "Description": "Burning radiance erupts from you in a 5-foot Emanation . Each creature of your choice that you can see in it must succeed on a Constitution saving throw or take 1d6 Radiant damage.\n\nCantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619217-word-of-radiance",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:conjure-fey",
+  "name": "Conjure Fey",
+  "description": "You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.\n\nAs a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d12 for each spell slot level above 6.",
+  "level": 6,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619048-conjure-fey",
+    "area": "",
+    "materials": "",
+    "attackSave": "Melee",
+    "damageEffect": "Psychic",
+    "primaryEffectCategory": "Summoning — Natural",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Exclusive",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Conjure Fey",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "Melee",
+      "Damage/Effect": "Psychic",
+      "Source": "",
+      "Description": "You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.\n\nAs a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d12 for each spell slot level above 6.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619048-conjure-fey",
+      "Primary Effect Category": "Summoning — Natural",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Exclusive",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

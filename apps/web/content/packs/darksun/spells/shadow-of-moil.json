@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:shadow-of-moil",
+  "name": "Shadow of Moil",
+  "description": "Flame-like shadows wreathe your body until the spell ends, causing you to become heavily obscured to others. The shadows turn dim light within 10 feet of you into darkness, and bright light in the same area to dim light.\n\nUntil the spell ends, you have resistance to radiant damage. In addition, whenever a creature within 10 feet of you hits you with an attack, the shadows lash out at that creature, dealing it 2d8 necrotic damage.",
+  "level": 4,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "Flame-like shadows wreathe your body until the spell ends, causing you to become heavily obscured to others. The shadows turn dim light within 10 feet of you into darkness, and bright light in the same area to dim light.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14596-shadow-of-moil",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Necrotic",
+    "primaryEffectCategory": "Undead Creation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Shadow of Moil",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Necrotic",
+      "Source": "",
+      "Description": "Flame-like shadows wreathe your body until the spell ends, causing you to become heavily obscured to others. The shadows turn dim light within 10 feet of you into darkness, and bright light in the same area to dim light.\n\nUntil the spell ends, you have resistance to radiant damage. In addition, whenever a creature within 10 feet of you hits you with an attack, the shadows lash out at that creature, dealing it 2d8 necrotic damage.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14596-shadow-of-moil",
+      "Primary Effect Category": "Undead Creation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

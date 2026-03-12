@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:continual-flame",
+  "name": "Continual Flame",
+  "description": "A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched.",
+  "level": 2,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Until Dispelled",
+  "concentration": false,
+  "summary": "A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619065-continual-flame",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Creation",
+    "primaryEffectCategory": "Illusions & Glamours",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Continual Flame",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Until Dispelled",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Creation",
+      "Source": "",
+      "Description": "A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619065-continual-flame",
+      "Primary Effect Category": "Illusions & Glamours",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

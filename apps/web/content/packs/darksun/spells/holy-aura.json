@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:holy-aura",
+  "name": "Holy Aura",
+  "description": "For the duration, you emit an aura in a 30-foot Emanation . While in the aura, creatures of your choice have Advantage on all saving throws, and other creatures have Disadvantage on attack rolls against them. In addition, when a Fiend or an Undead hits an affected creature with a melee attack roll, the attacker must succeed on a Constitution saving throw or have the Blinded condition until the end of its next turn.",
+  "level": 8,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "For the duration, you emit an aura in a 30-foot Emanation . While in the aura, creatures of your choice have Advantage on all saving throws, and other creatures have Disadvantage on attack rolls against them. In addition, when a Fiend or an Undead hits an affected creature with a melee attack roll, the attacker must succeed on a Constitution saving throw or have the Blinded condition until the end of its next turn.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619155-holy-aura",
+    "area": "(30 ft. )",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Blinded",
+    "primaryEffectCategory": "Wards & Sanctuaries",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "8th",
+      "Name": "Holy Aura",
+      "School": "Abjuration",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "(30 ft. )",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Blinded",
+      "Source": "",
+      "Description": "For the duration, you emit an aura in a 30-foot Emanation . While in the aura, creatures of your choice have Advantage on all saving throws, and other creatures have Disadvantage on attack rolls against them. In addition, when a Fiend or an Undead hits an affected creature with a melee attack roll, the attacker must succeed on a Constitution saving throw or have the Blinded condition until the end of its next turn.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619155-holy-aura",
+      "Primary Effect Category": "Wards & Sanctuaries",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

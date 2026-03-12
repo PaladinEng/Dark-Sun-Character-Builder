@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:call-lightning",
+  "name": "Call Lightning",
+  "description": "A storm cloud appears at a point within range that you can see above yourself. It takes the shape of a Cylinder that is 10 feet tall with a 60-foot radius.\n\nWhen you cast the spell, choose a point you can see under the cloud. A lightning bolt shoots from the cloud to that point. Each creature within 5 feet of that point makes a Dexterity saving throw, taking 3d10 Lightning damage on a failed save or half as much damage on a successful one.\n\nUntil the spell ends, you can take a Magic action to call down lightning in that way again, targeting the same point or a different one.\n\nIf you’re outdoors in a storm when you cast this spell, the spell gives you control over that storm instead of creating a new one. Under such conditions, the spell’s damage increases by 1d10.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 3.",
+  "level": 3,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "A storm cloud appears at a point within range that you can see above yourself. It takes the shape of a Cylinder that is 10 feet tall with a 60-foot radius.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618949-call-lightning",
+    "area": "(60 ft. *)",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Lightning (...)",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Call Lightning",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "120 ft.",
+      "Area": "(60 ft. *)",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Lightning (...)",
+      "Source": "",
+      "Description": "A storm cloud appears at a point within range that you can see above yourself. It takes the shape of a Cylinder that is 10 feet tall with a 60-foot radius.\n\nWhen you cast the spell, choose a point you can see under the cloud. A lightning bolt shoots from the cloud to that point. Each creature within 5 feet of that point makes a Dexterity saving throw, taking 3d10 Lightning damage on a failed save or half as much damage on a successful one.\n\nUntil the spell ends, you can take a Magic action to call down lightning in that way again, targeting the same point or a different one.\n\nIf you’re outdoors in a storm when you cast this spell, the spell gives you control over that storm instead of creating a new one. Under such conditions, the spell’s damage increases by 1d10.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 3.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618949-call-lightning",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

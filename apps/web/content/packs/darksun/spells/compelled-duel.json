@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:compelled-duel",
+  "name": "Compelled Duel",
+  "description": "You try to compel a creature into a duel. One creature that you can see within range makes a Wisdom saving throw. On a failed save, the target has Disadvantage on attack rolls against creatures other than you, and it can’t willingly move to a space that is more than 30 feet away from you.\n\nThe spell ends if you make an attack roll against a creature other than the target, if you cast a spell on an enemy other than the target, if an ally of yours damages the target, or if you end your turn more than 30 feet away from the target.",
+  "level": 1,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "30 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You try to compel a creature into a duel. One creature that you can see within range makes a Wisdom saving throw. On a failed save, the target has Disadvantage on attack rolls against creatures other than you, and it can’t willingly move to a space that is more than 30 feet away from you.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618990-compelled-duel",
+    "area": "",
+    "materials": "",
+    "attackSave": "WIS Save",
+    "damageEffect": "Control (...)",
+    "primaryEffectCategory": "Conditions & Debuffs",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Secondary"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Compelled Duel",
+      "School": "Enchantment",
+      "Casting Time": "1 Bonus Action",
+      "Range": "30 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "WIS Save",
+      "Damage/Effect": "Control (...)",
+      "Source": "",
+      "Description": "You try to compel a creature into a duel. One creature that you can see within range makes a Wisdom saving throw. On a failed save, the target has Disadvantage on attack rolls against creatures other than you, and it can’t willingly move to a space that is more than 30 feet away from you.\n\nThe spell ends if you make an attack roll against a creature other than the target, if you cast a spell on an enemy other than the target, if an ally of yours damages the target, or if you end your turn more than 30 feet away from the target.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618990-compelled-duel",
+      "Primary Effect Category": "Conditions & Debuffs",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Secondary"
+    }
+  }
+}

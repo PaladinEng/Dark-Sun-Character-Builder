@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:aura-of-purity",
+  "name": "Aura of Purity",
+  "description": "An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Poison damage and Advantage on saving throws to avoid or end effects that include the Blinded , Charmed , Deafened , Frightened , Paralyzed , Poisoned , or Stunned condition.",
+  "level": 4,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Poison damage and Advantage on saving throws to avoid or end effects that include the Blinded , Charmed , Deafened , Frightened , Paralyzed , Poisoned , or Stunned condition.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618888-aura-of-purity",
+    "area": "(30 ft. )",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Buff (...)",
+    "primaryEffectCategory": "Conditions & Debuffs",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Secondary"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Aura of Purity",
+      "School": "Abjuration",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "(30 ft. )",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Buff (...)",
+      "Source": "",
+      "Description": "An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Poison damage and Advantage on saving throws to avoid or end effects that include the Blinded , Charmed , Deafened , Frightened , Paralyzed , Poisoned , or Stunned condition.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618888-aura-of-purity",
+      "Primary Effect Category": "Conditions & Debuffs",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Secondary"
+    }
+  }
+}

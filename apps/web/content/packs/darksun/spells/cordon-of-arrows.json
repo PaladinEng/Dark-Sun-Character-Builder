@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:cordon-of-arrows",
+  "name": "Cordon of Arrows",
+  "description": "You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can’t be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.\n\nWhen you cast this spell, you can designate any creatures you choose, and the spell ignores them.\n\nUsing a Higher-Level Spell Slot. The amount of ammunition that can be affected increases by two for each spell slot level above 2.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "8 Hours",
+  "concentration": false,
+  "summary": "You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can’t be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619055-cordon-of-arrows",
+    "area": "",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Piercing",
+    "primaryEffectCategory": "Terrain Manipulation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Primary",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Cordon of Arrows",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "8 Hours",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Piercing",
+      "Source": "",
+      "Description": "You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can’t be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.\n\nWhen you cast this spell, you can designate any creatures you choose, and the spell ignores them.\n\nUsing a Higher-Level Spell Slot. The amount of ammunition that can be affected increases by two for each spell slot level above 2.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619055-cordon-of-arrows",
+      "Primary Effect Category": "Terrain Manipulation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Primary",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:create-magen",
+  "name": "Create Magen",
+  "description": "",
+  "level": 7,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Hour",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/654073-create-magen",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "",
+    "primaryEffectCategory": "Transformation / Polymorph",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "7th",
+      "Name": "Create Magen",
+      "School": "Transmutation",
+      "Casting Time": "1 Hour",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "",
+      "Source": "",
+      "Description": "",
+      "URL_absolute": "https://www.dndbeyond.com/spells/654073-create-magen",
+      "Primary Effect Category": "Transformation / Polymorph",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

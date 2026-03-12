@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:primordial-ward",
+  "name": "Primordial Ward",
+  "description": "You have resistance to acid, cold, fire, lightning, and thunder damage for the spell’s duration.\n\nWhen you take damage of one of those types, you can use your reaction to gain immunity to that type of damage, including against the triggering damage.\n\nIf you do so, the resistances end, and you have the immunity until the end of your next turn, at which time the spell ends.",
+  "level": 6,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You have resistance to acid, cold, fire, lightning, and thunder damage for the spell’s duration.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2395-primordial-ward",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Warding",
+    "primaryEffectCategory": "Wards & Sanctuaries",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Primordial Ward",
+      "School": "Abjuration",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Warding",
+      "Source": "",
+      "Description": "You have resistance to acid, cold, fire, lightning, and thunder damage for the spell’s duration.\n\nWhen you take damage of one of those types, you can use your reaction to gain immunity to that type of damage, including against the triggering damage.\n\nIf you do so, the resistances end, and you have the immunity until the end of your next turn, at which time the spell ends.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2395-primordial-ward",
+      "Primary Effect Category": "Wards & Sanctuaries",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

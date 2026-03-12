@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:vitriolic-sphere",
+  "name": "Vitriolic Sphere",
+  "description": "You point at a location within range, and a glowing, 1-foot-diameter ball of acid streaks there and explodes in a 20-foot-radius Sphere . Each creature in that area makes a Dexterity saving throw. On a failed save, a creature takes 10d4 Acid damage and another 5d4 Acid damage at the end of its next turn. On a successful save, a creature takes half the initial damage only.\n\nUsing a Higher-Level Spell Slot. The initial damage increases by 2d4 for each spell slot level above 4.",
+  "level": 4,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "150 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You point at a location within range, and a glowing, 1-foot-diameter ball of acid streaks there and explodes in a 20-foot-radius Sphere . Each creature in that area makes a Dexterity saving throw. On a failed save, a creature takes 10d4 Acid damage and another 5d4 Acid damage at the end of its next turn. On a successful save, a creature takes half the initial damage only.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619219-vitriolic-sphere",
+    "area": "(20 ft. )",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Acid (...)",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Vitriolic Sphere",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "150 ft.",
+      "Area": "(20 ft. )",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Acid (...)",
+      "Source": "",
+      "Description": "You point at a location within range, and a glowing, 1-foot-diameter ball of acid streaks there and explodes in a 20-foot-radius Sphere . Each creature in that area makes a Dexterity saving throw. On a failed save, a creature takes 10d4 Acid damage and another 5d4 Acid damage at the end of its next turn. On a successful save, a creature takes half the initial damage only.\n\nUsing a Higher-Level Spell Slot. The initial damage increases by 2d4 for each spell slot level above 4.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619219-vitriolic-sphere",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

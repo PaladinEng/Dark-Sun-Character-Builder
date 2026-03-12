@@ -71,5 +71,19 @@
     "Athasian Bard mechanics",
     "Wild Talent mechanical effects beyond table assignment",
     "Preserver spell-point and Rite of Blood automation"
-  ]
+  ],
+  "classSpellListOverrides": {
+    "srd52:class:wizard": [
+      "darksun:spelllist:tradition:arcane"
+    ],
+    "srd52:class:warlock": [
+      "darksun:spelllist:tradition:arcane"
+    ],
+    "srd52:class:druid": [
+      "darksun:spelllist:tradition:nature"
+    ],
+    "srd52:class:ranger": [
+      "darksun:spelllist:tradition:nature"
+    ]
+  }
 }

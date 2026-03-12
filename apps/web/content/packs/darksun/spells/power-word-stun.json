@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:power-word-stun",
+  "name": "Power Word Stun",
+  "description": "You overwhelm the mind of one creature you can see within range. If the target has 150 Hit Points or fewer, it has the Stunned condition. Otherwise, its Speed is 0 until the start of your next turn.\n\nThe Stunned target makes a Constitution saving throw at the end of each of its turns, ending the condition on itself on a success.",
+  "level": 8,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You overwhelm the mind of one creature you can see within range. If the target has 150 Hit Points or fewer, it has the Stunned condition. Otherwise, its Speed is 0 until the start of your next turn.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618889-power-word-stun",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Stunned",
+    "primaryEffectCategory": "Conditions & Debuffs",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Secondary"
+    },
+    "csvRow": {
+      "Level": "8th",
+      "Name": "Power Word Stun",
+      "School": "Enchantment",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Stunned",
+      "Source": "",
+      "Description": "You overwhelm the mind of one creature you can see within range. If the target has 150 Hit Points or fewer, it has the Stunned condition. Otherwise, its Speed is 0 until the start of your next turn.\n\nThe Stunned target makes a Constitution saving throw at the end of each of its turns, ending the condition on itself on a success.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618889-power-word-stun",
+      "Primary Effect Category": "Conditions & Debuffs",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Secondary"
+    }
+  }
+}

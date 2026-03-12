@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:barkskin",
+  "name": "Barkskin",
+  "description": "You touch a willing creature. Until the spell ends, the target’s skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You touch a willing creature. Until the spell ends, the target’s skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618907-barkskin",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Buff (...)",
+    "primaryEffectCategory": "Nature Interaction",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Exclusive",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Barkskin",
+      "School": "Transmutation",
+      "Casting Time": "1 Bonus Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Buff (...)",
+      "Source": "",
+      "Description": "You touch a willing creature. Until the spell ends, the target’s skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618907-barkskin",
+      "Primary Effect Category": "Nature Interaction",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Exclusive",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

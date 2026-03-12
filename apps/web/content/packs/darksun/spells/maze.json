@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:maze",
+  "name": "Maze",
+  "description": "You banish a creature that you can see within range into a labyrinthine demiplane. The target remains there for the duration or until it escapes the maze.\n\nThe target can take a Study action to try to escape. When it does so, it makes a DC 20 Intelligence ( Investigation ) check. If it succeeds, it escapes, and the spell ends.\n\nWhen the spell ends, the target reappears in the space it left or, if that space is occupied, in the nearest unoccupied space.",
+  "level": 8,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You banish a creature that you can see within range into a labyrinthine demiplane. The target remains there for the duration or until it escapes the maze.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619030-maze",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Banishment (...)",
+    "primaryEffectCategory": "Teleportation & Spatial Bending",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "8th",
+      "Name": "Maze",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Banishment (...)",
+      "Source": "",
+      "Description": "You banish a creature that you can see within range into a labyrinthine demiplane. The target remains there for the duration or until it escapes the maze.\n\nThe target can take a Study action to try to escape. When it does so, it makes a DC 20 Intelligence ( Investigation ) check. If it succeeds, it escapes, and the spell ends.\n\nWhen the spell ends, the target reappears in the space it left or, if that space is occupied, in the nearest unoccupied space.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619030-maze",
+      "Primary Effect Category": "Teleportation & Spatial Bending",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

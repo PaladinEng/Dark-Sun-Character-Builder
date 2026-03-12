@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:life-transference",
+  "name": "Life Transference",
+  "description": "You sacrifice some of your health to mend another creature’s injuries. You take 4d8 necrotic damage, which can’t be reduced in any way, and one creature of your choice that you can see within range regains a number of hit points equal to twice the necrotic damage you take.\n\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.",
+  "level": 3,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "30 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You sacrifice some of your health to mend another creature’s injuries. You take 4d8 necrotic damage, which can’t be reduced in any way, and one creature of your choice that you can see within range regains a number of hit points equal to twice the necrotic damage you take.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14880-life-transference",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Necrotic",
+    "primaryEffectCategory": "Healing & Restoration",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Life Transference",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "30 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Necrotic",
+      "Source": "",
+      "Description": "You sacrifice some of your health to mend another creature’s injuries. You take 4d8 necrotic damage, which can’t be reduced in any way, and one creature of your choice that you can see within range regains a number of hit points equal to twice the necrotic damage you take.\n\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14880-life-transference",
+      "Primary Effect Category": "Healing & Restoration",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

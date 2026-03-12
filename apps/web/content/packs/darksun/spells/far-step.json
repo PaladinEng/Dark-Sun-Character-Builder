@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:far-step",
+  "name": "Far Step",
+  "description": "You teleport up to 60 feet to an unoccupied space you can see. On each of your turns before the spell ends, you can use a bonus action to teleport in this way again.",
+  "level": 5,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You teleport up to 60 feet to an unoccupied space you can see. On each of your turns before the spell ends, you can use a bonus action to teleport in this way again.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14870-far-step",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Teleportation",
+    "primaryEffectCategory": "Teleportation & Spatial Bending",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Far Step",
+      "School": "Conjuration",
+      "Casting Time": "1 Bonus Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Teleportation",
+      "Source": "",
+      "Description": "You teleport up to 60 feet to an unoccupied space you can see. On each of your turns before the spell ends, you can use a bonus action to teleport in this way again.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14870-far-step",
+      "Primary Effect Category": "Teleportation & Spatial Bending",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

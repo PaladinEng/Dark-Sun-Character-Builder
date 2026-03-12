@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:summon-elemental",
+  "name": "Summon Elemental",
+  "description": "You call forth an Elemental spirit. It manifests in an unoccupied space that you can see within range and uses the Elemental Spirit stat block. When you cast the spell, choose an element: Air, Earth, Fire, or Water. The creature resembles a bipedal form wreathed in the chosen element, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nMedium Elemental, Neutral\n\nAC 11 + the spell’s level\n\nHP 50 + 10 for each spell level above 4\n\nSpeed 40 ft.; Burrow 40 ft. (Earth only); Fly 40 ft. (hover; Air only); Swim 40 ft. (Water only)\n\nResistances Acid (Water only), Lightning and Thunder (Air only), Piercing and Slashing (Earth only)\n\nImmunities Fire (Fire only), Poison; Exhaustion , Paralyzed , Petrified , Poisoned\n\nSenses Darkvision 60 ft.; Passive Perception 10\n\nLanguages Primordial, understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nAmorphous Form (Air, Fire, and Water Only). The spirit can move through a space as narrow as 1 inch wide without it counting as Difficult Terrain .\n\nActions\n\nMultiattack. The spirit makes a number of Slam attacks equal to half this spell’s level (round down).\n\nSlam. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d10 + 4 + the spell’s level Bludgeoning (Earth only), Cold (Water only), Lightning (Air only), or Fire (Fire only) damage.",
+  "level": 4,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You call forth an Elemental spirit. It manifests in an unoccupied space that you can see within range and uses the Elemental Spirit stat block. When you cast the spell, choose an element: Air, Earth, Fire, or Water. The creature resembles a bipedal form wreathed in the chosen element, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619113-summon-elemental",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Summoning — Elemental",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Summon Elemental",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You call forth an Elemental spirit. It manifests in an unoccupied space that you can see within range and uses the Elemental Spirit stat block. When you cast the spell, choose an element: Air, Earth, Fire, or Water. The creature resembles a bipedal form wreathed in the chosen element, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nMedium Elemental, Neutral\n\nAC 11 + the spell’s level\n\nHP 50 + 10 for each spell level above 4\n\nSpeed 40 ft.; Burrow 40 ft. (Earth only); Fly 40 ft. (hover; Air only); Swim 40 ft. (Water only)\n\nResistances Acid (Water only), Lightning and Thunder (Air only), Piercing and Slashing (Earth only)\n\nImmunities Fire (Fire only), Poison; Exhaustion , Paralyzed , Petrified , Poisoned\n\nSenses Darkvision 60 ft.; Passive Perception 10\n\nLanguages Primordial, understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nAmorphous Form (Air, Fire, and Water Only). The spirit can move through a space as narrow as 1 inch wide without it counting as Difficult Terrain .\n\nActions\n\nMultiattack. The spirit makes a number of Slam attacks equal to half this spell’s level (round down).\n\nSlam. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d10 + 4 + the spell’s level Bludgeoning (Earth only), Cold (Water only), Lightning (Air only), or Fire (Fire only) damage.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619113-summon-elemental",
+      "Primary Effect Category": "Summoning — Elemental",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

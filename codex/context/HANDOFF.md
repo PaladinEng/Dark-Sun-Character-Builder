@@ -10,6 +10,12 @@
 - `apps/web/content/packs/darksun` now reflects the repo-root `dark-sun-homebrew/` bundle in native pack format.
 - `apps/web/src/lib/packSettings.ts` loads Dark Sun setting metadata from `apps/web/content/packs/darksun/settings/`.
 - Builder behavior now filters Dark Sun class/subclass availability, hides classes replaced by setting rules, replaces species/backgrounds via setting-defined whitelist ids, and surfaces Wild Talent + setting notes when `darksun` is enabled.
+- Dark Sun spell-list overrides are now applied in `apps/web/src/lib/content.ts` after pack merge, driven by `classSpellListOverrides` in `apps/web/content/packs/darksun/settings/profile.json`.
+- `scripts/import-homebrew-spell-lists.mjs` converts `homebrew-spell-lists/*.csv` into:
+  - preserved JSON artifacts in `homebrew-spell-lists/*.json`
+  - native Dark Sun spell entities in `apps/web/content/packs/darksun/spells/`
+  - native tradition spell lists in `apps/web/content/packs/darksun/spelllists/tradition-*.json`
+  - `homebrew-spell-lists/elemental-cleric-vs-elemental-tradition-report.md`
 - `@dark-sun/content` is now consumed from workspace source, and `apps/web/next.config.ts` transpiles both internal packages needed for Next builds.
 - The live Vercel project is now configured directly with:
   - root directory `apps/web`
@@ -35,8 +41,10 @@
 - A Vercel dashboard-level `Output Directory` override can still break deployment; it must remain unset for this Next.js app.
 - Do not reintroduce a repo-root `vercel.json` unless the Vercel project root moves back to `/`.
 - Dark Sun species/background replacement now depends on `speciesReplacementIds` and `backgroundReplacementIds` in `apps/web/content/packs/darksun/settings/profile.json`.
+- No explicit psionics CSV is present in `homebrew-spell-lists/`; the local psionics JSON artifact is synthesized from master status data and should be replaced if a real CSV arrives.
+- Elemental Cleric still uses `darksun:spelllist:elemental-cleric:*`; the elemental tradition CSV is preserved separately and compared in the report only.
 
 ## Immediate Next-Step Commands
 1. `git status --short`
 2. `pnpm loop:check`
-3. `git log --oneline --decorate -5`
+3. `node scripts/import-homebrew-spell-lists.mjs`

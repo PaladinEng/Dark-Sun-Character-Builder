@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:dissonant-whispers",
+  "name": "Dissonant Whispers",
+  "description": "One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",
+  "level": 1,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619104-dissonant-whispers",
+    "area": "",
+    "materials": "",
+    "attackSave": "WIS Save",
+    "damageEffect": "Psychic",
+    "primaryEffectCategory": "Mind Control & Mental Influence",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Exclusive"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Dissonant Whispers",
+      "School": "Enchantment",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "WIS Save",
+      "Damage/Effect": "Psychic",
+      "Source": "",
+      "Description": "One creature of your choice that you can see within range hears a discordant melody in its mind. The target makes a Wisdom saving throw. On a failed save, it takes 3d6 Psychic damage and must immediately use its Reaction, if available, to move as far away from you as it can, using the safest route. On a successful save, the target takes half as much damage only.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619104-dissonant-whispers",
+      "Primary Effect Category": "Mind Control & Mental Influence",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Exclusive"
+    }
+  }
+}

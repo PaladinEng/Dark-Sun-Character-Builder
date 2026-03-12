@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:abi-dalzims-horrid-wilting",
+  "name": "Abi-Dalzim's Horrid Wilting",
+  "description": "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one.\n\nNonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly.",
+  "level": 8,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "150 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2367-abi-dalzims-horrid-wilting",
+    "area": "(30 ft. )",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Necrotic",
+    "primaryEffectCategory": "Constructs / Artifice",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "8th",
+      "Name": "Abi-Dalzim's Horrid Wilting",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "150 ft.",
+      "Area": "(30 ft. )",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Necrotic",
+      "Source": "",
+      "Description": "You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 12d8 necrotic damage on a failed save, or half as much damage on a successful one.\n\nNonmagical plants in the area that aren’t creatures, such as trees and shrubs, wither and die instantly.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2367-abi-dalzims-horrid-wilting",
+      "Primary Effect Category": "Constructs / Artifice",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

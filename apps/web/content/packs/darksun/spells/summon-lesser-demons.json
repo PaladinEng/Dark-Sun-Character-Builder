@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:summon-lesser-demons",
+  "name": "Summon Lesser Demons",
+  "description": "You utter foul words, summoning demons from the chaos of the Abyss. Roll on the following table to determine what appears.\n\nThe DM chooses the demons, such as manes or dretches , and you choose the unoccupied spaces you can see within range where they appear. A summoned demon disappears when it drops to 0 hit points or when the spell ends.\n\nThe demons are hostile to all creatures, including you. Roll initiative for the summoned demons as a group, which has its own turns. The demons pursue and attack the nearest non-demons to the best of their ability.\n\nAs part of casting the spell, you can form a circle on the ground with the blood used as a material component. The circle is large enough to encompass your space. While the spell lasts, the summoned demons can’t cross the circle or harm it, and they can’t target anyone within it. Using the material component in this manner consumes it when the spell ends.\n\nAt Higher Levels. When you cast this spell using a spell slot of 6th or 7th level, you summon twice as many demons. If you cast it using a spell slot of 8th or 9th level, you summon three times as many demons.",
+  "level": 3,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You utter foul words, summoning demons from the chaos of the Abyss. Roll on the following table to determine what appears.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14604-summon-lesser-demons",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Summoning — Extraplanar",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Secondary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Summon Lesser Demons",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You utter foul words, summoning demons from the chaos of the Abyss. Roll on the following table to determine what appears.\n\nThe DM chooses the demons, such as manes or dretches , and you choose the unoccupied spaces you can see within range where they appear. A summoned demon disappears when it drops to 0 hit points or when the spell ends.\n\nThe demons are hostile to all creatures, including you. Roll initiative for the summoned demons as a group, which has its own turns. The demons pursue and attack the nearest non-demons to the best of their ability.\n\nAs part of casting the spell, you can form a circle on the ground with the blood used as a material component. The circle is large enough to encompass your space. While the spell lasts, the summoned demons can’t cross the circle or harm it, and they can’t target anyone within it. Using the material component in this manner consumes it when the spell ends.\n\nAt Higher Levels. When you cast this spell using a spell slot of 6th or 7th level, you summon twice as many demons. If you cast it using a spell slot of 8th or 9th level, you summon three times as many demons.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14604-summon-lesser-demons",
+      "Primary Effect Category": "Summoning — Extraplanar",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Secondary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

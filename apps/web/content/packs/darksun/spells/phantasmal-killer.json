@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:phantasmal-killer",
+  "name": "Phantasmal Killer",
+  "description": "You tap into the nightmares of a creature you can see within range and create an illusion of its deepest fears, visible only to that creature. The target makes a Wisdom saving throw. On a failed save, the target takes 4d10 Psychic damage and has Disadvantage on ability checks and attack rolls for the duration. On a successful save, the target takes half as much damage, and the spell ends.\n\nFor the duration, the target makes a Wisdom saving throw at the end of each of its turns. On a failed save, it takes the Psychic damage again. On a successful save, the spell ends.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 4.",
+  "level": 4,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You tap into the nightmares of a creature you can see within range and create an illusion of its deepest fears, visible only to that creature. The target makes a Wisdom saving throw. On a failed save, the target takes 4d10 Psychic damage and has Disadvantage on ability checks and attack rolls for the duration. On a successful save, the target takes half as much damage, and the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618857-phantasmal-killer",
+    "area": "",
+    "materials": "",
+    "attackSave": "WIS Save",
+    "damageEffect": "Psychic",
+    "primaryEffectCategory": "Illusions & Glamours",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Phantasmal Killer",
+      "School": "Illusion",
+      "Casting Time": "1 Action",
+      "Range": "120 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "WIS Save",
+      "Damage/Effect": "Psychic",
+      "Source": "",
+      "Description": "You tap into the nightmares of a creature you can see within range and create an illusion of its deepest fears, visible only to that creature. The target makes a Wisdom saving throw. On a failed save, the target takes 4d10 Psychic damage and has Disadvantage on ability checks and attack rolls for the duration. On a successful save, the target takes half as much damage, and the spell ends.\n\nFor the duration, the target makes a Wisdom saving throw at the end of each of its turns. On a failed save, it takes the Psychic damage again. On a successful save, the spell ends.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 4.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618857-phantasmal-killer",
+      "Primary Effect Category": "Illusions & Glamours",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

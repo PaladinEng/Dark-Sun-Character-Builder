@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:control-flames",
+  "name": "Control Flames",
+  "description": "You choose nonmagical flame that you can see within range and that fits within a 5-foot cube. You affect it in one of the following ways:\n\nYou instantaneously expand the flame 5 feet in one direction, provided that wood or other fuel is present in the new location.\n\nYou instantaneously extinguish the flames within the cube.\n\nYou double or halve the area of bright light and dim light cast by the flame, change its color, or both. The change lasts for 1 hour.\n\nYou cause simple shapes—such as the vague form of a creature, an inanimate object, or a location—to appear within the flames and animate as you like. The shapes last for 1 hour.\n\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
+  "level": 0,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You choose nonmagical flame that you can see within range and that fits within a 5-foot cube. You affect it in one of the following ways:",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2374-control-flames",
+    "area": "(5 ft. *)",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Control",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "Cantrip",
+      "Name": "Control Flames",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "(5 ft. *)",
+      "Components": "S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Control",
+      "Source": "",
+      "Description": "You choose nonmagical flame that you can see within range and that fits within a 5-foot cube. You affect it in one of the following ways:\n\nYou instantaneously expand the flame 5 feet in one direction, provided that wood or other fuel is present in the new location.\n\nYou instantaneously extinguish the flames within the cube.\n\nYou double or halve the area of bright light and dim light cast by the flame, change its color, or both. The change lasts for 1 hour.\n\nYou cause simple shapes—such as the vague form of a creature, an inanimate object, or a location—to appear within the flames and animate as you like. The shapes last for 1 hour.\n\nIf you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2374-control-flames",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

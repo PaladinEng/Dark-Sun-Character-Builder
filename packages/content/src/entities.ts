@@ -34,6 +34,7 @@ const EntityBaseSchema = z.object({
   description: z.string().optional(),
   replaces: z.string().optional(),
   effects: z.array(EffectSchema).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 export const BaseEntitySchema = EntityBaseSchema;
 

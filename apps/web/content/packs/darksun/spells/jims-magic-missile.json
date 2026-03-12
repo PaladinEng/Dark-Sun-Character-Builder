@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:jims-magic-missile",
+  "name": "Jim's Magic Missile",
+  "description": "Any apprentice wizard can cast a boring old magic missile . Sure, it always strikes its target. Yawn. Do away with the drudgery of your grandfather’s magic with this improved version of the spell, as used by Jim Darkmagic!\n\nYou create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart targets a creature of your choice that you can see within range. Make a ranged spell attack for each missile. On a hit, a missile deals 2d4 force damage to its target.\n\nIf the attack roll scores a critical hit, the target of that missile takes 5d4 force damage instead of you rolling damage twice for a critical hit. If the attack roll for any missile is a 1, all missiles miss their targets and blow up in your face, dealing 1 force damage per missile to you.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart, and the royalty component increases by 1 gp, for each slot level above 1st.",
+  "level": 1,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Any apprentice wizard can cast a boring old magic missile . Sure, it always strikes its target. Yawn. Do away with the drudgery of your grandfather’s magic with this improved version of the spell, as used by Jim Darkmagic!",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/188129-jims-magic-missile",
+    "area": "",
+    "materials": "",
+    "attackSave": "Ranged",
+    "damageEffect": "Force",
+    "primaryEffectCategory": "Force Manipulation",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Secondary",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Jim's Magic Missile",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "120 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "Ranged",
+      "Damage/Effect": "Force",
+      "Source": "",
+      "Description": "Any apprentice wizard can cast a boring old magic missile . Sure, it always strikes its target. Yawn. Do away with the drudgery of your grandfather’s magic with this improved version of the spell, as used by Jim Darkmagic!\n\nYou create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart targets a creature of your choice that you can see within range. Make a ranged spell attack for each missile. On a hit, a missile deals 2d4 force damage to its target.\n\nIf the attack roll scores a critical hit, the target of that missile takes 5d4 force damage instead of you rolling damage twice for a critical hit. If the attack roll for any missile is a 1, all missiles miss their targets and blow up in your face, dealing 1 force damage per missile to you.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart, and the royalty component increases by 1 gp, for each slot level above 1st.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/188129-jims-magic-missile",
+      "Primary Effect Category": "Force Manipulation",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Secondary",
+      "Psionics Status": "Primary"
+    }
+  }
+}

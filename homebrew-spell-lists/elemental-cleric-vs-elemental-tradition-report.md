@@ -1,0 +1,269 @@
+# Elemental Cleric vs Elemental Tradition
+
+This report compares the existing builder-authoritative Elemental Cleric spell lists against the elemental tradition CSV import candidate.
+
+## Assumptions
+
+- Name matching uses lowercase slug normalization from spell names.
+- Existing Elemental Cleric spell lists remain authoritative for builder behavior in this pass.
+- Metadata-difference checks compare level, school, ritual, concentration, casting time, range, and duration where builder-native spell data exists.
+
+## Existing Elemental Cleric Spell Count
+
+- Unique spell names in builder-authoritative Elemental Cleric lists: 49
+- Unique spell names in elemental tradition CSV: 172
+
+## Present In Existing Elemental Cleric Lists Only
+
+- Aid (srd52:spell:aid; from darksun:spelllist:elemental-cleric:air)
+- Bane (srd52:spell:bane; from darksun:spelllist:elemental-cleric:shared)
+- Blade Ward (srd52:spell:blade-ward; from darksun:spelllist:elemental-cleric:shared)
+- Bless (srd52:spell:bless; from darksun:spelllist:elemental-cleric:air)
+- Command (srd52:spell:command; from darksun:spelllist:elemental-cleric:shared)
+- Comprehend Languages (srd52:spell:comprehend-languages; from darksun:spelllist:elemental-cleric:shared)
+- Darkvision (srd52:spell:darkvision; from darksun:spelllist:elemental-cleric:shared)
+- Daylight (srd52:spell:daylight; from darksun:spelllist:elemental-cleric:sun)
+- Detect Magic (srd52:spell:detect-magic; from darksun:spelllist:elemental-cleric:shared)
+- Detect Poison and Disease (srd52:spell:detect-poison-and-disease; from darksun:spelllist:elemental-cleric:shared)
+- Dispel Magic (srd52:spell:dispel-magic; from darksun:spelllist:elemental-cleric:shared)
+- Enhance Ability (srd52:spell:enhance-ability; from darksun:spelllist:elemental-cleric:shared)
+- Feather Fall (srd52:spell:feather-fall; from darksun:spelllist:elemental-cleric:air)
+- Foresight (srd52:spell:foresight; from darksun:spelllist:elemental-cleric:shared)
+- Guidance (srd52:spell:guidance; from darksun:spelllist:elemental-cleric:shared)
+- Heroism (srd52:spell:heroism; from darksun:spelllist:elemental-cleric:shared)
+- Hold Person (srd52:spell:hold-person; from darksun:spelllist:elemental-cleric:shared)
+- Identify (srd52:spell:identify; from darksun:spelllist:elemental-cleric:shared)
+- Locate Object (srd52:spell:locate-object; from darksun:spelllist:elemental-cleric:shared)
+- Longstrider (srd52:spell:longstrider; from darksun:spelllist:elemental-cleric:shared)
+- Message (srd52:spell:message; from darksun:spelllist:elemental-cleric:shared)
+- Minor Illusion (srd52:spell:minor-illusion; from darksun:spelllist:elemental-cleric:air)
+- Prayer of Healing (srd52:spell:prayer-of-healing; from darksun:spelllist:elemental-cleric:air)
+- Resistance (srd52:spell:resistance; from darksun:spelllist:elemental-cleric:shared)
+- Revivify (srd52:spell:revivify; from darksun:spelllist:elemental-cleric:air)
+- Sanctuary (srd52:spell:sanctuary; from darksun:spelllist:elemental-cleric:air)
+- Shatter (srd52:spell:shatter; from darksun:spelllist:elemental-cleric:rain)
+- Shield of Faith (srd52:spell:shield-of-faith; from darksun:spelllist:elemental-cleric:shared)
+- Silent Image (srd52:spell:silent-image; from darksun:spelllist:elemental-cleric:air)
+- Thaumaturgy (srd52:spell:thaumaturgy; from darksun:spelllist:elemental-cleric:shared)
+- Water Breathing (srd52:spell:water-breathing; from darksun:spelllist:elemental-cleric:water)
+
+## Present In Elemental Tradition CSV Only
+
+- Absorb Elements (1st; Exclusive)
+- Aganazzar's Scorcher (2nd; Exclusive)
+- Arcane Lock (2nd; Secondary)
+- Arcane Vigor (2nd; Primary)
+- Arms of Hadar (1st; Secondary)
+- Ashardalon's Stride (3rd; Exclusive)
+- Aura of Life (4th; Primary)
+- Aura of Vitality (3rd; Primary)
+- Befuddlement (8th; Primary)
+- Bigby's Hand (5th; Secondary)
+- Blade Barrier (6th; Primary)
+- Blade of Disaster (9th; Secondary)
+- Blight (4th; Exclusive)
+- Blinding Smite (3rd; Exclusive)
+- Bones of the Earth (6th; Primary)
+- Booming Blade (Cantrip; Exclusive)
+- Call Lightning (3rd; Exclusive)
+- Chain Lightning (6th; Exclusive)
+- Chaos Bolt (1st; Exclusive)
+- Chill Touch (Cantrip; Exclusive)
+- Chromatic Orb (1st; Exclusive)
+- Cloudkill (5th; Exclusive)
+- Cone of Cold (5th; Exclusive)
+- Conjure Barrage (3rd; Secondary)
+- Conjure Celestial (7th; Primary)
+- Conjure Elemental (5th; Exclusive)
+- Conjure Minor Elementals (4th; Exclusive)
+- Conjure Volley (5th; Secondary)
+- Control Flames (Cantrip; Exclusive)
+- Control Water (4th; Primary)
+- Control Weather (8th; Primary)
+- Control Winds (5th; Primary)
+- Cordon of Arrows (2nd; Primary)
+- Create Bonfire (Cantrip; Exclusive)
+- Crown of Stars (7th; Exclusive)
+- Darkness (2nd; Exclusive)
+- Dawn (5th; Exclusive)
+- Delayed Blast Fireball (7th; Exclusive)
+- Destructive Wave (5th; Exclusive)
+- Disintegrate (6th; Exclusive)
+- Divine Smite (1st; Exclusive)
+- Dragon's Breath (2nd; Exclusive)
+- Earth Tremor (1st; Primary)
+- Earthquake (8th; Primary)
+- Eldritch Blast (Cantrip; Secondary)
+- Elemental Weapon (3rd; Exclusive)
+- Elementalism (Cantrip; Exclusive)
+- Enervation (5th; Primary)
+- Erupting Earth (3rd; Primary)
+- Etherealness (7th; Secondary)
+- Fire Storm (7th; Exclusive)
+- Fireball (3rd; Exclusive)
+- Flame Arrows (3rd; Exclusive)
+- Flame Blade (2nd; Exclusive)
+- Flame Strike (5th; Exclusive)
+- Flaming Sphere (2nd; Exclusive)
+- Frost Fingers (1st; Exclusive)
+- Frostbite (Cantrip; Exclusive)
+- Grease (1st; Primary)
+- Greater Restoration (5th; Primary)
+- Green-Flame Blade (Cantrip; Exclusive)
+- Guardian of Nature (4th; Primary)
+- Gust (Cantrip; Exclusive)
+- Gust of Wind (2nd; Exclusive)
+- Harm (6th; Exclusive)
+- Heal (6th; Primary)
+- Healing Spirit (2nd; Primary)
+- Heat Metal (2nd; Exclusive)
+- Hellish Rebuke (1st; Exclusive)
+- Holy Weapon (5th; Exclusive)
+- Hunger of Hadar (3rd; Exclusive)
+- Ice Knife (1st; Exclusive)
+- Ice Storm (4th; Primary)
+- Illusory Dragon (8th; Exclusive)
+- Immolation (5th; Exclusive)
+- Incendiary Cloud (8th; Exclusive)
+- Investiture of Flame (6th; Exclusive)
+- Investiture of Ice (6th; Exclusive)
+- Investiture of Stone (6th; Primary)
+- Investiture of Wind (6th; Primary)
+- Jallarzi's Storm of Radiance (5th; Exclusive)
+- Jim's Magic Missile (1st; Secondary)
+- Knock (2nd; Secondary)
+- Life Transference (3rd; Primary)
+- Light (Cantrip; Exclusive)
+- Lightning Arrow (3rd; Exclusive)
+- Lightning Bolt (3rd; Exclusive)
+- Lightning Lure (Cantrip; Exclusive)
+- Maddening Darkness (8th; Exclusive)
+- Maelstrom (5th; Primary)
+- Mage Hand (Cantrip; Secondary)
+- Magic Stone (Cantrip; Exclusive)
+- Mass Cure Wounds (5th; Primary)
+- Mass Heal (9th; Primary)
+- Mass Healing Word (3rd; Primary)
+- Maximilian's Earthen Grasp (2nd; Primary)
+- Melf's Acid Arrow (2nd; Exclusive)
+- Melf's Minute Meteors (3rd; Exclusive)
+- Meteor Swarm (9th; Exclusive)
+- Mold Earth (Cantrip; Primary)
+- Mordenkainen's Sword (7th; Secondary)
+- Move Earth (6th; Primary)
+- Otiluke's Freezing Sphere (6th; Exclusive)
+- Passwall (5th; Secondary)
+- Power Word Heal (9th; Primary)
+- Power Word Kill (9th; Exclusive)
+- Primal Savagery (Cantrip; Exclusive)
+- Prismatic Spray (7th; Exclusive)
+- Prismatic Wall (9th; Exclusive)
+- Protection from Poison (2nd; Primary)
+- Psychic Scream (9th; Exclusive)
+- Ray of Frost (Cantrip; Exclusive)
+- Ray of Sickness (1st; Exclusive)
+- Rime's Binding Ice (2nd; Exclusive)
+- Scorching Ray (2nd; Exclusive)
+- Searing Smite (1st; Exclusive)
+- Shadow Blade (2nd; Secondary)
+- Shape Water (Cantrip; Exclusive)
+- Shield (1st; Secondary)
+- Sickening Radiance (4th; Exclusive)
+- Sleet Storm (3rd; Primary)
+- Snilloc's Snowball Swarm (2nd; Exclusive)
+- Sorcerous Burst (Cantrip; Exclusive)
+- Spiritual Weapon (2nd; Secondary)
+- Stone Shape (4th; Secondary)
+- Storm of Vengeance (9th; Primary)
+- Storm Sphere (4th; Primary)
+- Summon Elemental (4th; Exclusive)
+- Sunbeam (6th; Exclusive)
+- Sword Burst (Cantrip; Secondary)
+- Tasha's Caustic Brew (1st; Exclusive)
+- Telekinesis (5th; Secondary)
+- Temple of the Gods (7th; Primary)
+- Tenser's Floating Disk (1st; Secondary)
+- Thunderclap (Cantrip; Exclusive)
+- Thunderous Smite (1st; Exclusive)
+- Tidal Wave (3rd; Exclusive)
+- Transmute Rock (5th; Primary)
+- Tsunami (8th; Primary)
+- Unseen Servant (1st; Secondary)
+- Vampiric Touch (3rd; Primary)
+- Vitriolic Sphere (4th; Exclusive)
+- Wall of Fire (4th; Exclusive)
+- Wall of Force (5th; Secondary)
+- Wall of Ice (6th; Primary)
+- Wall of Light (5th; Exclusive)
+- Wall of Sand (3rd; Primary)
+- Wall of Stone (5th; Primary)
+- Wall of Water (3rd; Primary)
+- Warding Wind (2nd; Primary)
+- Web (2nd; Primary)
+- Wind Wall (3rd; Primary)
+- Witch Bolt (1st; Exclusive)
+- Word of Radiance (Cantrip; Exclusive)
+
+## Shared Spells With Notable Metadata Differences
+
+- Acid Splash (srd52:spell:acid-splash)
+  - school: builder="conjuration" csv="evocation"
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="60 feet" csv="60 ft."
+- Fire Bolt (srd52:spell:fire-bolt)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="120 feet" csv="120 ft."
+- Mending (srd52:spell:mending)
+  - castingTime: builder="1 minute" csv="1 Minute"
+  - range: builder="Touch" csv="Self"
+- Poison Spray (srd52:spell:poison-spray)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="30 feet" csv="30 ft."
+- Produce Flame (srd52:spell:produce-flame)
+  - castingTime: builder="1 action" csv="1 Bonus Action"
+  - duration: builder="10 minutes" csv="10 Minutes"
+- Sacred Flame (srd52:spell:sacred-flame)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="60 feet" csv="60 ft."
+- Shocking Grasp (srd52:spell:shocking-grasp)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="Touch" csv="Self"
+- Spare the Dying (srd52:spell:spare-the-dying)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="Touch" csv="15 ft."
+- Burning Hands (srd52:spell:burning-hands)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="Self (15-foot cone)" csv="Self"
+- Cure Wounds (srd52:spell:cure-wounds)
+  - school: builder="evocation" csv="abjuration"
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="Touch" csv="Self"
+- Fog Cloud (srd52:spell:fog-cloud)
+  - concentration: builder=true csv=false
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="120 feet" csv="120 ft."
+  - duration: builder="Concentration, up to 1 hour" csv="1 Hour"
+- Guiding Bolt (srd52:spell:guiding-bolt)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="120 feet" csv="120 ft."
+  - duration: builder="1 round" csv="1 Round"
+- Healing Word (srd52:spell:healing-word)
+  - school: builder="evocation" csv="abjuration"
+  - castingTime: builder="1 bonus action" csv="1 Bonus Action"
+  - range: builder="60 feet" csv="60 ft."
+- Magic Missile (srd52:spell:magic-missile)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="120 feet" csv="120 ft."
+- Thunderwave (srd52:spell:thunderwave)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="Self (15-foot cube)" csv="Self"
+- Lesser Restoration (srd52:spell:lesser-restoration)
+  - castingTime: builder="1 action" csv="1 Bonus Action"
+  - range: builder="Touch" csv="Self"
+- Remove Curse (srd52:spell:remove-curse)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="Touch" csv="Self"
+- Circle of Death (srd52:spell:circle-of-death)
+  - castingTime: builder="1 action" csv="1 Action"
+  - range: builder="150 feet" csv="150 ft."
+

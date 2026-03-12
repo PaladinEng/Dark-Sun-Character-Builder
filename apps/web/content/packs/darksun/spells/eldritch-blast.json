@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:eldritch-blast",
+  "name": "Eldritch Blast",
+  "description": "You hurl a beam of crackling energy. Make a ranged spell attack against one creature or object in range. On a hit, the target takes 1d10 Force damage.\n\nCantrip Upgrade. The spell creates two beams at level 5, three beams at level 11, and four beams at level 17. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.",
+  "level": 0,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You hurl a beam of crackling energy. Make a ranged spell attack against one creature or object in range. On a hit, the target takes 1d10 Force damage.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619161-eldritch-blast",
+    "area": "",
+    "materials": "",
+    "attackSave": "Ranged",
+    "damageEffect": "Force",
+    "primaryEffectCategory": "Force Manipulation",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Secondary",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "Cantrip",
+      "Name": "Eldritch Blast",
+      "School": "Evocation",
+      "Casting Time": "1 Action",
+      "Range": "120 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "Ranged",
+      "Damage/Effect": "Force",
+      "Source": "",
+      "Description": "You hurl a beam of crackling energy. Make a ranged spell attack against one creature or object in range. On a hit, the target takes 1d10 Force damage.\n\nCantrip Upgrade. The spell creates two beams at level 5, three beams at level 11, and four beams at level 17. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619161-eldritch-blast",
+      "Primary Effect Category": "Force Manipulation",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Secondary",
+      "Psionics Status": "Primary"
+    }
+  }
+}

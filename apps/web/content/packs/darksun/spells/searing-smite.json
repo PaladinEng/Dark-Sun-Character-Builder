@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:searing-smite",
+  "name": "Searing Smite",
+  "description": "As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.\n\nUsing a Higher-Level Spell Slot. All the damage increases by 1d6 for each spell slot level above 1.",
+  "level": 1,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action *",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619009-searing-smite",
+    "area": "",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Fire (...)",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Searing Smite",
+      "School": "Evocation",
+      "Casting Time": "1 Bonus Action *",
+      "Range": "",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Fire (...)",
+      "Source": "",
+      "Description": "As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.\n\nUsing a Higher-Level Spell Slot. All the damage increases by 1d6 for each spell slot level above 1.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619009-searing-smite",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -102,3 +102,31 @@ Append one dated section per completed work block.
   - Added `speciesReplacementIds` and `backgroundReplacementIds` to Dark Sun setting parsing and restriction application.
   - Declared the exact 8 Athasian species ids and 13 Dark Sun background ids in the Dark Sun profile.
   - Updated the ingest script so future Dark Sun regenerations preserve the replacement behavior.
+
+## 2026-03-11 - Dark Sun Tradition Spell Lists
+- Scope: Convert the repo-root `homebrew-spell-lists/` CSV data into preserved JSON artifacts plus native Dark Sun spell/spell-list content, then override class spell lists only in Dark Sun mode.
+- Result: PASS.
+- Validation:
+  - `pnpm install` -> PASS
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `scripts/import-homebrew-spell-lists.mjs`
+  - `packages/content/src/entities.ts`
+  - `apps/web/src/lib/packSettings.ts`
+  - `apps/web/src/lib/content.ts`
+  - `apps/web/content/packs/darksun/settings/profile.json`
+  - `apps/web/content/packs/darksun/spells/**`
+  - `apps/web/content/packs/darksun/spelllists/tradition-*.json`
+  - `homebrew-spell-lists/*.json`
+  - `homebrew-spell-lists/elemental-cleric-vs-elemental-tradition-report.md`
+  - `scripts/ingest-dark-sun-homebrew.mjs`
+  - `codex/context/*`
+- Findings:
+  - Native class spell-list wiring is simple: classes reference `spellListRefIds`, so Dark Sun overrides can be applied centrally by rewriting merged class spell-list refs instead of replacing class JSON.
+  - No `psionics_spell_list_v2_balanced.csv` was present in the source folder; the local psionics JSON artifact was synthesized from master rows where `Psionics Status` is not `Hard Ban`.
+- Fixes:
+  - Added entity-level `metadata` support so generated native spells/spell lists can retain import provenance and source row details.
+  - Generated 425 native Dark Sun spell entities for master-row spells not already covered by SRD ids and reused 92 existing SRD spell ids.
+  - Added Dark Sun Arcane/Nature/Divine/Elemental/Psionics native spell lists, but only Arcane and Nature are active class overrides in Dark Sun mode.
+  - Kept Elemental Cleric on the existing separately-developed spell lists and wrote a comparison report for later analysis.

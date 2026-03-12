@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:tashas-mind-whip",
+  "name": "Tasha's Mind Whip",
+  "description": "You psychically lash out at one creature you can see within range. The target must make an Intelligence saving throw. On a failed save, the target takes 3d6 psychic damage, and it can’t take a reaction until the end of its next turn. Moreover, on its next turn, it must choose whether it gets a move, an action, or a bonus action; it gets only one of the three. On a successful save, the target takes half as much damage and suffers none of the spell’s other effects.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd. The creatures must be within 30 feet of each other when you target them.",
+  "level": 2,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Round",
+  "concentration": false,
+  "summary": "You psychically lash out at one creature you can see within range. The target must make an Intelligence saving throw. On a failed save, the target takes 3d6 psychic damage, and it can’t take a reaction until the end of its next turn. Moreover, on its next turn, it must choose whether it gets a move, an action, or a bonus action; it gets only one of the three. On a successful save, the target takes half as much damage and suffers none of the spell’s other effects.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/719959-tashas-mind-whip",
+    "area": "",
+    "materials": "",
+    "attackSave": "INT Save",
+    "damageEffect": "Psychic",
+    "primaryEffectCategory": "Mind Control & Mental Influence",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Exclusive"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Tasha's Mind Whip",
+      "School": "Enchantment",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Round",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "INT Save",
+      "Damage/Effect": "Psychic",
+      "Source": "",
+      "Description": "You psychically lash out at one creature you can see within range. The target must make an Intelligence saving throw. On a failed save, the target takes 3d6 psychic damage, and it can’t take a reaction until the end of its next turn. Moreover, on its next turn, it must choose whether it gets a move, an action, or a bonus action; it gets only one of the three. On a successful save, the target takes half as much damage and suffers none of the spell’s other effects.\n\nAt Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, you can target one additional creature for each slot level above 2nd. The creatures must be within 30 feet of each other when you target them.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/719959-tashas-mind-whip",
+      "Primary Effect Category": "Mind Control & Mental Influence",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Exclusive"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:ashardalons-stride",
+  "name": "Ashardalon's Stride",
+  "description": "",
+  "level": 3,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/1183862-ashardalons-stride",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Fire",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Ashardalon's Stride",
+      "School": "Transmutation",
+      "Casting Time": "1 Bonus Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Fire",
+      "Source": "",
+      "Description": "",
+      "URL_absolute": "https://www.dndbeyond.com/spells/1183862-ashardalons-stride",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

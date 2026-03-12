@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:legend-lore",
+  "name": "Legend Lore",
+  "description": "Name or describe a famous person, place, or object. The spell brings to your mind a brief summary of the significant lore about that famous thing, as described by the DM.\n\nThe lore might consist of important details, amusing revelations, or even secret lore that has never been widely known. The more information you already know about the thing, the more precise and detailed the information you receive is. That information is accurate but might be couched in figurative language or poetry, as determined by the DM.\n\nIf the famous thing you chose isn’t actually famous, you hear sad musical notes played on a trombone, and the spell fails.",
+  "level": 5,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "10 Minutes",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Name or describe a famous person, place, or object. The spell brings to your mind a brief summary of the significant lore about that famous thing, as described by the DM.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619010-legend-lore",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Utility",
+    "primaryEffectCategory": "Divination — Omens & Revelation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Exclusive",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Legend Lore",
+      "School": "Divination",
+      "Casting Time": "10 Minutes",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Utility",
+      "Source": "",
+      "Description": "Name or describe a famous person, place, or object. The spell brings to your mind a brief summary of the significant lore about that famous thing, as described by the DM.\n\nThe lore might consist of important details, amusing revelations, or even secret lore that has never been widely known. The more information you already know about the thing, the more precise and detailed the information you receive is. That information is accurate but might be couched in figurative language or poetry, as determined by the DM.\n\nIf the famous thing you chose isn’t actually famous, you hear sad musical notes played on a trombone, and the spell fails.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619010-legend-lore",
+      "Primary Effect Category": "Divination — Omens & Revelation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Exclusive",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

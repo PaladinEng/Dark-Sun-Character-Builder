@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:hail-of-thorns",
+  "name": "Hail of Thorns",
+  "description": "As you hit the creature, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 1.",
+  "level": 1,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Bonus Action *",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "As you hit the creature, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618975-hail-of-thorns",
+    "area": "",
+    "materials": "",
+    "attackSave": "DEX Save",
+    "damageEffect": "Piercing",
+    "primaryEffectCategory": "Nature Interaction",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Exclusive",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Hail of Thorns",
+      "School": "Conjuration",
+      "Casting Time": "1 Bonus Action *",
+      "Range": "",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "DEX Save",
+      "Damage/Effect": "Piercing",
+      "Source": "",
+      "Description": "As you hit the creature, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 1.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618975-hail-of-thorns",
+      "Primary Effect Category": "Nature Interaction",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Exclusive",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

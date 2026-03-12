@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:summon-dragon",
+  "name": "Summon Dragon",
+  "description": "You call forth a Dragon spirit. It manifests in an unoccupied space that you can see within range and uses the Draconic Spirit stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nLarge Dragon, Neutral\n\nAC 14 + the spell’s level\n\nHP 50 + 10 for each spell level above 5\n\nSpeed 30 ft., Fly 60 ft., Swim 30 ft.\n\nResistances Acid, Cold, Fire, Lightning, Poison\n\nImmunities Charmed , Frightened , Poisoned\n\nSenses Blindsight 30 ft., Darkvision 60 ft.; Passive Perception 12\n\nLanguages Draconic, understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nShared Resistances. When you summon the spirit, choose one of its Resistances. You have Resistance to the chosen damage type until the spell ends.\n\nActions\n\nMultiattack. The spirit makes a number of Rend attacks equal to half the spell’s level (round down), and it uses Breath Weapon.\n\nRend. Melee Attack Roll: Bonus equals your spell attack modifier, reach 10 feet. Hit: 1d6 + 4 + the spell’s level Piercing damage.\n\nBreath Weapon. Dexterity Saving Throw: DC equals your spell save DC, each creature in a 30-foot Cone . Failure: 2d6 damage of a type this spirit has Resistance to (your choice when you cast the spell). Success: Half damage.",
+  "level": 5,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You call forth a Dragon spirit. It manifests in an unoccupied space that you can see within range and uses the Draconic Spirit stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618843-summon-dragon",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "",
+    "primaryEffectCategory": "Summoning — Extraplanar",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Secondary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Summon Dragon",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "",
+      "Source": "",
+      "Description": "You call forth a Dragon spirit. It manifests in an unoccupied space that you can see within range and uses the Draconic Spirit stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nLarge Dragon, Neutral\n\nAC 14 + the spell’s level\n\nHP 50 + 10 for each spell level above 5\n\nSpeed 30 ft., Fly 60 ft., Swim 30 ft.\n\nResistances Acid, Cold, Fire, Lightning, Poison\n\nImmunities Charmed , Frightened , Poisoned\n\nSenses Blindsight 30 ft., Darkvision 60 ft.; Passive Perception 12\n\nLanguages Draconic, understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nShared Resistances. When you summon the spirit, choose one of its Resistances. You have Resistance to the chosen damage type until the spell ends.\n\nActions\n\nMultiattack. The spirit makes a number of Rend attacks equal to half the spell’s level (round down), and it uses Breath Weapon.\n\nRend. Melee Attack Roll: Bonus equals your spell attack modifier, reach 10 feet. Hit: 1d6 + 4 + the spell’s level Piercing damage.\n\nBreath Weapon. Dexterity Saving Throw: DC equals your spell save DC, each creature in a 30-foot Cone . Failure: 2d6 damage of a type this spirit has Resistance to (your choice when you cast the spell). Success: Half damage.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618843-summon-dragon",
+      "Primary Effect Category": "Summoning — Extraplanar",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Secondary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

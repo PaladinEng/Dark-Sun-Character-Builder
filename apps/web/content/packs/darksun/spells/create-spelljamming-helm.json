@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:create-spelljamming-helm",
+  "name": "Create Spelljamming Helm",
+  "description": "",
+  "level": 5,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/1585026-create-spelljamming-helm",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Creation",
+    "primaryEffectCategory": "Constructs / Artifice",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Create Spelljamming Helm",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Creation",
+      "Source": "",
+      "Description": "",
+      "URL_absolute": "https://www.dndbeyond.com/spells/1585026-create-spelljamming-helm",
+      "Primary Effect Category": "Constructs / Artifice",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

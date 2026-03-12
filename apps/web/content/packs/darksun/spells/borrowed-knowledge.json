@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:borrowed-knowledge",
+  "name": "Borrowed Knowledge",
+  "description": "",
+  "level": 2,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/1239802-borrowed-knowledge",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Utility",
+    "primaryEffectCategory": "Divination — Omens & Revelation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Exclusive",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Borrowed Knowledge",
+      "School": "Divination",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Utility",
+      "Source": "",
+      "Description": "",
+      "URL_absolute": "https://www.dndbeyond.com/spells/1239802-borrowed-knowledge",
+      "Primary Effect Category": "Divination — Omens & Revelation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Exclusive",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:wither-and-bloom",
+  "name": "Wither and Bloom",
+  "description": "",
+  "level": 2,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/1239806-wither-and-bloom",
+    "area": "(10 ft. *)",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Necrotic",
+    "primaryEffectCategory": "Nature Interaction",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Exclusive",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Wither and Bloom",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "(10 ft. *)",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Necrotic",
+      "Source": "",
+      "Description": "",
+      "URL_absolute": "https://www.dndbeyond.com/spells/1239806-wither-and-bloom",
+      "Primary Effect Category": "Nature Interaction",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Exclusive",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

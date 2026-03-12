@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:summon-construct",
+  "name": "Summon Construct",
+  "description": "You call forth the spirit of a Construct. It manifests in an unoccupied space that you can see within range and uses the Construct Spirit stat block. When you cast the spell, choose a material: Clay, Metal, or Stone. The creature resembles an animate statue (you determine the appearance) made of the chosen material, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nMedium Construct, Neutral\n\nAC 13 + the spell’s level\n\nHP 40 + 15 for each spell level above 4\n\nSpeed 30 ft.\n\nResistances Poison\n\nImmunities Charmed , Exhaustion , Frightened , Paralyzed , Poisoned\n\nSenses Darkvision 60 ft.; Passive Perception 10\n\nLanguages Understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nHeated Body (Metal Only). A creature that hits the spirit with a melee attack or that starts its turn in a grapple with the spirit takes 1d10 Fire damage.\n\nStony Lethargy (Stone Only). When a creature starts its turn within 10 feet of the spirit, the spirit can target it with magical energy if the spirit can see it. Wisdom Saving Throw: DC equals your spell save DC, the target. Failure: Until the start of its next turn, the target can’t make Opportunity Attacks , and its Speed is halved.\n\nActions\n\nMultiattack. The spirit makes a number of Slam attacks equal to half this spell’s level (round down).\n\nSlam. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + the spell’s level Bludgeoning damage.\n\nReactions\n\nBerserk Lashing (Clay Only). Trigger: The spirit takes damage from a creature. Response: The spirit makes a Slam attack against that creature if possible, or the spirit moves up to half its Speed toward that creature without provoking Opportunity Attacks .",
+  "level": 4,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You call forth the spirit of a Construct. It manifests in an unoccupied space that you can see within range and uses the Construct Spirit stat block. When you cast the spell, choose a material: Clay, Metal, or Stone. The creature resembles an animate statue (you determine the appearance) made of the chosen material, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619111-summon-construct",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Constructs / Artifice",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Summon Construct",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You call forth the spirit of a Construct. It manifests in an unoccupied space that you can see within range and uses the Construct Spirit stat block. When you cast the spell, choose a material: Clay, Metal, or Stone. The creature resembles an animate statue (you determine the appearance) made of the chosen material, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nMedium Construct, Neutral\n\nAC 13 + the spell’s level\n\nHP 40 + 15 for each spell level above 4\n\nSpeed 30 ft.\n\nResistances Poison\n\nImmunities Charmed , Exhaustion , Frightened , Paralyzed , Poisoned\n\nSenses Darkvision 60 ft.; Passive Perception 10\n\nLanguages Understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nHeated Body (Metal Only). A creature that hits the spirit with a melee attack or that starts its turn in a grapple with the spirit takes 1d10 Fire damage.\n\nStony Lethargy (Stone Only). When a creature starts its turn within 10 feet of the spirit, the spirit can target it with magical energy if the spirit can see it. Wisdom Saving Throw: DC equals your spell save DC, the target. Failure: Until the start of its next turn, the target can’t make Opportunity Attacks , and its Speed is halved.\n\nActions\n\nMultiattack. The spirit makes a number of Slam attacks equal to half this spell’s level (round down).\n\nSlam. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + the spell’s level Bludgeoning damage.\n\nReactions\n\nBerserk Lashing (Clay Only). Trigger: The spirit takes damage from a creature. Response: The spirit makes a Slam attack against that creature if possible, or the spirit moves up to half its Speed toward that creature without provoking Opportunity Attacks .",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619111-summon-construct",
+      "Primary Effect Category": "Constructs / Artifice",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

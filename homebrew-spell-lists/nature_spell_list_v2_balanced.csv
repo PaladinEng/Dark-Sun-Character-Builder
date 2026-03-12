@@ -1,0 +1,632 @@
+Level,Name,School,Casting Time,Range,Area,Components,Materials,Duration,Concentration,Ritual,Attack/Save,Damage/Effect,Source,Description,URL_absolute,Primary Effect Category,Arcane Status,Divine Status,Nature Status,Elemental Status,Psionics Status
+1st,Animal Friendship,Enchantment,1 Action,30 ft.,,"V, S, M",,24 Hours,,,WIS Save,Charmed,,"Target a Beast that you can see within range. The target must succeed on a Wisdom saving throw or have the Charmed condition for the duration. If you or one of your allies deals damage to the target, the spell ends.
+
+Using a Higher-Level Spell Slot. You can target one additional Beast for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618847-animal-friendship,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+1st,Beast Bond,Divination,1 Action,,,"V, S, M",,10 Minutes,,,,Buff (...),,"You establish a telepathic link with one beast you touch that is friendly to you or charmed by you. The spell fails if the beast’s Intelligence is 4 or higher. Until the spell ends, the link is active while you and the beast are within line of sight of each other. Through the link, the beast can understand your telepathic messages to it, and it can telepathically communicate simple emotions and concepts back to you. While the link is active, the beast gains advantage on attack rolls against any creature within 5 feet of you that you can see.",https://www.dndbeyond.com/spells/2370-beast-bond,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+1st,Catapult,Transmutation,1 Action,60 ft.,,S,,Instantaneous,,,DEX Save,Bludgeoning,,"Choose one object weighing 1 to 5 pounds within range that isn’t being worn or carried. The object flies in a straight line up to 90 feet in a direction you choose before falling to the ground, stopping early if it impacts against a solid surface. If the object would strike a creature, that creature must make a Dexterity saving throw. On a failed save, the object strikes the target and stops moving. When the object strikes something, the object and what it strikes each take 3d8 bludgeoning damage.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the maximum weight of objects that you can target with this spell increases by 5 pounds, and the damage increases by 1d8, for each slot level above 1st.",https://www.dndbeyond.com/spells/2372-catapult,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+1st,Create or Destroy Water,Transmutation,1 Action,30 ft.,(30 ft. ),"V, S, M",,Instantaneous,,,,Creation,,"You do one of the following:
+
+Create Water. You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot Cube within range, extinguishing exposed flames there.
+
+Destroy Water. You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot Cube within range.
+
+Using a Higher-Level Spell Slot. You create or destroy 10 additional gallons of water, or the size of the Cube increases by 5 feet, for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619074-create-or-destroy-water,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+1st,Detect Evil and Good,Divination,1 Action,,(30 ft. ),"V, S",,10 Minutes,,,,Detection,,"For the duration, you sense the location of any Aberration, Celestial, Elemental, Fey, Fiend, or Undead within 30 feet of yourself. You also sense whether the Hallow spell is active there and, if so, where.
+
+The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.",https://www.dndbeyond.com/spells/2619090-detect-evil-and-good,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Detect Magic,Divination,1 Action,,(30 ft. ),"V, S",,10 Minutes,,,,Detection,,"For the duration, you sense the presence of magical effects within 30 feet of yourself. If you sense such effects, you can take the Magic action to see a faint aura around any visible creature or object in the area that bears the magic, and if an effect was created by a spell, you learn the spell’s school of magic.
+
+The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.",https://www.dndbeyond.com/spells/2619097-detect-magic,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Detect Poison and Disease,Divination,1 Action,,(30 ft. ),"V, S, M",,10 Minutes,,,,Detection,,"For the duration, you sense the location of poisons, poisonous or venomous creatures, and magical contagions within 30 feet of yourself. You sense the kind of poison, creature, or contagion in each case.
+
+The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.",https://www.dndbeyond.com/spells/2619093-detect-poison-and-disease,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Earth Tremor,Evocation,1 Action,10 ft.,,"V, S",,Instantaneous,,,DEX Save,Bludgeoning,,"You cause a tremor in the ground within range. Each creature other than you in that area must make a Dexterity saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone . If the ground in that area is loose earth or stone, it becomes difficult terrain until cleared, with each 5-foot-diameter portion requiring at least 1 minute to clear by hand.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",https://www.dndbeyond.com/spells/2378-earth-tremor,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+1st,Ensnaring Strike,Conjuration,1 Bonus Action *,,,V,,1 Minute,,,STR Save,Piercing,,"As you hit the target, grasping vines appear on it, and it makes a Strength saving throw. A Large or larger creature has Advantage on this save. On a failed save, the target has the Restrained condition until the spell ends. On a successful save, the vines shrivel away, and the spell ends.
+
+While Restrained, the target takes 1d6 Piercing damage at the start of each of its turns. The target or a creature within reach of it can take an action to make a Strength ( Athletics ) check against your spell save DC. On a success, the spell ends.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619172-ensnaring-strike,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+1st,Entangle,Conjuration,1 Action,90 ft.,(20 ft. ),"V, S",,1 Minute,,,STR Save,Restrained,,"Grasping plants sprout from the ground in a 20-foot square within range. For the duration, these plants turn the ground in the area into Difficult Terrain . They disappear when the spell ends.
+
+Each creature (other than you) in the area when you cast the spell must succeed on a Strength saving throw or have the Restrained condition until the spell ends. A Restrained creature can take an action to make a Strength ( Athletics ) check against your spell save DC. On a success, it frees itself from the grasping plants and is no longer Restrained by them.",https://www.dndbeyond.com/spells/2619186-entangle,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+1st,Expeditious Retreat,Transmutation,1 Bonus Action,,,"V, S",,10 Minutes,,,,Movement,,"You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action.",https://www.dndbeyond.com/spells/2619189-expeditious-retreat,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Feather Fall,Transmutation,1 Reaction *,60 ft.,,"V, M",,1 Minute,,,,Exploration (...),,"Choose up to five falling creatures within range. A falling creature’s rate of descent slows to 60 feet per round until the spell ends. If a creature lands before the spell ends, the creature takes no damage from the fall, and the spell ends for that creature.",https://www.dndbeyond.com/spells/2618874-feather-fall,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Fog Cloud,Conjuration,1 Action,120 ft.,(20 ft. ),"V, S",,1 Hour,,,,Control (...),,"You create a 20-foot-radius Sphere of fog centered on a point within range. The Sphere is Heavily Obscured . It lasts for the duration or until a strong wind (such as one created by Gust of Wind ) disperses it.
+
+Using a Higher-Level Spell Slot. The fog’s radius increases by 20 feet for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618910-fog-cloud,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+1st,Goodberry,Conjuration,1 Action,,,"V, S, M",,24 Hours,,,,Healing,,"Ten berries appear in your hand and are infused with magic for the duration. A creature can take a Bonus Action to eat one berry. Eating a berry restores 1 Hit Point, and the berry provides enough nourishment to sustain a creature for one day.
+
+Uneaten berries disappear when the spell ends.",https://www.dndbeyond.com/spells/2618952-goodberry,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+1st,Grease,Conjuration,1 Action,60 ft.,(10 ft. ),"V, S, M",,1 Minute,,,DEX Save,Prone,,"Nonflammable grease covers the ground in a 10-foot square centered on a point within range and turns it into Difficult Terrain for the duration.
+
+When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone.",https://www.dndbeyond.com/spells/2618957-grease,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+1st,Hail of Thorns,Conjuration,1 Bonus Action *,,,V,,Instantaneous,,,DEX Save,Piercing,,"As you hit the creature, this spell creates a rain of thorns that sprouts from your Ranged weapon or ammunition. The target of the attack and each creature within 5 feet of it make a Dexterity saving throw, taking 1d10 Piercing damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618975-hail-of-thorns,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+1st,Identify,Divination,1 Minute,,,"V, S, M",,Instantaneous,,,,Detection,,"You touch an object throughout the spell’s casting. If the object is a magic item or some other magical object, you learn its properties and how to use them, whether it requires Attunement , and how many charges it has, if any. You learn whether any ongoing spells are affecting the item and what they are. If the item was created by a spell, you learn that spell’s name.
+
+If you instead touch a creature throughout the casting, you learn which ongoing spells, if any, are currently affecting it.",https://www.dndbeyond.com/spells/2619180-identify,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Jump,Transmutation,1 Bonus Action,,,"V, S, M",,1 Minute,,,,Movement,,"You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618991-jump,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Longstrider,Transmutation,1 Action,,,"V, S, M",,1 Hour,,,,Buff (...),,"You touch a creature. The target’s Speed increases by 10 feet until the spell ends.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619004-longstrider,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+1st,Purify Food and Drink,Transmutation,1 Action,10 ft.,(5 ft. ),"V, S",,Instantaneous,,,,Utility,,You remove poison and rot from nonmagical food and drink in a 5-foot-radius Sphere centered on a point within range.,https://www.dndbeyond.com/spells/2618917-purify-food-and-drink,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+1st,Speak with Animals,Divination,1 Action,,,"V, S",,10 Minutes,,,,Communication (...),,"For the duration, you can comprehend and verbally communicate with Beasts, and you can use any of the Influence action’s skill options with them.
+
+Most Beasts have little to say about topics that don’t pertain to survival or companionship, but at minimum, a Beast can give you information about nearby locations and monsters, including whatever it has perceived within the past day.",https://www.dndbeyond.com/spells/2619059-speak-with-animals,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+1st,Zephyr Strike,Transmutation,1 Bonus Action,,,V,,1 Minute,,,,Force,,"You move like the wind. Until the spell ends, your movement doesn’t provoke opportunity attacks.
+
+Once before the spell ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn.",https://www.dndbeyond.com/spells/14622-zephyr-strike,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Alter Self,Transmutation,1 Action,,,"V, S",,1 Hour,,,,Shapechanging,,"You alter your physical form. Choose one of the following options. Its effects last for the duration, during which you can take a Magic action to replace the option you chose with a different one.
+
+Aquatic Adaptation. You sprout gills and grow webs between your fingers. You can breathe underwater and gain a Swim Speed equal to your Speed.
+
+Change Appearance. You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can’t appear as a creature of a different size, and your basic shape stays the same; if you’re bipedal, you can’t use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again.
+
+Natural Weapons. You grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use your Unarmed Strike to deal damage with that new growth, it deals 1d6 damage of the type in parentheses instead of dealing the normal damage for your Unarmed Strike, and you use your spellcasting ability modifier for the attack and damage rolls rather than using Strength.",https://www.dndbeyond.com/spells/2618846-alter-self,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Animal Messenger,Enchantment,1 Action,30 ft.,,"V, S, M",,24 Hours,,,CHA Save,Communication (...),,"A Tiny Beast of your choice that you can see within range must succeed on a Charisma saving throw, or it attempts to deliver a message for you (if the target’s Challenge Rating isn’t 0, it automatically succeeds). You specify a location you have visited and a recipient who matches a general description, such as “a person dressed in the uniform of the town guard” or “a red-haired dwarf wearing a pointed hat.” You also communicate a message of up to twenty-five words. The Beast travels for the duration toward the specified location, covering about 25 miles per 24 hours or 50 miles if the Beast can fly.
+
+When the Beast arrives, it delivers your message to the creature that you described, mimicking your communication. If the Beast doesn’t reach its destination before the spell ends, the message is lost, and the Beast returns to where you cast the spell.
+
+Using a Higher-Level Spell Slot. The spell’s duration increases by 48 hours for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618850-animal-messenger,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Barkskin,Transmutation,1 Bonus Action,,,"V, S, M",,1 Hour,,,,Buff (...),,"You touch a willing creature. Until the spell ends, the target’s skin assumes a bark-like appearance, and the target has an Armor Class of 17 if its AC is lower than that.",https://www.dndbeyond.com/spells/2618907-barkskin,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+2nd,Beast Sense,Divination,1 Action,,,S,,1 Hour,,,,Detection,,"You touch a willing Beast. For the duration, you can perceive through the Beast’s senses as well as your own. When perceiving through the Beast’s senses, you benefit from any special senses it has.",https://www.dndbeyond.com/spells/2618914-beast-sense,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Cordon of Arrows,Transmutation,1 Action,,,"V, S, M",,8 Hours,,,DEX Save,Piercing,,"You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can’t be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.
+
+When you cast this spell, you can designate any creatures you choose, and the spell ignores them.
+
+Using a Higher-Level Spell Slot. The amount of ammunition that can be affected increases by two for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619055-cordon-of-arrows,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Darkvision,Transmutation,1 Action,,,"V, S, M",,8 Hours,,,,Buff,,"For the duration, a willing creature you touch has Darkvision with a range of 150 feet.",https://www.dndbeyond.com/spells/2619082-darkvision,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Detect Thoughts,Divination,1 Action,,,"V, S, M",,1 Minute,,,WIS Save,Detection (...),,"You activate one of the effects below. Until the spell ends, you can activate either effect as a Magic action on your later turns.
+
+Sense Thoughts. You sense the presence of thoughts within 30 feet of yourself that belong to creatures that know languages or are telepathic. You don’t read the thoughts, but you know that a thinking creature is present.
+
+The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.
+
+Read Thoughts. Target one creature you can see within 30 feet of yourself or one creature within 30 feet of yourself that you detected with the Sense Thoughts option. You learn what is most on the target’s mind right now. If the target doesn’t know any languages and isn’t telepathic, you learn nothing.
+
+As a Magic action on your next turn, you can try to probe deeper into the target’s mind. If you probe deeper, the target makes a Wisdom saving throw. On a failed save, you discern the target’s reasoning, emotions, and something that looms large in its mind (such as a worry, love, or hate). On a successful save, the spell ends. Either way, the target knows that you are probing into its mind, and until you shift your attention away from the target’s mind, the target can take an action on its turn to make an Intelligence ( Arcana ) check against your spell save DC, ending the spell on a success.",https://www.dndbeyond.com/spells/2619099-detect-thoughts,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Earthbind,Transmutation,1 Action,300 ft.,,V,,1 Minute,,,STR Save,Control (...),,"Choose one creature you can see within range. Yellow strips of magical energy loop around the creature. The target must succeed on a Strength saving throw, or its flying speed (if any) is reduced to 0 feet for the spell’s duration. An airborne creature affected by this spell safely descends at 60 feet per round until it reaches the ground or the spell ends.",https://www.dndbeyond.com/spells/2377-earthbind,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Enhance Ability,Transmutation,1 Action,,,"V, S, M",,1 Hour,,,,Buff,,"You touch a creature and choose Strength, Dexterity, Intelligence, Wisdom, or Charisma. For the duration, the target has Advantage on ability checks using the chosen ability.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 2. You can choose a different ability for each target.",https://www.dndbeyond.com/spells/2619165-enhance-ability,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Enlarge/Reduce,Transmutation,1 Action,30 ft.,,"V, S, M",,1 Minute,,,CON Save,Buff,,"For the duration, the spell enlarges or reduces a creature or an object you can see within range (see the chosen effect below). A targeted object must be neither worn nor carried. If the target is an unwilling creature, it can make a Constitution saving throw. On a successful save, the spell has no effect.
+
+Everything that a targeted creature is wearing and carrying changes size with it. Any item it drops returns to normal size at once. A thrown weapon or piece of ammunition returns to normal size immediately after it hits or misses a target.
+
+Enlarge. The target’s size increases by one category—from Medium to Large, for example. The target also has Advantage on Strength checks and Strength saving throws. The target’s attacks with its enlarged weapons or Unarmed Strikes deal an extra 1d4 damage on a hit.
+
+Reduce. The target’s size decreases by one category—from Medium to Small, for example. The target also has Disadvantage on Strength checks and Strength saving throws. The target’s attacks with its reduced weapons or Unarmed Strikes deal 1d4 less damage on a hit (this can’t reduce the damage below 1).",https://www.dndbeyond.com/spells/2619170-enlarge-reduce,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Find Traps,Divination,1 Action,120 ft.,,"V, S",,Instantaneous,,,,Detection,,"You sense any trap within range that is within line of sight. A trap, for the purpose of this spell, includes any object or mechanism that was created to cause damage or other danger. Thus, the spell would sense the Alarm or Glyph of Warding spell or a mechanical pit trap, but it wouldn’t reveal a natural weakness in the floor, an unstable ceiling, or a hidden sinkhole.
+
+This spell reveals that a trap is present but not its location. You do learn the general nature of the danger posed by a trap you sense.",https://www.dndbeyond.com/spells/2618883-find-traps,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Kinetic Jaunt,Transmutation,1 Bonus Action,,,S,,1 Minute,,,,Buff,,,https://www.dndbeyond.com/spells/1239803-kinetic-jaunt,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Levitate,Transmutation,1 Action,60 ft.,,"V, S, M",,10 Minutes,,,CON Save,Movement,,"One creature or loose object of your choice that you can see within range rises vertically up to 20 feet and remains suspended there for the duration. The spell can levitate an object that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected.
+
+The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target’s altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can take a Magic action to move the target, which must remain within the spell’s range.
+
+When the spell ends, the target floats gently to the ground if it is still aloft.",https://www.dndbeyond.com/spells/2618994-levitate,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Locate Animals or Plants,Divination,1 Action,,,"V, S, M",,Instantaneous,,,,Detection,,"Describe or name a specific kind of Beast, Plant creature, or nonmagical plant. You learn the direction and distance to the closest creature or plant of that kind within 5 miles, if any are present.",https://www.dndbeyond.com/spells/2619000-locate-animals-or-plants,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+2nd,Locate Object,Divination,1 Action,,,"V, S, M",,10 Minutes,,,,Detection,,"Describe or name an object that is familiar to you. You sense the direction to the object’s location if that object is within 1,000 feet of you. If the object is in motion, you know the direction of its movement.
+
+The spell can locate a specific object known to you if you have seen it up close—within 30 feet—at least once. Alternatively, the spell can locate the nearest object of a particular kind, such as a certain kind of apparel, jewelry, furniture, tool, or weapon.
+
+This spell can’t locate an object if any thickness of lead blocks a direct path between you and the object.",https://www.dndbeyond.com/spells/2619002-locate-object,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Magic Weapon,Transmutation,1 Bonus Action,,,"V, S",,1 Hour,,,,Buff,,"You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls. The spell ends early if you cast it again.
+
+Using a Higher-Level Spell Slot. The bonus increases to +2 with a level 3–5 spell slot. The bonus increases to +3 with a level 6+ spell slot.",https://www.dndbeyond.com/spells/2619024-magic-weapon,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Maximilian's Earthen Grasp,Transmutation,1 Action,30 ft.,(5 ft. *),"V, S, M",,1 Minute,,,STR Save,Bludgeoning (...),,"You choose a 5-foot-square unoccupied space on the ground that you can see within range. A Medium hand made from compacted soil rises there and reaches for one creature you can see within 5 feet of it. The target must make a Strength saving throw. On a failed save, the target takes 2d6 bludgeoning damage and is restrained for the spell’s duration.
+
+As an action, you can cause the hand to crush the restrained target, who must make a Strength saving throw. It takes 2d6 bludgeoning damage on a failed save, or half as much damage on a successful one.
+
+To break out, the restrained target can use its action to make a Strength check against your spell save DC. On a success, the target escapes and is no longer restrained by the hand.
+
+As an action, you can cause the hand to reach for a different creature or to move to a different unoccupied space within range. The hand releases a restrained target if you do either.",https://www.dndbeyond.com/spells/2392-maximilians-earthen-grasp,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Moonbeam,Evocation,1 Action,120 ft.,(5 ft. *),"V, S, M",,1 Minute,,,CON Save,Radiant,,"A silvery beam of pale light shines down in a 5-foot-radius, 40-foot-high Cylinder centered on a point within range. Until the spell ends, Dim Light fills the Cylinder, and you can take a Magic action on later turns to move the Cylinder up to 60 feet.
+
+When the Cylinder appears, each creature in it makes a Constitution saving throw. On a failed save, a creature takes 2d10 Radiant damage, and if the creature is shape-shifted (as a result of the Polymorph spell, for example), it reverts to its true form and can’t shape-shift until it leaves the Cylinder. On a successful save, a creature takes half as much damage only. A creature also makes this save when the spell’s area moves into its space and when it enters the spell’s area or ends its turn there. A creature makes this save only once per turn.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619134-moonbeam,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Skywrite,Transmutation,1 Action,,,"V, S",,1 Hour,,,,Communication (...),,You cause up to ten words to form in a part of the sky you can see. The words appear to be made of cloud and remain in place for the spell’s duration. The words dissipate when the spell ends. A strong wind can disperse the clouds and end the spell early.,https://www.dndbeyond.com/spells/2398-skywrite,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+2nd,Spider Climb,Transmutation,1 Action,,,"V, S, M",,1 Hour,,,,Buff (...),,"Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and along ceilings, while leaving its hands free. The target also gains a Climb Speed equal to its Speed.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619071-spider-climb,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Spike Growth,Transmutation,1 Action,150 ft.,(20 ft. ),"V, S, M",,10 Minutes,,,,Control (...),,"The ground in a 20-foot-radius Sphere centered on a point within range sprouts hard spikes and thorns. The area becomes Difficult Terrain for the duration. When a creature moves into or within the area, it takes 2d4 Piercing damage for every 5 feet it travels.
+
+The transformation of the ground is camouflaged to look natural. Any creature that can’t see the area when the spell is cast must take a Search action and succeed on a Wisdom ( Perception or Survival ) check against your spell save DC to recognize the terrain as hazardous before entering it.",https://www.dndbeyond.com/spells/2619075-spike-growth,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+2nd,Summon Beast,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Small Beast, Neutral
+
+AC 11 + the spell’s level
+
+HP 20 (Air only) or 30 (Land and Water only) + 5 for each spell level above 2
+
+Speed 30 ft.; Climb 30 ft. (Land only); Fly 60 ft. (Air only); Swim 30 ft. (Water only)
+
+Senses Darkvision 60 ft.; Passive Perception 12
+
+Languages Understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Flyby (Air Only). The spirit doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach.
+
+Pack Tactics (Land and Water Only). The spirit has Advantage on an attack roll against a creature if at least one of the spirit’s allies is within 5 feet of the creature and the ally doesn’t have the Incapacitated condition.
+
+Water Breathing (Water Only). The spirit can breathe only underwater.
+
+Actions
+
+Multiattack. The spirit makes a number of Rend attacks equal to half this spell’s level (round down).
+
+Rend. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + the spell’s level Piercing damage.",https://www.dndbeyond.com/spells/2619106-summon-beast,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Warding Wind,Evocation,1 Action,,(10 ft. ),V,,10 Minutes,,,,Deafened,,"A strong wind (20 miles per hour) blows around you in a 10-foot radius and moves with you, remaining centered on you. The wind lasts for the spell’s duration.
+
+The wind has the following effects:
+
+It deafens you and other creatures in its area.
+
+It extinguishes unprotected flames in its area that are torch-sized or smaller.
+
+It hedges out vapor, gas, and fog that can be dispersed by strong wind.
+
+The area is difficult terrain for creatures other than you.
+
+The attack rolls of ranged weapon attacks have disadvantage if the attacks pass in or out of the wind.",https://www.dndbeyond.com/spells/2407-warding-wind,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Warp Sense,Divination,1 Action,,,"V, S, M",,1 Minute,,,,Detection (...),,,https://www.dndbeyond.com/spells/2119579-warp-sense,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+2nd,Web,Conjuration,1 Action,60 ft.,(20 ft. ),"V, S, M",,1 Hour,,,DEX Save,Restrained,,"You conjure a mass of sticky webbing at a point within range. The webs fill a 20-foot Cube there for the duration. The webs are Difficult Terrain , and the area within them is Lightly Obscured .
+
+If the webs aren’t anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.
+
+The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Restrained condition while in the webs or until it breaks free.
+
+A creature Restrained by the webs can take an action to make a Strength ( Athletics ) check against your spell save DC. If it succeeds, it is no longer Restrained.
+
+The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire.",https://www.dndbeyond.com/spells/2619208-web,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Wither and Bloom,Necromancy,1 Action,60 ft.,(10 ft. *),"V, S, M",,Instantaneous,,,CON Save,Necrotic,,,https://www.dndbeyond.com/spells/1239806-wither-and-bloom,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+3rd,Clairvoyance,Divination,10 Minutes,1 mile,,"V, S, M",,10 Minutes,,,,Detection (...),,"You create an Invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The intangible, invulnerable sensor remains in place for the duration.
+
+When you cast the spell, choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As a Bonus Action, you can switch between seeing and hearing.
+
+A creature that sees the sensor (such as a creature benefiting from See Invisibility or Truesight ) sees a luminous orb about the size of your fist.",https://www.dndbeyond.com/spells/2618972-clairvoyance,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+3rd,Conjure Animals,Conjuration,1 Action,60 ft.,,"V, S",,10 Minutes,,,DEX Save,Slashing,,"You conjure nature spirits that appear as a Large pack of spectral, intangible animals in an unoccupied space you can see within range. The pack lasts for the duration, and you choose the spirits’ animal form, such as wolves, serpents, or birds.
+
+You have Advantage on Strength saving throws while you’re within 5 feet of the pack, and when you move on your turn, you can also move the pack up to 30 feet to an unoccupied space you can see.
+
+Whenever the pack moves within 10 feet of a creature you can see and whenever a creature you can see enters a space within 10 feet of the pack or ends its turn there, you can force that creature to make a Dexterity saving throw. On a failed save, the creature takes 3d10 Slashing damage. A creature makes this save only once per turn.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619044-conjure-animals,Summoning — Natural,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+3rd,Create Food and Water,Conjuration,1 Action,30 ft.,,"V, S",,Instantaneous,,,,Creation,,"You create 45 pounds of food and 30 gallons of fresh water on the ground or in containers within range—both useful in fending off the hazards of malnutrition and dehydration . The food is bland but nourishing and looks like a food of your choice, and the water is clean. The food spoils after 24 hours if uneaten.",https://www.dndbeyond.com/spells/2619073-create-food-and-water,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+3rd,Erupting Earth,Transmutation,1 Action,120 ft.,(20 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Bludgeoning,,"Choose a point you can see on the ground within range. A fountain of churned earth and stone erupts in a 20-foot cube centered on that point. Each creature in that area must make a Dexterity saving throw. A creature takes 3d12 bludgeoning damage on a failed save, or half as much damage on a successful one. Additionally, the ground in that area becomes difficult terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd.",https://www.dndbeyond.com/spells/2380-erupting-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Fly,Transmutation,1 Action,,,"V, S, M",,10 Minutes,,,,Movement,,"You touch a willing creature. For the duration, the target gains a Fly Speed of 60 feet and can hover. When the spell ends, the target falls if it is still aloft unless it can stop the fall.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618909-fly,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+3rd,Meld into Stone,Transmutation,1 Action,,,"V, S",,8 Hours,,,,Movement,,"You step into a stone object or surface large enough to fully contain your body, merging yourself and your equipment with the stone for the duration. You must touch the stone to do so. Nothing of your presence remains visible or otherwise detectable by nonmagical senses.
+
+While merged with the stone, you can’t see what occurs outside it, and any Wisdom ( Perception ) checks you make to hear sounds outside it are made with Disadvantage. You remain aware of the passage of time and can cast spells on yourself while merged in the stone. You can use 5 feet of movement to leave the stone where you entered it, which ends the spell. You otherwise can’t move.
+
+Minor physical damage to the stone doesn’t harm you, but its partial destruction or a change in its shape (to the extent that you no longer fit within it) expels you and deals 6d6 Force damage to you. The stone’s complete destruction (or transmutation into a different substance) expels you and deals 50 Force damage to you. If expelled, you move into an unoccupied space closest to where you first entered and have the Prone condition.",https://www.dndbeyond.com/spells/2619031-meld-into-stone,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+3rd,Phantom Steed,Illusion,1 Minute,30 ft.,,"V, S",,1 Hour,,,,Movement,,"A Large, quasi-real, horselike creature appears on the ground in an unoccupied space of your choice within range. You decide the creature’s appearance, and it is equipped with a saddle, bit, and bridle. Any of the equipment created by the spell vanishes in a puff of smoke if it is carried more than 10 feet away from the steed.
+
+For the duration, you or a creature you choose can ride the steed. The steed uses the Riding Horse stat block, except it has a Speed of 100 feet and can travel 13 miles in an hour. When the spell ends, the steed gradually fades, giving the rider 1 minute to dismount. The spell ends early if the steed takes any damage.",https://www.dndbeyond.com/spells/2618859-phantom-steed,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+3rd,Plant Growth,Transmutation,Special *,150 ft.,(100 ft. ),"V, S",,Instantaneous,,,,Control,,"This spell channels vitality into plants. The casting time you use determines whether the spell has the Overgrowth or the Enrichment effect below.
+
+Overgrowth. Choose a point within range. All normal plants in a 100-foot-radius Sphere centered on that point become thick and overgrown. A creature moving through that area must spend 4 feet of movement for every 1 foot it moves. You can exclude one or more areas of any size within the spell’s area from being affected.
+
+Enrichment. All plants in a half-mile radius centered on a point within range become enriched for 365 days. The plants yield twice the normal amount of food when harvested. They can benefit from only one Plant Growth per year.",https://www.dndbeyond.com/spells/2618869-plant-growth,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+3rd,Sleet Storm,Conjuration,1 Action,150 ft.,(40 ft. *),"V, S, M",,1 Minute,,,DEX Save,Prone,,"Until the spell ends, sleet falls in a 40-foot-tall, 20-foot-radius Cylinder centered on a point you choose within range. The area is Heavily Obscured , and exposed flames in the area are doused.
+
+Ground in the Cylinder is Difficult Terrain . When a creature enters the Cylinder for the first time on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Prone condition and lose Concentration .",https://www.dndbeyond.com/spells/2618998-sleet-storm,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Speak with Plants,Transmutation,1 Action,,,"V, S",,10 Minutes,,,,Communication (...),,"You imbue plants in an immobile 30-foot Emanation with limited sentience and animation, giving them the ability to communicate with you and follow your simple commands. You can question plants about events in the spell’s area within the past day, gaining information about creatures that have passed, weather, and other circumstances.
+
+You can also turn Difficult Terrain caused by plant growth (such as thickets and undergrowth) into ordinary terrain that lasts for the duration. Or you can turn ordinary terrain where plants are present into Difficult Terrain that lasts for the duration.
+
+The spell doesn’t enable plants to uproot themselves and move about, but they can move their branches, tendrils, and stalks for you.
+
+If a Plant creature is in the area, you can communicate with it as if you shared a common language.",https://www.dndbeyond.com/spells/2619069-speak-with-plants,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+3rd,Summon Fey,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,,https://www.dndbeyond.com/spells/2619115-summon-fey,Summoning — Natural,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+3rd,Wall of Sand,Evocation,1 Action,90 ft.,,"V, S, M",,10 Minutes,,,,Blinded,,"You conjure up a wall of swirling sand on the ground at a point you can see within range. You can make the wall up to 30 feet long, 10 feet high, and 10 feet thick, and it vanishes when the spell ends. It blocks line of sight but not movement. A creature is blinded while in the wall’s space and must spend 3 feet of movement for every 1 foot it moves there.",https://www.dndbeyond.com/spells/2405-wall-of-sand,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Wall of Water,Evocation,1 Action,60 ft.,,"V, S, M",,10 Minutes,,,,Control (...),,"You create a wall of water on the ground at a point you can see within range. You can make the wall up to 30 feet long, 10 feet high, and 1 foot thick, or you can make a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall vanishes when the spell ends. The wall’s space is difficult terrain.
+
+Any ranged weapon attack that enters the wall’s space has disadvantage on the attack roll, and fire damage is halved if the fire effect passes through the wall to reach its target. Spells that deal cold damage that pass through the wall cause the area of the wall they pass through to freeze solid (at least a 5-foot-square section is frozen). Each 5-foot-square frozen section has AC 5 and 15 hit points. Reducing a frozen section to 0 hit points destroys it. When a section is destroyed, the wall’s water doesn’t fill it.",https://www.dndbeyond.com/spells/2406-wall-of-water,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Water Breathing,Transmutation,1 Action,30 ft.,,"V, S, M",,24 Hours,,,,Buff,,This spell grants up to ten willing creatures of your choice within range the ability to breathe underwater until the spell ends. Affected creatures also retain their normal mode of respiration.,https://www.dndbeyond.com/spells/2619205-water-breathing,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+3rd,Water Walk,Transmutation,1 Action,30 ft.,,"V, S, M",,1 Hour,,,,Movement,,"This spell grants the ability to move across any liquid surface—such as water, acid, mud, snow, quicksand, or lava—as if it were harmless solid ground (creatures crossing molten lava can still take damage from the heat). Up to ten willing creatures of your choice within range gain this ability for the duration.
+
+An affected target must take a Bonus Action to pass from the liquid’s surface into the liquid itself and vice versa, but if the target falls into the liquid, the target passes through the surface into the liquid below.",https://www.dndbeyond.com/spells/2619207-water-walk,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+3rd,Wind Wall,Evocation,1 Action,120 ft.,,"V, S, M",,1 Minute,,,STR Save,Bludgeoning,,"A wall of strong wind rises from the ground at a point you choose within range. You can make the wall up to 50 feet long, 15 feet high, and 1 foot thick. You can shape the wall in any way you choose so long as it makes one continuous path along the ground. The wall lasts for the duration.
+
+When the wall appears, each creature in its area makes a Strength saving throw, taking 4d8 Bludgeoning damage on a failed save or half as much damage on a successful one.
+
+The strong wind keeps fog, smoke, and other gases at bay. Small or smaller flying creatures or objects can’t pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and miss automatically. Boulders hurled by Giants or siege engines, and similar projectiles, are unaffected. Creatures in gaseous form can’t pass through it.",https://www.dndbeyond.com/spells/2619212-wind-wall,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Arcane Eye,Divination,1 Action,30 ft.,,"V, S, M",,1 Hour,,,,Detection,,"You create an Invisible , invulnerable eye within range that hovers for the duration. You mentally receive visual information from the eye, which can see in every direction. It also has Darkvision with a range of 30 feet.
+
+As a Bonus Action, you can move the eye up to 30 feet in any direction. A solid barrier blocks the eye’s movement, but the eye can pass through an opening as small as 1 inch in diameter.",https://www.dndbeyond.com/spells/2618863-arcane-eye,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+4th,Conjure Woodland Beings,Conjuration,1 Action,,(10 ft. *),"V, S",,10 Minutes,,,WIS Save,Force,,"You conjure nature spirits that flit around you in a 10-foot Emanation for the duration. Whenever the Emanation enters the space of a creature you can see and whenever a creature you can see enters the Emanation or ends its turn there, you can force that creature to make a Wisdom saving throw. The creature takes 5d8 Force damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.
+
+In addition, you can take the Disengage action as a Bonus Action for the spell’s duration.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619051-conjure-woodland-beings,Summoning — Natural,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+4th,Control Water,Transmutation,1 Action,300 ft.,,"V, S, M",,10 Minutes,,,STR Save,Bludgeoning,,"Until the spell ends, you control any water inside an area you choose that is a Cube up to 100 feet on a side, using one of the following effects. As a Magic action on your later turns, you can repeat the same effect or choose a different one.
+
+Flood. You cause the water level of all standing water in the area to rise by as much as 20 feet. If you choose an area in a large body of water, you instead create a 20-foot tall wave that travels from one side of the area to the other and then crashes. Any Huge or smaller vehicles in the wave’s path are carried with it to the other side. Any Huge or smaller vehicles struck by the wave have a 25 percent chance of capsizing.
+
+The water level remains elevated until the spell ends or you choose a different effect. If this effect produced a wave, the wave repeats on the start of your next turn while the flood effect lasts.
+
+Part Water. You part water in the area and create a trench. The trench extends across the spell’s area, and the separated water forms a wall to either side. The trench remains until the spell ends or you choose a different effect. The water then slowly fills in the trench over the course of the next round until the normal water level is restored.
+
+Redirect Flow. You cause flowing water in the area to move in a direction you choose, even if the water has to flow over obstacles, up walls, or in other unlikely directions. The water in the area moves as you direct it, but once it moves beyond the spell’s area, it resumes its flow based on the terrain. The water continues to move in the direction you chose until the spell ends or you choose a different effect.
+
+Whirlpool. You cause a whirlpool to form in the center of the area, which must be at least 50 feet square and 25 feet deep. The whirlpool lasts until you choose a different effect or the spell ends. The whirlpool is 5 feet wide at the base, up to 50 feet wide at the top, and 25 feet tall. Any creature in the water and within 25 feet of the whirlpool is pulled 10 feet toward it. When a creature enters the whirlpool for the first time on a turn or ends its turn there, it makes a Strength saving throw. On a failed save, the creature takes 2d8 Bludgeoning damage. On a successful save, the creature takes half as much damage. A creature can swim away from the whirlpool only if it first takes an action to pull away and succeeds on a Strength ( Athletics ) check against your spell save DC.",https://www.dndbeyond.com/spells/2619070-control-water,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Grasping Vine,Conjuration,1 Bonus Action,60 ft.,,"V, S",,1 Minute,,,Melee,Bludgeoning,,"You conjure a vine that sprouts from a surface in an unoccupied space that you can see within range. The vine lasts for the duration.
+
+Make a melee spell attack against a creature within 30 feet of the vine. On a hit, the target takes 4d8 Bludgeoning damage and is pulled up to 30 feet toward the vine; if the target is Huge or smaller, it has the Grappled condition (escape DC equal to your spell save DC). The vine can grapple only one creature at a time, and you can cause the vine to release a Grappled creature (no action required).
+
+As a Bonus Action on your later turns, you can repeat the attack against a creature within 30 feet of the vine.
+
+Using a Higher-Level Spell Slot. The number of creatures the vine can grapple increases by one for each spell slot level above 4.",https://www.dndbeyond.com/spells/2618955-grasping-vine,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+4th,Guardian of Nature,Transmutation,1 Bonus Action,,,V,,1 Minute,,,,Buff (...),,"A nature spirit answers your call and transforms you into a powerful guardian. The transformation lasts until the spell ends. You choose one of the following forms to assume: Primal Beast or Great Tree.
+
+Primal Beast. Bestial fur covers your body, your facial features become feral, and you gain the following benefits:
+
+Your walking speed increases by 10 feet.
+
+You gain darkvision with a range of 120 feet.
+
+You make Strength-based attack rolls with advantage.
+
+Your melee weapon attacks deal an extra 1d6 force damage on a hit.
+
+Great Tree. Your skin appears barky, leaves sprout from your hair, and you gain the following benefits:
+
+You gain 10 temporary hit points .
+
+You make Constitution saving throws with advantage.
+
+You make Dexterity- and Wisdom-based attack rolls with advantage.
+
+While you are on the ground, the ground within 15 feet of you is difficult terrain for your enemies.",https://www.dndbeyond.com/spells/14872-guardian-of-nature,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Ice Storm,Evocation,1 Action,300 ft.,(20 ft. *),"V, S, M",,Instantaneous,,,DEX Save,Bludgeoning (...),,"Hail falls in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Each creature in the Cylinder makes a Dexterity saving throw. A creature takes 2d10 Bludgeoning damage and 4d6 Cold damage on a failed save or half as much damage on a successful one.
+
+Hailstones turn ground in the Cylinder into Difficult Terrain until the end of your next turn.
+
+Using a Higher-Level Spell Slot. The Bludgeoning damage increases by 1d10 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619178-ice-storm,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Locate Creature,Divination,1 Action,,,"V, S, M",,1 Hour,,,,Detection,,"Describe or name a creature that is familiar to you. You sense the direction to the creature’s location if that creature is within 1,000 feet of you. If the creature is moving, you know the direction of its movement.
+
+The spell can locate a specific creature known to you or the nearest creature of a specific kind (such as a human or a unicorn) if you have seen such a creature up close—within 30 feet—at least once. If the creature you described or named is in a different form, such as under the effects of a Flesh to Stone or Polymorph spell, this spell doesn’t locate the creature.
+
+This spell can’t locate a creature if any thickness of lead blocks a direct path between you and the creature.",https://www.dndbeyond.com/spells/2619001-locate-creature,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+4th,Polymorph,Transmutation,1 Action,60 ft.,,"V, S, M",,1 Hour,,,WIS Save,Control (...),,"You attempt to transform a creature that you can see within range into a Beast. The target must succeed on a Wisdom saving throw or shape-shift into Beast form for the duration. That form can be any Beast you choose that has a Challenge Rating equal to or less than the target’s (or the target’s level if it doesn’t have a Challenge Rating). The target’s game statistics are replaced by the stat block of the chosen Beast, but the target retains its alignment, personality, creature type, Hit Points, and Hit Point Dice.
+
+The target gains a number of Temporary Hit Points equal to the Hit Points of the Beast form. These Temporary Hit Points vanish if any remain when the spell ends. The spell ends early on the target if it has no Temporary Hit Points left.
+
+The target is limited in the actions it can perform by the anatomy of its new form, and it can’t speak or cast spells.
+
+The target’s gear melds into the new form. The creature can’t use or otherwise benefit from any of that equipment.",https://www.dndbeyond.com/spells/2618876-polymorph,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+4th,Stoneskin,Transmutation,1 Action,,,"V, S, M",,1 Hour,,,,Buff,,"Until the spell ends, one willing creature you touch has Resistance to Bludgeoning, Piercing, and Slashing damage.",https://www.dndbeyond.com/spells/2619095-stoneskin,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+4th,Storm Sphere,Evocation,1 Action,150 ft.,(20 ft. ),"V, S",,1 Minute,,,STR Save,Bludgeoning (...),,"A 20-foot-radius sphere of whirling air springs into existence centered on a point you choose within range. The sphere remains for the spell’s duration. Each creature in the sphere when it appears or that ends its turn there must succeed on a Strength saving throw or take 2d6 bludgeoning damage. The sphere’s space is difficult terrain.
+
+Until the spell ends, you can use a bonus action on each of your turns to cause a bolt of lightning to leap from the center of the sphere toward one creature you choose within 60 feet of the center. Make a ranged spell attack. You have advantage on the attack roll if the target is in the sphere. On a hit, the target takes 4d6 lightning damage.
+
+Creatures within 30 feet of the sphere have disadvantage on Wisdom ( Perception ) checks made to listen.
+
+At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, the damage increases for each of its effects by 1d6 for each slot level above 4th.",https://www.dndbeyond.com/spells/2400-storm-sphere,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Awaken,Transmutation,8 Hours,,,"V, S, M",,Instantaneous,,,,Charmed,,"You spend the casting time tracing magical pathways within a precious gemstone, and then touch the target. The target must be either a Beast or Plant creature with an Intelligence of 3 or less or a natural plant that isn’t a creature. The target gains an Intelligence of 10 and the ability to speak one language you know. If the target is a natural plant, it becomes a Plant creature and gains the ability to move its limbs, roots, vines, creepers, and so forth, and it gains senses similar to a human’s. The DM chooses statistics appropriate for the awakened Plant, such as the statistics for the Awakened Shrub or Awakened Tree in the Monster Manual .
+
+The awakened target has the Charmed condition for 30 days or until you or your allies deal damage to it. When that condition ends, the awakened creature chooses its attitude toward you.",https://www.dndbeyond.com/spells/2618897-awaken,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+5th,Commune with Nature,Divination,1 Minute,,,"V, S",,Instantaneous,,,,Environment (...),,"You commune with nature spirits and gain knowledge of the surrounding area. In the outdoors, the spell gives you knowledge of the area within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn’t function where nature has been replaced by construction, such as in castles and settlements.
+
+Choose three of the following facts; you learn those facts as they pertain to the spell’s area:
+
+Locations of settlements
+
+Locations of portals to other planes of existence
+
+Location of one Challenge Rating 10+ creature (DM’s choice) that is a Celestial, an Elemental, a Fey, a Fiend, or an Undead
+
+The most prevalent kind of plant, mineral, or Beast (you choose which to learn)
+
+Locations of bodies of water
+
+For example, you could determine the location of a powerful monster in the area, the locations of bodies of water, and the locations of any towns.",https://www.dndbeyond.com/spells/2618989-commune-with-nature,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+5th,Control Winds,Transmutation,1 Action,300 ft.,(100 ft. ),"V, S",,1 Hour,,,STR Save,Prone,,"You take control of the air in a 100-foot cube that you can see within range. Choose one of the following effects when you cast the spell. The effect lasts for the spell’s duration, unless you use your action on a later turn to switch to a different effect. You can also use your action to temporarily halt the effect or to restart one you’ve halted.
+
+Gusts. A wind picks up within the cube, continually blowing in a horizontal direction you designate. You choose the intensity of the wind: calm, moderate, or strong. If the wind is moderate or strong, ranged weapon attacks that enter or leave the cube or pass through it have disadvantage on their attack rolls. If the wind is strong, any creature moving against the wind must spend 1 extra foot of movement for each foot moved.
+
+Downdraft. You cause a sustained blast of strong wind to blow downward from the top of the cube. Ranged weapon attacks that pass through the cube or that are made against targets within it have disadvantage on their attack rolls. A creature must make a Strength saving throw if it flies into the cube for the first time on a turn or starts its turn there flying. On a failed save, the creature is knocked prone .
+
+Updraft. You cause a sustained updraft within the cube, rising upward from the cube’s bottom side. Creatures that end a fall within the cube take only half damage from the fall. When a creature in the cube makes a vertical jump, the creature can jump up to 10 feet higher than normal.",https://www.dndbeyond.com/spells/2375-control-winds,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Insect Plague,Conjuration,1 Action,300 ft.,(20 ft. ),"V, S, M",,10 Minutes,,,CON Save,Piercing,,"Swarming locusts fill a 20-foot-radius Sphere centered on a point you choose within range. The Sphere remains for the duration, and its area is Lightly Obscured and Difficult Terrain .
+
+When the swarm appears, each creature in it makes a Constitution saving throw, taking 4d10 Piercing damage on a failed save or half as much damage on a successful one. A creature also makes this save when it enters the spell’s area for the first time on a turn or ends its turn there. A creature makes this save only once per turn.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2619183-insect-plague,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+5th,Maelstrom,Evocation,1 Action,120 ft.,,"V, S, M",,1 Minute,,,STR Save,Bludgeoning,,"A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is difficult terrain, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.",https://www.dndbeyond.com/spells/2390-maelstrom,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Scrying,Divination,10 Minutes,,,"V, S, M",,10 Minutes,,,WIS Save,Detection,,"You can see and hear a creature you choose that is on the same plane of existence as you. The target makes a Wisdom saving throw, which is modified (see the tables below) by how well you know the target and the sort of physical connection you have to it. The target doesn’t know what it is making the save against, only that it feels uneasy.
+
+On a successful save, the target isn’t affected, and you can’t use this spell on it again for 24 hours.
+
+On a failed save, the spell creates an Invisible , intangible sensor within 10 feet of the target. You can see and hear through the sensor as if you were there. The sensor moves with the target, remaining within 10 feet of it for the duration. If something can see the sensor, it appears as a luminous orb about the size of your fist.
+
+Instead of targeting a creature, you can target a location you have seen. When you do so, the sensor appears at that location and doesn’t move.",https://www.dndbeyond.com/spells/2619007-scrying,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+5th,Swift Quiver,Transmutation,1 Bonus Action,,,"V, S, M",,1 Minute,,,,Buff,,"When you cast the spell and as a Bonus Action until it ends, you can make two attacks with a weapon that fires Arrows or Bolts, such as a Longbow or a Light Crossbow. The spell magically creates the ammunition needed for each attack. Each Arrow or Bolt created by the spell deals damage like a nonmagical piece of ammunition of its kind and disintegrates immediately after it hits or misses.",https://www.dndbeyond.com/spells/2619125-swift-quiver,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+5th,Transmute Rock,Transmutation,1 Action,120 ft.,(40 ft. *),"V, S, M",,Until Dispelled,,,DEX Save,Bludgeoning,,"You choose an area of stone or mud that you can see that fits within a 40-foot cube and is within range, and choose one of the following effects.
+
+Transmute Rock to Mud. Nonmagical rock of any sort in the area becomes an equal volume of thick, flowing mud that remains for the spell’s duration.
+
+The ground in the spell’s area becomes muddy enough that creatures can sink into it. Each foot that a creature moves through the mud costs 4 feet of movement, and any creature on the ground when you cast the spell must make a Strength saving throw. A creature must also make the saving throw when it moves into the area for the first time on a turn or ends its turn there. On a failed save, a creature sinks into the mud and is restrained , though it can use an action to end the restrained condition on itself by pulling itself free of the mud.
+
+If you cast the spell on a ceiling, the mud falls. Any creature under the mud when it falls must make a Dexterity saving throw. A creature takes 4d8 bludgeoning damage on a failed save, or half as much damage on a successful one.
+
+Transmute Mud to Rock. Nonmagical mud or quicksand in the area no more than 10 feet deep transforms into soft stone for the spell’s duration. Any creature in the mud when it transforms must make a Dexterity saving throw. On a successful save, a creature is shunted safely to the surface in an unoccupied space. On a failed save, a creature becomes restrained by the rock. A restrained creature, or another creature within reach, can use an action to try to break the rock by succeeding on a DC 20 Strength check or by dealing damage to it. The rock has AC 15 and 25 hit points, and it is immune to poison and psychic damage.",https://www.dndbeyond.com/spells/2403-transmute-rock,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Wall of Stone,Evocation,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,,Control,,"A nonmagical wall of solid stone springs into existence at a point you choose within range. The wall is 6 inches thick and is composed of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. Alternatively, you can create 10-foot-by-20-foot panels that are only 3 inches thick.
+
+If the wall cuts through a creature’s space when it appears, the creature is pushed to one side of the wall (you choose which side). If a creature would be surrounded on all sides by the wall (or the wall and another solid surface), that creature can make a Dexterity saving throw. On a success, it can use its Reaction to move up to its Speed so that it is no longer enclosed by the wall.
+
+The wall can have any shape you desire, though it can’t occupy the same space as a creature or object. The wall doesn’t need to be vertical or rest on a firm foundation. It must, however, merge with and be solidly supported by existing stone. Thus, you can use this spell to bridge a chasm or create a ramp.
+
+If you create a span greater than 20 feet in length, you must halve the size of each panel to create supports. You can crudely shape the wall to create battlements and the like.
+
+The wall is an object made of stone that can be damaged and thus breached. Each panel has AC 15 and 30 Hit Points per inch of thickness, and it has Immunity to Poison and Psychic damage. Reducing a panel to 0 Hit Points destroys it and might cause connected panels to collapse at the DM’s discretion.
+
+If you maintain your Concentration on this spell for its full duration, the wall becomes permanent and can’t be dispelled. Otherwise, the wall disappears when the spell ends.",https://www.dndbeyond.com/spells/2619200-wall-of-stone,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Wrath of Nature,Evocation,1 Action,120 ft.,(60 ft. ),"V, S",,1 Minute,,,DEX Save,Slashing (...),,"You call out to the spirits of nature to rouse them against your enemies. Choose a point you can see within range. The spirits cause trees, rocks, and grasses in a 60-foot cube centered on that point to become animated until the spell ends.
+
+Grasses and Undergrowth. Any area of ground in the cube that is covered by grass or undergrowth is difficult terrain for your enemies.
+
+Trees. At the start of each of your turns, each of your enemies within 10 feet of any tree in the cube must succeed on a Dexterity saving throw or take 4d6 slashing damage from whipping branches.
+
+Roots and Vines. At the end of each of your turns, one creature of your choice that is on the ground in the cube must succeed on a Strength saving throw or become restrained until the spell ends. A restrained creature can use an action to make a Strength ( Athletics ) check against your spell save DC, ending the effect on itself on a success.
+
+Rocks. As a bonus action on your turn, you can cause a loose rock in the cube to launch at a creature you can see in the cube. Make a ranged spell attack against the target. On a hit, the target takes 3d8 nonmagical bludgeoning damage, and it must succeed on a Strength saving throw or fall prone .",https://www.dndbeyond.com/spells/14619-wrath-of-nature,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+6th,Blade Barrier,Evocation,1 Action,90 ft.,,"V, S",,10 Minutes,,,DEX Save,Force,,"You create a wall of whirling blades made of magical energy. The wall appears within range and lasts for the duration. You make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides Three-Quarters Cover , and its space is Difficult Terrain .
+
+Any creature in the wall’s space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall’s space or ends it turn there. A creature makes that save only once per turn.",https://www.dndbeyond.com/spells/2618929-blade-barrier,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Bones of the Earth,Transmutation,1 Action,120 ft.,(5 ft. *),"V, S",,Instantaneous,,,DEX Save,Bludgeoning,,"You cause up to six pillars of stone to burst from places on the ground that you can see within range. Each pillar is a cylinder that has a diameter of 5 feet and a height of up to 30 feet. The ground where a pillar appears must be wide enough for its diameter, and you can target the ground under a creature if that creature is Medium or smaller. Each pillar has AC 5 and 30 hit points. When reduced to 0 hit points, a pillar crumbles into rubble, which creates an area of difficult terrain with a 10-foot radius that lasts until the rubble is cleared. Each 5-foot-diameter portion of the area requires at least 1 minute to clear by hand.
+
+If a pillar is created under a creature, that creature must succeed on a Dexterity saving throw or be lifted by the pillar. A creature can choose to fail the save.
+
+If a pillar is prevented from reaching its full height because of a ceiling or other obstacle, a creature on the pillar takes 6d6 bludgeoning damage and is restrained , pinched between the pillar and the obstacle. The restrained creature can use an action to make a Strength or Dexterity check (the creature’s choice) against the spell’s save DC. On a success, the creature is no longer restrained and must either move off the pillar or fall off it.
+
+At Higher Levels. When you cast this spell using a spell slot of 7th level or higher, you can create two additional pillars for each slot level above 6th.",https://www.dndbeyond.com/spells/2371-bones-of-the-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Conjure Fey,Conjuration,1 Action,60 ft.,,"V, S",,10 Minutes,,,Melee,Psychic,,"You conjure a Medium spirit from the Feywild in an unoccupied space you can see within range. The spirit lasts for the duration, and it looks like a Fey creature of your choice. When the spirit appears, you can make one melee spell attack against a creature within 5 feet of it. On a hit, the target takes Psychic damage equal to 3d12 plus your spellcasting ability modifier, and the target has the Frightened condition until the start of your next turn, with both you and the spirit as the source of the fear.
+
+As a Bonus Action on your later turns, you can teleport the spirit to an unoccupied space you can see within 30 feet of the space it left and make the attack against a creature within 5 feet of it.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d12 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2619048-conjure-fey,Summoning — Natural,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+6th,Druid Grove,Abjuration,10 Minutes,,( *),"V, S, M",,24 Hours,,,,Debuff (...),,"You invoke the spirits of nature to protect an area outdoors or underground. The area can be as small as a 30-foot cube or as large as a 90-foot cube. Buildings and other structures are excluded from the affected area. If you cast this spell in the same area every day for a year, the spell lasts until dispelled.
+
+The spell creates the following effects within the area. When you cast this spell, you can specify creatures as friends who are immune to the effects. You can also specify a password that, when spoken aloud, makes the speaker immune to these effects.
+
+The entire warded area radiates magic. A dispel magic cast on the area, if successful, removes only one of the following effects, not the entire area. That spell’s caster chooses which effect to end. Only when all its effects are gone is this spell dispelled.
+
+Solid Fog. You can fill any number of 5-foot squares on the ground with thick fog, making them heavily obscured . The fog reaches 10 feet high. In addition, every foot of movement through the fog costs 2 extra feet. To a creature immune to this effect, the fog obscures nothing and looks like soft mist, with motes of green light floating in the air.
+
+Grasping Undergrowth. You can fill any number of 5-foot squares on the ground that aren’t filled with fog with grasping weeds and vines, as if they were affected by an entangle spell. To a creature immune to this effect, the weeds and vines feel soft and reshape themselves to serve as temporary seats or beds.
+
+Grove Guardians. You can animate up to four trees in the area, causing them to uproot themselves from the ground. These trees have the same statistics as an awakened tree , which appears in the Monster Manual , except they can’t speak, and their bark is covered with druidic symbols. If any creature not immune to this effect enters the warded area, the grove guardians fight until they have driven off or slain the intruders. The grove guardians also obey your spoken commands (no action required by you) that you issue while in the area. If you don’t give them commands and no intruders are present, the grove guardians do nothing. The grove guardians can’t leave the warded area. When the spell ends, the magic animating them disappears, and the trees take root again if possible.
+
+Additional Spell Effect. You can place your choice of one of the following magical effects within the warded area:
+
+A constant gust of wind in two locations of your choice
+
+Spike growth in one location of your choice
+
+Wind wall in two locations of your choice
+
+To a creature immune to this effect, the winds are a fragrant, gentle breeze, and the area of spike growth is harmless.",https://www.dndbeyond.com/spells/14834-druid-grove,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+6th,Flesh to Stone,Transmutation,1 Action,60 ft.,,"V, S, M",,1 Minute,,,CON Save,Petrified,,"You attempt to turn one creature that you can see within range into stone. The target makes a Constitution saving throw. On a failed save, it has the Restrained condition for the duration. On a successful save, its Speed is 0 until the start of your next turn. Constructs automatically succeed on the save.
+
+A Restrained target makes another Constitution saving throw at the end of each of its turns. If it successfully saves against this spell three times, the spell ends. If it fails its saves three times, it is turned to stone and has the Petrified condition for the duration. The successes and failures needn’t be consecutive; keep track of both until the target collects three of a kind.
+
+If you maintain your Concentration on this spell for the entire possible duration, the target is Petrified until the condition is ended by Greater Restoration or similar magic.",https://www.dndbeyond.com/spells/2618905-flesh-to-stone,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+6th,Heroes' Feast,Conjuration,10 Minutes,,(10 ft. ),"V, S, M",,Instantaneous,,,,Poisoned (...),,"You conjure a feast that appears on a surface in an unoccupied 10-foot Cube next to you. The feast takes 1 hour to consume and disappears at the end of that time, and the beneficial effects don’t set in until this hour is over. Up to twelve creatures can partake of the feast.
+
+A creature that partakes gains several benefits, which last for 24 hours. The creature has Resistance to Poison damage, and it has Immunity to the Frightened and Poisoned conditions. Its Hit Point maximum also increases by 2d10, and it gains the same number of Hit Points.",https://www.dndbeyond.com/spells/2618983-heroes-feast,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+6th,Investiture of Stone,Transmutation,1 Action,,,"V, S",,10 Minutes,,,DEX Save,Prone,,"Until the spell ends, bits of rock spread across your body, and you gain the following benefits:
+
+You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.
+
+You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.
+
+You can use your action to create a small earthquake on the ground in a 15-foot radius centered on you. Other creatures on that ground must succeed on a Dexterity saving throw or be knocked prone .
+
+You can use your action to create a small earthquake on the ground in a 15-foot radius centered on you. Other creatures on that ground must succeed on a Dexterity saving throw or be knocked prone .
+
+You can move across difficult terrain made of earth or stone without spending extra movement. You can move through solid earth or stone as if it was air and without destabilizing it, but you can’t end your movement there. If you do so, you are ejected to the nearest unoccupied space, this spell ends, and you are stunned until the end of your next turn.
+
+You can move across difficult terrain made of earth or stone without spending extra movement. You can move through solid earth or stone as if it was air and without destabilizing it, but you can’t end your movement there. If you do so, you are ejected to the nearest unoccupied space, this spell ends, and you are stunned until the end of your next turn.",https://www.dndbeyond.com/spells/2388-investiture-of-stone,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Investiture of Wind,Transmutation,1 Action,,(15 ft. *),"V, S",,10 Minutes,,,CON Save,Bludgeoning,,"Until the spell ends, wind whirls around you, and you gain the following benefits:
+
+Ranged weapon attacks made against you have disadvantage on the attack roll.
+
+Ranged weapon attacks made against you have disadvantage on the attack roll.
+
+You gain a flying speed of 60 feet. If you are still flying when the spell ends, you fall, unless you can somehow prevent it.
+
+You gain a flying speed of 60 feet. If you are still flying when the spell ends, you fall, unless you can somehow prevent it.
+
+You can use your action to create a 15-foot cube of swirling wind centered on a point you can see within 60 feet of you. Each creature in that area must make a Constitution saving throw. A creature takes 2d10 bludgeoning damage on a failed save, or half as much damage on a successful one. If a Large or smaller creature fails the save, that creature is also pushed up to 10 feet away from the center of the cube.
+
+You can use your action to create a 15-foot cube of swirling wind centered on a point you can see within 60 feet of you. Each creature in that area must make a Constitution saving throw. A creature takes 2d10 bludgeoning damage on a failed save, or half as much damage on a successful one. If a Large or smaller creature fails the save, that creature is also pushed up to 10 feet away from the center of the cube.",https://www.dndbeyond.com/spells/2389-investiture-of-wind,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Move Earth,Transmutation,1 Action,120 ft.,,"V, S, M",,2 Hours,,,,Control,,"Choose an area of terrain no larger than 40 feet on a side within range. You can reshape dirt, sand, or clay in the area in any manner you choose for the duration. You can raise or lower the area’s elevation, create or fill in a trench, erect or flatten a wall, or form a pillar. The extent of any such changes can’t exceed half the area’s largest dimension. For example, if you affect a 40-foot square, you can create a pillar up to 20 feet high, raise or lower the square’s elevation by up to 20 feet, dig a trench up to 20 feet deep, and so on. It takes 10 minutes for these changes to complete. Because the terrain’s transformation occurs slowly, creatures in the area can’t usually be trapped or injured by the ground’s movement.
+
+At the end of every 10 minutes you spend concentrating on the spell, you can choose a new area of terrain to affect within range.
+
+This spell can’t manipulate natural stone or stone construction. Rocks and structures shift to accommodate the new terrain. If the way you shape the terrain would make a structure unstable, it might collapse.
+
+Similarly, this spell doesn’t directly affect plant growth. The moved earth carries any plants along with it.",https://www.dndbeyond.com/spells/2619120-move-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Tasha's Bubbling Cauldron,Conjuration,1 Action,5 ft.,,"V, S, M",,10 Minutes,,,,,,"You conjure a claw-footed cauldron filled with bubbling liquid. The cauldron appears in an unoccupied space on the ground within 5 feet of you and lasts for the duration. The cauldron can’t be moved and disappears when the spell ends, along with the bubbling liquid inside it.
+
+The liquid in the cauldron duplicates the properties of a Common or an Uncommon potion of your choice (such as a Potion of Healing ). As a Bonus Action, you or an ally can reach into the cauldron and withdraw one potion of that kind. The potion is contained in a vial that disappears when the potion is consumed. The cauldron can produce a number of these potions equal to your spellcasting ability modifier (minimum 1). When the last of these potions is withdrawn from the cauldron, the cauldron disappears, and the spell ends.
+
+Potions obtained from the cauldron that aren’t consumed disappear when you cast this spell again.",https://www.dndbeyond.com/spells/2618841-tashas-bubbling-cauldron,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+6th,Tasha's Otherworldly Guise,Transmutation,1 Bonus Action,,,"V, S, M",,1 Minute,,,,Buff,,"Uttering an incantation, you draw on the magic of the Lower Planes or Upper Planes (your choice) to transform yourself. You gain the following benefits until the spell ends:
+
+You are immune to fire and poison damage (Lower Planes) or radiant and necrotic damage (Upper Planes).
+
+You are immune to the poisoned condition (Lower Planes) or the charmed condition (Upper Planes).
+
+Spectral wings appear on your back, giving you a flying speed of 40 feet.
+
+You have a +2 bonus to AC.
+
+All your weapon attacks are magical, and when you make a weapon attack, you can use your spellcasting ability modifier, instead of Strength or Dexterity, for the attack and damage rolls.
+
+You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that lets you attack more than once when you take the Attack action on your turn.",https://www.dndbeyond.com/spells/719961-tashas-otherworldly-guise,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+6th,True Seeing,Divination,1 Action,,,"V, S, M",,1 Hour,,,,Detection,,"For the duration, the willing creature you touch has Truesight with a range of 120 feet.",https://www.dndbeyond.com/spells/2619201-true-seeing,Divination — Detection,Secondary,Hard Ban,Secondary,Hard Ban,Primary
+6th,Wall of Ice,Evocation,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,DEX Save,Cold (...),,"You create a wall of ice on a solid surface within range. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-square panels. Each panel must be contiguous with another panel. In any form, the wall is 1 foot thick and lasts for the duration.
+
+If the wall cuts through a creature’s space when it appears, the creature is pushed to one side of the wall (you choose which side) and makes a Dexterity saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.
+
+The wall is an object that can be damaged and thus breached. It has AC 12 and 30 Hit Points per 10-foot section, and it has Immunity to Cold, Poison, and Psychic damage and Vulnerability to Fire damage. Reducing a 10-foot section of wall to 0 Hit Points destroys it and leaves behind a sheet of frigid air in the space the wall occupied.
+
+A creature moving through the sheet of frigid air for the first time on a turn makes a Constitution saving throw, taking 5d6 Cold damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage the wall deals when it appears increases by 2d6 and the damage from passing through the sheet of frigid air increases by 1d6 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2619195-wall-of-ice,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Wall of Thorns,Conjuration,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,DEX Save,Piercing (...),,"You create a wall of tangled brush bristling with needle-sharp thorns. The wall appears within range on a solid surface and lasts for the duration. You choose to make the wall up to 60 feet long, 10 feet high, and 5 feet thick or a circle that has a 20-foot diameter and is up to 20 feet high and 5 feet thick. The wall blocks line of sight.
+
+When the wall appears, each creature in its area makes a Dexterity saving throw, taking 7d8 Piercing damage on a failed save or half as much damage on a successful one.
+
+A creature can move through the wall, albeit slowly and painfully. For every 1 foot a creature moves through the wall, it must spend 4 feet of movement. Furthermore, the first time a creature enters a space in the wall on a turn or ends its turn there, the creature makes a Dexterity saving throw, taking 7d8 Slashing damage on a failed save or half as much damage on a successful one. A creature makes this save only once per turn.
+
+Using a Higher-Level Spell Slot. Both types of damage increase by 1d8 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2619202-wall-of-thorns,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+6th,Wind Walk,Transmutation,1 Minute,30 ft.,,"V, S, M",,8 Hours,,,,Buff (...),,"You and up to ten willing creatures of your choice within range assume gaseous forms for the duration, appearing as wisps of cloud. While in this cloud form, a target has a Fly Speed of 300 feet and can hover; it has Immunity to the Prone condition; and it has Resistance to Bludgeoning, Piercing, and Slashing damage. The only actions a target can take in this form are the Dash action or a Magic action to begin reverting to its normal form. Reverting takes 1 minute, during which the target has the Stunned condition. Until the spell ends, the target can revert to cloud form, which also requires a Magic action followed by a 1-minute transformation.
+
+If a target is in cloud form and flying when the effect ends, the target descends 60 feet per round for 1 minute until it lands, which it does safely. If it can’t land after 1 minute, it falls the remaining distance.",https://www.dndbeyond.com/spells/2619211-wind-walk,Movement Enhancement,Primary,Hard Ban,Secondary,Hard Ban,Primary
+7th,Create Magen,Transmutation,1 Hour,,,"V, S, M",,Instantaneous,,,,,,,https://www.dndbeyond.com/spells/654073-create-magen,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+7th,Draconic Transformation,Transmutation,1 Bonus Action,,(60 ft. ),"V, S, M",,1 Minute,,,DEX Save,Force,,,https://www.dndbeyond.com/spells/1183863-draconic-transformation,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+7th,Mordenkainen's Magnificent Mansion,Conjuration,1 Minute,300 ft.,,"V, S, M",,24 Hours,,,,Exploration (...),,"You conjure a shimmering door in range that lasts for the duration. The door leads to an extradimensional dwelling and is 5 feet wide and 10 feet tall. You and any creature you designate when you cast the spell can enter the extradimensional dwelling as long as the door remains open. You can open or close it (no action required) if you are within 30 feet of it. While closed, the door is imperceptible.
+
+Beyond the door is a magnificent foyer with numerous chambers beyond. The dwelling’s atmosphere is clean, fresh, and warm.
+
+You can create any floor plan you like for the dwelling, but it can’t exceed 50 contiguous 10-foot Cubes . The place is furnished and decorated as you choose. It contains sufficient food to serve a nine-course banquet for up to 100 people. Furnishings and other objects created by this spell dissipate into smoke if removed from it.
+
+A staff of 100 near-transparent servants attends all who enter. You determine the appearance of these servants and their attire. They are invulnerable and obey your commands. Each servant can perform tasks that a human could perform, but they can’t attack or take any action that would directly harm another creature. Thus the servants can fetch things, clean, mend, fold clothes, light fires, serve food, pour wine, and so on. The servants can’t leave the dwelling.
+
+When the spell ends, any creatures or objects left inside the extradimensional space are expelled into the unoccupied spaces nearest to the entrance.",https://www.dndbeyond.com/spells/2619112-mordenkainens-magnificent-mansion,Resource Creation & Sustenance,Hard Ban,Hard Ban,Primary,Hard Ban,Hard Ban
+7th,Regenerate,Transmutation,1 Minute,,,"V, S, M",,1 Hour,,,,Healing,,"A creature you touch regains 4d8 + 15 Hit Points. For the duration, the target regains 1 Hit Point at the start of each of its turns, and any severed body parts regrow after 2 minutes.",https://www.dndbeyond.com/spells/2618937-regenerate,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+7th,Reverse Gravity,Transmutation,1 Action,100 ft.,(50 ft. *),"V, S, M",,1 Minute,,,DEX Save,Control,,"This spell reverses gravity in a 50-foot-radius, 100-foot high Cylinder centered on a point within range. All creatures and objects in that area that aren’t anchored to the ground fall upward and reach the top of the Cylinder. A creature can make a Dexterity saving throw to grab a fixed object it can reach, thus avoiding the fall upward.
+
+If a ceiling or an anchored object is encountered in this upward fall, creatures and objects strike it just as they would during a downward fall. If an affected creature or object reaches the Cylinder’s top without striking anything, it hovers there for the duration. When the spell ends, affected objects and creatures fall downward.",https://www.dndbeyond.com/spells/2618954-reverse-gravity,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+8th,Animal Shapes,Transmutation,1 Action,30 ft.,,"V, S",,24 Hours,,,,Shapechanging,,"Choose any number of willing creatures that you can see within range. Each target shape-shifts into a Large or smaller Beast of your choice that has a Challenge Rating of 4 or lower. You can choose a different form for each target. On later turns, you can take a Magic action to transform the targets again.
+
+A target’s game statistics are replaced by the chosen Beast’s statistics, but the target retains its creature type; Hit Points; Hit Point Dice; alignment; ability to communicate; and Intelligence, Wisdom, and Charisma scores. The target’s actions are limited by the Beast form’s anatomy, and it can’t cast spells. The target’s equipment melds into the new form, and the target can’t use any of that equipment while in that form.
+
+The target gains a number of Temporary Hit Points equal to the Hit Points of the first form into which it shape-shifts. These Temporary Hit Points vanish if any remain when the spell ends. The transformation lasts for the duration or until the target ends it as a Bonus Action.",https://www.dndbeyond.com/spells/2618851-animal-shapes,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+8th,Control Weather,Transmutation,10 Minutes,,(5 miles ),"V, S, M",,8 Hours,,,,Control (...),,"You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell, and it ends early if you go indoors.
+
+When you cast the spell, you change the current weather conditions, which are determined by the DM. You can change precipitation, temperature, and wind. It takes 1d4 × 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.
+
+When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.",https://www.dndbeyond.com/spells/2619054-control-weather,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+8th,Earthquake,Transmutation,1 Action,500 ft.,,"V, S, M",,1 Minute,,,DEX Save,Bludgeoning,,"Choose a point on the ground that you can see within range. For the duration, an intense tremor rips through the ground in a 100-foot-radius circle centered on that point. The ground there is Difficult Terrain .
+
+When you cast this spell and at the end of each of your turns for the duration, each creature on the ground in the area makes a Dexterity saving throw. On a failed save, a creature has the Prone condition, and its Concentration is broken.
+
+You can also cause the effects below.
+
+Fissures. A total of 1d6 fissures open in the spell’s area at the end of the turn you cast it. You choose the fissures’ locations, which can’t be under structures. Each fissure is 1d10 × 10 feet deep and 10 feet wide, and it extends from one edge of the spell’s area to another edge. A creature in the same space as a fissure must succeed on a Dexterity saving throw or fall in. A creature that successfully saves moves with the fissure’s edge as it opens.
+
+Structures. The tremor deals 50 Bludgeoning damage to any structure in contact with the ground in the area when you cast the spell and at the end of each of your turns until the spell ends. If a structure drops to 0 Hit Points, it collapses.
+
+A creature within a distance from a collapsing structure equal to half the structure’s height makes a Dexterity saving throw. On a failed save, the creature takes 12d6 Bludgeoning damage, has the Prone condition, and is buried in the rubble, requiring a DC 20 Strength ( Athletics ) check as an action to escape. On a successful save, the creature takes half as much damage only.",https://www.dndbeyond.com/spells/2619160-earthquake,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+8th,Tsunami,Conjuration,1 Minute,1 mile,,"V, S",,6 Rounds,,,STR Save,Bludgeoning,,"A wall of water springs into existence at a point you choose within range. You can make the wall up to 300 feet long, 300 feet high, and 50 feet thick. The wall lasts for the duration.
+
+When the wall appears, each creature in its area makes a Strength saving throw, taking 6d10 Bludgeoning damage on a failed save or half as much damage on a successful one.
+
+At the start of each of your turns after the wall appears, the wall, along with any creatures in it, moves 50 feet away from you. Any Huge or smaller creature inside the wall or whose space the wall enters when it moves must succeed on a Strength saving throw or take 5d10 Bludgeoning damage. A creature can take this damage only once per round. At the end of the turn, the wall’s height is reduced by 50 feet, and the damage the wall deals on later rounds is reduced by 1d10. When the wall reaches 0 feet in height, the spell ends.
+
+A creature caught in the wall can move by swimming. Because of the wave’s force, though, the creature must succeed on a Strength ( Athletics ) check against your spell save DC to move at all. If it fails the check, it can’t move. A creature that moves out of the wall falls to the ground.",https://www.dndbeyond.com/spells/2619206-tsunami,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+9th,Mass Polymorph,Transmutation,1 Action,120 ft.,,"V, S, M",,1 Hour,,,WIS Save,Control (...),,"You transform up to ten creatures of your choice that you can see within range. An unwilling target must succeed on a Wisdom saving throw to resist the transformation. An unwilling shapechanger automatically succeeds on the save.
+
+Each target assumes a beast form of your choice, and you can choose the same form or different ones for each target. The new form can be any beast you have seen whose challenge rating is equal to or less than the target’s (or half the target’s level, if the target doesn’t have a challenge rating). The target’s game statistics, including mental ability scores, are replaced by the statistics of the chosen beast, but the target retains its hit points, alignment, and personality.
+
+Each target gains a number of temporary hit points equal to the hit points of its new form. These temporary hit points can’t be replaced by temporary hit points from another source. A target reverts to its normal form when it has no more temporary hit points or it dies. If the spell ends before then, the creature loses all its temporary hit points and reverts to its normal form.
+
+The creature is limited in the actions it can perform by the nature of its new form. It can’t speak, cast spells, or do anything else that requires hands or speech.
+
+The target’s gear melds into the new form. The target can’t activate, use, wield, or otherwise benefit from any of its equipment.",https://www.dndbeyond.com/spells/14882-mass-polymorph,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+9th,Shapechange,Transmutation,1 Action,,,"V, S, M",,1 Hour,,,,Shapechanging,,"You shape-shift into another creature for the duration or until you take a Magic action to shape-shift into a different eligible form. The new form must be of a creature that has a Challenge Rating no higher than your level or Challenge Rating. You must have seen the sort of creature before, and it can’t be a Construct or an Undead.
+
+When you cast the spell, you gain a number of Temporary Hit Points equal to the Hit Points of the first form into which you shape-shift. These Temporary Hit Points vanish if any remain when the spell ends.
+
+Your game statistics are replaced by the stat block of the chosen form, but you retain your creature type; alignment; personality; Intelligence, Wisdom, and Charisma scores; Hit Points; Hit Point Dice; proficiencies; and ability to communicate. If you have the Spellcasting feature, you retain it too.
+
+Upon shape-shifting, you determine whether your equipment drops to the ground or changes in size and shape to fit the new form while you’re in it.",https://www.dndbeyond.com/spells/2618982-shapechange,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+9th,Storm of Vengeance,Conjuration,1 Action,1 mile,,"V, S",,1 Minute,,,CON Save,Thunder (...),,"A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.
+
+At the start of each of your later turns, the storm produces different effects, as detailed below.
+
+Turn 2. Acidic rain falls. Each creature and object under the cloud takes 4d6 Acid damage.
+
+Turn 3. You call six bolts of lightning from the cloud to strike six different creatures or objects beneath it. Each target makes a Dexterity saving throw, taking 10d6 Lightning damage on a failed save or half as much damage on a successful one.
+
+Turn 4. Hailstones rain down. Each creature under the cloud takes 2d6 Bludgeoning damage.
+
+Turns 5–10. Gusts and freezing rain assail the area under the cloud. Each creature there takes 1d6 Cold damage. Until the spell ends, the area is Difficult Terrain and Heavily Obscured , ranged attacks with weapons are impossible there, and strong wind blows through the area.",https://www.dndbeyond.com/spells/2619098-storm-of-vengeance,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+9th,True Polymorph,Transmutation,1 Action,30 ft.,,"V, S, M",,1 Hour,,,WIS Save,Buff (...),,"Choose one creature or nonmagical object that you can see within range. The creature shape-shifts into a different creature or a nonmagical object, or the object shape-shifts into a creature (the object must be neither worn nor carried). The transformation lasts for the duration or until the target dies or is destroyed, but if you maintain Concentration on this spell for the full duration, the spell lasts until dispelled.
+
+An unwilling creature can make a Wisdom saving throw, and if it succeeds, it isn’t affected by this spell.
+
+Creature into Creature. If you turn a creature into another kind of creature, the new form can be any kind you choose that has a Challenge Rating equal to or less than the target’s Challenge Rating or level. The target’s game statistics are replaced by the stat block of the new form, but it retains its Hit Points, Hit Point Dice, alignment, and personality.
+
+The target gains a number of Temporary Hit Points equal to the Hit Points of the new form. These Temporary Hit Points vanish if any remain when the spell ends.
+
+The target is limited in the actions it can perform by the anatomy of its new form, and it can’t speak or cast spells.
+
+The target’s gear melds into the new form. The creature can’t use or otherwise benefit from any of that equipment.
+
+Object into Creature. You can turn an object into any kind of creature, as long as the creature’s size is no larger than the object’s size and the creature has a Challenge Rating of 9 or lower. The creature is Friendly to you and your allies. In combat, it takes its turns immediately after yours, and it obeys your commands.
+
+If the spell lasts more than an hour, you no longer control the creature. It might remain Friendly to you, depending on how you have treated it.
+
+Creature into Object. If you turn a creature into an object, it transforms along with whatever it is wearing and carrying into that form, as long as the object’s size is no larger than the creature’s size. The creature’s statistics become those of the object, and the creature has no memory of time spent in this form after the spell ends and it returns to normal.",https://www.dndbeyond.com/spells/2619198-true-polymorph,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+Cantrip,Druidcraft,Transmutation,1 Action,30 ft.,,"V, S",,Instantaneous,,,,Utility,,"Whispering to the spirits of nature, you create one of the following effects within range.
+
+Weather Sensor. You create a Tiny, harmless sensory effect that predicts what the weather will be at your location for the next 24 hours. The effect might manifest as a golden orb for clear skies, a cloud for rain, falling snowflakes for snow, and so on. This effect persists for 1 round.
+
+Bloom. You instantly make a flower blossom, a seed pod open, or a leaf bud bloom.
+
+Sensory Effect. You create a harmless sensory effect, such as falling leaves, spectral dancing fairies, a gentle breeze, the sound of an animal, or the faint odor of skunk. The effect must fit in a 5-foot Cube .
+
+Fire Play. You light or snuff out a candle, a torch, or a campfire.",https://www.dndbeyond.com/spells/2619158-druidcraft,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+Cantrip,Infestation,Conjuration,1 Action,30 ft.,,"V, S, M",,Instantaneous,,,CON Save,Poison,,"You cause a cloud of mites, fleas, and other parasites to appear momentarily on one creature you can see within range. The target must succeed on a Constitution saving throw, or it takes 1d6 poison damage and moves 5 feet in a random direction if it can move and its speed is at least 5 feet. Roll a d4 for the direction: 1, north; 2, south; 3, east; or 4, west. This movement doesn’t provoke opportunity attacks, and if the direction rolled is blocked, the target doesn’t move.
+
+The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",https://www.dndbeyond.com/spells/14878-infestation,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban
+Cantrip,Mold Earth,Transmutation,1 Action,30 ft.,(5 ft. ),S,,Instantaneous,,,,Control,,"You choose a portion of dirt or stone that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:
+
+If you target an area of loose earth, you can instantaneously excavate it, move it along the ground, and deposit it up to 5 feet away. This movement doesn’t have enough force to cause damage.
+
+If you target an area of loose earth, you can instantaneously excavate it, move it along the ground, and deposit it up to 5 feet away. This movement doesn’t have enough force to cause damage.
+
+You cause shapes, colors, or both to appear on the dirt or stone, spelling out words, creating images, or shaping patterns. The changes last for 1 hour.
+
+You cause shapes, colors, or both to appear on the dirt or stone, spelling out words, creating images, or shaping patterns. The changes last for 1 hour.
+
+If the dirt or stone you target is on the ground, you cause it to become difficult terrain. Alternatively, you can cause the ground to become normal terrain if it is already difficult terrain. This change lasts for 1 hour.
+
+If the dirt or stone you target is on the ground, you cause it to become difficult terrain. Alternatively, you can cause the ground to become normal terrain if it is already difficult terrain. This change lasts for 1 hour.
+
+If you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",https://www.dndbeyond.com/spells/2394-mold-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+Cantrip,Shillelagh,Transmutation,1 Bonus Action,,,"V, S, M",,1 Minute,,,Melee,Bludgeoning (...),,"A Club or Quarterstaff you are holding is imbued with nature’s power. For the duration, you can use your spellcasting ability instead of Strength for the attack and damage rolls of melee attacks using that weapon, and the weapon’s damage die becomes a d8. If the attack deals damage, it can be Force damage or the weapon’s normal damage type (your choice).
+
+The spell ends early if you cast it again or if you let go of the weapon.
+
+Cantrip Upgrade. The damage die changes when you reach levels 5 (d10), 11 (d12), and 17 (2d6).",https://www.dndbeyond.com/spells/2618984-shillelagh,Transformation / Polymorph,Primary,Hard Ban,Secondary,Hard Ban,Hard Ban
+Cantrip,Thorn Whip,Transmutation,1 Action,30 ft.,,"V, S, M",,Instantaneous,,,Melee,Piercing,,"You create a vine-like whip covered in thorns that lashes out at your command toward a creature in range. Make a melee spell attack against the target. On a hit, the target takes 1d6 Piercing damage, and if it is Large or smaller, you can pull it up to 10 feet closer to you.
+
+Cantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",https://www.dndbeyond.com/spells/2619176-thorn-whip,Nature Interaction,Hard Ban,Hard Ban,Exclusive,Hard Ban,Hard Ban

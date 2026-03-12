@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:tashas-otherworldly-guise",
+  "name": "Tasha's Otherworldly Guise",
+  "description": "Uttering an incantation, you draw on the magic of the Lower Planes or Upper Planes (your choice) to transform yourself. You gain the following benefits until the spell ends:\n\nYou are immune to fire and poison damage (Lower Planes) or radiant and necrotic damage (Upper Planes).\n\nYou are immune to the poisoned condition (Lower Planes) or the charmed condition (Upper Planes).\n\nSpectral wings appear on your back, giving you a flying speed of 40 feet.\n\nYou have a +2 bonus to AC.\n\nAll your weapon attacks are magical, and when you make a weapon attack, you can use your spellcasting ability modifier, instead of Strength or Dexterity, for the attack and damage rolls.\n\nYou can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that lets you attack more than once when you take the Attack action on your turn.",
+  "level": 6,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "Uttering an incantation, you draw on the magic of the Lower Planes or Upper Planes (your choice) to transform yourself. You gain the following benefits until the spell ends:",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/719961-tashas-otherworldly-guise",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Buff",
+    "primaryEffectCategory": "Transformation / Polymorph",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Tasha's Otherworldly Guise",
+      "School": "Transmutation",
+      "Casting Time": "1 Bonus Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Buff",
+      "Source": "",
+      "Description": "Uttering an incantation, you draw on the magic of the Lower Planes or Upper Planes (your choice) to transform yourself. You gain the following benefits until the spell ends:\n\nYou are immune to fire and poison damage (Lower Planes) or radiant and necrotic damage (Upper Planes).\n\nYou are immune to the poisoned condition (Lower Planes) or the charmed condition (Upper Planes).\n\nSpectral wings appear on your back, giving you a flying speed of 40 feet.\n\nYou have a +2 bonus to AC.\n\nAll your weapon attacks are magical, and when you make a weapon attack, you can use your spellcasting ability modifier, instead of Strength or Dexterity, for the attack and damage rolls.\n\nYou can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that lets you attack more than once when you take the Attack action on your turn.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/719961-tashas-otherworldly-guise",
+      "Primary Effect Category": "Transformation / Polymorph",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

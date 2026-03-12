@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:resurrection",
+  "name": "Resurrection",
+  "description": "With a touch, you revive a dead creature that has been dead for no more than a century, didn’t die of old age, and wasn’t Undead when it died.\n\nThe creature returns to life with all its Hit Points. This spell also neutralizes any poisons that affected the creature at the time of death. This spell closes all mortal wounds and restores any missing body parts.\n\nComing back from the dead is an ordeal. The target takes a −4 penalty to D20 Tests . Every time the target finishes a Long Rest, the penalty is reduced by 1 until it becomes 0.\n\nCasting this spell to revive a creature that has been dead for 365 days or longer taxes you. Until you finish a Long Rest, you can’t cast spells again, and you have Disadvantage on D20 Tests.",
+  "level": 7,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Hour",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "With a touch, you revive a dead creature that has been dead for no more than a century, didn’t die of old age, and wasn’t Undead when it died.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618953-resurrection",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Healing",
+    "primaryEffectCategory": "Resurrection",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Exclusive",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "7th",
+      "Name": "Resurrection",
+      "School": "Necromancy",
+      "Casting Time": "1 Hour",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Healing",
+      "Source": "",
+      "Description": "With a touch, you revive a dead creature that has been dead for no more than a century, didn’t die of old age, and wasn’t Undead when it died.\n\nThe creature returns to life with all its Hit Points. This spell also neutralizes any poisons that affected the creature at the time of death. This spell closes all mortal wounds and restores any missing body parts.\n\nComing back from the dead is an ordeal. The target takes a −4 penalty to D20 Tests . Every time the target finishes a Long Rest, the penalty is reduced by 1 until it becomes 0.\n\nCasting this spell to revive a creature that has been dead for 365 days or longer taxes you. Until you finish a Long Rest, you can’t cast spells again, and you have Disadvantage on D20 Tests.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618953-resurrection",
+      "Primary Effect Category": "Resurrection",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Exclusive",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

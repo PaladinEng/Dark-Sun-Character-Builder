@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:thunderous-smite",
+  "name": "Thunderous Smite",
+  "description": "Your strike rings with thunder that is audible within 300 feet of you, and the target takes an extra 2d6 Thunder damage from the attack. Additionally, if the target is a creature, it must succeed on a Strength saving throw or be pushed 10 feet away from you and have the Prone condition.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",
+  "level": 1,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action *",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Your strike rings with thunder that is audible within 300 feet of you, and the target takes an extra 2d6 Thunder damage from the attack. Additionally, if the target is a creature, it must succeed on a Strength saving throw or be pushed 10 feet away from you and have the Prone condition.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619182-thunderous-smite",
+    "area": "",
+    "materials": "",
+    "attackSave": "STR Save",
+    "damageEffect": "Thunder",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Thunderous Smite",
+      "School": "Evocation",
+      "Casting Time": "1 Bonus Action *",
+      "Range": "",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "STR Save",
+      "Damage/Effect": "Thunder",
+      "Source": "",
+      "Description": "Your strike rings with thunder that is audible within 300 feet of you, and the target takes an extra 2d6 Thunder damage from the attack. Additionally, if the target is a creature, it must succeed on a Strength saving throw or be pushed 10 feet away from you and have the Prone condition.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619182-thunderous-smite",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

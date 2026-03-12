@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:shape-water",
+  "name": "Shape Water",
+  "description": "You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:\n\nYou instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn’t have enough force to cause damage.\n\nYou instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn’t have enough force to cause damage.\n\nYou cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.\n\nYou cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.\n\nYou change the water’s color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.\n\nYou change the water’s color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.\n\nYou freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.\n\nYou freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.\n\nIf you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
+  "level": 0,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "30 ft.",
+  "components": [
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2397-shape-water",
+    "area": "(5 ft. )",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Control",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "Cantrip",
+      "Name": "Shape Water",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "30 ft.",
+      "Area": "(5 ft. )",
+      "Components": "S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Control",
+      "Source": "",
+      "Description": "You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:\n\nYou instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn’t have enough force to cause damage.\n\nYou instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn’t have enough force to cause damage.\n\nYou cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.\n\nYou cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.\n\nYou change the water’s color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.\n\nYou change the water’s color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.\n\nYou freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.\n\nYou freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.\n\nIf you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2397-shape-water",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

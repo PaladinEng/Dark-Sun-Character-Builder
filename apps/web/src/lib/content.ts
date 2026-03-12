@@ -17,6 +17,10 @@ import type {
 import { mergePacks, mergePacksWithProvenance } from "@dark-sun/content";
 import type { Pack } from "@dark-sun/content/node";
 import { loadPackFromDir } from "@dark-sun/content/node";
+import {
+  applySettingContentOverrides,
+  getResolvedPackSettings,
+} from "./packSettings";
 
 export type LoadedPackManifest = {
   id: string;
@@ -209,11 +213,13 @@ export async function getMergedContent(
   const provenance: MergeProvenance | undefined = includeProvenance
     ? (merged as ReturnType<typeof mergePacksWithProvenance>).provenance
     : undefined;
+  const settingProfile = await getResolvedPackSettings(finalIds);
+  const content = applySettingContentOverrides(merged.content, settingProfile);
 
   const result: MergedContentResult = {
-    ...merged.content,
+    ...content,
     packs: selected.map((pack) => ({ manifest: toLoadedManifest(pack.manifest) })),
-    content: merged.content,
+    content,
     report: merged.report,
     enabledPackIds: finalIds,
     provenance

@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:creation",
+  "name": "Creation",
+  "description": "You pull wisps of shadow material from the Shadowfell to create an object within range. It is either an object of vegetable matter (soft goods, rope, wood, and the like) or mineral matter (stone, crystal, metal, and the like). The object must be no larger than a 5-foot Cube , and the object must be of a form and material that you have seen.\n\nThe spell’s duration depends on the object’s material, as shown in the Materials table. If the object is composed of multiple materials, use the shortest duration. Using any object created by this spell as another spell’s Material component causes the other spell to fail.\n\nUsing a Higher-Level Spell Slot. The Cube increases by 5 feet for each spell slot level above 5.",
+  "level": 5,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "1 Minute",
+  "range": "30 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Special",
+  "concentration": false,
+  "summary": "You pull wisps of shadow material from the Shadowfell to create an object within range. It is either an object of vegetable matter (soft goods, rope, wood, and the like) or mineral matter (stone, crystal, metal, and the like). The object must be no larger than a 5-foot Cube , and the object must be of a form and material that you have seen.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619077-creation",
+    "area": "(5 ft. )",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Creation",
+    "primaryEffectCategory": "Constructs / Artifice",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Creation",
+      "School": "Illusion",
+      "Casting Time": "1 Minute",
+      "Range": "30 ft.",
+      "Area": "(5 ft. )",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Special",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Creation",
+      "Source": "",
+      "Description": "You pull wisps of shadow material from the Shadowfell to create an object within range. It is either an object of vegetable matter (soft goods, rope, wood, and the like) or mineral matter (stone, crystal, metal, and the like). The object must be no larger than a 5-foot Cube , and the object must be of a form and material that you have seen.\n\nThe spell’s duration depends on the object’s material, as shown in the Materials table. If the object is composed of multiple materials, use the shortest duration. Using any object created by this spell as another spell’s Material component causes the other spell to fail.\n\nUsing a Higher-Level Spell Slot. The Cube increases by 5 feet for each spell slot level above 5.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619077-creation",
+      "Primary Effect Category": "Constructs / Artifice",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:distort-value",
+  "name": "Distort Value",
+  "description": "Do you need to squeeze a few more gold pieces out of a merchant as you try to sell that weird octopus statue you liberated from the chaos temple? Do you need to downplay the worth of some magical assets when the tax collector stops by? Distort Value has you covered.\n\nYou cast this spell on an object no more than 1 foot on a side, doubling the object’s perceived value by adding illusory flourishes or polish to it, or reducing its perceived value by half with the help of illusory scratches, dents, and other unsightly features. Anyone examining the object can ascertain its true value with a successful Intelligence ( Investigation ) check against your spell save DC.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the maximum size of the object increases by 1 foot for each slot level above 1st.",
+  "level": 1,
+  "school": "illusion",
+  "ritual": false,
+  "castingTime": "1 Minute",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "8 Hours",
+  "concentration": false,
+  "summary": "Do you need to squeeze a few more gold pieces out of a merchant as you try to sell that weird octopus statue you liberated from the chaos temple? Do you need to downplay the worth of some magical assets when the tax collector stops by? Distort Value has you covered.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/188092-distort-value",
+    "area": "(1 ft. )",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "",
+    "primaryEffectCategory": "Illusions & Glamours",
+    "statuses": {
+      "arcane": "Exclusive",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Distort Value",
+      "School": "Illusion",
+      "Casting Time": "1 Minute",
+      "Range": "",
+      "Area": "(1 ft. )",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "8 Hours",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "",
+      "Source": "",
+      "Description": "Do you need to squeeze a few more gold pieces out of a merchant as you try to sell that weird octopus statue you liberated from the chaos temple? Do you need to downplay the worth of some magical assets when the tax collector stops by? Distort Value has you covered.\n\nYou cast this spell on an object no more than 1 foot on a side, doubling the object’s perceived value by adding illusory flourishes or polish to it, or reducing its perceived value by half with the help of illusory scratches, dents, and other unsightly features. Anyone examining the object can ascertain its true value with a successful Intelligence ( Investigation ) check against your spell save DC.\n\nAt Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the maximum size of the object increases by 1 foot for each slot level above 1st.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/188092-distort-value",
+      "Primary Effect Category": "Illusions & Glamours",
+      "Arcane Status": "Exclusive",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:storm-of-vengeance",
+  "name": "Storm of Vengeance",
+  "description": "A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.\n\nAt the start of each of your later turns, the storm produces different effects, as detailed below.\n\nTurn 2. Acidic rain falls. Each creature and object under the cloud takes 4d6 Acid damage.\n\nTurn 3. You call six bolts of lightning from the cloud to strike six different creatures or objects beneath it. Each target makes a Dexterity saving throw, taking 10d6 Lightning damage on a failed save or half as much damage on a successful one.\n\nTurn 4. Hailstones rain down. Each creature under the cloud takes 2d6 Bludgeoning damage.\n\nTurns 5–10. Gusts and freezing rain assail the area under the cloud. Each creature there takes 1d6 Cold damage. Until the spell ends, the area is Difficult Terrain and Heavily Obscured , ranged attacks with weapons are impossible there, and strong wind blows through the area.",
+  "level": 9,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "1 mile",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619098-storm-of-vengeance",
+    "area": "",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Thunder (...)",
+    "primaryEffectCategory": "Weather & Climate Control",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Primary",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "9th",
+      "Name": "Storm of Vengeance",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "1 mile",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Thunder (...)",
+      "Source": "",
+      "Description": "A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.\n\nAt the start of each of your later turns, the storm produces different effects, as detailed below.\n\nTurn 2. Acidic rain falls. Each creature and object under the cloud takes 4d6 Acid damage.\n\nTurn 3. You call six bolts of lightning from the cloud to strike six different creatures or objects beneath it. Each target makes a Dexterity saving throw, taking 10d6 Lightning damage on a failed save or half as much damage on a successful one.\n\nTurn 4. Hailstones rain down. Each creature under the cloud takes 2d6 Bludgeoning damage.\n\nTurns 5–10. Gusts and freezing rain assail the area under the cloud. Each creature there takes 1d6 Cold damage. Until the spell ends, the area is Difficult Terrain and Heavily Obscured , ranged attacks with weapons are impossible there, and strong wind blows through the area.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619098-storm-of-vengeance",
+      "Primary Effect Category": "Weather & Climate Control",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Primary",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

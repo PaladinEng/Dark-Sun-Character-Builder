@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:summon-beast",
+  "name": "Summon Beast",
+  "description": "You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nSmall Beast, Neutral\n\nAC 11 + the spell’s level\n\nHP 20 (Air only) or 30 (Land and Water only) + 5 for each spell level above 2\n\nSpeed 30 ft.; Climb 30 ft. (Land only); Fly 60 ft. (Air only); Swim 30 ft. (Water only)\n\nSenses Darkvision 60 ft.; Passive Perception 12\n\nLanguages Understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nFlyby (Air Only). The spirit doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach.\n\nPack Tactics (Land and Water Only). The spirit has Advantage on an attack roll against a creature if at least one of the spirit’s allies is within 5 feet of the creature and the ally doesn’t have the Incapacitated condition.\n\nWater Breathing (Water Only). The spirit can breathe only underwater.\n\nActions\n\nMultiattack. The spirit makes a number of Rend attacks equal to half this spell’s level (round down).\n\nRend. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + the spell’s level Piercing damage.",
+  "level": 2,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619106-summon-beast",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Movement Enhancement",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Summon Beast",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You call forth a bestial spirit. It manifests in an unoccupied space that you can see within range and uses the Bestial Spirit stat block. When you cast the spell, choose an environment: Air, Land, or Water. The creature resembles an animal of your choice that is native to the chosen environment, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.\n\nThe creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.\n\nUsing a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.\n\nSmall Beast, Neutral\n\nAC 11 + the spell’s level\n\nHP 20 (Air only) or 30 (Land and Water only) + 5 for each spell level above 2\n\nSpeed 30 ft.; Climb 30 ft. (Land only); Fly 60 ft. (Air only); Swim 30 ft. (Water only)\n\nSenses Darkvision 60 ft.; Passive Perception 12\n\nLanguages Understands the languages you know\n\nCR None (XP 0; PB equals your Proficiency Bonus)\n\nTraits\n\nFlyby (Air Only). The spirit doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach.\n\nPack Tactics (Land and Water Only). The spirit has Advantage on an attack roll against a creature if at least one of the spirit’s allies is within 5 feet of the creature and the ally doesn’t have the Incapacitated condition.\n\nWater Breathing (Water Only). The spirit can breathe only underwater.\n\nActions\n\nMultiattack. The spirit makes a number of Rend attacks equal to half this spell’s level (round down).\n\nRend. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 4 + the spell’s level Piercing damage.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619106-summon-beast",
+      "Primary Effect Category": "Movement Enhancement",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Primary"
+    }
+  }
+}

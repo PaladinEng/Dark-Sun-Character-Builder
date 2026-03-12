@@ -1,0 +1,903 @@
+Level,Name,School,Casting Time,Range,Area,Components,Materials,Duration,Concentration,Ritual,Attack/Save,Damage/Effect,Source,Description,URL_absolute,Primary Effect Category,Arcane Status,Divine Status,Nature Status,Elemental Status,Psionics Status
+1st,Absorb Elements,Abjuration,1 Reaction *,,,S,,1 Round,,,,Acid (...),,"The spell captures some of the incoming energy, lessening its effect on you and storing it for your next melee attack. You have resistance to the triggering damage type until the start of your next turn. Also, the first time you hit with a melee attack on your next turn, the target takes an extra 1d6 damage of the triggering type, and the spell ends.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each slot level above 1st.",https://www.dndbeyond.com/spells/2368-absorb-elements,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Arms of Hadar,Conjuration,1 Action,,(10 ft. ),"V, S",,Instantaneous,,,STR Save,Necrotic,,"Invoking Hadar, you cause tendrils to erupt from yourself. Each creature in a 10-foot Emanation originating from you makes a Strength saving throw. On a failed save, a target takes 2d6 Necrotic damage and can’t take Reactions until the start of its next turn. On a successful save, a target takes half as much damage only.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618871-arms-of-hadar,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+1st,Burning Hands,Evocation,1 Action,,(15 ft. ),"V, S",,Instantaneous,,,DEX Save,Fire,,"A thin sheet of flames shoots forth from you. Each creature in a 15-foot Cone makes a Dexterity saving throw, taking 3d6 Fire damage on a failed save or half as much damage on a successful one.
+
+Flammable objects in the Cone that aren’t being worn or carried start burning .
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618946-burning-hands,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Chaos Bolt,Evocation,1 Action,120 ft.,,"V, S",,Instantaneous,,,Ranged,Acid (...),,"You hurl an undulating, warbling mass of chaotic energy at one creature in range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 + 1d6 damage. Choose one of the d8s. The number rolled on that die determines the attack’s damage type, as shown below.
+
+If you roll the same number on both d8s, the chaotic energy leaps from the target to a different creature of your choice within 30 feet of it. Make a new attack roll against the new target, and make a new damage roll, which could cause the chaotic energy to leap again.
+
+A creature can be targeted only once by each casting of this spell.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, each target takes 1d6 extra damage of the type rolled for each slot level above 1st.",https://www.dndbeyond.com/spells/14761-chaos-bolt,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Chromatic Orb,Evocation,1 Action,90 ft.,,"V, S, M",,Instantaneous,,,Ranged,Acid (...),,"You hurl an orb of energy at a target within range. Choose Acid, Cold, Fire, Lightning, Poison, or Thunder for the type of orb you create, and then make a ranged spell attack against the target. On a hit, the target takes 3d8 damage of the chosen type.
+
+If you roll the same number on two or more of the d8s, the orb leaps to a different target of your choice within 30 feet of the target. Make an attack roll against the new target, and make a new damage roll. The orb can’t leap again unless you cast the spell with a level 2+ spell slot.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 1. The orb can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.",https://www.dndbeyond.com/spells/2618966-chromatic-orb,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Cure Wounds,Abjuration,1 Action,,,"V, S",,Instantaneous,,,,Healing,,"A creature you touch regains a number of Hit Points equal to 2d8 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 2d8 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619079-cure-wounds,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+1st,Divine Smite,Evocation,1 Bonus Action *,,,V,,Instantaneous,,,,Radiant,,"The target takes an extra 2d8 Radiant damage from the attack. The damage increases by 1d8 if the target is a Fiend or an Undead.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618833-divine-smite,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Earth Tremor,Evocation,1 Action,10 ft.,,"V, S",,Instantaneous,,,DEX Save,Bludgeoning,,"You cause a tremor in the ground within range. Each creature other than you in that area must make a Dexterity saving throw. On a failed save, a creature takes 1d6 bludgeoning damage and is knocked prone . If the ground in that area is loose earth or stone, it becomes difficult terrain until cleared, with each 5-foot-diameter portion requiring at least 1 minute to clear by hand.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st.",https://www.dndbeyond.com/spells/2378-earth-tremor,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+1st,Fog Cloud,Conjuration,1 Action,120 ft.,(20 ft. ),"V, S",,1 Hour,,,,Control (...),,"You create a 20-foot-radius Sphere of fog centered on a point within range. The Sphere is Heavily Obscured . It lasts for the duration or until a strong wind (such as one created by Gust of Wind ) disperses it.
+
+Using a Higher-Level Spell Slot. The fog’s radius increases by 20 feet for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618910-fog-cloud,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+1st,Frost Fingers,Evocation,1 Action,,(15 ft. ),"V, S",,Instantaneous,,,CON Save,Cold,,,https://www.dndbeyond.com/spells/654074-frost-fingers,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Grease,Conjuration,1 Action,60 ft.,(10 ft. ),"V, S, M",,1 Minute,,,DEX Save,Prone,,"Nonflammable grease covers the ground in a 10-foot square centered on a point within range and turns it into Difficult Terrain for the duration.
+
+When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone.",https://www.dndbeyond.com/spells/2618957-grease,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+1st,Guiding Bolt,Evocation,1 Action,120 ft.,,"V, S",,1 Round,,,Ranged,Radiant,,"You hurl a bolt of light toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 4d6 Radiant damage, and the next attack roll made against it before the end of your next turn has Advantage.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619136-guiding-bolt,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Healing Word,Abjuration,1 Bonus Action,60 ft.,,V,,Instantaneous,,,,Healing,,"A creature of your choice that you can see within range regains Hit Points equal to 2d4 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 2d4 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619143-healing-word,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+1st,Hellish Rebuke,Evocation,1 Reaction *,60 ft.,,"V, S",,Instantaneous,,,DEX Save,Fire,,"The creature that damaged you is momentarily surrounded by green flames. It makes a Dexterity saving throw, taking 2d10 Fire damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619149-hellish-rebuke,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Ice Knife,Conjuration,1 Action,60 ft.,(5 ft. *),"S, M",,Instantaneous,,,DEX Save,Piercing (...),,"You create a shard of ice and fling it at one creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Piercing damage. Hit or miss, the shard then explodes. The target and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 2d6 Cold damage.
+
+Using a Higher-Level Spell Slot. The Cold damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619171-ice-knife,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Jim's Magic Missile,Evocation,1 Action,120 ft.,,"V, S, M",,Instantaneous,,,Ranged,Force,,"Any apprentice wizard can cast a boring old magic missile . Sure, it always strikes its target. Yawn. Do away with the drudgery of your grandfather’s magic with this improved version of the spell, as used by Jim Darkmagic!
+
+You create three twisting, whistling, hypoallergenic, gluten-free darts of magical force. Each dart targets a creature of your choice that you can see within range. Make a ranged spell attack for each missile. On a hit, a missile deals 2d4 force damage to its target.
+
+If the attack roll scores a critical hit, the target of that missile takes 5d4 force damage instead of you rolling damage twice for a critical hit. If the attack roll for any missile is a 1, all missiles miss their targets and blow up in your face, dealing 1 force damage per missile to you.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart, and the royalty component increases by 1 gp, for each slot level above 1st.",https://www.dndbeyond.com/spells/188129-jims-magic-missile,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+1st,Magic Missile,Evocation,1 Action,120 ft.,,"V, S",,Instantaneous,,,,Force,,"You create three glowing darts of magical force. Each dart strikes a creature of your choice that you can see within range. A dart deals 1d4 + 1 Force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.
+
+Using a Higher-Level Spell Slot. The spell creates one more dart for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619022-magic-missile,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+1st,Ray of Sickness,Necromancy,1 Action,60 ft.,,"V, S",,Instantaneous,,,Ranged,Poison,,"You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618935-ray-of-sickness,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Searing Smite,Evocation,1 Bonus Action *,,,V,,1 Minute,,,CON Save,Fire (...),,"As you hit the target, it takes an extra 1d6 Fire damage from the attack. At the start of each of its turns until the spell ends, the target takes 1d6 Fire damage and then makes a Constitution saving throw. On a failed save, the spell continues. On a successful save, the spell ends.
+
+Using a Higher-Level Spell Slot. All the damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619009-searing-smite,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Shield,Abjuration,1 Reaction *,,,"V, S",,1 Round,,,,Warding,,"An imperceptible barrier of magical force protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile .",https://www.dndbeyond.com/spells/2619019-shield,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+1st,Tasha's Caustic Brew,Evocation,1 Action,,(30 ft. ),"V, S, M",,1 Minute,,,DEX Save,Acid,,"A stream of acid emanates from you in a line 30 feet long and 5 feet wide in a direction you choose. Each creature in the line must succeed on a Dexterity saving throw or be covered in acid for the spell’s duration or until a creature uses its action to scrape or wash the acid off itself or another creature. A creature covered in the acid takes 2d4 acid damage at start of each of its turns.
+
+At Higher Levels. When you cast this spell using a spell slot of 2nd level or higher, the damage increases by 2d4 for each slot level above 1st.",https://www.dndbeyond.com/spells/719953-tashas-caustic-brew,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Tenser's Floating Disk,Conjuration,1 Action,30 ft.,,"V, S, M",,1 Hour,,,,Movement (...),,"This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground.
+
+The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. It can move across uneven terrain, up or down stairs, slopes and the like, but it can’t cross an elevation change of 10 feet or more. For example, the disk can’t move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom.
+
+If you move more than 100 feet from the disk (typically because it can’t move around an obstacle to follow you), the spell ends.",https://www.dndbeyond.com/spells/2619169-tensers-floating-disk,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+1st,Thunderous Smite,Evocation,1 Bonus Action *,,,V,,Instantaneous,,,STR Save,Thunder,,"Your strike rings with thunder that is audible within 300 feet of you, and the target takes an extra 2d6 Thunder damage from the attack. Additionally, if the target is a creature, it must succeed on a Strength saving throw or be pushed 10 feet away from you and have the Prone condition.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619182-thunderous-smite,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Thunderwave,Evocation,1 Action,,(15 ft. ),"V, S",,Instantaneous,,,CON Save,Thunder,,"You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a Constitution saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.
+
+In addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619184-thunderwave,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+1st,Unseen Servant,Conjuration,1 Action,60 ft.,,"V, S, M",,1 Hour,,,,Control,,"This spell creates an Invisible , mindless, shapeless, Medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 Hit Point, and a Strength of 2, and it can’t attack. If it drops to 0 Hit Points, the spell ends.
+
+Once on each of your turns as a Bonus Action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring drinks. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command.
+
+If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends.",https://www.dndbeyond.com/spells/2619209-unseen-servant,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+1st,Witch Bolt,Evocation,1 Action,60 ft.,,"V, S, M",,1 Minute,,,Ranged,Lightning (...),,"A beam of crackling energy lances toward a creature within range, forming a sustained arc of lightning between you and the target. Make a ranged spell attack against it. On a hit, the target takes 2d12 Lightning damage.
+
+On each of your subsequent turns, you can take a Bonus Action to deal 1d12 Lightning damage to the target automatically, even if the first attack missed.
+
+The spell ends if the target is ever outside the spell’s range or if it has Total Cover from you.
+
+Using a Higher-Level Spell Slot. The initial damage increases by 1d12 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619215-witch-bolt,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Aganazzar's Scorcher,Evocation,1 Action,30 ft.,(30 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Fire,,"A line of roaring flame 30 feet long and 5 feet wide emanates from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 3d8 fire damage on a failed save, or half as much damage on a successful one.
+
+At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.",https://www.dndbeyond.com/spells/2369-aganazzars-scorcher,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Arcane Lock,Abjuration,1 Action,,,"V, S, M",,Until Dispelled,,,,Utility (...),,"You touch a closed door, window, gate, container, or hatch and magically lock it for the duration. This lock can’t be unlocked by any nonmagical means. You and any creatures you designate when you cast the spell can open and close the object despite the lock. You can also set a password that, when spoken within 5 feet of the object, unlocks it for 1 minute.",https://www.dndbeyond.com/spells/2618868-arcane-lock,Object & Structure Manipulation,Hard Ban,Hard Ban,Hard Ban,Secondary,Hard Ban
+2nd,Arcane Vigor,Abjuration,1 Bonus Action,,,"V, S",,Instantaneous,,,,,,"You tap into your life force to heal yourself. Roll one or two of your unexpended Hit Point Dice, and regain a number of Hit Points equal to the roll’s total plus your spellcasting ability modifier. Those dice are then expended.
+
+Using a Higher-Level Spell Slot. The number of unexpended Hit Dice you can roll increases by one for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618831-arcane-vigor,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Cordon of Arrows,Transmutation,1 Action,,,"V, S, M",,8 Hours,,,DEX Save,Piercing,,"You touch up to four nonmagical Arrows or Bolts and plant them in the ground in your space. Until the spell ends, the ammunition can’t be physically uprooted, and whenever a creature other than you enters a space within 30 feet of the ammunition for the first time on a turn or ends its turn there, one piece of ammunition flies up to strike it. The creature must succeed on a Dexterity saving throw or take 2d4 Piercing damage. The piece of ammunition is then destroyed. The spell ends when none of the ammunition remains planted in the ground.
+
+When you cast this spell, you can designate any creatures you choose, and the spell ignores them.
+
+Using a Higher-Level Spell Slot. The amount of ammunition that can be affected increases by two for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619055-cordon-of-arrows,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Darkness,Evocation,Action,60 ft.,(15 ft. ),"V, M",,10 Minutes,,,,Control,,"For the duration, magical Darkness spreads from a point within range and fills a 15-foot-radius Sphere . Darkvision can’t see through it, and nonmagical light can’t illuminate it.
+
+Alternatively, you cast the spell on an object that isn’t being worn or carried, causing the Darkness to fill a 15-foot Emanation originating from that object. Covering that object with something opaque, such as a bowl or helm, blocks the Darkness.
+
+If any of this spell’s area overlaps with an area of Bright Light or Dim Light created by a spell of level 2 or lower, that other spell is dispelled.",https://www.dndbeyond.com/spells/2619080-darkness,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Dragon's Breath,Transmutation,1 Bonus Action,,(15 ft. ),"V, S, M",,1 Minute,,,DEX Save,Acid (...),,"You touch one willing creature, and choose Acid, Cold, Fire, Lightning, or Poison. Until the spell ends, the target can take a Magic action to exhale a 15-foot Cone . Each creature in that area makes a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619150-dragons-breath,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Flame Blade,Evocation,1 Bonus Action,,,"V, S, M",,10 Minutes,,,Melee,Fire,,"You evoke a fiery blade in your free hand. The blade is similar in size and shape to a scimitar, and it lasts for the duration. If you let go of the blade, it disappears, but you can evoke it again as a Bonus Action.
+
+As a Magic action, you can make a melee spell attack with the fiery blade. On a hit, the target takes Fire damage equal to 3d6 plus your spellcasting ability modifier.
+
+The flaming blade sheds Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618899-flame-blade,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Flaming Sphere,Conjuration,1 Action,60 ft.,(5 ft. ),"V, S, M",,1 Minute,,,DEX Save,Fire,,"You create a 5-foot-diameter sphere of fire in an unoccupied space on the ground within range. It lasts for the duration. Any creature that ends its turn within 5 feet of the sphere makes a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one.
+
+As a Bonus Action, you can move the sphere up to 30 feet, rolling it along the ground. If you move the sphere into a creature’s space, that creature makes the save against the sphere, and the sphere stops moving for the turn.
+
+When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. Flammable objects that aren’t being worn or carried start burning if touched by the sphere, and it sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618919-flaming-sphere,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Gust of Wind,Evocation,1 Action,,,"V, S, M",,1 Minute,,,STR Save,Control,,"A Line of strong wind 60 feet long and 10 feet wide blasts from you in a direction you choose for the duration. Each creature in the Line must succeed on a Strength saving throw or be pushed 15 feet away from you in a direction following the Line. A creature that ends its turn in the Line must make the same save.
+
+Any creature in the Line must spend 2 feet of movement for every 1 foot it moves when moving closer to you.
+
+The gust disperses gas or vapor, and it extinguishes candles and similar unprotected flames in the area. It causes protected flames, such as those of lanterns, to dance wildly and has a 50 percent chance to extinguish them.
+
+As a Bonus Action on your later turns, you can change the direction in which the Line blasts from you.",https://www.dndbeyond.com/spells/2619137-gust-of-wind,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Healing Spirit,Conjuration,1 Bonus Action,60 ft.,(5 ft. ),"V, S",,1 Minute,,,,Healing (...),,"You call forth a nature spirit to soothe the wounded. The intangible spirit appears in a space that is a 5-foot cube you can see within range. The spirit looks like a transparent beast or fey (your choice).
+
+Until the spell ends, whenever you or a creature you can see moves into the spirit’s space for the first time on a turn or starts its turn there, you can cause the spirit to restore 1d6 hit points to that creature (no action required). The spirit can’t heal constructs or undead. The spirit can heal a number of times equal to 1 + your spellcasting ability modifier (minimum of twice). After healing that number of times, the spirit disappears.
+
+As a bonus action on your turn, you can move the spirit up to 30 feet to a space you can see.
+
+At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the healing increases by 1d6 for each slot level above 2nd.",https://www.dndbeyond.com/spells/14873-healing-spirit,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Heat Metal,Transmutation,1 Action,60 ft.,,"V, S, M",,1 Minute,,,CON Save,Fire,,"Choose a manufactured metal object, such as a metal weapon or a suit of Heavy or Medium metal armor, that you can see within range. You cause the object to glow red-hot. Any creature in physical contact with the object takes 2d8 Fire damage when you cast the spell. Until the spell ends, you can take a Bonus Action on each of your later turns to deal this damage again if the object is within range.
+
+If a creature is holding or wearing the object and takes the damage from it, the creature must succeed on a Constitution saving throw or drop the object if it can. If it doesn’t drop the object, it has Disadvantage on attack rolls and ability checks until the start of your next turn.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619145-heat-metal,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Knock,Transmutation,1 Action,60 ft.,,V,,Instantaneous,,,,Utility,,"Choose an object that you can see within range. The object can be a door, a box, a chest, a set of manacles, a padlock, or another object that contains a mundane or magical means that prevents access.
+
+A target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked.
+
+If the target is held shut by Arcane Lock , that spell is suppressed for 10 minutes, during which time the target can be opened and closed.
+
+When you cast the spell, a loud knock, audible up to 300 feet away, emanates from the target.",https://www.dndbeyond.com/spells/2618992-knock,Object & Structure Manipulation,Hard Ban,Hard Ban,Hard Ban,Secondary,Hard Ban
+2nd,Lesser Restoration,Abjuration,1 Bonus Action,,,"V, S",,Instantaneous,,,,Healing,,"You touch a creature and end one condition on it: Blinded , Deafened , Paralyzed , or Poisoned .",https://www.dndbeyond.com/spells/2619016-lesser-restoration,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Maximilian's Earthen Grasp,Transmutation,1 Action,30 ft.,(5 ft. *),"V, S, M",,1 Minute,,,STR Save,Bludgeoning (...),,"You choose a 5-foot-square unoccupied space on the ground that you can see within range. A Medium hand made from compacted soil rises there and reaches for one creature you can see within 5 feet of it. The target must make a Strength saving throw. On a failed save, the target takes 2d6 bludgeoning damage and is restrained for the spell’s duration.
+
+As an action, you can cause the hand to crush the restrained target, who must make a Strength saving throw. It takes 2d6 bludgeoning damage on a failed save, or half as much damage on a successful one.
+
+To break out, the restrained target can use its action to make a Strength check against your spell save DC. On a success, the target escapes and is no longer restrained by the hand.
+
+As an action, you can cause the hand to reach for a different creature or to move to a different unoccupied space within range. The hand releases a restrained target if you do either.",https://www.dndbeyond.com/spells/2392-maximilians-earthen-grasp,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Melf's Acid Arrow,Evocation,1 Action,90 ft.,,"V, S, M",,Instantaneous,,,Ranged,Acid (...),,"A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage only.
+
+Using a Higher-Level Spell Slot. The damage (both initial and later) increases by 1d4 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619032-melfs-acid-arrow,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Protection from Poison,Abjuration,1 Action,,,"V, S",,1 Hour,,,,Buff (...),,"You touch a creature and end the Poisoned condition on it. For the duration, the target has Advantage on saving throws to avoid or end the Poisoned condition, and it has Resistance to Poison damage.",https://www.dndbeyond.com/spells/2618915-protection-from-poison,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Rime's Binding Ice,Evocation,1 Action,,(30 ft. ),"S, M",,Instantaneous,,,CON Save,Cold,,,https://www.dndbeyond.com/spells/1183867-rimes-binding-ice,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Scorching Ray,Evocation,1 Action,120 ft.,,"V, S",,Instantaneous,,,Ranged,Fire,,"You hurl three fiery rays. You can hurl them at one target within range or at several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 Fire damage.
+
+Using a Higher-Level Spell Slot. You create one additional ray for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619005-scorching-ray,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Shadow Blade,Illusion,1 Bonus Action,,,"V, S",,1 Minute,,,,Psychic,,"You weave together threads of shadow to create a sword of solidified gloom in your hand. This magic sword lasts until the spell ends. It counts as a simple melee weapon with which you are proficient. It deals 2d8 psychic damage on a hit and has the finesse , light , and thrown properties (range 20/60). In addition, when you use the sword to attack a target that is in dim light or darkness, you make the attack roll with advantage.
+
+If you drop the weapon or throw it, it dissipates at the end of the turn. Thereafter, while the spell persists, you can use a bonus action to cause the sword to reappear in your hand.
+
+At Higher Levels. When you cast this spell using a 3rd- or 4th-level spell slot, the damage increases to 3d8. When you cast it using a 5th- or 6th-level spell slot, the damage increases to 4d8. When you cast it using a spell slot of 7th level or higher, the damage increases to 5d8.",https://www.dndbeyond.com/spells/14595-shadow-blade,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+2nd,Snilloc's Snowball Swarm,Evocation,1 Action,90 ft.,(5 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Cold,,"A flurry of magic snowballs erupts from a point you choose within range. Each creature in a 5-foot-radius sphere centered on that point must make a Dexterity saving throw. A creature takes 3d6 cold damage on a failed save, or half as much damage on a successful one.
+
+At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d6 for each slot level above 2nd.",https://www.dndbeyond.com/spells/2399-snillocs-snowball-swarm,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+2nd,Spiritual Weapon,Evocation,1 Bonus Action,60 ft.,,"V, S",,1 Minute,,,Melee,Force,,"You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.
+
+As a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for every slot level above 2.",https://www.dndbeyond.com/spells/2619081-spiritual-weapon,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+2nd,Warding Wind,Evocation,1 Action,,(10 ft. ),V,,10 Minutes,,,,Deafened,,"A strong wind (20 miles per hour) blows around you in a 10-foot radius and moves with you, remaining centered on you. The wind lasts for the spell’s duration.
+
+The wind has the following effects:
+
+It deafens you and other creatures in its area.
+
+It extinguishes unprotected flames in its area that are torch-sized or smaller.
+
+It hedges out vapor, gas, and fog that can be dispersed by strong wind.
+
+The area is difficult terrain for creatures other than you.
+
+The attack rolls of ranged weapon attacks have disadvantage if the attacks pass in or out of the wind.",https://www.dndbeyond.com/spells/2407-warding-wind,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+2nd,Web,Conjuration,1 Action,60 ft.,(20 ft. ),"V, S, M",,1 Hour,,,DEX Save,Restrained,,"You conjure a mass of sticky webbing at a point within range. The webs fill a 20-foot Cube there for the duration. The webs are Difficult Terrain , and the area within them is Lightly Obscured .
+
+If the webs aren’t anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet.
+
+The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Restrained condition while in the webs or until it breaks free.
+
+A creature Restrained by the webs can take an action to make a Strength ( Athletics ) check against your spell save DC. If it succeeds, it is no longer Restrained.
+
+The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire.",https://www.dndbeyond.com/spells/2619208-web,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Ashardalon's Stride,Transmutation,1 Bonus Action,,,"V, S",,1 Minute,,,,Fire,,,https://www.dndbeyond.com/spells/1183862-ashardalons-stride,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Aura of Vitality,Abjuration,1 Action,,(30 ft. ),V,,1 Minute,,,,Healing,,"An aura radiates from you in a 30-foot Emanation for the duration. When you create the aura and at the start of each of your turns while it persists, you can restore 2d6 Hit Points to one creature in it.",https://www.dndbeyond.com/spells/2618891-aura-of-vitality,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Blinding Smite,Evocation,1 Bonus Action *,,,V,,1 Minute,,,CON Save,Radiant,,"The target hit by the strike takes an extra 3d8 Radiant damage from the attack, and the target has the Blinded condition until the spell ends. At the end of each of its turns, the Blinded target makes a Constitution saving throw, ending the spell on itself on a success.
+
+Using a Higher-Level Spell Slot. The extra damage increases by 1d8 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618936-blinding-smite,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Call Lightning,Conjuration,1 Action,120 ft.,(60 ft. *),"V, S",,10 Minutes,,,DEX Save,Lightning (...),,"A storm cloud appears at a point within range that you can see above yourself. It takes the shape of a Cylinder that is 10 feet tall with a 60-foot radius.
+
+When you cast the spell, choose a point you can see under the cloud. A lightning bolt shoots from the cloud to that point. Each creature within 5 feet of that point makes a Dexterity saving throw, taking 3d10 Lightning damage on a failed save or half as much damage on a successful one.
+
+Until the spell ends, you can take a Magic action to call down lightning in that way again, targeting the same point or a different one.
+
+If you’re outdoors in a storm when you cast this spell, the spell gives you control over that storm instead of creating a new one. Under such conditions, the spell’s damage increases by 1d10.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d10 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618949-call-lightning,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Conjure Barrage,Conjuration,1 Action,,(60 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Force,,"You brandish the weapon used to cast the spell and conjure similar spectral weapons (or ammunition appropriate to the weapon) that launch forward and then disappear. Each creature of your choice that you can see in a 60-foot Cone makes a Dexterity saving throw, taking 5d8 Force damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619045-conjure-barrage,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+3rd,Elemental Weapon,Transmutation,1 Action,,,"V, S",,1 Hour,,,,Acid (...),,"A nonmagical weapon you touch becomes a magic weapon. Choose one of the following damage types: Acid, Cold, Fire, Lightning, or Thunder. For the duration, the weapon has a +1 bonus to attack rolls and deals an extra 1d4 damage of the chosen type when it hits.
+
+Using a Higher-Level Spell Slot. If you use a level 5–6 spell slot, the bonus to attack rolls increases to +2, and the extra damage increases to 2d4. If you use a level 7+ spell slot, the bonus increases to +3, and the extra damage increases to 3d4.",https://www.dndbeyond.com/spells/2619164-elemental-weapon,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Erupting Earth,Transmutation,1 Action,120 ft.,(20 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Bludgeoning,,"Choose a point you can see on the ground within range. A fountain of churned earth and stone erupts in a 20-foot cube centered on that point. Each creature in that area must make a Dexterity saving throw. A creature takes 3d12 bludgeoning damage on a failed save, or half as much damage on a successful one. Additionally, the ground in that area becomes difficult terrain until cleared. Each 5-foot-square portion of the area requires at least 1 minute to clear by hand.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d12 for each slot level above 3rd.",https://www.dndbeyond.com/spells/2380-erupting-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Fireball,Evocation,1 Action,150 ft.,(20 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Fire,,"A bright streak flashes from you to a point you choose within range and then blossoms with a low roar into a fiery explosion. Each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw, taking 8d6 Fire damage on a failed save or half as much damage on a successful one.
+
+Flammable objects in the area that aren’t being worn or carried start burning .
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618887-fireball,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Flame Arrows,Transmutation,1 Action,,,"V, S",,1 Hour,,,,Fire,,"You touch a quiver containing arrows or bolts. When a target is hit by a ranged weapon attack using a piece of ammunition drawn from the quiver, the target takes an extra 1d6 fire damage. The spell’s magic ends on the piece of ammunition when it hits or misses, and the spell ends when twelve pieces of ammunition have been drawn from the quiver.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the number of pieces of ammunition you can affect with this spell increases by two for each slot level above 3rd.",https://www.dndbeyond.com/spells/2381-flame-arrows,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Hunger of Hadar,Conjuration,1 Action,150 ft.,(20 ft. *),"V, S, M",,1 Minute,,,DEX Save,Cold (...),,"You open a gateway to the Far Realm, a region infested with unspeakable horrors. A 20-foot-radius Sphere of Darkness appears, centered on a point with range and lasting for the duration. The Sphere is Difficult Terrain , and it is filled with strange whispers and slurping noises, which can be heard up to 30 feet away. No light, magical or otherwise, can illuminate the area, and creatures fully within it have the Blinded condition.
+
+Any creature that starts its turn in the area takes 2d6 Cold damage. Any creature that ends its turn there must succeed on a Dexterity saving throw or take 2d6 Acid damage from otherworldly tentacles.
+
+Using a Higher-Level Spell Slot. The Cold or Acid damage (your choice) increases by 1d6 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619162-hunger-of-hadar,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Life Transference,Necromancy,1 Action,30 ft.,,"V, S",,Instantaneous,,,,Necrotic,,"You sacrifice some of your health to mend another creature’s injuries. You take 4d8 necrotic damage, which can’t be reduced in any way, and one creature of your choice that you can see within range regains a number of hit points equal to twice the necrotic damage you take.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.",https://www.dndbeyond.com/spells/14880-life-transference,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Lightning Arrow,Transmutation,1 Bonus Action *,,,"V, S",,Instantaneous,,,DEX Save,Lightning (...),,"As your attack hits or misses the target, the weapon or ammunition you’re using transforms into a lightning bolt. Instead of taking any damage or other effects from the attack, the target takes 4d8 Lightning damage on a hit or half as much damage on a miss. Each creature within 10 feet of the target then makes a Dexterity saving throw, taking 2d8 Lightning damage on a failed save or half as much damage on a successful one.
+
+The weapon or ammunition then returns to its normal form.
+
+Using a Higher-Level Spell Slot. The damage for both effects of the spell increases by 1d8 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618997-lightning-arrow,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Lightning Bolt,Evocation,1 Action,,(100 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Lightning,,"A stroke of lightning forming a 100-foot-long, 5-foot-wide Line blasts out from you in a direction you choose. Each creature in the Line makes a Dexterity saving throw, taking 8d6 Lightning damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618999-lightning-bolt,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Mass Healing Word,Abjuration,1 Bonus Action,60 ft.,,V,,Instantaneous,,,,Healing,,"Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 1d4 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619028-mass-healing-word,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Melf's Minute Meteors,Evocation,1 Action,,,"V, S, M",,10 Minutes,,,DEX Save,Fire,,"You create six tiny meteors in your space. They float in the air and orbit you for the spell’s duration. When you cast the spell — and as a bonus action on each of your turns thereafter — you can expend one or two of the meteors, sending them streaking toward a point or points you choose within 120 feet of you. Once a meteor reaches its destination or impacts against a solid surface, the meteor explodes. Each creature within 5 feet of the point where the meteor explodes must make a Dexterity saving throw. A creature takes 2d6 fire damage on a failed save, or half as much damage on a successful one.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the number of meteors created increases by two for each slot level above 3rd.",https://www.dndbeyond.com/spells/2393-melfs-minute-meteors,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Remove Curse,Abjuration,1 Action,,,"V, S",,Instantaneous,,,,Buff,,"At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner’s Attunement to the object so it can be removed or discarded.",https://www.dndbeyond.com/spells/2618943-remove-curse,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Sleet Storm,Conjuration,1 Action,150 ft.,(40 ft. *),"V, S, M",,1 Minute,,,DEX Save,Prone,,"Until the spell ends, sleet falls in a 40-foot-tall, 20-foot-radius Cylinder centered on a point you choose within range. The area is Heavily Obscured , and exposed flames in the area are doused.
+
+Ground in the Cylinder is Difficult Terrain . When a creature enters the Cylinder for the first time on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Prone condition and lose Concentration .",https://www.dndbeyond.com/spells/2618998-sleet-storm,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Tidal Wave,Conjuration,1 Action,120 ft.,,"V, S, M",,Instantaneous,,,DEX Save,Bludgeoning,,"You conjure up a wave of water that crashes down on an area within range. The area can be up to 30 feet long, up to 10 feet wide, and up to 10 feet tall. Each creature in that area must make a Dexterity saving throw. On a failed save, a creature takes 4d8 bludgeoning damage and is knocked prone . On a successful save, a creature takes half as much damage and isn’t knocked prone . The water then spreads out across the ground in all directions, extinguishing unprotected flames in its area and within 30 feet of it, and then it vanishes.",https://www.dndbeyond.com/spells/2402-tidal-wave,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+3rd,Vampiric Touch,Necromancy,1 Action,,,"V, S",,1 Minute,,,Melee,Necrotic,,"The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against one creature within reach. On a hit, the target takes 3d6 Necrotic damage, and you regain Hit Points equal to half the amount of Necrotic damage dealt.
+
+Until the spell ends, you can make the attack again on each of your turns as a Magic action, targeting the same creature or a different one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619214-vampiric-touch,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Wall of Sand,Evocation,1 Action,90 ft.,,"V, S, M",,10 Minutes,,,,Blinded,,"You conjure up a wall of swirling sand on the ground at a point you can see within range. You can make the wall up to 30 feet long, 10 feet high, and 10 feet thick, and it vanishes when the spell ends. It blocks line of sight but not movement. A creature is blinded while in the wall’s space and must spend 3 feet of movement for every 1 foot it moves there.",https://www.dndbeyond.com/spells/2405-wall-of-sand,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Wall of Water,Evocation,1 Action,60 ft.,,"V, S, M",,10 Minutes,,,,Control (...),,"You create a wall of water on the ground at a point you can see within range. You can make the wall up to 30 feet long, 10 feet high, and 1 foot thick, or you can make a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall vanishes when the spell ends. The wall’s space is difficult terrain.
+
+Any ranged weapon attack that enters the wall’s space has disadvantage on the attack roll, and fire damage is halved if the fire effect passes through the wall to reach its target. Spells that deal cold damage that pass through the wall cause the area of the wall they pass through to freeze solid (at least a 5-foot-square section is frozen). Each 5-foot-square frozen section has AC 5 and 15 hit points. Reducing a frozen section to 0 hit points destroys it. When a section is destroyed, the wall’s water doesn’t fill it.",https://www.dndbeyond.com/spells/2406-wall-of-water,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+3rd,Wind Wall,Evocation,1 Action,120 ft.,,"V, S, M",,1 Minute,,,STR Save,Bludgeoning,,"A wall of strong wind rises from the ground at a point you choose within range. You can make the wall up to 50 feet long, 15 feet high, and 1 foot thick. You can shape the wall in any way you choose so long as it makes one continuous path along the ground. The wall lasts for the duration.
+
+When the wall appears, each creature in its area makes a Strength saving throw, taking 4d8 Bludgeoning damage on a failed save or half as much damage on a successful one.
+
+The strong wind keeps fog, smoke, and other gases at bay. Small or smaller flying creatures or objects can’t pass through the wall. Loose, lightweight materials brought into the wall fly upward. Arrows, bolts, and other ordinary projectiles launched at targets behind the wall are deflected upward and miss automatically. Boulders hurled by Giants or siege engines, and similar projectiles, are unaffected. Creatures in gaseous form can’t pass through it.",https://www.dndbeyond.com/spells/2619212-wind-wall,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Aura of Life,Abjuration,1 Action,,(30 ft. ),V,,10 Minutes,,,,Healing (...),,"An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Necrotic damage, and your Hit Point maximums can’t be reduced. If an ally with 0 Hit Points starts its turn in the aura, that ally regains 1 Hit Point.",https://www.dndbeyond.com/spells/2618884-aura-of-life,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+4th,Blight,Necromancy,1 Action,30 ft.,,"V, S",,Instantaneous,,,CON Save,Necrotic,,"A creature that you can see within range makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one. A Plant creature automatically fails the save.
+
+Alternatively, target a nonmagical plant that isn’t a creature, such as a tree or shrub. It doesn’t make a save; it simply withers and dies.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2618934-blight,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+4th,Conjure Minor Elementals,Conjuration,1 Action,,(15 ft. ),"V, S",,10 Minutes,,,,Acid (...),,"You conjure spirits from the Elemental Planes that flit around you in a 15-foot Emanation for the duration. Until the spell ends, any attack you make deals an extra 2d8 damage when you hit a creature in the Emanation. This damage is Acid, Cold, Fire, or Lightning (your choice when you make the attack).
+
+In addition, the ground in the Emanation is Difficult Terrain for your enemies.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619049-conjure-minor-elementals,Summoning — Elemental,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+4th,Control Water,Transmutation,1 Action,300 ft.,,"V, S, M",,10 Minutes,,,STR Save,Bludgeoning,,"Until the spell ends, you control any water inside an area you choose that is a Cube up to 100 feet on a side, using one of the following effects. As a Magic action on your later turns, you can repeat the same effect or choose a different one.
+
+Flood. You cause the water level of all standing water in the area to rise by as much as 20 feet. If you choose an area in a large body of water, you instead create a 20-foot tall wave that travels from one side of the area to the other and then crashes. Any Huge or smaller vehicles in the wave’s path are carried with it to the other side. Any Huge or smaller vehicles struck by the wave have a 25 percent chance of capsizing.
+
+The water level remains elevated until the spell ends or you choose a different effect. If this effect produced a wave, the wave repeats on the start of your next turn while the flood effect lasts.
+
+Part Water. You part water in the area and create a trench. The trench extends across the spell’s area, and the separated water forms a wall to either side. The trench remains until the spell ends or you choose a different effect. The water then slowly fills in the trench over the course of the next round until the normal water level is restored.
+
+Redirect Flow. You cause flowing water in the area to move in a direction you choose, even if the water has to flow over obstacles, up walls, or in other unlikely directions. The water in the area moves as you direct it, but once it moves beyond the spell’s area, it resumes its flow based on the terrain. The water continues to move in the direction you chose until the spell ends or you choose a different effect.
+
+Whirlpool. You cause a whirlpool to form in the center of the area, which must be at least 50 feet square and 25 feet deep. The whirlpool lasts until you choose a different effect or the spell ends. The whirlpool is 5 feet wide at the base, up to 50 feet wide at the top, and 25 feet tall. Any creature in the water and within 25 feet of the whirlpool is pulled 10 feet toward it. When a creature enters the whirlpool for the first time on a turn or ends its turn there, it makes a Strength saving throw. On a failed save, the creature takes 2d8 Bludgeoning damage. On a successful save, the creature takes half as much damage. A creature can swim away from the whirlpool only if it first takes an action to pull away and succeeds on a Strength ( Athletics ) check against your spell save DC.",https://www.dndbeyond.com/spells/2619070-control-water,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Guardian of Nature,Transmutation,1 Bonus Action,,,V,,1 Minute,,,,Buff (...),,"A nature spirit answers your call and transforms you into a powerful guardian. The transformation lasts until the spell ends. You choose one of the following forms to assume: Primal Beast or Great Tree.
+
+Primal Beast. Bestial fur covers your body, your facial features become feral, and you gain the following benefits:
+
+Your walking speed increases by 10 feet.
+
+You gain darkvision with a range of 120 feet.
+
+You make Strength-based attack rolls with advantage.
+
+Your melee weapon attacks deal an extra 1d6 force damage on a hit.
+
+Great Tree. Your skin appears barky, leaves sprout from your hair, and you gain the following benefits:
+
+You gain 10 temporary hit points .
+
+You make Constitution saving throws with advantage.
+
+You make Dexterity- and Wisdom-based attack rolls with advantage.
+
+While you are on the ground, the ground within 15 feet of you is difficult terrain for your enemies.",https://www.dndbeyond.com/spells/14872-guardian-of-nature,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Ice Storm,Evocation,1 Action,300 ft.,(20 ft. *),"V, S, M",,Instantaneous,,,DEX Save,Bludgeoning (...),,"Hail falls in a 20-foot-radius, 40-foot-high Cylinder centered on a point within range. Each creature in the Cylinder makes a Dexterity saving throw. A creature takes 2d10 Bludgeoning damage and 4d6 Cold damage on a failed save or half as much damage on a successful one.
+
+Hailstones turn ground in the Cylinder into Difficult Terrain until the end of your next turn.
+
+Using a Higher-Level Spell Slot. The Bludgeoning damage increases by 1d10 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619178-ice-storm,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Sickening Radiance,Evocation,1 Action,120 ft.,(30 ft. ),"V, S",,10 Minutes,,,CON Save,Radiant,,"Dim, greenish light spreads within a 30-foot-radius sphere centered on a point you choose within range. The light spreads around corners, and it lasts until the spell ends.
+
+When a creature moves into the spell's area for the first time on a turn or starts its turn there, that creature must succeed on a Constitution saving throw or take 4d10 radiant damage, suffer one level of exhaustion , and emit a dim, greenish light in a 5-foot radius. This light makes it impossible for the creature to benefit from being invisible . The light and any levels of exhaustion caused by this spell go away when the spell ends.",https://www.dndbeyond.com/spells/14597-sickening-radiance,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+4th,Stone Shape,Transmutation,1 Action,,,"V, S, M",,Instantaneous,,,,Control,,"You touch a stone object of Medium size or smaller or a section of stone no more than 5 feet in any dimension and form it into any shape you like. For example, you could shape a large rock into a weapon, statue, or coffer, or you could make a small passage through a wall that is 5 feet thick. You could also shape a stone door or its frame to seal the door shut. The object you create can have up to two hinges and a latch, but finer mechanical detail isn’t possible.",https://www.dndbeyond.com/spells/2619092-stone-shape,Object & Structure Manipulation,Hard Ban,Hard Ban,Hard Ban,Secondary,Hard Ban
+4th,Storm Sphere,Evocation,1 Action,150 ft.,(20 ft. ),"V, S",,1 Minute,,,STR Save,Bludgeoning (...),,"A 20-foot-radius sphere of whirling air springs into existence centered on a point you choose within range. The sphere remains for the spell’s duration. Each creature in the sphere when it appears or that ends its turn there must succeed on a Strength saving throw or take 2d6 bludgeoning damage. The sphere’s space is difficult terrain.
+
+Until the spell ends, you can use a bonus action on each of your turns to cause a bolt of lightning to leap from the center of the sphere toward one creature you choose within 60 feet of the center. Make a ranged spell attack. You have advantage on the attack roll if the target is in the sphere. On a hit, the target takes 4d6 lightning damage.
+
+Creatures within 30 feet of the sphere have disadvantage on Wisdom ( Perception ) checks made to listen.
+
+At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, the damage increases for each of its effects by 1d6 for each slot level above 4th.",https://www.dndbeyond.com/spells/2400-storm-sphere,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+4th,Summon Elemental,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth an Elemental spirit. It manifests in an unoccupied space that you can see within range and uses the Elemental Spirit stat block. When you cast the spell, choose an element: Air, Earth, Fire, or Water. The creature resembles a bipedal form wreathed in the chosen element, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Medium Elemental, Neutral
+
+AC 11 + the spell’s level
+
+HP 50 + 10 for each spell level above 4
+
+Speed 40 ft.; Burrow 40 ft. (Earth only); Fly 40 ft. (hover; Air only); Swim 40 ft. (Water only)
+
+Resistances Acid (Water only), Lightning and Thunder (Air only), Piercing and Slashing (Earth only)
+
+Immunities Fire (Fire only), Poison; Exhaustion , Paralyzed , Petrified , Poisoned
+
+Senses Darkvision 60 ft.; Passive Perception 10
+
+Languages Primordial, understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Amorphous Form (Air, Fire, and Water Only). The spirit can move through a space as narrow as 1 inch wide without it counting as Difficult Terrain .
+
+Actions
+
+Multiattack. The spirit makes a number of Slam attacks equal to half this spell’s level (round down).
+
+Slam. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d10 + 4 + the spell’s level Bludgeoning (Earth only), Cold (Water only), Lightning (Air only), or Fire (Fire only) damage.",https://www.dndbeyond.com/spells/2619113-summon-elemental,Summoning — Elemental,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+4th,Vitriolic Sphere,Evocation,1 Action,150 ft.,(20 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Acid (...),,"You point at a location within range, and a glowing, 1-foot-diameter ball of acid streaks there and explodes in a 20-foot-radius Sphere . Each creature in that area makes a Dexterity saving throw. On a failed save, a creature takes 10d4 Acid damage and another 5d4 Acid damage at the end of its next turn. On a successful save, a creature takes half the initial damage only.
+
+Using a Higher-Level Spell Slot. The initial damage increases by 2d4 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619219-vitriolic-sphere,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+4th,Wall of Fire,Evocation,1 Action,120 ft.,,"V, S, M",,1 Minute,,,DEX Save,Fire,,"You create a wall of fire on a solid surface within range. You can make the wall up to 60 feet long, 20 feet high, and 1 foot thick, or a ringed wall up to 20 feet in diameter, 20 feet high, and 1 foot thick. The wall is opaque and lasts for the duration.
+
+When the wall appears, each creature in its area makes a Dexterity saving throw, taking 5d8 Fire damage on a failed save or half as much damage on a successful one.
+
+One side of the wall, selected by you when you cast this spell, deals 5d8 Fire damage to each creature that ends its turn within 10 feet of that side or inside the wall. A creature takes the same damage when it enters the wall for the first time on a turn or ends its turn there. The other side of the wall deals no damage.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619107-wall-of-fire,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Bigby's Hand,Evocation,1 Action,120 ft.,,"V, S, M",,1 Minute,,,,Force (...),,"You create a Large hand of shimmering magical energy in an unoccupied space that you can see within range. The hand lasts for the duration, and it moves at your command, mimicking the movements of your own hand.
+
+The hand is an object that has AC 20 and Hit Points equal to your Hit Point maximum. If it drops to 0 Hit Points, the spell ends. The hand doesn’t occupy its space.
+
+When you cast the spell and as a Bonus Action on your later turns, you can move the hand up to 60 feet and then cause one of the following effects:
+
+Clenched Fist. The hand strikes a target within 5 feet of it. Make a melee spell attack. On a hit, the target takes 5d8 Force damage.
+
+Forceful Hand. The hand attempts to push a Huge or smaller creature within 5 feet of it. The target must succeed on a Strength saving throw, or the hand pushes the target up to 5 feet plus a number of feet equal to five times your spellcasting ability modifier. The hand moves with the target, remaining within 5 feet of it.
+
+Grasping Hand. The hand attempts to grapple a Huge or smaller creature within 5 feet of it. The target must succeed on a Dexterity saving throw, or the target has the Grappled condition, with an escape DC equal to your spell save DC. While the hand grapples the target, you can take a Bonus Action to cause the hand to crush it, dealing Bludgeoning damage to the target equal to 4d6 plus your spellcasting ability modifier.
+
+Interposing Hand. The hand grants you Half Cover against attacks and other effects that originate from its space or that pass through it. In addition, its space counts as Difficult Terrain for your enemies.
+
+Using a Higher-Level Spell Slot. The damage of the Clenched Fist increases by 2d8 and the damage of the Grasping Hand increases by 2d6 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2618928-bigbys-hand,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+5th,Cloudkill,Conjuration,1 Action,120 ft.,(20 ft. ),"V, S",,10 Minutes,,,CON Save,Poison,,"You create a 20-foot-radius Sphere of yellow-green fog centered on a point within range. The fog lasts for the duration or until strong wind (such as the one created by Gust of Wind ) disperses it, ending the spell. Its area is Heavily Obscured .
+
+Each creature in the Sphere makes a Constitution saving throw, taking 5d8 Poison damage on a failed save or half as much damage on a successful one. A creature must also make this save when the Sphere moves into its space and when it enters the Sphere or ends its turn there. A creature makes this save only once per turn.
+
+The Sphere moves 10 feet away from you at the start of each of your turns.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2618976-cloudkill,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Cone of Cold,Evocation,1 Action,,(60 ft. ),"V, S, M",,Instantaneous,,,CON Save,Cold,,"You unleash a blast of cold air. Each creature in a 60-foot Cone originating from you makes a Constitution saving throw, taking 8d8 Cold damage on a failed save or half as much damage on a successful one. A creature killed by this spell becomes a frozen statue until it thaws.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2619042-cone-of-cold,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Conjure Elemental,Conjuration,1 Action,60 ft.,,"V, S",,10 Minutes,,,,Cold (...),,"You conjure a Large, intangible spirit from the Elemental Planes that appears in an unoccupied space within range. Choose the spirit’s element, which determines its damage type: air (Lightning), earth (Thunder), fire (Fire), or water (Cold). The spirit lasts for the duration.
+
+Whenever a creature you can see enters the spirit’s space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On failed save, the target takes 8d8 damage of the spirit’s type, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 damage of the spirit’s type. On a successful save, the target isn’t Restrained by the spirit.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2619047-conjure-elemental,Summoning — Elemental,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Conjure Volley,Conjuration,1 Action,150 ft.,(40 ft. *),"V, S, M",,Instantaneous,,,DEX Save,Force,,"You brandish the weapon used to cast the spell and choose a point within range. Hundreds of similar spectral weapons (or ammunition appropriate to the weapon) fall in a volley and then disappear. Each creature of your choice that you can see in a 40-foot-radius, 20-foot-high Cylinder centered on that point makes a Dexterity saving throw. A creature takes 8d8 Force damage on a failed save or half as much damage on a successful one.",https://www.dndbeyond.com/spells/2619050-conjure-volley,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+5th,Control Winds,Transmutation,1 Action,300 ft.,(100 ft. ),"V, S",,1 Hour,,,STR Save,Prone,,"You take control of the air in a 100-foot cube that you can see within range. Choose one of the following effects when you cast the spell. The effect lasts for the spell’s duration, unless you use your action on a later turn to switch to a different effect. You can also use your action to temporarily halt the effect or to restart one you’ve halted.
+
+Gusts. A wind picks up within the cube, continually blowing in a horizontal direction you designate. You choose the intensity of the wind: calm, moderate, or strong. If the wind is moderate or strong, ranged weapon attacks that enter or leave the cube or pass through it have disadvantage on their attack rolls. If the wind is strong, any creature moving against the wind must spend 1 extra foot of movement for each foot moved.
+
+Downdraft. You cause a sustained blast of strong wind to blow downward from the top of the cube. Ranged weapon attacks that pass through the cube or that are made against targets within it have disadvantage on their attack rolls. A creature must make a Strength saving throw if it flies into the cube for the first time on a turn or starts its turn there flying. On a failed save, the creature is knocked prone .
+
+Updraft. You cause a sustained updraft within the cube, rising upward from the cube’s bottom side. Creatures that end a fall within the cube take only half damage from the fall. When a creature in the cube makes a vertical jump, the creature can jump up to 10 feet higher than normal.",https://www.dndbeyond.com/spells/2375-control-winds,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Dawn,Evocation,1 Action,60 ft.,(30 ft. *),"V, S, M",,1 Minute,,,CON Save,Radiant,,"The light of dawn shines down on a location you specify within range. Until the spell ends, a 30-foot-radius, 40-foot-high cylinder of bright light glimmers there. This light is sunlight.
+
+When the cylinder appears, each creature in it must make a Constitution saving throw, taking 4d10 radiant damage on a failed save, or half as much damage on a successful one. A creature must also make this saving throw whenever it ends its turn in the cylinder.
+
+If you’re within 60 feet of the cylinder, you can move it up to 60 feet as a bonus action on your turn.",https://www.dndbeyond.com/spells/14831-dawn,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Destructive Wave,Evocation,1 Action,,(30 ft. ),V,,Instantaneous,,,CON Save,Thunder (...),,"Destructive energy ripples outward from you in a 30-foot Emanation . Each creature you choose in the Emanation makes a Constitution saving throw. On a failed save, a target takes 5d6 Thunder damage and 5d6 Radiant or Necrotic damage (your choice) and has the Prone condition. On a successful save, a target takes half as much damage only.",https://www.dndbeyond.com/spells/2619089-destructive-wave,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Enervation,Necromancy,1 Action,60 ft.,,"V, S",,1 Minute,,,DEX Save,Necrotic,,"A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell’s range, or if the target has total cover from you.
+
+Whenever the spell deals damage to a target, you regain hit points equal to half the amount of necrotic damage the target takes.
+
+At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",https://www.dndbeyond.com/spells/14869-enervation,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+5th,Flame Strike,Evocation,1 Action,60 ft.,(10 ft. *),"V, S, M",,Instantaneous,,,DEX Save,Fire (...),,"A vertical column of brilliant fire roars down from above. Each creature in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range makes a Dexterity saving throw, taking 5d6 Fire damage and 5d6 Radiant damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The Fire damage and the Radiant damage increase by 1d6 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2618920-flame-strike,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Greater Restoration,Abjuration,1 Action,,,"V, S, M",,Instantaneous,,,,Exhaustion,,"You touch a creature and magically remove one of the following effects from it:
+
+1 Exhaustion level
+
+The Charmed or Petrified condition
+
+A curse, including the target’s Attunement to a cursed magic item
+
+Any reduction to one of the target’s ability scores
+
+Any reduction to the target’s Hit Point maximum",https://www.dndbeyond.com/spells/2618961-greater-restoration,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+5th,Holy Weapon,Evocation,1 Bonus Action,,,"V, S",,1 Hour,,,CON Save,Radiant (...),,"You imbue a weapon you touch with holy power. Until the spell ends, the weapon emits bright light in a 30-foot radius and dim light for an additional 30 feet. In addition, weapon attacks made with it deal an extra 2d8 radiant damage on a hit. If the weapon isn’t already a magic weapon, it becomes one for the duration.
+
+As a bonus action on your turn, you can dismiss this spell and cause the weapon to emit a burst of radiance. Each creature of your choice that you can see within 30 feet of the weapon must make a Constitution saving throw. On a failed save, a creature takes 4d8 radiant damage, and it is blinded for 1 minute. On a successful save, a creature takes half as much damage and isn’t blinded . At the end of each of its turns, a blinded creature can make a Constitution saving throw, ending the effect on itself on a success.",https://www.dndbeyond.com/spells/14874-holy-weapon,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Immolation,Evocation,1 Action,90 ft.,,V,,1 Minute,,,DEX Save,Fire (...),,"Flames wreathe one creature you can see within range. The target must make a Dexterity saving throw. It takes 8d6 fire damage on a failed save, or half as much damage on a successful one. On a failed save, the target also burns for the spell’s duration. The burning target sheds bright light in a 30-foot radius and dim light for an additional 30 feet. At the end of each of its turns, the target repeats the saving throw. It takes 4d6 fire damage on a failed save, and the spell ends on a successful one. These magical flames can’t be extinguished by nonmagical means.
+
+If damage from this spell kills a target, the target is turned to ash.",https://www.dndbeyond.com/spells/2385-immolation,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Jallarzi's Storm of Radiance,Evocation,1 Action,120 ft.,(10 ft. *),"V, S, M",,1 Minute,,,CON Save,Radiant (...),,"You unleash a storm of flashing light and raging thunder in a 10-foot-radius, 40-foot-high Cylinder centered on a point you can see within range. While in this area, creatures have the Blinded and Deafened conditions, and they can’t cast spells with a Verbal component.
+
+When the storm appears, each creature in it makes a Constitution saving throw, taking 2d10 Radiant damage and 2d10 Thunder damage on a failed save or half as much damage on a successful one. A creature also makes this save when it enters the spell’s area for the first time on a turn or ends its turn there. A creature makes this save only once per turn.
+
+Using a Higher-Level Spell Slot. The Radiant and Thunder damage increase by 1d10 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2618836-jallarzis-storm-of-radiance,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Maelstrom,Evocation,1 Action,120 ft.,,"V, S, M",,1 Minute,,,STR Save,Bludgeoning,,"A swirling mass of 5-foot-deep water appears in a 30-foot radius centered on a point you can see within range. The point must be on the ground or in a body of water. Until the spell ends, that area is difficult terrain, and any creature that starts its turn there must succeed on a Strength saving throw or take 6d6 bludgeoning damage and be pulled 10 feet toward the center.",https://www.dndbeyond.com/spells/2390-maelstrom,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Mass Cure Wounds,Abjuration,1 Action,60 ft.,(30 ft. ),"V, S",,Instantaneous,,,,Healing,,"A wave of healing energy washes out from a point you can see within range. Choose up to six creatures in a 30-foot-radius Sphere centered on that point. Each target regains Hit Points equal to 5d8 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 1d8 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2619026-mass-cure-wounds,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+5th,Passwall,Transmutation,1 Action,30 ft.,,"V, S, M",,1 Hour,,,,Control,,"A passage appears at a point that you can see on a wooden, plaster, or stone surface (such as a wall, ceiling, or floor) within range and lasts for the duration. You choose the opening’s dimensions: up to 5 feet wide, 8 feet tall, and 20 feet deep. The passage creates no instability in a structure surrounding it.
+
+When the opening disappears, any creatures or objects still in the passage created by the spell are safely ejected to an unoccupied space nearest to the surface on which you cast the spell.",https://www.dndbeyond.com/spells/2618852-passwall,Object & Structure Manipulation,Hard Ban,Hard Ban,Hard Ban,Secondary,Hard Ban
+5th,Telekinesis,Transmutation,1 Action,60 ft.,,"V, S",,10 Minutes,,,,Control (...),,"You gain the ability to move or manipulate creatures or objects by thought. When you cast the spell and as a Magic action on your later turns before the spell ends, you can exert your will on one creature or object that you can see within range, causing the appropriate effect below. You can affect the same target round after round or choose a new one at any time. If you switch targets, the prior target is no longer affected by the spell.
+
+Creature. You can try to move a Huge or smaller creature. The target must succeed on a Strength saving throw, or you move it up to 30 feet in any direction within the spell’s range. Until the end of your next turn, the creature has the Restrained condition, and if you lift it into the air, it is suspended there. It falls at the end of your next turn unless you use this option on it again and it fails the save.
+
+Object. You can try to move a Huge or smaller object. If the object isn’t being worn or carried, you automatically move it up to 30 feet in any direction within the spell’s range.
+
+If the object is worn or carried by a creature, that creature must succeed on a Strength saving throw, or you pull the object away and move it up to 30 feet in any direction within the spell’s range.
+
+You can exert fine control on objects with your telekinetic grip, such as manipulating a simple tool, opening a door or a container, stowing or retrieving an item from an open container, or pouring the contents from a vial.",https://www.dndbeyond.com/spells/2619157-telekinesis,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+5th,Transmute Rock,Transmutation,1 Action,120 ft.,(40 ft. *),"V, S, M",,Until Dispelled,,,DEX Save,Bludgeoning,,"You choose an area of stone or mud that you can see that fits within a 40-foot cube and is within range, and choose one of the following effects.
+
+Transmute Rock to Mud. Nonmagical rock of any sort in the area becomes an equal volume of thick, flowing mud that remains for the spell’s duration.
+
+The ground in the spell’s area becomes muddy enough that creatures can sink into it. Each foot that a creature moves through the mud costs 4 feet of movement, and any creature on the ground when you cast the spell must make a Strength saving throw. A creature must also make the saving throw when it moves into the area for the first time on a turn or ends its turn there. On a failed save, a creature sinks into the mud and is restrained , though it can use an action to end the restrained condition on itself by pulling itself free of the mud.
+
+If you cast the spell on a ceiling, the mud falls. Any creature under the mud when it falls must make a Dexterity saving throw. A creature takes 4d8 bludgeoning damage on a failed save, or half as much damage on a successful one.
+
+Transmute Mud to Rock. Nonmagical mud or quicksand in the area no more than 10 feet deep transforms into soft stone for the spell’s duration. Any creature in the mud when it transforms must make a Dexterity saving throw. On a successful save, a creature is shunted safely to the surface in an unoccupied space. On a failed save, a creature becomes restrained by the rock. A restrained creature, or another creature within reach, can use an action to try to break the rock by succeeding on a DC 20 Strength check or by dealing damage to it. The rock has AC 15 and 25 hit points, and it is immune to poison and psychic damage.",https://www.dndbeyond.com/spells/2403-transmute-rock,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+5th,Wall of Force,Evocation,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,,Control (...),,"An Invisible wall of force springs into existence at a point you choose within range. The wall appears in any orientation you choose, as a horizontal or vertical barrier or at an angle. It can be free floating or resting on a solid surface. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. In any form, the wall is 1/4 inch thick and lasts for the duration. If the wall cuts through a creature’s space when it appears, the creature is pushed to one side of the wall (you choose which side).
+
+Nothing can physically pass through the wall. It is immune to all damage and can’t be dispelled by Dispel Magic . A Disintegrate spell destroys the wall instantly, however. The wall also extends into the Ethereal Plane and blocks ethereal travel through the wall.",https://www.dndbeyond.com/spells/2619194-wall-of-force,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+5th,Wall of Light,Evocation,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,CON Save,Radiant,,"A shimmering wall of bright light appears at a point you choose within range. The wall appears in any orientation you choose: horizontally, vertically, or diagonally. It can be free floating, or it can rest on a solid surface. The wall can be up to 60 feet long, 10 feet high, and 5 feet thick. The wall blocks line of sight, but creatures and objects can pass through it. It emits bright light out to 120 feet and dim light for an additional 120 feet.
+
+When the wall appears, each creature in its area must make a Constitution saving throw. On a failed save, a creature takes 4d8 radiant damage, and it is blinded for 1 minute. On a successful save, it takes half as much damage and isn’t blinded . A blinded creature can make a Constitution saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+A creature that ends its turn in the wall’s area takes 4d8 radiant damage.
+
+Until the spell ends, you can use an action to launch a beam of radiance from the wall at one creature you can see within 60 feet of it. Make a ranged spell attack. On a hit, the target takes 4d8 radiant damage. Whether you hit or miss, reduce the length of the wall by 10 feet. If the wall’s length drops to 0 feet, the spell ends.
+
+At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",https://www.dndbeyond.com/spells/14616-wall-of-light,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+5th,Wall of Stone,Evocation,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,,Control,,"A nonmagical wall of solid stone springs into existence at a point you choose within range. The wall is 6 inches thick and is composed of ten 10-foot-by-10-foot panels. Each panel must be contiguous with another panel. Alternatively, you can create 10-foot-by-20-foot panels that are only 3 inches thick.
+
+If the wall cuts through a creature’s space when it appears, the creature is pushed to one side of the wall (you choose which side). If a creature would be surrounded on all sides by the wall (or the wall and another solid surface), that creature can make a Dexterity saving throw. On a success, it can use its Reaction to move up to its Speed so that it is no longer enclosed by the wall.
+
+The wall can have any shape you desire, though it can’t occupy the same space as a creature or object. The wall doesn’t need to be vertical or rest on a firm foundation. It must, however, merge with and be solidly supported by existing stone. Thus, you can use this spell to bridge a chasm or create a ramp.
+
+If you create a span greater than 20 feet in length, you must halve the size of each panel to create supports. You can crudely shape the wall to create battlements and the like.
+
+The wall is an object made of stone that can be damaged and thus breached. Each panel has AC 15 and 30 Hit Points per inch of thickness, and it has Immunity to Poison and Psychic damage. Reducing a panel to 0 Hit Points destroys it and might cause connected panels to collapse at the DM’s discretion.
+
+If you maintain your Concentration on this spell for its full duration, the wall becomes permanent and can’t be dispelled. Otherwise, the wall disappears when the spell ends.",https://www.dndbeyond.com/spells/2619200-wall-of-stone,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Blade Barrier,Evocation,1 Action,90 ft.,,"V, S",,10 Minutes,,,DEX Save,Force,,"You create a wall of whirling blades made of magical energy. The wall appears within range and lasts for the duration. You make a straight wall up to 100 feet long, 20 feet high, and 5 feet thick, or a ringed wall up to 60 feet in diameter, 20 feet high, and 5 feet thick. The wall provides Three-Quarters Cover , and its space is Difficult Terrain .
+
+Any creature in the wall’s space makes a Dexterity saving throw, taking 6d10 Force damage on a failed save or half as much damage on a successful one. A creature also makes that save if it enters the wall’s space or ends it turn there. A creature makes that save only once per turn.",https://www.dndbeyond.com/spells/2618929-blade-barrier,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Bones of the Earth,Transmutation,1 Action,120 ft.,(5 ft. *),"V, S",,Instantaneous,,,DEX Save,Bludgeoning,,"You cause up to six pillars of stone to burst from places on the ground that you can see within range. Each pillar is a cylinder that has a diameter of 5 feet and a height of up to 30 feet. The ground where a pillar appears must be wide enough for its diameter, and you can target the ground under a creature if that creature is Medium or smaller. Each pillar has AC 5 and 30 hit points. When reduced to 0 hit points, a pillar crumbles into rubble, which creates an area of difficult terrain with a 10-foot radius that lasts until the rubble is cleared. Each 5-foot-diameter portion of the area requires at least 1 minute to clear by hand.
+
+If a pillar is created under a creature, that creature must succeed on a Dexterity saving throw or be lifted by the pillar. A creature can choose to fail the save.
+
+If a pillar is prevented from reaching its full height because of a ceiling or other obstacle, a creature on the pillar takes 6d6 bludgeoning damage and is restrained , pinched between the pillar and the obstacle. The restrained creature can use an action to make a Strength or Dexterity check (the creature’s choice) against the spell’s save DC. On a success, the creature is no longer restrained and must either move off the pillar or fall off it.
+
+At Higher Levels. When you cast this spell using a spell slot of 7th level or higher, you can create two additional pillars for each slot level above 6th.",https://www.dndbeyond.com/spells/2371-bones-of-the-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Chain Lightning,Evocation,1 Action,150 ft.,,"V, S, M",,Instantaneous,,,DEX Save,Lightning,,"You launch a lightning bolt toward a target you can see within range. Three bolts then leap from that target to as many as three other targets of your choice, each of which must be within 30 feet of the first target. A target can be a creature or an object and can be targeted by only one of the bolts.
+
+Each target makes a Dexterity saving throw, taking 10d8 Lightning damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. One additional bolt leaps from the first target to another target for each spell slot level above 6.",https://www.dndbeyond.com/spells/2618960-chain-lightning,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Circle of Death,Necromancy,1 Action,150 ft.,(60 ft. ),"V, S, M",,Instantaneous,,,CON Save,Necrotic,,"Negative energy ripples out in a 60-foot-radius Sphere from a point you choose within range. Each creature in that area makes a Constitution saving throw, taking 8d8 Necrotic damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage increases by 2d8 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2618969-circle-of-death,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Disintegrate,Transmutation,1 Action,60 ft.,,"V, S, M",,Instantaneous,,,DEX Save,Force,,"You launch a green ray at a target you can see within range. The target can be a creature, a nonmagical object, or a creation of magical force, such as the wall created by Wall of Force .
+
+A creature targeted by this spell makes a Dexterity saving throw. On a failed save, the target takes 10d6 + 40 Force damage. If this damage reduces it to 0 Hit Points, it and everything nonmagical it is wearing and carrying are disintegrated into gray dust. The target can be revived only by a True Resurrection or a Wish spell.
+
+This spell automatically disintegrates a Large or smaller nonmagical object or a creation of magical force. If such a target is Huge or larger, this spell disintegrates a 10-foot- Cube portion of it.
+
+Using a Higher-Level Spell Slot. The damage increases by 3d6 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2619094-disintegrate,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Harm,Necromancy,1 Action,60 ft.,,"V, S",,Instantaneous,,,CON Save,Necrotic,,"You unleash virulent magic on a creature you can see within range. The target makes a Constitution saving throw. On a failed save, it takes 14d6 Necrotic damage, and its Hit Point maximum is reduced by an amount equal to the Necrotic damage it took. On a successful save, it takes half as much damage only. This spell can’t reduce a target’s Hit Point maximum below 1.",https://www.dndbeyond.com/spells/2618977-harm,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Heal,Abjuration,1 Action,60 ft.,,"V, S",,Instantaneous,,,,Blinded (...),,"Choose a creature that you can see within range. Positive energy washes through the target, restoring 70 Hit Points. This spell also ends the Blinded , Deafened , and Poisoned conditions on the target.
+
+Using a Higher-Level Spell Slot. The healing increases by 10 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2618979-heal,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+6th,Investiture of Flame,Transmutation,1 Action,,,"V, S",,10 Minutes,,,DEX Save,Fire (...),,"Flames race across your body, shedding bright light in a 30-foot radius and dim light for an additional 30 feet for the spell’s duration. The flames don’t harm you. Until the spell ends, you gain the following benefits:
+
+You are immune to fire damage and have resistance to cold damage.
+
+You are immune to fire damage and have resistance to cold damage.
+
+Any creature that moves within 5 feet of you for the first time on a turn or ends its turn there takes 1d10 fire damage.
+
+Any creature that moves within 5 feet of you for the first time on a turn or ends its turn there takes 1d10 fire damage.
+
+You can use your action to create a line of fire 15 feet long and 5 feet wide extending from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 4d8 fire damage on a failed save, or half as much damage on a successful one.
+
+You can use your action to create a line of fire 15 feet long and 5 feet wide extending from you in a direction you choose. Each creature in the line must make a Dexterity saving throw. A creature takes 4d8 fire damage on a failed save, or half as much damage on a successful one.",https://www.dndbeyond.com/spells/2386-investiture-of-flame,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Investiture of Ice,Transmutation,1 Action,,(15 ft. *),"V, S",,10 Minutes,,,CON Save,Cold,,"Until the spell ends, ice rimes your body, and you gain the following benefits:
+
+You are immune to cold damage and have resistance to fire damage.
+
+You are immune to cold damage and have resistance to fire damage.
+
+You can move across difficult terrain created by ice or snow without spending extra movement.
+
+You can move across difficult terrain created by ice or snow without spending extra movement.
+
+The ground in a 10-foot radius around you is icy and is difficult terrain for creatures other than you. The radius moves with you.
+
+The ground in a 10-foot radius around you is icy and is difficult terrain for creatures other than you. The radius moves with you.
+
+You can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.
+
+You can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.",https://www.dndbeyond.com/spells/2387-investiture-of-ice,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Investiture of Stone,Transmutation,1 Action,,,"V, S",,10 Minutes,,,DEX Save,Prone,,"Until the spell ends, bits of rock spread across your body, and you gain the following benefits:
+
+You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.
+
+You have resistance to bludgeoning, piercing, and slashing damage from nonmagical attacks.
+
+You can use your action to create a small earthquake on the ground in a 15-foot radius centered on you. Other creatures on that ground must succeed on a Dexterity saving throw or be knocked prone .
+
+You can use your action to create a small earthquake on the ground in a 15-foot radius centered on you. Other creatures on that ground must succeed on a Dexterity saving throw or be knocked prone .
+
+You can move across difficult terrain made of earth or stone without spending extra movement. You can move through solid earth or stone as if it was air and without destabilizing it, but you can’t end your movement there. If you do so, you are ejected to the nearest unoccupied space, this spell ends, and you are stunned until the end of your next turn.
+
+You can move across difficult terrain made of earth or stone without spending extra movement. You can move through solid earth or stone as if it was air and without destabilizing it, but you can’t end your movement there. If you do so, you are ejected to the nearest unoccupied space, this spell ends, and you are stunned until the end of your next turn.",https://www.dndbeyond.com/spells/2388-investiture-of-stone,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Investiture of Wind,Transmutation,1 Action,,(15 ft. *),"V, S",,10 Minutes,,,CON Save,Bludgeoning,,"Until the spell ends, wind whirls around you, and you gain the following benefits:
+
+Ranged weapon attacks made against you have disadvantage on the attack roll.
+
+Ranged weapon attacks made against you have disadvantage on the attack roll.
+
+You gain a flying speed of 60 feet. If you are still flying when the spell ends, you fall, unless you can somehow prevent it.
+
+You gain a flying speed of 60 feet. If you are still flying when the spell ends, you fall, unless you can somehow prevent it.
+
+You can use your action to create a 15-foot cube of swirling wind centered on a point you can see within 60 feet of you. Each creature in that area must make a Constitution saving throw. A creature takes 2d10 bludgeoning damage on a failed save, or half as much damage on a successful one. If a Large or smaller creature fails the save, that creature is also pushed up to 10 feet away from the center of the cube.
+
+You can use your action to create a 15-foot cube of swirling wind centered on a point you can see within 60 feet of you. Each creature in that area must make a Constitution saving throw. A creature takes 2d10 bludgeoning damage on a failed save, or half as much damage on a successful one. If a Large or smaller creature fails the save, that creature is also pushed up to 10 feet away from the center of the cube.",https://www.dndbeyond.com/spells/2389-investiture-of-wind,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Move Earth,Transmutation,1 Action,120 ft.,,"V, S, M",,2 Hours,,,,Control,,"Choose an area of terrain no larger than 40 feet on a side within range. You can reshape dirt, sand, or clay in the area in any manner you choose for the duration. You can raise or lower the area’s elevation, create or fill in a trench, erect or flatten a wall, or form a pillar. The extent of any such changes can’t exceed half the area’s largest dimension. For example, if you affect a 40-foot square, you can create a pillar up to 20 feet high, raise or lower the square’s elevation by up to 20 feet, dig a trench up to 20 feet deep, and so on. It takes 10 minutes for these changes to complete. Because the terrain’s transformation occurs slowly, creatures in the area can’t usually be trapped or injured by the ground’s movement.
+
+At the end of every 10 minutes you spend concentrating on the spell, you can choose a new area of terrain to affect within range.
+
+This spell can’t manipulate natural stone or stone construction. Rocks and structures shift to accommodate the new terrain. If the way you shape the terrain would make a structure unstable, it might collapse.
+
+Similarly, this spell doesn’t directly affect plant growth. The moved earth carries any plants along with it.",https://www.dndbeyond.com/spells/2619120-move-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+6th,Otiluke's Freezing Sphere,Evocation,1 Action,300 ft.,(60 ft. ),"V, S, M",,Instantaneous,,,CON Save,Cold,,"A frigid globe streaks from you to a point of your choice within range, where it explodes in a 60-foot-radius Sphere . Each creature in that area makes a Constitution saving throw, taking 10d6 Cold damage on failed save or half as much damage on a successful one.
+
+If the globe strikes a body of water, it freezes the water to a depth of 6 inches over an area 30 feet square. This ice lasts for 1 minute. Creatures that were swimming on the surface of frozen water are trapped in the ice and have the Restrained condition. A trapped creature can take an action to make a Strength ( Athletics ) check against your spell save DC to break free.
+
+You can refrain from firing the globe after completing the spell’s casting. If you do so, a globe about the size of a sling bullet, cool to the touch, appears in your hand. At any time, you or a creature you give the globe to can throw the globe (to a range of 40 feet) or hurl it with a sling (to the sling’s normal range). It shatters on impact, with the same effect as a normal casting of the spell. You can also set the globe down without shattering it. After 1 minute, if the globe hasn’t already shattered, it explodes.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2619126-otilukes-freezing-sphere,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Sunbeam,Evocation,1 Action,,(60 ft. ),"V, S, M",,1 Minute,,,CON Save,Radiant,,"You launch a sunbeam in a 5-foot-wide, 60-foot-long Line . Each creature in the Line makes a Constitution saving throw. On a failed save, a creature takes 6d8 Radiant damage and has the Blinded condition until the start of your next turn. On a successful save, it takes half as much damage only.
+
+Until the spell ends, you can take a Magic action to create a new Line of radiance.
+
+For the duration, a mote of brilliant radiance shines above you. It sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. This light is sunlight.",https://www.dndbeyond.com/spells/2619121-sunbeam,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+6th,Wall of Ice,Evocation,1 Action,120 ft.,,"V, S, M",,10 Minutes,,,DEX Save,Cold (...),,"You create a wall of ice on a solid surface within range. You can form it into a hemispherical dome or a globe with a radius of up to 10 feet, or you can shape a flat surface made up of ten 10-foot-square panels. Each panel must be contiguous with another panel. In any form, the wall is 1 foot thick and lasts for the duration.
+
+If the wall cuts through a creature’s space when it appears, the creature is pushed to one side of the wall (you choose which side) and makes a Dexterity saving throw, taking 10d6 Cold damage on a failed save or half as much damage on a successful one.
+
+The wall is an object that can be damaged and thus breached. It has AC 12 and 30 Hit Points per 10-foot section, and it has Immunity to Cold, Poison, and Psychic damage and Vulnerability to Fire damage. Reducing a 10-foot section of wall to 0 Hit Points destroys it and leaves behind a sheet of frigid air in the space the wall occupied.
+
+A creature moving through the sheet of frigid air for the first time on a turn makes a Constitution saving throw, taking 5d6 Cold damage on a failed save or half as much damage on a successful one.
+
+Using a Higher-Level Spell Slot. The damage the wall deals when it appears increases by 2d6 and the damage from passing through the sheet of frigid air increases by 1d6 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2619195-wall-of-ice,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+7th,Conjure Celestial,Conjuration,1 Action,90 ft.,(10 ft. *),"V, S",,10 Minutes,,,DEX Save,Radiant,,"You conjure a spirit from the Upper Planes, which manifests as a pillar of light in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range. For each creature you can see in the Cylinder, choose which of these lights shines on it:
+
+Healing Light. The target regains Hit Points equal to 4d12 plus your spellcasting ability modifier.
+
+Searing Light. The target makes a Dexterity saving throw, taking 6d12 Radiant damage on a failed save or half as much damage on a successful one.
+
+Until the spell ends, Bright Light fills the Cylinder, and when you move on your turn, you can also move the Cylinder up to 30 feet.
+
+Whenever the Cylinder moves into the space of a creature you can see and whenever a creature you can see enters the Cylinder or ends its turn there, you can bathe it in one of the lights. A creature can be affected by this spell only once per turn.
+
+Using a Higher-Level Spell Slot. The healing and damage increase by 1d12 for each spell slot level above 7.",https://www.dndbeyond.com/spells/2619046-conjure-celestial,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+7th,Crown of Stars,Evocation,1 Action,,,"V, S",,1 Hour,,,Ranged,Radiant,,"Seven star-like motes of light appear and orbit your head until the spell ends. You can use a bonus action to send one of the motes streaking toward one creature or object within 120 feet of you. When you do so, make a ranged spell attack. On a hit, the target takes 4d12 radiant damage. Whether you hit or miss, the mote is expended. The spell ends early if you expend the last mote.
+
+If you have four or more motes remaining, they shed bright light in a 30-foot radius and dim light for an additional 30 feet. If you have one to three motes remaining, they shed dim light in a 30-foot radius.
+
+At Higher Levels. When you cast this spell using a spell slot of 8th level or higher, the number of motes created increases by two for each slot level above 7th.",https://www.dndbeyond.com/spells/14827-crown-of-stars,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+7th,Delayed Blast Fireball,Evocation,1 Action,150 ft.,(20 ft. ),"V, S, M",,1 Minute,,,DEX Save,Fire (...),,"A beam of yellow light flashes from you, then condenses at a chosen point within range as a glowing bead for the duration. When the spell ends, the bead explodes, and each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw. A creature takes Fire damage equal to the total accumulated damage on a failed save or half as much damage on a successful one.
+
+The spell’s base damage is 12d6, and the damage increases by 1d6 whenever your turn ends and the spell hasn’t ended.
+
+If a creature touches the glowing bead before the spell ends, that creature makes a Dexterity saving throw. On a failed save, the spell ends, causing the bead to explode. On a successful save, the creature can throw the bead up to 40 feet. If the thrown bead enters a creature’s space or collides with a solid object, the spell ends, and the bead explodes.
+
+When the bead explodes, flammable objects in the explosion that aren’t being worn or carried start burning .
+
+Using a Higher-Level Spell Slot. The base damage increases by 1d6 for each spell slot level above 7.",https://www.dndbeyond.com/spells/2619086-delayed-blast-fireball,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+7th,Etherealness,Conjuration,1 Action,,,"V, S",,8 Hours,,,,Buff (...),,"You step into the border regions of the Ethereal Plane, where it overlaps with your current plane. You remain in the Border Ethereal for the duration. During this time, you can move in any direction. If you move up or down, every foot of movement costs an extra foot. You can perceive the plane you left, which looks gray, and you can’t see anything there more than 60 feet away.
+
+While on the Ethereal Plane, you can affect and be affected only by creatures, objects, and effects on that plane. Creatures that aren’t on the Ethereal Plane can’t perceive or interact with you unless a feature gives them the ability to do so.
+
+When the spell ends, you return to the plane you left in the spot that corresponds to your space in the Border Ethereal. If you appear in an occupied space, you are shunted to the nearest unoccupied space and take Force damage equal to twice the number of feet you are moved.
+
+This spell ends instantly if you cast it while you are on the Ethereal Plane or a plane that doesn’t border it, such as one of the Outer Planes.
+
+Using a Higher-Level Spell Slot. You can target up to three willing creatures (including yourself) for each spell slot level above 7. The creatures must be within 10 feet of you when you cast the spell.",https://www.dndbeyond.com/spells/2619193-etherealness,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+7th,Fire Storm,Evocation,1 Action,150 ft.,(10 ft. ),"V, S",,Instantaneous,,,DEX Save,Fire,,"A storm of fire appears within range. The area of the storm consists of up to ten 10-foot Cubes , which you arrange as you like. Each Cube must be contiguous with at least one other Cube. Each creature in the area makes a Dexterity saving throw, taking 7d10 Fire damage on a failed save or half as much damage on a successful one.
+
+Flammable objects in the area that aren’t being worn or carried start burning .",https://www.dndbeyond.com/spells/2618896-fire-storm,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+7th,Mordenkainen's Sword,Evocation,1 Action,90 ft.,,"V, S, M",,1 Minute,,,Melee,Force,,"You create a spectral sword that hovers within range. It lasts for the duration.
+
+When the sword appears, you make a melee spell attack against a target within 5 feet of the sword. On a hit, the target takes Force damage equal to 4d12 plus your spellcasting ability modifier.
+
+On your later turns, you can take a Bonus Action to move the sword up to 30 feet to a spot you can see and repeat the attack against the same target or a different one.",https://www.dndbeyond.com/spells/2619118-mordenkainens-sword,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+7th,Prismatic Spray,Evocation,1 Action,,(60 ft. ),"V, S",,Instantaneous,,,DEX Save,Fire (...),,"Eight rays of light flash from you in a 60-foot Cone . Each creature in the Cone makes a Dexterity saving throw. For each target, roll 1d8 to determine which color ray affects it, consulting the Prismatic Rays table.",https://www.dndbeyond.com/spells/2618895-prismatic-spray,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+7th,Temple of the Gods,Conjuration,1 Hour,120 ft.,,"V, S, M",,24 Hours,,,CHA Save,Creation (...),,"You cause a temple to shimmer into existence on ground you can see within range. The temple must fit within an unoccupied cube of space, up to 120 feet on each side. The temple remains until the spell ends. It is dedicated to whatever god, pantheon, or philosophy is represented by the holy symbol used in the casting.
+
+You make all decisions about the temple’s appearance. The interior is enclosed by a floor, walls, and a roof, with one door granting access to the interior and as many windows as you wish. Only you and any creatures you designate when you cast the spell can open or close the door.
+
+The temple’s interior is an open space with an idol or altar at one end. You decide whether the temple is illuminated and whether that illumination is bright light or dim light. The smell of burning incense fills the air within, and the temperature is mild.
+
+The temple opposes types of creatures you choose when you cast this spell. Choose one or more of the following: celestials, elementals, fey, fiends, or undead. If a creature of the chosen type attempts to enter the temple, that creature must make a Charisma saving throw. On a failed save, it can’t enter the temple for 24 hours. Even if the creature can enter the temple, the magic there hinders it; whenever it makes an attack roll, an ability check, or a saving throw inside the temple, it must roll a d4 and subtract the number rolled from the d20 roll.
+
+In addition, the sensors created by divination spells can’t appear inside the temple, and creatures within can’t be targeted by divination spells.
+
+Finally, whenever any creature in the temple regains hit points from a spell of 1st level or higher, the creature regains additional hit points equal to your Wisdom modifier (minimum 1 hit point).
+
+The temple is made from opaque magical force that extends into the Ethereal Plane, thus blocking ethereal travel into the temple’s interior. Nothing can physically pass through the temple’s exterior. It can’t be dispelled by dispel magic , and antimagic field has no effect on it. A disintegrate spell destroys the temple instantly.
+
+Casting this spell on the same spot every day for a year makes this effect permanent.",https://www.dndbeyond.com/spells/14606-temple-of-the-gods,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+8th,Befuddlement,Enchantment,1 Action,150 ft.,,"V, S, M",,Instantaneous,,,INT Save,Psychic,,"You blast the mind of a creature that you can see within range. The target makes an Intelligence saving throw.
+
+On a failed save, the target takes 10d12 Psychic damage and can’t cast spells or take the Magic action. At the end of every 30 days, the target repeats the save, ending the effect on a success. The effect can also be ended by the Greater Restoration , Heal , or Wish spell.
+
+On a successful save, the target takes half as much damage only.",https://www.dndbeyond.com/spells/2618832-befuddlement,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+8th,Control Weather,Transmutation,10 Minutes,,(5 miles ),"V, S, M",,8 Hours,,,,Control (...),,"You take control of the weather within 5 miles of you for the duration. You must be outdoors to cast this spell, and it ends early if you go indoors.
+
+When you cast the spell, you change the current weather conditions, which are determined by the DM. You can change precipitation, temperature, and wind. It takes 1d4 × 10 minutes for the new conditions to take effect. Once they do so, you can change the conditions again. When the spell ends, the weather gradually returns to normal.
+
+When you change the weather conditions, find a current condition on the following tables and change its stage by one, up or down. When changing the wind, you can change its direction.",https://www.dndbeyond.com/spells/2619054-control-weather,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+8th,Earthquake,Transmutation,1 Action,500 ft.,,"V, S, M",,1 Minute,,,DEX Save,Bludgeoning,,"Choose a point on the ground that you can see within range. For the duration, an intense tremor rips through the ground in a 100-foot-radius circle centered on that point. The ground there is Difficult Terrain .
+
+When you cast this spell and at the end of each of your turns for the duration, each creature on the ground in the area makes a Dexterity saving throw. On a failed save, a creature has the Prone condition, and its Concentration is broken.
+
+You can also cause the effects below.
+
+Fissures. A total of 1d6 fissures open in the spell’s area at the end of the turn you cast it. You choose the fissures’ locations, which can’t be under structures. Each fissure is 1d10 × 10 feet deep and 10 feet wide, and it extends from one edge of the spell’s area to another edge. A creature in the same space as a fissure must succeed on a Dexterity saving throw or fall in. A creature that successfully saves moves with the fissure’s edge as it opens.
+
+Structures. The tremor deals 50 Bludgeoning damage to any structure in contact with the ground in the area when you cast the spell and at the end of each of your turns until the spell ends. If a structure drops to 0 Hit Points, it collapses.
+
+A creature within a distance from a collapsing structure equal to half the structure’s height makes a Dexterity saving throw. On a failed save, the creature takes 12d6 Bludgeoning damage, has the Prone condition, and is buried in the rubble, requiring a DC 20 Strength ( Athletics ) check as an action to escape. On a successful save, the creature takes half as much damage only.",https://www.dndbeyond.com/spells/2619160-earthquake,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+8th,Illusory Dragon,Illusion,1 Action,120 ft.,,S,,1 Minute,,,WIS Save,Acid (...),,"By gathering threads of shadow material from the Shadowfell, you create a Huge shadowy dragon in an unoccupied space that you can see within range. The illusion lasts for the spell’s duration and occupies its space, as if it were a creature.
+
+When the illusion appears, any of your enemies that can see it must succeed on a Wisdom saving throw or become frightened of it for 1 minute. If a frightened creature ends its turn in a location where it doesn’t have line of sight to the illusion, it can repeat the saving throw, ending the effect on itself on a success.
+
+As a bonus action on your turn, you can move the illusion up to 60 feet. At any point during its movement, you can cause it to exhale a blast of energy in a 60-foot cone originating from its space. When you create the dragon, choose a damage type: acid, cold, fire, lightning, necrotic, or poison. Each creature in the cone must make an Intelligence saving throw, taking 7d6 damage of the chosen damage type on a failed save, or half as much damage on a successful one.
+
+The illusion is tangible because of the shadow stuff used to create it, but attacks miss it automatically, it succeeds on all saving throws, and it is immune to all damage and conditions. A creature that uses an action to examine the dragon can determine that it is an illusion by succeeding on an Intelligence ( Investigation ) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through it and has advantage on saving throws against its breath.",https://www.dndbeyond.com/spells/14876-illusory-dragon,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+8th,Incendiary Cloud,Conjuration,1 Action,150 ft.,(20 ft. ),"V, S",,1 Minute,,,DEX Save,Fire,,"A swirling cloud of embers and smoke fills a 20-foot-radius Sphere centered on a point within range. The cloud’s area is Heavily Obscured . It lasts for the duration or until a strong wind (like that created by Gust of Wind ) disperses it.
+
+When the cloud appears, each creature in it makes a Dexterity saving throw, taking 10d8 Fire damage on a failed save or half as much damage on a successful one. A creature must also make this save when the Sphere moves into its space and when it enters the Sphere or ends its turn there. A creature makes this save only once per turn.
+
+The cloud moves 10 feet away from you in a direction you choose at the start of each of your turns.",https://www.dndbeyond.com/spells/2619177-incendiary-cloud,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+8th,Maddening Darkness,Evocation,1 Action,150 ft.,(60 ft. ),"V, M",,10 Minutes,,,WIS Save,Psychic,,"Magical darkness spreads from a point you choose within range to fill a 60-foot-radius sphere until the spell ends. The darkness spreads around corners. A creature with darkvision can’t see through this darkness. Nonmagical light, as well as light created by spells of 8th level or lower, can’t illuminate the area.
+
+Shrieks, gibbering, and mad laughter can be heard within the sphere. Whenever a creature starts its turn in the sphere, it must make a Wisdom saving throw, taking 8d8 psychic damage on a failed save, or half as much damage on a successful one.",https://www.dndbeyond.com/spells/14881-maddening-darkness,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+8th,Tsunami,Conjuration,1 Minute,1 mile,,"V, S",,6 Rounds,,,STR Save,Bludgeoning,,"A wall of water springs into existence at a point you choose within range. You can make the wall up to 300 feet long, 300 feet high, and 50 feet thick. The wall lasts for the duration.
+
+When the wall appears, each creature in its area makes a Strength saving throw, taking 6d10 Bludgeoning damage on a failed save or half as much damage on a successful one.
+
+At the start of each of your turns after the wall appears, the wall, along with any creatures in it, moves 50 feet away from you. Any Huge or smaller creature inside the wall or whose space the wall enters when it moves must succeed on a Strength saving throw or take 5d10 Bludgeoning damage. A creature can take this damage only once per round. At the end of the turn, the wall’s height is reduced by 50 feet, and the damage the wall deals on later rounds is reduced by 1d10. When the wall reaches 0 feet in height, the spell ends.
+
+A creature caught in the wall can move by swimming. Because of the wave’s force, though, the creature must succeed on a Strength ( Athletics ) check against your spell save DC to move at all. If it fails the check, it can’t move. A creature that moves out of the wall falls to the ground.",https://www.dndbeyond.com/spells/2619206-tsunami,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+9th,Blade of Disaster,Conjuration,1 Bonus Action,60 ft.,,"V, S",,1 Minute,,,Melee,Force,,"You create a blade-shaped planar rift about 3 feet long in an unoccupied space you can see within range. The blade lasts for the duration. When you cast this spell, you can make up to two melee spell attacks with the blade, each one against a creature, loose object, or structure within 5 feet of the blade. On a hit, the target takes 4d12 force damage. This attack scores a critical hit if the number on the d20 is 18 or higher. On a critical hit, the blade deals an extra 8d12 force damage (for a total of 12d12 force damage).
+
+As a bonus action on your turn, you can move the blade up to 30 feet to an unoccupied space you can see and then make up to two melee spell attacks with it again.
+
+The blade can harmlessly pass through any barrier, including a wall of force .",https://www.dndbeyond.com/spells/654072-blade-of-disaster,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+9th,Mass Heal,Abjuration,1 Action,60 ft.,,"V, S",,Instantaneous,,,,Blinded (...),,"A flood of healing energy flows from you into creatures around you. You restore up to 700 Hit Points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell also have the Blinded , Deafened , and Poisoned conditions removed from them.",https://www.dndbeyond.com/spells/2619027-mass-heal,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+9th,Meteor Swarm,Evocation,1 Action,1 mile,(40 ft. *),"V, S",,Instantaneous,,,DEX Save,Fire (...),,"Blazing orbs of fire plummet to the ground at four different points you can see within range. Each creature in a 40-foot-radius Sphere centered on each of those points makes a Dexterity saving throw. A creature takes 20d6 Fire damage and 20d6 Bludgeoning damage on a failed save or half as much damage on a successful one. A creature in the area of more than one fiery Sphere is affected only once.
+
+A nonmagical object that isn’t being worn or carried also takes the damage if it’s in the spell’s area, and the object starts burning if it’s flammable.",https://www.dndbeyond.com/spells/2619035-meteor-swarm,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+9th,Power Word Heal,Enchantment,1 Action,60 ft.,,V,,Instantaneous,,,,Prone,,"A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed , Frightened , Paralyzed , Poisoned , or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.",https://www.dndbeyond.com/spells/2618880-power-word-heal,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+9th,Power Word Kill,Enchantment,1 Action,60 ft.,,V,,Instantaneous,,,,Psychic,,"You compel one creature you can see within range to die. If the target has 100 Hit Points or fewer, it dies. Otherwise, it takes 12d12 Psychic damage.",https://www.dndbeyond.com/spells/2618886-power-word-kill,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+9th,Prismatic Wall,Abjuration,1 Action,60 ft.,,"V, S",,10 Minutes,,,CON Save,Fire (...),,"A shimmering, multicolored plane of light forms a vertical opaque wall—up to 90 feet long, 30 feet high, and 1 inch thick—centered on a point within range. Alternatively, you shape the wall into a globe up to 30 feet in diameter centered on a point within range. The wall lasts for the duration. If you position the wall in a space occupied by a creature, the spell ends instantly without effect.
+
+The wall sheds Bright Light within 100 feet and Dim Light for an additional 100 feet. You and creatures you designate when you cast the spell can pass through and be near the wall without harm. If another creature that can see the wall moves within 20 feet of it or starts its turn there, the creature must succeed on a Constitution saving throw or have the Blinded condition for 1 minute.
+
+The wall consists of seven layers, each with a different color. When a creature reaches into or passes through the wall, it does so one layer at a time through all the layers. Each layer forces the creature to make a Dexterity saving throw or be affected by that layer’s properties as described in the Prismatic Layers table.
+
+The wall, which has AC 10, can be destroyed one layer at a time, in order from red to violet, by means specific to each layer. If a layer is destroyed, it is gone for the duration. Antimagic Field has no effect on the wall, and Dispel Magic can affect only the violet layer.",https://www.dndbeyond.com/spells/2618898-prismatic-wall,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+9th,Psychic Scream,Enchantment,1 Action,90 ft.,,S,,Instantaneous,,,INT Save,Psychic,,"You unleash the power of your mind to blast the intellect of up to ten creatures of your choice that you can see within range. Creatures that have an Intelligence score of 2 or lower are unaffected.
+
+Each target must make an Intelligence saving throw. On a failed save, a target takes 14d6 psychic damage and is stunned . On a successful save, a target takes half as much damage and isn’t stunned. If a target is killed by this damage, its head explodes, assuming it has one.
+
+A stunned target can make an Intelligence saving throw at the end of each of its turns. On a successful save, the stunning effect ends.",https://www.dndbeyond.com/spells/14592-psychic-scream,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+9th,Storm of Vengeance,Conjuration,1 Action,1 mile,,"V, S",,1 Minute,,,CON Save,Thunder (...),,"A churning storm cloud forms for the duration, centered on a point within range and spreading to a radius of 300 feet. Each creature under the cloud when it appears must succeed on a Constitution saving throw or take 2d6 Thunder damage and have the Deafened condition for the duration.
+
+At the start of each of your later turns, the storm produces different effects, as detailed below.
+
+Turn 2. Acidic rain falls. Each creature and object under the cloud takes 4d6 Acid damage.
+
+Turn 3. You call six bolts of lightning from the cloud to strike six different creatures or objects beneath it. Each target makes a Dexterity saving throw, taking 10d6 Lightning damage on a failed save or half as much damage on a successful one.
+
+Turn 4. Hailstones rain down. Each creature under the cloud takes 2d6 Bludgeoning damage.
+
+Turns 5–10. Gusts and freezing rain assail the area under the cloud. Each creature there takes 1d6 Cold damage. Until the spell ends, the area is Difficult Terrain and Heavily Obscured , ranged attacks with weapons are impossible there, and strong wind blows through the area.",https://www.dndbeyond.com/spells/2619098-storm-of-vengeance,Weather & Climate Control,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+Cantrip,Acid Splash,Evocation,1 Action,60 ft.,(5 ft. ),"V, S",,Instantaneous,,,DEX Save,Acid,,"You create an acidic bubble at a point within range, where it explodes in a 5-foot-radius Sphere . Each creature in that Sphere must succeed on a Dexterity saving throw or take 1d6 Acid damage.
+
+Cantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",https://www.dndbeyond.com/spells/2618844-acid-splash,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Booming Blade,Evocation,1 Action,,(5 ft. ),"S, M",,1 Round,,,Melee,Thunder (...),,"You brandish the weapon used in the spell’s casting and make a melee attack with it against one creature within 5 feet of you. On a hit, the target suffers the weapon attack’s normal effects and then becomes sheathed in booming energy until the start of your next turn. If the target willingly moves 5 feet or more before then, the target takes 1d8 thunder damage, and the spell ends.
+
+This spell’s damage increases when you reach certain levels. At 5th level, the melee attack deals an extra 1d8 thunder damage to the target on a hit, and the damage the target takes for moving increases to 2d8. Both damage rolls increase by 1d8 at 11th level (2d8 and 3d8) and again at 17th level (3d8 and 4d8).",https://www.dndbeyond.com/spells/2410-booming-blade,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Chill Touch,Necromancy,1 Action,,,"V, S",,Instantaneous,,,Melee,Necrotic,,"Channeling the chill of the grave, make a melee spell attack against a target within reach. On a hit, the target takes 1d10 Necrotic damage, and it can’t regain Hit Points until the end of your next turn.
+
+Cantrip Upgrade. The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).",https://www.dndbeyond.com/spells/2618965-chill-touch,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Control Flames,Transmutation,1 Action,60 ft.,(5 ft. *),S,,Instantaneous,,,,Control,,"You choose nonmagical flame that you can see within range and that fits within a 5-foot cube. You affect it in one of the following ways:
+
+You instantaneously expand the flame 5 feet in one direction, provided that wood or other fuel is present in the new location.
+
+You instantaneously extinguish the flames within the cube.
+
+You double or halve the area of bright light and dim light cast by the flame, change its color, or both. The change lasts for 1 hour.
+
+You cause simple shapes—such as the vague form of a creature, an inanimate object, or a location—to appear within the flames and animate as you like. The shapes last for 1 hour.
+
+If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",https://www.dndbeyond.com/spells/2374-control-flames,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Create Bonfire,Conjuration,1 Action,60 ft.,(5 ft. ),"V, S",,1 Minute,,,DEX Save,Fire,,"You create a bonfire on ground that you can see within range. Until the spell ends, the magic bonfire fills a 5-foot cube. Any creature in the bonfire’s space when you cast the spell must succeed on a Dexterity saving throw or take 1d8 fire damage. A creature must also make the saving throw when it moves into the bonfire’s space for the first time on a turn or ends its turn there.
+
+The bonfire ignites flammable objects in its area that aren’t being worn or carried.
+
+The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",https://www.dndbeyond.com/spells/2373-create-bonfire,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Eldritch Blast,Evocation,1 Action,120 ft.,,"V, S",,Instantaneous,,,Ranged,Force,,"You hurl a beam of crackling energy. Make a ranged spell attack against one creature or object in range. On a hit, the target takes 1d10 Force damage.
+
+Cantrip Upgrade. The spell creates two beams at level 5, three beams at level 11, and four beams at level 17. You can direct the beams at the same target or at different ones. Make a separate attack roll for each beam.",https://www.dndbeyond.com/spells/2619161-eldritch-blast,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+Cantrip,Elementalism,Transmutation,1 Action,30 ft.,(5 ft. *),"V, S",,Instantaneous,,,,,,"You exert control over the elements, creating one of the following effects within range.
+
+Beckon Air. You create a breeze strong enough to ripple cloth, stir dust, rustle leaves, and close open doors and shutters, all in a 5-foot Cube. Doors and shutters being held open by someone or something aren’t affected.
+
+Beckon Earth. You create a thin shroud of dust or sand that covers surfaces in a 5-foot-square area, or you cause a single word to appear in your handwriting in a patch of dirt or sand.
+
+Beckon Fire. You create a thin cloud of harmless embers and colored, scented smoke in a 5-foot Cube. You choose the color and scent, and the embers can light candles, torches, or lamps in that area. The smoke’s scent lingers for 1 minute.
+
+Beckon Water. You create a spray of cool mist that lightly dampens creatures and objects in a 5-foot Cube. Alternatively, you create 1 cup of clean water either in an open container or on a surface, and the water evaporates in 1 minute.
+
+Sculpt Element. You cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour.",https://www.dndbeyond.com/spells/2618834-elementalism,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Fire Bolt,Evocation,1 Action,120 ft.,,"V, S",,Instantaneous,,,Ranged,Fire,,"You hurl a mote of fire at a creature or an object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Fire damage. A flammable object hit by this spell starts burning if it isn’t being worn or carried.
+
+Cantrip Upgrade. The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).",https://www.dndbeyond.com/spells/2618890-fire-bolt,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Frostbite,Evocation,1 Action,60 ft.,,"V, S",,Instantaneous,,,CON Save,Cold,,"You cause numbing frost to form on one creature that you can see within range. The target must make a Constitution saving throw. On a failed save, the target takes 1d6 cold damage, and it has disadvantage on the next weapon attack roll it makes before the end of its next turn.
+
+The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",https://www.dndbeyond.com/spells/2382-frostbite,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Green-Flame Blade,Evocation,1 Action,,(5 ft. ),"S, M",,Instantaneous,,,Melee,Fire (...),,"You brandish the weapon used in the spell’s casting and make a melee attack with it against one creature within 5 feet of you. On a hit, the target suffers the weapon attack’s normal effects, and you can cause green fire to leap from the target to a different creature of your choice that you can see within 5 feet of it. The second creature takes fire damage equal to your spellcasting ability modifier.
+
+This spell’s damage increases when you reach certain levels. At 5th level, the melee attack deals an extra 1d8 fire damage to the target on a hit, and the fire damage to the second creature increases to 1d8 + your spellcasting ability modifier. Both damage rolls increase by 1d8 at 11th level (2d8 and 2d8) and 17th level (3d8 and 3d8).",https://www.dndbeyond.com/spells/2411-green-flame-blade,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Gust,Transmutation,1 Action,30 ft.,,"V, S",,Instantaneous,,,STR Save,Control,,"You seize the air and compel it to create one of the following effects at a point you can see within range:
+
+One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you.
+
+One Medium or smaller creature that you choose must succeed on a Strength saving throw or be pushed up to 5 feet away from you.
+
+You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn’t pushed with enough force to cause damage.
+
+You create a small blast of air capable of moving one object that is neither held nor carried and that weighs no more than 5 pounds. The object is pushed up to 10 feet away from you. It isn’t pushed with enough force to cause damage.
+
+You create a harmless sensory effect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze.
+
+You create a harmless sensory effect using air, such as causing leaves to rustle, wind to slam shutters shut, or your clothing to ripple in a breeze.",https://www.dndbeyond.com/spells/2383-gust,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Light,Evocation,1 Action,,,"V, M",,1 Hour,,,,Creation (...),,"You touch one Large or smaller object that isn’t being worn or carried by someone else. Until the spell ends, the object sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. The light can be colored as you like.
+
+Covering the object with something opaque blocks the light. The spell ends if you cast it again.",https://www.dndbeyond.com/spells/2618996-light,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Lightning Lure,Evocation,1 Action,15 ft.,,V,,Instantaneous,,,STR Save,Lightning,,"You create a lash of lightning energy that strikes at one creature of your choice that you can see within 15 feet of you. The target must succeed on a Strength saving throw or be pulled up to 10 feet in a straight line toward you and then take 1d8 lightning damage if it is within 5 feet of you.
+
+This spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",https://www.dndbeyond.com/spells/2412-lightning-lure,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Mage Hand,Conjuration,1 Action,30 ft.,,"V, S",,1 Minute,,,,Utility,,"A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again.
+
+When you cast the spell, you can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial.
+
+As a Magic action on your later turns, you can control the hand thus again. As part of that action, you can move the hand up to 30 feet.
+
+The hand can’t attack, activate magic items, or carry more than 10 pounds.",https://www.dndbeyond.com/spells/2619008-mage-hand,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+Cantrip,Magic Stone,Transmutation,1 Bonus Action,,,"V, S",,1 Minute,,,Ranged,Bludgeoning,,"You touch one to three pebbles and imbue them with magic. You or someone else can make a ranged spell attack with one of the pebbles by throwing it or hurling it with a sling. If thrown, it has a range of 60 feet. If someone else attacks with the pebble, that attacker adds your spellcasting ability modifier, not the attacker’s, to the attack roll. On a hit, the target takes bludgeoning damage equal to 1d6 + your spellcasting ability modifier. Hit or miss, the spell then ends on the stone.
+
+If you cast this spell again, the spell ends early on any pebbles still affected by it.",https://www.dndbeyond.com/spells/2391-magic-stone,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Mending,Transmutation,1 Minute,,,"V, S, M",,Instantaneous,,,,Utility,,"This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage.
+
+This spell can physically repair a magic item, but it can’t restore magic to such an object.",https://www.dndbeyond.com/spells/2619033-mending,Object & Structure Manipulation,Hard Ban,Hard Ban,Hard Ban,Secondary,Hard Ban
+Cantrip,Mold Earth,Transmutation,1 Action,30 ft.,(5 ft. ),S,,Instantaneous,,,,Control,,"You choose a portion of dirt or stone that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:
+
+If you target an area of loose earth, you can instantaneously excavate it, move it along the ground, and deposit it up to 5 feet away. This movement doesn’t have enough force to cause damage.
+
+If you target an area of loose earth, you can instantaneously excavate it, move it along the ground, and deposit it up to 5 feet away. This movement doesn’t have enough force to cause damage.
+
+You cause shapes, colors, or both to appear on the dirt or stone, spelling out words, creating images, or shaping patterns. The changes last for 1 hour.
+
+You cause shapes, colors, or both to appear on the dirt or stone, spelling out words, creating images, or shaping patterns. The changes last for 1 hour.
+
+If the dirt or stone you target is on the ground, you cause it to become difficult terrain. Alternatively, you can cause the ground to become normal terrain if it is already difficult terrain. This change lasts for 1 hour.
+
+If the dirt or stone you target is on the ground, you cause it to become difficult terrain. Alternatively, you can cause the ground to become normal terrain if it is already difficult terrain. This change lasts for 1 hour.
+
+If you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",https://www.dndbeyond.com/spells/2394-mold-earth,Terrain Manipulation,Hard Ban,Hard Ban,Primary,Primary,Hard Ban
+Cantrip,Poison Spray,Necromancy,1 Action,30 ft.,,"V, S",,Instantaneous,,,Ranged,Poison,,"You spray toxic mist at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d12 Poison damage.
+
+Cantrip Upgrade. The damage increases by 1d12 when you reach levels 5 (2d12), 11 (3d12), and 17 (4d12).",https://www.dndbeyond.com/spells/2618875-poison-spray,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Primal Savagery,Transmutation,1 Action,,,S,,Instantaneous,,,Melee,Acid,,"You channel primal magic to cause your teeth or fingernails to sharpen, ready to deliver a corrosive attack. Make a melee spell attack against one creature within 5 feet of you. On a hit, the target takes 1d10 acid damage. After you make the attack, your teeth or fingernails return to normal.
+
+The spell’s damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).",https://www.dndbeyond.com/spells/14558-primal-savagery,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Produce Flame,Conjuration,1 Bonus Action,,,"V, S",,10 Minutes,,,Ranged,Fire,,"A flickering flame appears in your hand and remains there for the duration. While there, the flame emits no heat and ignites nothing, and it sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. The spell ends if you cast it again.
+
+Until the spell ends, you can take a Magic action to hurl fire at a creature or an object within 60 feet of you. Make a ranged spell attack. On a hit, the target takes 1d8 Fire damage.
+
+Cantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",https://www.dndbeyond.com/spells/2618901-produce-flame,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Ray of Frost,Evocation,1 Action,60 ft.,,"V, S",,Instantaneous,,,Ranged,Cold,,"A frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 Cold damage, and its Speed is reduced by 10 feet until the start of your next turn.
+
+Cantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",https://www.dndbeyond.com/spells/2618930-ray-of-frost,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Sacred Flame,Evocation,1 Action,60 ft.,,"V, S",,Instantaneous,,,DEX Save,Radiant,,"Flame-like radiance descends on a creature that you can see within range. The target must succeed on a Dexterity saving throw or take 1d8 Radiant damage. The target gains no benefit from Half Cover or Three-Quarters Cover for this save.
+
+Cantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",https://www.dndbeyond.com/spells/2618967-sacred-flame,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Shape Water,Transmutation,1 Action,30 ft.,(5 ft. ),S,,Instantaneous,,,,Control,,"You choose an area of water that you can see within range and that fits within a 5-foot cube. You manipulate it in one of the following ways:
+
+You instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn’t have enough force to cause damage.
+
+You instantaneously move or otherwise change the flow of the water as you direct, up to 5 feet in any direction. This movement doesn’t have enough force to cause damage.
+
+You cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.
+
+You cause the water to form into simple shapes and animate at your direction. This change lasts for 1 hour.
+
+You change the water’s color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.
+
+You change the water’s color or opacity. The water must be changed in the same way throughout. This change lasts for 1 hour.
+
+You freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.
+
+You freeze the water, provided that there are no creatures in it. The water unfreezes in 1 hour.
+
+If you cast this spell multiple times, you can have no more than two of its non-instantaneous effects active at a time, and you can dismiss such an effect as an action.",https://www.dndbeyond.com/spells/2397-shape-water,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Shocking Grasp,Evocation,1 Action,,,"V, S",,Instantaneous,,,Melee,Lightning,,"Lightning springs from you to a creature that you try to touch. Make a melee spell attack against the target. On a hit, the target takes 1d8 Lightning damage, and it can’t make Opportunity Attacks until the start of its next turn.
+
+Cantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",https://www.dndbeyond.com/spells/2618986-shocking-grasp,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Sorcerous Burst,Evocation,1 Action,120 ft.,,"V, S",,Instantaneous,,,Ranged,Acid (...),,"You cast sorcerous energy at one creature or object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Lightning, Poison, Psychic, or Thunder.
+
+If you roll an 8 on a d8 for this spell, you can roll another d8, and add it to the damage. When you cast this spell, the maximum number of these d8s you can add to the spell’s damage equals your spellcasting ability modifier.
+
+Cantrip Upgrade. The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",https://www.dndbeyond.com/spells/2618839-sorcerous-burst,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Spare the Dying,Necromancy,1 Action,15 ft.,,"V, S",,Instantaneous,,,,Healing,,"Choose a creature within range that has 0 Hit Points and isn’t dead . The creature becomes Stable .
+
+Cantrip Upgrade. The range doubles when you reach levels 5 (30 feet), 11 (60 feet), and 17 (120 feet).",https://www.dndbeyond.com/spells/2619067-spare-the-dying,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+Cantrip,Sword Burst,Conjuration,1 Action,5 ft.,,V,,Instantaneous,,,DEX Save,Force,,"You create a momentary circle of spectral blades that sweep around you. All other creatures within 5 feet of you must succeed on a Dexterity saving throw or take 1d6 force damage.
+
+This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",https://www.dndbeyond.com/spells/2413-sword-burst,Force Manipulation,Primary,Hard Ban,Hard Ban,Secondary,Primary
+Cantrip,Thunderclap,Evocation,1 Action,,(5 ft. ),S,,Instantaneous,,,CON Save,Thunder,,"Each creature in a 5-foot Emanation originating from you must succeed on a Constitution saving throw or take 1d6 Thunder damage. The spell’s thunderous sound can be heard up to 100 feet away.
+
+Cantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",https://www.dndbeyond.com/spells/2619179-thunderclap,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban
+Cantrip,Word of Radiance,Evocation,1 Action,,(5 ft. ),"V, M",,Instantaneous,,,CON Save,Radiant,,"Burning radiance erupts from you in a 5-foot Emanation . Each creature of your choice that you can see in it must succeed on a Constitution saving throw or take 1d6 Radiant damage.
+
+Cantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",https://www.dndbeyond.com/spells/2619217-word-of-radiance,Elemental Blasts,Hard Ban,Hard Ban,Hard Ban,Exclusive,Hard Ban

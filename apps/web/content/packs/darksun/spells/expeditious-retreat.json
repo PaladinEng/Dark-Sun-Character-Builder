@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:expeditious-retreat",
+  "name": "Expeditious Retreat",
+  "description": "You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action.",
+  "level": 1,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619189-expeditious-retreat",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Movement",
+    "primaryEffectCategory": "Movement Enhancement",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Expeditious Retreat",
+      "School": "Transmutation",
+      "Casting Time": "1 Bonus Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Movement",
+      "Source": "",
+      "Description": "You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619189-expeditious-retreat",
+      "Primary Effect Category": "Movement Enhancement",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Primary"
+    }
+  }
+}

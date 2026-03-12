@@ -623,6 +623,12 @@ async function ingestSettings() {
       "darksun:background:wastelander",
       "darksun:background:wilder",
     ],
+    classSpellListOverrides: {
+      "srd52:class:wizard": ["darksun:spelllist:tradition:arcane"],
+      "srd52:class:warlock": ["darksun:spelllist:tradition:arcane"],
+      "srd52:class:druid": ["darksun:spelllist:tradition:nature"],
+      "srd52:class:ranger": ["darksun:spelllist:tradition:nature"],
+    },
     disabledClassIds: [
       "srd52:class:paladin",
       "srd52:class:sorcerer",

@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:mass-healing-word",
+  "name": "Mass Healing Word",
+  "description": "Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.\n\nUsing a Higher-Level Spell Slot. The healing increases by 1d4 for each spell slot level above 3.",
+  "level": 3,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "60 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619028-mass-healing-word",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Healing",
+    "primaryEffectCategory": "Healing & Restoration",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Mass Healing Word",
+      "School": "Abjuration",
+      "Casting Time": "1 Bonus Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Healing",
+      "Source": "",
+      "Description": "Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.\n\nUsing a Higher-Level Spell Slot. The healing increases by 1d4 for each spell slot level above 3.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619028-mass-healing-word",
+      "Primary Effect Category": "Healing & Restoration",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

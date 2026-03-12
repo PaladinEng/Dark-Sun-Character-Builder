@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:summon-shadowspawn",
+  "name": "Summon Shadowspawn",
+  "description": "You call forth a shadowy spirit. It manifests in an unoccupied space that you can see within range. This corporeal form uses the Shadow Spirit stat block. When you cast the spell, choose an emotion: Fury, Despair, or Fear. The creature resembles a misshapen biped marked by the chosen emotion, which determines certain traits in its stat block. The creature disappears when it drops to 0 hit points or when the spell ends.\n\nThe creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its move to avoid danger.\n\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, use the higher level wherever the spell’s level appears in the stat block.\n\nShadow Spirit\n\nMedium monstrosity\n\nArmor Class 11 + the level of the spell (natural armor)\n\nHit Points 35 + 15 for each spell level above 3rd\n\nSpeed 40 ft.\n\nDamage Resistances necrotic\n\nCondition Immunities frightened\n\nSenses darkvision 120 ft., passive Perception 10\n\nLanguages understands the languages you speak\n\nChallenge — Proficiency Bonus equals your bonus\n\nTerror Frenzy (Fury Only). The spirit has advantage on attack rolls against frightened creatures.\n\nWeight of Sorrow (Despair Only). Any creature, other than you, that starts its turn within 5 feet of the spirit has its speed reduced by 20 feet until the start of that creature’s next turn.\n\nActions\n\nMultiattack. The spirit makes a number of attacks equal to half this spell’s level (rounded down).\n\nChilling Rend. Melee Weapon Attack: your spell attack modifier to hit, reach 5 ft., one target. Hit: 1d12 + 3 + the spell’s level cold damage.\n\nDreadful Scream (1/Day). The spirit screams. Each creature within 30 feet of it must succeed on a Wisdom saving throw against your spell save DC or be frightened of the spirit for 1 minute. The frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n\nBonus Actions\n\nShadow Stealth (Fear Only). While in dim light or darkness, the spirit takes the Hide action.",
+  "level": 3,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "90 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You call forth a shadowy spirit. It manifests in an unoccupied space that you can see within range. This corporeal form uses the Shadow Spirit stat block. When you cast the spell, choose an emotion: Fury, Despair, or Fear. The creature resembles a misshapen biped marked by the chosen emotion, which determines certain traits in its stat block. The creature disappears when it drops to 0 hit points or when the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/719948-summon-shadowspawn",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Summoning — Extraplanar",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Secondary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Summon Shadowspawn",
+      "School": "Conjuration",
+      "Casting Time": "1 Action",
+      "Range": "90 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You call forth a shadowy spirit. It manifests in an unoccupied space that you can see within range. This corporeal form uses the Shadow Spirit stat block. When you cast the spell, choose an emotion: Fury, Despair, or Fear. The creature resembles a misshapen biped marked by the chosen emotion, which determines certain traits in its stat block. The creature disappears when it drops to 0 hit points or when the spell ends.\n\nThe creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its move to avoid danger.\n\nAt Higher Levels. When you cast this spell using a spell slot of 4th level or higher, use the higher level wherever the spell’s level appears in the stat block.\n\nShadow Spirit\n\nMedium monstrosity\n\nArmor Class 11 + the level of the spell (natural armor)\n\nHit Points 35 + 15 for each spell level above 3rd\n\nSpeed 40 ft.\n\nDamage Resistances necrotic\n\nCondition Immunities frightened\n\nSenses darkvision 120 ft., passive Perception 10\n\nLanguages understands the languages you speak\n\nChallenge — Proficiency Bonus equals your bonus\n\nTerror Frenzy (Fury Only). The spirit has advantage on attack rolls against frightened creatures.\n\nWeight of Sorrow (Despair Only). Any creature, other than you, that starts its turn within 5 feet of the spirit has its speed reduced by 20 feet until the start of that creature’s next turn.\n\nActions\n\nMultiattack. The spirit makes a number of attacks equal to half this spell’s level (rounded down).\n\nChilling Rend. Melee Weapon Attack: your spell attack modifier to hit, reach 5 ft., one target. Hit: 1d12 + 3 + the spell’s level cold damage.\n\nDreadful Scream (1/Day). The spirit screams. Each creature within 30 feet of it must succeed on a Wisdom saving throw against your spell save DC or be frightened of the spirit for 1 minute. The frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.\n\nBonus Actions\n\nShadow Stealth (Fear Only). While in dim light or darkness, the spirit takes the Hide action.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/719948-summon-shadowspawn",
+      "Primary Effect Category": "Summoning — Extraplanar",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Secondary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

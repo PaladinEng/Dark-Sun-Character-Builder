@@ -1,0 +1,1011 @@
+Level,Name,School,Casting Time,Range,Area,Components,Materials,Duration,Concentration,Ritual,Attack/Save,Damage/Effect,Source,Description,URL_absolute,Primary Effect Category,Arcane Status,Divine Status,Nature Status,Elemental Status,Psionics Status
+1st,Alarm,Abjuration,1 Minute,30 ft.,(20 ft. ),"V, S, M",,8 Hours,,,,Detection,,"You set an alarm against intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot Cube. Until the spell ends, an alarm alerts you whenever a creature touches or enters the warded area. When you cast the spell, you can designate creatures that won’t set off the alarm. You also choose whether the alarm is audible or mental:
+
+Audible Alarm. The alarm produces the sound of a handbell for 10 seconds within 60 feet of the warded area.
+
+Mental Alarm. You are alerted by a mental ping if you are within 1 mile of the warded area. This ping awakens you if you’re asleep.",https://www.dndbeyond.com/spells/2619222-alarm,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Armor of Agathys,Abjuration,1 Bonus Action,,,"V, S, M",,1 Hour,,,,Cold,,"Protective magical frost surrounds you. You gain 5 Temporary Hit Points . If a creature hits you with a melee attack roll before the spell ends, the creature takes 5 Cold damage. The spell ends early if you have no Temporary Hit Points.
+
+Using a Higher-Level Spell Slot. The Temporary Hit Points and the Cold damage both increase by 5 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618870-armor-of-agathys,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Bane,Enchantment,1 Action,30 ft.,,"V, S, M",,1 Minute,,,CHA Save,Debuff,,"Up to three creatures of your choice that you can see within range must each make a Charisma saving throw. Whenever a target that fails this save makes an attack roll or a saving throw before the spell ends, the target must subtract 1d4 from the attack roll or save.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618900-bane,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+1st,Bless,Enchantment,1 Action,30 ft.,,"V, S, M",,1 Minute,,,,Buff,,"You bless up to three creatures within range. Whenever a target makes an attack roll or a saving throw before the spell ends, the target adds 1d4 to the attack roll or save.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618933-bless,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+1st,Command,Enchantment,1 Action,60 ft.,,V,,Instantaneous,,,WIS Save,Prone,,"You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. Choose the command from these options:
+
+Approach. The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.
+
+Drop. The target drops whatever it is holding and then ends its turn.
+
+Flee. The target spends its turn moving away from you by the fastest available means.
+
+Grovel. The target has the Prone condition and then ends its turn.
+
+Halt. On its turn, the target doesn’t move and takes no action or Bonus Action.
+
+Using a Higher-Level Spell Slot. You can affect one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2618985-command,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+1st,Compelled Duel,Enchantment,1 Bonus Action,30 ft.,,V,,1 Minute,,,WIS Save,Control (...),,"You try to compel a creature into a duel. One creature that you can see within range makes a Wisdom saving throw. On a failed save, the target has Disadvantage on attack rolls against creatures other than you, and it can’t willingly move to a space that is more than 30 feet away from you.
+
+The spell ends if you make an attack roll against a creature other than the target, if you cast a spell on an enemy other than the target, if an ally of yours damages the target, or if you end your turn more than 30 feet away from the target.",https://www.dndbeyond.com/spells/2618990-compelled-duel,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+1st,Comprehend Languages,Divination,1 Action,,,"V, S, M",,1 Hour,,,,Social,,"For the duration, you understand the literal meaning of any language that you hear or see signed. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text. This spell doesn’t decode symbols or secret messages.",https://www.dndbeyond.com/spells/2618993-comprehend-languages,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+1st,Cure Wounds,Abjuration,1 Action,,,"V, S",,Instantaneous,,,,Healing,,"A creature you touch regains a number of Hit Points equal to 2d8 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 2d8 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619079-cure-wounds,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+1st,Divine Favor,Transmutation,1 Bonus Action,,,"V, S",,1 Minute,,,,Radiant,,"Until the spell ends, your attacks with weapons deal an extra 1d4 Radiant damage on a hit.",https://www.dndbeyond.com/spells/2619142-divine-favor,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+1st,Find Familiar,Conjuration,1 Hour,10 ft.,,"V, S, M",,Instantaneous,,,,Summoning,,"You gain the service of a familiar, a spirit that takes an animal form you choose: Bat , Cat , Frog , Hawk , Lizard , Octopus , Owl , Rat , Raven , Spider , Weasel , or another Beast that has a Challenge Rating of 0 . Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form, though it is a Celestial, Fey, or Fiend (your choice) instead of a Beast. Your familiar acts independently of you, but it obeys your commands.
+
+Telepathic Connection. While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as a Bonus Action, you can see through the familiar’s eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses it has.
+
+Finally, when you cast a spell with a range of touch, your familiar can deliver the touch. Your familiar must be within 100 feet of you, and it must take a Reaction to deliver the touch when you cast the spell.
+
+Combat. The familiar is an ally to you and your allies. It rolls its own Initiative and acts on its own turn. A familiar can’t attack, but it can take other actions as normal.
+
+Disappearance of the Familiar. When the familiar drops to 0 Hit Points, it disappears. It reappears after you cast this spell again. As a Magic action, you can temporarily dismiss the familiar to a pocket dimension. Alternatively, you can dismiss it forever. As a Magic action while it is temporarily dismissed, you can cause it to reappear in an unoccupied space within 30 feet of you. Whenever the familiar drops to 0 Hit Points or disappears into the pocket dimension, it leaves behind in its space anything it was wearing or carrying.
+
+One Familiar Only. You can’t have more than one familiar at a time. If you cast this spell while you have a familiar, you instead cause it to adopt a new eligible form.",https://www.dndbeyond.com/spells/2618877-find-familiar,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+1st,Healing Word,Abjuration,1 Bonus Action,60 ft.,,V,,Instantaneous,,,,Healing,,"A creature of your choice that you can see within range regains Hit Points equal to 2d4 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 2d4 for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619143-healing-word,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+1st,Heroism,Enchantment,1 Action,,,"V, S",,1 Minute,,,,Frightened,,"A willing creature you touch is imbued with bravery. Until the spell ends, the creature is immune to the Frightened condition and gains Temporary Hit Points equal to your spellcasting ability modifier at the start of each of its turns.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619151-heroism,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+1st,Hex,Enchantment,1 Bonus Action,90 ft.,,"V, S, M",,1 Hour,,,,Necrotic,,"You place a curse on a creature that you can see within range. Until the spell ends, you deal an extra 1d6 Necrotic damage to the target whenever you hit it with an attack roll. Also, choose one ability when you cast the spell. The target has Disadvantage on ability checks made with the chosen ability.
+
+If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action on a later turn to curse a new creature.
+
+Using a Higher-Level Spell Slot. Your Concentration can last longer with a spell slot of level 2 (up to 4 hours), 3–4 (up to 8 hours), or 5+ (24 hours).",https://www.dndbeyond.com/spells/2618988-hex,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Hunter's Mark,Divination,1 Bonus Action,90 ft.,,V,,1 Hour,,,,Force,,"You magically mark one creature you can see within range as your quarry. Until the spell ends, you deal an extra 1d6 Force damage to the target whenever you hit it with an attack roll. You also have Advantage on any Wisdom ( Perception or Survival ) check you make to find it.
+
+If the target drops to 0 Hit Points before this spell ends, you can take a Bonus Action to move the mark to a new creature you can see within range.
+
+Using a Higher-Level Spell Slot. Your Concentration can last longer with a spell slot of level 3–4 (up to 8 hours) or 5+ (up to 24 hours).",https://www.dndbeyond.com/spells/2619166-hunters-mark,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Mage Armor,Abjuration,1 Action,,,"V, S, M",,8 Hours,,,,Buff (...),,"You touch a willing creature who isn’t wearing armor. Until the spell ends, the target’s base AC becomes 13 plus its Dexterity modifier. The spell ends early if the target dons armor.",https://www.dndbeyond.com/spells/2619006-mage-armor,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Protection from Evil and Good,Abjuration,1 Action,,,"V, S, M",,10 Minutes,,,,Buff (...),,"Until the spell ends, one willing creature you touch is protected against creatures that are Aberrations, Celestials, Elementals, Fey, Fiends, or Undead. The protection grants several benefits. Creatures of those types have Disadvantage on attack rolls against the target. The target also can’t be possessed by or gain the Charmed or Frightened conditions from them. If the target is already possessed, Charmed, or Frightened by such a creature, the target has Advantage on any new saving throw against the relevant effect.",https://www.dndbeyond.com/spells/2618912-protection-from-evil-and-good,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Sanctuary,Abjuration,1 Bonus Action,30 ft.,,"V, S, M",,1 Minute,,,WIS Save,Buff (...),,"You ward a creature within range. Until the spell ends, any creature who targets the warded creature with an attack roll or a damaging spell must succeed on a Wisdom saving throw or either choose a new target or lose the attack or spell. This spell doesn’t protect the warded creature from areas of effect.
+
+The spell ends if the warded creature makes an attack roll, casts a spell, or deals damage.",https://www.dndbeyond.com/spells/2619003-sanctuary,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Shield of Faith,Abjuration,1 Bonus Action,60 ft.,,"V, S, M",,10 Minutes,,,,Buff (...),,"A shimmering field surrounds a creature of your choice within range, granting it a +2 bonus to AC for the duration.",https://www.dndbeyond.com/spells/2619020-shield-of-faith,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+1st,Tasha's Hideous Laughter,Enchantment,1 Action,30 ft.,,"V, S, M",,1 Minute,,,WIS Save,Prone (...),,"One creature of your choice that you can see within range makes a Wisdom saving throw. On a failed save, it has the Prone and Incapacitated conditions for the duration. During that time, it laughs uncontrollably if it’s capable of laughter, and it can’t end the Prone condition on itself.
+
+At the end of each of its turns and each time it takes damage, it makes another Wisdom saving throw. The target has Advantage on the save if the save is triggered by damage. On a successful save, the spell ends.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 1.",https://www.dndbeyond.com/spells/2619132-tashas-hideous-laughter,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Aid,Abjuration,1 Action,30 ft.,,"V, S, M",,8 Hours,,,,Buff,,"Choose up to three creatures within range. Each target’s Hit Point maximum and current Hit Points increase by 5 for the duration.
+
+Using a Higher-Level Spell Slot. Each target’s Hit Points increase by 5 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618845-aid,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+2nd,Air Bubble,Conjuration,1 Action,60 ft.,,S,,24 Hours,,,,Buff,,,https://www.dndbeyond.com/spells/1585025-air-bubble,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+2nd,Arcane Vigor,Abjuration,1 Bonus Action,,,"V, S",,Instantaneous,,,,,,"You tap into your life force to heal yourself. Roll one or two of your unexpended Hit Point Dice, and regain a number of Hit Points equal to the roll’s total plus your spellcasting ability modifier. Those dice are then expended.
+
+Using a Higher-Level Spell Slot. The number of unexpended Hit Dice you can roll increases by one for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618831-arcane-vigor,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Augury,Divination,1 Minute,,,"V, S, M",,Instantaneous,,,,Foreknowledge,,"You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.
+
+The spell doesn’t account for circumstances, such as other spells, that might change the results.
+
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.",https://www.dndbeyond.com/spells/2618882-augury,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+2nd,Blindness/Deafness,Transmutation,1 Action,120 ft.,,V,,1 Minute,,,CON Save,Blinded (...),,"One creature that you can see within range must succeed on a Constitution saving throw, or it has the Blinded or Deafened condition (your choice) for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618938-blindness-deafness,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Borrowed Knowledge,Divination,1 Action,,,"V, S, M",,1 Hour,,,,Utility,,,https://www.dndbeyond.com/spells/1239802-borrowed-knowledge,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+2nd,Dust Devil,Conjuration,1 Action,60 ft.,(5 ft. *),"V, S, M",,1 Minute,,,STR Save,Bludgeoning,,"Choose an unoccupied 5-foot cube of air that you can see within range. An elemental force that resembles a dust devil appears in the cube and lasts for the spell’s duration.
+
+Any creature that ends its turn within 5 feet of the dust devil must make a Strength saving throw. On a failed save, the creature takes 1d8 bludgeoning damage and is pushed 10 feet away. On a successful save, the creature takes half as much damage and isn’t pushed.
+
+As a bonus action, you can move the dust devil up to 30 feet in any direction. If the dust devil moves over sand, dust, loose dirt, or small gravel, it sucks up the material and forms a 10-foot-radius cloud of debris around itself that lasts until the start of your next turn. The cloud heavily obscures its area.
+
+At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d8 for each slot level above 2nd.",https://www.dndbeyond.com/spells/2376-dust-devil,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+2nd,Find Steed,Conjuration,1 Action,30 ft.,,"V, S",,Instantaneous,,,,Summoning,,"You summon an otherworldly being that appears as a loyal steed in an unoccupied space of your choice within range. This creature uses the Otherworldly Steed stat block. If you already have a steed from this spell, the steed is replaced by the new one.
+
+The steed resembles a Large, rideable animal of your choice, such as a horse, a camel, a dire wolf, or an elk. Whenever you cast the spell, choose the steed’s creature type—Celestial, Fey, or Fiend—which determines certain traits in the stat block.
+
+Combat. The steed is an ally to you and your allies. In combat, it shares your Initiative count, and it functions as a controlled mount while you ride it (as defined in the rules on mounted combat). If you have the Incapacitated condition, the steed takes its turn immediately after yours and acts independently, focusing on protecting you.
+
+Disappearance of the Steed. The steed disappears if it drops to 0 Hit Points or if you die. When it disappears, it leaves behind anything it was wearing or carrying. If you cast this spell again, you decide whether you summon the steed that disappeared or a different one.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Large Celestial, Fey, or Fiend (Your Choice), Neutral
+
+AC 10 + 1 per spell level
+
+HP 5 + 10 per spell level (the steed has a number of Hit Dice [d10s] equal to the spell’s level)
+
+Speed 60 ft., Fly 60 ft. (requires level 4+ spell)
+
+Senses Passive Perception 11
+
+Languages Telepathy 1 mile (works only with you)
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Life Bond. When you regain Hit Points from a level 1+ spell, the steed regains the same number of Hit Points if you’re within 5 feet of it.
+
+Actions
+
+Otherworldly Slam. Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 plus the spell’s level of Radiant (Celestial), Psychic (Fey), or Necrotic (Fiend) damage.
+
+Bonus Actions
+
+Fell Glare (Fiend Only; Recharges after a Long Rest). Wisdom Saving Throw: DC equals your spell save DC, one creature within 60 feet the steed can see. Failure: The target has the Frightened condition until the end of your next turn.
+
+Fey Step (Fey Only; Recharges after a Long Rest). The steed teleports, along with its rider, to an unoccupied space of your choice up to 60 feet away from itself.
+
+Healing Touch (Celestial Only; Recharges after a Long Rest). One creature within 5 feet of the steed regains a number of Hit Points equal to 2d8 plus the spell’s level.",https://www.dndbeyond.com/spells/2618879-find-steed,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+2nd,Gentle Repose,Necromancy,1 Action,,,"V, S, M",,10 Days,,,,Warding,,"You touch a corpse or other remains. For the duration, the target is protected from decay and can’t become Undead.
+
+The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don’t count against the time limit of spells such as Raise Dead .",https://www.dndbeyond.com/spells/2618942-gentle-repose,Resurrection,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+2nd,Healing Spirit,Conjuration,1 Bonus Action,60 ft.,(5 ft. ),"V, S",,1 Minute,,,,Healing (...),,"You call forth a nature spirit to soothe the wounded. The intangible spirit appears in a space that is a 5-foot cube you can see within range. The spirit looks like a transparent beast or fey (your choice).
+
+Until the spell ends, whenever you or a creature you can see moves into the spirit’s space for the first time on a turn or starts its turn there, you can cause the spirit to restore 1d6 hit points to that creature (no action required). The spirit can’t heal constructs or undead. The spirit can heal a number of times equal to 1 + your spellcasting ability modifier (minimum of twice). After healing that number of times, the spirit disappears.
+
+As a bonus action on your turn, you can move the spirit up to 30 feet to a space you can see.
+
+At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the healing increases by 1d6 for each slot level above 2nd.",https://www.dndbeyond.com/spells/14873-healing-spirit,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Hold Person,Enchantment,1 Action,60 ft.,,"V, S, M",,1 Minute,,,WIS Save,Paralyzed,,"Choose a Humanoid that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.
+
+Using a Higher-Level Spell Slot. You can target one additional Humanoid for each spell slot level above 2.",https://www.dndbeyond.com/spells/2619153-hold-person,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Jim's Glowing Coin,Enchantment,1 Action,60 ft.,,"S, M, R",,1 Minute,,,WIS Save,,,"Of the many tactics employed by master magician and renowned adventurer Jim Darkmagic, the old glowing coin trick is a time-honored classic. When you cast the spell, you hurl the coin that is the spell’s material component to any spot within range. The coin lights up as if under the effect of a light spell. Each creature of your choice that you can see within 30 feet of the coin must succeed on a Wisdom saving throw or be distracted for the duration. While distracted, a creature has disadvantage on Wisdom ( Perception ) checks and initiative rolls.",https://www.dndbeyond.com/spells/188126-jims-glowing-coin,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Lesser Restoration,Abjuration,1 Bonus Action,,,"V, S",,Instantaneous,,,,Healing,,"You touch a creature and end one condition on it: Blinded , Deafened , Paralyzed , or Poisoned .",https://www.dndbeyond.com/spells/2619016-lesser-restoration,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Pass without Trace,Abjuration,1 Action,,(30 ft. ),"V, S, M",,1 Hour,,,,Buff (...),,"You radiate a concealing aura in a 30-foot Emanation for the duration. While in the aura, you and each creature you choose have a +10 bonus to Dexterity ( Stealth ) checks and leave no tracks.",https://www.dndbeyond.com/spells/2618849-pass-without-trace,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Prayer of Healing,Abjuration,10 Minutes,30 ft.,,V,,Instantaneous,,,,Healing,,"Up to five creatures of your choice who remain within range for the spell’s entire casting gain the benefits of a Short Rest and also regain 2d8 Hit Points. A creature can’t be affected by this spell again until that creature finishes a Long Rest.
+
+Using a Higher-Level Spell Slot. The healing increases by 1d8 for each spell slot level above 2.",https://www.dndbeyond.com/spells/2618892-prayer-of-healing,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+2nd,Protection from Poison,Abjuration,1 Action,,,"V, S",,1 Hour,,,,Buff (...),,"You touch a creature and end the Poisoned condition on it. For the duration, the target has Advantage on saving throws to avoid or end the Poisoned condition, and it has Resistance to Poison damage.",https://www.dndbeyond.com/spells/2618915-protection-from-poison,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+2nd,Pyrotechnics,Transmutation,1 Action,60 ft.,(5 ft. *),"V, S",,Instantaneous,,,CON Save,Blinded,,"Choose an area of nonmagical flame that you can see and that fits within a 5-foot cube within range. You can extinguish the fire in that area, and you create either fireworks or smoke when you do so.
+
+Fireworks . The target explodes with a dazzling display of colors. Each creature within 10 feet of the target must succeed on a Constitution saving throw or become blinded until the end of your next turn.
+
+Smoke. Thick black smoke spreads out from the target in a 20-foot radius, moving around corners. The area of the smoke is heavily obscured. The smoke persists for 1 minute or until a strong wind disperses it.",https://www.dndbeyond.com/spells/2396-pyrotechnics,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Ray of Enfeeblement,Necromancy,1 Action,60 ft.,,"V, S",,1 Minute,,,CON Save,Debuff,,"A beam of enervating energy shoots from you toward a creature within range. The target must make a Constitution saving throw. On a successful save, the target has Disadvantage on the next attack roll it makes until the start of your next turn.
+
+On a failed save, the target has Disadvantage on Strength-based D20 Tests for the duration. During that time, it also subtracts 1d8 from all its damage rolls. The target repeats the save at the end of each of its turns, ending the spell on a success.",https://www.dndbeyond.com/spells/2618926-ray-of-enfeeblement,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Spray of Cards,Conjuration,1 Action,,(15 ft. ),"V, S, M",,Instantaneous,,,DEX Save,Force,,"You spray a 15-foot cone of spectral cards. Each creature in that area must make a Dexterity saving throw. On a failed save, a creature takes 2d10 force damage and has the blinded condition until the end of its next turn. On a successful save, a creature takes half as much damage only.
+
+At Higher Levels. When you cast this spell using a spell slot of 3rd level or higher, the damage increases by 1d10 for each slot level above 2nd.",https://www.dndbeyond.com/spells/2158658-spray-of-cards,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+2nd,Warding Bond,Abjuration,1 Action,,,"V, S, M",,1 Hour,,,,Buff (...),,"You touch another creature that is willing and create a mystic connection between you and the target until the spell ends. While the target is within 60 feet of you, it gains a +1 bonus to AC and saving throws, and it has Resistance to all damage. Also, each time it takes damage, you take the same amount of damage.
+
+The spell ends if you drop to 0 Hit Points or if you and the target become separated by more than 60 feet. It also ends if the spell is cast again on either of the connected creatures.",https://www.dndbeyond.com/spells/2619203-warding-bond,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Antagonize,Enchantment,1 Action,30 ft.,,"V, S, M",,Instantaneous,,,WIS Save,Psychic,,"You whisper magical words that antagonize one creature of your choice within range. The target must make a Wisdom saving throw. On a failed save, the target takes 4d4 psychic damage and must immediately use its reaction to make a melee attack against another creature of your choice that you can see. If the target can’t make this attack (for example, because there is no one within its reach or because its reaction is unavailable), the target instead has disadvantage on the next attack roll it makes before the start of your next turn. On a successful save, the target takes half as much damage only.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d4 for each slot level above 3rd.",https://www.dndbeyond.com/spells/2158656-antagonize,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Aura of Vitality,Abjuration,1 Action,,(30 ft. ),V,,1 Minute,,,,Healing,,"An aura radiates from you in a 30-foot Emanation for the duration. When you create the aura and at the start of each of your turns while it persists, you can restore 2d6 Hit Points to one creature in it.",https://www.dndbeyond.com/spells/2618891-aura-of-vitality,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Beacon of Hope,Abjuration,1 Action,30 ft.,,"V, S",,1 Minute,,,,Buff,,"Choose any number of creatures within range. For the duration, each target has Advantage on Wisdom saving throws and Death Saving Throws and regains the maximum number of Hit Points possible from any healing.",https://www.dndbeyond.com/spells/2618911-beacon-of-hope,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Bestow Curse,Necromancy,1 Action,,,"V, S",,1 Minute,,,WIS Save,Debuff,,"You touch a creature, which must succeed on a Wisdom saving throw or become cursed for the duration. Until the curse ends, the target suffers one of the following effects of your choice:
+
+Choose one ability. The target has Disadvantage on ability checks and saving throws made with that ability.
+
+The target has Disadvantage on attack rolls against you.
+
+In combat, the target must succeed on a Wisdom saving throw at the start of each of its turns or be forced to take the Dodge action on that turn.
+
+If you deal damage to the target with an attack roll or a spell, the target takes an extra 1d8 Necrotic damage.
+
+Using a Higher-Level Spell Slot. If you cast this spell using a level 4 spell slot, you can maintain Concentration on it for up to 10 minutes. If you use a level 5+ spell slot, the spell doesn’t require Concentration, and the duration becomes 8 hours (level 5–6 slot) or 24 hours (level 7–8 slot). If you use a level 9 spell slot, the spell lasts until dispelled.",https://www.dndbeyond.com/spells/2618923-bestow-curse,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Catnap,Enchantment,1 Action,30 ft.,,"S, M",,10 Minutes,,,,Buff (...),,"You make a calming gesture, and up to three willing creatures of your choice that you can see within range fall unconscious for the spell’s duration. The spell ends on a target early if it takes damage or someone uses an action to shake or slap it awake. If a target remains unconscious for the full duration, that target gains the benefit of a short rest, and it can’t be affected by this spell again until it finishes a long rest.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, you can target one additional willing creature for each slot level above 3rd.",https://www.dndbeyond.com/spells/14754-catnap,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Crusader's Mantle,Evocation,1 Action,,(30 ft. ),V,,1 Minute,,,,Radiant,,"You radiate a magical aura in a 30-foot Emanation . While in the aura, you and your allies each deal an extra 1d4 Radiant damage when hitting with a weapon or an Unarmed Strike.",https://www.dndbeyond.com/spells/2619057-crusaders-mantle,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Feign Death,Necromancy,1 Action,,,"V, S, M",,1 Hour,,,,Blinded (...),,"You touch a willing creature and put it into a cataleptic state that is indistinguishable from death.
+
+For the duration, the target appears dead to outward inspection and to spells used to determine the target’s status. The target has the Blinded and Incapacitated conditions, and its Speed is 0.
+
+The target also has Resistance to all damage except Psychic damage, and it has Immunity to the Poisoned condition.",https://www.dndbeyond.com/spells/2618873-feign-death,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Gaseous Form,Transmutation,1 Action,,,"V, S, M",,1 Hour,,,,Buff (...),,"A willing creature you touch shape-shifts , along with everything it’s wearing and carrying, into a misty cloud for the duration. The spell ends on the target if it drops to 0 Hit Points or if it takes a Magic action to end the spell on itself.
+
+While in this form, the target’s only method of movement is a Fly Speed of 10 feet, and it can hover. The target can enter and occupy the space of another creature. The target has Resistance to Bludgeoning, Piercing, and Slashing damage; it has Immunity to the Prone condition; and it has Advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through narrow openings, but it treats liquids as though they were solid surfaces.
+
+The target can’t talk or manipulate objects, and any objects it was carrying or holding can’t be dropped, used, or otherwise interacted with. Finally, the target can’t attack or cast spells.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 3.",https://www.dndbeyond.com/spells/2618927-gaseous-form,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Glyph of Warding,Abjuration,1 Hour,,,"V, S, M",,Until Dispelled or Triggered,,,DEX Save,Acid (...),,"You inscribe a glyph that later unleashes a magical effect. You inscribe it either on a surface (such as a table or a section of floor) or within an object that can be closed (such as a book or chest) to conceal the glyph. The glyph can cover an area no larger than 10 feet in diameter. If the surface or object is moved more than 10 feet from where you cast this spell, the glyph is broken, and the spell ends without being triggered.
+
+The glyph is nearly imperceptible and requires a successful Wisdom ( Perception ) check against your spell save DC to notice.
+
+When you inscribe the glyph, you set its trigger and choose whether it’s an explosive rune or a spell glyph, as explained below.
+
+Set the Trigger. You decide what triggers the glyph when you cast the spell. For glyphs inscribed on a surface, common triggers include touching or stepping on the glyph, removing another object covering it, or approaching within a certain distance of it. For glyphs inscribed within an object, common triggers include opening that object or seeing the glyph. Once a glyph is triggered, this spell ends.
+
+You can refine the trigger so that only creatures of certain types activate it (for example, the glyph could be set to affect Aberrations). You can also set conditions for creatures that don’t trigger the glyph, such as those who say a certain password.
+
+Explosive Rune. When triggered, the glyph erupts with magical energy in a 20-foot-radius Sphere centered on the glyph. Each creature in the area makes a Dexterity saving throw. A creature takes 5d8 Acid, Cold, Fire, Lightning, or Thunder damage (your choice when you create the glyph) on a failed save or half as much damage on a successful one.
+
+Spell Glyph. You can store a prepared spell of level 3 or lower in the glyph by casting it as part of creating the glyph. The spell must target a single creature or an area. The spell being stored has no immediate effect when cast in this way.
+
+When the glyph is triggered, the stored spell takes effect. If the spell has a target, it targets the creature that triggered the glyph. If the spell affects an area, the area is centered on that creature. If the spell summons Hostile creatures or creates harmful objects or traps, they appear as close as possible to the intruder and attack it. If the spell requires Concentration , it lasts until the end of its full duration.
+
+Using a Higher-Level Spell Slot. The damage of an explosive rune increases by 1d8 for each spell slot level above 3. If you create a spell glyph, you can store any spell of up to the same level as the spell slot you use for the Glyph of Warding .",https://www.dndbeyond.com/spells/2618951-glyph-of-warding,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Intellect Fortress,Abjuration,1 Action,30 ft.,,V,,1 Hour,,,,Buff,,"For the duration, you or one willing creature you can see within range has resistance to psychic damage, as well as advantage on Intelligence, Wisdom, and Charisma saving throws.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, you can target one additional creature for each slot level above 3rd. The creatures must be within 30 feet of each other when you target them.",https://www.dndbeyond.com/spells/718549-intellect-fortress,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Leomund's Tiny Hut,Evocation,1 Minute,,(10 ft. ),"V, S, M",,8 Hours,,,,Utility,,"A 10-foot Emanation springs into existence around you and remains stationary for the duration. The spell fails when you cast it if the Emanation isn’t big enough to fully encapsulate all creatures in its area.
+
+Creatures and objects within the Emanation when you cast the spell can move through it freely. All other creatures and objects are barred from passing through it. Spells of level 3 or lower can’t be cast through it, and the effects of such spells can’t extend into it.
+
+The atmosphere inside the Emanation is comfortable and dry, regardless of the weather outside. Until the spell ends, you can command the interior to have Dim Light or Darkness (no action required). The Emanation is opaque from the outside and of any color you choose, but it’s transparent from the inside.
+
+The spell ends early if you leave the Emanation or if you cast it again.",https://www.dndbeyond.com/spells/2619013-leomunds-tiny-hut,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Life Transference,Necromancy,1 Action,30 ft.,,"V, S",,Instantaneous,,,,Necrotic,,"You sacrifice some of your health to mend another creature’s injuries. You take 4d8 necrotic damage, which can’t be reduced in any way, and one creature of your choice that you can see within range regains a number of hit points equal to twice the necrotic damage you take.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for each slot level above 3rd.",https://www.dndbeyond.com/spells/14880-life-transference,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Magic Circle,Abjuration,1 Minute,10 ft.,(10 ft. *),"V, S, M",,1 Hour,,,CHA Save,,,"You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the Cylinder intersects with the floor or other surface.
+
+Choose one or more of the following types of creatures: Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:
+
+The creature can’t willingly enter the Cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a Charisma saving throw.
+
+The creature has Disadvantage on attack rolls against targets within the Cylinder.
+
+Targets within the Cylinder can’t be possessed by or gain the Charmed or Frightened condition from the creature.
+
+Each time you cast this spell, you can cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the Cylinder and protecting targets outside it.
+
+Using a Higher-Level Spell Slot. The duration increases by 1 hour for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619018-magic-circle,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Mass Healing Word,Abjuration,1 Bonus Action,60 ft.,,V,,Instantaneous,,,,Healing,,"Up to six creatures of your choice that you can see within range regain Hit Points equal to 2d4 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 1d4 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619028-mass-healing-word,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Nondetection,Abjuration,1 Action,,,"V, S, M",,8 Hours,,,,Deception,,"For the duration, you hide a target that you touch from Divination spells. The target can be a willing creature, or it can be a place or an object no larger than 10 feet in any dimension. The target can’t be targeted by any Divination spell or perceived through magical scrying sensors.",https://www.dndbeyond.com/spells/2619122-nondetection,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Protection from Energy,Abjuration,1 Action,,,"V, S",,1 Hour,,,,Buff (...),,"For the duration, the willing creature you touch has Resistance to one damage type of your choice: Acid, Cold, Fire, Lightning, or Thunder.",https://www.dndbeyond.com/spells/2618908-protection-from-energy,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Remove Curse,Abjuration,1 Action,,,"V, S",,Instantaneous,,,,Buff,,"At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner’s Attunement to the object so it can be removed or discarded.",https://www.dndbeyond.com/spells/2618943-remove-curse,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+3rd,Revivify,Necromancy,1 Action,,,"V, S, M",,Instantaneous,,,,Healing,,"You touch a creature that has died within the last minute. That creature revives with 1 Hit Point. This spell can’t revive a creature that has died of old age, nor does it restore any missing body parts.",https://www.dndbeyond.com/spells/2618956-revivify,Resurrection,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+3rd,Sending,Divination,1 Action,,,"V, S, M",,Instantaneous,,,,Communication,,"You send a short message of 25 words or fewer to a creature you have met or a creature described to you by someone who has met it. The target hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables targets to understand the meaning of your message.
+
+You can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn’t arrive. You know if the delivery fails.
+
+Upon receiving your message, a creature can block your ability to reach it again with this spell for 8 hours. If you try to send another message during that time, you learn that you are blocked, and the spell fails.",https://www.dndbeyond.com/spells/2619015-sending,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+3rd,Slow,Transmutation,1 Action,120 ft.,(40 ft. ),"V, S, M",,1 Minute,,,WIS Save,Control (...),,"You alter time around up to six creatures of your choice in a 40-foot Cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration.
+
+An affected target’s Speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can’t take Reactions. On its turns, it can take either an action or a Bonus Action, not both, and it can make only one attack if it takes the Attack action. If it casts a spell with a Somatic component, there is a 25 percent chance the spell fails as a result of the target making the spell’s gestures too slowly.
+
+An affected target repeats the save at the end of each of its turns, ending the spell on itself on a success.",https://www.dndbeyond.com/spells/2619066-slow,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Speak with Dead,Necromancy,1 Action,10 ft.,,"V, S, M",,10 Minutes,,,,Communication (...),,"You grant the semblance of life to a corpse of your choice within range, allowing it to answer questions you pose. The corpse must have a mouth, and this spell fails if the deceased creature was Undead when it died. The spell also fails if the corpse was the target of this spell within the past 10 days.
+
+Until the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are antagonistic toward it or it recognizes you as an enemy. This spell doesn’t return the creature’s soul to its body, only its animating spirit. Thus, the corpse can’t learn new information, doesn’t comprehend anything that has happened since it died, and can’t speculate about future events.",https://www.dndbeyond.com/spells/2619068-speak-with-dead,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+3rd,Spirit Guardians,Conjuration,1 Action,,(15 ft. ),"V, S, M",,10 Minutes,,,WIS Save,Radiant (...),,"Protective spirits flit around you in a 15-foot Emanation for the duration. If you are good or neutral, their spectral form appears angelic or fey (your choice). If you are evil, they appear fiendish.
+
+When you cast this spell, you can designate creatures to be unaffected by it. Any other creature’s Speed is halved in the Emanation, and whenever the Emanation enters a creature’s space and whenever a creature enters the Emanation or ends its turn there, the creature must make a Wisdom saving throw. On a failed save, the creature takes 3d8 Radiant damage (if you are good or neutral) or 3d8 Necrotic damage (if you are evil). On a successful save, the creature takes half as much damage. A creature makes this save only once per turn.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619078-spirit-guardians,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+3rd,Spirit Shroud,Necromancy,1 Bonus Action,,,"V, S",,1 Minute,,,,Cold (...),,"You call forth spirits of the dead, which flit around you for the spell’s duration. The spirits are intangible and invulnerable.
+
+Until the spell ends, any attack you make deals 1d8 extra damage when you hit a creature within 10 feet of you. This damage is radiant, necrotic, or cold (your choice when you cast the spell). Any creature that takes this damage can’t regain hit points until the start of your next turn.
+
+In addition, any creature of your choice that you can see that starts its turn within 10 feet of you has its speed reduced by 10 feet until the start of your next turn.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, the damage increases by 1d8 for every two slot levels above 3rd.",https://www.dndbeyond.com/spells/718581-spirit-shroud,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+3rd,Stinking Cloud,Conjuration,1 Action,90 ft.,(20 ft. ),"V, S, M",,1 Minute,,,CON Save,Poisoned,,"You create a 20-foot-radius Sphere of yellow, nauseating gas centered on a point within range. The cloud is Heavily Obscured . The cloud lingers in the air for the duration or until a strong wind (such as the one created by Gust of Wind ) disperses it.
+
+Each creature that starts its turn in the Sphere must succeed on a Constitution saving throw or have the Poisoned condition until the end of the current turn. While Poisoned in this way, the creature can’t take an action or a Bonus Action.",https://www.dndbeyond.com/spells/2619091-stinking-cloud,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+3rd,Summon Lesser Demons,Conjuration,1 Action,60 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You utter foul words, summoning demons from the chaos of the Abyss. Roll on the following table to determine what appears.
+
+The DM chooses the demons, such as manes or dretches , and you choose the unoccupied spaces you can see within range where they appear. A summoned demon disappears when it drops to 0 hit points or when the spell ends.
+
+The demons are hostile to all creatures, including you. Roll initiative for the summoned demons as a group, which has its own turns. The demons pursue and attack the nearest non-demons to the best of their ability.
+
+As part of casting the spell, you can form a circle on the ground with the blood used as a material component. The circle is large enough to encompass your space. While the spell lasts, the summoned demons can’t cross the circle or harm it, and they can’t target anyone within it. Using the material component in this manner consumes it when the spell ends.
+
+At Higher Levels. When you cast this spell using a spell slot of 6th or 7th level, you summon twice as many demons. If you cast it using a spell slot of 8th or 9th level, you summon three times as many demons.",https://www.dndbeyond.com/spells/14604-summon-lesser-demons,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+3rd,Summon Shadowspawn,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth a shadowy spirit. It manifests in an unoccupied space that you can see within range. This corporeal form uses the Shadow Spirit stat block. When you cast the spell, choose an emotion: Fury, Despair, or Fear. The creature resembles a misshapen biped marked by the chosen emotion, which determines certain traits in its stat block. The creature disappears when it drops to 0 hit points or when the spell ends.
+
+The creature is an ally to you and your companions. In combat, the creature shares your initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its move to avoid danger.
+
+At Higher Levels. When you cast this spell using a spell slot of 4th level or higher, use the higher level wherever the spell’s level appears in the stat block.
+
+Shadow Spirit
+
+Medium monstrosity
+
+Armor Class 11 + the level of the spell (natural armor)
+
+Hit Points 35 + 15 for each spell level above 3rd
+
+Speed 40 ft.
+
+Damage Resistances necrotic
+
+Condition Immunities frightened
+
+Senses darkvision 120 ft., passive Perception 10
+
+Languages understands the languages you speak
+
+Challenge — Proficiency Bonus equals your bonus
+
+Terror Frenzy (Fury Only). The spirit has advantage on attack rolls against frightened creatures.
+
+Weight of Sorrow (Despair Only). Any creature, other than you, that starts its turn within 5 feet of the spirit has its speed reduced by 20 feet until the start of that creature’s next turn.
+
+Actions
+
+Multiattack. The spirit makes a number of attacks equal to half this spell’s level (rounded down).
+
+Chilling Rend. Melee Weapon Attack: your spell attack modifier to hit, reach 5 ft., one target. Hit: 1d12 + 3 + the spell’s level cold damage.
+
+Dreadful Scream (1/Day). The spirit screams. Each creature within 30 feet of it must succeed on a Wisdom saving throw against your spell save DC or be frightened of the spirit for 1 minute. The frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+Bonus Actions
+
+Shadow Stealth (Fear Only). While in dim light or darkness, the spirit takes the Hide action.",https://www.dndbeyond.com/spells/719948-summon-shadowspawn,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+3rd,Summon Undead,Necromancy,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth an Undead spirit. It manifests in an unoccupied space that you can see within range and uses the Undead Spirit stat block. When you cast the spell, choose the creature’s form: Ghostly, Putrid, or Skeletal. The spirit resembles an Undead creature with the chosen form, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Medium Undead, Neutral
+
+AC 11 + the spell’s level
+
+HP 30 (Ghostly and Putrid only) or 20 (Skeletal only) + 10 for each spell level above 3
+
+Speed 30 ft.; Fly 40 ft. (hover; Ghostly only)
+
+Immunities Necrotic, Poison; Exhaustion , Frightened , Paralyzed , Poisoned
+
+Senses Darkvision 60 ft.; Passive Perception 10
+
+Languages Understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Festering Aura (Putrid Only). Constitution Saving Throw: DC equals your spell save DC, any creature (other than you) that starts its turn within a 5-foot Emanation originating from the spirit. Failure: The creature has the Poisoned condition until the start of its next turn.
+
+Incorporeal Passage (Ghostly Only). The spirit can move through other creatures and objects as if they were Difficult Terrain . If it ends its turn inside an object, it is shunted to the nearest unoccupied space and takes 1d10 Force damage for every 5 feet traveled.
+
+Actions
+
+Multiattack. The spirit makes a number of attacks equal to half this spell’s level (round down).
+
+Deathly Touch (Ghostly Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 3 + the spell’s level Necrotic damage, and the target has the Frightened condition until the end of its next turn.
+
+Grave Bolt (Skeletal Only). Ranged Attack Roll: Bonus equals your spell attack modifier, range 150 ft. Hit: 2d4 + 3 + the spell’s level Necrotic damage.
+
+Rotting Claw (Putrid Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d6 + 3 + the spell’s level Slashing damage. If the target has the Poisoned condition, it has the Paralyzed condition until the end of its next turn.",https://www.dndbeyond.com/spells/2619119-summon-undead,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+3rd,Tongues,Divination,1 Action,,,"V, M",,1 Hour,,,,Communication (...),,"This spell grants the creature you touch the ability to understand any spoken or signed language that it hears or sees. Moreover, when the target communicates by speaking or signing, any creature that knows at least one language can understand it if that creature can hear the speech or see the signing.",https://www.dndbeyond.com/spells/2619190-tongues,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+3rd,Vampiric Touch,Necromancy,1 Action,,,"V, S",,1 Minute,,,Melee,Necrotic,,"The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against one creature within reach. On a hit, the target takes 3d6 Necrotic damage, and you regain Hit Points equal to half the amount of Necrotic damage dealt.
+
+Until the spell ends, you can make the attack again on each of your turns as a Magic action, targeting the same creature or a different one.
+
+Using a Higher-Level Spell Slot. The damage increases by 1d6 for each spell slot level above 3.",https://www.dndbeyond.com/spells/2619214-vampiric-touch,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+4th,Aura of Life,Abjuration,1 Action,,(30 ft. ),V,,10 Minutes,,,,Healing (...),,"An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Necrotic damage, and your Hit Point maximums can’t be reduced. If an ally with 0 Hit Points starts its turn in the aura, that ally regains 1 Hit Point.",https://www.dndbeyond.com/spells/2618884-aura-of-life,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+4th,Aura of Purity,Abjuration,1 Action,,(30 ft. ),V,,10 Minutes,,,,Buff (...),,"An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Resistance to Poison damage and Advantage on saving throws to avoid or end effects that include the Blinded , Charmed , Deafened , Frightened , Paralyzed , Poisoned , or Stunned condition.",https://www.dndbeyond.com/spells/2618888-aura-of-purity,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+4th,Banishment,Abjuration,1 Action,30 ft.,,"V, S, M",,1 Minute,,,CHA Save,Banishment (...),,"One creature that you can see within range must succeed on a Charisma saving throw or be transported to a harmless demiplane for the duration. While there, the target has the Incapacitated condition. When the spell ends, the target reappears in the space it left or in the nearest unoccupied space if that space is occupied.
+
+If the target is an Aberration, a Celestial, an Elemental, a Fey, or a Fiend, the target doesn’t return if the spell lasts for 1 minute. The target is instead transported to a random location on a plane (DM’s choice) associated with its creature type.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 4.",https://www.dndbeyond.com/spells/2618906-banishment,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Death Ward,Abjuration,1 Action,,,"V, S",,8 Hours,,,,Buff (...),,"You touch a creature and grant it a measure of protection from death. The first time the target would drop to 0 Hit Points before the spell ends, the target instead drops to 1 Hit Point, and the spell ends.
+
+If the spell is still in effect when the target is subjected to an effect that would kill it instantly without dealing damage, that effect is negated against the target, and the spell ends.",https://www.dndbeyond.com/spells/2619085-death-ward,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+4th,Divination,Divination,1 Action,,,"V, S, M",,Instantaneous,,,,Foreknowledge,,"This spell puts you in contact with a god or a god’s servants. You ask one question about a specific goal, event, or activity to occur within 7 days. The DM offers a truthful reply, which might be a short phrase or cryptic rhyme. The spell doesn’t account for circumstances that might change the answer, such as the casting of other spells.
+
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.",https://www.dndbeyond.com/spells/2619140-divination,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+4th,Elemental Bane,Transmutation,1 Action,90 ft.,,"V, S",,1 Minute,,,CON Save,Acid (...),,"Choose one creature you can see within range, and choose one of the following damage types: acid, cold, fire, lightning, or thunder. The target must succeed on a Constitution saving throw or be affected by the spell for its duration. The first time each turn the affected target takes damage of the chosen type, the target takes an extra 2d6 damage of that type. Moreover, the target loses any resistance to that damage type until the spell ends.
+
+At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, you can target one additional creature for each slot level above 4th. The creatures must be within 30 feet of each other when you target them.",https://www.dndbeyond.com/spells/2379-elemental-bane,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+4th,Evard's Black Tentacles,Conjuration,1 Action,90 ft.,(20 ft. ),"V, S, M",,1 Minute,,,STR Save,Bludgeoning,,"Squirming, ebony tentacles fill a 20-foot square on ground that you can see within range. For the duration, these tentacles turn the ground in that area into Difficult Terrain .
+
+Each creature in that area makes a Strength saving throw. On a failed save, it takes 3d6 Bludgeoning damage, and it has the Restrained condition until the spell ends. A creature also makes that save if it enters the area or ends it turn there. A creature makes that save only once per turn.
+
+A Restrained creature can take an action to make a Strength ( Athletics ) check against your spell save DC, ending the condition on itself on a success.",https://www.dndbeyond.com/spells/2619187-evards-black-tentacles,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+4th,Find Greater Steed,Conjuration,10 Minutes,30 ft.,,"V, S",,Instantaneous,,,,Summoning,,"You summon a spirit that assumes the form of a loyal, majestic mount. Appearing in an unoccupied space within range, the spirit takes on a form you choose: a griffon , a pegasus , a peryton , a dire wolf , a rhinoceros , or a saber-toothed tiger . The creature has the statistics provided in the Monster Manual for the chosen form, though it is a celestial, a fey, or a fiend (your choice) instead of its normal creature type. Additionally, if it has an Intelligence score of 5 or lower, its Intelligence becomes 6, and it gains the ability to understand one language of your choice that you speak.
+
+You control the mount in combat. While the mount is within 1 mile of you, you can communicate with it telepathically. While mounted on it, you can make any spell you cast that targets only you also target the mount.
+
+The mount disappears temporarily when it drops to 0 hit points or when you dismiss it as an action. Casting this spell again re-summons the bonded mount, with all its hit points restored and any conditions removed.
+
+You can’t have more than one mount bonded by this spell or find steed at the same time. As an action, you can release a mount from its bond, causing it to disappear permanently.
+
+Whenever the mount disappears, it leaves behind any objects it was wearing or carrying.",https://www.dndbeyond.com/spells/14871-find-greater-steed,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Fire Shield,Evocation,1 Action,,,"V, S, M",,10 Minutes,,,,Fire (...),,"Wispy flames wreathe your body for the duration, shedding Bright Light in a 10-foot radius and Dim Light for an additional 10 feet.
+
+The flames provide you with a warm shield or a chill shield, as you choose. The warm shield grants you Resistance to Cold damage, and the chill shield grants you Resistance to Fire damage.
+
+In addition, whenever a creature within 5 feet of you hits you with a melee attack roll, the shield erupts with flame. The attacker takes 2d8 Fire damage from a warm shield or 2d8 Cold damage from a chill shield.",https://www.dndbeyond.com/spells/2618894-fire-shield,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+4th,Fount of Moonlight,Evocation,1 Action,,,"V, S",,10 Minutes,,,CON Save,Radiant,,"A cool light wreathes your body for the duration, emitting Bright Light in a 20-foot radius and Dim Light for an additional 20 feet.
+
+Until the spell ends, you have Resistance to Radiant damage, and your melee attacks deal an extra 2d6 Radiant damage on a hit.
+
+In addition, immediately after you take damage from a creature you can see within 60 feet of yourself, you can take a Reaction to force the creature to make a Constitution saving throw. On a failed save, the creature has the Blinded condition until the end of your next turn.",https://www.dndbeyond.com/spells/2618835-fount-of-moonlight,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+4th,Freedom of Movement,Abjuration,1 Action,,,"V, S, M",,1 Hour,,,,Buff (...),,"You touch a willing creature. For the duration, the target’s movement is unaffected by Difficult Terrain , and spells and other magical effects can neither reduce the target’s Speed nor cause the target to have the Paralyzed or Restrained conditions. The target also has a Swim Speed equal to its Speed.
+
+In addition, the target can spend 5 feet of movement to automatically escape from nonmagical restraints, such as manacles or a creature imposing the Grappled condition on it.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 4.",https://www.dndbeyond.com/spells/2618921-freedom-of-movement,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+4th,Gate Seal,Abjuration,1 Minute,60 ft.,(30 ft. ),"V, S, M",,24 Hours,,,,Control (...),,,https://www.dndbeyond.com/spells/2119578-gate-seal,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+4th,Giant Insect,Conjuration,1 Action,60 ft.,,"V, S",,10 Minutes,,,,Summoning,,"You summon a giant centipede, spider, or wasp (chosen when you cast the spell). It manifests in an unoccupied space you can see within range and uses the Giant Insect stat block. The form you choose determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Large Beast, Unaligned
+
+AC 11 + the spell’s level
+
+HP 30 + 10 for each spell level above 4
+
+Speed 40 ft., Climb 40 ft., Fly 40 ft. (Wasp only)
+
+Senses Darkvision 60 ft., Passive Perception 12
+
+Languages Understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Spider Climb. The insect can climb difficult surfaces, including along ceilings, without needing to make an ability check.
+
+Actions
+
+Multiattack. The insect makes a number of attacks equal to half this spell’s level (round down).
+
+Poison Jab. Melee Attack Roll: Bonus equals your spell attack modifier, reach 10 ft. Hit: 1d6 + 3 plus the spell’s level Piercing damage plus 1d4 Poison damage.
+
+Web Bolt (Spider Only). Ranged Attack Roll: Bonus equals your spell attack modifier, range 60 ft. Hit: 1d10 + 3 plus the spell’s level Bludgeoning damage, and the target’s Speed is reduced to 0 until the start of the insect’s next turn.
+
+Bonus Actions
+
+Venomous Spew (Centipede Only). Constitution Saving Throw: Your spell save DC, one creature the insect can see within 10 feet. Failure: The target has the Poisoned condition until the start of the insect’s next turn.",https://www.dndbeyond.com/spells/2618944-giant-insect,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+4th,Guardian of Faith,Conjuration,1 Action,30 ft.,,V,,8 Hours,,,DEX Save,Radiant,,"A Large spectral guardian appears and hovers for the duration in an unoccupied space that you can see within range. The guardian occupies that space and is invulnerable, and it appears in a form appropriate for your deity or pantheon.
+
+Any enemy that moves to a space within 10 feet of the guardian for the first time on a turn or starts its turn there makes a Dexterity saving throw, taking 20 Radiant damage on a failed save or half as much damage on a successful one. The guardian vanishes when it has dealt a total of 60 damage.",https://www.dndbeyond.com/spells/2619135-guardian-of-faith,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Leomund's Secret Chest,Conjuration,1 Action,,,"V, S, M",,Until Dispelled,,,,Utility,,"You hide a chest and all its contents on the Ethereal Plane. You must touch the chest and the miniature replica that serve as Material components for the spell. The chest can contain up to 12 cubic feet of nonliving material (3 feet by 2 feet by 2 feet).
+
+While the chest remains on the Ethereal Plane, you can take a Magic action and touch the replica to recall the chest. It appears in an unoccupied space on the ground within 5 feet of you. You can send the chest back to the Ethereal Plane by taking a Magic action to touch the chest and the replica.
+
+After 60 days, there is a cumulative 5 percent chance at the end of each day that the spell ends. The spell also ends if you cast this spell again or if the Tiny replica chest is destroyed. If the spell ends and the larger chest is on the Ethereal Plane, the chest remains there for you or someone else to find.",https://www.dndbeyond.com/spells/2619012-leomunds-secret-chest,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Mordenkainen's Faithful Hound,Conjuration,1 Action,30 ft.,,"V, S, M",,8 Hours,,,DEX Save,Force,,"You conjure a phantom watchdog in an unoccupied space that you can see within range. The hound remains for the duration or until the two of you are more than 300 feet apart from each other.
+
+No one but you can see the hound, and it is intangible and invulnerable. When a Small or larger creature comes within 30 feet of it without first speaking the password that you specify when you cast this spell, the hound starts barking loudly. The hound has Truesight with a range of 30 feet.
+
+At the start of each of your turns, the hound attempts to bite one enemy within 5 feet of it. That enemy must succeed on a Dexterity saving throw or take 4d8 Force damage.
+
+On your later turns, you can take a Magic action to move the hound up to 30 feet.",https://www.dndbeyond.com/spells/2619110-mordenkainens-faithful-hound,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Otiluke's Resilient Sphere,Abjuration,1 Action,30 ft.,,"V, S, M",,1 Minute,,,DEX Save,Control (...),,"A shimmering sphere encloses a Large or smaller creature or object within range. An unwilling creature must succeed on a Dexterity saving throw or be enclosed for the duration.
+
+Nothing—not physical objects, energy, or other spell effects—can pass through the barrier, in or out, though a creature in the sphere can breathe there. The sphere is immune to all damage, and a creature or object inside can’t be damaged by attacks or effects originating from outside, nor can a creature inside the sphere damage anything outside it.
+
+The sphere is weightless and just large enough to contain the creature or object inside. An enclosed creature can take an action to push against the sphere’s walls and thus roll the sphere at up to half the creature’s Speed. Similarly, the globe can be picked up and moved by other creatures.
+
+A Disintegrate spell targeting the globe destroys it without harming anything inside.",https://www.dndbeyond.com/spells/2619128-otilukes-resilient-sphere,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+4th,Spirit of Death,Necromancy,1 Action,60 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth a spirit that embodies death. The spirit manifests in an unoccupied space you can see within range and uses the reaper spirit stat block. The spirit disappears when it is reduced to 0 hit points or when the spell ends.
+
+The spirit is an ally to you and your companions. In combat, the spirit shares your initiative count and takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue the spirit any commands, it takes the Dodge action and uses its movement to avoid danger.
+
+Medium Undead, Neutral
+
+Armor Class 11 + the level of the spell (natural armor)
+
+Hit Points 40 + 10 for each spell level above 4th
+
+Speed 30 ft., fly 30 ft. (hover)
+
+STR
+
+16 (+3)
+
+DEX
+
+16 (+3)
+
+CON
+
+16 (+3)
+
+INT
+
+16 (+3)
+
+WIS
+
+16 (+3)
+
+CHA
+
+16 (+3)
+
+Damage Immunities necrotic, poison
+
+Condition Immunities charmed , exhaustion , frightened , paralyzed , poisoned
+
+Senses darkvision 60 ft., passive Perception 13
+
+Languages understands the languages you speak
+
+Challenge — Proficiency Bonus equals your bonus
+
+Incorporeal Movement. The spirit can move through other creatures and objects as if they were difficult terrain . If it ends its turn inside an object, it is shunted to the nearest unoccupied space and takes 1d10 force damage for every 5 feet shunted.
+
+Actions
+
+Multiattack. The spirit makes a number of Reaping Scythe attacks equal to half the level of the spell (rounded down).
+
+Reaping Scythe. Melee Weapon Attack: your spell attack modifier to hit (with advantage), reach 5 ft., the creature haunted by Haunt Creature. Hit: 1d8 + 3 + the spell’s level necrotic damage.
+
+Bonus Actions
+
+Haunt Creature. The spirit targets a creature it can see within 10 feet of itself and begins haunting it. While the target is haunted, you and the spirit sense the direction and distance to the target if it is on the same plane of existence as you. Additionally, if the target starts its turn within 10 feet of the spirit, the target must succeed on a Wisdom saving throw against your spell save DC or have the frightened condition until the start of the target’s next turn. The target remains haunted until it dies, the spirit disappears, or the spirit uses this action again.
+
+At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, use the higher level wherever the spell’s level appears in the reaper spirit stat block.",https://www.dndbeyond.com/spells/2158657-spirit-of-death,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Staggering Smite,Enchantment,1 Bonus Action *,,,V,,Instantaneous,,,WIS Save,Psychic,,"The target takes an extra 4d6 Psychic damage from the attack, and the target must succeed on a Wisdom saving throw or have the Stunned condition until the end of your next turn.
+
+Using a Higher-Level Spell Slot. The extra damage increases by 1d6 for each spell slot level above 4.",https://www.dndbeyond.com/spells/2619084-staggering-smite,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+4th,Summon Aberration,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth an aberrant spirit. It manifests in an unoccupied space that you can see within range and uses the Aberrant Spirit stat block. When you cast the spell, choose Beholderkin, Mind Flayer, or Slaad. The creature resembles an Aberration of that kind, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, it shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Medium Aberration, Neutral
+
+AC 11 + the spell’s level
+
+HP 40 + 10 for each spell level above 4
+
+Speed 30 ft.; Fly 30 ft. (hover; Beholderkin only)
+
+Immunities Psychic
+
+Senses Darkvision 60 ft.; Passive Perception 10
+
+Languages Deep Speech, understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Regeneration (Slaad Only). The spirit regains 5 Hit Points at the start of its turn if it has at least 1 Hit Point.
+
+Whispering Aura (Mind Flayer Only). At the start of each of the spirit’s turns, the spirit emits psionic energy if it doesn’t have the Incapacitated condition. Wisdom Saving Throw: DC equals your spell save DC, each creature (other than you) within 5 feet of the spirit. Failure: 2d6 Psychic damage.
+
+Actions
+
+Multiattack. The spirit makes a number of attacks equal to half this spell’s level (round down).
+
+Claw (Slaad Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d10 + 3 + the spell’s level Slashing damage, and the target can’t regain Hit Points until the start of the spirit’s next turn.
+
+Eye Ray (Beholderkin Only). Ranged Attack Roll: Bonus equals your spell attack modifier, range 150 ft. Hit: 1d8 + 3 + the spell’s level Psychic damage.
+
+Psychic Slam (Mind Flayer Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 3 + the spell’s level Psychic damage.",https://www.dndbeyond.com/spells/2619105-summon-aberration,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Summon Greater Demon,Conjuration,1 Action,60 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You utter foul words, summoning one demon from the chaos of the Abyss. You choose the demon’s type, which must be one of challenge rating 5 or lower, such as a shadow demon or a barlgura . The demon appears in an unoccupied space you can see within range, and the demon disappears when it drops to 0 hit points or when the spell ends.
+
+Roll initiative for the demon, which has its own turns. When you summon it and on each of your turns thereafter, you can issue a verbal command to it (requiring no action on your part), telling it what it must do on its next turn. If you issue no command, it spends its turn attacking any creature within reach that has attacked it.
+
+At the end of each of the demon’s turns, it makes a Charisma saving throw. The demon has disadvantage on this saving throw if you say its true name. On a failed save, the demon continues to obey you. On a successful save, your control of the demon ends for the rest of the duration, and the demon spends its turns pursuing and attacking the nearest non-demons to the best of its ability. If you stop concentrating on the spell before it reaches its full duration, an uncontrolled demon doesn’t disappear for 1d6 rounds if it still has hit points.
+
+As part of casting the spell, you can form a circle on the ground with the blood used as a material component. The circle is large enough to encompass your space. While the spell lasts, the summoned demon can’t cross the circle or harm it, and it can’t target anyone within it. Using the material component in this manner consumes it when the spell ends.
+
+At Higher Levels. When you cast this spell using a spell slot of 5th level or higher, the challenge rating increases by 1 for each slot level above 4th.",https://www.dndbeyond.com/spells/14603-summon-greater-demon,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+4th,Watery Sphere,Conjuration,1 Action,90 ft.,(5 ft. ),"V, S, M",,1 Minute,,,STR Save,Restrained (...),,"You conjure up a sphere of water with a 5-foot radius at a point you can see within range. The sphere can hover but no more than 10 feet off the ground. The sphere remains for the spell’s duration.
+
+Any creature in the sphere’s space must make a Strength saving throw. On a successful save, a creature is ejected from that space to the nearest unoccupied space of the creature’s choice outside the sphere. A Huge or larger creature succeeds on the saving throw automatically, and a Large or smaller creature can choose to fail it. On a failed save, a creature is restrained by the sphere and is engulfed by the water. At the end of each of its turns, a restrained target can repeat the saving throw, ending the effect on itself on a success.
+
+The sphere can restrain as many as four Medium or smaller creatures or one Large creature. If the sphere restrains a creature that causes it to exceed this capacity, a random creature that was already restrained by the sphere falls out of it and lands prone in a space within 5 feet of it.
+
+As an action, you can move the sphere up to 30 feet in a straight line. If it moves over a pit, a cliff, or other drop-off, it safely descends until it is hovering 10 feet above the ground. Any creature restrained by the sphere moves with it. You can ram the sphere into creatures, forcing them to make the saving throw.
+
+When the spell ends, the sphere falls to the ground and extinguishes all normal flames within 30 feet of it. Any creature restrained by the sphere is knocked prone in the space where it falls. The water then vanishes.",https://www.dndbeyond.com/spells/2408-watery-sphere,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+5th,Antilife Shell,Abjuration,1 Action,,(10 ft. *),"V, S",,1 Hour,,,,Control (...),,"An aura extends from you in a 10-foot Emanation for the duration. The aura prevents creatures other than Constructs and Undead from passing or reaching through it. An affected creature can cast spells or make attacks with Ranged or Reach weapons through the barrier.
+
+If you move so that an affected creature is forced to pass through the barrier, the spell ends.",https://www.dndbeyond.com/spells/2618856-antilife-shell,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Circle of Power,Abjuration,1 Action,,(30 ft. ),V,,10 Minutes,,,,Buff (...),,"An aura radiates from you in a 30-foot Emanation for the duration. While in the aura, you and your allies have Advantage on saving throws against spells and other magical effects. When an affected creature makes a saving throw against a spell or magical effect that allows a save to take only half damage, it takes no damage if it succeeds on the save.",https://www.dndbeyond.com/spells/2618970-circle-of-power,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Commune,Divination,1 Minute,,,"V, S, M",,1 Minute,,,,Foreknowledge,,"You contact a deity or a divine proxy and ask up to three questions that can be answered with yes or no. You must ask your questions before the spell ends. You receive a correct answer for each question.
+
+Divine beings aren’t necessarily omniscient, so you might receive “unclear” as an answer if a question pertains to information that lies beyond the deity’s knowledge. In a case where a one-word answer could be misleading or contrary to the deity’s interests, the DM might offer a short phrase as an answer instead.
+
+If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.",https://www.dndbeyond.com/spells/2618987-commune,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+5th,Contact Other Plane,Divination,1 Minute,,,V,,1 Minute,,,,Communication (...),,"You mentally contact a demigod, the spirit of a long-dead sage, or some other knowledgeable entity from another plane. Contacting this otherworldly intelligence can break your mind. When you cast this spell, make a DC 15 Intelligence saving throw. On a successful save, you can ask the entity up to five questions. You must ask your questions before the spell ends. The DM answers each question with one word, such as “yes,” “no,” “maybe,” “never,” “irrelevant,” or “unclear” (if the entity doesn’t know the answer to the question). If a one-word answer would be misleading, the DM might instead offer a short phrase as an answer.
+
+On a failed save, you take 6d6 Psychic damage and have the Incapacitated condition until you finish a Long Rest. A Greater Restoration spell cast on you ends this effect.",https://www.dndbeyond.com/spells/2619052-contact-other-plane,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+5th,Contagion,Necromancy,1 Action,,,"V, S",,7 Days,,,CON Save,Necrotic,,"Your touch inflicts a magical contagion. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition. Also, choose one ability when you cast the spell. While Poisoned, the target has Disadvantage on saving throws made with the chosen ability.
+
+The target must repeat the saving throw at the end of each of its turns until it gets three successes or failures. If the target succeeds on three of these saves, the spell ends on the target. If the target fails three of the saves, the spell lasts for 7 days on it.
+
+Whenever the Poisoned target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw, or the Poisoned condition doesn’t end on it.",https://www.dndbeyond.com/spells/2619063-contagion,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Dispel Evil and Good,Abjuration,1 Action,,,"V, S, M",,1 Minute,,,CHA Save,Charmed (...),,"For the duration, Celestials, Elementals, Fey, Fiends, and Undead have Disadvantage on attack rolls against you. You can end the spell early by using either of the following special functions.
+
+Break Enchantment. As a Magic action, you touch a creature that is possessed by or has the Charmed or Frightened condition from one or more creatures of the types above. The target is no longer possessed, Charmed, or Frightened by such creatures.
+
+Dismissal. As a Magic action, you target one creature you can see within 5 feet of you that has one of the creature types above. The target must succeed on a Charisma saving throw or be sent back to its home plane if it isn’t there already. If they aren’t on their home plane, Undead are sent to the Shadowfell, and Fey are sent to the Feywild.",https://www.dndbeyond.com/spells/2619096-dispel-evil-and-good,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Enervation,Necromancy,1 Action,60 ft.,,"V, S",,1 Minute,,,DEX Save,Necrotic,,"A tendril of inky darkness reaches out from you, touching a creature you can see within range to drain life from it. The target must make a Dexterity saving throw. On a successful save, the target takes 2d8 necrotic damage, and the spell ends. On a failed save, the target takes 4d8 necrotic damage, and until the spell ends, you can use your action on each of your turns to automatically deal 4d8 necrotic damage to the target. The spell ends if you use your action to do anything else, if the target is ever outside the spell’s range, or if the target has total cover from you.
+
+Whenever the spell deals damage to a target, you regain hit points equal to half the amount of necrotic damage the target takes.
+
+At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.",https://www.dndbeyond.com/spells/14869-enervation,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+5th,Geas,Enchantment,1 Minute,60 ft.,,V,,30 Days,,,WIS Save,Psychic,,"You give a verbal command to a creature that you can see within range, ordering it to carry out some service or refrain from an action or a course of activity as you decide. The target must succeed on a Wisdom saving throw or have the Charmed condition for the duration. The target automatically succeeds if it can’t understand your command.
+
+While Charmed, the creature takes 5d10 Psychic damage if it acts in a manner directly counter to your command. It takes this damage no more than once each day.
+
+You can issue any command you choose, short of an activity that would result in certain death. Should you issue a suicidal command, the spell ends.
+
+A Remove Curse , Greater Restoration , or Wish spell ends this spell.
+
+Using a Higher-Level Spell Slot. If you use a level 7 or 8 spell slot, the duration is 365 days. If you use a level 9 spell slot, the spell lasts until it is ended by one of the spells mentioned above.",https://www.dndbeyond.com/spells/2618940-geas,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Greater Restoration,Abjuration,1 Action,,,"V, S, M",,Instantaneous,,,,Exhaustion,,"You touch a creature and magically remove one of the following effects from it:
+
+1 Exhaustion level
+
+The Charmed or Petrified condition
+
+A curse, including the target’s Attunement to a cursed magic item
+
+Any reduction to one of the target’s ability scores
+
+Any reduction to the target’s Hit Point maximum",https://www.dndbeyond.com/spells/2618961-greater-restoration,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+5th,Hallow,Abjuration,24 Hours,,,"V, S, M",,Until Dispelled,,,,Buff (...),,"You touch a point and infuse an area around it with holy or unholy power. The area can have a radius up to 60 feet, and the spell fails if the radius includes an area already under the effect of Hallow . The affected area has the following effects.
+
+Hallowed Ward. Choose any of these creature types: Aberration, Celestial, Elemental, Fey, Fiend, or Undead. Creatures of the chosen types can’t willingly enter the area, and any creature that is possessed by or that has the Charmed or Frightened condition from such creatures isn’t possessed, Charmed, or Frightened by them while in the area.
+
+Extra Effect. You bind an extra effect to the area from the list below:
+
+Courage. Creatures of any types you choose can’t gain the Frightened condition while in the area.
+
+Darkness. Darkness fills the area. Normal light, as well as magical light created by spells of a level lower than this spell, can’t illuminate the area.
+
+Daylight. Bright light fills the area. Magical Darkness created by spells of a level lower than this spell can’t extinguish the light.
+
+Peaceful Rest. Dead bodies interred in the area can’t be turned into Undead.
+
+Extradimensional Interference. Creatures of any types you choose can’t enter or exit the area using teleportation or interplanar travel.
+
+Fear. Creatures of any types you choose have the Frightened condition while in the area.
+
+Resistance. Creatures of any types you choose have Resistance to one damage type of your choice while in the area.
+
+Silence. No sound can emanate from within the area, and no sound can reach into it.
+
+Tongues. Creatures of any types you choose can communicate with any other creature in the area even if they don’t share a common language.
+
+Vulnerability. Creatures of any types you choose have Vulnerability to one damage type of your choice while in the area.",https://www.dndbeyond.com/spells/2619138-hallow,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Hold Monster,Enchantment,1 Action,90 ft.,,"V, S, M",,1 Minute,,,WIS Save,Paralyzed,,"Choose a creature that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.
+
+Using a Higher-Level Spell Slot. You can target one additional creature for each spell slot level above 5.",https://www.dndbeyond.com/spells/2619152-hold-monster,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+5th,Infernal Calling,Conjuration,1 Minute,90 ft.,,"V, S, M",,1 Hour,,,,Control (...),,"Uttering a dark incantation, you summon a devil from the Nine Hells. You choose the devil’s type, which must be one of challenge rating 6 or lower, such as a barbed devil or a bearded devil . The devil appears in an unoccupied space that you can see within range. The devil disappears when it drops to 0 hit points or when the spell ends.
+
+The devil is unfriendly toward you and your companions. Roll initiative for the devil, which has its own turns. It is under the Dungeon Master’s control and acts according to its nature on each of its turns, which might result in its attacking you if it thinks it can prevail, or trying to tempt you to undertake an evil act in exchange for limited service. The DM has the creature’s statistics.
+
+On each of your turns, you can try to issue a verbal command to the devil (no action required by you). It obeys the command if the likely outcome is in accordance with its desires, especially if the result would draw you toward evil. Otherwise, you must make a Charisma ( Deception , Intimidation , or Persuasion ) check contested by its Wisdom ( Insight ) check. You make the check with advantage if you say the devil’s true name. If your check fails, the devil becomes immune to your verbal commands for the duration of the spell, though it can still carry out your commands if it chooses. If your check succeeds, the devil carries out your command — such as “attack my enemies,” “explore the room ahead,” or “bear this message to the queen” — until it completes the activity, at which point it returns to you to report having done so.
+
+If your concentration ends before the spell reaches its full duration, the devil doesn’t disappear if it has become immune to your verbal commands. Instead, it acts in whatever manner it chooses for 3d6 minutes, and then it disappears.
+
+If you possess an individual devil’s talisman, you can summon that devil if it is of the appropriate challenge rating plus 1, and it obeys all your commands, with no Charisma checks required.
+
+At Higher Levels. When you cast this spell using a spell slot of 6th level or higher, the challenge rating increases by 1 for each slot level above 5th.",https://www.dndbeyond.com/spells/14877-infernal-calling,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+5th,Legend Lore,Divination,10 Minutes,,,"V, S, M",,Instantaneous,,,,Utility,,"Name or describe a famous person, place, or object. The spell brings to your mind a brief summary of the significant lore about that famous thing, as described by the DM.
+
+The lore might consist of important details, amusing revelations, or even secret lore that has never been widely known. The more information you already know about the thing, the more precise and detailed the information you receive is. That information is accurate but might be couched in figurative language or poetry, as determined by the DM.
+
+If the famous thing you chose isn’t actually famous, you hear sad musical notes played on a trombone, and the spell fails.",https://www.dndbeyond.com/spells/2619010-legend-lore,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+5th,Mass Cure Wounds,Abjuration,1 Action,60 ft.,(30 ft. ),"V, S",,Instantaneous,,,,Healing,,"A wave of healing energy washes out from a point you can see within range. Choose up to six creatures in a 30-foot-radius Sphere centered on that point. Each target regains Hit Points equal to 5d8 plus your spellcasting ability modifier.
+
+Using a Higher-Level Spell Slot. The healing increases by 1d8 for each spell slot level above 5.",https://www.dndbeyond.com/spells/2619026-mass-cure-wounds,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+5th,Planar Binding,Abjuration,1 Hour,60 ft.,,"V, S, M",,24 Hours,,,CHA Save,Control,,"You attempt to bind a Celestial, an Elemental, a Fey, or a Fiend to your service. The creature must be within range for the entire casting of the spell. (Typically, the creature is first summoned into the center of the inverted version of the Magic Circle spell to trap it while this spell is cast.) At the completion of the casting, the target must succeed on a Charisma saving throw or be bound to serve you for the duration. If the creature was summoned or created by another spell, that spell’s duration is extended to match the duration of this spell.
+
+A bound creature must follow your commands to the best of its ability. You might command the creature to accompany you on an adventure, to guard a location, or to deliver a message. If the creature is Hostile , it strives to twist your commands to achieve its own objectives. If the creature carries out your commands completely before the spell ends, it travels to you to report this fact if you are on the same plane of existence. If you are on a different plane, it returns to the place where you bound it and remains there until the spell ends.
+
+Using a Higher-Level Spell Slot. The duration increases with a spell slot of level 6 (10 days), 7 (30 days), 8 (180 days), and 9 (366 days).",https://www.dndbeyond.com/spells/2618864-planar-binding,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+5th,Raise Dead,Necromancy,1 Hour,,,"V, S, M",,Instantaneous,,,,Healing,,"With a touch, you revive a dead creature if it has been dead no longer than 10 days and it wasn’t Undead when it died.
+
+The creature returns to life with 1 Hit Point. This spell also neutralizes any poisons that affected the creature at the time of death.
+
+This spell closes all mortal wounds, but it doesn’t restore missing body parts. If the creature is lacking body parts or organs integral for its survival—its head, for instance—the spell automatically fails.
+
+Coming back from the dead is an ordeal. The target takes a −4 penalty to D20 Tests . Every time the target finishes a Long Rest, the penalty is reduced by 1 until it becomes 0.",https://www.dndbeyond.com/spells/2618922-raise-dead,Resurrection,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+5th,Rary's Telepathic Bond,Divination,1 Action,30 ft.,,"V, S, M",,1 Hour,,,,Communication,,"You forge a telepathic link among up to eight willing creatures of your choice within range, psychically linking each creature to all the others for the duration. Creatures that can’t communicate in any languages aren’t affected by this spell.
+
+Until the spell ends, the targets can communicate telepathically through the bond whether or not they share a language. The communication is possible over any distance, though it can’t extend to other planes of existence.",https://www.dndbeyond.com/spells/2618925-rarys-telepathic-bond,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+5th,Reincarnate,Necromancy,1 Hour,,,"V, S, M",,Instantaneous,,,,Healing,,"You touch a dead Humanoid or a piece of one. If the creature has been dead no longer than 10 days, the spell forms a new body for it and calls the soul to enter that body. Roll 1d10 and consult the table below to determine the body’s species, or the DM chooses another playable species.
+
+The reincarnated creature makes any choices that a species’ description offers, and the creature recalls its former life. It retains the capabilities it had in its original form, except it loses the traits of its previous species and gains the traits of its new one.",https://www.dndbeyond.com/spells/2618941-reincarnate,Resurrection,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+5th,Skill Empowerment,Transmutation,1 Action,,,"V, S",,1 Hour,,,,Buff (...),,"Your magic deepens a creature’s understanding of its own talent. You touch one willing creature and give it expertise in one skill of your choice; until the spell ends, the creature doubles its proficiency bonus for ability checks it makes that use the chosen skill.
+
+You must choose a skill in which the target is proficient and that isn’t already benefiting from an effect, such as Expertise, that doubles its proficiency bonus.",https://www.dndbeyond.com/spells/14599-skill-empowerment,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+5th,Summon Celestial,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth a Celestial spirit. It manifests in an angelic form in an unoccupied space that you can see within range and uses the Celestial Spirit stat block. When you cast the spell, choose Avenger or Defender. Your choice determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Large Celestial, Neutral
+
+AC 11 + the spell’s level + 2 (Defender only)
+
+HP 40 + 10 for each spell level above 5
+
+Speed 30 ft., Fly 40 ft.
+
+Resistances Radiant
+
+Immunities Charmed , Frightened
+
+Senses Darkvision 60 ft.; Passive Perception 12
+
+Languages Celestial, understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Actions
+
+Multiattack. The spirit makes a number of attacks equal to half this spell’s level (round down).
+
+Radiant Bow (Avenger Only). Ranged Attack Roll : Bonus equals your spell attack modifier, range 600 ft. Hit: 2d6 + 2 + the spell’s level Radiant damage.
+
+Radiant Mace (Defender Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d10 + 3 + the spell’s level Radiant damage, and the spirit can choose itself or another creature it can see within 10 feet of the target. The chosen creature gains 1d10 Temporary Hit Points .
+
+Healing Touch (1/Day). The spirit touches another creature. The target regains Hit Points equal to 2d8 + the spell’s level.",https://www.dndbeyond.com/spells/2619108-summon-celestial,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+5th,Summon Draconic Spirit,Conjuration,1 Action,60 ft.,,"V, S, M",,1 Hour,,,,Summoning,,,https://www.dndbeyond.com/spells/1183868-summon-draconic-spirit,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+5th,Summon Dragon,Conjuration,1 Action,60 ft.,,"V, S, M",,1 Hour,,,,,,"You call forth a Dragon spirit. It manifests in an unoccupied space that you can see within range and uses the Draconic Spirit stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Large Dragon, Neutral
+
+AC 14 + the spell’s level
+
+HP 50 + 10 for each spell level above 5
+
+Speed 30 ft., Fly 60 ft., Swim 30 ft.
+
+Resistances Acid, Cold, Fire, Lightning, Poison
+
+Immunities Charmed , Frightened , Poisoned
+
+Senses Blindsight 30 ft., Darkvision 60 ft.; Passive Perception 12
+
+Languages Draconic, understands the languages you know
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Shared Resistances. When you summon the spirit, choose one of its Resistances. You have Resistance to the chosen damage type until the spell ends.
+
+Actions
+
+Multiattack. The spirit makes a number of Rend attacks equal to half the spell’s level (round down), and it uses Breath Weapon.
+
+Rend. Melee Attack Roll: Bonus equals your spell attack modifier, reach 10 feet. Hit: 1d6 + 4 + the spell’s level Piercing damage.
+
+Breath Weapon. Dexterity Saving Throw: DC equals your spell save DC, each creature in a 30-foot Cone . Failure: 2d6 damage of a type this spirit has Resistance to (your choice when you cast the spell). Success: Half damage.",https://www.dndbeyond.com/spells/2618843-summon-dragon,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+5th,Yolande's Regal Presence,Enchantment,1 Action,,(10 ft. ),"V, S, M",,1 Minute,,,WIS Save,Psychic,,"You surround yourself with unearthly majesty in a 10-foot Emanation. Whenever the Emanation enters the space of a creature you can see and whenever a creature you can see enters the Emanation or ends its turn there, you can force that creature to make a Wisdom saving throw. On a failed save, the target takes 4d6 Psychic damage and has the Prone condition, and you can push it up to 10 feet away. On a successful save, the target takes half as much damage only. A creature makes this save only once per turn.",https://www.dndbeyond.com/spells/2618842-yolandes-regal-presence,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+6th,Contingency,Abjuration,10 Minutes,,,"V, S, M",,10 Days,,,,Utility,,"Choose a spell of level 5 or lower that you can cast, that has a casting time of an action, and that can target you. You cast that spell—called the contingent spell—as part of casting Contingency , expending spell slots for both, but the contingent spell doesn’t come into effect. Instead, it takes effect when a certain trigger occurs. You describe that trigger when you cast the two spells. For example, a Contingency cast with Water Breathing might stipulate that Water Breathing comes into effect when you are engulfed in water or a similar liquid.
+
+The contingent spell takes effect immediately after the trigger occurs for the first time, whether or not you want it to, and then Contingency ends.
+
+The contingent spell takes effect only on you, even if it can normally target others. You can use only one Contingency spell at a time. If you cast this spell again, the effect of another Contingency spell on you ends. Also, Contingency ends on you if its material component is ever not on your person.",https://www.dndbeyond.com/spells/2619053-contingency,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+6th,Find the Path,Divination,1 Minute,,,"V, S, M",,1 Day,,,,Detection,,"You magically sense the most direct physical route to a location you name. You must be familiar with the location, and the spell fails if you name a destination on another plane of existence, a moving destination (such as a mobile fortress), or an unspecific destination (such as “a green dragon’s lair”).
+
+For the duration, as long as you are on the same plane of existence as the destination, you know how far it is and in what direction it lies. Whenever you face a choice of paths along the way there, you know which path is the most direct.",https://www.dndbeyond.com/spells/2618881-find-the-path,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+6th,Fizban's Platinum Shield,Abjuration,1 Bonus Action,60 ft.,,"V, S, M",,1 Minute,,,,Warding,,,https://www.dndbeyond.com/spells/1183864-fizbans-platinum-shield,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+6th,Heal,Abjuration,1 Action,60 ft.,,"V, S",,Instantaneous,,,,Blinded (...),,"Choose a creature that you can see within range. Positive energy washes through the target, restoring 70 Hit Points. This spell also ends the Blinded , Deafened , and Poisoned conditions on the target.
+
+Using a Higher-Level Spell Slot. The healing increases by 10 for each spell slot level above 6.",https://www.dndbeyond.com/spells/2618979-heal,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+6th,Magic Jar,Necromancy,1 Minute,,,"V, S, M",,Until Dispelled,,,CHA Save,Control,,"Your body falls into a catatonic state as your soul leaves it and enters the container you used for the spell’s Material component. While your soul inhabits the container, you are aware of your surroundings as if you were in the container’s space. You can’t move or take Reactions. The only action you can take is to project your soul up to 100 feet out of the container, either returning to your living body (and ending the spell) or attempting to possess a Humanoid’s body.
+
+You can attempt to possess any Humanoid within 100 feet of you that you can see (creatures warded by a Protection from Evil and Good or Magic Circle spell can’t be possessed ). The target makes a Charisma saving throw. On a failed save, your soul enters the target’s body, and the target’s soul becomes trapped in the container. On a successful save, the target resists your efforts to possess it, and you can’t attempt to possess it again for 24 hours.
+
+Once you possess a creature’s body, you control it. Your Hit Points, Hit Point Dice, Strength, Dexterity, Constitution, Speed, and senses are replaced by the creature’s. You otherwise keep your game statistics.
+
+Meanwhile, the possessed creature’s soul can perceive from the container using its own senses, but it can’t move and it is Incapacitated .
+
+While possessing a body, you can take a Magic action to return from the host body to the container if it is within 100 feet of you, returning the host creature’s soul to its body. If the host body dies while you’re in it, the creature dies, and you make a Charisma saving throw against your own spellcasting DC. On a success, you return to the container if it is within 100 feet of you. Otherwise, you die.
+
+If the container is destroyed or the spell ends, your soul returns to your body. If your body is more than 100 feet away from you or if your body is dead, you die. If another creature’s soul is in the container when it is destroyed, the creature’s soul returns to its body if the body is alive and within 100 feet. Otherwise, that creature dies.
+
+When the spell ends, the container is destroyed.",https://www.dndbeyond.com/spells/2619021-magic-jar,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+6th,Primordial Ward,Abjuration,1 Action,,,"V, S",,1 Minute,,,,Warding,,"You have resistance to acid, cold, fire, lightning, and thunder damage for the spell’s duration.
+
+When you take damage of one of those types, you can use your reaction to gain immunity to that type of damage, including against the triggering damage.
+
+If you do so, the resistances end, and you have the immunity until the end of your next turn, at which time the spell ends.",https://www.dndbeyond.com/spells/2395-primordial-ward,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+6th,Soul Cage,Necromancy,1 Reaction *,60 ft.,,"V, S, M",,8 Hours,,,,Buff (...),,"This spell snatches the soul of a humanoid as it dies and traps it inside the tiny cage you use for the material component. A stolen soul remains inside the cage until the spell ends or until you destroy the cage, which ends the spell. While you have a soul inside the cage, you can exploit it in any of the ways described below. You can use a trapped soul up to six times. Once you exploit a soul for the sixth time, it is released, and the spell ends. While a soul is trapped, the dead humanoid it came from can’t be revived.
+
+Steal Life. You can use a bonus action to drain vigor from the soul and regain 2d8 hit points.
+
+Query Soul. You ask the soul a question (no action required) and receive a brief telepathic answer, which you can understand regardless of the language used. The soul knows only what it knew in life, but it must answer you truthfully and to the best of its ability. The answer is no more than a sentence or two and might be cryptic.
+
+Borrow Experience. You can use a bonus action to bolster yourself with the soul’s life experience, making your next attack roll, ability check, or saving throw with advantage. If you don’t use this benefit before the start of your next turn, it is lost.
+
+Eyes of the Dead. You can use an action to name a place the humanoid saw in life, which creates an invisible sensor somewhere in that place if it is on the plane of existence you’re currently on. The sensor remains for as long as you concentrate, up to 10 minutes (as if you were concentrating on a spell). You receive visual and auditory information from the sensor as if you were in its space using your senses.
+
+A creature that can see the sensor (such as one using see invisibility or truesight ) sees a translucent image of the tormented humanoid whose soul you caged.",https://www.dndbeyond.com/spells/14601-soul-cage,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+6th,Summon Fiend,Conjuration,1 Action,90 ft.,,"V, S, M",,1 Hour,,,,Summoning,,"You call forth a fiendish spirit. It manifests in an unoccupied space that you can see within range and uses the Fiendish Spirit stat block. When you cast the spell, choose Demon, Devil, or Yugoloth. The creature resembles a Fiend of the chosen type, which determines certain details in its stat block. The creature disappears when it drops to 0 Hit Points or when the spell ends.
+
+The creature is an ally to you and your allies. In combat, the creature shares your Initiative count, but it takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue any, it takes the Dodge action and uses its movement to avoid danger.
+
+Using a Higher-Level Spell Slot. Use the spell slot’s level for the spell’s level in the stat block.
+
+Large Fiend, Neutral
+
+AC 12 + the spell’s level
+
+HP 50 (Demon only) or 40 (Devil only) or 60 (Yugoloth only) + 15 for each spell level above 6
+
+Speed 40 ft.; Climb 40 ft. (Demon only); Fly 60 ft. (Devil only)
+
+Resistances Fire
+
+Immunities Poison; Poisoned
+
+Senses Darkvision 60 ft.; Passive Perception 10
+
+Languages Abyssal, Infernal; telepathy 60 ft.
+
+CR None (XP 0; PB equals your Proficiency Bonus)
+
+Traits
+
+Death Throes (Demon Only). When the spirit drops to 0 Hit Points or the spell ends, the spirit explodes. Dexterity Saving Throw: DC equals your spell save DC, each creature in a 10-foot Emanation originating from the spirit. Failure: 2d10 plus this spell’s level Fire damage. Success: Half damage.
+
+Devil’s Sight (Devil Only). Magical Darkness doesn’t impede the spirit’s Darkvision .
+
+Magic Resistance. The spirit has Advantage on saving throws against spells and other magical eff ects.
+
+Actions
+
+Multiattack. The spirit makes a number of attacks equal to half this spell’s level (round down).
+
+Bite (Demon Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d12 + 3 + the spell’s level Necrotic damage.
+
+Claws (Yugoloth Only). Melee Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. Hit: 1d8 + 3 + the spell’s level Slashing damage. Immediately after the attack hits or misses, the spirit can teleport up to 30 feet to an unoccupied space it can see.
+
+Fiery Strike (Devil Only). Melee or Ranged Attack Roll: Bonus equals your spell attack modifier, reach 5 ft. or range 150 ft. Hit: 2d6 + 3 + the spell’s level Fire damage.",https://www.dndbeyond.com/spells/2619117-summon-fiend,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+6th,Tenser's Transformation,Transmutation,1 Action,,,"V, S, M",,10 Minutes,,,,Buff (...),,"You endow yourself with endurance and martial prowess fueled by magic. Until the spell ends, you can’t cast spells, and you gain the following benefits:
+
+You gain 50 temporary hit points. If any of these remain when the spell ends, they are lost.
+
+You have advantage on attack rolls that you make with simple and martial weapons.
+
+When you hit a target with a weapon attack, that target takes an extra 2d12 force damage.
+
+You have proficiency with all armor, shields, simple weapons, and martial weapons.
+
+You have proficiency in Strength and Constitution saving throws.
+
+You can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that gives you extra attacks.
+
+Immediately after the spell ends, you must succeed on a DC 15 Constitution saving throw or suffer one level of exhaustion .",https://www.dndbeyond.com/spells/14612-tensers-transformation,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+7th,Conjure Celestial,Conjuration,1 Action,90 ft.,(10 ft. *),"V, S",,10 Minutes,,,DEX Save,Radiant,,"You conjure a spirit from the Upper Planes, which manifests as a pillar of light in a 10-foot-radius, 40-foot-high Cylinder centered on a point within range. For each creature you can see in the Cylinder, choose which of these lights shines on it:
+
+Healing Light. The target regains Hit Points equal to 4d12 plus your spellcasting ability modifier.
+
+Searing Light. The target makes a Dexterity saving throw, taking 6d12 Radiant damage on a failed save or half as much damage on a successful one.
+
+Until the spell ends, Bright Light fills the Cylinder, and when you move on your turn, you can also move the Cylinder up to 30 feet.
+
+Whenever the Cylinder moves into the space of a creature you can see and whenever a creature you can see enters the Cylinder or ends its turn there, you can bathe it in one of the lights. A creature can be affected by this spell only once per turn.
+
+Using a Higher-Level Spell Slot. The healing and damage increase by 1d12 for each spell slot level above 7.",https://www.dndbeyond.com/spells/2619046-conjure-celestial,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+7th,Divine Word,Evocation,1 Bonus Action,30 ft.,,V,,Instantaneous,,,CHA Save,Deafened (...),,"You utter a word imbued with power from the Upper Planes. Each creature of your choice in range makes a Charisma saving throw. On a failed save, a target that has 50 Hit Points or fewer suffers an effect based on its current Hit Points, as shown in the Divine Word Effects table. Regardless of its Hit Points, a Celestial, an Elemental, a Fey, or a Fiend target that fails its save is forced back to its plane of origin (if it isn’t there already) and can’t return to the current plane for 24 hours by any means short of a Wish spell.",https://www.dndbeyond.com/spells/2619144-divine-word,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+7th,Resurrection,Necromancy,1 Hour,,,"V, S, M",,Instantaneous,,,,Healing,,"With a touch, you revive a dead creature that has been dead for no more than a century, didn’t die of old age, and wasn’t Undead when it died.
+
+The creature returns to life with all its Hit Points. This spell also neutralizes any poisons that affected the creature at the time of death. This spell closes all mortal wounds and restores any missing body parts.
+
+Coming back from the dead is an ordeal. The target takes a −4 penalty to D20 Tests . Every time the target finishes a Long Rest, the penalty is reduced by 1 until it becomes 0.
+
+Casting this spell to revive a creature that has been dead for 365 days or longer taxes you. Until you finish a Long Rest, you can’t cast spells again, and you have Disadvantage on D20 Tests.",https://www.dndbeyond.com/spells/2618953-resurrection,Resurrection,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+7th,Sequester,Transmutation,1 Action,,,"V, S, M",,Until Dispelled,,,,Invisible,,"With a touch, you magically sequester an object or a willing creature. For the duration, the target has the Invisible condition and can’t be targeted by Divination spells, detected by magic, or viewed remotely with magic.
+
+If the target is a creature, it enters a state of suspended animation; it has the Unconscious condition, doesn’t age, and doesn’t need food, water, or air.
+
+You can set a condition for the spell to end early. The condition can be anything you choose, but it must occur or be visible within 1 mile of the target. Examples include “after 1,000 years” or “when the tarrasque awakens.” This spell also ends if the target takes any damage.",https://www.dndbeyond.com/spells/2618980-sequester,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+7th,Temple of the Gods,Conjuration,1 Hour,120 ft.,,"V, S, M",,24 Hours,,,CHA Save,Creation (...),,"You cause a temple to shimmer into existence on ground you can see within range. The temple must fit within an unoccupied cube of space, up to 120 feet on each side. The temple remains until the spell ends. It is dedicated to whatever god, pantheon, or philosophy is represented by the holy symbol used in the casting.
+
+You make all decisions about the temple’s appearance. The interior is enclosed by a floor, walls, and a roof, with one door granting access to the interior and as many windows as you wish. Only you and any creatures you designate when you cast the spell can open or close the door.
+
+The temple’s interior is an open space with an idol or altar at one end. You decide whether the temple is illuminated and whether that illumination is bright light or dim light. The smell of burning incense fills the air within, and the temperature is mild.
+
+The temple opposes types of creatures you choose when you cast this spell. Choose one or more of the following: celestials, elementals, fey, fiends, or undead. If a creature of the chosen type attempts to enter the temple, that creature must make a Charisma saving throw. On a failed save, it can’t enter the temple for 24 hours. Even if the creature can enter the temple, the magic there hinders it; whenever it makes an attack roll, an ability check, or a saving throw inside the temple, it must roll a d4 and subtract the number rolled from the d20 roll.
+
+In addition, the sensors created by divination spells can’t appear inside the temple, and creatures within can’t be targeted by divination spells.
+
+Finally, whenever any creature in the temple regains hit points from a spell of 1st level or higher, the creature regains additional hit points equal to your Wisdom modifier (minimum 1 hit point).
+
+The temple is made from opaque magical force that extends into the Ethereal Plane, thus blocking ethereal travel into the temple’s interior. Nothing can physically pass through the temple’s exterior. It can’t be dispelled by dispel magic , and antimagic field has no effect on it. A disintegrate spell destroys the temple instantly.
+
+Casting this spell on the same spot every day for a year makes this effect permanent.",https://www.dndbeyond.com/spells/14606-temple-of-the-gods,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+7th,Whirlwind,Evocation,1 Action,300 ft.,(10 ft. *),"V, M",,1 Minute,,,DEX Save,Bludgeoning,,"A whirlwind howls down to a point that you can see on the ground within range. The whirlwind is a 10-foot-radius, 30-foot-high cylinder centered on that point. Until the spell ends, you can use your action to move the whirlwind up to 30 feet in any direction along the ground. The whirlwind sucks up any Medium or smaller objects that aren’t secured to anything and that aren’t worn or carried by anyone.
+
+A creature must make a Dexterity saving throw the first time on a turn that it enters the whirlwind or that the whirlwind enters its space, including when the whirlwind first appears. A creature takes 10d6 bludgeoning damage on a failed save, or half as much damage on a successful one. In addition, a Large or smaller creature that fails the save must succeed on a Strength saving throw or become restrained in the whirlwind until the spell ends. When a creature starts its turn restrained by the whirlwind, the creature is pulled 5 feet higher inside it, unless the creature is at the top. A restrained creature moves with the whirlwind and falls when the spell ends, unless the creature has some means to stay aloft.
+
+A restrained creature can use an action to make a Strength or Dexterity check against your spell save DC. If successful, the creature is no longer restrained by the whirlwind and is hurled 3d6 × 10 feet away from it in a random direction.",https://www.dndbeyond.com/spells/2409-whirlwind,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+8th,Befuddlement,Enchantment,1 Action,150 ft.,,"V, S, M",,Instantaneous,,,INT Save,Psychic,,"You blast the mind of a creature that you can see within range. The target makes an Intelligence saving throw.
+
+On a failed save, the target takes 10d12 Psychic damage and can’t cast spells or take the Magic action. At the end of every 30 days, the target repeats the save, ending the effect on a success. The effect can also be ended by the Greater Restoration , Heal , or Wish spell.
+
+On a successful save, the target takes half as much damage only.",https://www.dndbeyond.com/spells/2618832-befuddlement,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+8th,Glibness,Enchantment,1 Action,,,V,,1 Hour,,,,Social,,"Until the spell ends, when you make a Charisma check, you can replace the number you roll with a 15. Additionally, no matter what you say, magic that would determine if you are telling the truth indicates that you are being truthful.",https://www.dndbeyond.com/spells/2618948-glibness,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+8th,Holy Aura,Abjuration,1 Action,,(30 ft. ),"V, S, M",,1 Minute,,,CON Save,Blinded,,"For the duration, you emit an aura in a 30-foot Emanation . While in the aura, creatures of your choice have Advantage on all saving throws, and other creatures have Disadvantage on attack rolls against them. In addition, when a Fiend or an Undead hits an affected creature with a melee attack roll, the attacker must succeed on a Constitution saving throw or have the Blinded condition until the end of its next turn.",https://www.dndbeyond.com/spells/2619155-holy-aura,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+8th,Mind Blank,Abjuration,1 Action,,,"V, S",,24 Hours,,,,Charmed,,"Until the spell ends, one willing creature you touch has Immunity to Psychic damage and the Charmed condition. The target is also unaffected by anything that would sense its emotions or alignment, read its thoughts, or magically detect its location, and no spell—not even Wish —can gather information about the target, observe it remotely, or control its mind.",https://www.dndbeyond.com/spells/2619036-mind-blank,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+8th,Power Word Stun,Enchantment,1 Action,60 ft.,,V,,Instantaneous,,,,Stunned,,"You overwhelm the mind of one creature you can see within range. If the target has 150 Hit Points or fewer, it has the Stunned condition. Otherwise, its Speed is 0 until the start of your next turn.
+
+The Stunned target makes a Constitution saving throw at the end of each of its turns, ending the condition on itself on a success.",https://www.dndbeyond.com/spells/2618889-power-word-stun,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+8th,Sunburst,Evocation,1 Action,150 ft.,(60 ft. ),"V, S, M",,Instantaneous,,,CON Save,Radiant,,"Brilliant sunlight flashes in a 60-foot-radius Sphere centered on a point you choose within range. Each creature in the Sphere makes a Constitution saving throw. On a failed save, a creature takes 12d6 Radiant damage and has the Blinded condition for 1 minute. On a successful save, it takes half as much damage only.
+
+A creature Blinded by this spell makes another Constitution saving throw at the end of each of its turns, ending the effect on itself on a success.
+
+This spell dispels Darkness in its area that was created by any spell.",https://www.dndbeyond.com/spells/2619123-sunburst,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+8th,Telepathy,Divination,1 Action,,,"V, S, M",,24 Hours,,,,Communication,,"You create a telepathic link between yourself and a willing creature with which you are familiar. The creature can be anywhere on the same plane of existence as you. The spell ends if you or the target are no longer on the same plane.
+
+Until the spell ends, you and the target can instantly share words, images, sounds, and other sensory messages with each other through the link, and the target recognizes you as the creature it is communicating with. The spell enables a creature to understand the meaning of your words and any sensory messages you send to it.",https://www.dndbeyond.com/spells/2619159-telepathy,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+9th,Gate,Conjuration,1 Action,60 ft.,,"V, S, M",,1 Minute,,,,Control (...),,"You conjure a portal linking an unoccupied space you can see within range to a precise location on a different plane of existence. The portal is a circular opening, which you can make 5 to 20 feet in diameter. You can orient the portal in any direction you choose. The portal lasts for the duration, and the portal’s destination is visible through it.
+
+The portal has a front and a back on each plane where it appears. Travel through the portal is possible only by moving through its front. Anything that does so is instantly transported to the other plane, appearing in the unoccupied space nearest to the portal.
+
+Deities and other planar rulers can prevent portals created by this spell from opening in their presence or anywhere within their domains.
+
+When you cast this spell, you can speak the name of a specific creature (a pseudonym, title, or nickname doesn’t work). If that creature is on a plane other than the one you are on, the portal opens next to the named creature and transports it to the nearest unoccupied space on your side of the portal. You gain no special power over the creature, and it is free to act as the DM deems appropriate. It might leave, attack you, or help you.",https://www.dndbeyond.com/spells/2618932-gate,Summoning — Extraplanar,Hard Ban,Secondary,Hard Ban,Hard Ban,Hard Ban
+9th,Imprisonment,Abjuration,1 Minute,30 ft.,,"V, S, M",,Until Dispelled,,,WIS Save,Restrained (...),,"You create a magical restraint to hold a creature that you can see within range. The target must make a Wisdom saving throw. On a successful save, the target is unaffected, and it is immune to this spell for the next 24 hours. On a failed save, the target is imprisoned. While imprisoned, the target doesn’t need to breathe, eat, or drink, and it doesn’t age. Divination spells can’t locate or perceive the imprisoned target, and the target can’t teleport.
+
+Until the spell ends, the target is also affected by one of the following effects of your choice:
+
+Burial. The target is entombed beneath the earth in a hollow globe of magical force that is just large enough to contain the target. Nothing can pass into or out of the globe.
+
+Chaining. Chains firmly rooted in the ground hold the target in place. The target has the Restrained condition and can’t be moved by any means.
+
+Hedged Prison. The target is trapped in a demiplane that is warded against teleportation and planar travel. The demiplane is your choice of a labyrinth, a cage, a tower, or the like.
+
+Minimus Containment. The target becomes 1 inch tall and is trapped inside an indestructible gemstone or a similar object. Light can pass through the gemstone (allowing the target to see out and other creatures to see in), but nothing else can pass through by any means.
+
+Slumber. The target has the Unconscious condition and can’t be awoken.
+
+Ending the Spell. When you cast the spell, specify a trigger that will end it. The trigger can be as simple or as elaborate as you choose, but the DM must agree that it has a high likelihood of happening within the next decade. The trigger must be an observable action, such as someone making a particular offering at the temple of your god, saving your true love, or defeating a specific monster.
+
+A Dispel Magic spell can end the spell only if it is cast with a level 9 spell slot, targeting either the prison or the component used to create it.",https://www.dndbeyond.com/spells/2619175-imprisonment,Curses & Hexes,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+9th,Invulnerability,Abjuration,1 Action,,,"V, S, M",,10 Minutes,,,,Warding,,You are immune to all damage until the spell ends.,https://www.dndbeyond.com/spells/14879-invulnerability,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+9th,Mass Heal,Abjuration,1 Action,60 ft.,,"V, S",,Instantaneous,,,,Blinded (...),,"A flood of healing energy flows from you into creatures around you. You restore up to 700 Hit Points, divided as you choose among any number of creatures that you can see within range. Creatures healed by this spell also have the Blinded , Deafened , and Poisoned conditions removed from them.",https://www.dndbeyond.com/spells/2619027-mass-heal,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+9th,Power Word Heal,Enchantment,1 Action,60 ft.,,V,,Instantaneous,,,,Prone,,"A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed , Frightened , Paralyzed , Poisoned , or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.",https://www.dndbeyond.com/spells/2618880-power-word-heal,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+9th,True Resurrection,Necromancy,1 Hour,,,"V, S, M",,Instantaneous,,,,Healing,,"You touch a creature that has been dead for no longer than 200 years and that died for any reason except old age. The creature is revived with all its Hit Points.
+
+This spell closes all wounds, neutralizes any poison, cures all magical contagions, and lifts any curses affecting the creature when it died. The spell replaces damaged or missing organs and limbs. If the creature was Undead, it is restored to its non-Undead form.
+
+The spell can provide a new body if the original no longer exists, in which case you must speak the creature’s name. The creature then appears in an unoccupied space you choose within 10 feet of you.",https://www.dndbeyond.com/spells/2619199-true-resurrection,Resurrection,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+9th,Wish,Conjuration,1 Action,,,V,,Instantaneous,,,,Buff (...),,"Wish is the mightiest spell a mortal can cast. By simply speaking aloud, you can alter reality itself.
+
+The basic use of this spell is to duplicate any other spell of level 8 or lower. If you use it this way, you don’t need to meet any requirements to cast that spell, including costly components. The spell simply takes effect.
+
+Alternatively, you can create one of the following effects of your choice:
+
+Object Creation. You create one object of up to 25,000 GP in value that isn’t a magic item. The object can be no more than 300 feet in any dimension, and it appears in an unoccupied space that you can see on the ground.
+
+Instant Health. You allow yourself and up to twenty creatures that you can see to regain all Hit Points, and you end all effects on them listed in the Greater Restoration spell.
+
+Resistance. You grant up to ten creatures that you can see Resistance to one damage type that you choose. This Resistance is permanent.
+
+Spell Immunity. You grant up to ten creatures you can see immunity to a single spell or other magical effect for 8 hours.
+
+Sudden Learning. You replace one of your feats with another feat for which you are eligible. You lose all the benefits of the old feat and gain the benefits of the new one. You can’t replace a feat that is a prerequisite for any of your other feats or features.
+
+Roll Redo. You undo a single recent event by forcing a reroll of any die roll made within the last round (including your last turn). Reality reshapes itself to accommodate the new result. For example, a Wish spell could undo an ally’s failed saving throw or a foe’s Critical Hit. You can force the reroll to be made with Advantage or Disadvantage, and you choose whether to use the reroll or the original roll.
+
+Reshape Reality. You may wish for something not included in any of the other effects. To do so, state your wish to the DM as precisely as possible. The DM has great latitude in ruling what occurs in such an instance; the greater the wish, the greater the likelihood that something goes wrong. This spell might simply fail, the effect you desire might be achieved only in part, or you might suffer an unforeseen consequence as a result of how you worded the wish. For example, wishing that a villain were dead might propel you forward in time to a period when that villain is no longer alive, effectively removing you from the game. Similarly, wishing for a Legendary magic item or an Artifact might instantly transport you to the presence of the item’s current owner. If your wish is granted and its effects have consequences for a whole community, region, or world, you are likely to attract powerful foes. If your wish would affect a god, the god’s divine servants might instantly intervene to prevent it or to encourage you to craft the wish in a particular way. If your wish would undo the multiverse itself, threaten the City of Sigil, or affect the Lady of Pain in any way, you see an image of her in your mind for a moment; she shakes her head, and your wish fails.
+
+The stress of casting Wish to produce any effect other than duplicating another spell weakens you. After enduring that stress, each time you cast a spell until you finish a Long Rest, you take 1d10 Necrotic damage per level of that spell. This damage can’t be reduced or prevented in any way. In addition, your Strength score becomes 3 for 2d4 days. For each of those days that you spend resting and doing nothing more than light activity, your remaining recovery time decreases by 2 days. Finally, there is a 33 percent chance that you are unable to cast Wish ever again if you suffer this stress.",https://www.dndbeyond.com/spells/2619213-wish,Unique,Exclusive,Exclusive,Hard Ban,Hard Ban,Hard Ban
+Cantrip,Blade Ward,Abjuration,1 Action,,,"V, S",,1 Minute,,,,Combat (...),,"Whenever a creature makes an attack roll against you before the spell ends, the attacker subtracts 1d4 from the attack roll.",https://www.dndbeyond.com/spells/2618931-blade-ward,Wards & Sanctuaries,Hard Ban,Primary,Hard Ban,Hard Ban,Hard Ban
+Cantrip,Encode Thoughts,Enchantment,1 Action,,,S,,8 Hours,,,,Creation (...),,"Putting a finger to your head, you pull a memory, an idea, or a message from your mind and transform it into a tangible string of glowing energy called a thought strand, which persists for the duration or until you cast this spell again. The thought strand appears in an unoccupied space within 5 feet of you as a Tiny, weightless, semisolid object that can be held and carried like a ribbon. It is otherwise stationary.
+
+If you cast this spell while concentrating on a spell or an ability that allows you to read or manipulate the thoughts of others (such as detect thoughts or modify memory ), you can transform the thoughts or memories you read, rather than your own, into a thought strand.
+
+Casting this spell while holding a thought strand allows you to instantly receive whatever memory, idea, or message the thought strand contains. (Casting detect thoughts on the strand has the same effect.)",https://www.dndbeyond.com/spells/83532-encode-thoughts,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+Cantrip,Guidance,Divination,1 Action,,,"V, S",,1 Minute,,,,Buff,,"You touch a willing creature and choose a skill. Until the spell ends, the creature adds 1d4 to any ability check using the chosen skill.",https://www.dndbeyond.com/spells/2618971-guidance,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+Cantrip,Message,Transmutation,1 Action,120 ft.,,"S, M",,1 Round,,,,Communication (...),,"You point toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear.
+
+You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence; 1 foot of stone, metal, or wood; or a thin sheet of lead blocks the spell.",https://www.dndbeyond.com/spells/2619034-message,Communication & Language,Hard Ban,Secondary,Hard Ban,Hard Ban,Exclusive
+Cantrip,Resistance,Abjuration,1 Action,,,"V, S",,1 Minute,,,,Buff,,"You touch a willing creature and choose a damage type: Acid, Bludgeoning, Cold, Fire, Lightning, Necrotic, Piercing, Poison, Radiant, Slashing, or Thunder. When the creature takes damage of the chosen type before the spell ends, the creature reduces the total damage taken by 1d4. A creature can benefit from this spell only once per turn.",https://www.dndbeyond.com/spells/2618947-resistance,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary
+Cantrip,Spare the Dying,Necromancy,1 Action,15 ft.,,"V, S",,Instantaneous,,,,Healing,,"Choose a creature within range that has 0 Hit Points and isn’t dead . The creature becomes Stable .
+
+Cantrip Upgrade. The range doubles when you reach levels 5 (30 feet), 11 (60 feet), and 17 (120 feet).",https://www.dndbeyond.com/spells/2619067-spare-the-dying,Healing & Restoration,Hard Ban,Primary,Hard Ban,Primary,Hard Ban
+Cantrip,True Strike,Divination,1 Action,,,"S, M",,Instantaneous,,,Melee,Radiant,,"Guided by a flash of magical insight, you make one attack with the weapon used in the spell’s casting. The attack uses your spellcasting ability for the attack and damage rolls instead of using Strength or Dexterity. If the attack deals damage, it can be Radiant damage or the weapon’s normal damage type (your choice).
+
+Cantrip Upgrade. Whether you deal Radiant damage or the weapon’s normal damage type, the attack deals extra Radiant damage when you reach levels 5 (1d6), 11 (2d6), and 17 (3d6).",https://www.dndbeyond.com/spells/2619204-true-strike,Divination — Omens & Revelation,Hard Ban,Exclusive,Hard Ban,Hard Ban,Hard Ban
+Cantrip,Vicious Mockery,Enchantment,1 Action,60 ft.,,V,,Instantaneous,,,WIS Save,Psychic,,"You unleash a string of insults laced with subtle enchantments at one creature you can see or hear within range. The target must succeed on a Wisdom saving throw or take 1d6 Psychic damage and have Disadvantage on the next attack roll it makes before the end of its next turn.
+
+Cantrip Upgrade. The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",https://www.dndbeyond.com/spells/2619216-vicious-mockery,Conditions & Debuffs,Hard Ban,Primary,Hard Ban,Hard Ban,Secondary

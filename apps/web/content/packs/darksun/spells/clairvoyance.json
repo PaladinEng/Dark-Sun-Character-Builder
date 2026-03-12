@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:clairvoyance",
+  "name": "Clairvoyance",
+  "description": "You create an Invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The intangible, invulnerable sensor remains in place for the duration.\n\nWhen you cast the spell, choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As a Bonus Action, you can switch between seeing and hearing.\n\nA creature that sees the sensor (such as a creature benefiting from See Invisibility or Truesight ) sees a luminous orb about the size of your fist.",
+  "level": 3,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "10 Minutes",
+  "range": "1 mile",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You create an Invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The intangible, invulnerable sensor remains in place for the duration.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618972-clairvoyance",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Detection (...)",
+    "primaryEffectCategory": "Divination — Detection",
+    "statuses": {
+      "arcane": "Secondary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "3rd",
+      "Name": "Clairvoyance",
+      "School": "Divination",
+      "Casting Time": "10 Minutes",
+      "Range": "1 mile",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Detection (...)",
+      "Source": "",
+      "Description": "You create an Invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The intangible, invulnerable sensor remains in place for the duration.\n\nWhen you cast the spell, choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As a Bonus Action, you can switch between seeing and hearing.\n\nA creature that sees the sensor (such as a creature benefiting from See Invisibility or Truesight ) sees a luminous orb about the size of your fist.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618972-clairvoyance",
+      "Primary Effect Category": "Divination — Detection",
+      "Arcane Status": "Secondary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Primary"
+    }
+  }
+}

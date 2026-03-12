@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:power-word-heal",
+  "name": "Power Word Heal",
+  "description": "A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed , Frightened , Paralyzed , Poisoned , or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.",
+  "level": 9,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed , Frightened , Paralyzed , Poisoned , or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618880-power-word-heal",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Prone",
+    "primaryEffectCategory": "Healing & Restoration",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "9th",
+      "Name": "Power Word Heal",
+      "School": "Enchantment",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Prone",
+      "Source": "",
+      "Description": "A wave of healing energy washes over one creature you can see within range. The target regains all its Hit Points. If the creature has the Charmed , Frightened , Paralyzed , Poisoned , or Stunned condition, the condition ends. If the creature has the Prone condition, it can use its Reaction to stand up.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618880-power-word-heal",
+      "Primary Effect Category": "Healing & Restoration",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

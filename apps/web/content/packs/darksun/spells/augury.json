@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:augury",
+  "name": "Augury",
+  "description": "You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.\n\nThe spell doesn’t account for circumstances, such as other spells, that might change the results.\n\nIf you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.",
+  "level": 2,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 Minute",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618882-augury",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Foreknowledge",
+    "primaryEffectCategory": "Divination — Omens & Revelation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Exclusive",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Augury",
+      "School": "Divination",
+      "Casting Time": "1 Minute",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Foreknowledge",
+      "Source": "",
+      "Description": "You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The DM chooses the omen from the Omens table.\n\nThe spell doesn’t account for circumstances, such as other spells, that might change the results.\n\nIf you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618882-augury",
+      "Primary Effect Category": "Divination — Omens & Revelation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Exclusive",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

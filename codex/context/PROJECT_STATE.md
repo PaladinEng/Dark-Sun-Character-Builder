@@ -4,11 +4,11 @@ Last updated:
 - 2026-03-11 EDT
 
 ## Current Objective
-- Keep the Dark Sun builder setting behavior correct by treating Dark Sun species and backgrounds as replacement lists instead of additive content, while preserving the current deployment and validation state.
+- Revise Dark Sun spell-list handling so tradition CSVs are preserved as JSON, native Dark Sun spell/spell-list content is generated locally, and class spell lists are overridden only in Dark Sun mode.
 
 ## Repository Snapshot
 - Branch: `main`
-- HEAD at last context refresh: `6f32b34`
+- HEAD at last context refresh: `0881e92`
 - Harness status for this pass:
   - `pnpm loop:check` -> `=== ALL_PASS ===`
 
@@ -48,6 +48,18 @@ Last updated:
   - Dark Sun species resolve to exactly 8 options
   - Dark Sun backgrounds resolve to exactly 13 options
   - SRD `Human` and SRD `Acolyte` no longer appear as builder option ids in Dark Sun mode
+- Imported the repo-root `homebrew-spell-lists/` CSV dataset into local JSON/native content layers:
+  - `homebrew-spell-lists/*.json` now preserve the full CSV rows plus native spell-id mappings
+  - `apps/web/content/packs/darksun/spells/` now contains 425 generated native Dark Sun spell entities for rows not already covered by SRD spell ids
+  - `apps/web/content/packs/darksun/spelllists/tradition-*.json` now provide native Arcane, Divine, Nature, Elemental, and Psionics tradition spell lists
+  - `homebrew-spell-lists/elemental-cleric-vs-elemental-tradition-report.md` compares the existing Elemental Cleric lists against the elemental tradition CSV without changing the authoritative Elemental Cleric lists
+- Added Dark Sun-only class spell-list overrides:
+  - Wizard -> `darksun:spelllist:tradition:arcane`
+  - Warlock -> `darksun:spelllist:tradition:arcane`
+  - Druid -> `darksun:spelllist:tradition:nature`
+  - Ranger -> `darksun:spelllist:tradition:nature`
+  - Elemental Cleric remains on `darksun:spelllist:elemental-cleric:shared`
+- Reconfirmed locally that SRD-only mode keeps the original SRD core spell lists for Wizard, Warlock, Druid, and Ranger.
 
 ## Remaining Limitations (Explicit)
 - Defiler casting remains a stub.
@@ -56,6 +68,8 @@ Last updated:
 - Wild Talent currently supports table-backed selection/display only; mechanical effects are not automated.
 - Elemental Cleric spell lists only reference spells that already exist as native spell entities; unsupported source spells are preserved in `apps/web/content/packs/darksun/settings/elemental-cleric-spell-source.json`.
 - Dark Sun language rules are surfaced in setting metadata/UI notes, not a full language-pick workflow.
+- The repo-root `homebrew-spell-lists/` directory remains local and untracked in git for this pass.
+- No standalone `psionics_spell_list_v2_balanced.csv` was present in `homebrew-spell-lists/`; the local JSON artifact was synthesized from the master CSV rows where `Psionics Status` is not `Hard Ban`.
 
 ## Notes for Next Runner Session
 - If the Dark Sun source bundle changes, regenerate with:
@@ -64,6 +78,8 @@ Last updated:
   - `apps/web/content/packs/darksun/settings/*.json`
   - `apps/web/src/lib/packSettings.ts`
 - For Dark Sun mode, species/background availability is now controlled by setting-level replacement ids rather than pack-merging alone.
+- Dark Sun spell-list overrides are now applied at merged-content time in `apps/web/src/lib/content.ts`, driven by `classSpellListOverrides` in `apps/web/content/packs/darksun/settings/profile.json`.
+- Full CSV preservation now lives in `homebrew-spell-lists/*.json`; native builder spell data uses `metadata` on generated spell and spell-list entities for source retention.
 - Keep internal workspace packages consumable from source for web builds unless a deliberate dist-build pipeline replaces that approach.
 - For Vercel, keep the project rooted at `apps/web`, keep `Output Directory` unset, and rely on the live project settings rather than a repo-root `vercel.json`.
 - Re-run `pnpm loop:check` after any content, builder, or context edit.

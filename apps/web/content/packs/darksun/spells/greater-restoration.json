@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:greater-restoration",
+  "name": "Greater Restoration",
+  "description": "You touch a creature and magically remove one of the following effects from it:\n\n1 Exhaustion level\n\nThe Charmed or Petrified condition\n\nA curse, including the target’s Attunement to a cursed magic item\n\nAny reduction to one of the target’s ability scores\n\nAny reduction to the target’s Hit Point maximum",
+  "level": 5,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You touch a creature and magically remove one of the following effects from it:",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618961-greater-restoration",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Exhaustion",
+    "primaryEffectCategory": "Healing & Restoration",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Primary",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Greater Restoration",
+      "School": "Abjuration",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Exhaustion",
+      "Source": "",
+      "Description": "You touch a creature and magically remove one of the following effects from it:\n\n1 Exhaustion level\n\nThe Charmed or Petrified condition\n\nA curse, including the target’s Attunement to a cursed magic item\n\nAny reduction to one of the target’s ability scores\n\nAny reduction to the target’s Hit Point maximum",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618961-greater-restoration",
+      "Primary Effect Category": "Healing & Restoration",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Primary",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:spiritual-weapon",
+  "name": "Spiritual Weapon",
+  "description": "You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.\n\nAs a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d8 for every slot level above 2.",
+  "level": 2,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619081-spiritual-weapon",
+    "area": "",
+    "materials": "",
+    "attackSave": "Melee",
+    "damageEffect": "Force",
+    "primaryEffectCategory": "Force Manipulation",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Secondary",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Spiritual Weapon",
+      "School": "Evocation",
+      "Casting Time": "1 Bonus Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "Melee",
+      "Damage/Effect": "Force",
+      "Source": "",
+      "Description": "You create a floating, spectral force that resembles a weapon of your choice and lasts for the duration. The force appears within range in a space of your choice, and you can immediately make one melee spell attack against one creature within 5 feet of the force. On a hit, the target takes Force damage equal to 1d8 plus your spellcasting ability modifier.\n\nAs a Bonus Action on your later turns, you can move the force up to 20 feet and repeat the attack against a creature within 5 feet of it.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d8 for every slot level above 2.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619081-spiritual-weapon",
+      "Primary Effect Category": "Force Manipulation",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Secondary",
+      "Psionics Status": "Primary"
+    }
+  }
+}

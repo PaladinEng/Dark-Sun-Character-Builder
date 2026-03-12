@@ -1,0 +1,55 @@
+{
+  "generatedSpellCount": 425,
+  "reusedExistingSpellCount": 92,
+  "classSpellListOverrides": {
+    "srd52:class:wizard": [
+      "darksun:spelllist:tradition:arcane"
+    ],
+    "srd52:class:warlock": [
+      "darksun:spelllist:tradition:arcane"
+    ],
+    "srd52:class:druid": [
+      "darksun:spelllist:tradition:nature"
+    ],
+    "srd52:class:ranger": [
+      "darksun:spelllist:tradition:nature"
+    ]
+  },
+  "traditionOutputs": [
+    {
+      "id": "arcane",
+      "sourceCsvPresent": true,
+      "sourceJsonFile": "arcane_spell_list_v2_balanced.json",
+      "nativeSpellListId": "darksun:spelllist:tradition:arcane",
+      "rowCount": 157
+    },
+    {
+      "id": "divine",
+      "sourceCsvPresent": true,
+      "sourceJsonFile": "divine_spell_list_v2_balanced.json",
+      "nativeSpellListId": "darksun:spelllist:tradition:divine",
+      "rowCount": 150
+    },
+    {
+      "id": "nature",
+      "sourceCsvPresent": true,
+      "sourceJsonFile": "nature_spell_list_v2_balanced.json",
+      "nativeSpellListId": "darksun:spelllist:tradition:nature",
+      "rowCount": 117
+    },
+    {
+      "id": "elemental",
+      "sourceCsvPresent": true,
+      "sourceJsonFile": "elemental_spell_list_v2_balanced.json",
+      "nativeSpellListId": "darksun:spelllist:tradition:elemental",
+      "rowCount": 172
+    },
+    {
+      "id": "psionics",
+      "sourceCsvPresent": false,
+      "sourceJsonFile": "psionics_spell_list_v2_balanced.json",
+      "nativeSpellListId": "darksun:spelllist:tradition:psionics",
+      "rowCount": 133
+    }
+  ]
+}

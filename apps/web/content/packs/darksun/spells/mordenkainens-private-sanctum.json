@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:mordenkainens-private-sanctum",
+  "name": "Mordenkainen's Private Sanctum",
+  "description": "You make an area within range magically secure. The area is a Cube that can be as small as 5 feet to as large as 100 feet on each side. The spell lasts for the duration.\n\nWhen you cast the spell, you decide what sort of security the spell provides, choosing any of the following properties:\n\nSound can’t pass through the barrier at the edge of the warded area.\n\nThe barrier of the warded area appears dark and foggy, preventing vision (including Darkvision ) through it.\n\nSensors created by Divination spells can’t appear inside the protected area or pass through the barrier at its perimeter.\n\nCreatures in the area can’t be targeted by Divination spells.\n\nNothing can teleport into or out of the warded area.\n\nPlanar travel is blocked within the warded area.\n\nCasting this spell on the same spot every day for 365 days makes the spell last until dispelled.\n\nUsing a Higher-Level Spell Slot. You can increase the size of the Cube by 100 feet for each spell slot level above 4.",
+  "level": 4,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "10 Minutes",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "24 Hours",
+  "concentration": false,
+  "summary": "You make an area within range magically secure. The area is a Cube that can be as small as 5 feet to as large as 100 feet on each side. The spell lasts for the duration.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2619114-mordenkainens-private-sanctum",
+    "area": "( *)",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Control (...)",
+    "primaryEffectCategory": "Teleportation & Spatial Bending",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Mordenkainen's Private Sanctum",
+      "School": "Abjuration",
+      "Casting Time": "10 Minutes",
+      "Range": "120 ft.",
+      "Area": "( *)",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "24 Hours",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Control (...)",
+      "Source": "",
+      "Description": "You make an area within range magically secure. The area is a Cube that can be as small as 5 feet to as large as 100 feet on each side. The spell lasts for the duration.\n\nWhen you cast the spell, you decide what sort of security the spell provides, choosing any of the following properties:\n\nSound can’t pass through the barrier at the edge of the warded area.\n\nThe barrier of the warded area appears dark and foggy, preventing vision (including Darkvision ) through it.\n\nSensors created by Divination spells can’t appear inside the protected area or pass through the barrier at its perimeter.\n\nCreatures in the area can’t be targeted by Divination spells.\n\nNothing can teleport into or out of the warded area.\n\nPlanar travel is blocked within the warded area.\n\nCasting this spell on the same spot every day for 365 days makes the spell last until dispelled.\n\nUsing a Higher-Level Spell Slot. You can increase the size of the Cube by 100 feet for each spell slot level above 4.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2619114-mordenkainens-private-sanctum",
+      "Primary Effect Category": "Teleportation & Spatial Bending",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:commune-with-nature",
+  "name": "Commune with Nature",
+  "description": "You commune with nature spirits and gain knowledge of the surrounding area. In the outdoors, the spell gives you knowledge of the area within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn’t function where nature has been replaced by construction, such as in castles and settlements.\n\nChoose three of the following facts; you learn those facts as they pertain to the spell’s area:\n\nLocations of settlements\n\nLocations of portals to other planes of existence\n\nLocation of one Challenge Rating 10+ creature (DM’s choice) that is a Celestial, an Elemental, a Fey, a Fiend, or an Undead\n\nThe most prevalent kind of plant, mineral, or Beast (you choose which to learn)\n\nLocations of bodies of water\n\nFor example, you could determine the location of a powerful monster in the area, the locations of bodies of water, and the locations of any towns.",
+  "level": 5,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 Minute",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You commune with nature spirits and gain knowledge of the surrounding area. In the outdoors, the spell gives you knowledge of the area within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn’t function where nature has been replaced by construction, such as in castles and settlements.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618989-commune-with-nature",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Environment (...)",
+    "primaryEffectCategory": "Nature Interaction",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Exclusive",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "5th",
+      "Name": "Commune with Nature",
+      "School": "Divination",
+      "Casting Time": "1 Minute",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Environment (...)",
+      "Source": "",
+      "Description": "You commune with nature spirits and gain knowledge of the surrounding area. In the outdoors, the spell gives you knowledge of the area within 3 miles of you. In caves and other natural underground settings, the radius is limited to 300 feet. The spell doesn’t function where nature has been replaced by construction, such as in castles and settlements.\n\nChoose three of the following facts; you learn those facts as they pertain to the spell’s area:\n\nLocations of settlements\n\nLocations of portals to other planes of existence\n\nLocation of one Challenge Rating 10+ creature (DM’s choice) that is a Celestial, an Elemental, a Fey, a Fiend, or an Undead\n\nThe most prevalent kind of plant, mineral, or Beast (you choose which to learn)\n\nLocations of bodies of water\n\nFor example, you could determine the location of a powerful monster in the area, the locations of bodies of water, and the locations of any towns.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618989-commune-with-nature",
+      "Primary Effect Category": "Nature Interaction",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Exclusive",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "id": "darksun:spell:zephyr-strike",
+  "name": "Zephyr Strike",
+  "description": "You move like the wind. Until the spell ends, your movement doesn’t provoke opportunity attacks.\n\nOnce before the spell ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn.",
+  "level": 1,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You move like the wind. Until the spell ends, your movement doesn’t provoke opportunity attacks.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14622-zephyr-strike",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Force",
+    "primaryEffectCategory": "Movement Enhancement",
+    "statuses": {
+      "arcane": "Primary",
+      "divine": "Hard Ban",
+      "nature": "Secondary",
+      "elemental": "Hard Ban",
+      "psionics": "Primary"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "Zephyr Strike",
+      "School": "Transmutation",
+      "Casting Time": "1 Bonus Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V",
+      "Materials": "",
+      "Duration": "1 Minute",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Force",
+      "Source": "",
+      "Description": "You move like the wind. Until the spell ends, your movement doesn’t provoke opportunity attacks.\n\nOnce before the spell ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14622-zephyr-strike",
+      "Primary Effect Category": "Movement Enhancement",
+      "Arcane Status": "Primary",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Secondary",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Primary"
+    }
+  }
+}

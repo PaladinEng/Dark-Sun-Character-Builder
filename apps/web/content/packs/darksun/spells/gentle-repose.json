@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:gentle-repose",
+  "name": "Gentle Repose",
+  "description": "You touch a corpse or other remains. For the duration, the target is protected from decay and can’t become Undead.\n\nThe spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don’t count against the time limit of spells such as Raise Dead .",
+  "level": 2,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "10 Days",
+  "concentration": false,
+  "summary": "You touch a corpse or other remains. For the duration, the target is protected from decay and can’t become Undead.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618942-gentle-repose",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Warding",
+    "primaryEffectCategory": "Resurrection",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Exclusive",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Gentle Repose",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "10 Days",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Warding",
+      "Source": "",
+      "Description": "You touch a corpse or other remains. For the duration, the target is protected from decay and can’t become Undead.\n\nThe spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don’t count against the time limit of spells such as Raise Dead .",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618942-gentle-repose",
+      "Primary Effect Category": "Resurrection",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Exclusive",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

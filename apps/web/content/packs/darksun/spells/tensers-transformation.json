@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:tensers-transformation",
+  "name": "Tenser's Transformation",
+  "description": "You endow yourself with endurance and martial prowess fueled by magic. Until the spell ends, you can’t cast spells, and you gain the following benefits:\n\nYou gain 50 temporary hit points. If any of these remain when the spell ends, they are lost.\n\nYou have advantage on attack rolls that you make with simple and martial weapons.\n\nWhen you hit a target with a weapon attack, that target takes an extra 2d12 force damage.\n\nYou have proficiency with all armor, shields, simple weapons, and martial weapons.\n\nYou have proficiency in Strength and Constitution saving throws.\n\nYou can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that gives you extra attacks.\n\nImmediately after the spell ends, you must succeed on a DC 15 Constitution saving throw or suffer one level of exhaustion .",
+  "level": 6,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You endow yourself with endurance and martial prowess fueled by magic. Until the spell ends, you can’t cast spells, and you gain the following benefits:",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/14612-tensers-transformation",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Buff (...)",
+    "primaryEffectCategory": "Conditions & Debuffs",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Primary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Secondary"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Tenser's Transformation",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Buff (...)",
+      "Source": "",
+      "Description": "You endow yourself with endurance and martial prowess fueled by magic. Until the spell ends, you can’t cast spells, and you gain the following benefits:\n\nYou gain 50 temporary hit points. If any of these remain when the spell ends, they are lost.\n\nYou have advantage on attack rolls that you make with simple and martial weapons.\n\nWhen you hit a target with a weapon attack, that target takes an extra 2d12 force damage.\n\nYou have proficiency with all armor, shields, simple weapons, and martial weapons.\n\nYou have proficiency in Strength and Constitution saving throws.\n\nYou can attack twice, instead of once, when you take the Attack action on your turn. You ignore this benefit if you already have a feature, like Extra Attack, that gives you extra attacks.\n\nImmediately after the spell ends, you must succeed on a DC 15 Constitution saving throw or suffer one level of exhaustion .",
+      "URL_absolute": "https://www.dndbeyond.com/spells/14612-tensers-transformation",
+      "Primary Effect Category": "Conditions & Debuffs",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Primary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Secondary"
+    }
+  }
+}

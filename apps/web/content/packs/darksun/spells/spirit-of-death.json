@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:spirit-of-death",
+  "name": "Spirit of Death",
+  "description": "You call forth a spirit that embodies death. The spirit manifests in an unoccupied space you can see within range and uses the reaper spirit stat block. The spirit disappears when it is reduced to 0 hit points or when the spell ends.\n\nThe spirit is an ally to you and your companions. In combat, the spirit shares your initiative count and takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue the spirit any commands, it takes the Dodge action and uses its movement to avoid danger.\n\nMedium Undead, Neutral\n\nArmor Class 11 + the level of the spell (natural armor)\n\nHit Points 40 + 10 for each spell level above 4th\n\nSpeed 30 ft., fly 30 ft. (hover)\n\nSTR\n\n16 (+3)\n\nDEX\n\n16 (+3)\n\nCON\n\n16 (+3)\n\nINT\n\n16 (+3)\n\nWIS\n\n16 (+3)\n\nCHA\n\n16 (+3)\n\nDamage Immunities necrotic, poison\n\nCondition Immunities charmed , exhaustion , frightened , paralyzed , poisoned\n\nSenses darkvision 60 ft., passive Perception 13\n\nLanguages understands the languages you speak\n\nChallenge — Proficiency Bonus equals your bonus\n\nIncorporeal Movement. The spirit can move through other creatures and objects as if they were difficult terrain . If it ends its turn inside an object, it is shunted to the nearest unoccupied space and takes 1d10 force damage for every 5 feet shunted.\n\nActions\n\nMultiattack. The spirit makes a number of Reaping Scythe attacks equal to half the level of the spell (rounded down).\n\nReaping Scythe. Melee Weapon Attack: your spell attack modifier to hit (with advantage), reach 5 ft., the creature haunted by Haunt Creature. Hit: 1d8 + 3 + the spell’s level necrotic damage.\n\nBonus Actions\n\nHaunt Creature. The spirit targets a creature it can see within 10 feet of itself and begins haunting it. While the target is haunted, you and the spirit sense the direction and distance to the target if it is on the same plane of existence as you. Additionally, if the target starts its turn within 10 feet of the spirit, the target must succeed on a Wisdom saving throw against your spell save DC or have the frightened condition until the start of the target’s next turn. The target remains haunted until it dies, the spirit disappears, or the spirit uses this action again.\n\nAt Higher Levels. When you cast this spell using a spell slot of 5th level or higher, use the higher level wherever the spell’s level appears in the reaper spirit stat block.",
+  "level": 4,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 Hour",
+  "concentration": false,
+  "summary": "You call forth a spirit that embodies death. The spirit manifests in an unoccupied space you can see within range and uses the reaper spirit stat block. The spirit disappears when it is reduced to 0 hit points or when the spell ends.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2158657-spirit-of-death",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Summoning",
+    "primaryEffectCategory": "Summoning — Extraplanar",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Secondary",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "4th",
+      "Name": "Spirit of Death",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "60 ft.",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "1 Hour",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Summoning",
+      "Source": "",
+      "Description": "You call forth a spirit that embodies death. The spirit manifests in an unoccupied space you can see within range and uses the reaper spirit stat block. The spirit disappears when it is reduced to 0 hit points or when the spell ends.\n\nThe spirit is an ally to you and your companions. In combat, the spirit shares your initiative count and takes its turn immediately after yours. It obeys your verbal commands (no action required by you). If you don’t issue the spirit any commands, it takes the Dodge action and uses its movement to avoid danger.\n\nMedium Undead, Neutral\n\nArmor Class 11 + the level of the spell (natural armor)\n\nHit Points 40 + 10 for each spell level above 4th\n\nSpeed 30 ft., fly 30 ft. (hover)\n\nSTR\n\n16 (+3)\n\nDEX\n\n16 (+3)\n\nCON\n\n16 (+3)\n\nINT\n\n16 (+3)\n\nWIS\n\n16 (+3)\n\nCHA\n\n16 (+3)\n\nDamage Immunities necrotic, poison\n\nCondition Immunities charmed , exhaustion , frightened , paralyzed , poisoned\n\nSenses darkvision 60 ft., passive Perception 13\n\nLanguages understands the languages you speak\n\nChallenge — Proficiency Bonus equals your bonus\n\nIncorporeal Movement. The spirit can move through other creatures and objects as if they were difficult terrain . If it ends its turn inside an object, it is shunted to the nearest unoccupied space and takes 1d10 force damage for every 5 feet shunted.\n\nActions\n\nMultiattack. The spirit makes a number of Reaping Scythe attacks equal to half the level of the spell (rounded down).\n\nReaping Scythe. Melee Weapon Attack: your spell attack modifier to hit (with advantage), reach 5 ft., the creature haunted by Haunt Creature. Hit: 1d8 + 3 + the spell’s level necrotic damage.\n\nBonus Actions\n\nHaunt Creature. The spirit targets a creature it can see within 10 feet of itself and begins haunting it. While the target is haunted, you and the spirit sense the direction and distance to the target if it is on the same plane of existence as you. Additionally, if the target starts its turn within 10 feet of the spirit, the target must succeed on a Wisdom saving throw against your spell save DC or have the frightened condition until the start of the target’s next turn. The target remains haunted until it dies, the spirit disappears, or the spirit uses this action again.\n\nAt Higher Levels. When you cast this spell using a spell slot of 5th level or higher, use the higher level wherever the spell’s level appears in the reaper spirit stat block.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2158657-spirit-of-death",
+      "Primary Effect Category": "Summoning — Extraplanar",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Secondary",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "darksun:spell:investiture-of-ice",
+  "name": "Investiture of Ice",
+  "description": "Until the spell ends, ice rimes your body, and you gain the following benefits:\n\nYou are immune to cold damage and have resistance to fire damage.\n\nYou are immune to cold damage and have resistance to fire damage.\n\nYou can move across difficult terrain created by ice or snow without spending extra movement.\n\nYou can move across difficult terrain created by ice or snow without spending extra movement.\n\nThe ground in a 10-foot radius around you is icy and is difficult terrain for creatures other than you. The radius moves with you.\n\nThe ground in a 10-foot radius around you is icy and is difficult terrain for creatures other than you. The radius moves with you.\n\nYou can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.\n\nYou can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.",
+  "level": 6,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "Until the spell ends, ice rimes your body, and you gain the following benefits:",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2387-investiture-of-ice",
+    "area": "(15 ft. *)",
+    "materials": "",
+    "attackSave": "CON Save",
+    "damageEffect": "Cold",
+    "primaryEffectCategory": "Elemental Blasts",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Exclusive",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "6th",
+      "Name": "Investiture of Ice",
+      "School": "Transmutation",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "(15 ft. *)",
+      "Components": "V, S",
+      "Materials": "",
+      "Duration": "10 Minutes",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "CON Save",
+      "Damage/Effect": "Cold",
+      "Source": "",
+      "Description": "Until the spell ends, ice rimes your body, and you gain the following benefits:\n\nYou are immune to cold damage and have resistance to fire damage.\n\nYou are immune to cold damage and have resistance to fire damage.\n\nYou can move across difficult terrain created by ice or snow without spending extra movement.\n\nYou can move across difficult terrain created by ice or snow without spending extra movement.\n\nThe ground in a 10-foot radius around you is icy and is difficult terrain for creatures other than you. The radius moves with you.\n\nThe ground in a 10-foot radius around you is icy and is difficult terrain for creatures other than you. The radius moves with you.\n\nYou can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.\n\nYou can use your action to create a 15-foot cone of freezing wind extending from your outstretched hand in a direction you choose. Each creature in the cone must make a Constitution saving throw. A creature takes 4d6 cold damage on a failed save, or half as much damage on a successful one. A creature that fails its save against this effect has its speed halved until the start of your next turn.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2387-investiture-of-ice",
+      "Primary Effect Category": "Elemental Blasts",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Exclusive",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:gift-of-gab",
+  "name": "Gift of Gab",
+  "description": "Jim Darkmagic is said to have invented this spell, originally calling it I said what?! Have you ever been talking to the local monarch and accidentally mentioned how their son looks like your favorite hog from when you were growing up on the family farm? We’ve all been there! But rather than being beheaded for an honest slip of the tongue, you can pretend it never happened — by ensuring that no one knows it happened.\n\nWhen you cast this spell, you skillfully reshape the memories of listeners in your immediate area, so that each creature of your choice within 5 feet of you forgets everything you said within the last 6 seconds. Those creatures then remember that you actually said the words you speak as the verbal component of the spell.\n\nWhen I met Jim Darkmagic, I wondered how he got anything done in that outfit. I have since learned that most of his talents involve standing and talking. His outfit is perfect for that.\n\n— Môrgæn",
+  "level": 2,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 Reaction *",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Jim Darkmagic is said to have invented this spell, originally calling it I said what?! Have you ever been talking to the local monarch and accidentally mentioned how their son looks like your favorite hog from when you were growing up on the family farm? We’ve all been there! But rather than being beheaded for an honest slip of the tongue, you can pretend it never happened — by ensuring that no one knows it happened.",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/188118-gift-of-gab",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "",
+    "primaryEffectCategory": "Mind Control & Mental Influence",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Exclusive"
+    },
+    "csvRow": {
+      "Level": "2nd",
+      "Name": "Gift of Gab",
+      "School": "Enchantment",
+      "Casting Time": "1 Reaction *",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M, R",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "",
+      "Source": "",
+      "Description": "Jim Darkmagic is said to have invented this spell, originally calling it I said what?! Have you ever been talking to the local monarch and accidentally mentioned how their son looks like your favorite hog from when you were growing up on the family farm? We’ve all been there! But rather than being beheaded for an honest slip of the tongue, you can pretend it never happened — by ensuring that no one knows it happened.\n\nWhen you cast this spell, you skillfully reshape the memories of listeners in your immediate area, so that each creature of your choice within 5 feet of you forgets everything you said within the last 6 seconds. Those creatures then remember that you actually said the words you speak as the verbal component of the spell.\n\nWhen I met Jim Darkmagic, I wondered how he got anything done in that outfit. I have since learned that most of his talents involve standing and talking. His outfit is perfect for that.\n\n— Môrgæn",
+      "URL_absolute": "https://www.dndbeyond.com/spells/188118-gift-of-gab",
+      "Primary Effect Category": "Mind Control & Mental Influence",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Exclusive"
+    }
+  }
+}

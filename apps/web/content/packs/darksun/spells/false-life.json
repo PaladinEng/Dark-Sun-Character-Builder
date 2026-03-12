@@ -1,0 +1,60 @@
+{
+  "id": "darksun:spell:false-life",
+  "name": "False Life",
+  "description": "You gain 2d4 + 4 Temporary Hit Points .\n\nUsing a Higher-Level Spell Slot. You gain 5 additional Temporary Hit Points for each spell slot level above 1.",
+  "level": 1,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You gain 2d4 + 4 Temporary Hit Points .",
+  "notes": "Imported from dndbeyond_spells_with_sources_v23_final_balanced.csv. Full homebrew spell metadata is preserved in metadata.",
+  "metadata": {
+    "importSource": "homebrew-spell-lists",
+    "sourceCsv": "dndbeyond_spells_with_sources_v23_final_balanced.csv",
+    "urlAbsolute": "https://www.dndbeyond.com/spells/2618866-false-life",
+    "area": "",
+    "materials": "",
+    "attackSave": "",
+    "damageEffect": "Buff",
+    "primaryEffectCategory": "Undead Creation",
+    "statuses": {
+      "arcane": "Hard Ban",
+      "divine": "Hard Ban",
+      "nature": "Hard Ban",
+      "elemental": "Hard Ban",
+      "psionics": "Hard Ban"
+    },
+    "csvRow": {
+      "Level": "1st",
+      "Name": "False Life",
+      "School": "Necromancy",
+      "Casting Time": "1 Action",
+      "Range": "",
+      "Area": "",
+      "Components": "V, S, M",
+      "Materials": "",
+      "Duration": "Instantaneous",
+      "Concentration": "",
+      "Ritual": "",
+      "Attack/Save": "",
+      "Damage/Effect": "Buff",
+      "Source": "",
+      "Description": "You gain 2d4 + 4 Temporary Hit Points .\n\nUsing a Higher-Level Spell Slot. You gain 5 additional Temporary Hit Points for each spell slot level above 1.",
+      "URL_absolute": "https://www.dndbeyond.com/spells/2618866-false-life",
+      "Primary Effect Category": "Undead Creation",
+      "Arcane Status": "Hard Ban",
+      "Divine Status": "Hard Ban",
+      "Nature Status": "Hard Ban",
+      "Elemental Status": "Hard Ban",
+      "Psionics Status": "Hard Ban"
+    }
+  }
+}
