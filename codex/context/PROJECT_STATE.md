@@ -4,11 +4,11 @@ Last updated:
 - 2026-03-11 EDT
 
 ## Current Objective
-- Revise Dark Sun spell-list handling so tradition CSVs are preserved as JSON, native Dark Sun spell/spell-list content is generated locally, and class spell lists are overridden only in Dark Sun mode.
+- Stabilize local Dark Sun validation after the tradition spell-list import, add focused Dark Sun smoke coverage, and harden the harness against flaky Next.js build/dev artifact failures.
 
 ## Repository Snapshot
 - Branch: `main`
-- HEAD at last context refresh: `0881e92`
+- HEAD at last context refresh: `9ea55db`
 - Harness status for this pass:
   - `pnpm loop:check` -> `=== ALL_PASS ===`
 
@@ -60,6 +60,30 @@ Last updated:
   - Ranger -> `darksun:spelllist:tradition:nature`
   - Elemental Cleric remains on `darksun:spelllist:elemental-cleric:shared`
 - Reconfirmed locally that SRD-only mode keeps the original SRD core spell lists for Wizard, Warlock, Druid, and Ranger.
+- Investigated the current local regression after the spell-list import:
+  - clean `next build` oscillated between missing `.next/server/pages-manifest.json` and missing `.nft.json` trace files
+  - the old `apps/web` build script masked that by retrying inline
+- Added focused local regression coverage:
+  - `scripts/darksun-content-smoke.mjs` validates merged-content generation for `srd52` and `srd52,darksun`
+  - the smoke asserts Dark Sun species replacement, Dark Sun background replacement, and Dark Sun class spell-list overrides for Wizard, Warlock, Druid, Ranger, and Elemental Cleric
+- Hardened the harness/build path:
+  - `scripts/web-build-check.mjs` now reports explicit Next artifact failure classes and verifies required `.next/server` artifacts
+  - `scripts/loopdev-check.mjs` now runs the Dark Sun smoke stage before the web stages
+  - `scripts/web-build-stable.mjs` now provides a bounded clean-retry wrapper for `pnpm --filter web build` so manual local builds can recover from the known Next artifact flake
+- Added local Next.js stabilization files/config for the hybrid app/pages setup:
+  - `apps/web/pages/_app.tsx`
+  - `apps/web/pages/_document.tsx`
+  - `apps/web/pages/_error.tsx`
+  - `apps/web/pages/404.tsx`
+  - `apps/web/app/not-found.tsx`
+  - `apps/web/next.config.ts` now sets `outputFileTracingRoot` and uses `compiler.runAfterProductionCompile` to materialize baseline manifest/trace placeholders needed by later build phases on this machine
+- Repaired the workspace install after adding `caniuse-lite` for Next dev bootstrap:
+  - `apps/web/package.json` now includes `caniuse-lite`
+  - `pnpm install --force` repaired the workspace symlink graph after a transient broken install state
+- Final local validation for this pass:
+  - `pnpm install` -> PASS
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
 
 ## Remaining Limitations (Explicit)
 - Defiler casting remains a stub.
@@ -70,6 +94,7 @@ Last updated:
 - Dark Sun language rules are surfaced in setting metadata/UI notes, not a full language-pick workflow.
 - The repo-root `homebrew-spell-lists/` directory remains local and untracked in git for this pass.
 - No standalone `psionics_spell_list_v2_balanced.csv` was present in `homebrew-spell-lists/`; the local JSON artifact was synthesized from the master CSV rows where `Psionics Status` is not `Hard Ban`.
+- The Next.js clean-build issue appears to be an upstream/local artifact-generation flake rather than a Dark Sun content bug; local builds are currently stabilized by bounded retries plus artifact assertions, not by a confirmed upstream root-cause fix.
 
 ## Notes for Next Runner Session
 - If the Dark Sun source bundle changes, regenerate with:
@@ -82,4 +107,9 @@ Last updated:
 - Full CSV preservation now lives in `homebrew-spell-lists/*.json`; native builder spell data uses `metadata` on generated spell and spell-list entities for source retention.
 - Keep internal workspace packages consumable from source for web builds unless a deliberate dist-build pipeline replaces that approach.
 - For Vercel, keep the project rooted at `apps/web`, keep `Output Directory` unset, and rely on the live project settings rather than a repo-root `vercel.json`.
+- The harness now depends on:
+  - `scripts/darksun-content-smoke.mjs`
+  - `scripts/web-build-check.mjs`
+  - `scripts/web-build-stable.mjs`
+- If the Next artifact flake resurfaces more aggressively, inspect the retry output from `pnpm --filter web build` first before changing Dark Sun content wiring.
 - Re-run `pnpm loop:check` after any content, builder, or context edit.

@@ -28,6 +28,18 @@
   - Psionicist mechanics
   - Athasian Bard mechanics
   - Wild Talent effects beyond selection/display
+- Local regression coverage has been expanded:
+  - `scripts/darksun-content-smoke.mjs` validates Dark Sun species/background replacement plus class spell-list overrides for Wizard, Warlock, Druid, Ranger, and Elemental Cleric.
+  - `scripts/web-build-check.mjs` validates the Next build path and checks required `.next/server` artifacts.
+  - `scripts/web-build-stable.mjs` is the developer-facing bounded clean-retry wrapper behind `pnpm --filter web build`.
+- The hybrid app/pages local Next setup now also includes:
+  - `apps/web/app/not-found.tsx`
+  - `apps/web/pages/_app.tsx`
+  - `apps/web/pages/_document.tsx`
+  - `apps/web/pages/_error.tsx`
+  - `apps/web/pages/404.tsx`
+- `apps/web/next.config.ts` now sets `outputFileTracingRoot` and uses `compiler.runAfterProductionCompile` to materialize baseline placeholder files needed by later build phases on this machine.
+- `apps/web/package.json` now includes `caniuse-lite` so `next dev` can resolve its compiled `browserslist` dependency chain consistently.
 
 ## Validation Commands
 1. `pnpm install`
@@ -43,8 +55,9 @@
 - Dark Sun species/background replacement now depends on `speciesReplacementIds` and `backgroundReplacementIds` in `apps/web/content/packs/darksun/settings/profile.json`.
 - No explicit psionics CSV is present in `homebrew-spell-lists/`; the local psionics JSON artifact is synthesized from master status data and should be replaced if a real CSV arrives.
 - Elemental Cleric still uses `darksun:spelllist:elemental-cleric:*`; the elemental tradition CSV is preserved separately and compared in the report only.
+- The local Next.js artifact flake still appears to be upstream/framework behavior rather than a Dark Sun content bug; current mitigation is bounded clean retries plus artifact assertions.
 
 ## Immediate Next-Step Commands
 1. `git status --short`
 2. `pnpm loop:check`
-3. `node scripts/import-homebrew-spell-lists.mjs`
+3. `pnpm --filter web build`

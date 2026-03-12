@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "rm -rf .next && next build || (rm -rf .next && next build)",
+    "build": "node ../../scripts/web-build-stable.mjs",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"
@@ -12,6 +12,7 @@
   "dependencies": {
     "@dark-sun/content": "workspace:*",
     "@dark-sun/rules": "workspace:*",
+    "caniuse-lite": "^1.0.30001776",
     "next": "15.5.12",
     "react": "19.2.4",
     "react-dom": "19.2.4"

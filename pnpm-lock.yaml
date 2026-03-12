@@ -26,6 +26,9 @@ importers:
       '@dark-sun/rules':
         specifier: workspace:*
         version: link:../../packages/rules
+      caniuse-lite:
+        specifier: ^1.0.30001776
+        version: 1.0.30001776
       next:
         specifier: 15.5.12
         version: 15.5.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)

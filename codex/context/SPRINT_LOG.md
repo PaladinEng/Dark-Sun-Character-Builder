@@ -130,3 +130,38 @@ Append one dated section per completed work block.
   - Generated 425 native Dark Sun spell entities for master-row spells not already covered by SRD ids and reused 92 existing SRD spell ids.
   - Added Dark Sun Arcane/Nature/Divine/Elemental/Psionics native spell lists, but only Arcane and Nature are active class overrides in Dark Sun mode.
   - Kept Elemental Cleric on the existing separately-developed spell lists and wrote a comparison report for later analysis.
+
+## 2026-03-11 - Dark Sun Regression Investigation And Harness Hardening
+- Scope: Reproduce the local regression after the tradition spell-list import, harden the harness so the failure mode is visible earlier, and add focused Dark Sun override smoke coverage without pushing.
+- Result: PASS.
+- Validation:
+  - `pnpm install` -> PASS
+  - `pnpm --filter web build` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `apps/web/next.config.ts`
+  - `apps/web/package.json`
+  - `apps/web/app/not-found.tsx`
+  - `apps/web/pages/_app.tsx`
+  - `apps/web/pages/_document.tsx`
+  - `apps/web/pages/_error.tsx`
+  - `apps/web/pages/404.tsx`
+  - `package.json`
+  - `pnpm-lock.yaml`
+  - `scripts/loopdev-check.mjs`
+  - `scripts/web-build-check.mjs`
+  - `scripts/web-build-stable.mjs`
+  - `scripts/darksun-content-smoke.mjs`
+  - `codex/context/*`
+- Findings:
+  - The local regression was not a Dark Sun data-reference break. The concrete failure was flaky Next.js artifact generation on this machine:
+    - missing `.next/server/pages-manifest.json`
+    - missing `.next/server/**/*.nft.json`
+  - The old `apps/web` build script masked this by retrying inline, so the harness could not classify the first failure clearly.
+  - After adding `caniuse-lite`, the workspace symlink graph needed a forced reinstall before Vitest and Next dev resolved consistently again.
+- Fixes:
+  - Added a dedicated Dark Sun merged-content smoke script that validates species/background replacement and class spell-list overrides.
+  - Added a dedicated web build check that verifies required build artifacts and reports explicit artifact failure classes.
+  - Switched the developer-facing `pnpm --filter web build` command to a bounded clean-retry wrapper, while keeping the harness responsible for artifact assertions.
+  - Added minimal app/pages fallback files plus `outputFileTracingRoot` and a `runAfterProductionCompile` placeholder hook to stabilize the hybrid app/pages local build path.
+  - Added `caniuse-lite` to the web workspace and repaired the install with `pnpm install --force` after a transient broken pnpm symlink state.

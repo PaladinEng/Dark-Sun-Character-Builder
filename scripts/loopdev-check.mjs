@@ -8,13 +8,14 @@ import process from "node:process";
 const FULL_STAGES = [
   { name: "repo:duplicate-suffix", command: ["pnpm", "guard:duplicates"] },
   { name: "content:lint", command: ["pnpm", "content:lint"] },
+  { name: "content:darksun-smoke", command: ["pnpm", "darksun:smoke"] },
   { name: "rules:typecheck", command: ["pnpm", "--filter", "@dark-sun/rules", "typecheck"] },
   { name: "rules:unit", command: ["pnpm", "--filter", "@dark-sun/rules", "test:unit"] },
   { name: "sheet:golden", command: ["pnpm", "sheet:golden"] },
   { name: "sheet:invariants", command: ["pnpm", "sheet:invariants"] },
   {
     name: "web:build",
-    command: ["pnpm", "--filter", "web", "build"],
+    command: ["pnpm", "web:build-check"],
     forbiddenOutput: [/⨯ ESLint:/i],
     warningPatterns: [/Warning:/i, /react-hooks\/exhaustive-deps/i, /ESLint warning/i],
     strictWarningsFail: true,
@@ -29,6 +30,7 @@ const FULL_STAGES = [
 const FAST_STAGE_NAMES = new Set([
   "repo:duplicate-suffix",
   "content:lint",
+  "content:darksun-smoke",
   "rules:typecheck",
   "rules:unit",
   "sheet:golden",

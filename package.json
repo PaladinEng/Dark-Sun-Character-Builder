@@ -11,6 +11,8 @@
     "sheet:golden": "pnpm --filter @dark-sun/rules sheet:golden",
     "sheet:invariants": "pnpm --filter @dark-sun/rules sheet:invariants",
     "guard:duplicates": "node scripts/check-duplicate-suffix-files.mjs",
+    "web:build-check": "node scripts/web-build-check.mjs",
+    "darksun:smoke": "node --experimental-specifier-resolution=node scripts/darksun-content-smoke.mjs",
     "web:smoke": "node scripts/web-smoke.mjs",
     "web:dev-smoke": "node scripts/web-dev-smoke.mjs",
     "api:smoke": "node scripts/api-smoke.mjs",
