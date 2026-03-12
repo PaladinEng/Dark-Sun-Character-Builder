@@ -198,3 +198,23 @@ Append one dated section per completed work block.
   - Updated GitHub Actions verification to use Node 24.
   - Documented Node 24 as the supported version in `README.md`.
   - Generalized the web-build retry classifier to cover broader `.next` `ENOENT`/`ENOTEMPTY` races and added bounded cleanup retries for `.next` removal.
+
+## 2026-03-12 - Verify Fix For Content Typecheck
+- Scope: Fix the `@dark-sun/content` typecheck regression in `verify.yml`, then make `pnpm verify` non-destructive so it no longer rewrites the checked-in SRD pack during validation.
+- Result: PASS.
+- Validation:
+  - `pnpm --filter @dark-sun/content typecheck` -> PASS
+  - `pnpm verify` -> PASS
+  - `pnpm loop:check` -> `=== ALL_PASS ===`
+- Files touched:
+  - `packages/content/test/content.test.ts`
+  - `scripts/import_srd521_seed.ts`
+  - `package.json`
+  - `codex/context/*`
+- Findings:
+  - The immediate CI/typecheck failure came from a test helper type mismatch: `makePack()` rejected `manifest`, but the attribution test passed a manifest override.
+  - `pnpm verify` also ran a destructive seed import into `apps/web/content/packs/srd52`, and the seed source is intentionally incomplete compared with the checked-in enriched SRD pack, so later validation failed after `verify` mutated the repo.
+- Fixes:
+  - Allowed partial manifest overrides in the content test helper and removed the unnecessary `as any` cast.
+  - Added a non-destructive `--check` mode to `scripts/import_srd521_seed.ts` that imports into `codex/harness/import-seed-check/srd52`.
+  - Changed `verify` to use `import:seed:check`, while keeping manual `import:seed` behavior unchanged.

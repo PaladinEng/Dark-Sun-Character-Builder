@@ -27,8 +27,9 @@
     "fetch:srd521": "tsx scripts/fetch_srd_5_2_1.ts",
     "import:srd521:seed": "pnpm import:seed",
     "import:seed": "pnpm --filter @dark-sun/content build && tsx scripts/import_srd521_seed.ts",
+    "import:seed:check": "pnpm --filter @dark-sun/content build && tsx scripts/import_srd521_seed.ts --check",
     "typecheck": "pnpm --filter @dark-sun/content build && pnpm --filter @dark-sun/rules typecheck && pnpm --filter @dark-sun/content typecheck && pnpm --filter web typecheck",
-    "verify": "pnpm test && pnpm import:seed && pnpm typecheck",
+    "verify": "pnpm test && pnpm import:seed:check && pnpm typecheck",
     "start:dev": "pnpm verify && pnpm --filter web dev"
   },
   "devDependencies": {

@@ -11,6 +11,7 @@ import type { Pack } from "../src/load";
 function makePack(
   input: Omit<Partial<Pack>, "entities" | "manifest"> & {
     id: string;
+    manifest?: Partial<Pack["manifest"]>;
     entities?: Partial<Pack["entities"]>;
   }
 ): Pack {
@@ -25,14 +26,18 @@ function makePack(
     spells: [],
     spellLists: []
   };
+  const defaultManifest: Pack["manifest"] = {
+    id: input.id,
+    name: input.id,
+    version: "0.0.1",
+    license: "MIT",
+    source: "test"
+  };
 
   return {
     manifest: {
-      id: input.id,
-      name: input.id,
-      version: "0.0.1",
-      license: "MIT",
-      source: "test"
+      ...defaultManifest,
+      ...(input.manifest ?? {})
     },
     ...input,
     entities: {
@@ -153,7 +158,7 @@ describe("content", () => {
           license: "CC-BY-4.0",
           source: "https://www.dndbeyond.com/srd",
           attributionText: "SRD 5.2.1 attribution sample"
-        } as any
+        }
       })
     ]);
     const blocks = getAttributionBlocks(merged.content);

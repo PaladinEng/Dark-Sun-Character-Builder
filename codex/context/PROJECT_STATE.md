@@ -4,7 +4,7 @@ Last updated:
 - 2026-03-12 EDT
 
 ## Current Objective
-- Keep the local Dark Sun integration stable while pinning the repo to Node 24 across package metadata, local version files, CI, and Vercel-facing expectations.
+- Keep the local Dark Sun integration stable while fixing `pnpm verify` so CI validation does not fail on content-package type drift or destructively rewrite the checked-in SRD pack.
 
 ## Repository Snapshot
 - Branch: `main`
@@ -27,11 +27,20 @@ Last updated:
 - Hardened the local Next build retry wrapper further so the harness still goes green on the known `.next` artifact race:
   - generalized retry classification to cover broader `.next` `ENOENT` / `ENOTEMPTY` failures
   - added bounded cleanup retries for `.next` removal in both `scripts/web-build-stable.mjs` and `scripts/web-build-check.mjs`
+- Fixed the `@dark-sun/content` typecheck failure in `packages/content/test/content.test.ts`:
+  - `makePack()` now accepts an optional partial `manifest` override, which matches how the attribution test uses it
+  - removed the now-unnecessary `as any` cast from the manifest fixture
+- Fixed `pnpm verify` so the seed import step no longer mutates the checked-in SRD content pack during validation:
+  - `scripts/import_srd521_seed.ts --check` now imports into `codex/harness/import-seed-check/srd52`
+  - `package.json` `verify` now uses `import:seed:check` instead of the destructive `import:seed`
+  - manual `pnpm import:seed` still preserves the original write-to-pack behavior
 
 ## Current Validation
 - `node -v` -> `v20.20.1`
 - `pnpm install` -> PASS with expected engine warnings because the shell is still on Node 20
 - `pnpm --filter web build` -> PASS
+- `pnpm --filter @dark-sun/content typecheck` -> PASS
+- `pnpm verify` -> PASS
 - `pnpm loop:check` -> `=== ALL_PASS ===`
 
 ## Remaining Limitations (Explicit)
@@ -50,6 +59,8 @@ Last updated:
   - `nvm use`
   - or install/select Node 24 by the machine's version manager first
 - Re-run:
+  - `pnpm --filter @dark-sun/content typecheck`
+  - `pnpm verify`
   - `pnpm install`
   - `pnpm --filter web build`
   - `pnpm loop:check`

@@ -1,17 +1,23 @@
 import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
+import process from "node:process";
 
 import { SeedPackSchema, normalizeSeedPack } from "@dark-sun/content";
 
 type EntityWithId = { id: string };
 
 const PACK_ID = "srd52";
-const PACK_ROOT = path.resolve(
+const SOURCE_PACK_ROOT = path.resolve(
   process.cwd(),
   "apps/web/content/packs",
   PACK_ID,
 );
-const SEED_FILE = path.join(PACK_ROOT, "_seed", "seed.json");
+const cliArgs = new Set(process.argv.slice(2));
+const isCheckMode = cliArgs.has("--check");
+const PACK_ROOT = isCheckMode
+  ? path.resolve(process.cwd(), "codex/harness/import-seed-check", PACK_ID)
+  : SOURCE_PACK_ROOT;
+const SEED_FILE = path.join(SOURCE_PACK_ROOT, "_seed", "seed.json");
 
 const GENERATED_DIRS = {
   species: path.join(PACK_ROOT, "species"),
@@ -115,6 +121,10 @@ async function main(): Promise<void> {
   await writeEntities(GENERATED_DIRS.equipment, normalized.equipment ?? []);
   await writeEntities(GENERATED_DIRS.spells, normalized.spells ?? []);
   await writeEntities(GENERATED_DIRS.spellLists, normalized.spellLists ?? []);
+
+  if (isCheckMode) {
+    console.log(`Validated SRD seed import into ${PACK_ROOT}`);
+  }
 }
 
 main().catch((error) => {
