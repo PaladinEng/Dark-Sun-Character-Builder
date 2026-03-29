@@ -1,0 +1,30 @@
+schema_version: "1.0"
+project:
+  id: "dark-sun-character-builder"
+  name: "Dark Sun Character Builder"
+  owner: "PaladinEng"
+  entity: "paladin-robotics"
+  status: "active"
+  priority: 1
+  github_repo: "PaladinEng/Dark-Sun-Character-Builder"
+  claude_project: ""
+  created: "2026-03-28"
+  last_updated: "2026-03-28"
+context:
+  summary_file: "CONTEXT.md"
+  status_file: "STATUS.md"
+  decisions_file: "DECISIONS.md"
+  workqueue_file: "WORKQUEUE.md"
+  agents_file: "AGENTS.md"
+tags:
+  - d&d
+  - dark-sun
+  - typescript
+  - nextjs
+  - character-builder
+  - homebrew
+dependencies: []
+tools:
+  primary_agent: "claude-code"
+  validation_cmd: "pnpm loop:check"
+  working_dir: "~/projects/dark-sun-character-builder"
