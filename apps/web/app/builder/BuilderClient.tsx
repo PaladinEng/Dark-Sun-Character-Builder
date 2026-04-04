@@ -1360,25 +1360,36 @@ export default function BuilderClient({
 
   const inventoryArmor = useMemo(() => {
     const ids = state.inventoryItemIds ?? [];
-    return ids
-      .map((id) => content.equipmentById[id])
-      .filter(
-        (item): item is Option =>
-          Boolean(item) &&
-          (item.type === "armor_light" || item.type === "armor_medium" || item.type === "armor_heavy"),
-      );
+    const result: Option[] = [];
+    for (const id of ids) {
+      const item = content.equipmentById[id];
+      if (item && (item.type === "armor_light" || item.type === "armor_medium" || item.type === "armor_heavy")) {
+        result.push(item as Option);
+      }
+    }
+    return result;
   }, [state.inventoryItemIds, content.equipmentById]);
   const inventoryShields = useMemo(() => {
     const ids = state.inventoryItemIds ?? [];
-    return ids
-      .map((id) => content.equipmentById[id])
-      .filter((item): item is Option => Boolean(item) && item.type === "shield");
+    const result: Option[] = [];
+    for (const id of ids) {
+      const item = content.equipmentById[id];
+      if (item && item.type === "shield") {
+        result.push(item as Option);
+      }
+    }
+    return result;
   }, [state.inventoryItemIds, content.equipmentById]);
   const inventoryWeapons = useMemo(() => {
     const ids = state.inventoryItemIds ?? [];
-    return ids
-      .map((id) => content.equipmentById[id])
-      .filter((item): item is Option => Boolean(item) && item.type === "weapon");
+    const result: Option[] = [];
+    for (const id of ids) {
+      const item = content.equipmentById[id];
+      if (item && item.type === "weapon") {
+        result.push(item as Option);
+      }
+    }
+    return result;
   }, [state.inventoryItemIds, content.equipmentById]);
 
   const [inventorySearchTerm, setInventorySearchTerm] = useState("");
