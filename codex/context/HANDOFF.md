@@ -1,10 +1,13 @@
 # Handoff
 
 ## Start-of-Session Checklist
-1. Read `AGENTS.md`.
-2. Read `codex/context/PROJECT_STATE.md`.
-3. Read `codex/context/WORK_QUEUE.md`.
+1. Read `context/AGENTS.md` (moved from repo root to `context/`).
+2. Read `context/STATUS.md` and `context/WORKQUEUE.md` (canonical location).
+3. Read `codex/context/PROJECT_STATE.md` (historical Codex-era state).
 4. Check git status and current branch/tag state.
+
+> **Note:** All project context files (STATUS.md, WORKQUEUE.md, DECISIONS.md,
+> AGENTS.md, meta.yaml) now live in `context/`, not the repo root.
 
 ## Current Dark Sun / Tooling Status
 - Dark Sun species/background replacement and spell-list overrides are still active and validated.

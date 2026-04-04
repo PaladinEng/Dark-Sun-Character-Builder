@@ -54,6 +54,11 @@ Last updated:
 - No standalone `psionics_spell_list_v2_balanced.csv` was present in `homebrew-spell-lists/`; the local JSON artifact was synthesized from the master CSV rows where `Psionics Status` is not `Hard Ban`.
 - The local Next.js clean-build issue still appears to be an upstream/local artifact-generation flake rather than a Dark Sun content bug; current mitigation is bounded retries plus artifact assertions.
 
+## Context File Location
+All project context files (STATUS.md, WORKQUEUE.md, DECISIONS.md, AGENTS.md,
+meta.yaml) now live in `context/`, not the repo root. CLAUDE.md Session Start
+already references `context/STATUS.md` and `context/WORKQUEUE.md`.
+
 ## Notes for Next Runner Session
 - Before local validation, switch the shell to Node 24:
   - `nvm use`
