@@ -1503,13 +1503,25 @@ export default function BuilderClient({
   };
 
   const updatePointBuyAbility = (ability: Ability, value: number) => {
-    setState((previous) => ({
-      ...previous,
-      baseAbilities: {
-        ...previous.baseAbilities,
-        [ability]: normalizePointBuyScore(value),
-      },
-    }));
+    setState((previous) => {
+      const clamped = normalizePointBuyScore(value);
+      const currentCost = computePointBuyCost(previous.baseAbilities);
+      const currentAbilityCost = getPointBuyScoreCost(previous.baseAbilities[ability]);
+      const newAbilityCost = getPointBuyScoreCost(clamped);
+      if (currentCost !== null && currentAbilityCost !== null && newAbilityCost !== null) {
+        const newTotal = currentCost - currentAbilityCost + newAbilityCost;
+        if (newTotal > POINT_BUY_BUDGET) {
+          return previous;
+        }
+      }
+      return {
+        ...previous,
+        baseAbilities: {
+          ...previous.baseAbilities,
+          [ability]: clamped,
+        },
+      };
+    });
   };
 
   const normalizeInteger = (value: number, minimum = 0, maximum?: number): number => {
@@ -2160,6 +2172,15 @@ export default function BuilderClient({
             if (abilityScoreMethod === "point_buy") {
               const score = state.baseAbilities[ability];
               const cost = getPointBuyScoreCost(score);
+              const currentAbilityCost = cost ?? 0;
+              const budgetLeft = (pointBuyRemaining ?? 0) + currentAbilityCost;
+              let maxAffordable = POINT_BUY_MIN_SCORE;
+              for (let s = POINT_BUY_MIN_SCORE; s <= POINT_BUY_MAX_SCORE; s++) {
+                const sCost = getPointBuyScoreCost(s);
+                if (sCost !== null && sCost <= budgetLeft) {
+                  maxAffordable = s;
+                }
+              }
               return (
                 <label key={ability} className="text-sm">
                   <div className="flex items-center justify-between font-semibold uppercase">
@@ -2169,7 +2190,7 @@ export default function BuilderClient({
                   <input
                     type="number"
                     min={POINT_BUY_MIN_SCORE}
-                    max={POINT_BUY_MAX_SCORE}
+                    max={maxAffordable}
                     value={score}
                     onChange={(event) => updatePointBuyAbility(ability, Number(event.target.value))}
                     className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
