@@ -550,6 +550,7 @@ export default function BuilderClient({
   const [exportNotice, setExportNotice] = useState<string | null>(null);
 
   const [state, setState] = useState<BuilderState>(() => ({
+    name: "",
     level: 1,
     baseAbilities: makeDefaultAbilities(),
     abilityScoreMethod: "manual",
@@ -2206,6 +2207,19 @@ export default function BuilderClient({
       ) : null}
 
       <section className="grid gap-4 rounded-lg border border-slate-700 bg-slate-900/60 p-4 md:grid-cols-3">
+        <label className="text-sm md:col-span-3">
+          <div className="font-semibold">Character Name</div>
+          <input
+            type="text"
+            value={state.name ?? ""}
+            onChange={(event) =>
+              setState((previous) => ({ ...previous, name: event.target.value }))
+            }
+            className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+            placeholder="Enter character name"
+          />
+        </label>
+
         <label className="text-sm">
           <div className="font-semibold">Species</div>
           <select

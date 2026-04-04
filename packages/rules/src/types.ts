@@ -66,6 +66,7 @@ export interface AttunedItem {
 }
 
 export interface CharacterState {
+  name?: string;
   level: number;
   baseAbilities: AbilityRecord;
   abilityScoreMethod?: AbilityScoreMethod;
