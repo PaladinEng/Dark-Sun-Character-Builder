@@ -1356,21 +1356,6 @@ export default function BuilderClient({
     }
     return normalized;
   }, [state.attunedItems]);
-  const standardArrayAllowedCounts = useMemo(() => {
-    const counts = new Map<number, number>();
-    for (const value of STANDARD_ARRAY) {
-      counts.set(value, (counts.get(value) ?? 0) + 1);
-    }
-    return counts;
-  }, []);
-  const standardArrayAssignedCounts = useMemo(() => {
-    const counts = new Map<number, number>();
-    for (const ability of ABILITIES) {
-      const score = state.baseAbilities[ability];
-      counts.set(score, (counts.get(score) ?? 0) + 1);
-    }
-    return counts;
-  }, [state.baseAbilities]);
 
   const applySources = (nextEnabledIds: string[]) => {
     const ordered = manifestOrder.filter((id) => nextEnabledIds.includes(id));
@@ -2087,17 +2072,11 @@ export default function BuilderClient({
                     onChange={(event) => updateAbility(ability, Number(event.target.value))}
                     className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
                   >
-                    {STANDARD_ARRAY.map((value) => {
-                      const assignedCount = standardArrayAssignedCounts.get(value) ?? 0;
-                      const allowedCount = standardArrayAllowedCounts.get(value) ?? 0;
-                      const isCurrentValue = state.baseAbilities[ability] === value;
-                      const disabled = !isCurrentValue && assignedCount >= allowedCount;
-                      return (
-                        <option key={`${ability}-standard-${value}`} value={value} disabled={disabled}>
+                    {STANDARD_ARRAY.map((value) => (
+                        <option key={`${ability}-standard-${value}`} value={value}>
                           {value}
                         </option>
-                      );
-                    })}
+                    ))}
                   </select>
                 </label>
               );
