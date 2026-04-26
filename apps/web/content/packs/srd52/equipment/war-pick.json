@@ -4,5 +4,8 @@
   "name": "War Pick",
   "damageDice": "1d8",
   "weaponCategory": "martial",
+  "masteryProperties": [
+    "sap"
+  ],
   "description": "War Pick is a martial weapon that deals 1d8 damage."
 }

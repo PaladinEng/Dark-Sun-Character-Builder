@@ -1,0 +1,11 @@
+{
+  "id": "srd52:equipment:flail",
+  "type": "weapon",
+  "name": "Flail",
+  "damageDice": "1d8",
+  "weaponCategory": "martial",
+  "masteryProperties": [
+    "sap"
+  ],
+  "description": "Flail is a martial weapon that deals 1d8 damage."
+}

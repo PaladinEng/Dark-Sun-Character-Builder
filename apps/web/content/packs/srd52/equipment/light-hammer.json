@@ -9,5 +9,8 @@
     "thrown",
     "range 20/60"
   ],
+  "masteryProperties": [
+    "nick"
+  ],
   "description": "Light Hammer is a simple weapon that deals 1d4 damage."
 }

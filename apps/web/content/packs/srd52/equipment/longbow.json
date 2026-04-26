@@ -9,5 +9,8 @@
     "heavy",
     "two-handed"
   ],
+  "masteryProperties": [
+    "slow"
+  ],
   "description": "Longbow is a martial weapon that deals 1d8 damage."
 }

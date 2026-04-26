@@ -7,5 +7,8 @@
   "properties": [
     "light"
   ],
+  "masteryProperties": [
+    "slow"
+  ],
   "description": "Club is a simple weapon that deals 1d4 damage."
 }

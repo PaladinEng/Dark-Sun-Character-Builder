@@ -7,5 +7,8 @@
   "properties": [
     "light"
   ],
+  "masteryProperties": [
+    "nick"
+  ],
   "description": "Sickle is a simple weapon that deals 1d4 damage."
 }

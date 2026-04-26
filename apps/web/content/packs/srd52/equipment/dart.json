@@ -10,5 +10,8 @@
     "range 20/60",
     "ranged"
   ],
+  "masteryProperties": [
+    "vex"
+  ],
   "description": "Dart is a simple weapon that deals 1d4 damage."
 }

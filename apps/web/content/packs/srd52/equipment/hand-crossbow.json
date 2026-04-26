@@ -9,5 +9,8 @@
     "light",
     "loading"
   ],
+  "masteryProperties": [
+    "vex"
+  ],
   "description": "Hand Crossbow is a martial weapon that deals 1d6 damage."
 }

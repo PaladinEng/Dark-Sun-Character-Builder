@@ -9,5 +9,8 @@
     "loading",
     "two-handed"
   ],
+  "masteryProperties": [
+    "slow"
+  ],
   "description": "Light Crossbow is a simple weapon that deals 1d8 damage."
 }

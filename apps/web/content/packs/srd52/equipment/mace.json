@@ -4,5 +4,8 @@
   "name": "Mace",
   "damageDice": "1d6",
   "weaponCategory": "simple",
+  "masteryProperties": [
+    "sap"
+  ],
   "description": "Mace is a simple weapon that deals 1d6 damage."
 }

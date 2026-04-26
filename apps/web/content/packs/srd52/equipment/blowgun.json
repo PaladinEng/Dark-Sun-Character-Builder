@@ -1,0 +1,17 @@
+{
+  "id": "srd52:equipment:blowgun",
+  "type": "weapon",
+  "name": "Blowgun",
+  "damageDice": "1",
+  "weaponCategory": "martial",
+  "properties": [
+    "ranged",
+    "ammunition",
+    "loading",
+    "range 25/100"
+  ],
+  "masteryProperties": [
+    "vex"
+  ],
+  "description": "Blowgun is a martial ranged weapon that deals 1 piercing damage."
+}

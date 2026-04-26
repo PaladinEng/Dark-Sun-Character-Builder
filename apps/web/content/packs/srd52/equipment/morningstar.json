@@ -4,5 +4,8 @@
   "name": "Morningstar",
   "damageDice": "1d8",
   "weaponCategory": "martial",
+  "masteryProperties": [
+    "sap"
+  ],
   "description": "Morningstar is a martial weapon that deals 1d8 damage."
 }

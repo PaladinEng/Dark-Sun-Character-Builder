@@ -9,5 +9,8 @@
     "range 20/60",
     "versatile"
   ],
+  "masteryProperties": [
+    "topple"
+  ],
   "description": "Trident is a martial weapon that deals 1d6 damage."
 }

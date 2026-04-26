@@ -8,5 +8,8 @@
     "heavy",
     "two-handed"
   ],
+  "masteryProperties": [
+    "topple"
+  ],
   "description": "Maul is a martial weapon that deals 2d6 damage."
 }

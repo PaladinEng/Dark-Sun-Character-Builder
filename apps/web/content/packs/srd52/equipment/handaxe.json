@@ -9,5 +9,8 @@
     "thrown",
     "range 20/60"
   ],
+  "masteryProperties": [
+    "vex"
+  ],
   "description": "Handaxe is a simple weapon that deals 1d6 damage."
 }

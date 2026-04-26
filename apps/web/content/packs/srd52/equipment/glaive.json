@@ -9,5 +9,8 @@
     "reach",
     "two-handed"
   ],
+  "masteryProperties": [
+    "graze"
+  ],
   "description": "Glaive is a martial weapon that deals 1d10 damage."
 }

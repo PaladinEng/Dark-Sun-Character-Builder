@@ -8,5 +8,8 @@
     "thrown",
     "range 30/120"
   ],
+  "masteryProperties": [
+    "slow"
+  ],
   "description": "Javelin is a simple weapon that deals 1d6 damage."
 }

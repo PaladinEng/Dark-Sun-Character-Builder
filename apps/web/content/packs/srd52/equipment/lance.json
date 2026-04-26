@@ -8,5 +8,8 @@
     "reach",
     "special"
   ],
+  "masteryProperties": [
+    "topple"
+  ],
   "description": "Lance is a martial weapon that deals 1d12 damage."
 }

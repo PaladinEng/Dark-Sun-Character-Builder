@@ -9,5 +9,8 @@
     "reach",
     "two-handed"
   ],
+  "masteryProperties": [
+    "cleave"
+  ],
   "description": "Halberd is a martial weapon that deals 1d10 damage."
 }

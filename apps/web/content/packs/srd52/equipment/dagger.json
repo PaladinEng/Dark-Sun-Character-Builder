@@ -10,5 +10,8 @@
     "thrown",
     "range 20/60"
   ],
+  "masteryProperties": [
+    "nick"
+  ],
   "description": "Dagger is a simple weapon that deals 1d4 damage."
 }

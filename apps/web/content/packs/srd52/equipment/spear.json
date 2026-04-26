@@ -9,5 +9,8 @@
     "range 20/60",
     "versatile"
   ],
+  "masteryProperties": [
+    "sap"
+  ],
   "description": "Spear is a simple weapon that deals 1d6 damage."
 }
