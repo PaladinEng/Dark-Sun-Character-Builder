@@ -52,3 +52,14 @@ Session prompts and outcomes for the Dark Sun Character Builder. Each entry reco
 **Commits:**
 - `71e212f` fix(content): complete D&D 2024 mechanical descriptions for all feats
 **Next:** Same as session 2 — /sheet and /print layout rework against the 5-page D&D Beyond reference. Effect-schema expansion (reaction/conditional/initiative/HP-scaling) is now the gating constraint for promoting these descriptions to mechanical effects.
+
+### 2026-04-26 — Session 4: Weapon mastery audit + missing weapons
+**Prompt:** Cowork audit found 2 missing SRD weapons (Flail, Blowgun) and 30 weapons without 2024 mastery properties. Add the missing weapons and apply the correct mastery assignments. Musket/pistol excluded for Dark Sun setting fit.
+**Outcome:**
+- Added `flail.json` (martial melee, 1d8, mastery sap) and `blowgun.json` (martial ranged, 1 damage, ammunition/loading/range 25/100, mastery vex).
+- Added `masteryProperties` to 30 existing weapons covering all four categories. Mastery enum is `cleave|graze|nick|push|sap|slow|topple|vex` (validated by `WeaponMasteryPropertySchema`); harness lints would have caught any typo. The 4 weapons that already had correct mastery (battleaxe/topple, longsword/sap, rapier/vex, shortbow/vex) were left untouched.
+- Equipment count for srd52 pack is now 2 weapons higher.
+**Harness:** PASS (all 13 stages, ~62s).
+**Commits:**
+- `c88cbc4` fix(content): add missing weapons and D&D 2024 mastery properties to all weapons
+**Next:** Same as before — /sheet and /print layout rework against the D&D Beyond reference. Note that `shortsword.json` is currently typed as `weaponCategory: "simple"` but the SRD makes it martial; left unchanged because the audit's scope was mastery only — flag for a future content correction.
