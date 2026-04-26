@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feat:ritual-caster",
+  "name": "Ritual Caster",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "int": 13
+    }
+  },
+  "description": "You learn two level-1 spells with the Ritual tag from a chosen spell list, and you can cast them as Rituals. You can copy other Ritual spells you find into your ritual book."
+}

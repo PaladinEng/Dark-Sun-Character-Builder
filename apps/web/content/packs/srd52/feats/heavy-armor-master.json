@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feat:heavy-armor-master",
+  "name": "Heavy Armor Master",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "str": 13
+    }
+  },
+  "description": "While wearing Heavy armor, bludgeoning, piercing, and slashing damage you take from nonmagical attacks is reduced by 2. You also increase your Strength score by 1 (max 20)."
+}

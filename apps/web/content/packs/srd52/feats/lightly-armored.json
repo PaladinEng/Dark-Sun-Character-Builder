@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:lightly-armored",
+  "name": "Lightly Armored",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You gain proficiency with Light armor and increase your Strength or Dexterity score by 1 (max 20)."
+}

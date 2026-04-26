@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:poisoner",
+  "name": "Poisoner",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Your weapon attacks ignore resistance to Poison damage. As a Bonus Action, you can apply Poison to one weapon or up to three pieces of ammunition (DC 14 Con save or 2d8 poison and Poisoned for 1 minute). You also gain proficiency with the Poisoner's Kit."
+}

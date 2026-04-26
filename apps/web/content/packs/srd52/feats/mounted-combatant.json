@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:mounted-combatant",
+  "name": "Mounted Combatant",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "While mounted, you have advantage on melee attacks against unmounted creatures smaller than your mount, you can force an attack against your mount to target you instead, and your mount takes no damage from effects allowing a Dexterity save for half (and none on a successful save)."
+}

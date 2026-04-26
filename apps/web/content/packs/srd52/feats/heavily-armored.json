@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feat:heavily-armored",
+  "name": "Heavily Armored",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "str": 13
+    }
+  },
+  "description": "You gain proficiency with Heavy armor and increase your Strength score by 1 (max 20). Prerequisite: proficiency with Medium armor."
+}

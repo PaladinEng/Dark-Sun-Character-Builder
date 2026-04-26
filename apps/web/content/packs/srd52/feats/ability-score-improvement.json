@@ -1,0 +1,11 @@
+{
+  "id": "srd52:feat:ability-score-improvement",
+  "name": "Ability Score Improvement",
+  "category": "general",
+  "repeatable": true,
+  "grantsAbilityIncreases": true,
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You increase one ability score of your choice by 2, or you increase two ability scores of your choice by 1. You can't raise an ability score above 20."
+}

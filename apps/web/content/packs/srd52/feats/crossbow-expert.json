@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:crossbow-expert",
+  "name": "Crossbow Expert",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You ignore the loading property of crossbows you are proficient with, you don't have disadvantage on ranged attacks within 5 feet, and you can fire a Hand Crossbow as a Bonus Action after attacking with a one-handed weapon."
+}

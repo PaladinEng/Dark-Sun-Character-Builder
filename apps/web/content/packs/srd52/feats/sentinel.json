@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:sentinel",
+  "name": "Sentinel",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "When you hit a creature with an Opportunity Attack, the creature's Speed becomes 0 for the rest of the turn. Creatures provoke Opportunity Attacks even if they Disengage. When a creature within 5 feet attacks a target other than you, you can use a Reaction to make a melee weapon attack against the attacker."
+}

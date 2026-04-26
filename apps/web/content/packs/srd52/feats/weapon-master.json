@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:weapon-master",
+  "name": "Weapon Master",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You gain proficiency with four weapons of your choice (Simple or Martial), and you increase your Strength or Dexterity score by 1 (max 20)."
+}

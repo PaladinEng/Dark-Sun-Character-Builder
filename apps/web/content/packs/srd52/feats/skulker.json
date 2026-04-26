@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feat:skulker",
+  "name": "Skulker",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "dex": 13
+    }
+  },
+  "description": "You can take the Hide action while only Lightly Obscured. When a hidden ranged attack misses, you remain hidden, and you suffer no disadvantage on Wisdom (Perception) checks relying on sight in dim light."
+}

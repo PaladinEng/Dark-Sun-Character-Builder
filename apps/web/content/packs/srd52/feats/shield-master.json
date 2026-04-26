@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:shield-master",
+  "name": "Shield Master",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "When you take the Attack action, you can use a Bonus Action to try to shove a creature within 5 feet with your shield. You can add your shield's AC bonus to Dexterity saving throws against effects that target only you, and on a successful Dexterity save against an area effect that allows half damage on a save, you take no damage."
+}

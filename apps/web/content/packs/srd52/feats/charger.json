@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:charger",
+  "name": "Charger",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "After dashing toward a creature, you can make a melee attack as a Bonus Action with extra damage or push the creature. You also gain a bonus to long jump distance."
+}

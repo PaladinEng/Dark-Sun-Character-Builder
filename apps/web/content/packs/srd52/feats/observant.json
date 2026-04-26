@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:observant",
+  "name": "Observant",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You gain a +5 bonus to Passive Perception and Passive Investigation, you can read lips, and you have proficiency with Investigation or Perception (your choice)."
+}

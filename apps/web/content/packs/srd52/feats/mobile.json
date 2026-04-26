@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:mobile",
+  "name": "Mobile",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Your Speed increases by 10 feet, you ignore Difficult Terrain when you Dash, and when you make a melee attack against a creature you don't provoke Opportunity Attacks from that creature for the rest of the turn (whether you hit or not)."
+}

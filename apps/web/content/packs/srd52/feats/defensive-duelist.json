@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feat:defensive-duelist",
+  "name": "Defensive Duelist",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "dex": 13
+    }
+  },
+  "description": "When wielding a Finesse weapon you are proficient with and another creature hits you with a melee attack, you can use a Reaction to add your Proficiency Bonus to your Armor Class against that attack."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:dual-wielder",
+  "name": "Dual Wielder",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You gain proficiency with martial weapons that have the Light property, you can draw or stow two one-handed weapons when you would normally only be able to draw or stow one, and you gain a +1 bonus to AC while wielding a separate melee weapon in each hand."
+}

@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:medium-armor-master",
+  "name": "Medium Armor Master",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You no longer have disadvantage on Stealth checks while wearing Medium armor, and you can add up to 3 (instead of 2) of your Dexterity modifier to your Armor Class when wearing Medium armor."
+}

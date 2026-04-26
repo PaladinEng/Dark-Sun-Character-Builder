@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:polearm-master",
+  "name": "Polearm Master",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "When you take the Attack action with a Glaive, Halberd, Pike, Quarterstaff, or Spear, you can make a Bonus Action attack with the opposite end (1d4 bludgeoning). While wielding such a weapon, creatures provoke an Opportunity Attack when they enter your reach."
+}

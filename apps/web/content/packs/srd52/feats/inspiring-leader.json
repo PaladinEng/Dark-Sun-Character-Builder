@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feat:inspiring-leader",
+  "name": "Inspiring Leader",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "cha": 13
+    }
+  },
+  "description": "You can spend 10 minutes inspiring up to 6 friendly creatures (including yourself) within 30 feet who can see or hear you and can understand you. Each creature gains temporary HP equal to your level + your Charisma modifier."
+}
