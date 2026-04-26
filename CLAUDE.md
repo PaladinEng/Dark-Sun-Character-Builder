@@ -3,14 +3,14 @@
 A browser-based D&D 2024 character builder for Alwyn's Dark Sun homebrew campaign, built as a TypeScript monorepo with Next.js frontend and a separated rules engine.
 
 ## Local Path
-~/projects/dark-sun-character-builder
+~/Documents/Character\ Builder\ -\ Dark\ Sun/dark-sun-builder
 
 ## GitHub
 https://github.com/PaladinEng/Dark-Sun-Character-Builder
 
 ## Session Start
 ```bash
-cd ~/projects/dark-sun-character-builder
+cd ~/Documents/Character\ Builder\ -\ Dark\ Sun/dark-sun-builder
 cat context/STATUS.md
 cat context/WORKQUEUE.md
 ```
