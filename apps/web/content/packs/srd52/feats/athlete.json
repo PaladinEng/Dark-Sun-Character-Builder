@@ -5,5 +5,5 @@
   "prerequisites": {
     "minLevel": 4
   },
-  "description": "You improve physical training, mobility, and overall athletic performance."
+  "description": "Ability Score Increase: Increase your Strength or Dexterity score by 1, to a maximum of 20. Climb Speed: When you have the climb speed of 0 feet, climbing 1 foot costs you 1 extra foot of movement instead of 2 (effectively, climbing doesn't cost extra movement for you). Jumping: You can make a running long jump or a running high jump after moving only 5 feet on foot, rather than the normal 10 feet. Stand Up: When you have the Prone condition, standing up uses only 5 feet of your movement (rather than half your speed)."
 }

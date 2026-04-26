@@ -5,5 +5,5 @@
   "prerequisites": {
     "minLevel": 4
   },
-  "description": "You excel at precise long-range attacks under difficult conditions."
+  "description": "Ability Score Increase: Increase your Dexterity score by 1, to a maximum of 20. Firing in Melee: Attacking at long range with a Ranged weapon doesn't impose Disadvantage on your attack rolls. Long-Distance Shot: Your ranged weapon attacks ignore Half Cover and Three-Quarters Cover. Steady Aim: As a Bonus Action, you can give yourself Advantage on your next attack roll on the current turn with a Ranged weapon. You can use this Bonus Action only if you haven't moved during this turn, and after you use it, your Speed is 0 until the end of the current turn."
 }

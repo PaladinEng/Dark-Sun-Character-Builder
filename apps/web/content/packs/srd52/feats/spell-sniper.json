@@ -6,5 +6,5 @@
     "minLevel": 4,
     "requiresSpellcasting": true
   },
-  "description": "You refine spell attacks for exceptional range and precise targeting."
+  "description": "Ability Score Increase: Increase your spellcasting ability score by 1, to a maximum of 20. Spell Cantrip: You learn one cantrip that requires an attack roll. Choose the cantrip from the Cleric, Druid, Sorcerer, Warlock, or Wizard spell list. Your spellcasting ability for the cantrip is the same one used by the spellcasting feature that gave you this feat. Spell Range: When you cast a spell that requires you to make an attack roll, the spell's range is doubled. Cover Ignored: Your ranged spell attacks ignore Half Cover and Three-Quarters Cover."
 }

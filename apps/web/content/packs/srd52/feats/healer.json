@@ -2,5 +2,5 @@
   "id": "srd52:feat:healer",
   "name": "Healer",
   "category": "origin",
-  "description": "You gain practical medical skill for stabilizing and restoring allies."
+  "description": "Battle Medic: If you have a Healer's Kit, you can expend one use of it and take a Utilize action to tend to a creature within 5 feet of you. That creature regains 1d6 + your Proficiency Bonus Hit Points and can't benefit from this feat again until it finishes a Short or Long Rest. Healing Reroll: Whenever you roll dice to determine the number of Hit Points you restore with a spell or with this feat, you can reroll any 1s, but you must use the new rolls."
 }

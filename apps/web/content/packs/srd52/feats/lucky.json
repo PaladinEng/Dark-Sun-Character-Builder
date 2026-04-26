@@ -2,5 +2,5 @@
   "id": "srd52:feat:lucky",
   "name": "Lucky",
   "category": "origin",
-  "description": "You can turn uncertain outcomes in your favor through remarkable fortune."
+  "description": "You have a number of Luck Points equal to your Proficiency Bonus and can spend them on the following benefits. Advantage: When you make a D20 Test, you can spend 1 Luck Point to give yourself Advantage on the roll. Disadvantage: When a creature rolls an attack roll against you, you can spend 1 Luck Point to impose Disadvantage on that roll. Regain Points: You regain all expended Luck Points when you finish a Long Rest."
 }

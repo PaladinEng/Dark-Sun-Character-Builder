@@ -5,5 +5,5 @@
   "prerequisites": {
     "minLevel": 4
   },
-  "description": "You increase resilience and recover more effectively from hardship."
+  "description": "Ability Score Increase: Increase your Constitution score by 1, to a maximum of 20. Defy Death: You have Advantage on Death Saving Throws. Speedy Recovery: As a Bonus Action, you can expend one of your Hit Point Dice, roll the die, and regain a number of Hit Points equal to the roll plus your Constitution modifier (minimum of 1 HP). You can't use this Bonus Action again until you finish a Short or Long Rest."
 }

@@ -5,5 +5,5 @@
   "prerequisites": {
     "minLevel": 4
   },
-  "description": "You specialize in disrupting hostile spellcasters and magical threats."
+  "description": "Ability Score Increase: Increase your Strength, Constitution, or Dexterity score by 1, to a maximum of 20. Concentration Breaker: When you damage a creature that is concentrating on a spell, that creature has Disadvantage on the saving throw it makes to maintain Concentration. Guarded Mind: If you fail an Intelligence, Wisdom, or Charisma saving throw, you can use your Reaction to reroll it; you must use the new roll. Once you use this Reaction, you can't do so again until you finish a Short or Long Rest."
 }

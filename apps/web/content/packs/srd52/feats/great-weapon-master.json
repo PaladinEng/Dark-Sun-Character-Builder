@@ -5,5 +5,5 @@
   "prerequisites": {
     "minLevel": 4
   },
-  "description": "On your turn when you score a critical hit with a melee weapon or reduce a creature to 0 HP with one, you can make one melee weapon attack as a Bonus Action. You can also add your Proficiency Bonus to the damage of a Heavy melee weapon attack you make on your turn (once per turn)."
+  "description": "When you score a critical hit with a melee weapon or reduce a creature to 0 HP with one, you can make one melee weapon attack as a Bonus Action. When you hit a creature with an attack roll using a Heavy weapon, you can roll the weapon's damage dice once and use either result. You can use this damage reroll only once per turn."
 }

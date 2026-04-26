@@ -2,5 +2,5 @@
   "id": "srd52:feat:magic-initiate",
   "name": "Magic Initiate",
   "category": "origin",
-  "description": "You learn introductory spellcasting from a chosen magical tradition."
+  "description": "Choose a spell list when you take this feat: Cleric, Druid, or Wizard. You learn two cantrips of your choice and one level-1 spell, all from the chosen list. Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells (whichever is used by the chosen list: Wizard = INT, Cleric = WIS, Druid = WIS). You can cast the level-1 spell without a spell slot once per Long Rest, and you can also cast it using any spell slots you have. Whenever you gain a new level, you can replace one of the spells with another spell of the same level from the chosen list. This feat is repeatable; each time you take it again, choose a different spell list."
 }
