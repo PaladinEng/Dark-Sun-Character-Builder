@@ -24,6 +24,13 @@
     "name": "Shortbow",
     "toHit": 6
   },
+  "attacks": [
+    {
+      "damage": "1d6+3",
+      "name": "Shortbow",
+      "toHit": 6
+    }
+  ],
   "feats": [
     {
       "id": "test:feat:eagle-eye",

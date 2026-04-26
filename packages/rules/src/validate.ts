@@ -732,6 +732,23 @@ export function validateCharacter(
     }
   }
 
+  for (const [index, weaponId] of (state.equippedWeaponIds ?? []).entries()) {
+    const equippedWeapon = content.equipmentById[weaponId];
+    if (!equippedWeapon) {
+      pushError({
+        code: "INVALID_EQUIPPED_WEAPON_ID",
+        message: `Equipped weapon id not found: ${weaponId}.`,
+        path: `equippedWeaponIds[${index}]`
+      });
+    } else if (equippedWeapon.type !== "weapon") {
+      pushError({
+        code: "INVALID_EQUIPPED_WEAPON_TYPE",
+        message: `Equipped weapon id does not reference a weapon: ${weaponId}.`,
+        path: `equippedWeaponIds[${index}]`
+      });
+    }
+  }
+
   for (const [index, itemId] of (state.inventoryItemIds ?? []).entries()) {
     if (content.equipmentById[itemId]) {
       continue;

@@ -24,6 +24,13 @@
     "name": "Mace",
     "toHit": 3
   },
+  "attacks": [
+    {
+      "damage": "1d6+0",
+      "name": "Mace",
+      "toHit": 3
+    }
+  ],
   "feats": [
     {
       "id": "test:feat:origin-alert",

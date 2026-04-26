@@ -20,6 +20,7 @@
   ],
   "armorClass": 13,
   "attack": null,
+  "attacks": [],
   "feats": [
     {
       "id": "test:feat:durable-training",

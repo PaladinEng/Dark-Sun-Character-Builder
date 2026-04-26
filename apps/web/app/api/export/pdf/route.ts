@@ -448,6 +448,14 @@ export async function POST(request: Request) {
         .map((mastery) => formatDelimitedLabel(mastery))
         .join(", ")}`
     : null;
+  const attacksSnapshot = derived.attacks.map((attack) => ({
+    name: attack.name,
+    toHit: attack.toHit,
+    damage: attack.damage,
+    notes: attack.mastery?.length
+      ? `Mastery: ${attack.mastery.map((mastery) => formatDelimitedLabel(mastery)).join(", ")}`
+      : null,
+  }));
   const resolveSpellNames = (spellIds: readonly string[] | undefined): string[] =>
     sortUniqueIds(spellIds)
       .map((spellId) => merged.content.spellsById[spellId]?.name ?? spellId)
@@ -579,6 +587,7 @@ export async function POST(request: Request) {
     attackToHit: derived.attack?.toHit,
     attackDamage: derived.attack?.damage,
     attackNotes,
+    attacks: attacksSnapshot,
     classFeatureNames: allProgressionFeatureNames,
     speciesTraitNames,
     selectedFeatureNames,

@@ -792,10 +792,20 @@ export default function BuilderClient({
     }
     return byTier;
   }, [availableClassSpells, unlockedMysticArcanumTiers]);
-  const selectedWeapon = useMemo(
-    () => options.weapons.find((entry) => entry.id === state.equippedWeaponId),
-    [options.weapons, state.equippedWeaponId],
+  const equippedWeaponIds = useMemo(() => {
+    if (state.equippedWeaponIds && state.equippedWeaponIds.length > 0) {
+      return state.equippedWeaponIds;
+    }
+    return state.equippedWeaponId ? [state.equippedWeaponId] : [];
+  }, [state.equippedWeaponIds, state.equippedWeaponId]);
+  const selectedWeapons = useMemo(
+    () =>
+      equippedWeaponIds
+        .map((id) => options.weapons.find((entry) => entry.id === id))
+        .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry)),
+    [options.weapons, equippedWeaponIds],
   );
+  const selectedWeapon = selectedWeapons[0];
   const selectedClassSkillChoices = selectedClass?.classSkillChoices;
   const skillNameById = useMemo(() => {
     const map: Record<string, string> = {};
@@ -2354,23 +2364,83 @@ export default function BuilderClient({
           </select>
         </label>
 
-        <label className="text-sm">
-          <div className="font-semibold">Weapon</div>
-          <select
-            className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
-            value={state.equippedWeaponId ?? ""}
-            onChange={(event) =>
-              setState((previous) => ({ ...previous, equippedWeaponId: event.target.value || undefined }))
-            }
-          >
-            <option value="">None</option>
-            {options.weapons.map((entry) => (
-              <option key={entry.id} value={entry.id}>
-                {entry.name}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Weapons</div>
+          <p className="mt-1 text-xs text-slate-300">
+            Equip one or more weapons. Each appears as its own row in the attack table.
+          </p>
+          <div className="mt-2 grid gap-1 md:grid-cols-2">
+            {options.weapons.map((entry) => {
+              const checked = equippedWeaponIds.includes(entry.id);
+              return (
+                <label
+                  key={`weapon-${entry.id}`}
+                  className="flex items-center gap-2 rounded border border-slate-700 bg-slate-950/40 px-2 py-1"
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={(event) => {
+                      const isNowChecked = event.target.checked;
+                      setState((previous) => {
+                        const current =
+                          previous.equippedWeaponIds && previous.equippedWeaponIds.length > 0
+                            ? [...previous.equippedWeaponIds]
+                            : previous.equippedWeaponId
+                              ? [previous.equippedWeaponId]
+                              : [];
+                        const next = isNowChecked
+                          ? Array.from(new Set([...current, entry.id]))
+                          : current.filter((id) => id !== entry.id);
+                        return {
+                          ...previous,
+                          equippedWeaponIds: next,
+                          equippedWeaponId: next[0],
+                        };
+                      });
+                    }}
+                  />
+                  <span>{entry.name}</span>
+                </label>
+              );
+            })}
+          </div>
+          {selectedWeapons.length > 0 ? (
+            <ul className="mt-2 flex flex-wrap gap-1 text-xs">
+              {selectedWeapons.map((weapon) => (
+                <li
+                  key={`equipped-${weapon.id}`}
+                  className="flex items-center gap-1 rounded bg-amber-900/40 px-2 py-0.5"
+                >
+                  <span>{weapon.name}</span>
+                  <button
+                    type="button"
+                    aria-label={`Remove ${weapon.name}`}
+                    onClick={() =>
+                      setState((previous) => {
+                        const current =
+                          previous.equippedWeaponIds && previous.equippedWeaponIds.length > 0
+                            ? [...previous.equippedWeaponIds]
+                            : previous.equippedWeaponId
+                              ? [previous.equippedWeaponId]
+                              : [];
+                        const next = current.filter((id) => id !== weapon.id);
+                        return {
+                          ...previous,
+                          equippedWeaponIds: next,
+                          equippedWeaponId: next[0],
+                        };
+                      })
+                    }
+                    className="text-amber-200 hover:text-rose-300"
+                  >
+                    ×
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </div>
 
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Identity & Combat Tracking</div>

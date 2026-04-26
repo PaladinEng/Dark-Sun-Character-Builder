@@ -67,6 +67,12 @@ export type PdfExportCharacterSnapshot = {
   attackToHit?: number | null;
   attackDamage?: string | null;
   attackNotes?: string | null;
+  attacks?: ReadonlyArray<{
+    name: string;
+    toHit?: number | null;
+    damage?: string | null;
+    notes?: string | null;
+  }>;
   classFeatureNames?: readonly string[];
   speciesTraitNames?: readonly string[];
   selectedFeatureNames?: readonly string[];
@@ -1715,15 +1721,28 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     damage: "See spell",
     notes: "Cantrip",
   }));
-  const attackRows = [
-    {
-      name: snapshot.attackName?.trim() || "-",
-      bonus: attackBonusOrDc,
-      damage: snapshot.attackDamage?.trim() || "-",
-      notes: attackNotes,
-    },
-    ...cantripRows,
-  ];
+  const weaponRows =
+    snapshot.attacks && snapshot.attacks.length > 0
+      ? snapshot.attacks.map((attack) => ({
+          name: attack.name?.trim() || "-",
+          bonus:
+            typeof attack.toHit === "number"
+              ? formatModifier(attack.toHit)
+              : typeof snapshot.spellSaveDC === "number"
+                ? `DC ${snapshot.spellSaveDC}`
+                : "-",
+          damage: attack.damage?.trim() || "-",
+          notes: attack.notes?.trim() || "-",
+        }))
+      : [
+          {
+            name: snapshot.attackName?.trim() || "-",
+            bonus: attackBonusOrDc,
+            damage: snapshot.attackDamage?.trim() || "-",
+            notes: attackNotes,
+          },
+        ];
+  const attackRows = [...weaponRows, ...cantripRows];
   while (attackRows.length < 6) {
     attackRows.push({ name: "-", bonus: "-", damage: "-", notes: "-" });
   }

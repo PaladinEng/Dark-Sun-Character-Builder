@@ -33,6 +33,13 @@
     "name": "Dagger",
     "toHit": 6
   },
+  "attacks": [
+    {
+      "damage": "1d4+2",
+      "name": "Dagger",
+      "toHit": 6
+    }
+  ],
   "feats": [
     {
       "id": "test:feat:durable-training",

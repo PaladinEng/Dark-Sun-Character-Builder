@@ -416,7 +416,7 @@ export default async function PrintPage({
   const skillProficiencySet = new Set(derived.skillProficiencies ?? []);
   const saveProficiencySet = new Set(derived.saveProficiencies ?? []);
 
-  const attacks = derived.attack ? [derived.attack] : [];
+  const attacks = derived.attacks;
   const attackRows = [...attacks, ...Array.from({ length: Math.max(0, 4 - attacks.length) }, () => null)];
 
   const attributions = merged.packs

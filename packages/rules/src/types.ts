@@ -101,7 +101,12 @@ export interface CharacterState {
   inventoryEntries?: InventoryEntry[];
   equippedArmorId?: string;
   equippedShieldId?: string;
+  /**
+   * Legacy single-weapon slot. Kept for backwards compatibility with older
+   * fixtures and saves. New code should prefer {@link equippedWeaponIds}.
+   */
   equippedWeaponId?: string;
+  equippedWeaponIds?: string[];
   armorProficiencies?: string[];
   weaponProficiencies?: string[];
   subclass?: string;
@@ -154,6 +159,11 @@ export interface DerivedState {
   passivePerception: number;
   maxHP: number;
   armorClass: number;
+  attacks: Array<{ name: string; toHit: number; damage: string; mastery?: string[] }>;
+  /**
+   * Legacy single-attack accessor. Equal to `attacks[0] ?? null`. Kept so
+   * older callers continue to compile while the multi-weapon migration lands.
+   */
   attack: { name: string; toHit: number; damage: string; mastery?: string[] } | null;
   spellcastingAbility: SpellcastingAbility | null;
   spellSaveDC: number | null;

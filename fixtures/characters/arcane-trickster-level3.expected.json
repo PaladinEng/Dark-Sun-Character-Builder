@@ -10,6 +10,7 @@
   "advancementSlots": [],
   "armorClass": 13,
   "attack": null,
+  "attacks": [],
   "feats": [],
   "finalAbilities": {
     "cha": 10,

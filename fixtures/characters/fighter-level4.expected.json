@@ -24,6 +24,13 @@
     "name": "Longsword",
     "toHit": 5
   },
+  "attacks": [
+    {
+      "damage": "1d8+3",
+      "name": "Longsword",
+      "toHit": 5
+    }
+  ],
   "feats": [
     {
       "id": "test:feat:origin-alert",

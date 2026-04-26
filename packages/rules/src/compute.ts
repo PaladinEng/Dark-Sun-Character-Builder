@@ -462,9 +462,18 @@ export function computeDerivedState(
   const shield = state.equippedShieldId
     ? merged.equipmentById[state.equippedShieldId]
     : undefined;
-  const weapon = state.equippedWeaponId
-    ? merged.equipmentById[state.equippedWeaponId]
-    : undefined;
+  const equippedWeaponIds =
+    state.equippedWeaponIds && state.equippedWeaponIds.length > 0
+      ? state.equippedWeaponIds
+      : state.equippedWeaponId
+        ? [state.equippedWeaponId]
+        : [];
+  const weapons = equippedWeaponIds
+    .map((id) => merged.equipmentById[id])
+    .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+  // Legacy single-weapon view for code paths that still read it during
+  // computation (e.g. proficiency warnings reference the first weapon).
+  const weapon = weapons[0];
 
   const dexMod = abilityMods.dex;
   const dexCapEffective =
@@ -505,16 +514,18 @@ export function computeDerivedState(
     armorClass += 2;
   }
 
-  let attack: DerivedState["attack"] = null;
-  if (weapon?.type === "weapon" && weapon.damageDice) {
-    if (!weapon.weaponCategory) {
+  const attacks: DerivedState["attacks"] = [];
+  for (const equippedWeapon of weapons) {
+    if (equippedWeapon.type !== "weapon" || !equippedWeapon.damageDice) {
+      continue;
+    }
+    if (!equippedWeapon.weaponCategory) {
       warnings.push(
-        `Weapon category missing for ${weapon.name}; proficiency cannot be inferred from simple/martial rules`
+        `Weapon category missing for ${equippedWeapon.name}; proficiency cannot be inferred from simple/martial rules`
       );
     }
-
-    const ranged = hasProperty(weapon, "ranged");
-    const finesse = hasProperty(weapon, "finesse");
+    const ranged = hasProperty(equippedWeapon, "ranged");
+    const finesse = hasProperty(equippedWeapon, "finesse");
     const attackAbility: Ability = ranged
       ? "dex"
       : finesse
@@ -523,7 +534,7 @@ export function computeDerivedState(
           : "str"
         : "str";
     const mod = abilityMods[attackAbility];
-    const proficientWithWeapon = isProficientWithWeapon(weapon, klass);
+    const proficientWithWeapon = isProficientWithWeapon(equippedWeapon, klass);
     const attackBonus = applied.attackBonuses
       .filter((bonus) => {
         if (bonus.condition === "ranged_weapon") {
@@ -534,18 +545,19 @@ export function computeDerivedState(
       .reduce((sum, bonus) => sum + bonus.value, 0);
     if (!proficientWithWeapon) {
       warnings.push(
-        `Attack with ${weapon.name} is not proficient; proficiency bonus not applied`
+        `Attack with ${equippedWeapon.name} is not proficient; proficiency bonus not applied`
       );
     }
-    attack = {
-      name: weapon.name,
+    attacks.push({
+      name: equippedWeapon.name,
       toHit: mod + (proficientWithWeapon ? proficiencyBonus : 0) + attackBonus,
-      damage: `${weapon.damageDice}${signed(mod)}`,
-      ...(weapon.masteryProperties && weapon.masteryProperties.length > 0
-        ? { mastery: [...weapon.masteryProperties] }
-        : {})
-    };
+      damage: `${equippedWeapon.damageDice}${signed(mod)}`,
+      ...(equippedWeapon.masteryProperties && equippedWeapon.masteryProperties.length > 0
+        ? { mastery: [...equippedWeapon.masteryProperties] }
+        : {}),
+    });
   }
+  const attack: DerivedState["attack"] = attacks[0] ?? null;
 
   let spellcastingAbility: SpellcastingAbility | null = null;
   let spellSaveDC: number | null = null;
@@ -624,6 +636,7 @@ export function computeDerivedState(
     passivePerception: 10 + (skills.perception ?? 0),
     maxHP,
     armorClass,
+    attacks,
     attack,
     spellcastingAbility,
     spellSaveDC,

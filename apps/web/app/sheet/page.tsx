@@ -360,9 +360,16 @@ export default async function SheetPage({
   const shield = payload.characterState.equippedShieldId
     ? merged.content.equipmentById[payload.characterState.equippedShieldId]
     : undefined;
-  const weapon = payload.characterState.equippedWeaponId
-    ? merged.content.equipmentById[payload.characterState.equippedWeaponId]
-    : undefined;
+  const weaponIds =
+    payload.characterState.equippedWeaponIds && payload.characterState.equippedWeaponIds.length > 0
+      ? payload.characterState.equippedWeaponIds
+      : payload.characterState.equippedWeaponId
+        ? [payload.characterState.equippedWeaponId]
+        : [];
+  const weapons = weaponIds
+    .map((id) => merged.content.equipmentById[id])
+    .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+  const weapon = weapons[0];
 
   const level = Math.max(1, Math.floor(payload.characterState.level || 1));
   const xp = Number.isFinite(payload.characterState.xp)
@@ -568,22 +575,25 @@ export default async function SheetPage({
     damage: string;
     notes: string;
   }> = [];
-  if (derived.attack) {
+  for (const attack of derived.attacks) {
     attackRows.push({
-      name: derived.attack.name,
-      bonus: formatModifier(derived.attack.toHit),
-      damage: derived.attack.damage,
+      name: attack.name,
+      bonus: formatModifier(attack.toHit),
+      damage: attack.damage,
       notes:
-        derived.attack.mastery && derived.attack.mastery.length > 0
-          ? `Mastery: ${derived.attack.mastery.map((mastery) => formatMasteryLabel(mastery)).join(", ")}`
+        attack.mastery && attack.mastery.length > 0
+          ? `Mastery: ${attack.mastery.map((mastery) => formatMasteryLabel(mastery)).join(", ")}`
           : "",
     });
   }
-  if (weapon && (!derived.attack || derived.attack.name !== weapon.name)) {
+  for (const equippedWeapon of weapons) {
+    if (derived.attacks.some((attack) => attack.name === equippedWeapon.name)) {
+      continue;
+    }
     attackRows.push({
-      name: weapon.name,
+      name: equippedWeapon.name,
       bonus: "-",
-      damage: weapon.damageDice ?? "-",
+      damage: equippedWeapon.damageDice ?? "-",
       notes: "No resolved attack bonus",
     });
   }

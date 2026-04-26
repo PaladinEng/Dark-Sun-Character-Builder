@@ -14,6 +14,13 @@
     "name": "Shortbow",
     "toHit": 5
   },
+  "attacks": [
+    {
+      "damage": "1d6+3",
+      "name": "Shortbow",
+      "toHit": 5
+    }
+  ],
   "feats": [
     {
       "id": "test:feat:origin-alert",

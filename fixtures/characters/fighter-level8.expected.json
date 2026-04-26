@@ -32,6 +32,13 @@
     "name": "Longbow",
     "toHit": 6
   },
+  "attacks": [
+    {
+      "damage": "1d8+3",
+      "name": "Longbow",
+      "toHit": 6
+    }
+  ],
   "feats": [
     {
       "id": "test:feat:origin-alert",
