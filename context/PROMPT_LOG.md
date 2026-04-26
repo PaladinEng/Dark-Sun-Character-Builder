@@ -40,3 +40,15 @@ Session prompts and outcomes for the Dark Sun Character Builder. Each entry reco
 - `3b8a6d0` fix(content): add 23 missing D&D 2024 SRD general feats
 - `a6dc941` fix(rules): support multiple equipped weapons and per-weapon attacks
 **Next:** /sheet HTML layout rework against the D&D Beyond 5-page reference (left/center/right columns on page 1, features/equipment on page 2, character details with personality fields on page 4, spells page 5). Printable PDF layout rework follows. Some new feats (Mobile speed bonus, Heavy Armor Master damage reduction, Observant passive bonuses) will become mechanically modelable once the runtime grows reaction/conditional support.
+
+### 2026-04-26 — Session 3: Complete D&D 2024 feat descriptions
+**Prompt:** Cowork review found that the original 15 SRD feats had placeholder one-line descriptions, Great Weapon Master had outdated 2014 mechanics, and the origin feat Crafter was missing entirely. Rewrite all 15 placeholder descriptions to match D&D 2024 PHB rules, correct Great Weapon Master, and add Crafter.
+**Outcome:**
+- Rewrote 15 feat descriptions with full D&D 2024 mechanics: Alert (Initiative Proficiency + Initiative Swap), Healer (Battle Medic + Healing Reroll), Lucky (Luck Points = PB), Magic Initiate (cantrips + 1 spell from Cleric/Druid/Wizard list), Musician (3 instruments + Encouraging Song Heroic Inspiration), Savage Attacker (reroll weapon damage once per turn), Skilled (3 skills/tools, repeatable), Tavern Brawler (1d4 + STR unarmed, push, damage rerolls, improvised proficiency), Athlete (STR/DEX +1, climbing/jumping/standing improvements), Durable (CON +1, advantage on death saves, bonus-action HD heal), Mage Slayer (STR/CON/DEX +1, concentration disadvantage, mental save reroll), Sharpshooter (DEX +1, ignore cover, no long-range disadvantage, Steady Aim), Spell Sniper (spellcasting +1, doubled spell range, ignore cover, attack cantrip), Tough (HP = level×2 + 2/level), War Caster (spellcasting +1, advantage on Concentration saves, reaction-spell on OA, somatic components with weapons).
+- Corrected Great Weapon Master: removed the obsolete 2014 "proficiency bonus to damage on a Heavy weapon attack" and replaced with the 2024 once-per-turn Heavy-weapon damage reroll.
+- Added the missing origin feat Crafter (3 Artisan's Tools proficiencies, 25% craft time/cost reduction, 20% nonmagical-purchase discount). Pack feat count went 38 → 39.
+- All categories verified (8 origins are `origin`, 8+ generals are `general`, prerequisites preserved). Effects arrays remain absent — the 2024 mechanics in scope here (initiative bonuses, dice rerolls, cover ignore, HP-per-level scaling, choice-based proficiencies) aren't expressible in the current effect schema.
+**Harness:** PASS (all 13 stages, ~65s).
+**Commits:**
+- `71e212f` fix(content): complete D&D 2024 mechanical descriptions for all feats
+**Next:** Same as session 2 — /sheet and /print layout rework against the 5-page D&D Beyond reference. Effect-schema expansion (reaction/conditional/initiative/HP-scaling) is now the gating constraint for promoting these descriptions to mechanical effects.
