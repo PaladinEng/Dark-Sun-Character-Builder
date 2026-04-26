@@ -536,8 +536,6 @@ export default async function SheetPage({
   });
 
   const characterStateWithOptionalIdentity = payload.characterState as CharacterState & {
-    characterName?: unknown;
-    name?: unknown;
     playerName?: unknown;
     player?: unknown;
     campaignName?: unknown;
@@ -546,9 +544,7 @@ export default async function SheetPage({
     currentHp?: unknown;
     currentHitPoints?: unknown;
   };
-  const rawCharacterName =
-    normalizeOptionalString(characterStateWithOptionalIdentity.characterName) ??
-    normalizeOptionalString(characterStateWithOptionalIdentity.name);
+  const rawCharacterName = normalizeOptionalString(payload.characterState.characterName);
   const rawPlayerName =
     normalizeOptionalString(characterStateWithOptionalIdentity.playerName) ??
     normalizeOptionalString(characterStateWithOptionalIdentity.player);

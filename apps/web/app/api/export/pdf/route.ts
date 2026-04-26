@@ -407,15 +407,11 @@ export async function POST(request: Request) {
     normalizeSpellSlotUsage(characterStateWithSpellSlots.spellSlotsUsed);
   const normalizedLevel = Math.max(1, Math.floor(payload.characterState.level || 1));
   const characterStateWithOptionalIdentity = payload.characterState as CharacterState & {
-    characterName?: unknown;
-    name?: unknown;
     currentHP?: unknown;
     currentHp?: unknown;
     currentHitPoints?: unknown;
   };
-  const rawCharacterName =
-    normalizeOptionalString(characterStateWithOptionalIdentity.characterName) ??
-    normalizeOptionalString(characterStateWithOptionalIdentity.name);
+  const rawCharacterName = normalizeOptionalString(payload.characterState.characterName);
   const characterName = rawCharacterName?.trim() ? rawCharacterName.trim() : null;
   const currentHP = normalizeOptionalNonNegativeInt(
     characterStateWithOptionalIdentity.currentHP ??

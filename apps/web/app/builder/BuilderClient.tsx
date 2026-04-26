@@ -1876,6 +1876,22 @@ export default function BuilderClient({
       </section>
 
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <label className="block text-sm font-semibold" htmlFor="character-name-input">
+          Character Name
+        </label>
+        <input
+          id="character-name-input"
+          type="text"
+          value={state.characterName ?? ""}
+          onChange={(event) =>
+            setState((previous) => ({ ...previous, characterName: event.target.value }))
+          }
+          placeholder="Name your character"
+          className="mt-2 w-full rounded border border-slate-600 bg-slate-950 px-3 py-2 text-lg text-slate-100 placeholder:text-slate-500 focus:border-amber-400 focus:outline-none"
+        />
+      </section>
+
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
         <h2 className="text-sm font-semibold">Export</h2>
         <p className="mt-1 text-sm text-slate-300">
           Download machine-readable data or a template-based printable PDF.

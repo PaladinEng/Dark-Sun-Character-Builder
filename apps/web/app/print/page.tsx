@@ -469,7 +469,9 @@ export default async function PrintPage({
             <header className="page-header">
               <div className="panel name-panel">
                 <div className="panel-title">Character Name</div>
-                <div className="character-name-line">______________________________</div>
+                <div className="character-name-line">
+                  {payload.characterState.characterName?.trim() || "______________________________"}
+                </div>
               </div>
               <div className="panel identity-panel">
                 <div className="identity-grid">
