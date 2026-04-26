@@ -2664,6 +2664,174 @@ export default function BuilderClient({
                 className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
               />
             </label>
+            <div className="md:col-span-2">
+              <details
+                open={Boolean(
+                  state.companion?.name ||
+                    state.companion?.type ||
+                    state.companion?.summary ||
+                    state.companion?.notes,
+                )}
+                className="rounded border border-slate-700 bg-slate-950/40 px-3 py-2"
+              >
+                <summary className="cursor-pointer text-sm font-semibold">Companion</summary>
+                <div className="mt-2 grid gap-2 md:grid-cols-2">
+                  <label className="text-xs">
+                    <div className="font-semibold">Name</div>
+                    <input
+                      type="text"
+                      value={state.companion?.name ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          companion: {
+                            ...(previous.companion ?? {}),
+                            name: event.target.value,
+                          },
+                        }))
+                      }
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                  <label className="text-xs">
+                    <div className="font-semibold">Type</div>
+                    <input
+                      type="text"
+                      value={state.companion?.type ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          companion: {
+                            ...(previous.companion ?? {}),
+                            type: event.target.value,
+                          },
+                        }))
+                      }
+                      placeholder="e.g. Beast (Wolf), Steel Defender"
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                  <label className="text-xs md:col-span-2">
+                    <div className="font-semibold">Summary</div>
+                    <input
+                      type="text"
+                      value={state.companion?.summary ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          companion: {
+                            ...(previous.companion ?? {}),
+                            summary: event.target.value,
+                          },
+                        }))
+                      }
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                  <label className="text-xs md:col-span-2">
+                    <div className="font-semibold">Notes</div>
+                    <textarea
+                      value={state.companion?.notes ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          companion: {
+                            ...(previous.companion ?? {}),
+                            notes: event.target.value,
+                          },
+                        }))
+                      }
+                      rows={3}
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                </div>
+              </details>
+            </div>
+            <div className="md:col-span-2">
+              <details
+                open={Boolean(
+                  state.familiar?.name ||
+                    state.familiar?.type ||
+                    state.familiar?.summary ||
+                    state.familiar?.notes,
+                )}
+                className="rounded border border-slate-700 bg-slate-950/40 px-3 py-2"
+              >
+                <summary className="cursor-pointer text-sm font-semibold">Familiar</summary>
+                <div className="mt-2 grid gap-2 md:grid-cols-2">
+                  <label className="text-xs">
+                    <div className="font-semibold">Name</div>
+                    <input
+                      type="text"
+                      value={state.familiar?.name ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          familiar: {
+                            ...(previous.familiar ?? {}),
+                            name: event.target.value,
+                          },
+                        }))
+                      }
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                  <label className="text-xs">
+                    <div className="font-semibold">Type</div>
+                    <input
+                      type="text"
+                      value={state.familiar?.type ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          familiar: {
+                            ...(previous.familiar ?? {}),
+                            type: event.target.value,
+                          },
+                        }))
+                      }
+                      placeholder="e.g. Imp, Quasit, Pseudodragon"
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                  <label className="text-xs md:col-span-2">
+                    <div className="font-semibold">Summary</div>
+                    <input
+                      type="text"
+                      value={state.familiar?.summary ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          familiar: {
+                            ...(previous.familiar ?? {}),
+                            summary: event.target.value,
+                          },
+                        }))
+                      }
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                  <label className="text-xs md:col-span-2">
+                    <div className="font-semibold">Notes</div>
+                    <textarea
+                      value={state.familiar?.notes ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          familiar: {
+                            ...(previous.familiar ?? {}),
+                            notes: event.target.value,
+                          },
+                        }))
+                      }
+                      rows={3}
+                      className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+                    />
+                  </label>
+                </div>
+              </details>
+            </div>
             <label className="text-sm md:col-span-2">
               <div className="font-semibold">Notes</div>
               <textarea
