@@ -1443,13 +1443,37 @@ export default function BuilderClient({
   };
 
   const updatePointBuyAbility = (ability: Ability, value: number) => {
-    setState((previous) => ({
-      ...previous,
-      baseAbilities: {
-        ...previous.baseAbilities,
-        [ability]: normalizePointBuyScore(value),
-      },
-    }));
+    setState((previous) => {
+      const requested = normalizePointBuyScore(value);
+      const currentScore = previous.baseAbilities[ability];
+      // Always allow decreases (frees points). For increases, clamp to the highest
+      // affordable score so the 27-point budget cannot be exceeded.
+      let next = requested;
+      if (requested > currentScore) {
+        const otherCost = ABILITIES.reduce((sum, a) => {
+          if (a === ability) return sum;
+          const cost = getPointBuyScoreCost(previous.baseAbilities[a]);
+          return sum + (cost ?? 0);
+        }, 0);
+        const remainingBudget = POINT_BUY_BUDGET - otherCost;
+        let affordable = currentScore;
+        for (let candidate = requested; candidate >= currentScore; candidate -= 1) {
+          const cost = getPointBuyScoreCost(candidate);
+          if (cost !== null && cost <= remainingBudget) {
+            affordable = candidate;
+            break;
+          }
+        }
+        next = affordable;
+      }
+      return {
+        ...previous,
+        baseAbilities: {
+          ...previous.baseAbilities,
+          [ability]: next,
+        },
+      };
+    });
   };
 
   const normalizeInteger = (value: number, minimum = 0, maximum?: number): number => {
@@ -2085,9 +2109,20 @@ export default function BuilderClient({
             <div className="rounded border border-slate-700 bg-slate-950/60 p-2 text-xs">
               <div>Budget: {POINT_BUY_BUDGET}</div>
               <div>Spent: {pointBuySpent ?? "invalid"}</div>
-              <div className={pointBuyRemaining !== null && pointBuyRemaining < 0 ? "text-rose-300" : ""}>
+              <div
+                className={
+                  pointBuyRemaining !== null && pointBuyRemaining < 0
+                    ? "font-semibold text-rose-400"
+                    : ""
+                }
+              >
                 Remaining: {pointBuyRemaining ?? "invalid"}
               </div>
+              {pointBuyRemaining !== null && pointBuyRemaining < 0 ? (
+                <div className="mt-1 text-rose-300">
+                  Over budget by {Math.abs(pointBuyRemaining)} — reduce a score to continue.
+                </div>
+              ) : null}
             </div>
           ) : null}
         </div>
@@ -2122,19 +2157,37 @@ export default function BuilderClient({
             if (abilityScoreMethod === "point_buy") {
               const score = state.baseAbilities[ability];
               const cost = getPointBuyScoreCost(score);
+              const otherCost = ABILITIES.reduce((sum, other) => {
+                if (other === ability) return sum;
+                return sum + (getPointBuyScoreCost(state.baseAbilities[other]) ?? 0);
+              }, 0);
+              const remainingForThis = POINT_BUY_BUDGET - otherCost;
+              let maxAffordable = POINT_BUY_MIN_SCORE;
+              for (let candidate = POINT_BUY_MAX_SCORE; candidate >= POINT_BUY_MIN_SCORE; candidate -= 1) {
+                const candidateCost = getPointBuyScoreCost(candidate);
+                if (candidateCost !== null && candidateCost <= remainingForThis) {
+                  maxAffordable = candidate;
+                  break;
+                }
+              }
+              const overBudget = pointBuyRemaining !== null && pointBuyRemaining < 0;
               return (
                 <label key={ability} className="text-sm">
                   <div className="flex items-center justify-between font-semibold uppercase">
                     <span>{ability}</span>
-                    <span className="text-xs text-slate-400">{cost !== null ? `${cost} pts` : "invalid"}</span>
+                    <span className={`text-xs ${overBudget ? "text-rose-400" : "text-slate-400"}`}>
+                      {cost !== null ? `${cost} pts` : "invalid"}
+                    </span>
                   </div>
                   <input
                     type="number"
                     min={POINT_BUY_MIN_SCORE}
-                    max={POINT_BUY_MAX_SCORE}
+                    max={maxAffordable}
                     value={score}
                     onChange={(event) => updatePointBuyAbility(ability, Number(event.target.value))}
-                    className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                    className={`mt-1 w-full rounded border bg-slate-950 px-2 py-1 ${
+                      overBudget ? "border-rose-500" : "border-slate-700"
+                    }`}
                   />
                 </label>
               );
