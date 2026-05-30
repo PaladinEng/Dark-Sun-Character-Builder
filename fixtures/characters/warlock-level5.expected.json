@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 13,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d4+2",
     "name": "Dagger",
@@ -130,5 +131,8 @@
     "Durable Training: Fixture feat for advancement slot.",
     "Eldritch Invocations"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Simple Weapons"
+  ]
 }

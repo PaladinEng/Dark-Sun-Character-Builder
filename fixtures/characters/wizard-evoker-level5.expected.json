@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 12,
+  "armorProficiencies": [],
   "attack": null,
   "attacks": [],
   "feats": [
@@ -112,5 +113,6 @@
     "Durable Training: Fixture feat for advancement slot.",
     "Sculpt Spells"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": []
 }

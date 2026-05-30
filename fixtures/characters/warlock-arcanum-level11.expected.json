@@ -28,6 +28,7 @@
     }
   ],
   "armorClass": 13,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d4+2",
     "name": "Dagger",
@@ -149,5 +150,8 @@
     "Pact of the Tome",
     "Resilient Training: Fixture feat for higher-level advancement slot."
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Simple Weapons"
+  ]
 }

@@ -9,6 +9,7 @@
   },
   "advancementSlots": [],
   "armorClass": 10,
+  "armorProficiencies": [],
   "attack": null,
   "attacks": [],
   "feats": [],
@@ -76,5 +77,6 @@
     "Speed 25 ft.",
     "Stonecunning"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": []
 }

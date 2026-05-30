@@ -1252,8 +1252,8 @@ export default function BuilderClient({
         background: selectedBackground?.name ?? null,
         class: selectedClass?.name ?? null,
         species: selectedSpecies?.name ?? null,
-        armorProficiencies: sortStringIds(state.armorProficiencies ?? []),
-        weaponProficiencies: sortStringIds(state.weaponProficiencies ?? []),
+        armorProficiencies: derived.armorProficiencies,
+        weaponProficiencies: derived.weaponProficiencies,
         toolProficiencies: derived.toolProficiencies,
         languages: derived.languages,
         coins: {
@@ -3761,6 +3761,12 @@ export default function BuilderClient({
                   ))}
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div>
+            <div className="text-sm font-semibold">Languages</div>
+            <div className="mt-1 rounded bg-slate-950 p-3 text-xs">
+              {derived.languages.length > 0 ? derived.languages.join(", ") : "None"}
             </div>
           </div>
         </div>

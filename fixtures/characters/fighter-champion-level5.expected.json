@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 11,
+  "armorProficiencies": [],
   "attack": null,
   "attacks": [],
   "feats": [
@@ -82,5 +83,6 @@
     "Improved Critical",
     "Second Wind"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": []
 }

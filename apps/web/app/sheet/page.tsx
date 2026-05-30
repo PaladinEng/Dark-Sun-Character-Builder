@@ -614,8 +614,8 @@ export default async function SheetPage({
     total: spellSlots ? (spellSlots[index] ?? 0) : 0,
   }));
   const hasSpellSlots = spellSlotRows.some((slotRow) => slotRow.total > 0);
-  const armorProficiencies = dedupeStrings(payload.characterState.armorProficiencies ?? []);
-  const weaponProficiencies = dedupeStrings(payload.characterState.weaponProficiencies ?? []);
+  const armorProficiencies = dedupeStrings(derived.armorProficiencies);
+  const weaponProficiencies = dedupeStrings(derived.weaponProficiencies);
   const toolProficiencies = dedupeStrings(derived.toolProficiencies);
   const languageProficiencies = dedupeStrings(derived.languages);
   const activeConditionSet = new Set(activeConditionLabels.map((condition) => condition.toLowerCase()));

@@ -9,6 +9,7 @@
   },
   "advancementSlots": [],
   "armorClass": 12,
+  "armorProficiencies": [],
   "attack": null,
   "attacks": [],
   "feats": [],
@@ -63,5 +64,6 @@
   "spellSlots": null,
   "toolProficiencies": [],
   "traits": [],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": []
 }

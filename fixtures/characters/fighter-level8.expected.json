@@ -27,6 +27,7 @@
     }
   ],
   "armorClass": 15,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d8+3",
     "name": "Longbow",
@@ -113,5 +114,9 @@
     "Navigator's Tools"
   ],
   "traits": [],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Martial Weapons",
+    "Simple Weapons"
+  ]
 }

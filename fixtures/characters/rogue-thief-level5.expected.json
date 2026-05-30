@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 13,
+  "armorProficiencies": [],
   "attack": null,
   "attacks": [],
   "feats": [
@@ -82,5 +83,6 @@
     "Fast Hands",
     "Sneak Attack"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": []
 }

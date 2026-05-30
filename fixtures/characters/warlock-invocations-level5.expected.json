@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 13,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d4+2",
     "name": "Dagger",
@@ -133,5 +134,8 @@
     "Mask of Many Faces",
     "Pact of the Tome"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Simple Weapons"
+  ]
 }

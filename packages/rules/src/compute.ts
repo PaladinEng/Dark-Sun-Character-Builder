@@ -416,6 +416,21 @@ export function computeDerivedState(
     ...applied.grantedLanguages
   ]);
 
+  // Derive weapon proficiency labels from class data
+  const derivedWeaponProficiencies: string[] = [...(state.weaponProficiencies ?? [])];
+  if (klass?.weaponProficiencies) {
+    if (klass.weaponProficiencies.simple) derivedWeaponProficiencies.push("Simple Weapons");
+    if (klass.weaponProficiencies.martial) derivedWeaponProficiencies.push("Martial Weapons");
+    for (const weaponId of klass.weaponProficiencies.weaponIds ?? []) {
+      const weapon = merged.equipmentById[weaponId];
+      derivedWeaponProficiencies.push(weapon?.name ?? weaponId);
+    }
+  }
+  const weaponProficiencies = dedupeSortedStrings(derivedWeaponProficiencies);
+
+  // Derive armor proficiency labels (no class-level armor proficiencies in JSON yet)
+  const armorProficiencies = dedupeSortedStrings([...(state.armorProficiencies ?? [])]);
+
   const skillDefinitions = getResolvedSkillDefinitions(merged);
   const skills: Record<string, number> = {};
   for (const skill of skillDefinitions) {
@@ -632,6 +647,8 @@ export function computeDerivedState(
     skillProficiencies: finalSkillProficiencies,
     saveProficiencies,
     toolProficiencies,
+    weaponProficiencies,
+    armorProficiencies,
     languages,
     passivePerception: 10 + (skills.perception ?? 0),
     maxHP,

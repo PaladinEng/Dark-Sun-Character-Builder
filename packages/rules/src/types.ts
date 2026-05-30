@@ -155,6 +155,8 @@ export interface DerivedState {
   skillProficiencies: string[];
   saveProficiencies: Ability[];
   toolProficiencies: string[];
+  weaponProficiencies: string[];
+  armorProficiencies: string[];
   languages: string[];
   passivePerception: number;
   maxHP: number;

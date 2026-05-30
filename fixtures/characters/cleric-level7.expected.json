@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 16,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d6+0",
     "name": "Mace",
@@ -133,5 +134,8 @@
   ],
   "toolProficiencies": [],
   "traits": [],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Simple Weapons"
+  ]
 }

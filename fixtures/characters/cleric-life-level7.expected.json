@@ -19,6 +19,7 @@
     }
   ],
   "armorClass": 10,
+  "armorProficiencies": [],
   "attack": null,
   "attacks": [],
   "feats": [
@@ -113,5 +114,6 @@
     "Durable Training: Fixture feat for advancement slot.",
     "Preserve Life"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": []
 }

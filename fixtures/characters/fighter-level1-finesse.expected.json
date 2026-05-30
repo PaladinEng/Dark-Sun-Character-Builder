@@ -9,6 +9,7 @@
   },
   "advancementSlots": [],
   "armorClass": 16,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d8+3",
     "name": "Rapier",
@@ -95,5 +96,9 @@
   },
   "toolProficiencies": [],
   "traits": [],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Martial Weapons",
+    "Simple Weapons"
+  ]
 }

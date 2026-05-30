@@ -9,6 +9,7 @@
   },
   "advancementSlots": [],
   "armorClass": 14,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d8+2",
     "name": "Longsword",
@@ -93,5 +94,9 @@
     "Navigator's Tools"
   ],
   "traits": [],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Martial Weapons",
+    "Simple Weapons"
+  ]
 }

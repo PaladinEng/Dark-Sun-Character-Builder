@@ -9,6 +9,7 @@
   },
   "advancementSlots": [],
   "armorClass": 15,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d6+3",
     "name": "Shortbow",
@@ -78,5 +79,9 @@
     "Fighting Style: Archery",
     "Fighting Style: Defense"
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Martial Weapons",
+    "Simple Weapons"
+  ]
 }

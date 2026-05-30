@@ -18,6 +18,7 @@
     }
   ],
   "armorClass": 17,
+  "armorProficiencies": [],
   "attack": {
     "damage": "1d8+4",
     "name": "Longsword",
@@ -98,5 +99,9 @@
   "traits": [
     "Speed 35 ft."
   ],
-  "warnings": []
+  "warnings": [],
+  "weaponProficiencies": [
+    "Martial Weapons",
+    "Simple Weapons"
+  ]
 }
