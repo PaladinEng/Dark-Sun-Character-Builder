@@ -2296,11 +2296,32 @@ export default function BuilderClient({
             }
           >
             <option value="">None</option>
-            {options.backgrounds.map((entry) => (
-              <option key={entry.id} value={entry.id}>
-                {entry.name}
-              </option>
-            ))}
+            {(() => {
+              const srd = options.backgrounds.filter((b) => b.id.startsWith("srd52:"));
+              const homebrew = options.backgrounds.filter((b) => !b.id.startsWith("srd52:"));
+              return (
+                <>
+                  {srd.length > 0 && (
+                    <optgroup label="SRD Backgrounds">
+                      {srd.map((entry) => (
+                        <option key={entry.id} value={entry.id}>
+                          {entry.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                  )}
+                  {homebrew.length > 0 && (
+                    <optgroup label="Dark Sun Backgrounds">
+                      {homebrew.map((entry) => (
+                        <option key={entry.id} value={entry.id}>
+                          {entry.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                  )}
+                </>
+              );
+            })()}
           </select>
         </label>
 

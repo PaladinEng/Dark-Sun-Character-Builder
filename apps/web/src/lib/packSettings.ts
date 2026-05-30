@@ -407,7 +407,11 @@ export function applySettingRestrictions(
       ? options.species.filter((entry) => speciesReplacementIds.has(entry.id))
       : options.species,
     backgrounds: backgroundReplacementIds
-      ? options.backgrounds.filter((entry) => backgroundReplacementIds.has(entry.id))
+      ? options.backgrounds.filter(
+          (entry) =>
+            backgroundReplacementIds.has(entry.id) ||
+            !entry.id.startsWith("darksun:background:"),
+        )
       : options.backgrounds,
     classes: options.classes.filter((entry) => !disabledClassIds.has(entry.id)),
     subclasses: options.subclasses.filter((entry) => !disabledSubclassIds.has(entry.id)),

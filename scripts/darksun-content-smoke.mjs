@@ -169,7 +169,11 @@ function applyReplacementFilters(content, profile) {
     ? content.species.filter((entry) => speciesReplacementIds.has(entry.id))
     : content.species;
   const backgrounds = backgroundReplacementIds
-    ? content.backgrounds.filter((entry) => backgroundReplacementIds.has(entry.id))
+    ? content.backgrounds.filter(
+        (entry) =>
+          backgroundReplacementIds.has(entry.id) ||
+          !entry.id.startsWith("darksun:background:"),
+      )
     : content.backgrounds;
 
   return {
@@ -225,16 +229,22 @@ async function main() {
   );
 
   const darkSunBackgroundIds = sortValues(darkSun.backgrounds.map((entry) => entry.id));
-  assert((profile.backgroundReplacementIds ?? []).length > 0, "Dark Sun background replacement ids are empty");
-  assert.deepEqual(
-    darkSunBackgroundIds,
-    sortValues(profile.backgroundReplacementIds ?? []),
-    "Dark Sun backgrounds no longer match settings backgroundReplacementIds",
-  );
+  const profileBackgroundIds = sortValues(profile.backgroundReplacementIds ?? []);
+  assert(profileBackgroundIds.length > 0, "Dark Sun background replacement ids are empty");
   assert(
-    darkSunBackgroundIds.every((id) => id.startsWith("darksun:background:")),
-    `SRD background leaked into Dark Sun: ${darkSunBackgroundIds.join(", ")}`,
+    profileBackgroundIds.every((id) => id.startsWith("darksun:background:")),
+    `backgroundReplacementIds should only contain darksun: IDs: ${profileBackgroundIds.join(", ")}`,
   );
+  // All Dark Sun backgrounds from the profile must be present
+  for (const id of profileBackgroundIds) {
+    assert(
+      darkSunBackgroundIds.includes(id),
+      `Dark Sun background ${id} missing from merged content`,
+    );
+  }
+  // SRD backgrounds should also be present (additive merge)
+  const srdBackgrounds = darkSunBackgroundIds.filter((id) => id.startsWith("srd52:background:"));
+  assert(srdBackgrounds.length > 0, "SRD backgrounds should be available alongside Dark Sun backgrounds");
 
   assertSpellListOverride(srdOnly, "srd52:class:wizard", ["srd52:spelllist:wizard-core"]);
   assertSpellListOverride(srdOnly, "srd52:class:warlock", ["srd52:spelllist:warlock-core"]);
