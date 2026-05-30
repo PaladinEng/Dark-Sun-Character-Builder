@@ -80,6 +80,8 @@ export interface CharacterState {
   warlockPactBoonFeatureId?: string;
   warlockMysticArcanumByLevel?: Partial<Record<6 | 7 | 8 | 9, string>>;
   featSelections?: FeatSelections;
+  /** Maps feat ID → chosen ability for half-feats that grant +1 to a chosen ability. */
+  featAbilityChoices?: Record<string, Ability>;
   // Legacy fields retained for backwards compatibility with older saves/fixtures.
   selectedFeats?: string[];
   originFeatId?: string;

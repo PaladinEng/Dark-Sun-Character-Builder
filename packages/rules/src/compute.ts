@@ -17,6 +17,7 @@ import { getSpellSlots } from "./spellSlots";
 import {
   ABILITIES,
   type Ability,
+  type AbilityIncrease,
   type AbilityRecord,
   type Advancement,
   type CharacterState,
@@ -310,9 +311,48 @@ export function computeDerivedState(
       changes: entry.changes
     }));
 
+  // Collect ability bonuses from half-feats (origin + level-up feats)
+  const allSelectedFeatIds: string[] = [];
+  const originFeatId =
+    state.featSelections?.origin ?? state.originFeatId;
+  if (originFeatId) allSelectedFeatIds.push(originFeatId);
+  for (const entry of advancementsByLevel.values()) {
+    if (entry.type === "feat") allSelectedFeatIds.push(entry.featId);
+  }
+  const featAbilityIncreases: AbilityIncrease[] = [];
+  for (const featId of allSelectedFeatIds) {
+    const feat = merged.featsById[featId];
+    const opts = (feat as Record<string, unknown> | undefined)
+      ?.abilityBonusOptions as
+      | { abilities: Ability[]; value?: number }
+      | undefined;
+    if (!opts) continue;
+    const value = opts.value ?? 1;
+    if (opts.abilities.length === 1) {
+      // Fixed bonus — apply automatically
+      featAbilityIncreases.push({
+        source: "feat",
+        changes: { [opts.abilities[0]]: value },
+      });
+    } else {
+      // Choice bonus — look up the player's selection
+      const chosen = state.featAbilityChoices?.[featId];
+      if (chosen && opts.abilities.includes(chosen)) {
+        featAbilityIncreases.push({
+          source: "feat",
+          changes: { [chosen]: value },
+        });
+      }
+    }
+  }
+
   const effectiveState: CharacterState = {
     ...state,
-    abilityIncreases: [...(state.abilityIncreases ?? []), ...asiIncreases]
+    abilityIncreases: [
+      ...(state.abilityIncreases ?? []),
+      ...asiIncreases,
+      ...featAbilityIncreases,
+    ],
   };
 
   const finalAbilities = computeFinalAbilities(effectiveState);

@@ -2,6 +2,10 @@
   "id": "srd52:feat:durable",
   "name": "Durable",
   "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["con"],
+    "value": 1
+  },
   "prerequisites": {
     "minLevel": 4
   },

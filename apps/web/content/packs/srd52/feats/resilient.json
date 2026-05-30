@@ -2,6 +2,10 @@
   "id": "srd52:feat:resilient",
   "name": "Resilient",
   "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["str", "dex", "con", "int", "wis", "cha"],
+    "value": 1
+  },
   "repeatable": true,
   "prerequisites": {
     "minLevel": 4

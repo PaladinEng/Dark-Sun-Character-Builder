@@ -3121,6 +3121,46 @@ export default function BuilderClient({
               ) : null}
             </div>
           ) : null}
+
+          {(() => {
+            const currentOriginFeatId =
+              selectedBackgroundFixedOriginFeatId ??
+              state.featSelections?.origin ??
+              state.originFeatId;
+            const originFeat = currentOriginFeatId
+              ? originFeats.find((f) => f.id === currentOriginFeatId)
+              : undefined;
+            const bonusOpts = (originFeat as Record<string, unknown> | undefined)
+              ?.abilityBonusOptions as
+              | { abilities: Ability[]; value: number }
+              | undefined;
+            if (!bonusOpts || bonusOpts.abilities.length <= 1) return null;
+            return (
+              <label className="mt-3 block text-sm">
+                <div className="font-semibold">Feat Ability Bonus (+{bonusOpts.value ?? 1})</div>
+                <select
+                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  value={state.featAbilityChoices?.[currentOriginFeatId!] ?? ""}
+                  onChange={(event) =>
+                    setState((previous) => ({
+                      ...previous,
+                      featAbilityChoices: {
+                        ...(previous.featAbilityChoices ?? {}),
+                        [currentOriginFeatId!]: event.target.value as Ability,
+                      },
+                    }))
+                  }
+                >
+                  <option value="">Choose ability...</option>
+                  {bonusOpts.abilities.map((ab) => (
+                    <option key={`origin-feat-ab-${ab}`} value={ab}>
+                      {ab.toUpperCase()}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            );
+          })()}
         </section>
       ) : null}
 
@@ -3339,6 +3379,40 @@ export default function BuilderClient({
                             No feats currently meet prerequisites or duplicate restrictions.
                           </p>
                         ) : null}
+                        {(() => {
+                          if (!existingFeatId) return null;
+                          const appliedFeat = feats.find((f) => f.id === existingFeatId);
+                          const bonusOpts = (appliedFeat as Record<string, unknown> | undefined)
+                            ?.abilityBonusOptions as
+                            | { abilities: Ability[]; value: number }
+                            | undefined;
+                          if (!bonusOpts || bonusOpts.abilities.length <= 1) return null;
+                          return (
+                            <label className="text-sm">
+                              <div className="font-semibold">Feat Ability Bonus (+{bonusOpts.value ?? 1})</div>
+                              <select
+                                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                                value={state.featAbilityChoices?.[existingFeatId] ?? ""}
+                                onChange={(event) =>
+                                  setState((previous) => ({
+                                    ...previous,
+                                    featAbilityChoices: {
+                                      ...(previous.featAbilityChoices ?? {}),
+                                      [existingFeatId]: event.target.value as Ability,
+                                    },
+                                  }))
+                                }
+                              >
+                                <option value="">Choose ability...</option>
+                                {bonusOpts.abilities.map((ab) => (
+                                  <option key={`lvl-${level}-feat-ab-${ab}`} value={ab}>
+                                    {ab.toUpperCase()}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                          );
+                        })()}
                       </div>
                     ) : (
                       <div className="space-y-2">

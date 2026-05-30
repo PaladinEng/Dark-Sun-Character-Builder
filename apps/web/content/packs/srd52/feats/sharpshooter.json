@@ -2,6 +2,10 @@
   "id": "srd52:feat:sharpshooter",
   "name": "Sharpshooter",
   "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["dex"],
+    "value": 1
+  },
   "prerequisites": {
     "minLevel": 4
   },

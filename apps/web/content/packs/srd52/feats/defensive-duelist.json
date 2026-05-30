@@ -2,6 +2,10 @@
   "id": "srd52:feat:defensive-duelist",
   "name": "Defensive Duelist",
   "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["dex"],
+    "value": 1
+  },
   "prerequisites": {
     "minLevel": 4,
     "abilities": {

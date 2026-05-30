@@ -327,6 +327,12 @@ export const FeatSchema = EntityBaseSchema.extend({
   grantsAbilityIncreases: z.boolean().optional(),
   repeatable: z.boolean().optional(),
   prerequisites: SelectionPrerequisitesSchema.optional(),
+  abilityBonusOptions: z
+    .object({
+      abilities: z.array(AbilitySchema).min(1),
+      value: z.number().int(),
+    })
+    .optional(),
 });
 export type Feat = z.infer<typeof FeatSchema>;
 
