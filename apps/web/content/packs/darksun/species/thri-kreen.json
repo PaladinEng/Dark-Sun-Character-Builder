@@ -11,16 +11,18 @@
       "name": "Thri-kreen Anatomy"
     },
     {
-      "type": "grant_trait",
-      "name": "Natural Weapons"
+      "type": "grant_natural_weapon",
+      "name": "Claws",
+      "damageDice": "1d4",
+      "damageType": "slashing",
+      "ability": "str"
     },
     {
-      "type": "grant_trait",
-      "name": "Claws"
-    },
-    {
-      "type": "grant_trait",
-      "name": "Bite"
+      "type": "grant_natural_weapon",
+      "name": "Bite",
+      "damageDice": "1d4",
+      "damageType": "piercing",
+      "ability": "str"
     },
     {
       "type": "grant_trait",

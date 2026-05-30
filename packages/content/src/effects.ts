@@ -57,6 +57,13 @@ export const EffectSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("grant_language"),
     language: z.string().min(1)
+  }),
+  z.object({
+    type: z.literal("grant_natural_weapon"),
+    name: z.string().min(1),
+    damageDice: z.string().min(1),
+    damageType: z.string().min(1),
+    ability: AbilitySchema.optional(),
   })
 ]);
 

@@ -14,7 +14,8 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_resistance",
   "grant_trait",
   "grant_tool_proficiency",
-  "grant_language"
+  "grant_language",
+  "grant_natural_weapon"
 ] as const;
 
 export interface DerivedBonus {
@@ -33,6 +34,13 @@ export interface AttackBonus {
   condition: "always" | "ranged_weapon";
 }
 
+export interface NaturalWeapon {
+  name: string;
+  damageDice: string;
+  damageType: string;
+  ability?: Ability;
+}
+
 export interface AppliedEffects {
   grantedSkillProficiencies: string[];
   grantedSaveProficiencies: Ability[];
@@ -44,6 +52,7 @@ export interface AppliedEffects {
   bonuses: DerivedBonus[];
   armorClassBonuses: ArmorClassBonus[];
   attackBonuses: AttackBonus[];
+  naturalWeapons: NaturalWeapon[];
   unarmoredDefenseAbility?: Ability;
   speedOverride?: number;
 }
@@ -66,6 +75,7 @@ export function applyEffectsToCharacter(
   const bonuses: DerivedBonus[] = [];
   const armorClassBonuses: ArmorClassBonus[] = [];
   const attackBonuses: AttackBonus[] = [];
+  const naturalWeapons: NaturalWeapon[] = [];
   let unarmoredDefenseAbility: Ability | undefined;
   let speedOverride: number | undefined;
 
@@ -132,6 +142,15 @@ export function applyEffectsToCharacter(
       unarmoredDefenseAbility = effect.ability as Ability;
       continue;
     }
+    if (effect.type === "grant_natural_weapon") {
+      naturalWeapons.push({
+        name: effect.name,
+        damageDice: effect.damageDice,
+        damageType: effect.damageType,
+        ...(effect.ability ? { ability: effect.ability as Ability } : {}),
+      });
+      continue;
+    }
     if (effect.type === "set_speed") {
       speedOverride = effect.value;
     }
@@ -158,6 +177,7 @@ export function applyEffectsToCharacter(
     bonuses,
     armorClassBonuses,
     attackBonuses,
+    naturalWeapons,
     ...(unarmoredDefenseAbility ? { unarmoredDefenseAbility } : {}),
     speedOverride
   };

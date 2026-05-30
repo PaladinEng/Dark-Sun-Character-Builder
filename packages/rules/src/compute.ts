@@ -612,6 +612,17 @@ export function computeDerivedState(
         : {}),
     });
   }
+  // Add natural weapon attacks from species/other effects
+  for (const naturalWeapon of applied.naturalWeapons) {
+    const nwAbility: Ability = naturalWeapon.ability ?? "str";
+    const nwMod = abilityMods[nwAbility];
+    attacks.push({
+      name: naturalWeapon.name,
+      toHit: nwMod + proficiencyBonus,
+      damage: `${naturalWeapon.damageDice}${signed(nwMod)} ${naturalWeapon.damageType}`,
+    });
+  }
+
   const attack: DerivedState["attack"] = attacks[0] ?? null;
 
   let spellcastingAbility: SpellcastingAbility | null = null;

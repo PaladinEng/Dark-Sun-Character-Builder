@@ -11,8 +11,11 @@
       "name": "Flight"
     },
     {
-      "type": "grant_trait",
-      "name": "Talons"
+      "type": "grant_natural_weapon",
+      "name": "Talons",
+      "damageDice": "1d4",
+      "damageType": "slashing",
+      "ability": "str"
     },
     {
       "type": "grant_language",
