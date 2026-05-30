@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:merchant",
+  "name": "Merchant",
+  "abilityOptions": {
+    "abilities": [
+      "con",
+      "int",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:lucky",
+  "grantsOriginFeatId": "srd52:feat:lucky",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:navigators-tools",
+      "srd52:equipment:backpack"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "animal_handling"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "persuasion"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Navigator's Tools"
+    }
+  ],
+  "description": "A dealer in goods who excels at negotiation and long-distance trade."
+}

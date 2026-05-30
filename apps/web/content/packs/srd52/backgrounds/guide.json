@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:guide",
+  "name": "Guide",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "con",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:magic-initiate",
+  "grantsOriginFeatId": "srd52:feat:magic-initiate",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:cartographers-tools",
+      "srd52:equipment:bedroll"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "stealth"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "survival"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Cartographer's Tools"
+    }
+  ],
+  "description": "A trailblazer experienced in navigating wilderness and tracking quarry."
+}

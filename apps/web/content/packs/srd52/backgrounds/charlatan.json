@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:charlatan",
+  "name": "Charlatan",
+  "abilityOptions": {
+    "abilities": [
+      "dex",
+      "con",
+      "cha"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:skilled",
+  "grantsOriginFeatId": "srd52:feat:skilled",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:forgery-kit",
+      "srd52:equipment:disguise-kit"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "deception"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "sleight_of_hand"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Forgery Kit"
+    }
+  ],
+  "description": "A trickster and con artist who lives by charm and guile."
+}

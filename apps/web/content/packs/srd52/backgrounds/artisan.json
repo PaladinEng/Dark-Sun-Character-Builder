@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:artisan",
+  "name": "Artisan",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "int"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:crafter",
+  "grantsOriginFeatId": "srd52:feat:crafter",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:calligraphers-supplies",
+      "srd52:equipment:backpack"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "investigation"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "persuasion"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Carpenter's Tools"
+    }
+  ],
+  "description": "A skilled crafter who makes useful items and trades goods."
+}

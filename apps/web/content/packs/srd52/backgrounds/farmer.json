@@ -1,0 +1,35 @@
+{
+  "id": "srd52:background:farmer",
+  "name": "Farmer",
+  "abilityOptions": {
+    "abilities": [
+      "str",
+      "con",
+      "wis"
+    ],
+    "mode": "2+1_or_1+1+1"
+  },
+  "grantsFeat": "srd52:feat:tough",
+  "grantsOriginFeatId": "srd52:feat:tough",
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:carpenters-tools",
+      "srd52:equipment:shovel"
+    ]
+  },
+  "effects": [
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "animal_handling"
+    },
+    {
+      "type": "grant_skill_proficiency",
+      "skill": "nature"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Carpenter's Tools"
+    }
+  ],
+  "description": "A hardworking agrarian shaped by toil and the rhythms of the land."
+}

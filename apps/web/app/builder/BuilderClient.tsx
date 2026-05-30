@@ -622,6 +622,7 @@ export default function BuilderClient({
   const [slotModes, setSlotModes] = useState<Record<number, "feat" | "asi">>({});
   const [featDrafts, setFeatDrafts] = useState<Record<number, string>>({});
   const [asiDrafts, setAsiDrafts] = useState<Record<number, AbilityChanges>>({});
+  const [pointBuyEditing, setPointBuyEditing] = useState<Record<string, string>>({});
 
   useEffect(() => {
     setEnabledSources(enabledSourceIds);
@@ -2193,8 +2194,35 @@ export default function BuilderClient({
                     type="number"
                     min={POINT_BUY_MIN_SCORE}
                     max={maxAffordable}
-                    value={score}
-                    onChange={(event) => updatePointBuyAbility(ability, Number(event.target.value))}
+                    value={ability in pointBuyEditing ? pointBuyEditing[ability] : score}
+                    onChange={(event) => {
+                      setPointBuyEditing((prev) => ({ ...prev, [ability]: event.target.value }));
+                    }}
+                    onBlur={() => {
+                      const raw = pointBuyEditing[ability];
+                      if (raw !== undefined) {
+                        updatePointBuyAbility(ability, Number(raw));
+                        setPointBuyEditing((prev) => {
+                          const next = { ...prev };
+                          delete next[ability];
+                          return next;
+                        });
+                      }
+                    }}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") {
+                        const raw = pointBuyEditing[ability];
+                        if (raw !== undefined) {
+                          updatePointBuyAbility(ability, Number(raw));
+                          setPointBuyEditing((prev) => {
+                            const next = { ...prev };
+                            delete next[ability];
+                            return next;
+                          });
+                        }
+                        (event.target as HTMLInputElement).blur();
+                      }
+                    }}
                     className={`mt-1 w-full rounded border bg-slate-950 px-2 py-1 ${
                       overBudget ? "border-rose-500" : "border-slate-700"
                     }`}
