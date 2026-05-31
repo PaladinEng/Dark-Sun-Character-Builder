@@ -3,7 +3,7 @@
   "type": "weapon",
   "name": "Shortsword",
   "damageDice": "1d6",
-  "weaponCategory": "simple",
+  "weaponCategory": "martial",
   "properties": [
     "finesse",
     "light"
@@ -11,5 +11,5 @@
   "masteryProperties": [
     "vex"
   ],
-  "description": "Shortsword is a simple weapon that deals 1d6 damage."
+  "description": "Shortsword is a martial weapon that deals 1d6 piercing damage."
 }

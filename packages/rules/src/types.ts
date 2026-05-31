@@ -85,6 +85,8 @@ export interface CharacterState {
   selectedBackgroundId?: string;
   selectedClassId?: string;
   selectedFeatureIds?: string[];
+  /** Selected Wild Talent feature ID (Dark Sun setting). */
+  wildTalentFeatureId?: string;
   warlockInvocationFeatureIds?: string[];
   warlockPactBoonFeatureId?: string;
   warlockMysticArcanumByLevel?: Partial<Record<6 | 7 | 8 | 9, string>>;

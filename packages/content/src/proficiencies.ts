@@ -39,6 +39,7 @@ export const LANGUAGE_VALUES = [
   "Draconic",
   "Draj",
   "Draxa",
+  "Druidic",
   "Dwarvish",
   "Elvish",
   "Giant",

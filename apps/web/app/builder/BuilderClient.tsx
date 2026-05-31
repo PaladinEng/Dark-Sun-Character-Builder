@@ -700,12 +700,7 @@ export default function BuilderClient({
         .sort((a, b) => a.name.localeCompare(b.name)),
     [selectableFeatures, wildTalentFeatureTag],
   );
-  const selectedWildTalentId = useMemo(() => {
-    const selectedFeatureIds = state.selectedFeatureIds ?? [];
-    return (
-      wildTalentOptions.find((feature) => selectedFeatureIds.includes(feature.id))?.id ?? undefined
-    );
-  }, [state.selectedFeatureIds, wildTalentOptions]);
+  const selectedWildTalentId = state.wildTalentFeatureId;
   const selectedWarlockFeatureIdsForPrereqs = useMemo(
     () =>
       new Set([
@@ -1093,19 +1088,23 @@ export default function BuilderClient({
       return;
     }
 
-    setState((previous) => {
-      const selectedFeatureIds = new Set(previous.selectedFeatureIds ?? []);
-      const hasWildTalent = wildTalentOptions.some((feature) => selectedFeatureIds.has(feature.id));
-      if (hasWildTalent) {
-        return previous;
+    // Migrate wild talent from legacy selectedFeatureIds to dedicated field
+    if (!state.wildTalentFeatureId) {
+      const legacyWt = wildTalentOptions.find((f) => (state.selectedFeatureIds ?? []).includes(f.id));
+      if (legacyWt) {
+        setState((prev) => ({
+          ...prev,
+          wildTalentFeatureId: legacyWt.id,
+          selectedFeatureIds: (prev.selectedFeatureIds ?? []).filter((id) => id !== legacyWt.id),
+        }));
+        return;
       }
-      selectedFeatureIds.add(wildTalentOptions[0].id);
-      return {
-        ...previous,
-        selectedFeatureIds: sortStringIds(Array.from(selectedFeatureIds)),
-      };
-    });
-  }, [settingProfile?.wildTalentRequired, wildTalentOptions]);
+    }
+
+    if (!state.wildTalentFeatureId && wildTalentOptions.length > 0) {
+      setState((prev) => ({ ...prev, wildTalentFeatureId: wildTalentOptions[0].id }));
+    }
+  }, [settingProfile?.wildTalentRequired, wildTalentOptions, state.wildTalentFeatureId, state.selectedFeatureIds]);
 
   useEffect(() => {
     setState((previous) => {
@@ -1413,19 +1412,10 @@ export default function BuilderClient({
   };
 
   const onChangeWildTalent = (featureId: string) => {
-    setState((previous) => {
-      const selected = new Set(previous.selectedFeatureIds ?? []);
-      for (const option of wildTalentOptions) {
-        selected.delete(option.id);
-      }
-      if (featureId) {
-        selected.add(featureId);
-      }
-      return {
-        ...previous,
-        selectedFeatureIds: sortStringIds(Array.from(selected)),
-      };
-    });
+    setState((previous) => ({
+      ...previous,
+      wildTalentFeatureId: featureId || undefined,
+    }));
   };
 
   const updateAbility = (ability: Ability, value: number) => {
@@ -1779,6 +1769,36 @@ export default function BuilderClient({
     setExportNotice("JSON exported with validation report.");
   };
 
+  const onImportJson = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.onchange = (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const raw = JSON.parse(e.target?.result as string);
+          const imported = raw.characterState ?? raw.state ?? raw;
+          if (!imported || typeof imported !== "object" || !imported.level) {
+            setExportNotice("Invalid character file: missing required fields.");
+            return;
+          }
+          setState(imported);
+          if (raw.enabledPackIds && Array.isArray(raw.enabledPackIds)) {
+            applySources(raw.enabledPackIds);
+          }
+          setExportNotice("Character imported successfully.");
+        } catch {
+          setExportNotice("Failed to parse character file.");
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  };
+
   const onOpenHtmlSheet = () => {
     const payload = encodePayloadToBase64Url(createCharacterPayload(state, enabledSources));
     const url = `/sheet?payload=${encodeURIComponent(payload)}`;
@@ -1933,7 +1953,7 @@ export default function BuilderClient({
       </section>
 
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
-        <h2 className="text-sm font-semibold">Export</h2>
+        <h2 className="text-sm font-semibold">Save / Load</h2>
         <p className="mt-1 text-sm text-slate-300">
           Download machine-readable data or a template-based printable PDF.
         </p>
@@ -1951,6 +1971,13 @@ export default function BuilderClient({
             className="rounded border border-slate-600 px-3 py-1.5 text-sm hover:bg-slate-800"
           >
             Download JSON
+          </button>
+          <button
+            type="button"
+            onClick={onImportJson}
+            className="rounded border border-slate-600 px-3 py-1.5 text-sm hover:bg-slate-800"
+          >
+            Import JSON
           </button>
           <button
             type="button"
@@ -2069,6 +2096,12 @@ export default function BuilderClient({
                   <div className="mt-1 text-xs text-amber-200">
                     Required at character creation. This is currently a table-backed stub selection.
                   </div>
+                  {selectedWildTalentId ? (() => {
+                    const talent = wildTalentOptions.find((f) => f.id === selectedWildTalentId);
+                    return talent?.description ? (
+                      <div className="mt-1 text-xs text-amber-100/70">{talent.description}</div>
+                    ) : null;
+                  })() : null}
                 </label>
               ) : null}
 
@@ -3932,6 +3965,7 @@ export default function BuilderClient({
                     onClick={() => {
                       setState((prev) => {
                         const updated = (prev.languages ?? []).filter((l) => l !== lang);
+                        // eslint-disable-next-line @typescript-eslint/no-unused-vars
                         const { [lang]: _, ...remainingLiteracy } = prev.languageLiteracy ?? {};
                         return { ...prev, languages: updated, languageLiteracy: remainingLiteracy };
                       });
@@ -4044,6 +4078,19 @@ export default function BuilderClient({
             ) : null}
           </div>
         </div>
+
+        {selectedWildTalentId ? (() => {
+          const talent = wildTalentOptions.find((f) => f.id === selectedWildTalentId);
+          return talent ? (
+            <div className="mt-4 rounded border border-amber-800/60 bg-amber-950/30 p-3">
+              <h3 className="text-sm font-semibold text-amber-200">Wild Talent</h3>
+              <div className="mt-1 text-sm">{talent.name}</div>
+              {talent.description ? (
+                <div className="mt-1 text-xs text-amber-100/70">{talent.description}</div>
+              ) : null}
+            </div>
+          ) : null;
+        })() : null}
 
         {spellcastingAbility ? (
           <div className="mt-4 rounded border border-slate-700 p-3">

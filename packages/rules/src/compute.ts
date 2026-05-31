@@ -137,7 +137,8 @@ function resolveSelectedFeatures(
   const selectedIds = dedupe([
     ...(state.selectedFeatureIds ?? []),
     ...(state.warlockInvocationFeatureIds ?? []),
-    ...(state.warlockPactBoonFeatureId ? [state.warlockPactBoonFeatureId] : [])
+    ...(state.warlockPactBoonFeatureId ? [state.warlockPactBoonFeatureId] : []),
+    ...(state.wildTalentFeatureId ? [state.wildTalentFeatureId] : [])
   ]);
   return selectedIds
     .map((id) => merged.featuresById[id])
