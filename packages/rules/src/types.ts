@@ -65,6 +65,15 @@ export interface AttunedItem {
   notes?: string;
 }
 
+export interface CustomSpell {
+  name: string;
+  level: number;
+  field: "known" | "prepared" | "cantrip";
+  ritual?: boolean;
+  concentration?: boolean;
+  notes?: string;
+}
+
 export interface CharacterState {
   characterName?: string;
   level: number;
@@ -97,6 +106,7 @@ export interface CharacterState {
   knownSpellIds?: string[];
   preparedSpellIds?: string[];
   cantripsKnownIds?: string[];
+  customSpells?: CustomSpell[];
   coins?: Partial<CharacterCoins>;
   otherWealth?: string;
   inventoryItemIds?: string[];
@@ -183,6 +193,7 @@ export interface DerivedState {
     knownSpellIds: string[];
     preparedSpellIds: string[];
     cantripsKnownIds: string[];
+    customSpells: CustomSpell[];
   };
   feats: { id: string; name: string }[];
   warnings: string[];

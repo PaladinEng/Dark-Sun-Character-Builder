@@ -84,6 +84,7 @@
     "abilityMod": 3,
     "attackBonus": 5,
     "cantripsKnownIds": [],
+    "customSpells": [],
     "knownSpellIds": [],
     "preparedSpellIds": [],
     "progression": "full",

@@ -8,6 +8,7 @@ import type {
   AttunedItem,
   AbilityScoreMethod,
   CharacterState,
+  CustomSpell,
   DerivedState,
   ValidationReport,
 } from "@dark-sun/rules";
@@ -547,6 +548,9 @@ export default function BuilderClient({
   const manifestOrder = useMemo(() => manifests.map((manifest) => manifest.id), [manifests]);
   const [enabledSources, setEnabledSources] = useState<string[]>(enabledSourceIds);
   const [showDebug, setShowDebug] = useState(false);
+  const [customSpellDraft, setCustomSpellDraft] = useState<{
+    name: string; level: number; field: CustomSpell["field"]; ritual: boolean; concentration: boolean;
+  }>({ name: "", level: 0, field: "cantrip", ritual: false, concentration: false });
   const [exportNotice, setExportNotice] = useState<string | null>(null);
 
   const [state, setState] = useState<BuilderState>(() => ({
@@ -3574,6 +3578,141 @@ export default function BuilderClient({
           </div>
         </section>
       ) : null}
+
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold">Custom Spells</h2>
+          <div className="text-xs text-slate-300">{(state.customSpells ?? []).length} added</div>
+        </div>
+        <p className="mt-1 text-xs text-slate-400">
+          Manually add spells not in the content packs (homebrew, one-off grants, etc.).
+        </p>
+
+        {(state.customSpells ?? []).length > 0 ? (
+          <div className="mt-3 space-y-1">
+            {(state.customSpells ?? []).map((cs, index) => (
+              <div
+                key={`custom-spell-${index}`}
+                className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
+              >
+                <span className="truncate">
+                  {cs.name}
+                  <span className="ml-1 text-slate-400">
+                    (L{cs.level}{cs.field === "cantrip" ? " Cantrip" : cs.field === "prepared" ? " Prepared" : " Known"}
+                    {cs.ritual ? ", R" : ""}{cs.concentration ? ", C" : ""})
+                  </span>
+                </span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      customSpells: (prev.customSpells ?? []).filter((_, i) => i !== index),
+                    }))
+                  }
+                  className="shrink-0 rounded border border-slate-700 px-2 py-0.5"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-3 grid gap-2 rounded border border-slate-800 bg-slate-950/70 p-3 md:grid-cols-6">
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Spell Name</div>
+            <input
+              type="text"
+              value={customSpellDraft.name}
+              onChange={(e) => setCustomSpellDraft((d) => ({ ...d, name: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. Defiler's Grasp"
+            />
+          </label>
+          <label className="text-xs">
+            <div className="font-semibold">Level</div>
+            <select
+              value={customSpellDraft.level}
+              onChange={(e) => {
+                const lvl = Number(e.target.value);
+                setCustomSpellDraft((d) => ({
+                  ...d,
+                  level: lvl,
+                  field: lvl === 0 ? "cantrip" : d.field === "cantrip" ? "known" : d.field,
+                }));
+              }}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+            >
+              {Array.from({ length: 10 }, (_, i) => (
+                <option key={`spell-level-${i}`} value={i}>
+                  {i === 0 ? "0 (Cantrip)" : String(i)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="text-xs">
+            <div className="font-semibold">List</div>
+            <select
+              value={customSpellDraft.field}
+              disabled={customSpellDraft.level === 0}
+              onChange={(e) => setCustomSpellDraft((d) => ({ ...d, field: e.target.value as CustomSpell["field"] }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm disabled:opacity-50"
+            >
+              {customSpellDraft.level === 0 ? (
+                <option value="cantrip">Cantrip</option>
+              ) : (
+                <>
+                  <option value="known">Known</option>
+                  <option value="prepared">Prepared</option>
+                </>
+              )}
+            </select>
+          </label>
+          <div className="flex items-end gap-3 text-xs md:col-span-2">
+            <label className="flex items-center gap-1">
+              <input
+                type="checkbox"
+                checked={customSpellDraft.ritual}
+                onChange={(e) => setCustomSpellDraft((d) => ({ ...d, ritual: e.target.checked }))}
+              />
+              Ritual
+            </label>
+            <label className="flex items-center gap-1">
+              <input
+                type="checkbox"
+                checked={customSpellDraft.concentration}
+                onChange={(e) => setCustomSpellDraft((d) => ({ ...d, concentration: e.target.checked }))}
+              />
+              Conc.
+            </label>
+            <button
+              type="button"
+              disabled={!customSpellDraft.name.trim()}
+              onClick={() => {
+                if (!customSpellDraft.name.trim()) return;
+                setState((prev) => ({
+                  ...prev,
+                  customSpells: [
+                    ...(prev.customSpells ?? []),
+                    {
+                      name: customSpellDraft.name.trim(),
+                      level: customSpellDraft.level,
+                      field: customSpellDraft.field,
+                      ...(customSpellDraft.ritual ? { ritual: true } : {}),
+                      ...(customSpellDraft.concentration ? { concentration: true } : {}),
+                    },
+                  ],
+                }));
+                setCustomSpellDraft({ name: "", level: 0, field: "cantrip", ritual: false, concentration: false });
+              }}
+              className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </section>
 
       {isWarlockClass ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">

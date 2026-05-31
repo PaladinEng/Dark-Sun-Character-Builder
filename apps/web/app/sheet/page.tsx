@@ -487,6 +487,15 @@ export default async function SheetPage({
     const spell = merged.content.spellsById[id];
     return spell ? formatSpellNameWithFlags(spell) : id;
   });
+  // Merge custom spells into the appropriate lists
+  for (const cs of payload.characterState.customSpells ?? []) {
+    let label = cs.name;
+    if (cs.ritual) label += " (R)";
+    if (cs.concentration) label += " (C)";
+    if (cs.field === "known") knownSpellNames.push(label);
+    else if (cs.field === "prepared") preparedSpellNames.push(label);
+    else if (cs.field === "cantrip") cantripNames.push(label);
+  }
   const spellListRefs = dedupeStrings([
     ...(selectedClass?.spellListRefIds ?? []),
     ...(selectedClass?.spellListRefs ?? []),

@@ -93,6 +93,7 @@
       "test:spell:mage-hand",
       "test:spell:minor-illusion"
     ],
+    "customSpells": [],
     "knownSpellIds": [
       "test:spell:burning-hands",
       "test:spell:fear",

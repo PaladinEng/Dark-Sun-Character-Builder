@@ -86,6 +86,7 @@
     "abilityMod": 2,
     "attackBonus": 4,
     "cantripsKnownIds": [],
+    "customSpells": [],
     "knownSpellIds": [
       "test:spell:cure-wounds",
       "test:spell:hail-of-thorns",

@@ -211,6 +211,7 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     knownSpellIds: Array.isArray(input.knownSpellIds) ? input.knownSpellIds : [],
     preparedSpellIds: Array.isArray(input.preparedSpellIds) ? input.preparedSpellIds : [],
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
+    customSpells: Array.isArray(input.customSpells) ? input.customSpells : [],
     selectedFeats: Array.isArray(input.selectedFeats) ? input.selectedFeats : [],
     selectedFeatureIds: Array.isArray(input.selectedFeatureIds) ? input.selectedFeatureIds : [],
     warlockInvocationFeatureIds: Array.isArray(input.warlockInvocationFeatureIds)
@@ -473,6 +474,15 @@ export async function POST(request: Request) {
   const cantripSpellNames = resolveSpellNames(cantripSpellIds);
   const knownSpellNames = resolveSpellNames(knownSpellIds);
   const preparedSpellNames = resolveSpellNames(preparedSpellIds);
+  // Merge custom spells into the name arrays and spell list
+  for (const cs of payload.characterState.customSpells ?? []) {
+    let label = cs.name;
+    if (cs.ritual) label += " (R)";
+    if (cs.concentration) label += " (C)";
+    if (cs.field === "known") knownSpellNames.push(label);
+    else if (cs.field === "prepared") preparedSpellNames.push(label);
+    else if (cs.field === "cantrip") cantripSpellNames.push(label);
+  }
 
   type SpellSelectionKind = "cantrip" | "known" | "prepared";
   const spellSelectionById = new Map<string, Set<SpellSelectionKind>>();
@@ -496,7 +506,7 @@ export async function POST(request: Request) {
     known: "Known",
     prepared: "Prepared",
   };
-  const spellListEntries = [...spellSelectionById.entries()]
+  const contentSpellEntries = [...spellSelectionById.entries()]
     .map(([spellId, selections]) => {
       const spell = merged.content.spellsById[spellId];
       const orderedSelections = spellSelectionOrder.filter((selection) => selections.has(selection));
@@ -532,7 +542,20 @@ export async function POST(request: Request) {
         notes: noteParts.join("; "),
         reference: formatSpellReference(spell),
       };
-    })
+    });
+  // Add custom spells to the spell list entries
+  const customSpellEntries = (payload.characterState.customSpells ?? []).map((cs) => {
+    const noteParts: string[] = [spellSelectionLabels[cs.field] ?? cs.field];
+    if (cs.ritual) noteParts.push("Ritual");
+    if (cs.concentration) noteParts.push("Concentration");
+    if (cs.notes?.trim()) noteParts.push(cs.notes.trim());
+    return {
+      level: cs.level,
+      name: cs.name,
+      notes: noteParts.join("; "),
+    };
+  });
+  const spellListEntries = [...contentSpellEntries, ...customSpellEntries]
     .sort((left, right) => {
       const leftLevel = typeof left.level === "number" && Number.isFinite(left.level) ? left.level : Number.POSITIVE_INFINITY;
       const rightLevel =

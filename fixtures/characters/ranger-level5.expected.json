@@ -104,6 +104,7 @@
     "abilityMod": 2,
     "attackBonus": 5,
     "cantripsKnownIds": [],
+    "customSpells": [],
     "knownSpellIds": [
       "test:spell:cure-wounds",
       "test:spell:enhance-ability",

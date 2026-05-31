@@ -34,6 +34,7 @@ export type {
   ConditionId,
   CharacterCoins,
   AttunedItem,
+  CustomSpell,
   CompanionPlaceholder,
   DerivedModifier,
   DerivedModifierEffect,

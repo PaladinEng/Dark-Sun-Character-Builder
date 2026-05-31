@@ -106,6 +106,7 @@
       "test:spell:mage-hand",
       "test:spell:minor-illusion"
     ],
+    "customSpells": [],
     "knownSpellIds": [
       "test:spell:charm-person",
       "test:spell:fear",

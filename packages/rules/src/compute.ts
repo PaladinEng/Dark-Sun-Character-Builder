@@ -632,6 +632,7 @@ export function computeDerivedState(
   const knownSpellIds = sortIds(state.knownSpellIds);
   const preparedSpellIds = sortIds(state.preparedSpellIds);
   const cantripsKnownIds = sortIds(state.cantripsKnownIds);
+  const customSpells = state.customSpells ?? [];
 
   const spellcastingConfig = subclass?.spellcasting ?? klass?.spellcasting;
   const spellcasting = spellcastingConfig
@@ -656,7 +657,8 @@ export function computeDerivedState(
           slots,
           knownSpellIds,
           preparedSpellIds,
-          cantripsKnownIds
+          cantripsKnownIds,
+          customSpells,
         };
       })()
     : undefined;
