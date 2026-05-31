@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Aura Beacon is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Metacreativity wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self (40-foot radius); Components: O; Duration: Focus.\n\nYou visibly manifest your aura. While you focus, a bright light radiates from your body. When you cast this spell, and as a bonus action while you continue to focus on it, you may modulate the radius of the aura's light, from as short as 1 inch, to as long as 20 feet. Regardless of the length of this radius of bright light, a radius of dim light of equal length extends out from the bright light. Your aura's light can be colored as you like.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Aura Beacon",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You visibly manifest your aura. While you focus, a bright light radiates from your body. When you cast this spell, and as a bonus action while you continue to focus on it, you may modulate the radius of the aura's light, from as short as 1 inch, to as long as 20 feet. Regardless of the length of this radius of bright light, a radius of dim light of equal length extends out from the bright light. Your aura's light can be colored as you like."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Metacreativity",
+    "castingTime": "1 bonus action",
+    "range": "Self (40-foot radius)",
+    "components": "O",
+    "duration": "Focus"
+  }
 }

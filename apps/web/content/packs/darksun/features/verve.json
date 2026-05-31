@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Verve is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychometabolism wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self; Components: A, O; Duration: Focus.\n\nWhen you cast this spell, you are energized and briefly glow as you intone a low hum that reverberates through your body.\nUntil your focus ends, you don't need to eat, breathe, or sleep. To gain the benefits of a long rest, you can spend 8 hours engaged in light activity.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Verve",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "When you cast this spell, you are energized and briefly glow as you intone a low hum that reverberates through your body.\nUntil your focus ends, you don't need to eat, breathe, or sleep. To gain the benefits of a long rest, you can spend 8 hours engaged in light activity."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychometabolism",
+    "castingTime": "1 bonus action",
+    "range": "Self",
+    "components": "A, O",
+    "duration": "Focus"
+  }
 }

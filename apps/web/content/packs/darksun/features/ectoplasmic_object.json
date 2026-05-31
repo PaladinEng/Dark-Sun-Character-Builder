@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Ectoplasmic Object is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Metacreativity wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 15 feet; Components: A, O; Duration: Focus.\n\nYou pull matter from a plane of thoughts to create objects you imagine on your own plane.\nWhile you focus, you may use your action to create a fragile, Tiny object that lasts for 1 minute, or until you dismiss it as an action, create a new object with this power, or until the object is destroyed. When the object is destroyed, you dismiss it, or its time expires, it dissolves into ectoplasmic slime that evaporates into nothing.\nThe object you create is translucent and with a crystalline, glassy, or slimy appearance as you desire. It has an AC of 5, 1 hit point, and must be able to fit in a 1-foot cube. The object can take whatever form you desire, but is simple with no internal mechanisms. It can have the outward appearance of a complex object, such as a crossbow or clockwork device, but it does not function. The object cannot serve as a tool, weapon, or other useful piece of equipment.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Ectoplasmic Object",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You pull matter from a plane of thoughts to create objects you imagine on your own plane.\nWhile you focus, you may use your action to create a fragile, Tiny object that lasts for 1 minute, or until you dismiss it as an action, create a new object with this power, or until the object is destroyed. When the object is destroyed, you dismiss it, or its time expires, it dissolves into ectoplasmic slime that evaporates into nothing.\nThe object you create is translucent and with a crystalline, glassy, or slimy appearance as you desire. It has an AC of 5, 1 hit point, and must be able to fit in a 1-foot cube. The object can take whatever form you desire, but is simple with no internal mechanisms. It can have the outward appearance of a complex object, such as a crossbow or clockwork device, but it does not function. The object cannot serve as a tool, weapon, or other useful piece of equipment."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Metacreativity",
+    "castingTime": "1 bonus action",
+    "range": "15 feet",
+    "components": "A, O",
+    "duration": "Focus"
+  }
 }

@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Mind Thrust is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Telepathy wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 60 feet; Components: O; Duration: Focus.\n\nWhile you focus on this power, you can use your action to target one creature you can see within range, making your eyes flare noticeably for an instant. The target must succeed on a Charisma saving throw or take 1d10 points of psychic damage.\nThis cantrip's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10).",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Mind Thrust",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "While you focus on this power, you can use your action to target one creature you can see within range, making your eyes flare noticeably for an instant. The target must succeed on a Charisma saving throw or take 1d10 points of psychic damage.\nThis cantrip's damage increases by 1d10 when you reach 5th level (2d10), 11th level (3d10), and 17th level (4d10)."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Telepathy",
+    "castingTime": "1 bonus action",
+    "range": "60 feet",
+    "components": "O",
+    "duration": "Focus"
+  }
 }

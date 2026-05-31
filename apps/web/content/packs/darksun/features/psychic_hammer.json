@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Psychic Hammer is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychokinesis wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 30 feet; Components: O; Duration: Focus.\n\nWhile you focus on this power, you can use your action to target one creature you can see within range with a battering ram of translucent telekinetic energy. The target must succeed on a Constitution saving throw or take 1d6 points of force damage and be knocked prone.\nThis cantrip's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Psychic Hammer",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "While you focus on this power, you can use your action to target one creature you can see within range with a battering ram of translucent telekinetic energy. The target must succeed on a Constitution saving throw or take 1d6 points of force damage and be knocked prone.\nThis cantrip's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychokinesis",
+    "castingTime": "1 bonus action",
+    "range": "30 feet",
+    "components": "O",
+    "duration": "Focus"
+  }
 }

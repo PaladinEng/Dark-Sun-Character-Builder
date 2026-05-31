@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Energy Ray is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychokinesis wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 90 feet; Components: A, O; Duration: Focus.\n\nYou hold your hand aloft and generate a font of pure energy within it. When you cast this spell, choose one of the following damage types: cold, fire, lightning, or thunder.\nUntil your focus ends, you can use your action to target one creature within range and shoot a ray of energy at it. Make a ranged power attack against the target. On a hit, the target takes 1d8 points of damage of the type you chose when you cast this spell.\nThis power allows you to shoot more than one ray as an action when you reach higher levels: two rays at 5th level, three rays at 11th level, and four rays at 17th level. You can direct the rays at the same target or at different ones. Make a separate attack roll for each ray.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Energy Ray",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You hold your hand aloft and generate a font of pure energy within it. When you cast this spell, choose one of the following damage types: cold, fire, lightning, or thunder.\nUntil your focus ends, you can use your action to target one creature within range and shoot a ray of energy at it. Make a ranged power attack against the target. On a hit, the target takes 1d8 points of damage of the type you chose when you cast this spell.\nThis power allows you to shoot more than one ray as an action when you reach higher levels: two rays at 5th level, three rays at 11th level, and four rays at 17th level. You can direct the rays at the same target or at different ones. Make a separate attack roll for each ray."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychokinesis",
+    "castingTime": "1 bonus action",
+    "range": "90 feet",
+    "components": "A, O",
+    "duration": "Focus"
+  }
 }

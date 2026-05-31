@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Sixth Sense is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Clairsentience wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self; Components: None; Duration: Focus.\n\nYou gain a prescient sense that improves your reflexive response to danger, granting you advantage on initiative rolls until your focus ends.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Sixth Sense",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You gain a prescient sense that improves your reflexive response to danger, granting you advantage on initiative rolls until your focus ends."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Clairsentience",
+    "castingTime": "1 bonus action",
+    "range": "Self",
+    "components": "None",
+    "duration": "Focus"
+  }
 }

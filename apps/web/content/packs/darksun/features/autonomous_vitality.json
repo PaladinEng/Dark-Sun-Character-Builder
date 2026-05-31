@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Autonomous Vitality is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychometabolism wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self (60-foot radius); Components: A; Duration: Focus.\n\nYou amplify the sound of your heartbeat, radiating your own vitality outward and syncing your allies to your lifeforce.\nUntil your focus ends, when a creature within range rolls a death saving throw, you can use your reaction to provide that creature with advantage on that saving throw.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Autonomous Vitality",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You amplify the sound of your heartbeat, radiating your own vitality outward and syncing your allies to your lifeforce.\nUntil your focus ends, when a creature within range rolls a death saving throw, you can use your reaction to provide that creature with advantage on that saving throw."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychometabolism",
+    "castingTime": "1 bonus action",
+    "range": "Self (60-foot radius)",
+    "components": "A",
+    "duration": "Focus"
+  }
 }

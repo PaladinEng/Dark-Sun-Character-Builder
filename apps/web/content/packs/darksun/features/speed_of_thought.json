@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Speed of Thought is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychoportation wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self; Components: O; Duration: Focus.\n\nYour body's responses to your thoughts quicken, increasing your walking speed by 10 feet until your focus ends.\nAdditionally, while you focus, you may teleport to your feet from a prone position once per round on your turn, requiring no action and expending none of your movement. Your speed must not be 0 for you to teleport this way.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Speed of Thought",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "Your body's responses to your thoughts quicken, increasing your walking speed by 10 feet until your focus ends.\nAdditionally, while you focus, you may teleport to your feet from a prone position once per round on your turn, requiring no action and expending none of your movement. Your speed must not be 0 for you to teleport this way."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychoportation",
+    "castingTime": "1 bonus action",
+    "range": "Self",
+    "components": "O",
+    "duration": "Focus"
+  }
 }

@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Psychic Static is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Telepathy wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 60 feet; Components: A; Duration: Focus.\n\nWhen you cast this spell, you generate a field of subtle mental noise. Until your focus ends, you can make this noise perceivable by any number of creatures you can see in range at any time, requiring no action. Creatures who can sense this effect know it originates from your direction.\nWhenever a creature you can see that perceives this noise makes an ability check, you may use your reaction to force the creature to roll a d4 and subtract the result from the check. Deafened creatures are not immune to this effect.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Psychic Static",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "When you cast this spell, you generate a field of subtle mental noise. Until your focus ends, you can make this noise perceivable by any number of creatures you can see in range at any time, requiring no action. Creatures who can sense this effect know it originates from your direction.\nWhenever a creature you can see that perceives this noise makes an ability check, you may use your reaction to force the creature to roll a d4 and subtract the result from the check. Deafened creatures are not immune to this effect."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Telepathy",
+    "castingTime": "1 bonus action",
+    "range": "60 feet",
+    "components": "A",
+    "duration": "Focus"
+  }
 }

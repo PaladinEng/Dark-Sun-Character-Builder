@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Battle Trance is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychometabolism wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self; Components: A; Duration: Focus.\n\nYou optimize your body for combat. Until your focus ends, any attack roll you make for a melee weapon attack ignores disadvantage. If disadvantage would normally apply to the roll, that roll also can't benefit from advantage.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Battle Trance",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You optimize your body for combat. Until your focus ends, any attack roll you make for a melee weapon attack ignores disadvantage. If disadvantage would normally apply to the roll, that roll also can't benefit from advantage."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychometabolism",
+    "castingTime": "1 bonus action",
+    "range": "Self",
+    "components": "A",
+    "duration": "Focus"
+  }
 }

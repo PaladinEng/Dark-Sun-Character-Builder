@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Imbue Psicrystal is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Metacreativity wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Touch; Components: O, M (a small crystal worth 10 gp); Duration: Focus.\n\nYou hold a crystal aloft and imbue it with a shard of sentience and energy drawn from a plane of thoughts, transforming it into a psicrystal. The psicrystal floats off your hand and into your space.\nThe psicrystal is a Tiny construct with an AC equal to your power save DC, hit points equal to your psionic ability modifier, and a fly speed of 30 feet that allows it to hover. All of its ability scores are 10, and it has no proficiencies. It cannot be poisoned, and is immune to poison damage and disease. The psicrystal can see and hear as well as an average humanoid, except that it is blind to everything more than 30 feet from it.\nWhen the psicrystal drops to 0 hit points, or when the power ends, it becomes a nonmagical crystal. You may reuse the same crystal to cast this spell again. When you do, the psicrystal you create retains the memories it had from any time it spent as a psicrystal from previous castings.\nThe psicrystal is friendly to you and your companions. You can communicate with it telepathically out to a range of 100 feet. It acts on the same initiative count as you, immediately after your turn. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to mentally or verbally command it to take the Dash, Disengage, or Help actions. The psicrystal cannot make any attacks.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Imbue Psicrystal",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You hold a crystal aloft and imbue it with a shard of sentience and energy drawn from a plane of thoughts, transforming it into a psicrystal. The psicrystal floats off your hand and into your space.\nThe psicrystal is a Tiny construct with an AC equal to your power save DC, hit points equal to your psionic ability modifier, and a fly speed of 30 feet that allows it to hover. All of its ability scores are 10, and it has no proficiencies. It cannot be poisoned, and is immune to poison damage and disease. The psicrystal can see and hear as well as an average humanoid, except that it is blind to everything more than 30 feet from it.\nWhen the psicrystal drops to 0 hit points, or when the power ends, it becomes a nonmagical crystal. You may reuse the same crystal to cast this spell again. When you do, the psicrystal you create retains the memories it had from any time it spent as a psicrystal from previous castings.\nThe psicrystal is friendly to you and your companions. You can communicate with it telepathically out to a range of 100 feet. It acts on the same initiative count as you, immediately after your turn. It can move and use its reaction on its own, but the only action it takes on its turn is the Dodge action, unless you take a bonus action on your turn to mentally or verbally command it to take the Dash, Disengage, or Help actions. The psicrystal cannot make any attacks."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Metacreativity",
+    "castingTime": "1 bonus action",
+    "range": "Touch",
+    "components": "O, M (a small crystal worth 10 gp)",
+    "duration": "Focus"
+  }
 }

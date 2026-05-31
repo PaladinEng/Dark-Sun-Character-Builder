@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Wild Talent is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Metacreativity wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 10 feet; Components: A, O; Duration: Focus.\n\nYou manifest minor psionic effects. Until your focus ends, you can create one of the following effects as an action:\nFar hand. You telekinetically manipulate up to five unattended objects within range, simultaneously moving them to another location within range in any orientation you desire. You can only affect up to 5 pounds of matter at once.\nDislocate vision. You shift your field of vision to one that originates from any point you can see within range. This point moves relative to you as you move. While your vision is dislocated, your eyes glow with light. This effect lasts as long as you focus, or you use this effect again to return your vision to normal.\nSubjective sense. You telepathically cause all creatures within range to experience a simple sensation that is subjective to each, such as \"the scent of my favorite food.\" This sensation lasts for 1 minute or until you use this effect again, and affected creatures know it is not real. When you use this effect, you must specify which sense will be affected: sight, hearing, smell, taste, or touch. Creatures continue to perceive their real surroundings even while subject to this effect, and do not suffer any detriment or receive any benefit due to the subjective sensation they perceive. You gain no knowledge of specifically what a creature senses due to this effect.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Wild Talent",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You manifest minor psionic effects. Until your focus ends, you can create one of the following effects as an action:\nFar hand. You telekinetically manipulate up to five unattended objects within range, simultaneously moving them to another location within range in any orientation you desire. You can only affect up to 5 pounds of matter at once.\nDislocate vision. You shift your field of vision to one that originates from any point you can see within range. This point moves relative to you as you move. While your vision is dislocated, your eyes glow with light. This effect lasts as long as you focus, or you use this effect again to return your vision to normal.\nSubjective sense. You telepathically cause all creatures within range to experience a simple sensation that is subjective to each, such as \"the scent of my favorite food.\" This sensation lasts for 1 minute or until you use this effect again, and affected creatures know it is not real. When you use this effect, you must specify which sense will be affected: sight, hearing, smell, taste, or touch. Creatures continue to perceive their real surroundings even while subject to this effect, and do not suffer any detriment or receive any benefit due to the subjective sensation they perceive. You gain no knowledge of specifically what a creature senses due to this effect."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Metacreativity",
+    "castingTime": "1 bonus action",
+    "range": "10 feet",
+    "components": "A, O",
+    "duration": "Focus"
+  }
 }

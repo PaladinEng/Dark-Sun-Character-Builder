@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Blind Spot is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Telepathy wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 120 feet; Components: None; Duration: Focus.\n\nWhile you focus on this power, you can use your action to try to erase notice of yourself from a creature you can see in range. The target must succeed on a Wisdom saving throw, or you are invisible to it until the end of your next turn or until you take an action. If you take an action, your invisibility ends before your action.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Blind Spot",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "While you focus on this power, you can use your action to try to erase notice of yourself from a creature you can see in range. The target must succeed on a Wisdom saving throw, or you are invisible to it until the end of your next turn or until you take an action. If you take an action, your invisibility ends before your action."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Telepathy",
+    "castingTime": "1 bonus action",
+    "range": "120 feet",
+    "components": "None",
+    "duration": "Focus"
+  }
 }

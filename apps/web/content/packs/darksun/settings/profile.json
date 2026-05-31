@@ -63,7 +63,7 @@
     "Resurrection should be governed by spell-list availability.",
     "Bard uses an Athasian Bard stub subclass.",
     "Psionicist remains a stub class.",
-    "Wild Talent selection is currently a table-backed stub."
+    "Wild Talent selection is table-backed; each talent now carries full rules text from the 1.0.2 DRAFT Campaign Guide, though activated mechanics (attack rolls, damage scaling) are not yet auto-resolved by the runtime."
   ],
   "unsupportedMechanics": [
     "Defiler casting",

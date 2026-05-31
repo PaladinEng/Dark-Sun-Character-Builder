@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Inertial Transference is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychoportation wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self (30-foot radius); Components: A; Duration: Focus.\n\nYou store your potential momentum and impart it onto your allies. While you focus on this power, when you end your turn without having used any of your movement during it, you can use your reaction to move one willing creature you can see within range up to half their speed, following a path of your choice. To move this way, the ally mustn't be incapacitated.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Inertial Transference",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You store your potential momentum and impart it onto your allies. While you focus on this power, when you end your turn without having used any of your movement during it, you can use your reaction to move one willing creature you can see within range up to half their speed, following a path of your choice. To move this way, the ally mustn't be incapacitated."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychoportation",
+    "castingTime": "1 bonus action",
+    "range": "Self (30-foot radius)",
+    "components": "A",
+    "duration": "Focus"
+  }
 }

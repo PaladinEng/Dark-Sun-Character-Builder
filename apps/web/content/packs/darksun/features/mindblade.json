@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Mindblade is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Metacreativity wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self; Components: O; Duration: Focus.\n\nYou create a weapon of solidified thoughts, called a mindblade. It is a magical melee weapon you are proficient with that deals 1d8 piercing or slashing damage, as decided by you when you create it. You may choose to use your psionic ability instead of Strength for the attack and damage rolls of melee attacks using your mindblade.\nUntil your focus ends, you cannot let go of your mindblade, nor can it be forced from your grip, unless an effect specifically says otherwise. When your focus on this power ends, your mindblade disappears.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Mindblade",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You create a weapon of solidified thoughts, called a mindblade. It is a magical melee weapon you are proficient with that deals 1d8 piercing or slashing damage, as decided by you when you create it. You may choose to use your psionic ability instead of Strength for the attack and damage rolls of melee attacks using your mindblade.\nUntil your focus ends, you cannot let go of your mindblade, nor can it be forced from your grip, unless an effect specifically says otherwise. When your focus on this power ends, your mindblade disappears."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Metacreativity",
+    "castingTime": "1 bonus action",
+    "range": "Self",
+    "components": "O",
+    "duration": "Focus"
+  }
 }

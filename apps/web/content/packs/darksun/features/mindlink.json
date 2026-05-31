@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Mindlink is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Telepathy wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 120 feet; Components: A; Duration: Focus.\n\nYou contact the mind of another creature you can see within range, granting you the ability to communicate with it telepathically while you focus on this power. While you focus, the target can telepathically communicate with you as well. If you don't share a language with the target, you can convey emotions and feelings, but can't engage in complex conversation. The target must have an Intelligence of at least 4, otherwise this spell fails and the casting time is wasted. You can only communicate with the target while it remains in range.\nUntil your focus ends, you can use a bonus action to switch the target of this spell to another creature you can see within range. The spell ends if the new target does not have an Intelligence of at least 4.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Mindlink",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You contact the mind of another creature you can see within range, granting you the ability to communicate with it telepathically while you focus on this power. While you focus, the target can telepathically communicate with you as well. If you don't share a language with the target, you can convey emotions and feelings, but can't engage in complex conversation. The target must have an Intelligence of at least 4, otherwise this spell fails and the casting time is wasted. You can only communicate with the target while it remains in range.\nUntil your focus ends, you can use a bonus action to switch the target of this spell to another creature you can see within range. The spell ends if the new target does not have an Intelligence of at least 4."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Telepathy",
+    "castingTime": "1 bonus action",
+    "range": "120 feet",
+    "components": "A",
+    "duration": "Focus"
+  }
 }

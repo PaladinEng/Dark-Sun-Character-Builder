@@ -110,6 +110,7 @@
   ],
   "notes": [
     "Roll 20 is the actual Wild Talent ability, not a reroll or roll-twice result.",
-    "Full mechanical implementations may be added later."
+    "Each talent's feature entry now carries full rules text, discipline, and casting metadata sourced from the 1.0.2 DRAFT Dark Sun Campaign Guide.",
+    "Activated mechanics (power attack rolls, save DCs, and per-level damage scaling) are documented in the descriptions but are not yet auto-resolved by the rules runtime."
   ]
 }

@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Primal Metabolism is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychometabolism wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: Self (10 feet); Components: None; Duration: Focus.\n\nYou alter your body chemistry to produce volatile enzymes.\nUntil your focus ends, you can use an action to expel a visible cloud of poisonous or acidic vapor at one creature within range, or two creatures within range that are within 5 feet of each other. A target must succeed on a Constitution saving throw, or take 1d6 acid or poison damage (your choice).\nThis cantrip's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Primal Metabolism",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "You alter your body chemistry to produce volatile enzymes.\nUntil your focus ends, you can use an action to expel a visible cloud of poisonous or acidic vapor at one creature within range, or two creatures within range that are within 5 feet of each other. A target must succeed on a Constitution saving throw, or take 1d6 acid or poison damage (your choice).\nThis cantrip's damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6)."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychometabolism",
+    "castingTime": "1 bonus action",
+    "range": "Self (10 feet)",
+    "components": "None",
+    "duration": "Focus"
+  }
 }

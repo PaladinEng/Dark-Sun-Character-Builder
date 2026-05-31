@@ -5,12 +5,20 @@
   "tags": [
     "wild_talent"
   ],
-  "description": "Mystic Displacement is a Dark Sun Wild Talent stub selected from the setting table.\nTODO: only table assignment is implemented; mechanical resolution remains future work.",
+  "description": "Psychoportation wild talent (psionic cantrip). Casting Time: 1 bonus action; Range: 30-foot radius; Components: A; Duration: Focus.\n\nWith an audible thrum, you extend your senses out around you, reaching through the fold of space to manipulate objects.\nUntil your focus ends, you can use your action to teleport a loose object you can see within 30 feet of you to another location within range. The object can't weigh more than 10 pounds, and you can't affect an object being worn or carried by another creature. When the item reappears, it can be in any orientation you desire relative to its original one. The object falls if you cause it to reappear in midair.",
   "effects": [
     {
       "type": "grant_trait",
       "name": "Mystic Displacement",
-      "description": "Wild Talent stub selected from the Dark Sun setting table. Full mechanics are intentionally pending."
+      "description": "With an audible thrum, you extend your senses out around you, reaching through the fold of space to manipulate objects.\nUntil your focus ends, you can use your action to teleport a loose object you can see within 30 feet of you to another location within range. The object can't weigh more than 10 pounds, and you can't affect an object being worn or carried by another creature. When the item reappears, it can be in any orientation you desire relative to its original one. The object falls if you cause it to reappear in midair."
     }
-  ]
+  ],
+  "metadata": {
+    "system": "wild_talent",
+    "discipline": "Psychoportation",
+    "castingTime": "1 bonus action",
+    "range": "30-foot radius",
+    "components": "A",
+    "duration": "Focus"
+  }
 }
