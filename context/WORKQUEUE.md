@@ -1,9 +1,10 @@
 # WORKQUEUE — Dark Sun Character Builder
-Last updated: 2026-04-26
+Last updated: 2026-05-31
 
 ## P1 — High Priority
-- [ ] Improve /sheet HTML layout (information architecture against D&D Beyond reference)
-- [ ] Improve printable PDF layout (multi-page split per reference)
+- [x] ~~Improve /sheet HTML layout (information architecture against D&D Beyond reference)~~ (done 2026-05-31, Session 5)
+- [x] ~~Improve printable PDF/print layout (multi-page split per reference)~~ (done 2026-05-31, Session 5)
+- [ ] Correct `shortsword.json` to `weaponCategory: "martial"` (flagged Session 4)
 - [x] ~~Migrate Codex prompt queue workflow to Claude Code~~ (operating in Claude Code; PROMPT_LOG.md is the new continuity ledger)
 - [x] ~~Initial working session — read CONTEXT.md and define first sprint~~ (done 2026-04-26)
 - [x] ~~Add character name field to builder state and UI~~ (done 2026-04-26)
