@@ -50,6 +50,7 @@
     "str": 16,
     "wis": 12
   },
+  "languageLiteracy": {},
   "languages": [],
   "maxHP": 44,
   "passivePerception": 14,

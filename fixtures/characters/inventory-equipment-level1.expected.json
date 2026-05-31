@@ -31,6 +31,7 @@
     "str": 16,
     "wis": 10
   },
+  "languageLiteracy": {},
   "languages": [],
   "maxHP": 12,
   "passivePerception": 10,

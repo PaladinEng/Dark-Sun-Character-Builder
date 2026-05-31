@@ -150,6 +150,10 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
       : [],
     toolProficiencies: Array.isArray(input.toolProficiencies) ? input.toolProficiencies : [],
     languages: Array.isArray(input.languages) ? input.languages : [],
+    languageLiteracy:
+      input.languageLiteracy && typeof input.languageLiteracy === "object" && !Array.isArray(input.languageLiteracy)
+        ? (input.languageLiteracy as Record<string, boolean>)
+        : undefined,
     knownSpellIds: Array.isArray(input.knownSpellIds) ? input.knownSpellIds : [],
     preparedSpellIds: Array.isArray(input.preparedSpellIds) ? input.preparedSpellIds : [],
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
@@ -313,7 +317,9 @@ export default async function PrintPage({
     .slice(0, 6);
 
   const toolProficiencies = sortIds(derived.toolProficiencies);
-  const languages = sortIds(derived.languages);
+  const languages = sortIds(derived.languages).map((lang) =>
+    derived.languageLiteracy[lang] ? `${lang} (literate)` : lang
+  );
   const level = Math.max(1, Math.floor(payload.characterState.level || 1));
   const xp = Number.isFinite(payload.characterState.xp)
     ? Math.max(0, Math.floor(payload.characterState.xp ?? 0))

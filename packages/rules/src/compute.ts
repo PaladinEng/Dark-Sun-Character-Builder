@@ -455,6 +455,7 @@ export function computeDerivedState(
     ...(state.languages ?? []),
     ...applied.grantedLanguages
   ]);
+  const languageLiteracy: Record<string, boolean> = { ...(state.languageLiteracy ?? {}) };
 
   // Derive weapon proficiency labels from class data
   const derivedWeaponProficiencies: string[] = [...(state.weaponProficiencies ?? [])];
@@ -703,6 +704,7 @@ export function computeDerivedState(
     weaponProficiencies,
     armorProficiencies,
     languages,
+    languageLiteracy,
     passivePerception: 10 + (skills.perception ?? 0),
     maxHP,
     armorClass,

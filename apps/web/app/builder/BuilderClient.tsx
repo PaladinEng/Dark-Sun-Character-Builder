@@ -157,6 +157,7 @@ type ExportedDerivedState = {
   weaponProficiencies: string[];
   toolProficiencies: string[];
   languages: string[];
+  languageLiteracy: Record<string, boolean>;
   coins: {
     cp: number;
     sp: number;
@@ -1260,6 +1261,7 @@ export default function BuilderClient({
         weaponProficiencies: derived.weaponProficiencies,
         toolProficiencies: derived.toolProficiencies,
         languages: derived.languages,
+        languageLiteracy: derived.languageLiteracy,
         coins: {
           cp: coin("cp"),
           sp: coin("sp"),
@@ -2529,6 +2531,23 @@ export default function BuilderClient({
                 <span className="font-semibold">Heroic Inspiration</span>
               </label>
             </div>
+
+            <label className="text-sm">
+              <div className="font-semibold">Current HP</div>
+              <input
+                type="number"
+                min={0}
+                max={derived.maxHP}
+                value={state.currentHP ?? derived.maxHP}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    currentHP: normalizeInteger(Number(event.target.value), 0, derived.maxHP),
+                  }))
+                }
+                className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+              />
+            </label>
 
             <label className="text-sm">
               <div className="font-semibold">Temp HP</div>
@@ -3842,6 +3861,157 @@ export default function BuilderClient({
         </section>
       ) : null}
 
+      {/* ── Language Picker ── */}
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <h2 className="text-sm font-semibold">Languages</h2>
+        {(() => {
+          const chosenSet = new Set(state.languages ?? []);
+          const automaticLanguages = derived.languages.filter((lang) => !chosenSet.has(lang));
+          const chosenLanguages = (state.languages ?? []).filter((lang) => derived.languages.includes(lang));
+          const langConfig = settingProfile?.languages ?? null;
+          const additionalSlots = langConfig?.selectionRules.additionalChoices ?? 0;
+          const literacyDefault = langConfig?.selectionRules.literacyDefault ?? true;
+          const showLiteracy = langConfig != null && langConfig.selectionRules.literacyDefault !== undefined;
+          const alreadyUsed = new Set([...automaticLanguages, ...chosenLanguages]);
+          const remainingSlots = Math.max(0, additionalSlots - chosenLanguages.length);
+
+          return (
+            <div className="mt-3 space-y-2">
+              {/* Automatic languages (read-only) */}
+              {automaticLanguages.map((lang) => (
+                <div key={lang} className="flex items-center gap-3 rounded bg-slate-950 px-3 py-2 text-sm">
+                  <span className="flex-1">
+                    {lang} <span className="text-xs text-slate-400">(automatic)</span>
+                  </span>
+                  {showLiteracy ? (
+                    <label className="flex items-center gap-1.5 text-xs text-slate-300">
+                      <input
+                        type="checkbox"
+                        checked={state.languageLiteracy?.[lang] ?? literacyDefault}
+                        onChange={(event) => {
+                          setState((prev) => ({
+                            ...prev,
+                            languageLiteracy: {
+                              ...(prev.languageLiteracy ?? {}),
+                              [lang]: event.target.checked,
+                            },
+                          }));
+                        }}
+                      />
+                      Literate
+                    </label>
+                  ) : null}
+                </div>
+              ))}
+
+              {/* Chosen languages (removable) */}
+              {chosenLanguages.map((lang) => (
+                <div key={lang} className="flex items-center gap-3 rounded bg-slate-950 px-3 py-2 text-sm">
+                  <span className="flex-1">{lang}</span>
+                  {showLiteracy ? (
+                    <label className="flex items-center gap-1.5 text-xs text-slate-300">
+                      <input
+                        type="checkbox"
+                        checked={state.languageLiteracy?.[lang] ?? literacyDefault}
+                        onChange={(event) => {
+                          setState((prev) => ({
+                            ...prev,
+                            languageLiteracy: {
+                              ...(prev.languageLiteracy ?? {}),
+                              [lang]: event.target.checked,
+                            },
+                          }));
+                        }}
+                      />
+                      Literate
+                    </label>
+                  ) : null}
+                  <button
+                    type="button"
+                    className="text-xs text-red-400 hover:text-red-300"
+                    onClick={() => {
+                      setState((prev) => {
+                        const updated = (prev.languages ?? []).filter((l) => l !== lang);
+                        const { [lang]: _, ...remainingLiteracy } = prev.languageLiteracy ?? {};
+                        return { ...prev, languages: updated, languageLiteracy: remainingLiteracy };
+                      });
+                    }}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+
+              {/* Additional language picker slots */}
+              {langConfig ? (
+                remainingSlots > 0 ? (
+                  <div className="flex items-center gap-3 rounded bg-slate-950 px-3 py-2 text-sm">
+                    <select
+                      className="flex-1 rounded bg-slate-800 px-2 py-1 text-sm text-slate-200"
+                      value=""
+                      onChange={(event) => {
+                        const lang = event.target.value;
+                        if (!lang) return;
+                        setState((prev) => ({
+                          ...prev,
+                          languages: [...(prev.languages ?? []), lang],
+                        }));
+                      }}
+                    >
+                      <option value="">
+                        Select language ({remainingSlots} slot{remainingSlots === 1 ? "" : "s"} remaining)
+                      </option>
+                      {(langConfig.categories ?? []).map((cat) => {
+                        const catAvailable = cat.languages.filter((lang) => !alreadyUsed.has(lang.name));
+                        if (catAvailable.length === 0) return null;
+                        return (
+                          <optgroup key={cat.id} label={cat.name}>
+                            {catAvailable.map((lang) => (
+                              <option key={lang.id} value={lang.name}>
+                                {lang.name}{lang.speakers ? ` (${lang.speakers})` : ""}
+                              </option>
+                            ))}
+                          </optgroup>
+                        );
+                      })}
+                    </select>
+                  </div>
+                ) : (
+                  <div className="text-xs text-slate-400">
+                    All {additionalSlots} additional language slot{additionalSlots === 1 ? "" : "s"} filled.
+                  </div>
+                )
+              ) : (
+                /* SRD-only mode: free-text language input */
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="Add a language..."
+                    className="flex-1 rounded bg-slate-800 px-2 py-1 text-sm text-slate-200"
+                    onKeyDown={(event) => {
+                      if (event.key !== "Enter") return;
+                      const value = (event.target as HTMLInputElement).value.trim();
+                      if (!value) return;
+                      if (derived.languages.includes(value)) return;
+                      setState((prev) => ({
+                        ...prev,
+                        languages: [...(prev.languages ?? []), value],
+                      }));
+                      (event.target as HTMLInputElement).value = "";
+                    }}
+                  />
+                  <span className="text-xs text-slate-400">Press Enter to add</span>
+                </div>
+              )}
+
+              {derived.languages.length === 0 && automaticLanguages.length === 0 && chosenLanguages.length === 0 ? (
+                <div className="text-xs text-slate-400">No languages yet.</div>
+              ) : null}
+            </div>
+          );
+        })()}
+      </section>
+
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
         <h2 className="text-sm font-semibold">Derived State</h2>
         <div className="mt-3 grid gap-3 text-sm md:grid-cols-4">
@@ -3979,7 +4149,14 @@ export default function BuilderClient({
           <div>
             <div className="text-sm font-semibold">Languages</div>
             <div className="mt-1 rounded bg-slate-950 p-3 text-xs">
-              {derived.languages.length > 0 ? derived.languages.join(", ") : "None"}
+              {derived.languages.length > 0
+                ? derived.languages
+                    .map((lang) => {
+                      const literate = derived.languageLiteracy[lang];
+                      return literate ? `${lang} (literate)` : lang;
+                    })
+                    .join(", ")
+                : "None"}
             </div>
           </div>
         </div>

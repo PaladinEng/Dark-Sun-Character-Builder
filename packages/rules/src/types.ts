@@ -103,6 +103,8 @@ export interface CharacterState {
   chosenSaveProficiencies: Ability[];
   toolProficiencies?: string[];
   languages?: string[];
+  /** Maps language name → whether the character is literate in it. */
+  languageLiteracy?: Record<string, boolean>;
   knownSpellIds?: string[];
   preparedSpellIds?: string[];
   cantripsKnownIds?: string[];
@@ -124,6 +126,7 @@ export interface CharacterState {
   subclass?: string;
   xp?: number;
   heroicInspiration?: boolean;
+  currentHP?: number;
   tempHP?: number;
   hitDiceTotal?: number;
   hitDiceSpent?: number;
@@ -170,6 +173,7 @@ export interface DerivedState {
   weaponProficiencies: string[];
   armorProficiencies: string[];
   languages: string[];
+  languageLiteracy: Record<string, boolean>;
   passivePerception: number;
   maxHP: number;
   armorClass: number;

@@ -48,6 +48,7 @@ export type PdfExportCharacterSnapshot = {
   savingThrows?: AbilityRecord;
   saveProficiencies?: readonly Ability[];
   skills?: Record<string, number>;
+  skillProficiencies?: readonly string[];
   skillDefinitions?: ReadonlyArray<{ id: string; name: string; ability: Ability }>;
   skillAndToolRows?: readonly SkillAndToolDisplayRow[];
   proficiencyBonus: number;
@@ -1756,10 +1757,12 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   const bodyTop = survivabilityY - sectionGap;
   const bodyBottom = 24;
 
-  const abilityY = 186;
+  const abilityY = 304;
   const abilityHeight = bodyTop - abilityY;
+  const skillsY = 106;
+  const skillsHeight = abilityY - skillsY - sectionGap;
   const trainingY = bodyBottom;
-  const trainingHeight = abilityY - bodyBottom - sectionGap;
+  const trainingHeight = skillsY - bodyBottom - sectionGap;
 
   const conditionsY = 514;
   const conditionsHeight = bodyTop - conditionsY;
@@ -1921,6 +1924,28 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     toListLine("Languages", snapshot.languages),
   ];
   drawListInSection(commands, trainingLines, leftX, trainingY, leftWidth, trainingHeight, 12, 8, 96, 10);
+
+  drawSection(commands, leftX, skillsY, leftWidth, skillsHeight, "Skills");
+  const skillProficiencySet = new Set(snapshot.skillProficiencies ?? []);
+  const skillRows = (snapshot.skillAndToolRows ?? []).filter(
+    (row): row is typeof row & { kind: "skill" } => row.kind === "skill"
+  );
+  const skillLineHeight = 9;
+  const skillListTopY = sectionListTopY(skillsY, skillsHeight);
+  const skillListMinY = sectionListMinY(skillsY);
+  const skillMaxLines = Math.max(1, Math.floor((skillListTopY - skillListMinY) / skillLineHeight) + 1);
+  for (let index = 0; index < Math.min(skillMaxLines, skillRows.length); index += 1) {
+    const row = skillRows[index];
+    const lineY = skillListTopY - index * skillLineHeight;
+    if (lineY < skillListMinY) {
+      break;
+    }
+    const isProficient = skillProficiencySet.has(row.id);
+    const marker = isProficient ? "• " : "  ";
+    const modLabel = row.value >= 0 ? `+${row.value}` : `${row.value}`;
+    const skillText = `${marker}${row.label}: ${modLabel}`;
+    drawText(commands, skillText, leftX + SECTION_INNER_PADDING, lineY, 8, false);
+  }
 
   drawSection(commands, rightX, attacksY, rightWidth, attacksHeight, "Weapons / Attacks");
   const tableX = rightX + 8;

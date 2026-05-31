@@ -190,6 +190,10 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     weaponProficiencies: normalizeStringArray(input.weaponProficiencies),
     toolProficiencies: normalizeStringArray(input.toolProficiencies),
     languages: normalizeStringArray(input.languages),
+    languageLiteracy:
+      input.languageLiteracy && typeof input.languageLiteracy === "object" && !Array.isArray(input.languageLiteracy)
+        ? (input.languageLiteracy as Record<string, boolean>)
+        : undefined,
     attunedItems: normalizeAttunedItems(input.attunedItems),
     subclass: normalizeOptionalString(input.subclass),
     xp: normalizeOptionalNonNegativeInt(input.xp),
@@ -626,7 +630,9 @@ export default async function SheetPage({
   const armorProficiencies = dedupeStrings(derived.armorProficiencies);
   const weaponProficiencies = dedupeStrings(derived.weaponProficiencies);
   const toolProficiencies = dedupeStrings(derived.toolProficiencies);
-  const languageProficiencies = dedupeStrings(derived.languages);
+  const languageProficiencies = dedupeStrings(derived.languages).map((lang) =>
+    derived.languageLiteracy[lang] ? `${lang} (literate)` : lang
+  );
   const activeConditionSet = new Set(activeConditionLabels.map((condition) => condition.toLowerCase()));
   const conditionRows = STANDARD_CONDITION_LABELS.map((label) => ({
     label,
