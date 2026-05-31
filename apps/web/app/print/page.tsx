@@ -31,26 +31,16 @@ const ABILITY_LABELS: Record<Ability, string> = {
   cha: "CHA",
 };
 
-const SKILL_ORDER = [
-  "athletics",
-  "acrobatics",
-  "sleight_of_hand",
-  "stealth",
-  "arcana",
-  "history",
-  "investigation",
-  "nature",
-  "religion",
-  "animal_handling",
-  "insight",
-  "medicine",
-  "perception",
-  "survival",
-  "deception",
-  "intimidation",
-  "performance",
-  "persuasion",
-] as const;
+// Skills grouped under their governing ability, mirroring the reference
+// character sheet's left-column layout (Athletics under STR, etc.).
+const ABILITY_SKILLS: Record<Ability, readonly string[]> = {
+  str: ["athletics"],
+  dex: ["acrobatics", "sleight_of_hand", "stealth"],
+  con: [],
+  int: ["arcana", "history", "investigation", "nature", "religion"],
+  wis: ["animal_handling", "insight", "medicine", "perception", "survival"],
+  cha: ["deception", "intimidation", "performance", "persuasion"],
+};
 
 function formatModifier(value: number): string {
   return value >= 0 ? `+${value}` : String(value);
@@ -291,6 +281,12 @@ export default async function PrintPage({
   const cpCoins = Number.isFinite(coinValues.cp)
     ? Math.max(0, Math.floor(coinValues.cp ?? 0))
     : 0;
+  const epCoins = Number.isFinite(coinValues.ep)
+    ? Math.max(0, Math.floor(coinValues.ep ?? 0))
+    : 0;
+  const ppCoins = Number.isFinite(coinValues.pp)
+    ? Math.max(0, Math.floor(coinValues.pp ?? 0))
+    : 0;
   const inventoryQuantities = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
     if (!inventoryQuantities.has(itemId)) {
@@ -308,14 +304,16 @@ export default async function PrintPage({
     );
   }
 
-  const inventoryNameList = [...inventoryQuantities.entries()]
+  const fullInventoryList = [...inventoryQuantities.entries()]
     .map(([itemId, quantity]) => {
       const label = merged.content.equipmentById[itemId]?.name ?? itemId;
       return quantity > 1 ? `${label} x${quantity}` : label;
     })
-    .sort((a, b) => a.localeCompare(b))
-    .slice(0, 6);
+    .sort((a, b) => a.localeCompare(b));
+  const inventoryNameList = fullInventoryList.slice(0, 6);
 
+  const armorProficiencies = sortIds(derived.armorProficiencies);
+  const weaponProficiencies = sortIds(derived.weaponProficiencies);
   const toolProficiencies = sortIds(derived.toolProficiencies);
   const languages = sortIds(derived.languages).map((lang) =>
     derived.languageLiteracy[lang] ? `${lang} (literate)` : lang
@@ -376,17 +374,10 @@ export default async function PrintPage({
         )
       : [];
 
-  const sensesSummary =
-    derived.senses.length > 0
-      ? `Senses: ${derived.senses.map((sense) => formatSenseSummary(sense)).join(", ")}`
-      : null;
-  const resistancesSummary =
-    derived.resistances.length > 0
-      ? `Resistances: ${derived.resistances.join(", ")}`
-      : null;
+  const sensesEntries = derived.senses.map((sense) => formatSenseSummary(sense));
   const passiveTraits = derived.traits;
   const activeConditionEntries = (derived.activeConditionIds ?? []).map(
-    (conditionId) => `Condition: ${formatConditionLabel(conditionId)}`,
+    (conditionId) => formatConditionLabel(conditionId),
   );
   const activeModifierEntries = (derived.appliedModifiers ?? []).map((modifier) => {
     const effectSummary = modifier.effects
@@ -399,31 +390,47 @@ export default async function PrintPage({
       })
       .join(", ");
     return effectSummary.length > 0
-      ? `Modifier: ${modifier.label} (${effectSummary})`
-      : `Modifier: ${modifier.label}`;
+      ? `${modifier.label} (${effectSummary})`
+      : modifier.label;
   });
-
-  const traitEntries = [
-    sensesSummary,
-    resistancesSummary,
-    ...activeConditionEntries,
-    ...activeModifierEntries,
-    ...passiveTraits.map((entry) => `Trait: ${entry}`),
-    species ? `Species: ${species.name}` : null,
-    background ? `Background: ${background.name}` : null,
-    klass ? `Class: ${klass.name}` : null,
-    selectedSubclass ? `Subclass: ${selectedSubclass.name}` : null,
-    ...classFeatureNames.map((name) => `Class Feature: ${name}`),
-    ...subclassFeatureNames.map((name) => `Subclass Feature: ${name}`),
-    ...featureNames.map((name) => `Feature: ${name}`),
-    ...derived.feats.map((feat) => `Feat: ${feat.name}`),
-  ].filter((entry): entry is string => Boolean(entry));
 
   const skillProficiencySet = new Set(derived.skillProficiencies ?? []);
   const saveProficiencySet = new Set(derived.saveProficiencies ?? []);
 
   const attacks = derived.attacks;
   const attackRows = [...attacks, ...Array.from({ length: Math.max(0, 4 - attacks.length) }, () => null)];
+
+  // Equipped weapons (multi-weapon aware) for the equipment page.
+  const equippedWeaponIds =
+    payload.characterState.equippedWeaponIds && payload.characterState.equippedWeaponIds.length > 0
+      ? payload.characterState.equippedWeaponIds
+      : payload.characterState.equippedWeaponId
+        ? [payload.characterState.equippedWeaponId]
+        : [];
+  const equippedWeapons = equippedWeaponIds
+    .map((id) => merged.content.equipmentById[id])
+    .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+
+  // Magic / attuned items. Handle both the structured shape and legacy strings.
+  const rawAttunedItems: unknown[] = Array.isArray(payload.characterState.attunedItems)
+    ? (payload.characterState.attunedItems as unknown[])
+    : [];
+  const attunedItemsDisplay = rawAttunedItems
+    .map((item) => {
+      if (typeof item === "string") {
+        return item.trim();
+      }
+      if (!item || typeof item !== "object") {
+        return "";
+      }
+      const record = item as { name?: unknown; itemId?: unknown; notes?: unknown };
+      const name = typeof record.name === "string" ? record.name.trim() : "";
+      const itemId = typeof record.itemId === "string" ? record.itemId.trim() : "";
+      const notes = typeof record.notes === "string" ? record.notes.trim() : "";
+      const label = name || (itemId ? merged.content.equipmentById[itemId]?.name ?? itemId : "");
+      return label && notes ? `${label} — ${notes}` : label || notes;
+    })
+    .filter((entry) => entry.length > 0);
 
   const attributions = merged.packs
     .map((pack) => pack.manifest.attributionText?.trim())
@@ -434,6 +441,8 @@ export default async function PrintPage({
   const spellSaveDC = derived.spellSaveDC ?? derived.spellcasting?.saveDC ?? null;
   const spellAttackBonus =
     derived.spellAttackBonus ?? derived.spellcasting?.attackBonus ?? null;
+  const spellcastingModifier =
+    spellcastingAbility !== null ? derived.abilityMods[spellcastingAbility] : null;
   const spellcastingProgression = derived.spellcasting?.progression ?? null;
   const spellSlots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
   const knownSpellIds = derived.spellcasting?.knownSpellIds ?? sortIds(payload.characterState.knownSpellIds);
@@ -463,6 +472,66 @@ export default async function PrintPage({
     else if (cs.field === "cantrip") cantripNames.push(label);
   }
   const spellSlotLevels = Array.from({ length: 9 }, (_value, index) => index + 1);
+  const hasSpellcasting =
+    spellcastingAbility !== null ||
+    (spellSlots?.some((count) => count > 0) ?? false) ||
+    cantripNames.length > 0 ||
+    knownSpellNames.length > 0 ||
+    preparedSpellNames.length > 0;
+
+  const characterName =
+    payload.characterState.characterName?.trim() || "______________________________";
+
+  // Header bar reused across the core, features, and details pages.
+  const headerBar = (
+    <header className="page-header">
+      <div className="panel name-panel">
+        <div className="panel-title">Character Name</div>
+        <div className="character-name-line">{characterName}</div>
+      </div>
+      <div className="panel identity-panel">
+        <div className="identity-grid">
+          <div>
+            <div className="small-label">Background</div>
+            <div className="small-value">{background?.name ?? "Unspecified"}</div>
+          </div>
+          <div>
+            <div className="small-label">Class</div>
+            <div className="small-value">{klass?.name ?? "Unspecified"}</div>
+          </div>
+          <div>
+            <div className="small-label">Species</div>
+            <div className="small-value">{species?.name ?? "Unspecified"}</div>
+          </div>
+          <div>
+            <div className="small-label">Subclass</div>
+            <div className="small-value">
+              {selectedSubclass?.name ?? payload.characterState.subclass ?? "None"}
+            </div>
+          </div>
+          <div>
+            <div className="small-label">Level</div>
+            <div className="small-value">{level}</div>
+          </div>
+          <div>
+            <div className="small-label">XP</div>
+            <div className="small-value">{xp}</div>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+
+  const attributionFooter = (
+    <footer className="sheet-footer">
+      <div className="small-label">Dark Sun Character Builder Sheet</div>
+      {attributions.length > 0 ? (
+        <div className="attribution-text">{attributions.join(" ")}</div>
+      ) : (
+        <div className="attribution-text">No attribution text required for selected packs.</div>
+      )}
+    </footer>
+  );
 
   return (
     <main className="print-root">
@@ -470,107 +539,59 @@ export default async function PrintPage({
         showOverlayToggle={showOverlayToggle && (hasOverlayPage1 || hasOverlayPage2)}
       />
 
+      {/* PAGE 1 — CORE CHARACTER SHEET */}
       <section
-        className={[
-          "sheet-page",
-          "page-1",
-          hasOverlayPage1 ? "has-overlay" : "",
-        ]
+        className={["sheet-page", "page-1", hasOverlayPage1 ? "has-overlay" : ""]
           .filter(Boolean)
           .join(" ")}
       >
         <div className="sheet-content">
           <div className="page1-layout">
-            <header className="page-header">
-              <div className="panel name-panel">
-                <div className="panel-title">Character Name</div>
-                <div className="character-name-line">
-                  {payload.characterState.characterName?.trim() || "______________________________"}
-                </div>
-              </div>
-              <div className="panel identity-panel">
-                <div className="identity-grid">
-                  <div>
-                    <div className="small-label">Class</div>
-                    <div className="small-value">{klass?.name ?? "Unspecified"}</div>
-                  </div>
-                  <div>
-                  <div className="small-label">Subclass</div>
-                    <div className="small-value">{selectedSubclass?.name ?? payload.characterState.subclass ?? "None"}</div>
-                </div>
-                  <div>
-                    <div className="small-label">Level</div>
-                    <div className="small-value">{level}</div>
-                  </div>
-                  <div>
-                    <div className="small-label">XP</div>
-                    <div className="small-value">{xp}</div>
-                  </div>
-                  <div>
-                    <div className="small-label">Species</div>
-                    <div className="small-value">{species?.name ?? "Unspecified"}</div>
-                  </div>
-                  <div>
-                    <div className="small-label">Background</div>
-                    <div className="small-value">{background?.name ?? "Unspecified"}</div>
-                  </div>
-                  <div>
-                    <div className="small-label">Heroic Inspiration</div>
-                    <div className="small-value">
-                      {payload.characterState.heroicInspiration ? "Yes" : "No"}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="small-label">Alignment</div>
-                    <div className="small-value">{payload.characterState.alignment ?? "-"}</div>
-                  </div>
-                </div>
-              </div>
-            </header>
+            {headerBar}
 
             <div className="page-columns">
               <div className="column-left">
-                <section className="panel abilities-panel">
-                  <div className="section-head">Ability Scores</div>
-                  <div className="abilities-stack">
-                    {ABILITIES.map((ability) => (
-                      <div key={ability} className="ability-row">
-                        <div className="ability-tag">{ABILITY_LABELS[ability]}</div>
-                        <div className="ability-mod-badge">{formatModifier(derived.abilityMods[ability])}</div>
-                        <div className="ability-score-box">{derived.finalAbilities[ability]}</div>
-                      </div>
-                    ))}
+                <section className="panel ability-skills-panel">
+                  <div className="section-head">Abilities · Saves · Skills</div>
+                  <div className="prof-bonus-row">
+                    <span>Proficiency Bonus</span>
+                    <span className="pb-value">{formatModifier(derived.proficiencyBonus)}</span>
                   </div>
-                </section>
-
-                <section className="panel saves-panel">
-                  <div className="section-head">Saving Throws</div>
-                  <table className="tight-table">
-                    <tbody>
-                      {ABILITIES.map((ability) => (
-                        <tr key={`save-${ability}`}>
-                          <td className="mark-col">{saveProficiencySet.has(ability) ? "●" : "○"}</td>
-                          <td>{ABILITY_LABELS[ability]}</td>
-                          <td className="num-col">{formatModifier(derived.savingThrows[ability])}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </section>
-
-                <section className="panel skills-panel">
-                  <div className="section-head">Skills</div>
-                  <table className="tight-table">
-                    <tbody>
-                      {SKILL_ORDER.map((skill) => (
-                        <tr key={skill}>
-                          <td className="mark-col">{skillProficiencySet.has(skill) ? "●" : "○"}</td>
-                          <td>{formatSkillName(skill)}</td>
-                          <td className="num-col">{formatModifier(derived.skills[skill] ?? 0)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  {ABILITIES.map((ability) => (
+                    <div key={ability} className="ability-skill-block">
+                      <div className="ab-head">
+                        <div className="ab-mod">{formatModifier(derived.abilityMods[ability])}</div>
+                        <div className="ab-tag">{ABILITY_LABELS[ability]}</div>
+                        <div className="ab-score">{derived.finalAbilities[ability]}</div>
+                      </div>
+                      <div className="ab-detail">
+                        <div className="detail-line">
+                          <span>
+                            <span className="prof-dot">
+                              {saveProficiencySet.has(ability) ? "●" : "○"}
+                            </span>{" "}
+                            Saving Throw
+                          </span>
+                          <span className="detail-num">
+                            {formatModifier(derived.savingThrows[ability])}
+                          </span>
+                        </div>
+                        {ABILITY_SKILLS[ability].map((skill) => (
+                          <div key={skill} className="detail-line">
+                            <span>
+                              <span className="prof-dot">
+                                {skillProficiencySet.has(skill) ? "●" : "○"}
+                              </span>{" "}
+                              {formatSkillName(skill)}
+                            </span>
+                            <span className="detail-num">
+                              {formatModifier(derived.skills[skill] ?? 0)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </section>
               </div>
 
@@ -641,15 +662,19 @@ export default async function PrintPage({
                   </table>
                 </section>
 
-                <section className="panel traits-panel">
-                  <div className="section-head">Features & Traits</div>
-                  {traitEntries.length === 0 ? (
-                    <p className="placeholder">No features selected.</p>
+                <section className="panel senses-panel">
+                  <div className="section-head">Senses</div>
+                  {sensesEntries.length === 0 && derived.resistances.length === 0 ? (
+                    <div className="placeholder">Passive Perception {passivePerception}</div>
                   ) : (
-                    <ul className="trimmed-list">
-                      {traitEntries.map((entry, index) => (
-                        <li key={`trait-${index}`}>{entry}</li>
+                    <ul className="trimmed-list compact">
+                      <li>Passive Perception {passivePerception}</li>
+                      {sensesEntries.map((entry, index) => (
+                        <li key={`sense-${index}`}>{entry}</li>
                       ))}
+                      {derived.resistances.length > 0 ? (
+                        <li>Resistances: {derived.resistances.join(", ")}</li>
+                      ) : null}
                     </ul>
                   )}
                 </section>
@@ -657,45 +682,153 @@ export default async function PrintPage({
 
               <div className="column-right">
                 <section className="panel profs-panel">
-                  <div className="section-head">Proficiencies & Languages</div>
+                  <div className="section-head">Proficiencies</div>
+                  <div className="list-block">
+                    <div className="small-label">Armor</div>
+                    {armorProficiencies.length === 0 ? (
+                      <div className="placeholder">None</div>
+                    ) : (
+                      <div className="inline-list">{armorProficiencies.join(", ")}</div>
+                    )}
+                  </div>
+                  <div className="list-block">
+                    <div className="small-label">Weapons</div>
+                    {weaponProficiencies.length === 0 ? (
+                      <div className="placeholder">None</div>
+                    ) : (
+                      <div className="inline-list">{weaponProficiencies.join(", ")}</div>
+                    )}
+                  </div>
                   <div className="list-block">
                     <div className="small-label">Tools</div>
                     {toolProficiencies.length === 0 ? (
                       <div className="placeholder">None</div>
                     ) : (
-                      <ul className="trimmed-list compact">
-                        {toolProficiencies.map((tool) => (
-                          <li key={tool}>{tool}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className="list-block">
-                    <div className="small-label">Languages</div>
-                    {languages.length === 0 ? (
-                      <div className="placeholder">None</div>
-                    ) : (
-                      <ul className="trimmed-list compact">
-                        {languages.map((language) => (
-                          <li key={language}>{language}</li>
-                        ))}
-                      </ul>
+                      <div className="inline-list">{toolProficiencies.join(", ")}</div>
                     )}
                   </div>
                 </section>
 
+                <section className="panel languages-panel">
+                  <div className="section-head">Languages</div>
+                  {languages.length === 0 ? (
+                    <div className="placeholder">None</div>
+                  ) : (
+                    <div className="inline-list list-block">{languages.join(", ")}</div>
+                  )}
+                </section>
+
                 <section className="panel inventory-panel">
-                  <div className="section-head">Equipment / Inventory</div>
+                  <div className="section-head">Equipment</div>
                   <ul className="trimmed-list compact">
                     <li>Armor: {armor?.name ?? "None"}</li>
                     <li>Shield: {shield?.name ?? "None"}</li>
-                    <li>Weapon: {weapon?.name ?? "None"}</li>
-                    <li>Coins: {gpCoins} gp / {spCoins} sp / {cpCoins} cp</li>
+                    <li>
+                      Weapon:{" "}
+                      {equippedWeapons.length > 0
+                        ? equippedWeapons.map((entry) => entry.name).join(", ")
+                        : weapon?.name ?? "None"}
+                    </li>
                     <li>Other: {inventoryNameList.join(", ") || "-"}</li>
                   </ul>
                 </section>
 
-                <section className="panel feats-panel">
+                <section className="panel currency-panel">
+                  <div className="section-head">Currency</div>
+                  <div className="currency-row">
+                    {[
+                      ["CP", cpCoins],
+                      ["SP", spCoins],
+                      ["EP", epCoins],
+                      ["GP", gpCoins],
+                      ["PP", ppCoins],
+                    ].map(([label, value]) => (
+                      <div key={label as string} className="coin-cell">
+                        <div className="small-label">{label}</div>
+                        <div className="coin-value">{value}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+
+                <section className="panel resources-panel">
+                  <div className="section-head">Conditions / Resources</div>
+                  <ul className="trimmed-list compact">
+                    <li>Hit Dice: {hitDiceSpent}/{hitDiceTotal ?? "-"}</li>
+                    <li>Death Saves: {deathSaveSuccesses}✓ / {deathSaveFailures}✗</li>
+                    <li>Exhaustion: {exhaustionLevel}</li>
+                    <li>Heroic Inspiration: {payload.characterState.heroicInspiration ? "Yes" : "No"}</li>
+                    {activeConditionEntries.map((entry, index) => (
+                      <li key={`cond-${index}`}>{entry}</li>
+                    ))}
+                    {activeModifierEntries.map((entry, index) => (
+                      <li key={`mod-${index}`}>{entry}</li>
+                    ))}
+                  </ul>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PAGE 2 — FEATURES & EQUIPMENT */}
+      <section
+        className={["sheet-page", "page-2", hasOverlayPage2 ? "has-overlay" : ""]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        <div className="sheet-content">
+          <div className="detail-layout">
+            {headerBar}
+            <div className="detail-body">
+              <div className="detail-col">
+                <section className="panel grow">
+                  <div className="section-head">Class Features</div>
+                  {classFeatureNames.length === 0 ? (
+                    <div className="placeholder">None</div>
+                  ) : (
+                    <ul className="trimmed-list compact scroll-list">
+                      {classFeatureNames.map((name, index) => (
+                        <li key={`class-feature-${index}`}>{name}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+
+                <section className="panel">
+                  <div className="section-head">Subclass Features</div>
+                  {subclassFeatureNames.length === 0 ? (
+                    <div className="placeholder">None</div>
+                  ) : (
+                    <ul className="trimmed-list compact">
+                      {subclassFeatureNames.map((name, index) => (
+                        <li key={`subclass-feature-${index}`}>{name}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+
+                <section className="panel grow">
+                  <div className="section-head">Species Traits & Selected Features</div>
+                  {passiveTraits.length === 0 && featureNames.length === 0 ? (
+                    <div className="placeholder">None</div>
+                  ) : (
+                    <ul className="trimmed-list compact scroll-list">
+                      {species ? <li>Species: {species.name}</li> : null}
+                      {passiveTraits.map((entry, index) => (
+                        <li key={`trait-${index}`}>{entry}</li>
+                      ))}
+                      {featureNames.map((name, index) => (
+                        <li key={`feature-${index}`}>{name}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              </div>
+
+              <div className="detail-col">
+                <section className="panel">
                   <div className="section-head">Feats</div>
                   {derived.feats.length === 0 ? (
                     <div className="placeholder">None</div>
@@ -708,146 +841,276 @@ export default async function PrintPage({
                   )}
                 </section>
 
-                <section className="panel notes-panel">
-                  <div className="section-head">Notes</div>
-                  <div className="notes-area" />
-                </section>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className={[
-          "sheet-page",
-          "page-2",
-          hasOverlayPage2 ? "has-overlay" : "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
-      >
-        <div className="sheet-content">
-          <div className="page2-layout">
-            <header className="panel page2-header">
-              <div>
-                <div className="sheet-title">Spells</div>
-                <div className="small-value">Character: ________________________</div>
-              </div>
-              <div className="small-value">{klass?.name ?? "Class Unspecified"} Level {level}</div>
-            </header>
-
-            <div className="page2-columns">
-              <div className="page2-left">
-                <section className="panel spell-summary-panel">
-                  <div className="section-head">Spellcasting Summary</div>
-                  <div className="spell-summary-grid">
-                    <div>
-                      <div className="small-label">Spellcasting Ability</div>
-                      <div className="small-value">
-                        {spellcastingAbility ? ABILITY_LABELS[spellcastingAbility] : "Not available"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="small-label">Spell Save DC</div>
-                      <div className="small-value">
-                        {spellSaveDC ?? "Not available"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="small-label">Spell Attack Bonus</div>
-                      <div className="small-value">
-                        {spellAttackBonus !== null ? formatModifier(spellAttackBonus) : "Not available"}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="small-label">Progression</div>
-                      <div className="small-value">
-                        {spellcastingProgression ?? "Not available"}
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                <section className="panel spell-slots-panel">
-                  <div className="section-head">Spell Slots</div>
+                <section className="panel">
+                  <div className="section-head">Equipped Gear</div>
                   <table className="tight-table">
-                    <thead>
-                      <tr>
-                        <th>Level</th>
-                        <th>Slots</th>
-                        <th>Used</th>
-                      </tr>
-                    </thead>
                     <tbody>
-                      {spellSlotLevels.map((slotLevel) => (
-                        <tr key={`slot-${slotLevel}`}>
-                          <td>{slotLevel}</td>
-                          <td className="num-col">
-                            {spellSlots ? (spellSlots[slotLevel - 1] ?? 0) : "-"}
-                          </td>
-                          <td className="num-col">
-                            {spellSlots && (spellSlots[slotLevel - 1] ?? 0) > 0 ? "0" : "-"}
-                          </td>
+                      <tr>
+                        <td className="label-col">Armor</td>
+                        <td>{armor?.name ?? "None"}</td>
+                      </tr>
+                      <tr>
+                        <td className="label-col">Shield</td>
+                        <td>{shield?.name ?? "None"}</td>
+                      </tr>
+                      {(equippedWeapons.length > 0
+                        ? equippedWeapons.map((entry) => entry.name)
+                        : weapon
+                          ? [weapon.name]
+                          : []
+                      ).map((name, index) => (
+                        <tr key={`weapon-${index}`}>
+                          <td className="label-col">{index === 0 ? "Weapons" : ""}</td>
+                          <td>{name}</td>
                         </tr>
                       ))}
+                      {equippedWeapons.length === 0 && !weapon ? (
+                        <tr>
+                          <td className="label-col">Weapons</td>
+                          <td>None</td>
+                        </tr>
+                      ) : null}
                     </tbody>
                   </table>
                 </section>
 
-                <section className="panel spell-list-panel">
-                  <div className="section-head">Spells Known / Prepared</div>
-                  <div className="spell-list-grid">
-                    <div>
-                      <div className="small-label">Cantrips</div>
-                      <div className="small-value-list">{cantripNames.join(", ") || "(none)"}</div>
-                    </div>
-                    <div>
-                      <div className="small-label">Known</div>
-                      <div className="small-value-list">{knownSpellNames.join(", ") || "(none)"}</div>
-                    </div>
-                    <div>
-                      <div className="small-label">Prepared</div>
-                      <div className="small-value-list">{preparedSpellNames.join(", ") || "(none)"}</div>
-                    </div>
-                  </div>
-                  {!spellcastingAbility ? (
-                    <div className="placeholder spell-placeholder">
-                      No spellcasting class selected; lists shown from scaffold state.
-                    </div>
-                  ) : null}
+                <section className="panel grow">
+                  <div className="section-head">Inventory</div>
+                  {fullInventoryList.length === 0 ? (
+                    <div className="placeholder">None</div>
+                  ) : (
+                    <ul className="trimmed-list compact scroll-list two-col">
+                      {fullInventoryList.map((entry, index) => (
+                        <li key={`inv-${index}`}>{entry}</li>
+                      ))}
+                    </ul>
+                  )}
                 </section>
-              </div>
 
-              <div className="page2-right">
-                <section className="panel right-notes-panel">
-                  <div className="section-head">Additional Notes</div>
-                  <div className="notes-area tall" />
-                </section>
-                <section className="panel resources-panel">
-                  <div className="section-head">Conditions / Resources</div>
-                  <ul className="trimmed-list compact">
-                    <li>Hit Dice: {hitDiceSpent}/{hitDiceTotal ?? "-"}</li>
-                    <li>Death Saves: {deathSaveSuccesses}/{deathSaveFailures}</li>
-                    <li>Exhaustion: {exhaustionLevel}</li>
-                  </ul>
+                <section className="panel magic-items-panel">
+                  <div className="section-head">Magic Items</div>
+                  <ol className="magic-item-list">
+                    {Array.from({ length: 5 }, (_value, index) => (
+                      <li key={`magic-${index}`}>{attunedItemsDisplay[index] ?? ""}</li>
+                    ))}
+                  </ol>
                 </section>
               </div>
             </div>
-
-            <footer className="sheet-footer">
-              <div className="small-label">Dark Sun Character Builder Sheet</div>
-              {attributions.length > 0 ? (
-                <div className="attribution-text">
-                  {attributions.join(" ")}
-                </div>
-              ) : (
-                <div className="attribution-text">No attribution text required for selected packs.</div>
-              )}
-            </footer>
           </div>
         </div>
       </section>
+
+      {/* PAGE 3 — CHARACTER DETAILS */}
+      <section className="sheet-page page-3">
+        <div className="sheet-content">
+          <div className="detail-layout">
+            {headerBar}
+            <div className="detail-body details-body">
+              <div className="detail-col">
+                <section className="panel">
+                  <div className="section-head">Appearance</div>
+                  <div className="prose-block">
+                    {payload.characterState.appearance?.trim() || "—"}
+                  </div>
+                </section>
+                <section className="panel">
+                  <div className="section-head">Physical Description</div>
+                  <div className="prose-block">
+                    {payload.characterState.physicalDescription?.trim() || "—"}
+                  </div>
+                </section>
+                <section className="panel grow">
+                  <div className="section-head">Backstory</div>
+                  <div className="prose-block grow">
+                    {payload.characterState.backstory?.trim() || "—"}
+                  </div>
+                </section>
+              </div>
+
+              <div className="detail-col">
+                <section className="panel">
+                  <div className="section-head">Alignment</div>
+                  <div className="prose-block">{payload.characterState.alignment?.trim() || "—"}</div>
+                </section>
+                <section className="panel grow">
+                  <div className="section-head">Notes</div>
+                  <div className="prose-block grow">
+                    {payload.characterState.notes?.trim() || "—"}
+                  </div>
+                </section>
+                <section className="panel">
+                  <div className="section-head">Companion</div>
+                  <div className="prose-block">
+                    {[
+                      payload.characterState.companion?.name,
+                      payload.characterState.companion?.type,
+                      payload.characterState.companion?.summary,
+                    ]
+                      .filter((part) => typeof part === "string" && part.trim().length > 0)
+                      .join(" · ") || "—"}
+                  </div>
+                </section>
+                <section className="panel">
+                  <div className="section-head">Familiar</div>
+                  <div className="prose-block">
+                    {[
+                      payload.characterState.familiar?.name,
+                      payload.characterState.familiar?.type,
+                      payload.characterState.familiar?.summary,
+                    ]
+                      .filter((part) => typeof part === "string" && part.trim().length > 0)
+                      .join(" · ") || "—"}
+                  </div>
+                </section>
+                <section className="panel">
+                  <div className="section-head">Ability Scores</div>
+                  <div className="ability-summary-grid">
+                    {ABILITIES.map((ability) => (
+                      <div key={`summary-${ability}`} className="ability-summary-cell">
+                        <div className="small-label">{ABILITY_LABELS[ability]}</div>
+                        <div className="ability-summary-mod">
+                          {formatModifier(derived.abilityMods[ability])}
+                        </div>
+                        <div className="ability-summary-score">{derived.finalAbilities[ability]}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </div>
+            {!hasSpellcasting ? attributionFooter : null}
+          </div>
+        </div>
+      </section>
+
+      {/* PAGE 4 — SPELLCASTING (only when the character can cast) */}
+      {hasSpellcasting ? (
+        <section className="sheet-page page-4">
+          <div className="sheet-content">
+            <div className="detail-layout">
+              <header className="panel spell-header">
+                <div className="sheet-title">Spellcasting</div>
+                <div className="small-value">
+                  {characterName} — {klass?.name ?? "Class"} {level}
+                </div>
+              </header>
+
+              <section className="panel spell-summary-panel">
+                <div className="section-head">Spellcasting Summary</div>
+                <div className="spell-summary-grid">
+                  <div>
+                    <div className="small-label">Ability</div>
+                    <div className="small-value">
+                      {spellcastingAbility ? ABILITY_LABELS[spellcastingAbility] : "—"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="small-label">Modifier</div>
+                    <div className="small-value">
+                      {spellcastingModifier !== null ? formatModifier(spellcastingModifier) : "—"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="small-label">Spell Save DC</div>
+                    <div className="small-value">{spellSaveDC ?? "—"}</div>
+                  </div>
+                  <div>
+                    <div className="small-label">Spell Attack Bonus</div>
+                    <div className="small-value">
+                      {spellAttackBonus !== null ? formatModifier(spellAttackBonus) : "—"}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="small-label">Progression</div>
+                    <div className="small-value">{spellcastingProgression ?? "—"}</div>
+                  </div>
+                </div>
+              </section>
+
+              <div className="detail-body spell-body">
+                <div className="detail-col">
+                  <section className="panel spell-slots-panel">
+                    <div className="section-head">Spell Slots</div>
+                    <table className="tight-table">
+                      <thead>
+                        <tr>
+                          <th>Level</th>
+                          <th>Slots</th>
+                          <th>Used</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {spellSlotLevels.map((slotLevel) => (
+                          <tr key={`slot-${slotLevel}`}>
+                            <td>{slotLevel}</td>
+                            <td className="num-col">
+                              {spellSlots ? (spellSlots[slotLevel - 1] ?? 0) : "-"}
+                            </td>
+                            <td className="slot-track">
+                              {spellSlots && (spellSlots[slotLevel - 1] ?? 0) > 0
+                                ? Array.from(
+                                    { length: spellSlots[slotLevel - 1] ?? 0 },
+                                    () => "☐",
+                                  ).join(" ")
+                                : "-"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </section>
+                </div>
+
+                <div className="detail-col">
+                  <section className="panel grow">
+                    <div className="section-head">Spells</div>
+                    <div className="spell-list-grid">
+                      <div>
+                        <div className="small-label">Cantrips</div>
+                        <ul className="trimmed-list compact">
+                          {cantripNames.length === 0 ? (
+                            <li className="placeholder">None</li>
+                          ) : (
+                            cantripNames.map((name, index) => (
+                              <li key={`cantrip-${index}`}>{name}</li>
+                            ))
+                          )}
+                        </ul>
+                      </div>
+                      <div>
+                        <div className="small-label">Known</div>
+                        <ul className="trimmed-list compact">
+                          {knownSpellNames.length === 0 ? (
+                            <li className="placeholder">None</li>
+                          ) : (
+                            knownSpellNames.map((name, index) => (
+                              <li key={`known-${index}`}>{name}</li>
+                            ))
+                          )}
+                        </ul>
+                      </div>
+                      <div>
+                        <div className="small-label">Prepared</div>
+                        <ul className="trimmed-list compact">
+                          {preparedSpellNames.length === 0 ? (
+                            <li className="placeholder">None</li>
+                          ) : (
+                            preparedSpellNames.map((name, index) => (
+                              <li key={`prepared-${index}`}>{name}</li>
+                            ))
+                          )}
+                        </ul>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              {attributionFooter}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <style>{`
         @page {
@@ -937,13 +1200,6 @@ export default async function PrintPage({
           background-image: url("/sheets/template-page2.png");
         }
 
-        .page1-layout {
-          height: 100%;
-          display: grid;
-          grid-template-rows: 1in 9.2in;
-          row-gap: 0.1in;
-        }
-
         .panel {
           border: 1px solid #0f172a;
           border-radius: 2px;
@@ -961,6 +1217,23 @@ export default async function PrintPage({
           text-transform: uppercase;
         }
 
+        .small-label {
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          font-size: 8px;
+          color: #334155;
+        }
+
+        .small-value {
+          margin-top: 2px;
+          font-size: 12px;
+          font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        /* ---- Shared header bar (pages 1-3) ---- */
         .page-header {
           display: grid;
           grid-template-columns: 4.85in 2.85in;
@@ -994,25 +1267,17 @@ export default async function PrintPage({
         .identity-grid {
           height: 100%;
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 0.06in 0.08in;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0.05in 0.08in;
           align-content: start;
         }
 
-        .small-label {
-          text-transform: uppercase;
-          letter-spacing: 0.04em;
-          font-size: 8px;
-          color: #334155;
-        }
-
-        .small-value {
-          margin-top: 2px;
-          font-size: 12px;
-          font-weight: 600;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        /* ---- Page 1 layout ---- */
+        .page1-layout {
+          height: 100%;
+          display: grid;
+          grid-template-rows: 1in 9.2in;
+          row-gap: 0.1in;
         }
 
         .page-columns {
@@ -1023,73 +1288,158 @@ export default async function PrintPage({
         }
 
         .column-left {
-          display: grid;
-          grid-template-rows: 4.05in 1.35in 3.6in;
-          row-gap: 0.1in;
+          height: 100%;
         }
 
-        .column-middle {
-          display: grid;
-          grid-template-rows: 1.2in 1.65in 2.1in 3.95in;
-          row-gap: 0.1in;
+        .column-left .ability-skills-panel {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
         }
 
+        .column-middle,
         .column-right {
-          display: grid;
-          grid-template-rows: 1.6in 2.1in 1.1in 4.1in;
+          display: flex;
+          flex-direction: column;
           row-gap: 0.1in;
         }
 
-        .abilities-stack {
-          display: grid;
-          grid-template-rows: repeat(6, 1fr);
-          gap: 0.05in;
-          padding: 0.05in;
-        }
-
-        .ability-row {
-          border: 1px solid #475569;
-          border-radius: 2px;
-          display: grid;
-          grid-template-columns: 0.5in 1fr;
-          grid-template-rows: 0.42in 0.24in;
+        .prof-bonus-row {
+          display: flex;
+          justify-content: space-between;
           align-items: center;
-          justify-items: center;
-          padding: 0.02in;
+          padding: 0.03in 0.06in;
+          font-size: 9px;
+          font-weight: 600;
+          border-bottom: 1px solid #cbd5e1;
         }
 
-        .ability-tag {
-          grid-column: 1;
-          grid-row: 1 / span 2;
-          align-self: center;
-          font-size: 13px;
+        .pb-value {
+          font-size: 12px;
           font-weight: 700;
-          letter-spacing: 0.06em;
         }
 
-        .ability-mod-badge {
-          grid-column: 2;
-          grid-row: 1;
-          width: 0.72in;
-          height: 0.42in;
+        .ability-skill-block {
+          padding: 0.03in 0.06in;
+          border-bottom: 1px solid #cbd5e1;
+        }
+
+        .ability-skill-block:last-child {
+          border-bottom: none;
+        }
+
+        .ab-head {
+          display: flex;
+          align-items: center;
+          gap: 0.07in;
+          margin-bottom: 0.02in;
+        }
+
+        .ab-mod {
+          width: 0.34in;
+          height: 0.34in;
           border: 1px solid #0f172a;
           border-radius: 999px;
           display: grid;
           place-items: center;
-          font-size: 16px;
+          font-size: 13px;
           font-weight: 700;
         }
 
-        .ability-score-box {
-          grid-column: 2;
-          grid-row: 2;
-          width: 0.62in;
-          height: 0.2in;
+        .ab-tag {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+        }
+
+        .ab-score {
+          margin-left: auto;
+          min-width: 0.36in;
+          height: 0.22in;
+          padding: 0 0.04in;
           border: 1px solid #0f172a;
           display: grid;
           place-items: center;
           font-size: 11px;
           font-weight: 700;
+        }
+
+        .ab-detail {
+          font-size: 8.5px;
+          padding-left: 0.04in;
+        }
+
+        .detail-line {
+          display: flex;
+          justify-content: space-between;
+          line-height: 1.4;
+        }
+
+        .prof-dot {
+          font-size: 8px;
+        }
+
+        .detail-num {
+          font-weight: 600;
+        }
+
+        .stat {
+          border: 1px solid #64748b;
+          border-radius: 2px;
+          padding: 0.03in 0.04in;
+          min-height: 0.44in;
+        }
+
+        .stat-value {
+          margin-top: 0.02in;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        .combat-panel,
+        .hp-panel,
+        .attacks-panel,
+        .senses-panel,
+        .profs-panel,
+        .languages-panel,
+        .inventory-panel,
+        .currency-panel,
+        .resources-panel {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .attacks-panel,
+        .senses-panel,
+        .resources-panel {
+          flex: 1;
+        }
+
+        .combat-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 0.05in;
+          padding: 0.05in;
+        }
+
+        .combat-grid .stat:nth-child(4) {
+          grid-column: 1 / span 1;
+        }
+
+        .combat-grid .stat:nth-child(5) {
+          grid-column: 2 / span 2;
+        }
+
+        .hp-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.05in;
+          padding: 0.05in;
+        }
+
+        .hp-grid .stat:nth-child(1) {
+          grid-column: 1 / span 2;
         }
 
         .tight-table {
@@ -1113,78 +1463,22 @@ export default async function PrintPage({
           background: #f1f5f9;
         }
 
-        .mark-col {
-          width: 0.17in;
-          text-align: center;
-        }
-
         .num-col {
           width: 0.35in;
           text-align: right;
           font-weight: 600;
         }
 
-        .skills-panel .tight-table td,
-        .skills-panel .tight-table th {
-          font-size: 8.5px;
-          height: 0.135in;
-        }
-
-        .combat-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          grid-template-rows: 1fr 1fr;
-          gap: 0.05in;
-          padding: 0.05in;
-        }
-
-        .combat-grid .stat:nth-child(4) {
-          grid-column: 1 / span 1;
-        }
-
-        .combat-grid .stat:nth-child(5) {
-          grid-column: 2 / span 2;
-        }
-
-        .stat {
-          border: 1px solid #64748b;
-          border-radius: 2px;
-          padding: 0.03in 0.04in;
-          min-height: 0.44in;
-        }
-
-        .stat-value {
-          margin-top: 0.02in;
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 1;
-        }
-
-        .hp-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: 1fr 1fr;
-          gap: 0.05in;
-          padding: 0.05in;
-        }
-
-        .hp-grid .stat:nth-child(1) {
-          grid-column: 1 / span 2;
+        .label-col {
+          width: 0.8in;
+          font-weight: 600;
+          background: #f8fafc;
         }
 
         .attacks-table td,
         .attacks-table th {
           height: 0.2in;
           font-size: 8.5px;
-        }
-
-        .attacks-panel,
-        .traits-panel,
-        .feats-panel,
-        .inventory-panel,
-        .profs-panel {
-          display: flex;
-          flex-direction: column;
         }
 
         .trimmed-list {
@@ -1197,15 +1491,27 @@ export default async function PrintPage({
 
         .trimmed-list.compact {
           font-size: 8.5px;
-          line-height: 1.15;
+          line-height: 1.2;
         }
 
-        .traits-panel .trimmed-list {
-          max-height: 3.45in;
+        .scroll-list {
+          flex: 1;
+          overflow: hidden;
+        }
+
+        .two-col {
+          columns: 2;
+          column-gap: 0.16in;
         }
 
         .list-block {
           padding: 0.05in;
+        }
+
+        .inline-list {
+          font-size: 8.5px;
+          line-height: 1.25;
+          margin-top: 2px;
         }
 
         .placeholder {
@@ -1214,37 +1520,116 @@ export default async function PrintPage({
           padding: 0.05in;
         }
 
-        .notes-area {
-          margin: 0.05in;
-          border: 1px dashed #64748b;
-          background-image: repeating-linear-gradient(
-            to bottom,
-            transparent 0,
-            transparent 0.18in,
-            #cbd5e1 0.18in,
-            #cbd5e1 0.19in
-          );
-          flex: 1;
-          min-height: 0.8in;
+        .currency-row {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 0.04in;
+          padding: 0.05in;
         }
 
-        .notes-panel {
+        .coin-cell {
+          border: 1px solid #64748b;
+          border-radius: 2px;
+          text-align: center;
+          padding: 0.03in 0.02in;
+        }
+
+        .coin-value {
+          font-size: 11px;
+          font-weight: 700;
+        }
+
+        /* ---- Pages 2-4 shared detail layout ---- */
+        .detail-layout {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          row-gap: 0.1in;
+        }
+
+        .detail-body {
+          flex: 1;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 0.1in;
+          overflow: hidden;
+        }
+
+        .detail-col {
+          display: flex;
+          flex-direction: column;
+          row-gap: 0.1in;
+          overflow: hidden;
+        }
+
+        .panel.grow {
+          flex: 1;
+        }
+
+        .prose-block {
+          padding: 0.05in 0.06in;
+          font-size: 9px;
+          line-height: 1.35;
+          white-space: pre-wrap;
+          overflow: hidden;
+        }
+
+        .prose-block.grow {
+          flex: 1;
+        }
+
+        .magic-items-panel {
           display: flex;
           flex-direction: column;
         }
 
-        .page2-layout {
-          height: 100%;
-          display: grid;
-          grid-template-rows: 0.7in 9.5in;
-          row-gap: 0.1in;
+        .magic-item-list {
+          margin: 0;
+          padding: 0.05in 0.08in 0.08in 0.28in;
+          font-size: 9px;
         }
 
-        .page2-header {
+        .magic-item-list li {
+          min-height: 0.18in;
+          border-bottom: 1px solid #cbd5e1;
+        }
+
+        .details-body {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .ability-summary-grid {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 0.04in;
+          padding: 0.05in;
+        }
+
+        .ability-summary-cell {
+          border: 1px solid #64748b;
+          border-radius: 2px;
+          text-align: center;
+          padding: 0.03in 0.02in;
+        }
+
+        .ability-summary-mod {
+          font-size: 13px;
+          font-weight: 700;
+          line-height: 1.1;
+        }
+
+        .ability-summary-score {
+          font-size: 9px;
+          color: #334155;
+        }
+
+        /* ---- Spell page ---- */
+        .spell-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
           padding: 0.06in;
+          height: 0.7in;
         }
 
         .sheet-title {
@@ -1255,69 +1640,38 @@ export default async function PrintPage({
           line-height: 1;
         }
 
-        .page2-columns {
-          display: grid;
-          grid-template-columns: 4.8in 2.9in;
-          column-gap: 0.1in;
-          height: 9.5in;
-        }
-
-        .page2-left {
-          display: grid;
-          grid-template-rows: 1.1in 1.3in 6.9in;
-          row-gap: 0.1in;
-        }
-
-        .page2-right {
-          display: grid;
-          grid-template-rows: 7.35in 2.05in;
-          row-gap: 0.1in;
+        .spell-summary-panel {
+          display: flex;
+          flex-direction: column;
         }
 
         .spell-summary-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(5, 1fr);
           gap: 0.06in;
           padding: 0.06in;
         }
 
-        .spell-list-panel {
+        .spell-body {
+          grid-template-columns: 2.4in 1fr;
+        }
+
+        .spell-slots-panel {
           display: flex;
           flex-direction: column;
+        }
+
+        .slot-track {
+          font-size: 9px;
+          letter-spacing: 0.04em;
         }
 
         .spell-list-grid {
           display: grid;
           grid-template-rows: repeat(3, auto);
-          gap: 0.05in;
+          gap: 0.06in;
           padding: 0.06in;
-        }
-
-        .small-value-list {
-          margin-top: 2px;
-          font-size: 10px;
-          min-height: 0.18in;
-          white-space: nowrap;
           overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        .spell-placeholder {
-          flex: 1;
-        }
-
-        .right-notes-panel,
-        .resources-panel {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .notes-area.tall {
-          min-height: 6.75in;
-        }
-
-        .notes-area.short {
-          min-height: 1.45in;
         }
 
         .sheet-footer {
