@@ -54,6 +54,7 @@ export const LANGUAGE_VALUES = [
   "Primordial",
   "Raam",
   "Sylvan",
+  "Thieves' Cant",
   "Thri-kreen",
   "Trade Tongue",
   "Tyr",

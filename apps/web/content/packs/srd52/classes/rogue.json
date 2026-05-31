@@ -93,6 +93,10 @@
     {
       "type": "grant_save_proficiency",
       "ability": "int"
+    },
+    {
+      "type": "grant_tool_proficiency",
+      "tool": "Thieves' Tools"
     }
   ],
   "description": "A precise opportunist specializing in stealth, agility, and tactical strikes."
