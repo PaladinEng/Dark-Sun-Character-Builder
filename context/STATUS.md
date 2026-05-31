@@ -8,28 +8,31 @@ GitHub: https://github.com/PaladinEng/Dark-Sun-Character-Builder
 
 Builder core works with the closed-loop validation harness green. Both the /print
 sheet and the /sheet HTML view have been reworked to a shared multi-section
-information architecture inspired by the D&D 2024 reference, and the rules engine
-supports multiple equipped weapons end to end.
+information architecture inspired by the D&D 2024 reference. The rules engine
+supports multiple equipped weapons, natural weapon attacks, half-feat ability
+bonuses, custom spell entry, language picker with literacy tracking, and
+character save/load via JSON import/export.
 
 ## Last Session
-Date: 2026-05-31 (Session 5 — Sheet & print layout rework)
+Date: 2026-05-31 (Cowork bug-fix session — 20+ fixes and features)
 Done:
-- Reworked `apps/web/app/print/page.tsx` from 2 pages to up to 4 (fixed inch-based
-  CSS kept): page 1 core (skills grouped under abilities with ●/○ proficiency
-  markers, combat, HP, attacks, senses, proficiencies, languages, equipment,
-  CP/SP/EP/GP/PP currency, conditions); page 2 features & equipment (class/subclass
-  features, species traits, feats, equipped-gear table, inventory, 5 magic-item
-  slots); page 3 character details (appearance, description, backstory, alignment,
-  notes, companion/familiar, compact ability summary); page 4 spellcasting, rendered
-  only for casters (summary, slot tracker, cantrip/known/prepared lists with R/C
-  markers).
-- Reworked `apps/web/app/sheet/page.tsx` to mirror the same sections in one
-  scrollable Tailwind document; removed the duplicated combat strip and HP block;
-  grouped skills under abilities; added `SheetSection`/`StatCell` helpers.
-- Data-fetching/parsing logic and `pdfExport.ts` left untouched. Backwards-compatible
-  with the `?payload=base64` URL format.
-- Verified via the dev server: Fighter → 3 print pages, Cleric L5 → 4 print pages
-  with a populated spellcasting page; sheet renders 15 ordered sections, no dupes.
+- 8 SRD backgrounds added (Artisan, Charlatan, Farmer, Guard, Guide, Merchant, Scribe, Wayfarer)
+- Point buy input fixed (defer clamping to blur/Enter)
+- Background dropdown grouped by SRD/Dark Sun with additive filtering
+- Weapon proficiencies derived from class data, displayed on sheet/PDF
+- All 8 Dark Sun species grant languages via effects
+- Half-feat ability bonuses: 17 feats with abilityBonusOptions schema + choice UI
+- Natural weapons: grant_natural_weapon effect type, Aarakocra Talons + Thri-kreen Claws/Bite
+- Custom spell manual entry with level, list, ritual/concentration flags
+- Rogue gets Thieves' Tools + Thieves' Cant; Assassin gets Disguise Kit + Poisoner's Kit
+- Skills section added to PDF page 1
+- Language picker with Dark Sun categories, additionalChoices, literacy checkboxes
+- Current HP editable input alongside Temp HP
+- Character import/export (Save / Load section with Import JSON)
+- Wild Talent refactored to dedicated wildTalentFeatureId with description display
+- Athasian Elf updated: Trance → Elf Sleep, added Elf Run trait
+- Shortsword corrected to martial weapon category
+- Druidic feature changed to grant_language
 
 ## In Progress
 _None._
@@ -38,9 +41,7 @@ _None._
 _None._
 
 ## Next Session Should Start With
-Run `pnpm loop:check` to confirm the baseline passes. Optional follow-ups:
-tune per-page vertical budgets if long feature/backstory text clips under the fixed
-`.sheet-page` height; correct `shortsword.json` to martial (carried from Session 4);
-and, only if a page-for-page reference match is wanted, extract all 5 template
-overlays and wire `.page-3/4` overlay CSS (deliberately skipped this session — see
-the Session 5 Decision in PROMPT_LOG.md).
+Run `pnpm loop:check` to confirm baseline passes. Priority items from WORKQUEUE:
+- P2: Add Aasimar species, create 9 missing Dark Sun reworked spell entities,
+  add missing 2024 SRD subclasses, localStorage auto-save
+- P3: Defiler/Psionicist/Bard stubs, feat mechanical effects, content pack generalization
