@@ -1,5 +1,5 @@
 # WORKQUEUE — Dark Sun Character Builder
-Last updated: 2026-06-06
+Last updated: 2026-06-07
 
 ## P1 — High Priority
 - [x] ~~**Class resources system** (Focus Points, Rage, Bardic Inspiration, Sorcery Points, etc.) — schema, derivation, display on sheet/print/PDF~~ (done 2026-06-06, Cowork session)
@@ -15,10 +15,10 @@ Last updated: 2026-06-06
 - [x] ~~Support multiple equipped weapons and a multi-row attack table~~ (done 2026-04-26)
 
 ## P2 — Medium Priority
-- [ ] **Weapon Mastery feat** — gate mastery properties behind class feature/feat, add choice UI, add effects to weapon-master.json
-- [ ] **Per-feature notes** — add `featureNotes` map to CharacterState, input fields next to each feature/feat, display on sheet/print/PDF
+- [x] ~~**Weapon Mastery feat** — gate mastery properties behind class feature/feat, add choice UI, add effects to weapon-master.json~~ (done 2026-06-07, Cowork session)
+- [x] ~~**Per-feature notes** — add `featureNotes` map to CharacterState, input fields next to each feature/feat, display on sheet/print/PDF~~ (done 2026-06-07, Cowork session)
 - [ ] Add localStorage auto-save for character state (prevent data loss on tab close)
-- [ ] Add Aasimar species to SRD pack
+- [x] ~~Add Aasimar species to SRD pack~~ (done 2026-06-07, Cowork session)
 - [ ] Create 9 missing Dark Sun reworked spell entities (Elemental Aegis, Elemental Favor, Storm Step, Destructive Squall, Silt Horror's Grasp, Blight of the Ash Wastes, Transmute Stone to Slag, Conjure Elemental Earth/Fire reworks)
 - [ ] Add missing D&D 2024 SRD subclasses and resolve `unresolvedDisabledSubclassKeys` in profile.json (~13 subclasses)
 - [ ] Add builder shortcut to open /sheet directly

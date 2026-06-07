@@ -64,6 +64,10 @@ export const EffectSchema = z.discriminatedUnion("type", [
     damageDice: z.string().min(1),
     damageType: z.string().min(1),
     ability: AbilitySchema.optional(),
+  }),
+  z.object({
+    type: z.literal("grant_weapon_mastery"),
+    count: z.number().int().positive(),
   })
 ]);
 

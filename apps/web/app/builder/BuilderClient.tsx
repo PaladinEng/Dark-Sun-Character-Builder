@@ -834,6 +834,18 @@ export default function BuilderClient({
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
   );
+  /** All weapons that have at least one mastery property, sorted by name. */
+  const weaponsWithMastery = useMemo(() => {
+    const allEquipment = Object.values(content.equipmentById ?? {});
+    return allEquipment
+      .filter(
+        (item): item is typeof item & { masteryProperties: string[] } =>
+          item.type === "weapon" &&
+          Array.isArray(item.masteryProperties) &&
+          item.masteryProperties.length > 0
+      )
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [content.equipmentById]);
   const skillAndToolRows = useMemo(() => {
     return getSkillAndToolDisplayRows({
       skillDefinitions: content.skillDefinitions,
@@ -2546,6 +2558,56 @@ export default function BuilderClient({
             </ul>
           ) : null}
         </div>
+
+        {derived.weaponMasteryLimit > 0 && (
+          <div className="text-sm md:col-span-3">
+            <div className="font-semibold">
+              Weapon Mastery ({(state.weaponMasteryChoices ?? []).length}/{derived.weaponMasteryLimit})
+            </div>
+            <p className="mt-1 text-xs text-slate-300">
+              Choose up to {derived.weaponMasteryLimit} weapon{derived.weaponMasteryLimit > 1 ? "s" : ""} whose mastery properties you can use.
+            </p>
+            <div className="mt-2 grid gap-1 md:grid-cols-2">
+              {weaponsWithMastery.map((weapon) => {
+                const choices = state.weaponMasteryChoices ?? [];
+                const checked = choices.includes(weapon.id);
+                const atLimit = choices.length >= derived.weaponMasteryLimit;
+                return (
+                  <label
+                    key={`mastery-${weapon.id}`}
+                    className={`flex items-center gap-2 rounded border px-2 py-1 ${
+                      checked
+                        ? "border-amber-600 bg-amber-900/30"
+                        : atLimit
+                          ? "border-slate-700 bg-slate-950/20 opacity-50"
+                          : "border-slate-700 bg-slate-950/40"
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      disabled={!checked && atLimit}
+                      onChange={(event) => {
+                        const isNowChecked = event.target.checked;
+                        setState((previous) => {
+                          const current = previous.weaponMasteryChoices ?? [];
+                          const next = isNowChecked
+                            ? [...current, weapon.id]
+                            : current.filter((id) => id !== weapon.id);
+                          return { ...previous, weaponMasteryChoices: next };
+                        });
+                      }}
+                    />
+                    <span>{weapon.name}</span>
+                    <span className="ml-auto text-xs text-amber-300/70">
+                      {weapon.masteryProperties.join(", ")}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Identity & Combat Tracking</div>

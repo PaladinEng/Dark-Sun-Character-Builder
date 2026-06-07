@@ -1,0 +1,11 @@
+{
+  "id": "srd52:feature:weapon-mastery-fighter",
+  "name": "Weapon Mastery",
+  "effects": [
+    {
+      "type": "grant_weapon_mastery",
+      "count": 3
+    }
+  ],
+  "description": "Your training with weapons allows you to use the mastery properties of three kinds of weapons of your choice with which you have proficiency."
+}

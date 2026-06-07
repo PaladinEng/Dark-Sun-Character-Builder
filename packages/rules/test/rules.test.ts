@@ -1,4 +1,4 @@
-import type { Background, Class, Equipment, Feat, MergedContent, PackManifest, Spell } from "@dark-sun/content";
+import type { Background, Class, Equipment, Feat, Feature, MergedContent, PackManifest, Spell } from "@dark-sun/content";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -569,11 +569,17 @@ describe("rules", () => {
   });
 
   it("includes weapon mastery annotation on derived attacks", () => {
+    const masteryFeature: Feature = {
+      id: "test:feature:weapon-mastery",
+      name: "Weapon Mastery",
+      effects: [{ type: "grant_weapon_mastery" as const, count: 2 }]
+    };
     const klass: Class = {
       id: "test:class:martial",
       name: "Martial",
       hitDie: 10,
-      weaponProficiencies: { martial: true }
+      weaponProficiencies: { martial: true },
+      classFeaturesByLevel: [{ level: 1, featureId: masteryFeature.id }]
     };
     const longsword: Equipment = {
       id: "test:weapon:longsword",
@@ -589,6 +595,7 @@ describe("rules", () => {
       baseState({
         selectedClassId: klass.id,
         equippedWeaponId: longsword.id,
+        weaponMasteryChoices: [longsword.id],
         baseAbilities: {
           str: 16,
           dex: 12,
@@ -602,7 +609,8 @@ describe("rules", () => {
         classes: [klass],
         classesById: { [klass.id]: klass },
         equipment: [longsword],
-        equipmentById: { [longsword.id]: longsword }
+        equipmentById: { [longsword.id]: longsword },
+        featuresById: { [masteryFeature.id]: masteryFeature }
       })
     );
 

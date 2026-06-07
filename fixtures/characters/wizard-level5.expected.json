@@ -32,6 +32,7 @@
       "toHit": 5
     }
   ],
+  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {

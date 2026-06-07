@@ -12,6 +12,7 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
+  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [],
   "finalAbilities": {

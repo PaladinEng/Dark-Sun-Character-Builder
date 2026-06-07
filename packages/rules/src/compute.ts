@@ -609,6 +609,12 @@ export function computeDerivedState(
     armorClass += 2;
   }
 
+  // Weapon Mastery: take the max limit from class/feat effects (species don't grant mastery)
+  const weaponMasteryLimit = applied.weaponMasteryLimit;
+  const masteryChoices = new Set(
+    (state.weaponMasteryChoices ?? []).slice(0, weaponMasteryLimit)
+  );
+
   const attacks: DerivedState["attacks"] = [];
   for (const equippedWeapon of weapons) {
     if (equippedWeapon.type !== "weapon" || !equippedWeapon.damageDice) {
@@ -643,13 +649,18 @@ export function computeDerivedState(
         `Attack with ${equippedWeapon.name} is not proficient; proficiency bonus not applied`
       );
     }
+    // Only include mastery properties when the character has weapon mastery
+    // and has chosen this weapon for mastery.
+    const hasMastery =
+      weaponMasteryLimit > 0 &&
+      masteryChoices.has(equippedWeapon.id) &&
+      equippedWeapon.masteryProperties &&
+      equippedWeapon.masteryProperties.length > 0;
     attacks.push({
       name: equippedWeapon.name,
       toHit: mod + (proficientWithWeapon ? proficiencyBonus : 0) + attackBonus,
       damage: `${equippedWeapon.damageDice}${signed(mod)}`,
-      ...(equippedWeapon.masteryProperties && equippedWeapon.masteryProperties.length > 0
-        ? { mastery: [...equippedWeapon.masteryProperties] }
-        : {}),
+      ...(hasMastery ? { mastery: [...equippedWeapon.masteryProperties!] } : {}),
     });
   }
   // Add natural weapon attacks from species/other effects
@@ -749,6 +760,7 @@ export function computeDerivedState(
     armorClass,
     attacks,
     attack,
+    weaponMasteryLimit,
     spellcastingAbility,
     spellSaveDC,
     spellAttackBonus,

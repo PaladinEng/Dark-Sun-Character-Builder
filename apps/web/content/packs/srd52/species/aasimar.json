@@ -1,0 +1,47 @@
+{
+  "id": "srd52:species:aasimar",
+  "name": "Aasimar",
+  "effects": [
+    {
+      "type": "set_speed",
+      "value": 30
+    },
+    {
+      "type": "grant_sense",
+      "sense": "darkvision",
+      "range": 60
+    },
+    {
+      "type": "grant_resistance",
+      "damageType": "necrotic"
+    },
+    {
+      "type": "grant_resistance",
+      "damageType": "radiant"
+    },
+    {
+      "type": "grant_trait",
+      "name": "Celestial Revelation",
+      "description": "When you reach 3rd level, choose one revelation below. Thereafter, you can use a Bonus Action to unleash the celestial energy within yourself, gaining the benefits of that revelation. Your transformation lasts for 1 minute or until you end it (no action required). Once you transform, you can't do so again until you finish a Long Rest. Heavenly Wings, Inner Radiance, or Necrotic Shroud."
+    },
+    {
+      "type": "grant_trait",
+      "name": "Healing Hands",
+      "description": "As a Magic action, you touch a creature and roll a number of d4s equal to your Proficiency Bonus. The creature regains a number of Hit Points equal to the total rolled. Once you use this trait, you can't use it again until you finish a Long Rest."
+    },
+    {
+      "type": "grant_trait",
+      "name": "Light Bearer",
+      "description": "You know the Light cantrip. Charisma is your spellcasting ability for it."
+    },
+    {
+      "type": "grant_language",
+      "language": "Common"
+    },
+    {
+      "type": "grant_language",
+      "language": "Celestial"
+    }
+  ],
+  "description": "Aasimar are mortals touched by celestial power, bearing a spark of the Upper Planes within their souls. They can fan that spark to bring light, healing, and heavenly fury."
+}

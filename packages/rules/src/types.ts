@@ -147,6 +147,8 @@ export interface CharacterState {
   conditions?: CharacterConditions;
   /** Free-text notes keyed by feature or feat ID. */
   featureNotes?: Record<string, string>;
+  /** Weapon IDs the player has chosen for Weapon Mastery. */
+  weaponMasteryChoices?: string[];
 }
 
 export interface DerivedStartingEquipment {
@@ -209,6 +211,8 @@ export interface DerivedState {
     total: number;
     recharge: "short_rest" | "long_rest";
   }>;
+  /** Maximum number of weapons the character can apply mastery to (0 = no mastery). */
+  weaponMasteryLimit: number;
   feats: { id: string; name: string }[];
   warnings: string[];
   startingEquipment?: DerivedStartingEquipment;

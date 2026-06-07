@@ -15,7 +15,8 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_trait",
   "grant_tool_proficiency",
   "grant_language",
-  "grant_natural_weapon"
+  "grant_natural_weapon",
+  "grant_weapon_mastery"
 ] as const;
 
 export interface DerivedBonus {
@@ -55,6 +56,8 @@ export interface AppliedEffects {
   naturalWeapons: NaturalWeapon[];
   unarmoredDefenseAbility?: Ability;
   speedOverride?: number;
+  /** Maximum number of weapons that can have mastery applied (take highest). */
+  weaponMasteryLimit: number;
 }
 
 function dedupe<T>(items: T[]): T[] {
@@ -78,6 +81,7 @@ export function applyEffectsToCharacter(
   const naturalWeapons: NaturalWeapon[] = [];
   let unarmoredDefenseAbility: Ability | undefined;
   let speedOverride: number | undefined;
+  let weaponMasteryLimit = 0;
 
   for (const effect of effects) {
     if (effect.type === "grant_skill_proficiency") {
@@ -153,6 +157,10 @@ export function applyEffectsToCharacter(
     }
     if (effect.type === "set_speed") {
       speedOverride = effect.value;
+      continue;
+    }
+    if (effect.type === "grant_weapon_mastery") {
+      weaponMasteryLimit = Math.max(weaponMasteryLimit, effect.count);
     }
   }
 
@@ -179,6 +187,7 @@ export function applyEffectsToCharacter(
     attackBonuses,
     naturalWeapons,
     ...(unarmoredDefenseAbility ? { unarmoredDefenseAbility } : {}),
-    speedOverride
+    speedOverride,
+    weaponMasteryLimit
   };
 }

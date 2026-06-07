@@ -28,6 +28,10 @@
   "classFeaturesByLevel": [
     {
       "level": 1,
+      "featureId": "srd52:feature:weapon-mastery"
+    },
+    {
+      "level": 1,
       "featureId": "srd52:feature:lay-on-hands"
     },
     {

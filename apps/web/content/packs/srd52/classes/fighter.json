@@ -24,6 +24,10 @@
   "classFeaturesByLevel": [
     {
       "level": 1,
+      "featureId": "srd52:feature:weapon-mastery-fighter"
+    },
+    {
+      "level": 1,
       "featureId": "srd52:feature:fighting-style-defense"
     },
     {
@@ -35,12 +39,20 @@
       "featureId": "srd52:feature:action-surge"
     },
     {
+      "level": 4,
+      "featureId": "srd52:feature:weapon-mastery-fighter-improved"
+    },
+    {
       "level": 5,
       "featureId": "srd52:feature:extra-attack"
     },
     {
       "level": 9,
       "featureId": "srd52:feature:indomitable"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:weapon-mastery-fighter-superior"
     },
     {
       "level": 11,
