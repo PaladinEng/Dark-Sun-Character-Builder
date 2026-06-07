@@ -1,38 +1,30 @@
 # STATUS — Dark Sun Character Builder
-Updated: 2026-05-31
+Updated: 2026-06-06
 
 ## Current State
 Phase 0 — Project registered with Paladin Control Plane on 2026-04-03.
 Creation mode: existing-repo.
 GitHub: https://github.com/PaladinEng/Dark-Sun-Character-Builder
 
-Builder core works with the closed-loop validation harness green. Both the /print
-sheet and the /sheet HTML view have been reworked to a shared multi-section
-information architecture inspired by the D&D 2024 reference. The rules engine
-supports multiple equipped weapons, natural weapon attacks, half-feat ability
-bonuses, custom spell entry, language picker with literacy tracking, and
-character save/load via JSON import/export.
+Builder core works with the closed-loop validation harness green (13/13 stages).
+Both /print and /sheet have been reworked to a multi-section information
+architecture. The rules engine supports multiple equipped weapons, natural weapon
+attacks, half-feat ability bonuses, custom spell entry, language picker with
+literacy tracking, and character save/load via JSON import/export. PDF export
+has been fixed for ability score layout, skill markers, and spell slot alignment.
+Starting equipment is now complete for all classes and backgrounds.
 
 ## Last Session
-Date: 2026-05-31 (Cowork bug-fix session — 20+ fixes and features)
+Date: 2026-06-06 (Cowork — PDF fixes, starting equipment, class resources)
 Done:
-- 8 SRD backgrounds added (Artisan, Charlatan, Farmer, Guard, Guide, Merchant, Scribe, Wayfarer)
-- Point buy input fixed (defer clamping to blur/Enter)
-- Background dropdown grouped by SRD/Dark Sun with additive filtering
-- Weapon proficiencies derived from class data, displayed on sheet/PDF
-- All 8 Dark Sun species grant languages via effects
-- Half-feat ability bonuses: 17 feats with abilityBonusOptions schema + choice UI
-- Natural weapons: grant_natural_weapon effect type, Aarakocra Talons + Thri-kreen Claws/Bite
-- Custom spell manual entry with level, list, ritual/concentration flags
-- Rogue gets Thieves' Tools + Thieves' Cant; Assassin gets Disguise Kit + Poisoner's Kit
-- Skills section added to PDF page 1
-- Language picker with Dark Sun categories, additionalChoices, literacy checkboxes
-- Current HP editable input alongside Temp HP
-- Character import/export (Save / Load section with Import JSON)
-- Wild Talent refactored to dedicated wildTalentFeatureId with description display
-- Athasian Elf updated: Trance → Elf Sleep, added Elf Run trait
-- Shortsword corrected to martial weapon category
-- Druidic feature changed to grant_language
+- PDF ability score field no longer overlaps modifier text
+- Proficient skill markers use ASCII `*` instead of mojibaked Unicode bullet
+- Spell slots level 9 note text repositioned to avoid overlap
+- LEVEL/TOTAL/EXPENDED header row aligned to correct table row
+- Starting equipment completed for all 13 classes (backpack, bedroll, waterskin + class gear)
+- 9 Dark Sun backgrounds gained startingEquipment
+- 6 sparse backgrounds expanded
+- Class resources system: ClassResourceDefinitionSchema with 5 calculation modes, 9 classes populated, display on sheet/print/PDF
 
 ## In Progress
 _None._
@@ -42,6 +34,6 @@ _None._
 
 ## Next Session Should Start With
 Run `pnpm loop:check` to confirm baseline passes. Priority items from WORKQUEUE:
-- P2: Add Aasimar species, create 9 missing Dark Sun reworked spell entities,
-  add missing 2024 SRD subclasses, localStorage auto-save
+- P2: Weapon Mastery feat, per-feature notes, localStorage auto-save, Aasimar species
+- P2: Missing Dark Sun spells, missing SRD subclasses
 - P3: Defiler/Psionicist/Bard stubs, feat mechanical effects, content pack generalization

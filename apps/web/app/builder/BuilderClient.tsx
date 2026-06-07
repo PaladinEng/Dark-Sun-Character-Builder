@@ -2102,6 +2102,23 @@ export default function BuilderClient({
                       <div className="mt-1 text-xs text-amber-100/70">{talent.description}</div>
                     ) : null;
                   })() : null}
+                  {selectedWildTalentId ? (
+                    <input
+                      type="text"
+                      placeholder="Add note…"
+                      className="mt-1 w-full rounded border border-amber-800/50 bg-slate-950/30 px-2 py-0.5 text-xs text-amber-100 placeholder:text-amber-100/30"
+                      value={state.featureNotes?.[selectedWildTalentId] ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          featureNotes: {
+                            ...(previous.featureNotes ?? {}),
+                            [selectedWildTalentId!]: event.target.value,
+                          },
+                        }))
+                      }
+                    />
+                  ) : null}
                 </label>
               ) : null}
 
@@ -3217,6 +3234,31 @@ export default function BuilderClient({
               </label>
             );
           })()}
+
+          {(() => {
+            const originFeatIdForNote =
+              selectedBackgroundFixedOriginFeatId ??
+              state.featSelections?.origin ??
+              state.originFeatId;
+            if (!originFeatIdForNote) return null;
+            return (
+              <input
+                type="text"
+                placeholder="Add note…"
+                className="mt-2 w-full rounded border border-slate-700/50 bg-slate-950/30 px-2 py-0.5 text-xs text-slate-300 placeholder:text-slate-600"
+                value={state.featureNotes?.[originFeatIdForNote] ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    featureNotes: {
+                      ...(previous.featureNotes ?? {}),
+                      [originFeatIdForNote]: event.target.value,
+                    },
+                  }))
+                }
+              />
+            );
+          })()}
         </section>
       ) : null}
 
@@ -3469,6 +3511,23 @@ export default function BuilderClient({
                             </label>
                           );
                         })()}
+                        {existingFeatId ? (
+                          <input
+                            type="text"
+                            placeholder="Add note…"
+                            className="mt-1 w-full rounded border border-slate-700/50 bg-slate-950/30 px-2 py-0.5 text-xs text-slate-300 placeholder:text-slate-600"
+                            value={state.featureNotes?.[existingFeatId] ?? ""}
+                            onChange={(event) =>
+                              setState((previous) => ({
+                                ...previous,
+                                featureNotes: {
+                                  ...(previous.featureNotes ?? {}),
+                                  [existingFeatId]: event.target.value,
+                                },
+                              }))
+                            }
+                          />
+                        ) : null}
                       </div>
                     ) : (
                       <div className="space-y-2">
@@ -3522,6 +3581,65 @@ export default function BuilderClient({
           )}
         </div>
       </section>
+
+      {(() => {
+        const klass = state.selectedClassId
+          ? (content.classesById[state.selectedClassId] as { classFeaturesByLevel?: Array<{ level: number; featureId: string }> } | undefined)
+          : undefined;
+        const subclass = state.subclass
+          ? (content.subclassesById?.[state.subclass] as { subclassFeaturesByLevel?: Array<{ level: number; featureId: string }> } | undefined)
+          : undefined;
+        const classFeatureEntries = (klass?.classFeaturesByLevel ?? [])
+          .filter((entry) => entry.level <= state.level)
+          .map((entry) => ({
+            id: entry.featureId,
+            name: (content.featuresById[entry.featureId] as Option | undefined)?.name ?? entry.featureId,
+          }));
+        const subclassFeatureEntries = (subclass?.subclassFeaturesByLevel ?? [])
+          .filter((entry) => entry.level <= state.level)
+          .map((entry) => ({
+            id: entry.featureId,
+            name: (content.featuresById[entry.featureId] as Option | undefined)?.name ?? entry.featureId,
+          }));
+        const allEntries = [...classFeatureEntries, ...subclassFeatureEntries]
+          .filter((entry, index, self) => self.findIndex((other) => other.id === entry.id) === index);
+        if (allEntries.length === 0) return null;
+        const hasAnyNotes = allEntries.some((entry) => (state.featureNotes?.[entry.id] ?? "").length > 0);
+        return (
+          <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+            <details open={hasAnyNotes}>
+              <summary className="cursor-pointer text-sm font-semibold">
+                Class Feature Notes
+                <span className="ml-2 text-xs font-normal text-slate-400">
+                  ({allEntries.length} features)
+                </span>
+              </summary>
+              <div className="mt-3 space-y-2">
+                {allEntries.map((entry) => (
+                  <div key={`cfn-${entry.id}`} className="grid grid-cols-[1fr_2fr] items-center gap-2">
+                    <div className="text-xs text-slate-300 truncate">{entry.name}</div>
+                    <input
+                      type="text"
+                      placeholder="Add note…"
+                      className="w-full rounded border border-slate-700/50 bg-slate-950/30 px-2 py-0.5 text-xs text-slate-300 placeholder:text-slate-600"
+                      value={state.featureNotes?.[entry.id] ?? ""}
+                      onChange={(event) =>
+                        setState((previous) => ({
+                          ...previous,
+                          featureNotes: {
+                            ...(previous.featureNotes ?? {}),
+                            [entry.id]: event.target.value,
+                          },
+                        }))
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            </details>
+          </section>
+        );
+      })()}
 
       {selectedSpellcasting ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
@@ -3817,6 +3935,24 @@ export default function BuilderClient({
                             {!eligible ? (
                               <span className="mt-1 block text-amber-300">Prerequisites not met.</span>
                             ) : null}
+                            {checked ? (
+                              <input
+                                type="text"
+                                placeholder="Add note…"
+                                className="mt-1 w-full rounded border border-slate-700/50 bg-slate-950/30 px-2 py-0.5 text-xs text-slate-300 placeholder:text-slate-600"
+                                value={state.featureNotes?.[feature.id] ?? ""}
+                                onClick={(event) => event.stopPropagation()}
+                                onChange={(event) =>
+                                  setState((previous) => ({
+                                    ...previous,
+                                    featureNotes: {
+                                      ...(previous.featureNotes ?? {}),
+                                      [feature.id]: event.target.value,
+                                    },
+                                  }))
+                                }
+                              />
+                            ) : null}
                           </span>
                         </div>
                       </label>
@@ -3850,6 +3986,23 @@ export default function BuilderClient({
               <p className="mt-2 text-xs text-amber-300">
                 Select one pact boon at level 3 or higher.
               </p>
+            ) : null}
+            {selectedWarlockPactBoonId ? (
+              <input
+                type="text"
+                placeholder="Add note…"
+                className="mt-1 w-full rounded border border-slate-700/50 bg-slate-950/30 px-2 py-0.5 text-xs text-slate-300 placeholder:text-slate-600"
+                value={state.featureNotes?.[selectedWarlockPactBoonId] ?? ""}
+                onChange={(event) =>
+                  setState((previous) => ({
+                    ...previous,
+                    featureNotes: {
+                      ...(previous.featureNotes ?? {}),
+                      [selectedWarlockPactBoonId!]: event.target.value,
+                    },
+                  }))
+                }
+              />
             ) : null}
           </div>
 

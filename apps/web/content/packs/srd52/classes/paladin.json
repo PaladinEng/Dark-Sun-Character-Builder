@@ -89,6 +89,22 @@
     "equippedShieldId": "srd52:equipment:shield",
     "equippedWeaponId": "srd52:equipment:longsword"
   },
+  "resources": [
+    {
+      "name": "Lay on Hands",
+      "shortName": "LoH",
+      "recharge": "long_rest",
+      "startLevel": 1,
+      "usesLevelMultiplier": 5
+    },
+    {
+      "name": "Channel Divinity",
+      "shortName": "CD",
+      "recharge": "long_rest",
+      "startLevel": 3,
+      "usesEqualToProficiencyBonus": true
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

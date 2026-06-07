@@ -87,6 +87,16 @@
     "equippedArmorId": "srd52:equipment:leather-armor",
     "equippedWeaponId": "srd52:equipment:rapier"
   },
+  "resources": [
+    {
+      "name": "Bardic Inspiration",
+      "shortName": "Insp",
+      "recharge": "long_rest",
+      "startLevel": 1,
+      "usesEqualToAbilityMod": "cha",
+      "minimumUses": 1
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

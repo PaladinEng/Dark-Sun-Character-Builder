@@ -69,6 +69,25 @@
     "equippedArmorId": "srd52:equipment:chain-shirt",
     "equippedWeaponId": "srd52:equipment:longsword"
   },
+  "resources": [
+    {
+      "name": "Second Wind",
+      "shortName": "SW",
+      "recharge": "long_rest",
+      "startLevel": 1,
+      "usesEqualToProficiencyBonus": true
+    },
+    {
+      "name": "Action Surge",
+      "shortName": "AS",
+      "recharge": "short_rest",
+      "startLevel": 2,
+      "usesByLevel": [
+        { "level": 2, "uses": 1 },
+        { "level": 17, "uses": 2 }
+      ]
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

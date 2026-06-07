@@ -1,7 +1,8 @@
 # WORKQUEUE — Dark Sun Character Builder
-Last updated: 2026-05-31
+Last updated: 2026-06-06
 
 ## P1 — High Priority
+- [x] ~~**Class resources system** (Focus Points, Rage, Bardic Inspiration, Sorcery Points, etc.) — schema, derivation, display on sheet/print/PDF~~ (done 2026-06-06, Cowork session)
 - [x] ~~Improve /sheet HTML layout (information architecture against D&D Beyond reference)~~ (done 2026-05-31, Session 5)
 - [x] ~~Improve printable PDF/print layout (multi-page split per reference)~~ (done 2026-05-31, Session 5)
 - [x] ~~Correct `shortsword.json` to `weaponCategory: "martial"`~~ (done 2026-05-31, Cowork session)
@@ -14,10 +15,12 @@ Last updated: 2026-05-31
 - [x] ~~Support multiple equipped weapons and a multi-row attack table~~ (done 2026-04-26)
 
 ## P2 — Medium Priority
+- [ ] **Weapon Mastery feat** — gate mastery properties behind class feature/feat, add choice UI, add effects to weapon-master.json
+- [ ] **Per-feature notes** — add `featureNotes` map to CharacterState, input fields next to each feature/feat, display on sheet/print/PDF
+- [ ] Add localStorage auto-save for character state (prevent data loss on tab close)
 - [ ] Add Aasimar species to SRD pack
 - [ ] Create 9 missing Dark Sun reworked spell entities (Elemental Aegis, Elemental Favor, Storm Step, Destructive Squall, Silt Horror's Grasp, Blight of the Ash Wastes, Transmute Stone to Slag, Conjure Elemental Earth/Fire reworks)
 - [ ] Add missing D&D 2024 SRD subclasses and resolve `unresolvedDisabledSubclassKeys` in profile.json (~13 subclasses)
-- [ ] Add localStorage auto-save for character state (prevent data loss on tab close)
 - [ ] Add builder shortcut to open /sheet directly
 - [ ] Expand SRD coverage (additional spells, equipment)
 - [ ] Implement modelable feat effects when the runtime grows reaction/conditional support (Mobile +10 speed, Heavy Armor Master damage reduction, Observant +5 passive bonuses, etc.)
@@ -35,7 +38,19 @@ Last updated: 2026-05-31
 - [ ] Create homebrew content pack documentation for other DMs
 - [ ] Commercialization prep — landing page and licensing
 
-## Completed This Session (2026-05-31 Cowork)
+## Completed (2026-06-06 Cowork — PDF fixes + starting equipment + class resources)
+- [x] Class resources system — ClassResourceDefinitionSchema with 5 calculation modes, resources on 9 classes, display on sheet/print/PDF
+
+
+- [x] Fix PDF ability score overlap with modifier text (score field height/offset adjusted)
+- [x] Fix mojibaked bullet `•` before proficient skills (replaced with ASCII `*`)
+- [x] Fix spell slots level 9 "No class spell slots" text overlap
+- [x] Fix LEVEL/TOTAL/EXPENDED header row shifted down by one
+- [x] Complete starting equipment for all 13 classes (backpack, bedroll, waterskin + class-appropriate gear)
+- [x] Add startingEquipment to 9 Dark Sun backgrounds that were missing it entirely
+- [x] Expand 6 sparse backgrounds (Acrobat, Athasian Minstrel, Psionic Adept, Veiled Alliance, Acolyte, Noble)
+
+## Completed (2026-05-31 Cowork — 20+ bug fixes and features)
 - [x] 8 missing SRD backgrounds (Artisan, Charlatan, Farmer, Guard, Guide, Merchant, Scribe, Wayfarer)
 - [x] Point buy input fix (defer clamping to blur/Enter)
 - [x] Background dropdown with SRD/Dark Sun group separators

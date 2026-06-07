@@ -32,6 +32,7 @@
       "toHit": 6
     }
   ],
+  "classResources": [],
   "feats": [
     {
       "id": "test:feat:eagle-eye",

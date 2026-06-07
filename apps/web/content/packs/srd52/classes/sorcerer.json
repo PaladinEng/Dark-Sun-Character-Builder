@@ -60,6 +60,15 @@
     ],
     "equippedWeaponId": "srd52:equipment:dagger"
   },
+  "resources": [
+    {
+      "name": "Sorcery Points",
+      "shortName": "SP",
+      "recharge": "long_rest",
+      "startLevel": 2,
+      "usesEqualToLevel": true
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

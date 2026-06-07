@@ -548,27 +548,42 @@ export default async function SheetPage({
     ...(selectedSubclass?.spellListRefs ?? []),
   ]);
 
-  const classFeatureNames = selectedClass
-    ? getClassFeatureIdsForLevel(selectedClass, level).map(
-        (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
-      )
+  const featureNotes = payload.characterState.featureNotes ?? {};
+
+  const classFeatureEntries = selectedClass
+    ? getClassFeatureIdsForLevel(selectedClass, level).map((featureId) => ({
+        id: featureId,
+        name: merged.content.featuresById[featureId]?.name ?? featureId,
+      }))
     : [];
-  const subclassFeatureNames =
+  const subclassFeatureEntries =
     selectedSubclass && selectedClass && selectedSubclass.classId === selectedClass.id
-      ? getSubclassFeatureIdsForLevel(selectedSubclass, level).map(
-          (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
-        )
+      ? getSubclassFeatureIdsForLevel(selectedSubclass, level).map((featureId) => ({
+          id: featureId,
+          name: merged.content.featuresById[featureId]?.name ?? featureId,
+        }))
       : [];
-  const progressionFeatureNames = dedupeStrings([...classFeatureNames, ...subclassFeatureNames]);
-  const selectedFeatureNames = dedupeStrings([
+  const progressionFeatureEntries = (() => {
+    const seen = new Set<string>();
+    return [...classFeatureEntries, ...subclassFeatureEntries].filter((entry) => {
+      if (seen.has(entry.name)) return false;
+      seen.add(entry.name);
+      return true;
+    });
+  })();
+  const selectedFeatureIds = dedupeStrings([
     ...(payload.characterState.selectedFeatureIds ?? []),
     ...(payload.characterState.warlockInvocationFeatureIds ?? []),
     ...(payload.characterState.warlockPactBoonFeatureId
       ? [payload.characterState.warlockPactBoonFeatureId]
       : []),
-  ])
-    .map((featureId) => merged.content.featuresById[featureId]?.name ?? featureId)
-    .filter((entry) => entry.length > 0);
+  ]);
+  const selectedFeatureEntries = selectedFeatureIds
+    .map((featureId) => ({
+      id: featureId,
+      name: merged.content.featuresById[featureId]?.name ?? featureId,
+    }))
+    .filter((entry) => entry.name.length > 0);
 
   const speciesTraitEntries = dedupeStrings(derived.traits);
 
@@ -679,10 +694,14 @@ export default async function SheetPage({
     label,
     active: activeConditionSet.has(label.toLowerCase()),
   }));
-  const allClassFeatures = dedupeStrings([
-    ...progressionFeatureNames,
-    ...selectedFeatureNames,
-  ]);
+  const allClassFeatureEntries = (() => {
+    const seen = new Set<string>();
+    return [...progressionFeatureEntries, ...selectedFeatureEntries].filter((entry) => {
+      if (seen.has(entry.name)) return false;
+      seen.add(entry.name);
+      return true;
+    });
+  })();
 
   const hasCompanion = hasCompanionData(payload.characterState.companion);
   const hasFamiliar = hasCompanionData(payload.characterState.familiar);
@@ -779,6 +798,30 @@ export default async function SheetPage({
             <StatCell label="Exhaustion" value={exhaustionLevel} />
           </div>
         </SheetSection>
+
+        {/* Class Resources (Focus Points, Rage, etc.) */}
+        {derived.classResources.length > 0 ? (
+          <SheetSection title="Class Resources">
+            <div className="grid grid-cols-2 gap-2 p-2 text-sm sm:grid-cols-3 lg:grid-cols-4">
+              {derived.classResources.map((resource, index) => (
+                <div
+                  key={`class-resource-${index}`}
+                  className="rounded border border-slate-900 p-2"
+                >
+                  <div className="text-[11px] uppercase tracking-wide text-slate-600">
+                    {resource.name}
+                  </div>
+                  <div className="text-lg font-bold">
+                    {resource.total === -1 ? "Unlimited" : resource.total}{" "}
+                    <span className="text-xs font-normal text-slate-500">
+                      ({resource.recharge === "short_rest" ? "SR" : "LR"})
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SheetSection>
+        ) : null}
 
         {/* Core: abilities/saves/skills + attacks/senses */}
         <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
@@ -938,24 +981,34 @@ export default async function SheetPage({
             <div className="space-y-2 p-2 text-sm">
               <div>
                 <div className="text-[11px] uppercase tracking-wide text-slate-600">By Class / Subclass Level</div>
-                {progressionFeatureNames.length === 0 ? (
+                {progressionFeatureEntries.length === 0 ? (
                   <p>None</p>
                 ) : (
                   <ul className="list-disc space-y-1 pl-5">
-                    {progressionFeatureNames.map((name) => (
-                      <li key={`class-feature-${name}`}>{name}</li>
+                    {progressionFeatureEntries.map((entry) => (
+                      <li key={`class-feature-${entry.id}`}>
+                        {entry.name}
+                        {featureNotes[entry.id] ? (
+                          <span className="ml-1 text-xs italic text-slate-500"> — {featureNotes[entry.id]}</span>
+                        ) : null}
+                      </li>
                     ))}
                   </ul>
                 )}
               </div>
               <div>
                 <div className="text-[11px] uppercase tracking-wide text-slate-600">Selected / Combined</div>
-                {allClassFeatures.length === 0 ? (
+                {allClassFeatureEntries.length === 0 ? (
                   <p>None</p>
                 ) : (
                   <ul className="list-disc space-y-1 pl-5">
-                    {allClassFeatures.map((name) => (
-                      <li key={`all-feature-${name}`}>{name}</li>
+                    {allClassFeatureEntries.map((entry) => (
+                      <li key={`all-feature-${entry.id}`}>
+                        {entry.name}
+                        {featureNotes[entry.id] ? (
+                          <span className="ml-1 text-xs italic text-slate-500"> — {featureNotes[entry.id]}</span>
+                        ) : null}
+                      </li>
                     ))}
                   </ul>
                 )}
@@ -986,7 +1039,12 @@ export default async function SheetPage({
                 ) : (
                   <ul className="list-disc space-y-1 pl-5">
                     {derived.feats.map((feat) => (
-                      <li key={feat.id}>{feat.name}</li>
+                      <li key={feat.id}>
+                        {feat.name}
+                        {featureNotes[feat.id] ? (
+                          <span className="ml-1 text-xs italic text-slate-500"> — {featureNotes[feat.id]}</span>
+                        ) : null}
+                      </li>
                     ))}
                   </ul>
                 )}

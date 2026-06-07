@@ -12,6 +12,7 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
+  "classResources": [],
   "feats": [],
   "finalAbilities": {
     "cha": 10,

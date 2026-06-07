@@ -8,6 +8,7 @@ export type {
   Species,
   Background,
   Class,
+  ClassResourceDefinition,
   Subclass,
   Spellcasting,
   ClassFeatureGrant,

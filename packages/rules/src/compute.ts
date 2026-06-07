@@ -1,5 +1,6 @@
 import type {
   Class,
+  ClassResourceDefinition,
   Effect,
   Equipment,
   Feat,
@@ -290,6 +291,43 @@ function getLevelAdvancements(
   }
 
   return byLevel;
+}
+
+function resolveResourceUses(
+  resource: ClassResourceDefinition,
+  level: number,
+  proficiencyBonus: number,
+  abilityMods: AbilityRecord
+): number {
+  if (resource.startLevel && level < resource.startLevel) {
+    return 0;
+  }
+  let uses = 0;
+
+  if (resource.usesByLevel) {
+    // Find the highest entry whose level ≤ character level
+    const sorted = [...resource.usesByLevel].sort((a, b) => a.level - b.level);
+    for (const entry of sorted) {
+      if (entry.level <= level) {
+        uses = entry.uses;
+      }
+    }
+  } else if (resource.usesEqualToLevel) {
+    uses = level;
+  } else if (resource.usesEqualToProficiencyBonus) {
+    uses = proficiencyBonus;
+  } else if (resource.usesEqualToAbilityMod) {
+    uses = abilityMods[resource.usesEqualToAbilityMod] ?? 0;
+  } else if (resource.usesLevelMultiplier != null) {
+    uses = level * resource.usesLevelMultiplier;
+  }
+
+  // -1 means unlimited; skip minimum clamping for that
+  if (uses !== -1 && resource.minimumUses != null) {
+    uses = Math.max(resource.minimumUses, uses);
+  }
+
+  return uses;
 }
 
 export function computeDerivedState(
@@ -716,6 +754,14 @@ export function computeDerivedState(
     spellAttackBonus,
     spellSlots,
     spellcasting,
+    classResources: (klass?.resources ?? [])
+      .filter((r) => !r.startLevel || level >= r.startLevel)
+      .map((r) => ({
+        name: r.name,
+        ...(r.shortName ? { shortName: r.shortName } : {}),
+        total: resolveResourceUses(r, level, proficiencyBonus, abilityMods),
+        recharge: r.recharge,
+      })),
     feats: feats.map((feat) => ({ id: feat.id, name: feat.name })),
     warnings: dedupe(warnings),
     ...(startingEquipment ? { startingEquipment } : {}),

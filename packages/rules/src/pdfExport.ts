@@ -75,9 +75,12 @@ export type PdfExportCharacterSnapshot = {
     notes?: string | null;
   }>;
   classFeatureNames?: readonly string[];
+  classFeatureIds?: readonly string[];
   speciesTraitNames?: readonly string[];
   selectedFeatureNames?: readonly string[];
+  selectedFeatureIds?: readonly string[];
   featNames?: readonly string[];
+  featIds?: readonly string[];
   activeConditionNames?: readonly string[];
   spellcastingAbility?: Ability | null;
   spellcastingModifier?: number | null;
@@ -119,6 +122,8 @@ export type PdfExportCharacterSnapshot = {
   equippedShieldName?: string | null;
   equippedWeaponName?: string | null;
   warningMessages?: readonly string[];
+  classResources?: ReadonlyArray<{ name: string; shortName?: string; total: number; recharge: string }>;
+  featureNotes?: Readonly<Record<string, string>>;
 };
 
 function escapePdfText(value: string): string {
@@ -1700,16 +1705,42 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
         ? `DC ${snapshot.spellSaveDC}`
         : "-";
   const attackNotes = snapshot.attackNotes?.trim() || "-";
+  const notesMap = snapshot.featureNotes ?? {};
   const classFeatureLines = (() => {
-    const merged = normalizeDisplayValues([
-      ...(snapshot.classFeatureNames ?? []),
-      ...(snapshot.selectedFeatureNames ?? []),
-    ]);
-    return merged.length > 0 ? merged : ["None"];
+    const classNames = snapshot.classFeatureNames ?? [];
+    const classIds = snapshot.classFeatureIds ?? [];
+    const selectedNames = snapshot.selectedFeatureNames ?? [];
+    const selectedIds = snapshot.selectedFeatureIds ?? [];
+    const allNames = [...classNames, ...selectedNames];
+    const allIds = [...classIds, ...selectedIds];
+    const merged = normalizeDisplayValues(allNames);
+    const withNotes = merged.map((name) => {
+      const idx = allNames.indexOf(name);
+      const id = idx >= 0 ? allIds[idx] : undefined;
+      const note = id ? notesMap[id] : undefined;
+      return note ? `${name} - ${note}` : name;
+    });
+    return withNotes.length > 0 ? withNotes : ["None"];
   })();
   const speciesTraitLines = normalizeLines(snapshot.speciesTraitNames, "None");
-  const featLines = normalizeLines(snapshot.featNames, "None");
+  const featLines = (() => {
+    const names = snapshot.featNames ?? [];
+    const ids = snapshot.featIds ?? [];
+    const normalized = names.length > 0 ? names.map(String) : ["None"];
+    return normalized.map((name, idx) => {
+      if (name === "None") return name;
+      const id = ids[idx];
+      const note = id ? notesMap[id] : undefined;
+      return note ? `${name} - ${note}` : name;
+    });
+  })();
   const conditionLines = normalizeLines(snapshot.activeConditionNames, "None");
+  const classResourceLines = (snapshot.classResources ?? []).map((resource) => {
+    const label = resource.shortName ?? resource.name;
+    const rechargeLabel = resource.recharge === "short_rest" ? "SR" : "LR";
+    const totalLabel = resource.total === -1 ? "Unlimited" : `${resource.total}`;
+    return `${label}: ${totalLabel} (${rechargeLabel})`;
+  });
   const saveProficiencySet = new Set(snapshot.saveProficiencies ?? []);
   const cantripRows = (snapshot.cantripSpellNames ?? []).slice(0, 2).map((name) => ({
     name: `Cantrip: ${name}`,
@@ -2049,6 +2080,15 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     rightWidth - 108,
     conditionsY + 10
   );
+  if (classResourceLines.length > 0) {
+    const resourceX = rightX + Math.floor(rightWidth / 2);
+    let resourceY = conditionsY + conditionsHeight - 20;
+    for (const resourceLine of classResourceLines.slice(0, 3)) {
+      if (resourceY < conditionsY + 4) break;
+      drawText(commands, resourceLine, resourceX, resourceY, 8, false);
+      resourceY -= 10;
+    }
+  }
 
   drawSection(commands, rightX, featuresY, rightWidth, featuresHeight, "Features Summary");
   const featuresInnerX = rightX + SECTION_INNER_PADDING;

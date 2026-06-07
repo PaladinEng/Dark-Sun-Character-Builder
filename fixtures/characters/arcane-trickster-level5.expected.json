@@ -22,6 +22,7 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
+  "classResources": [],
   "feats": [
     {
       "id": "test:feat:sprinter",

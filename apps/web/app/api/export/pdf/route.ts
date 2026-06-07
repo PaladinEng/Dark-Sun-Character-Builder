@@ -419,27 +419,45 @@ export async function POST(request: Request) {
       characterStateWithOptionalIdentity.currentHp ??
       characterStateWithOptionalIdentity.currentHitPoints
   );
-  const classFeatureNames = selectedClass
-    ? getClassFeatureIdsForLevel(selectedClass, normalizedLevel).map(
-        (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
-      )
+  const classFeatureIdsRaw = selectedClass
+    ? getClassFeatureIdsForLevel(selectedClass, normalizedLevel)
     : [];
-  const subclassFeatureNames =
+  const subclassFeatureIdsRaw =
     selectedSubclass && selectedClass && selectedSubclass.classId === selectedClass.id
-      ? getSubclassFeatureIdsForLevel(selectedSubclass, normalizedLevel).map(
-          (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
-        )
+      ? getSubclassFeatureIdsForLevel(selectedSubclass, normalizedLevel)
       : [];
-  const allProgressionFeatureNames = [...new Set([...classFeatureNames, ...subclassFeatureNames])];
-  const selectedFeatureNames = [...new Set([
+  const classFeatureNames = classFeatureIdsRaw.map(
+    (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
+  );
+  const subclassFeatureNames = subclassFeatureIdsRaw.map(
+    (featureId) => merged.content.featuresById[featureId]?.name ?? featureId
+  );
+  const allProgressionIds = [...classFeatureIdsRaw, ...subclassFeatureIdsRaw];
+  const allProgressionNames = [...classFeatureNames, ...subclassFeatureNames];
+  const seenProgressionNames = new Set<string>();
+  const dedupedProgressionIds: string[] = [];
+  const dedupedProgressionNames: string[] = [];
+  for (let i = 0; i < allProgressionNames.length; i++) {
+    if (!seenProgressionNames.has(allProgressionNames[i])) {
+      seenProgressionNames.add(allProgressionNames[i]);
+      dedupedProgressionIds.push(allProgressionIds[i]);
+      dedupedProgressionNames.push(allProgressionNames[i]);
+    }
+  }
+  const selectedFeatureIdsRaw = [...new Set([
     ...(payload.characterState.selectedFeatureIds ?? []),
     ...(payload.characterState.warlockInvocationFeatureIds ?? []),
     ...(payload.characterState.warlockPactBoonFeatureId
       ? [payload.characterState.warlockPactBoonFeatureId]
       : [])
-  ])]
+  ])];
+  const selectedFeatureNames = selectedFeatureIdsRaw
     .map((featureId) => merged.content.featuresById[featureId]?.name ?? featureId)
     .filter((name) => name.trim().length > 0);
+  const selectedFeatureIdsFiltered = selectedFeatureIdsRaw.filter((_, idx) => {
+    const name = merged.content.featuresById[selectedFeatureIdsRaw[idx]]?.name ?? selectedFeatureIdsRaw[idx];
+    return name.trim().length > 0;
+  });
   const speciesTraitNames = summarizeSpeciesTraits(selectedSpecies?.description, selectedSpecies?.effects);
   const activeConditionNames = (derived.activeConditionIds ?? []).map((conditionId) =>
     formatConditionLabel(conditionId)
@@ -612,10 +630,14 @@ export async function POST(request: Request) {
     attackDamage: derived.attack?.damage,
     attackNotes,
     attacks: attacksSnapshot,
-    classFeatureNames: allProgressionFeatureNames,
+    classFeatureNames: dedupedProgressionNames,
+    classFeatureIds: dedupedProgressionIds,
     speciesTraitNames,
     selectedFeatureNames,
+    selectedFeatureIds: selectedFeatureIdsFiltered,
     featNames: derived.feats.map((feat) => feat.name),
+    featIds: derived.feats.map((feat) => feat.id),
+    featureNotes: payload.characterState.featureNotes ?? {},
     activeConditionNames,
     spellcastingAbility,
     spellcastingModifier,
@@ -656,6 +678,7 @@ export async function POST(request: Request) {
     equippedArmorName: armor?.name,
     equippedShieldName: shield?.name,
     equippedWeaponName: weapon?.name,
+    classResources: derived.classResources,
     warningMessages: validation.warnings.map((issue) => `[${issue.code}] ${issue.message}`),
   });
 

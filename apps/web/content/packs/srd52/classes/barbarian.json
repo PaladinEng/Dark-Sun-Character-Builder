@@ -87,6 +87,22 @@
     "equippedArmorId": "srd52:equipment:hide-armor",
     "equippedWeaponId": "srd52:equipment:greataxe"
   },
+  "resources": [
+    {
+      "name": "Rage",
+      "shortName": "Rage",
+      "recharge": "long_rest",
+      "startLevel": 1,
+      "usesByLevel": [
+        { "level": 1, "uses": 2 },
+        { "level": 3, "uses": 3 },
+        { "level": 6, "uses": 4 },
+        { "level": 12, "uses": 5 },
+        { "level": 17, "uses": 6 },
+        { "level": 20, "uses": -1 }
+      ]
+    }
+  ],
   "effects": [
     {
       "type": "grant_save_proficiency",

@@ -22,6 +22,7 @@
       "toHit": 2
     }
   ],
+  "classResources": [],
   "feats": [
     {
       "id": "test:feat:origin-alert",

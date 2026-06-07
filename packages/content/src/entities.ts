@@ -159,6 +159,26 @@ export const SpellcastingSchema = z.object({
 });
 export type Spellcasting = z.infer<typeof SpellcastingSchema>;
 
+const ResourceUsesAtLevelSchema = z.object({
+  level: z.number().int().min(1).max(20),
+  uses: z.number().int(), // -1 means unlimited
+});
+
+export const ClassResourceDefinitionSchema = z.object({
+  name: z.string().min(1),
+  shortName: z.string().optional(),
+  recharge: z.enum(["short_rest", "long_rest"]),
+  startLevel: z.number().int().min(1).max(20).optional(),
+  // Exactly one calculation mode should be set:
+  usesByLevel: z.array(ResourceUsesAtLevelSchema).optional(),
+  usesEqualToLevel: z.literal(true).optional(),
+  usesEqualToProficiencyBonus: z.literal(true).optional(),
+  usesEqualToAbilityMod: AbilitySchema.optional(),
+  usesLevelMultiplier: z.number().optional(),
+  minimumUses: z.number().int().optional(),
+});
+export type ClassResourceDefinition = z.infer<typeof ClassResourceDefinitionSchema>;
+
 export const ClassSchema = EntityBaseSchema.extend({
   hitDie: z.number().int().positive().optional(),
   classSkillChoices: z
@@ -180,6 +200,7 @@ export const ClassSchema = EntityBaseSchema.extend({
   spellListRefs: z.array(z.string()).optional(),
   classFeaturesByLevel: ClassFeaturesByLevelSchema.optional(),
   startingEquipment: StartingEquipmentBundleSchema.optional(),
+  resources: z.array(ClassResourceDefinitionSchema).optional(),
 }).superRefine((value, ctx) => {
   if (
     value.spellListRefIds &&

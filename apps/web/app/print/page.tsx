@@ -341,17 +341,22 @@ export default async function PrintPage({
     ? Math.max(0, Math.min(10, Math.floor(payload.characterState.exhaustionLevel ?? 0)))
     : 0;
 
-  const featureNames = [...new Set([
+  const featureNotes = payload.characterState.featureNotes ?? {};
+
+  const featureEntries = [...new Set([
     ...(payload.characterState.selectedFeatureIds ?? []),
     ...(payload.characterState.warlockInvocationFeatureIds ?? []),
     ...(payload.characterState.warlockPactBoonFeatureId
       ? [payload.characterState.warlockPactBoonFeatureId]
       : []),
   ])]
-    .map((id) => merged.content.featuresById[id]?.name)
-    .filter((name): name is string => Boolean(name));
-  const classFeatureIds = new Set<string>();
-  const classFeatureNames = (klass?.classFeaturesByLevel ?? [])
+    .map((id) => ({
+      id,
+      name: merged.content.featuresById[id]?.name ?? "",
+    }))
+    .filter((entry) => entry.name.length > 0);
+  const classFeatureIdSet = new Set<string>();
+  const classFeatureEntries = (klass?.classFeaturesByLevel ?? [])
     .filter((entry) => entry.level <= level)
     .sort((a, b) => {
       if (a.level !== b.level) {
@@ -360,17 +365,23 @@ export default async function PrintPage({
       return a.featureId.localeCompare(b.featureId);
     })
     .filter((entry) => {
-      if (classFeatureIds.has(entry.featureId)) {
+      if (classFeatureIdSet.has(entry.featureId)) {
         return false;
       }
-      classFeatureIds.add(entry.featureId);
+      classFeatureIdSet.add(entry.featureId);
       return true;
     })
-    .map((entry) => merged.content.featuresById[entry.featureId]?.name ?? entry.featureId);
-  const subclassFeatureNames =
+    .map((entry) => ({
+      id: entry.featureId,
+      name: merged.content.featuresById[entry.featureId]?.name ?? entry.featureId,
+    }));
+  const subclassFeatureEntries =
     selectedSubclass && klass && selectedSubclass.classId === klass.id
       ? getSubclassFeatureIdsForLevel(selectedSubclass, level).map(
-          (featureId) => merged.content.featuresById[featureId]?.name ?? featureId,
+          (featureId) => ({
+            id: featureId,
+            name: merged.content.featuresById[featureId]?.name ?? featureId,
+          }),
         )
       : [];
 
@@ -764,6 +775,18 @@ export default async function PrintPage({
                     {activeModifierEntries.map((entry, index) => (
                       <li key={`mod-${index}`}>{entry}</li>
                     ))}
+                    {derived.classResources.length > 0 ? (
+                      <>
+                        {derived.classResources.map((resource, index) => (
+                          <li key={`cr-${index}`}>
+                            {resource.name}:{" "}
+                            {resource.total === -1 ? "Unlimited" : resource.total}
+                            {" / "}
+                            {resource.recharge === "short_rest" ? "SR" : "LR"}
+                          </li>
+                        ))}
+                      </>
+                    ) : null}
                   </ul>
                 </section>
               </div>
@@ -785,12 +808,17 @@ export default async function PrintPage({
               <div className="detail-col">
                 <section className="panel grow">
                   <div className="section-head">Class Features</div>
-                  {classFeatureNames.length === 0 ? (
+                  {classFeatureEntries.length === 0 ? (
                     <div className="placeholder">None</div>
                   ) : (
                     <ul className="trimmed-list compact scroll-list">
-                      {classFeatureNames.map((name, index) => (
-                        <li key={`class-feature-${index}`}>{name}</li>
+                      {classFeatureEntries.map((entry) => (
+                        <li key={`class-feature-${entry.id}`}>
+                          {entry.name}
+                          {featureNotes[entry.id] ? (
+                            <span className="note-suffix"> — {featureNotes[entry.id]}</span>
+                          ) : null}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -798,12 +826,17 @@ export default async function PrintPage({
 
                 <section className="panel">
                   <div className="section-head">Subclass Features</div>
-                  {subclassFeatureNames.length === 0 ? (
+                  {subclassFeatureEntries.length === 0 ? (
                     <div className="placeholder">None</div>
                   ) : (
                     <ul className="trimmed-list compact">
-                      {subclassFeatureNames.map((name, index) => (
-                        <li key={`subclass-feature-${index}`}>{name}</li>
+                      {subclassFeatureEntries.map((entry) => (
+                        <li key={`subclass-feature-${entry.id}`}>
+                          {entry.name}
+                          {featureNotes[entry.id] ? (
+                            <span className="note-suffix"> — {featureNotes[entry.id]}</span>
+                          ) : null}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -811,7 +844,7 @@ export default async function PrintPage({
 
                 <section className="panel grow">
                   <div className="section-head">Species Traits & Selected Features</div>
-                  {passiveTraits.length === 0 && featureNames.length === 0 ? (
+                  {passiveTraits.length === 0 && featureEntries.length === 0 ? (
                     <div className="placeholder">None</div>
                   ) : (
                     <ul className="trimmed-list compact scroll-list">
@@ -819,8 +852,13 @@ export default async function PrintPage({
                       {passiveTraits.map((entry, index) => (
                         <li key={`trait-${index}`}>{entry}</li>
                       ))}
-                      {featureNames.map((name, index) => (
-                        <li key={`feature-${index}`}>{name}</li>
+                      {featureEntries.map((entry) => (
+                        <li key={`feature-${entry.id}`}>
+                          {entry.name}
+                          {featureNotes[entry.id] ? (
+                            <span className="note-suffix"> — {featureNotes[entry.id]}</span>
+                          ) : null}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -835,7 +873,12 @@ export default async function PrintPage({
                   ) : (
                     <ul className="trimmed-list compact">
                       {derived.feats.map((feat) => (
-                        <li key={feat.id}>{feat.name}</li>
+                        <li key={feat.id}>
+                          {feat.name}
+                          {featureNotes[feat.id] ? (
+                            <span className="note-suffix"> — {featureNotes[feat.id]}</span>
+                          ) : null}
+                        </li>
                       ))}
                     </ul>
                   )}
@@ -1518,6 +1561,12 @@ export default async function PrintPage({
           color: #64748b;
           font-size: 9px;
           padding: 0.05in;
+        }
+
+        .note-suffix {
+          font-style: italic;
+          color: #64748b;
+          font-size: 0.85em;
         }
 
         .currency-row {

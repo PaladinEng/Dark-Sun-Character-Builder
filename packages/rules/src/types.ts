@@ -145,6 +145,8 @@ export interface CharacterState {
   familiar?: CompanionPlaceholder;
   baseSpeed?: number;
   conditions?: CharacterConditions;
+  /** Free-text notes keyed by feature or feat ID. */
+  featureNotes?: Record<string, string>;
 }
 
 export interface DerivedStartingEquipment {
@@ -201,6 +203,12 @@ export interface DerivedState {
     cantripsKnownIds: string[];
     customSpells: CustomSpell[];
   };
+  classResources: Array<{
+    name: string;
+    shortName?: string;
+    total: number;
+    recharge: "short_rest" | "long_rest";
+  }>;
   feats: { id: string; name: string }[];
   warnings: string[];
   startingEquipment?: DerivedStartingEquipment;
