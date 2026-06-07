@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-recovery",
+  "name": "Boon of Recovery",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Last Stand: When you'd be reduced to 0 HP, you can drop to 1 HP instead and regain HP equal to half your HP maximum (recharges on Long Rest). Recover Vitality: Pool of ten d10s — as a Bonus Action, expend dice and regain HP equal to the roll. Pool refreshes on Long Rest."
+}

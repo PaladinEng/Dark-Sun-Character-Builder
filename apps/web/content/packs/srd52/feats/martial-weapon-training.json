@@ -1,0 +1,16 @@
+{
+  "id": "srd52:feat:martial-weapon-training",
+  "name": "Martial Weapon Training",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Weapon Proficiency: You gain proficiency with Martial weapons."
+}

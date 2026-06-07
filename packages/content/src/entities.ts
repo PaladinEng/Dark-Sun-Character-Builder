@@ -351,7 +351,7 @@ export const FeatureSchema = EntityBaseSchema.extend({
 export type Feature = z.infer<typeof FeatureSchema>;
 
 export const FeatSchema = EntityBaseSchema.extend({
-  category: z.enum(["origin", "general"]).optional(),
+  category: z.enum(["origin", "general", "fighting_style", "epic_boon"]).optional(),
   grantsAbilityIncreases: z.boolean().optional(),
   repeatable: z.boolean().optional(),
   prerequisites: SelectionPrerequisitesSchema.optional(),

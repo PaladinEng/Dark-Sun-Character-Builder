@@ -1,0 +1,19 @@
+{
+  "id": "srd52:feat:grappler",
+  "name": "Grappler",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4,
+    "abilities": {
+      "str": 13
+    }
+  },
+  "description": "Punch and Grab: When you hit a creature with an Unarmed Strike as part of the Attack action, you can use both the Damage and the Grapple option (once per turn). Attack Advantage: You have Advantage on attack rolls against a creature Grappled by you. Fast Wrestler: You don't spend extra movement to move a creature Grappled by you if the creature is your size or smaller."
+}

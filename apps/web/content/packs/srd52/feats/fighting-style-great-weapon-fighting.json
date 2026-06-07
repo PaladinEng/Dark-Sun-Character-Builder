@@ -1,0 +1,6 @@
+{
+  "id": "srd52:feat:fighting-style-great-weapon-fighting",
+  "name": "Fighting Style: Great Weapon Fighting",
+  "category": "fighting_style",
+  "description": "When you roll damage for an attack with a Melee weapon held with two hands, you can treat any 1 or 2 on a damage die as a 3. The weapon must have the Two-Handed or Versatile property."
+}

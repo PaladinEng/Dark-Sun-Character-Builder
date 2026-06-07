@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-dimensional-travel",
+  "name": "Boon of Dimensional Travel",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Blink Steps: Immediately after you take the Attack action or the Magic action, you can teleport up to 30 feet to an unoccupied space you can see."
+}

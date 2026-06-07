@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-combat-prowess",
+  "name": "Boon of Combat Prowess",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Peerless Aim: When you miss with an attack roll, you can hit instead. Once you use this benefit, you can't use it again until the start of your next turn."
+}

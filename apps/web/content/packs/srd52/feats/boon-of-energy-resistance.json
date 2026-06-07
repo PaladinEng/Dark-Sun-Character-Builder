@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-energy-resistance",
+  "name": "Boon of Energy Resistance",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Energy Resistances: Gain Resistance to two damage types of your choice from Acid/Cold/Fire/Lightning/Necrotic/Poison/Psychic/Radiant/Thunder (swap on Long Rest). Energy Redirection: When you take damage of one of those types, you can use a Reaction to force another creature you can see within 60 feet to make a Dexterity save (DC 8 + Con + PB) or take 2d12 + Con damage of the same type."
+}

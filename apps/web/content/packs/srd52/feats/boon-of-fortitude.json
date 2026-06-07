@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-fortitude",
+  "name": "Boon of Fortitude",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Fortified Health: Your Hit Point maximum increases by 40. Whenever you regain Hit Points, you can regain additional Hit Points equal to your Constitution modifier (once per turn)."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-skill",
+  "name": "Boon of Skill",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "All-Around Adept: You gain proficiency in all skills. Expertise: Choose one skill in which you lack Expertise — you gain Expertise in that skill."
+}

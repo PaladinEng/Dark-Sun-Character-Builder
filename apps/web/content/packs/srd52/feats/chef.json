@@ -1,0 +1,16 @@
+{
+  "id": "srd52:feat:chef",
+  "name": "Chef",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": [
+      "con",
+      "wis"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Cook's Utensils: You gain proficiency with Cook's Utensils. Replenishing Meal: As part of a Short Rest, you can cook special food for up to 4 + your Proficiency Bonus creatures; each ally who spends Hit Dice to heal during the rest regains an extra 1d8 HP. Bolstering Treats: With 1 hour of work (or when you finish a Long Rest), you can cook treats equal to your Proficiency Bonus; a creature can eat one as a Bonus Action to gain Temporary HP equal to your Proficiency Bonus."
+}

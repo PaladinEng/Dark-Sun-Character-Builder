@@ -59,7 +59,7 @@ type Option = {
   originFeatChoice?: {
     featIds?: string[];
   };
-  category?: "origin" | "general";
+  category?: "origin" | "general" | "fighting_style" | "epic_boon";
   repeatable?: boolean;
   prerequisites?: {
     minLevel?: number;

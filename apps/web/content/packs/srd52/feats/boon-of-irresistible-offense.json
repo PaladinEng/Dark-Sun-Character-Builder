@@ -1,0 +1,16 @@
+{
+  "id": "srd52:feat:boon-of-irresistible-offense",
+  "name": "Boon of Irresistible Offense",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Overcome Defenses: The Bludgeoning, Piercing, and Slashing damage you deal always ignores Resistance. Overwhelming Strike: When you roll a 20 on the d20 for an attack roll, you can deal extra damage equal to the ability score increased by this feat."
+}

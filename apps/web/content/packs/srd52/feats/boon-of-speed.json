@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-speed",
+  "name": "Boon of Speed",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Escape Artist: As a Bonus Action, you can take the Disengage action, which also ends the Grappled condition on you. Quickness: Your Speed increases by 30 feet."
+}

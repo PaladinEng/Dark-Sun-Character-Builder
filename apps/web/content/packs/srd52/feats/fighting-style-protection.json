@@ -1,0 +1,6 @@
+{
+  "id": "srd52:feat:fighting-style-protection",
+  "name": "Fighting Style: Protection",
+  "category": "fighting_style",
+  "description": "When a creature you can see attacks a target other than you within 5 feet of you, you can take a Reaction to interpose your Shield (if you're holding one), imposing Disadvantage on the triggering attack and all other attack rolls against the target until the start of your next turn."
+}

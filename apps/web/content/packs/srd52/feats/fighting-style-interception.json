@@ -1,0 +1,6 @@
+{
+  "id": "srd52:feat:fighting-style-interception",
+  "name": "Fighting Style: Interception",
+  "category": "fighting_style",
+  "description": "When a creature you can see hits another creature within 5 feet of you, you can take a Reaction to reduce the damage by 1d10 plus your Proficiency Bonus. You must be holding a Shield, Simple weapon, or Martial weapon."
+}

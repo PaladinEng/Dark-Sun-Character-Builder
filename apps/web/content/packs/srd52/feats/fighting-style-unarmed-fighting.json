@@ -1,0 +1,6 @@
+{
+  "id": "srd52:feat:fighting-style-unarmed-fighting",
+  "name": "Fighting Style: Unarmed Fighting",
+  "category": "fighting_style",
+  "description": "Your Unarmed Strike deals 1d6 (or 1d8 if you're not holding any weapons or a Shield) plus your Strength modifier in Bludgeoning damage. At the start of each of your turns, you can deal 1d4 Bludgeoning damage to one creature Grappled by you."
+}

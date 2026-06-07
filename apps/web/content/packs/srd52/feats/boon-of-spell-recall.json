@@ -1,0 +1,18 @@
+{
+  "id": "srd52:feat:boon-of-spell-recall",
+  "name": "Boon of Spell Recall",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19,
+    "requiresSpellcasting": true
+  },
+  "description": "Free Casting: Whenever you cast a spell with a level 1–4 spell slot, roll 1d4. If the number you roll is the same as the slot's level, the slot isn't expended."
+}

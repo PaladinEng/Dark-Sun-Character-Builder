@@ -1,0 +1,20 @@
+{
+  "id": "srd52:feat:boon-of-fate",
+  "name": "Boon of Fate",
+  "category": "epic_boon",
+  "abilityBonusOptions": {
+    "abilities": [
+      "str",
+      "dex",
+      "con",
+      "int",
+      "wis",
+      "cha"
+    ],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 19
+  },
+  "description": "Improve Fate: When you or another creature within 60 feet succeeds on or fails a D20 Test, you can roll 2d4 and apply the total as a bonus or penalty to the d20 roll. Recharges on Initiative or Short/Long Rest."
+}

@@ -1,0 +1,6 @@
+{
+  "id": "srd52:feat:fighting-style-dueling",
+  "name": "Fighting Style: Dueling",
+  "category": "fighting_style",
+  "description": "When you're holding a Melee weapon in one hand and no other weapons, you gain a +2 bonus to damage rolls with that weapon."
+}

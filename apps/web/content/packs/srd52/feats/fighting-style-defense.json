@@ -1,0 +1,6 @@
+{
+  "id": "srd52:feat:fighting-style-defense",
+  "name": "Fighting Style: Defense",
+  "category": "fighting_style",
+  "description": "While you're wearing Light, Medium, or Heavy armor, you gain a +1 bonus to Armor Class."
+}
