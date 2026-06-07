@@ -737,6 +737,20 @@ export default function BuilderClient({
     [selectableFeatures, wildTalentFeatureTag],
   );
   const selectedWildTalentId = state.wildTalentFeatureId;
+  const fightingStyleOptions = useMemo(
+    () =>
+      collectArray(content, "feats")
+        .filter((feat) => feat.category === "fighting_style")
+        .sort((a, b) => a.name.localeCompare(b.name)),
+    [content],
+  );
+  const grantsFightingStyle = useMemo(() => {
+    const klass = selectedClass as { classFeaturesByLevel?: Array<{ level: number; featureId: string }> } | undefined;
+    return (klass?.classFeaturesByLevel ?? []).some(
+      (entry) => entry.level <= state.level && entry.featureId === "srd52:feature:fighting-style",
+    );
+  }, [selectedClass, state.level]);
+  const selectedFightingStyleFeatId = state.chosenFightingStyleFeatId;
   const selectedWarlockFeatureIdsForPrereqs = useMemo(
     () =>
       new Set([
@@ -1520,6 +1534,13 @@ export default function BuilderClient({
     setState((previous) => ({
       ...previous,
       wildTalentFeatureId: featureId || undefined,
+    }));
+  };
+
+  const onChangeFightingStyle = (featId: string) => {
+    setState((previous) => ({
+      ...previous,
+      chosenFightingStyleFeatId: featId || undefined,
     }));
   };
 
@@ -3605,6 +3626,41 @@ export default function BuilderClient({
               );
             })}
           </div>
+        </section>
+      ) : null}
+
+      {grantsFightingStyle && fightingStyleOptions.length > 0 ? (
+        <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+          <h2 className="text-sm font-semibold">Fighting Style</h2>
+          <p className="mt-1 text-sm text-slate-300">
+            Your class grants the Fighting Style feature. Choose one Fighting Style feat from the list below.
+          </p>
+          {!selectedFightingStyleFeatId ? (
+            <p className="mt-2 text-sm font-semibold text-amber-300">
+              Choose a Fighting Style to complete character.
+            </p>
+          ) : null}
+          <label className="mt-3 block text-sm">
+            <div className="font-semibold">Fighting Style</div>
+            <select
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-slate-100"
+              value={selectedFightingStyleFeatId ?? ""}
+              onChange={(event) => onChangeFightingStyle(event.target.value)}
+            >
+              <option value="">Select a Fighting Style…</option>
+              {fightingStyleOptions.map((feat) => (
+                <option key={`fighting-style-${feat.id}`} value={feat.id}>
+                  {feat.name}
+                </option>
+              ))}
+            </select>
+            {selectedFightingStyleFeatId ? (() => {
+              const feat = fightingStyleOptions.find((f) => f.id === selectedFightingStyleFeatId);
+              return feat?.description ? (
+                <div className="mt-2 text-xs text-slate-300">{feat.description}</div>
+              ) : null;
+            })() : null}
+          </label>
         </section>
       ) : null}
 

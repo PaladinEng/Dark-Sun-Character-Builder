@@ -93,6 +93,8 @@ export interface CharacterState {
   selectedFeatureIds?: string[];
   /** Selected Wild Talent feature ID (Dark Sun setting). */
   wildTalentFeatureId?: string;
+  /** Chosen Fighting Style feat ID, granted when a class feature triggers it. */
+  chosenFightingStyleFeatId?: string;
   warlockInvocationFeatureIds?: string[];
   warlockPactBoonFeatureId?: string;
   warlockMysticArcanumByLevel?: Partial<Record<6 | 7 | 8 | 9, string>>;

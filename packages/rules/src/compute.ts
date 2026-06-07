@@ -239,11 +239,20 @@ function resolveSelectedFeats(
       ? candidateOriginFeat.id
       : undefined;
 
+  const chosenFightingStyleFeat = state.chosenFightingStyleFeatId
+    ? merged.featsById[state.chosenFightingStyleFeatId]
+    : undefined;
+  const resolvedFightingStyleFeatId =
+    chosenFightingStyleFeat?.category === "fighting_style"
+      ? chosenFightingStyleFeat.id
+      : undefined;
+
   // Deterministic ordering: origin feat first, then level-slot feats (ascending level),
-  // then any legacy free-form selected feats.
+  // chosen Fighting Style, then any legacy free-form selected feats.
   const allIds = dedupe([
     ...(resolvedOriginFeatId ? [resolvedOriginFeatId] : []),
     ...levelFeatIds,
+    ...(resolvedFightingStyleFeatId ? [resolvedFightingStyleFeatId] : []),
     ...(state.selectedFeats ?? [])
   ]);
 
