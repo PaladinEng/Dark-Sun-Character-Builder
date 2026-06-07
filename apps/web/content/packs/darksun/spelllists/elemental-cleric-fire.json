@@ -14,6 +14,7 @@
     "srd52:spell:aid",
     "srd52:spell:lesser-restoration",
     "srd52:spell:prayer-of-healing",
-    "srd52:spell:revivify"
+    "srd52:spell:revivify",
+    "darksun:spell:conjure-elemental-fire"
   ]
 }

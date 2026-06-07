@@ -68,6 +68,14 @@ export const EffectSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("grant_weapon_mastery"),
     count: z.number().int().positive(),
+  }),
+  z.object({
+    type: z.literal("add_speed_bonus"),
+    value: z.number().int(),
+  }),
+  z.object({
+    type: z.literal("add_hp_per_level"),
+    value: z.number().int().positive(),
   })
 ]);
 

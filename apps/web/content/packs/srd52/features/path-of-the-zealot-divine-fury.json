@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-zealot-divine-fury",
+  "name": "Divine Fury",
+  "description": "While Raging, the first creature you hit on each of your turns with a weapon attack takes extra 1d6 + half Barbarian level Necrotic or Radiant damage (your choice).",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Divine Fury",
+      "description": "Path of the Zealot feature (level 3)."
+    }
+  ]
+}

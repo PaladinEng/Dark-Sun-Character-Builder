@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-zealot-zealous-presence",
+  "name": "Zealous Presence",
+  "description": "As a Bonus Action, you unleash a war cry imbued with divine energy. Up to ten creatures of your choice within 60 feet gain Advantage on attack rolls and saving throws until the start of your next turn. Once used, you can't use it again until you finish a Long Rest.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Zealous Presence",
+      "description": "Path of the Zealot feature (level 10)."
+    }
+  ]
+}

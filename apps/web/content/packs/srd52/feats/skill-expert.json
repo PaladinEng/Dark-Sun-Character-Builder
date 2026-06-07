@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:skill-expert",
+  "name": "Skill Expert",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["str", "dex", "con", "int", "wis", "cha"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You gain proficiency in one skill of your choice. Choose one skill in which you have proficiency: you gain Expertise in that skill."
+}

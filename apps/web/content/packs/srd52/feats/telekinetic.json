@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:telekinetic",
+  "name": "Telekinetic",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["int", "wis", "cha"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You learn the Mage Hand cantrip (the hand is invisible). If you already know this spell, its range increases by 30 feet. As a Bonus Action, you can try to telekinetically shove one creature you can see within 30 feet. The target must succeed on a Strength saving throw or be moved 5 feet toward you or away from you."
+}

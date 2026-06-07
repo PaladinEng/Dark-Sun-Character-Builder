@@ -24,6 +24,8 @@
     "srd52:spell:locate-object",
     "srd52:spell:dispel-magic",
     "srd52:spell:remove-curse",
-    "srd52:spell:foresight"
+    "srd52:spell:foresight",
+    "darksun:spell:elemental-aegis",
+    "darksun:spell:elemental-favor"
   ]
 }

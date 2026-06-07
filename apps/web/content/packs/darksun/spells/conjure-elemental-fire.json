@@ -1,0 +1,18 @@
+{
+  "id": "darksun:spell:conjure-elemental-fire",
+  "name": "Conjure Elemental Fire",
+  "description": "You conjure a Large, intangible fire spirit from the elemental planes that appears in an unoccupied space within range. The spirit deals Fire damage. The spirit lasts for the duration.\n\nWhenever a creature you can see enters the spirit's space or starts its turn within 5 feet of the spirit, you can force that creature to make a Dexterity saving throw if the spirit has no creature Restrained. On failed save, the target takes 8d8 Fire damage, and the target has the Restrained condition until the spell ends. At the start of each of its turns, the Restrained target repeats the save. On a failed save, the target takes 4d8 Fire damage. On a successful save, the target isn't Restrained by the spirit.\n\nUsing a Higher-Level Spell Slot. The damage increases by 1d8 for each spell slot level above 5.",
+  "level": 5,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "60 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 Minutes",
+  "concentration": false,
+  "summary": "You conjure a Large, intangible fire spirit from the elemental planes that appears in an unoccupied space within range. The spirit deals Fire damage.",
+  "notes": "Dark Sun homebrew spell. Fire-only rework of Conjure Elemental for the Fire patron domain."
+}

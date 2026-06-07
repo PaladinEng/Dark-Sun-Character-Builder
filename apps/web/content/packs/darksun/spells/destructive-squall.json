@@ -1,0 +1,17 @@
+{
+  "id": "darksun:spell:destructive-squall",
+  "name": "Destructive Squall",
+  "description": "A violent storm erupts from you in a 30-foot Emanation. Each creature you choose in the Emanation makes a Constitution saving throw. On a failed save, a target takes 5d6 Thunder damage and 5d6 Cold damage and has the Prone condition. On a successful save, a target takes half as much damage only.",
+  "level": 5,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A violent storm erupts from you in a 30-foot Emanation. Each creature you choose in the Emanation makes a Constitution saving throw against Thunder and Cold damage.",
+  "notes": "Dark Sun homebrew spell. Rework of Destructive Wave for the Rain patron domain."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "srd52:feat:elemental-adept",
+  "name": "Elemental Adept",
+  "category": "general",
+  "repeatable": true,
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Choose one damage type: Acid, Cold, Fire, Lightning, or Thunder. Spells you cast ignore Resistance to damage of the chosen type. When you roll damage for a spell that deals damage of that type, you can treat any 1 on a damage die as a 2."
+}

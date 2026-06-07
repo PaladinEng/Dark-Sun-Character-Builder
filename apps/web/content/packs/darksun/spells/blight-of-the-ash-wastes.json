@@ -1,0 +1,18 @@
+{
+  "id": "darksun:spell:blight-of-the-ash-wastes",
+  "name": "Blight of the Ash Wastes",
+  "description": "Your touch inflicts a withering blight drawn from the desolation of the ash wastes. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition. Also, choose one ability when you cast the spell. While Poisoned, the target has Disadvantage on saving throws made with the chosen ability.\n\nThe target must repeat the saving throw at the end of each of its turns until it gets three successes or failures. If the target succeeds on three of these saves, the spell ends on the target. If the target fails three of the saves, the spell lasts for 7 days on it.\n\nWhenever the Poisoned target receives an effect that would end the Poisoned condition, the target must succeed on a Constitution saving throw, or the Poisoned condition doesn't end on it.",
+  "level": 5,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "7 Days",
+  "concentration": false,
+  "summary": "Your touch inflicts a withering blight drawn from the desolation of the ash wastes. The target must succeed on a Constitution saving throw or take 11d8 Necrotic damage and have the Poisoned condition.",
+  "notes": "Dark Sun homebrew spell. Rename of Contagion for the Magma and Silt patron domains."
+}

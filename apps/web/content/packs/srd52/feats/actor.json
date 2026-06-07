@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:actor",
+  "name": "Actor",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["cha"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You have Advantage on Deception checks made to pass yourself off as a different person. You can mimic the speech of another person or the sounds made by other creatures, requiring a successful Deception check contested by the listener's Insight check."
+}

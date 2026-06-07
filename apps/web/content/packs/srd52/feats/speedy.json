@@ -1,0 +1,19 @@
+{
+  "id": "srd52:feat:speedy",
+  "name": "Speedy",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["dex", "con"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Your walking Speed increases by 10 feet. You are not slowed by Difficult Terrain when you Dash. When you take the Dash action, you can make one melee weapon attack as part of that action.",
+  "effects": [
+    {
+      "type": "add_speed_bonus",
+      "value": 10
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "darksun:spell:elemental-favor",
+  "name": "Elemental Favor",
+  "description": "You channel the fury of the elemental planes into your strikes. Until the spell ends, your attacks with weapons deal an extra 1d4 damage on a hit. Choose the damage type when you cast the spell: Acid, Cold, Fire, Lightning, or Thunder.",
+  "level": 1,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Bonus Action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 Minute",
+  "concentration": false,
+  "summary": "You channel the fury of the elemental planes into your strikes. Until the spell ends, your attacks with weapons deal an extra 1d4 damage on a hit. Choose the damage type when you cast the spell: Acid, Cold, Fire, Lightning, or Thunder.",
+  "notes": "Dark Sun homebrew spell. Elemental rework of Divine Favor, available to all elemental patrons."
+}

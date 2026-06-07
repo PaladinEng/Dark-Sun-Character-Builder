@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-zealot-rage-beyond-death",
+  "name": "Rage Beyond Death",
+  "description": "While Raging, having 0 Hit Points does not knock you Unconscious. You still must make death saving throws, and you suffer the normal effects of taking damage while at 0 Hit Points. You only die if your Rage ends while you have 0 Hit Points.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Rage Beyond Death",
+      "description": "Path of the Zealot feature (level 14)."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:piercer",
+  "name": "Piercer",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["str", "dex"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Once per turn, when you hit a creature with an attack that deals Piercing damage, you can reroll one of the attack's damage dice, and you must use the new roll. When you score a Critical Hit that deals Piercing damage, you roll one additional damage die when determining the extra Piercing damage."
+}

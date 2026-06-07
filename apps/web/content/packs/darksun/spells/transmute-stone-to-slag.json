@@ -1,0 +1,19 @@
+{
+  "id": "darksun:spell:transmute-stone-to-slag",
+  "name": "Transmute Stone to Slag",
+  "description": "You choose an area of stone that you can see that fits within a 40-foot cube and is within range. The stone superheats and flows like magma for the spell's duration.\n\nThe ground in the spell's area becomes molten enough that creatures can sink into it. Each foot that a creature moves through the slag costs 4 feet of movement, and any creature on the ground when you cast the spell must make a Dexterity saving throw. A creature must also make the saving throw when it moves into the area for the first time on a turn or ends its turn there. On a failed save, a creature sinks into the slag and is Restrained and takes 4d8 Fire damage, though it can use an action to end the Restrained condition on itself by pulling itself free.\n\nIf you cast the spell on a ceiling, the slag falls. Any creature under the slag when it falls must make a Dexterity saving throw. A creature takes 4d8 Fire damage on a failed save, or half as much damage on a successful one.\n\nWhen the spell ends, the slag rapidly cools into jagged obsidian. Any creature Restrained by the slag becomes Restrained by the obsidian. A Restrained creature, or another creature within reach, can use an action to try to break the obsidian by succeeding on a DC 20 Strength check or by dealing damage to it. The obsidian has AC 15 and 25 hit points, and it is immune to Poison and Psychic damage.",
+  "level": 5,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "120 ft.",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Until Dispelled",
+  "concentration": false,
+  "summary": "You choose an area of stone that you can see that fits within a 40-foot cube and is within range. The stone superheats and flows like magma.",
+  "notes": "Dark Sun homebrew spell. Rework of Transmute Rock for the Magma patron domain."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "srd52:equipment:net",
+  "type": "weapon",
+  "name": "Net",
+  "damageDice": "0",
+  "weaponCategory": "martial",
+  "properties": [
+    "ranged",
+    "thrown",
+    "special"
+  ],
+  "description": "Net is a martial ranged weapon. A Large or smaller creature hit by a net is Restrained until freed. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-sea-oceanic-gift",
+  "name": "Oceanic Gift",
+  "description": "Once per turn when you deal Cold or Lightning damage, the target must succeed on a Constitution save or have their speed reduced to 0 until the end of their next turn. Additionally, you and up to 5 creatures of your choice within 30 feet gain a swim speed and can breathe underwater.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Oceanic Gift",
+      "description": "Circle of the Sea feature (level 14)."
+    }
+  ]
+}

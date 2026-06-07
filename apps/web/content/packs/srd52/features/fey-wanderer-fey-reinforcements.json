@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:fey-wanderer-fey-reinforcements",
+  "name": "Fey Reinforcements",
+  "description": "You can cast Summon Fey without a Material component. You can also cast it once without a spell slot, and you regain the ability to do so when you finish a Long Rest.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Fey Reinforcements",
+      "description": "Fey Wanderer feature (level 11)."
+    }
+  ]
+}

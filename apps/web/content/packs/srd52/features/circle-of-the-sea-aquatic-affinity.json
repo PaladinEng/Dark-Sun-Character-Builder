@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-sea-aquatic-affinity",
+  "name": "Aquatic Affinity",
+  "description": "You gain a Swim Speed equal to your walking speed, and you can breathe underwater. In addition, when you cast a spell that deals Cold or Lightning damage, you can add your Wisdom modifier to one damage roll of that spell.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Aquatic Affinity",
+      "description": "Circle of the Sea feature (level 6)."
+    }
+  ]
+}

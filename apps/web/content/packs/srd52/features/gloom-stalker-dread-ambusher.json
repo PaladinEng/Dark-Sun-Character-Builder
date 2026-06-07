@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:gloom-stalker-dread-ambusher",
+  "name": "Dread Ambusher",
+  "description": "You add your Wisdom modifier to your Initiative rolls. At the start of your first turn of each combat, your walking speed increases by 10 feet until the end of that turn. If you take the Attack action on that turn, you can make one additional weapon attack. If that attack hits, the target takes an extra 1d8 damage of the weapon's damage type.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Dread Ambusher",
+      "description": "Gloom Stalker feature (level 3)."
+    }
+  ]
+}

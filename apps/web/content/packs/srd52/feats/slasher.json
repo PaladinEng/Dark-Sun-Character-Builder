@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:slasher",
+  "name": "Slasher",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["str", "dex"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "Once per turn when you deal Slashing damage to a creature, you can reduce the target's Speed by 10 feet until the start of your next turn. When you score a Critical Hit that deals Slashing damage, the target has Disadvantage on all attack rolls until the start of your next turn."
+}

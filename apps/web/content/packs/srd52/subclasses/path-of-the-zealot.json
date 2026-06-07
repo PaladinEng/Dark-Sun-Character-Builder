@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:path-of-the-zealot",
+  "classId": "srd52:class:barbarian",
+  "name": "Path of the Zealot",
+  "description": "A path of barbarians fueled by religious fervor, channeling divine fury through their rage.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:path-of-the-zealot-divine-fury"
+    },
+    {
+      "level": 6,
+      "featureId": "srd52:feature:path-of-the-zealot-fanatical-focus"
+    },
+    {
+      "level": 10,
+      "featureId": "srd52:feature:path-of-the-zealot-zealous-presence"
+    },
+    {
+      "level": 14,
+      "featureId": "srd52:feature:path-of-the-zealot-rage-beyond-death"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Path of the Zealot Training",
+      "description": "Path of the Zealot features apply according to subclass progression."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:gloom-stalker",
+  "classId": "srd52:class:ranger",
+  "name": "Gloom Stalker",
+  "description": "Rangers who stalk the darkest corners of the world, ambushing foes with supernatural speed.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:gloom-stalker-dread-ambusher"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:gloom-stalker-iron-mind"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:gloom-stalker-stalkers-flurry"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:gloom-stalker-shadowy-dodge"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Gloom Stalker Training",
+      "description": "Gloom Stalker features apply according to subclass progression."
+    }
+  ]
+}

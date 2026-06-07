@@ -5,6 +5,8 @@
   "spellIds": [
     "srd52:spell:acid-splash",
     "srd52:spell:poison-spray",
-    "srd52:spell:burning-hands"
+    "srd52:spell:burning-hands",
+    "darksun:spell:blight-of-the-ash-wastes",
+    "darksun:spell:transmute-stone-to-slag"
   ]
 }

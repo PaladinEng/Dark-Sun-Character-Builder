@@ -549,7 +549,7 @@ export function computeDerivedState(
   const hitDie = klass?.hitDie ?? 8;
   const conMod = abilityMods.con;
   const levelGain = Math.floor(hitDie / 2) + 1 + conMod;
-  const maxHP = Math.max(1, hitDie + conMod + (level - 1) * levelGain);
+  const maxHP = Math.max(1, hitDie + conMod + (level - 1) * levelGain + applied.hpPerLevel * level);
 
   const armor = state.equippedArmorId
     ? merged.equipmentById[state.equippedArmorId]
@@ -742,7 +742,7 @@ export function computeDerivedState(
     finalAbilities,
     abilityMods,
     proficiencyBonus,
-    speed: applied.speedOverride ?? state.baseSpeed ?? 30,
+    speed: (applied.speedOverride ?? state.baseSpeed ?? 30) + applied.speedBonus,
     senses,
     resistances,
     traits,

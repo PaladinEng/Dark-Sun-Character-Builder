@@ -40,17 +40,11 @@
     "srd52:subclass:eldritch-knight",
     "srd52:subclass:way-of-shadow",
     "srd52:subclass:college-of-lore",
-    "srd52:subclass:college-of-valor"
-  ],
-  "unresolvedDisabledSubclassKeys": [
-    "barbarian_path_of_the_zealot",
-    "druid_circle_of_the_sea",
-    "fighter_eldritch_knight",
-    "monk_warrior_of_shadow",
-    "ranger_fey_wanderer",
-    "ranger_gloom_stalker",
-    "rogue_arcane_trickster",
-    "warlock_archfey"
+    "srd52:subclass:college-of-valor",
+    "srd52:subclass:path-of-the-zealot",
+    "srd52:subclass:circle-of-the-sea",
+    "srd52:subclass:fey-wanderer",
+    "srd52:subclass:gloom-stalker"
   ],
   "wildTalentRequired": true,
   "wildTalentFeatureTag": "wild_talent",

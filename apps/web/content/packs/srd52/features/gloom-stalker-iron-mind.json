@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:gloom-stalker-iron-mind",
+  "name": "Iron Mind",
+  "description": "You gain proficiency in Wisdom saving throws. If you already have this proficiency, you instead gain proficiency in Intelligence or Charisma saving throws (your choice).",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Iron Mind",
+      "description": "Gloom Stalker feature (level 7)."
+    }
+  ]
+}

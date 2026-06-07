@@ -1526,19 +1526,20 @@ export default async function PrintPage({
 
         .trimmed-list {
           margin: 0;
-          padding: 0.05in 0.08in 0.08in 0.18in;
-          font-size: 9px;
+          padding: 0.04in 0.06in 0.06in 0.16in;
+          font-size: 8.5px;
           line-height: 1.2;
           overflow: hidden;
         }
 
         .trimmed-list.compact {
-          font-size: 8.5px;
-          line-height: 1.2;
+          font-size: 8px;
+          line-height: 1.15;
         }
 
         .scroll-list {
           flex: 1;
+          min-height: 0;
           overflow: hidden;
         }
 
@@ -1598,6 +1599,7 @@ export default async function PrintPage({
 
         .detail-body {
           flex: 1;
+          min-height: 0;
           display: grid;
           grid-template-columns: 1fr 1fr;
           column-gap: 0.1in;
@@ -1608,23 +1610,26 @@ export default async function PrintPage({
           display: flex;
           flex-direction: column;
           row-gap: 0.1in;
+          min-height: 0;
           overflow: hidden;
         }
 
         .panel.grow {
           flex: 1;
+          min-height: 0;
         }
 
         .prose-block {
           padding: 0.05in 0.06in;
-          font-size: 9px;
-          line-height: 1.35;
+          font-size: 8.5px;
+          line-height: 1.3;
           white-space: pre-wrap;
           overflow: hidden;
         }
 
         .prose-block.grow {
           flex: 1;
+          min-height: 0;
         }
 
         .magic-items-panel {

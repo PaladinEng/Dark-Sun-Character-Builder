@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:fey-wanderer-beguiling-twist",
+  "name": "Beguiling Twist",
+  "description": "Whenever you or a creature you can see within 120 feet succeeds on a saving throw against being Charmed or Frightened, you can use your Reaction to force a different creature you can see within 120 feet to make a Wisdom saving throw against your spell save DC. On a failed save, the target is Charmed or Frightened by you for 1 minute.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Beguiling Twist",
+      "description": "Fey Wanderer feature (level 7)."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "srd52:feat:gift-of-the-chromatic-dragon",
+  "name": "Gift of the Chromatic Dragon",
+  "category": "general",
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "As a Bonus Action, you can touch a Simple or Martial weapon and infuse it with one of these damage types: Acid, Cold, Fire, Lightning, or Poison. For 1 minute, the weapon deals an extra 1d4 damage of the chosen type on a hit. When you take Acid, Cold, Fire, Lightning, or Poison damage, you can use a Reaction to give yourself Resistance to that instance of damage."
+}

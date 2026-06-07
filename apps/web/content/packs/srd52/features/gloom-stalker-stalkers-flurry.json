@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:gloom-stalker-stalkers-flurry",
+  "name": "Stalker's Flurry",
+  "description": "Once per turn when you miss with a weapon attack, you can make another weapon attack as part of the same action.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Stalker's Flurry",
+      "description": "Gloom Stalker feature (level 11)."
+    }
+  ]
+}

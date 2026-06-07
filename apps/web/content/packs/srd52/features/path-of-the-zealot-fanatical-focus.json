@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:path-of-the-zealot-fanatical-focus",
+  "name": "Fanatical Focus",
+  "description": "Once per Rage, if you fail a saving throw, you can reroll it with a bonus equal to your Rage Damage, and you must use the new roll.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Fanatical Focus",
+      "description": "Path of the Zealot feature (level 6)."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:fey-wanderer-dreadful-strikes",
+  "name": "Dreadful Strikes",
+  "description": "You can augment your weapon strikes with mind-scarring magic. Once per turn when you hit a creature with a weapon, you can deal an extra 1d4 Psychic damage to the target. This damage increases to 1d6 at 11th level.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Dreadful Strikes",
+      "description": "Fey Wanderer feature (level 3)."
+    }
+  ]
+}

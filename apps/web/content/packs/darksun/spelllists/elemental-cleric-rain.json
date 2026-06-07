@@ -6,6 +6,8 @@
     "srd52:spell:shocking-grasp",
     "srd52:spell:fog-cloud",
     "srd52:spell:thunderwave",
-    "srd52:spell:shatter"
+    "srd52:spell:shatter",
+    "darksun:spell:storm-step",
+    "darksun:spell:destructive-squall"
   ]
 }

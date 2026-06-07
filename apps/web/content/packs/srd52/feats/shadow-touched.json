@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:shadow-touched",
+  "name": "Shadow-Touched",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["int", "wis", "cha"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You learn Invisibility and one 1st-level spell of your choice from the Illusion or Necromancy school of magic. You can cast each of these spells once without expending a spell slot. Once you cast either spell in this way, you can't cast it again until you finish a Long Rest. You can also cast these spells using spell slots you have of the appropriate level."
+}

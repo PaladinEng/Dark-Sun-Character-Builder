@@ -16,7 +16,9 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_tool_proficiency",
   "grant_language",
   "grant_natural_weapon",
-  "grant_weapon_mastery"
+  "grant_weapon_mastery",
+  "add_speed_bonus",
+  "add_hp_per_level"
 ] as const;
 
 export interface DerivedBonus {
@@ -58,6 +60,10 @@ export interface AppliedEffects {
   speedOverride?: number;
   /** Maximum number of weapons that can have mastery applied (take highest). */
   weaponMasteryLimit: number;
+  /** Additive speed bonus (e.g. Mobile +10). */
+  speedBonus: number;
+  /** Extra HP per character level (e.g. Tough +2). */
+  hpPerLevel: number;
 }
 
 function dedupe<T>(items: T[]): T[] {
@@ -82,6 +88,8 @@ export function applyEffectsToCharacter(
   let unarmoredDefenseAbility: Ability | undefined;
   let speedOverride: number | undefined;
   let weaponMasteryLimit = 0;
+  let speedBonus = 0;
+  let hpPerLevel = 0;
 
   for (const effect of effects) {
     if (effect.type === "grant_skill_proficiency") {
@@ -161,6 +169,14 @@ export function applyEffectsToCharacter(
     }
     if (effect.type === "grant_weapon_mastery") {
       weaponMasteryLimit = Math.max(weaponMasteryLimit, effect.count);
+      continue;
+    }
+    if (effect.type === "add_speed_bonus") {
+      speedBonus += effect.value;
+      continue;
+    }
+    if (effect.type === "add_hp_per_level") {
+      hpPerLevel += effect.value;
     }
   }
 
@@ -188,6 +204,8 @@ export function applyEffectsToCharacter(
     naturalWeapons,
     ...(unarmoredDefenseAbility ? { unarmoredDefenseAbility } : {}),
     speedOverride,
-    weaponMasteryLimit
+    weaponMasteryLimit,
+    speedBonus,
+    hpPerLevel
   };
 }

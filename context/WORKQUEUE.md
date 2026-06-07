@@ -17,14 +17,14 @@ Last updated: 2026-06-07
 ## P2 — Medium Priority
 - [x] ~~**Weapon Mastery feat** — gate mastery properties behind class feature/feat, add choice UI, add effects to weapon-master.json~~ (done 2026-06-07, Cowork session)
 - [x] ~~**Per-feature notes** — add `featureNotes` map to CharacterState, input fields next to each feature/feat, display on sheet/print/PDF~~ (done 2026-06-07, Cowork session)
-- [ ] Add localStorage auto-save for character state (prevent data loss on tab close)
+- [x] ~~Add localStorage auto-save for character state (prevent data loss on tab close)~~ (done 2026-06-07, Cowork session)
 - [x] ~~Add Aasimar species to SRD pack~~ (done 2026-06-07, Cowork session)
-- [ ] Create 9 missing Dark Sun reworked spell entities (Elemental Aegis, Elemental Favor, Storm Step, Destructive Squall, Silt Horror's Grasp, Blight of the Ash Wastes, Transmute Stone to Slag, Conjure Elemental Earth/Fire reworks)
-- [ ] Add missing D&D 2024 SRD subclasses and resolve `unresolvedDisabledSubclassKeys` in profile.json (~13 subclasses)
-- [ ] Add builder shortcut to open /sheet directly
-- [ ] Expand SRD coverage (additional spells, equipment)
-- [ ] Implement modelable feat effects when the runtime grows reaction/conditional support (Mobile +10 speed, Heavy Armor Master damage reduction, Observant +5 passive bonuses, etc.)
-- [ ] Tune print page vertical budgets if long feature/backstory text clips under fixed `.sheet-page` height
+- [x] ~~Create 9 missing Dark Sun reworked spell entities~~ (done 2026-06-07, Cowork session — Elemental Aegis, Elemental Favor, Storm Step, Destructive Squall, Silt Horror's Grasp, Blight of the Ash Wastes, Transmute Stone to Slag, Conjure Elemental Earth/Fire)
+- [x] ~~Add missing D&D 2024 SRD subclasses and resolve `unresolvedDisabledSubclassKeys`~~ (done 2026-06-07, Cowork session — 4 new subclasses: Path of the Zealot, Circle of the Sea, Fey Wanderer, Gloom Stalker; 3 stale keys removed, 1 rename resolved)
+- [x] ~~Add builder shortcut to open /sheet directly~~ (done 2026-06-07, Cowork session — "View Sheet" button in header)
+- [x] ~~Expand SRD coverage~~ (done 2026-06-07, Cowork session — 12 missing feats added, 2 missing weapons: Musket, Net)
+- [x] ~~Implement modelable feat effects~~ (done 2026-06-07, Cowork session — add_speed_bonus + add_hp_per_level effect types; Mobile +10 speed, Tough +2 HP/level, Speedy +10 speed, Poisoner tool prof, Tavern Brawler natural weapon)
+- [x] ~~Tune print page vertical budgets~~ (done 2026-06-07, Cowork session — min-height: 0 on flex children, reduced font sizes)
 - [ ] Extract all 5 template overlay PNGs from reference PDF and wire page 3/4 overlay CSS
 
 ## P3 — Low Priority
@@ -33,7 +33,7 @@ Last updated: 2026-06-07
 - [ ] Athasian Bard subclass mechanics (currently a stub)
 - [ ] Wild Talent mechanical effects beyond table assignment (12 talents are stubs)
 - [ ] Preserver spell-point and Rite of Blood automation
-- [ ] Telekinetic and Telepathic feat mechanical implementations
+- [x] ~~Telekinetic and Telepathic feat files added~~ (done 2026-06-07, Cowork session — mechanical effects still stubs)
 - [ ] Remove Dark Sun hardcoding — implement full content pack system
 - [ ] Create homebrew content pack documentation for other DMs
 - [ ] Commercialization prep — landing page and licensing

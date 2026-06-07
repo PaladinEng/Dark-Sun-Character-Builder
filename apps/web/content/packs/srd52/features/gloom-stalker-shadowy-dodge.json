@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:gloom-stalker-shadowy-dodge",
+  "name": "Shadowy Dodge",
+  "description": "Whenever a creature makes an attack roll against you and doesn't have Advantage, you can use your Reaction to impose Disadvantage on the roll. You must use this before you know the outcome of the attack.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Shadowy Dodge",
+      "description": "Gloom Stalker feature (level 15)."
+    }
+  ]
+}

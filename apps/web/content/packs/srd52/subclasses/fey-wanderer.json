@@ -1,0 +1,31 @@
+{
+  "id": "srd52:subclass:fey-wanderer",
+  "classId": "srd52:class:ranger",
+  "name": "Fey Wanderer",
+  "description": "A ranger archetype imbued with the beguiling and fearsome fey magic of the Feywild.",
+  "subclassFeaturesByLevel": [
+    {
+      "level": 3,
+      "featureId": "srd52:feature:fey-wanderer-dreadful-strikes"
+    },
+    {
+      "level": 7,
+      "featureId": "srd52:feature:fey-wanderer-beguiling-twist"
+    },
+    {
+      "level": 11,
+      "featureId": "srd52:feature:fey-wanderer-fey-reinforcements"
+    },
+    {
+      "level": 15,
+      "featureId": "srd52:feature:fey-wanderer-misty-wanderer"
+    }
+  ],
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Fey Wanderer Training",
+      "description": "Fey Wanderer features apply according to subclass progression."
+    }
+  ]
+}

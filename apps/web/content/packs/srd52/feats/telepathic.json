@@ -1,0 +1,13 @@
+{
+  "id": "srd52:feat:telepathic",
+  "name": "Telepathic",
+  "category": "general",
+  "abilityBonusOptions": {
+    "abilities": ["int", "wis", "cha"],
+    "value": 1
+  },
+  "prerequisites": {
+    "minLevel": 4
+  },
+  "description": "You can speak telepathically to any creature you can see within 60 feet. Your telepathic utterances are in a language you know, and the creature understands you only if it knows that language. You can cast Detect Thoughts once without expending a spell slot. Once you cast it in this way, you can't do so again until you finish a Long Rest. You can also cast it using spell slots you have of the appropriate level."
+}

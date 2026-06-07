@@ -1,0 +1,18 @@
+{
+  "id": "darksun:spell:storm-step",
+  "name": "Storm Step",
+  "description": "You dissolve into a bolt of lightning and reappear at a location within range. You arrive at exactly the spot desired. It can be a place you can see, one you can visualize, or one you can describe by stating distance and direction.\n\nEach creature within 5 feet of your departure point must make a Dexterity saving throw, taking 3d10 Lightning damage on a failed save, or half as much on a successful one.\n\nYou can also teleport one willing creature. The creature must be within 5 feet of you when you teleport, and it teleports to a space within 5 feet of your destination space.\n\nIf you or the other creature would arrive in a space occupied by a creature or completely filled by one or more objects, you and any creature traveling with you each take 4d6 Force damage, and the teleportation fails.",
+  "level": 4,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 Action",
+  "range": "500 ft.",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You dissolve into a bolt of lightning and reappear at a location within range. Each creature within 5 feet of your departure point must make a Dexterity saving throw against Lightning damage.",
+  "notes": "Dark Sun homebrew spell. Rework of Dimension Door for the Rain patron domain."
+}

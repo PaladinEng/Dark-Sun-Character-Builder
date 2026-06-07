@@ -209,6 +209,7 @@ const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
 const COIN_DENOMINATIONS: CoinDenomination[] = ["cp", "sp", "ep", "gp", "pp"];
 const ATTUNEMENT_SLOT_COUNT = 5;
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
+const CHARACTER_STORAGE_KEY = "darksun-builder:character";
 const ABILITY_SCORE_METHOD_OPTIONS: Array<{ value: AbilityScoreMethod; label: string }> = [
   { value: "manual", label: "Manual" },
   { value: "standard_array", label: "Standard Array" },
@@ -554,71 +555,85 @@ export default function BuilderClient({
   }>({ name: "", level: 0, field: "cantrip", ritual: false, concentration: false });
   const [exportNotice, setExportNotice] = useState<string | null>(null);
 
-  const [state, setState] = useState<BuilderState>(() => ({
-    level: 1,
-    baseAbilities: makeDefaultAbilities(),
-    abilityScoreMethod: "manual",
-    selectedSpeciesId: undefined,
-    selectedBackgroundId: undefined,
-    selectedClassId: undefined,
-    subclass: undefined,
-    warlockInvocationFeatureIds: [],
-    warlockPactBoonFeatureId: undefined,
-    warlockMysticArcanumByLevel: {},
-    xp: 0,
-    heroicInspiration: false,
-    equippedArmorId: undefined,
-    equippedShieldId: undefined,
-    equippedWeaponId: undefined,
-    armorProficiencies: [],
-    weaponProficiencies: [],
-    chosenSkillProficiencies: [],
-    chosenClassSkills: [],
-    chosenSaveProficiencies: [],
-    toolProficiencies: [],
-    languages: [],
-    knownSpellIds: [],
-    preparedSpellIds: [],
-    cantripsKnownIds: [],
-    coins: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
-    otherWealth: "",
-    tempHP: 0,
-    hitDiceTotal: undefined,
-    hitDiceSpent: 0,
-    deathSaveSuccesses: 0,
-    deathSaveFailures: 0,
-    exhaustionLevel: 0,
-    attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
-      name: "",
-      itemId: "",
+  const [state, setState] = useState<BuilderState>(() => {
+    const defaults: BuilderState = {
+      level: 1,
+      baseAbilities: makeDefaultAbilities(),
+      abilityScoreMethod: "manual",
+      selectedSpeciesId: undefined,
+      selectedBackgroundId: undefined,
+      selectedClassId: undefined,
+      subclass: undefined,
+      warlockInvocationFeatureIds: [],
+      warlockPactBoonFeatureId: undefined,
+      warlockMysticArcanumByLevel: {},
+      xp: 0,
+      heroicInspiration: false,
+      equippedArmorId: undefined,
+      equippedShieldId: undefined,
+      equippedWeaponId: undefined,
+      armorProficiencies: [],
+      weaponProficiencies: [],
+      chosenSkillProficiencies: [],
+      chosenClassSkills: [],
+      chosenSaveProficiencies: [],
+      toolProficiencies: [],
+      languages: [],
+      knownSpellIds: [],
+      preparedSpellIds: [],
+      cantripsKnownIds: [],
+      coins: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
+      otherWealth: "",
+      tempHP: 0,
+      hitDiceTotal: undefined,
+      hitDiceSpent: 0,
+      deathSaveSuccesses: 0,
+      deathSaveFailures: 0,
+      exhaustionLevel: 0,
+      attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
+        name: "",
+        itemId: "",
+        notes: "",
+      })),
+      appearance: "",
+      physicalDescription: "",
+      backstory: "",
+      alignment: "",
       notes: "",
-    })),
-    appearance: "",
-    physicalDescription: "",
-    backstory: "",
-    alignment: "",
-    notes: "",
-    companion: {
-      name: "",
-      type: "",
-      summary: "",
-      notes: "",
-    },
-    familiar: {
-      name: "",
-      type: "",
-      summary: "",
-      notes: "",
-    },
-    inventoryItemIds: [],
-    inventoryEntries: [],
-    featSelections: {
-      level: {},
-    },
-    selectedFeats: [],
-    abilityIncreases: [],
-    advancements: [],
-  }));
+      companion: {
+        name: "",
+        type: "",
+        summary: "",
+        notes: "",
+      },
+      familiar: {
+        name: "",
+        type: "",
+        summary: "",
+        notes: "",
+      },
+      inventoryItemIds: [],
+      inventoryEntries: [],
+      featSelections: {
+        level: {},
+      },
+      selectedFeats: [],
+      abilityIncreases: [],
+      advancements: [],
+    };
+    if (typeof window !== "undefined") {
+      try {
+        const saved = window.localStorage.getItem(CHARACTER_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved) as Partial<BuilderState>;
+          return { ...defaults, ...parsed };
+        }
+      } catch {
+        // Corrupted storage — fall through to defaults
+      }
+    }
+    return defaults;
+  });
 
   const [backgroundMode, setBackgroundMode] = useState<"2+1" | "1+1+1">("2+1");
   const [backgroundPlusTwo, setBackgroundPlusTwo] = useState<Ability>("str");
@@ -660,6 +675,18 @@ export default function BuilderClient({
     searchParams,
     sourcesParamPresent,
   ]);
+
+  // Auto-save character state to localStorage (debounced)
+  useEffect(() => {
+    const handle = setTimeout(() => {
+      try {
+        window.localStorage.setItem(CHARACTER_STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        // Storage full or unavailable — silently ignore
+      }
+    }, 400);
+    return () => clearTimeout(handle);
+  }, [state]);
 
   const selectedBackground = useMemo(
     () => options.backgrounds.find((background) => background.id === state.selectedBackgroundId),
@@ -1942,10 +1969,21 @@ export default function BuilderClient({
   return (
     <main className="mx-auto max-w-6xl space-y-6 p-6">
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
-        <h1 className="text-2xl font-semibold">Builder</h1>
-        <p className="mt-1 text-sm text-slate-300">
-          Select sources, then configure your character and review derived stats.
-        </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold">Builder</h1>
+            <p className="mt-1 text-sm text-slate-300">
+              Select sources, then configure your character and review derived stats.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onOpenHtmlSheet}
+            className="rounded bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-500"
+          >
+            View Sheet
+          </button>
+        </div>
       </section>
 
       <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">

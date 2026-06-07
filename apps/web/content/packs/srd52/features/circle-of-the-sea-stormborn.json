@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-sea-stormborn",
+  "name": "Stormborn",
+  "description": "You gain a Fly Speed equal to your walking speed, and you have Resistance to Cold and Lightning damage.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Stormborn",
+      "description": "Circle of the Sea feature (level 10)."
+    }
+  ]
+}

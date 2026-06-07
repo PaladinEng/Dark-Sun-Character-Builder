@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:fey-wanderer-misty-wanderer",
+  "name": "Misty Wanderer",
+  "description": "You can cast Misty Step without expending a spell slot a number of times equal to your Wisdom modifier (minimum once), regaining all uses on a Long Rest. When you cast Misty Step, you can bring along one willing creature within 5 feet.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Misty Wanderer",
+      "description": "Fey Wanderer feature (level 15)."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "srd52:feature:circle-of-the-sea-wrath-of-the-sea",
+  "name": "Wrath of the Sea",
+  "description": "As a Bonus Action, you can crash a wave of elemental water at a creature you can see within 30 feet. The target must succeed on a Constitution saving throw against your spell save DC or take 1d6 Cold damage and be pushed up to 15 feet away from you. This damage increases to 2d6 at 10th level.",
+  "effects": [
+    {
+      "type": "grant_trait",
+      "name": "Wrath of the Sea",
+      "description": "Circle of the Sea feature (level 3)."
+    }
+  ]
+}
