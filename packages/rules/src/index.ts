@@ -35,6 +35,7 @@ export type {
   CharacterCoins,
   AttunedItem,
   CustomSpell,
+  CustomGearItem,
   CompanionPlaceholder,
   DerivedModifier,
   DerivedModifierEffect,

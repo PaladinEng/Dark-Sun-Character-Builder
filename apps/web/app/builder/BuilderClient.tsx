@@ -8,6 +8,7 @@ import type {
   AttunedItem,
   AbilityScoreMethod,
   CharacterState,
+  CustomGearItem,
   CustomSpell,
   DerivedState,
   ValidationReport,
@@ -286,6 +287,7 @@ function makeDefaultBuilderState(): BuilderState {
     },
     inventoryItemIds: [],
     inventoryEntries: [],
+    customGear: [],
     featSelections: {
       level: {},
     },
@@ -621,6 +623,9 @@ export default function BuilderClient({
   const [customSpellDraft, setCustomSpellDraft] = useState<{
     name: string; level: number; field: CustomSpell["field"]; ritual: boolean; concentration: boolean;
   }>({ name: "", level: 0, field: "cantrip", ritual: false, concentration: false });
+  const [customGearDraft, setCustomGearDraft] = useState<{
+    name: string; quantity: number; notes: string;
+  }>({ name: "", quantity: 1, notes: "" });
   const [exportNotice, setExportNotice] = useState<string | null>(null);
 
   const [state, setState] = useState<BuilderState>(() => {
@@ -1920,6 +1925,7 @@ export default function BuilderClient({
       ritual: false,
       concentration: false,
     });
+    setCustomGearDraft({ name: "", quantity: 1, notes: "" });
     setStartingEquipmentJustApplied(false);
     if (typeof window !== "undefined") {
       try {
@@ -4215,6 +4221,110 @@ export default function BuilderClient({
                   ],
                 }));
                 setCustomSpellDraft({ name: "", level: 0, field: "cantrip", ritual: false, concentration: false });
+              }}
+              className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold">Custom Gear</h2>
+          <div className="text-xs text-slate-300">{(state.customGear ?? []).length} added</div>
+        </div>
+        <p className="mt-1 text-xs text-slate-400">
+          Manually add items not in the equipment catalog (homebrew gear, loot, trinkets, etc.). Appears on the printed sheet alongside catalog inventory.
+        </p>
+
+        {(state.customGear ?? []).length > 0 ? (
+          <div className="mt-3 space-y-1">
+            {(state.customGear ?? []).map((item, index) => (
+              <div
+                key={`custom-gear-${index}`}
+                className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
+              >
+                <span className="truncate">
+                  {item.name}
+                  {item.quantity && item.quantity > 1 ? (
+                    <span className="ml-1 text-slate-400">×{item.quantity}</span>
+                  ) : null}
+                  {item.notes ? (
+                    <span className="ml-2 italic text-slate-400">— {item.notes}</span>
+                  ) : null}
+                </span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      customGear: (prev.customGear ?? []).filter((_, i) => i !== index),
+                    }))
+                  }
+                  className="shrink-0 rounded border border-slate-700 px-2 py-0.5"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-3 grid gap-2 rounded border border-slate-800 bg-slate-950/70 p-3 md:grid-cols-6">
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Item Name</div>
+            <input
+              type="text"
+              value={customGearDraft.name}
+              onChange={(e) => setCustomGearDraft((d) => ({ ...d, name: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. Sunblade Hilt"
+            />
+          </label>
+          <label className="text-xs">
+            <div className="font-semibold">Qty</div>
+            <input
+              type="number"
+              min={1}
+              max={999}
+              value={customGearDraft.quantity}
+              onChange={(e) =>
+                setCustomGearDraft((d) => ({
+                  ...d,
+                  quantity: Math.max(1, Math.min(999, Number(e.target.value) || 1)),
+                }))
+              }
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Notes (optional)</div>
+            <input
+              type="text"
+              value={customGearDraft.notes}
+              onChange={(e) => setCustomGearDraft((d) => ({ ...d, notes: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. attuned, broken, etc."
+            />
+          </label>
+          <div className="flex items-end">
+            <button
+              type="button"
+              disabled={!customGearDraft.name.trim()}
+              onClick={() => {
+                if (!customGearDraft.name.trim()) return;
+                const entry: CustomGearItem = {
+                  name: customGearDraft.name.trim(),
+                  ...(customGearDraft.quantity > 1 ? { quantity: customGearDraft.quantity } : {}),
+                  ...(customGearDraft.notes.trim() ? { notes: customGearDraft.notes.trim() } : {}),
+                };
+                setState((prev) => ({
+                  ...prev,
+                  customGear: [...(prev.customGear ?? []), entry],
+                }));
+                setCustomGearDraft({ name: "", quantity: 1, notes: "" });
               }}
               className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
             >

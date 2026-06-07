@@ -74,6 +74,12 @@ export interface CustomSpell {
   notes?: string;
 }
 
+export interface CustomGearItem {
+  name: string;
+  quantity?: number;
+  notes?: string;
+}
+
 export interface CharacterState {
   characterName?: string;
   level: number;
@@ -113,6 +119,7 @@ export interface CharacterState {
   preparedSpellIds?: string[];
   cantripsKnownIds?: string[];
   customSpells?: CustomSpell[];
+  customGear?: CustomGearItem[];
   coins?: Partial<CharacterCoins>;
   otherWealth?: string;
   inventoryItemIds?: string[];

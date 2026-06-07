@@ -212,6 +212,7 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
     preparedSpellIds: Array.isArray(input.preparedSpellIds) ? input.preparedSpellIds : [],
     cantripsKnownIds: Array.isArray(input.cantripsKnownIds) ? input.cantripsKnownIds : [],
     customSpells: Array.isArray(input.customSpells) ? input.customSpells : [],
+    customGear: Array.isArray(input.customGear) ? input.customGear : [],
     selectedFeats: Array.isArray(input.selectedFeats) ? input.selectedFeats : [],
     selectedFeatureIds: Array.isArray(input.selectedFeatureIds) ? input.selectedFeatureIds : [],
     warlockInvocationFeatureIds: Array.isArray(input.warlockInvocationFeatureIds)
@@ -368,12 +369,26 @@ export async function POST(request: Request) {
         : 1;
     inventoryCounts.set(entry.itemId, Math.max(quantity, inventoryCounts.get(entry.itemId) ?? 0));
   }
-  const inventoryItems = [...inventoryCounts.entries()]
+  const catalogInventoryItems = [...inventoryCounts.entries()]
     .map(([itemId, quantity]) => {
       const label = merged.content.equipmentById[itemId]?.name ?? itemId;
       return quantity > 1 ? `${label} x${quantity}` : label;
     })
     .sort((a, b) => a.localeCompare(b));
+  const customInventoryItems = (payload.characterState.customGear ?? [])
+    .map((gear) => {
+      const name = gear.name?.trim();
+      if (!name) return "";
+      const quantity =
+        typeof gear.quantity === "number" && Number.isFinite(gear.quantity)
+          ? Math.max(1, Math.floor(gear.quantity))
+          : 1;
+      const note = gear.notes?.trim();
+      const base = quantity > 1 ? `${name} x${quantity}` : name;
+      return note ? `${base} (${note})` : base;
+    })
+    .filter((label) => label.length > 0);
+  const inventoryItems = [...catalogInventoryItems, ...customInventoryItems];
   const inventorySummaryItems = inventoryItems.slice(0, 6);
   const attunedItems = payload.characterState.attunedItems ?? [];
   const attunedItemLabels = attunedItems

@@ -304,12 +304,26 @@ export default async function PrintPage({
     );
   }
 
-  const fullInventoryList = [...inventoryQuantities.entries()]
+  const catalogInventoryList = [...inventoryQuantities.entries()]
     .map(([itemId, quantity]) => {
       const label = merged.content.equipmentById[itemId]?.name ?? itemId;
       return quantity > 1 ? `${label} x${quantity}` : label;
     })
     .sort((a, b) => a.localeCompare(b));
+  const customInventoryList = (payload.characterState.customGear ?? [])
+    .map((gear) => {
+      const name = gear.name?.trim();
+      if (!name) return "";
+      const quantity =
+        typeof gear.quantity === "number" && Number.isFinite(gear.quantity)
+          ? Math.max(1, Math.floor(gear.quantity))
+          : 1;
+      const note = gear.notes?.trim();
+      const base = quantity > 1 ? `${name} x${quantity}` : name;
+      return note ? `${base} (${note})` : base;
+    })
+    .filter((label) => label.length > 0);
+  const fullInventoryList = [...catalogInventoryList, ...customInventoryList];
   const inventoryNameList = fullInventoryList.slice(0, 6);
 
   const armorProficiencies = sortIds(derived.armorProficiencies);

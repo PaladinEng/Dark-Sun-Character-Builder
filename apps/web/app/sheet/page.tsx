@@ -456,8 +456,24 @@ export default async function SheetPage({
       itemId,
       quantity,
       label: merged.content.equipmentById[itemId]?.name ?? itemId,
+      notes: undefined as string | undefined,
     }))
     .sort((left, right) => left.label.localeCompare(right.label));
+
+  for (const gear of payload.characterState.customGear ?? []) {
+    const name = gear.name?.trim();
+    if (!name) continue;
+    const quantity =
+      typeof gear.quantity === "number" && Number.isFinite(gear.quantity)
+        ? Math.max(1, Math.floor(gear.quantity))
+        : 1;
+    inventoryRows.push({
+      itemId: "custom",
+      quantity,
+      label: name,
+      notes: gear.notes?.trim() || undefined,
+    });
+  }
 
   const attunedItems = (payload.characterState.attunedItems ?? [])
     .map((item) => {
@@ -1090,10 +1106,18 @@ export default async function SheetPage({
                       </tr>
                     </thead>
                     <tbody>
-                      {inventoryRows.map((row) => (
-                        <tr key={`inventory-${row.itemId}`} className="border-b border-slate-200">
+                      {inventoryRows.map((row, idx) => (
+                        <tr
+                          key={`inventory-${row.itemId}-${idx}`}
+                          className="border-b border-slate-200"
+                        >
                           <td className="py-1 pr-2">{row.quantity}</td>
-                          <td className="py-1 pr-2">{row.label}</td>
+                          <td className="py-1 pr-2">
+                            {row.label}
+                            {row.notes ? (
+                              <span className="ml-1 italic text-slate-500">— {row.notes}</span>
+                            ) : null}
+                          </td>
                           <td className="py-1 text-slate-600">{row.itemId}</td>
                         </tr>
                       ))}
