@@ -9,6 +9,13 @@
     ],
     "mode": "2+1_or_1+1+1"
   },
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:calligraphers-supplies",
+      "srd52:equipment:backpack",
+      "srd52:equipment:waterskin"
+    ]
+  },
   "effects": [
     {
       "type": "grant_skill_proficiency",

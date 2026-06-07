@@ -60,7 +60,11 @@
     "itemIds": [
       "srd52:equipment:leather-armor",
       "srd52:equipment:shield",
-      "srd52:equipment:quarterstaff"
+      "srd52:equipment:quarterstaff",
+      "srd52:equipment:herbalism-kit",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin"
     ],
     "equippedArmorId": "srd52:equipment:leather-armor",
     "equippedShieldId": "srd52:equipment:shield",

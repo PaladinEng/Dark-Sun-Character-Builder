@@ -982,7 +982,7 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     `${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY} m ${slotsTableX + slotsLevelColumnWidth + slotsTotalColumnWidth} ${slotsTableY + slotsTableHeight} l S`
   );
 
-  const slotsHeaderRowTopY = rowTopY(slotsTableY, slotsTableHeight, slotsRowHeight, 1);
+  const slotsHeaderRowTopY = rowTopY(slotsTableY, slotsTableHeight, slotsRowHeight, 0);
   drawTextInCell(
     commands,
     "LEVEL",
@@ -1014,7 +1014,7 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
     "center"
   );
   spellSlotRows.forEach((row, index) => {
-    const rowTop = rowTopY(slotsTableY, slotsTableHeight, slotsRowHeight, index + 2);
+    const rowTop = rowTopY(slotsTableY, slotsTableHeight, slotsRowHeight, index + 1);
     const rowTextY = rowBaselineY(rowTop, slotsRowHeight, 7);
     drawTextInCell(commands, `Level ${row.level}`, slotsTableX, rowTextY, slotsLevelColumnWidth, 7, false, "left", 8);
     drawTextInCell(
@@ -1048,7 +1048,7 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
         : "Expended slot tracking is not currently modeled."
       : "No class spell slots at this level.",
     slotsTableX,
-    slotsTableY - 8,
+    slotsTableY - 16,
     7,
     false
   );
@@ -1873,14 +1873,14 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       commands.push(`${boxX} ${rowY} ${abilityColumnWidth} ${abilityBoxHeight} re S`);
       drawText(commands, ABILITY_LABELS[ability], boxX + 4, rowY + abilityBoxHeight - 12, 8, true);
 
-      const scoreFieldY = rowY + abilityBoxHeight - 48;
+      const scoreFieldY = rowY + abilityBoxHeight - 42;
       const scoreFieldWidth = abilityColumnWidth - 8;
       drawField(
         commands,
         boxX + 4,
         scoreFieldY,
         scoreFieldWidth,
-        34,
+        26,
         "Score",
         `${snapshot.abilities[ability] ?? 0}`,
         4,
@@ -1941,7 +1941,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
       break;
     }
     const isProficient = skillProficiencySet.has(row.id);
-    const marker = isProficient ? "• " : "  ";
+    const marker = isProficient ? "* " : "  ";
     const modLabel = row.value >= 0 ? `+${row.value}` : `${row.value}`;
     const skillText = `${marker}${row.label}: ${modLabel}`;
     drawText(commands, skillText, leftX + SECTION_INNER_PADDING, lineY, 8, false);

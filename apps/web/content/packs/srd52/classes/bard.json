@@ -78,7 +78,11 @@
     "itemIds": [
       "srd52:equipment:leather-armor",
       "srd52:equipment:rapier",
-      "srd52:equipment:dagger"
+      "srd52:equipment:dagger",
+      "srd52:equipment:musical-instrument",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin"
     ],
     "equippedArmorId": "srd52:equipment:leather-armor",
     "equippedWeaponId": "srd52:equipment:rapier"

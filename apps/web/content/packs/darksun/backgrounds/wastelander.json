@@ -9,6 +9,15 @@
     ],
     "mode": "2+1_or_1+1+1"
   },
+  "startingEquipment": {
+    "itemIds": [
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin",
+      "srd52:equipment:rations-1day",
+      "srd52:equipment:tinderbox",
+      "srd52:equipment:rope-hempen-50ft"
+    ]
+  },
   "effects": [
     {
       "type": "grant_skill_proficiency",

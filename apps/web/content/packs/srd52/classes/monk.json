@@ -84,7 +84,13 @@
   ],
   "startingEquipment": {
     "itemIds": [
-      "srd52:equipment:shortsword"
+      "srd52:equipment:shortsword",
+      "srd52:equipment:dart",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin",
+      "srd52:equipment:rations-1day",
+      "srd52:equipment:rope-hempen-50ft"
     ],
     "equippedWeaponId": "srd52:equipment:shortsword"
   },

@@ -79,7 +79,11 @@
     "itemIds": [
       "srd52:equipment:chain-mail",
       "srd52:equipment:shield",
-      "srd52:equipment:longsword"
+      "srd52:equipment:longsword",
+      "srd52:equipment:javelin",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin"
     ],
     "equippedArmorId": "srd52:equipment:chain-mail",
     "equippedShieldId": "srd52:equipment:shield",

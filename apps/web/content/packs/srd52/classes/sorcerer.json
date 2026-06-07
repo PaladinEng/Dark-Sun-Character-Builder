@@ -52,7 +52,11 @@
   ],
   "startingEquipment": {
     "itemIds": [
-      "srd52:equipment:dagger"
+      "srd52:equipment:dagger",
+      "srd52:equipment:quarterstaff",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin"
     ],
     "equippedWeaponId": "srd52:equipment:dagger"
   },

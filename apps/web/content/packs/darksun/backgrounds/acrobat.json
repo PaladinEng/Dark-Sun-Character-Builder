@@ -28,7 +28,10 @@
   "grantsOriginFeatId": "srd52:feat:skilled",
   "startingEquipment": {
     "itemIds": [
-      "srd52:equipment:disguise-kit"
+      "srd52:equipment:disguise-kit",
+      "srd52:equipment:backpack",
+      "srd52:equipment:waterskin",
+      "srd52:equipment:rope-hempen-50ft"
     ]
   }
 }

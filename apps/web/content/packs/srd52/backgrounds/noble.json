@@ -13,7 +13,9 @@
   "grantsOriginFeatId": "srd52:feat:lucky",
   "startingEquipment": {
     "itemIds": [
-      "srd52:equipment:gaming-set"
+      "srd52:equipment:gaming-set",
+      "srd52:equipment:backpack",
+      "srd52:equipment:calligraphers-supplies"
     ]
   },
   "effects": [

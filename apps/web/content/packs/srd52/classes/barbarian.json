@@ -75,7 +75,14 @@
   "startingEquipment": {
     "itemIds": [
       "srd52:equipment:hide-armor",
-      "srd52:equipment:greataxe"
+      "srd52:equipment:greataxe",
+      "srd52:equipment:handaxe",
+      "srd52:equipment:javelin",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:rations-1day",
+      "srd52:equipment:waterskin",
+      "srd52:equipment:rope-hempen-50ft"
     ],
     "equippedArmorId": "srd52:equipment:hide-armor",
     "equippedWeaponId": "srd52:equipment:greataxe"

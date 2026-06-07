@@ -57,7 +57,11 @@
     "itemIds": [
       "srd52:equipment:chain-shirt",
       "srd52:equipment:shield",
-      "srd52:equipment:mace"
+      "srd52:equipment:mace",
+      "srd52:equipment:light-crossbow",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin"
     ],
     "equippedArmorId": "srd52:equipment:chain-shirt",
     "equippedShieldId": "srd52:equipment:shield",

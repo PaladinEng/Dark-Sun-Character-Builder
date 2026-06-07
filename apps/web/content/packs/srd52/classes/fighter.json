@@ -58,7 +58,13 @@
   "startingEquipment": {
     "itemIds": [
       "srd52:equipment:chain-shirt",
-      "srd52:equipment:longsword"
+      "srd52:equipment:longsword",
+      "srd52:equipment:shield",
+      "srd52:equipment:shortbow",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin",
+      "srd52:equipment:rope-hempen-50ft"
     ],
     "equippedArmorId": "srd52:equipment:chain-shirt",
     "equippedWeaponId": "srd52:equipment:longsword"

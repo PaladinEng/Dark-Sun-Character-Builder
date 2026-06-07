@@ -28,7 +28,10 @@
   "grantsOriginFeatId": "darksun:feat:telepathic",
   "startingEquipment": {
     "itemIds": [
-      "srd52:equipment:calligraphers-supplies"
+      "srd52:equipment:calligraphers-supplies",
+      "srd52:equipment:backpack",
+      "srd52:equipment:bedroll",
+      "srd52:equipment:waterskin"
     ]
   }
 }
