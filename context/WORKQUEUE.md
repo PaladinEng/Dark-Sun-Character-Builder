@@ -26,7 +26,10 @@ Last updated: 2026-06-07
 - [ ] Filter prepared spell list to only show known spells (wizard-style casters)
 - [ ] Dark Sun currency (ceramic/copper/silver/gold pieces)
 - [ ] Custom Gear input (mirror custom spells)
-- [ ] Verify: saves not including proficiency bonus (code trace clean; needs character JSON to reproduce)
+- [x] ~~Verify: saves not including proficiency bonus~~ (closed 2026-06-07 — unit test confirms Wizard L1 INT save = +5 and L5 INT save = +6 end-to-end against the real SRD pack; any user-reported instance is stale localStorage and Reset Character clears it)
+- [x] ~~Fighting Style picker tied to class feature trigger~~ (done 2026-06-07 — new srd52:feature:fighting-style, chosenFightingStyleFeatId state, picker for Fighter L1 / Paladin L2 / Ranger L2)
+- [x] ~~Custom Gear input~~ (done 2026-06-07 — mirrors Custom Spells, surfaces on /sheet, /print, and PDF)
+- [ ] Drop template-page3/4/5.png assets into apps/web/public/sheets/ — CSS already wired; needs `brew install poppler` then `pdftoppm` extraction from the 5-page reference PDF (or any equivalent tool)
 
 ## P2 — Medium Priority
 - [x] ~~**Weapon Mastery feat** — gate mastery properties behind class feature/feat, add choice UI, add effects to weapon-master.json~~ (done 2026-06-07, Cowork session)
@@ -39,7 +42,7 @@ Last updated: 2026-06-07
 - [x] ~~Expand SRD coverage~~ (done 2026-06-07, Cowork session — 12 missing feats added, 2 missing weapons: Musket, Net)
 - [x] ~~Implement modelable feat effects~~ (done 2026-06-07, Cowork session — add_speed_bonus + add_hp_per_level effect types; Mobile +10 speed, Tough +2 HP/level, Speedy +10 speed, Poisoner tool prof, Tavern Brawler natural weapon)
 - [x] ~~Tune print page vertical budgets~~ (done 2026-06-07, Cowork session — min-height: 0 on flex children, reduced font sizes)
-- [ ] Extract all 5 template overlay PNGs from reference PDF and wire page 3/4 overlay CSS
+- [x] ~~Wire page 3/4/5 overlay CSS~~ (done 2026-06-07; PNG asset drop still pending — see entry above)
 
 ## P3 — Low Priority
 - [ ] Defiler casting mechanics
