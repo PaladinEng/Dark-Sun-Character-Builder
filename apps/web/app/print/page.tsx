@@ -249,6 +249,9 @@ export default async function PrintPage({
   const showOverlayToggle = process.env.NODE_ENV !== "production";
   const hasOverlayPage1 = await fileExists("public/sheets/template-page1.png");
   const hasOverlayPage2 = await fileExists("public/sheets/template-page2.png");
+  const hasOverlayPage3 = await fileExists("public/sheets/template-page3.png");
+  const hasOverlayPage4 = await fileExists("public/sheets/template-page4.png");
+  const hasOverlayPage5 = await fileExists("public/sheets/template-page5.png");
 
   const species = payload.characterState.selectedSpeciesId
     ? merged.content.speciesById[payload.characterState.selectedSpeciesId]
@@ -561,7 +564,10 @@ export default async function PrintPage({
   return (
     <main className="print-root">
       <PrintSheetControls
-        showOverlayToggle={showOverlayToggle && (hasOverlayPage1 || hasOverlayPage2)}
+        showOverlayToggle={
+          showOverlayToggle &&
+          (hasOverlayPage1 || hasOverlayPage2 || hasOverlayPage3 || hasOverlayPage4 || hasOverlayPage5)
+        }
       />
 
       {/* PAGE 1 — CORE CHARACTER SHEET */}
@@ -959,7 +965,11 @@ export default async function PrintPage({
       </section>
 
       {/* PAGE 3 — CHARACTER DETAILS */}
-      <section className="sheet-page page-3">
+      <section
+        className={["sheet-page", "page-3", hasOverlayPage3 ? "has-overlay" : ""]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <div className="sheet-content">
           <div className="detail-layout">
             {headerBar}
@@ -1043,7 +1053,11 @@ export default async function PrintPage({
 
       {/* PAGE 4 — SPELLCASTING (only when the character can cast) */}
       {hasSpellcasting ? (
-        <section className="sheet-page page-4">
+        <section
+          className={["sheet-page", "page-4", hasOverlayPage4 ? "has-overlay" : ""]
+            .filter(Boolean)
+            .join(" ")}
+        >
           <div className="sheet-content">
             <div className="detail-layout">
               <header className="panel spell-header">
@@ -1255,6 +1269,18 @@ export default async function PrintPage({
 
         .sheet-page.page-2.has-overlay::before {
           background-image: url("/sheets/template-page2.png");
+        }
+
+        .sheet-page.page-3.has-overlay::before {
+          background-image: url("/sheets/template-page3.png");
+        }
+
+        .sheet-page.page-4.has-overlay::before {
+          background-image: url("/sheets/template-page4.png");
+        }
+
+        .sheet-page.page-5.has-overlay::before {
+          background-image: url("/sheets/template-page5.png");
         }
 
         .panel {
