@@ -1361,6 +1361,61 @@ export default function BuilderClient({
       startingEquipment?.equippedShieldId ||
       startingEquipment?.equippedWeaponId,
   );
+  const inventoryItemIdSet = useMemo(
+    () => new Set(state.inventoryItemIds ?? []),
+    [state.inventoryItemIds],
+  );
+  const startingEquipmentApplied = useMemo(() => {
+    if (!startingEquipment) {
+      return {
+        itemsApplied: new Set<string>(),
+        allItemsApplied: false,
+        armorApplied: false,
+        shieldApplied: false,
+        weaponApplied: false,
+        allEquippedApplied: false,
+        fullyApplied: false,
+      };
+    }
+    const itemsApplied = new Set(
+      (startingEquipment.itemIds ?? []).filter((id) => inventoryItemIdSet.has(id)),
+    );
+    const totalItems = startingEquipment.itemIds?.length ?? 0;
+    const allItemsApplied = totalItems > 0 && itemsApplied.size === totalItems;
+    const armorApplied = startingEquipment.equippedArmorId
+      ? state.equippedArmorId === startingEquipment.equippedArmorId
+      : true;
+    const shieldApplied = startingEquipment.equippedShieldId
+      ? state.equippedShieldId === startingEquipment.equippedShieldId
+      : true;
+    const weaponApplied = startingEquipment.equippedWeaponId
+      ? state.equippedWeaponId === startingEquipment.equippedWeaponId
+      : true;
+    const allEquippedApplied = armorApplied && shieldApplied && weaponApplied;
+    return {
+      itemsApplied,
+      allItemsApplied: totalItems === 0 ? true : allItemsApplied,
+      armorApplied,
+      shieldApplied,
+      weaponApplied,
+      allEquippedApplied,
+      fullyApplied: (totalItems === 0 || allItemsApplied) && allEquippedApplied,
+    };
+  }, [
+    startingEquipment,
+    inventoryItemIdSet,
+    state.equippedArmorId,
+    state.equippedShieldId,
+    state.equippedWeaponId,
+  ]);
+  const [startingEquipmentJustApplied, setStartingEquipmentJustApplied] = useState(false);
+  useEffect(() => {
+    if (!startingEquipmentJustApplied) {
+      return;
+    }
+    const handle = window.setTimeout(() => setStartingEquipmentJustApplied(false), 3000);
+    return () => window.clearTimeout(handle);
+  }, [startingEquipmentJustApplied]);
   const knownSpellLimit = classSpellSelectionLimits?.known;
   const preparedSpellLimit = classSpellSelectionLimits?.prepared;
   const cantripsKnownLimit = classSpellSelectionLimits?.cantripsKnown;
@@ -1943,6 +1998,7 @@ export default function BuilderClient({
     if (!startingEquipment) {
       return;
     }
+    setStartingEquipmentJustApplied(true);
 
     setState((previous) => {
       const nextArmorId =
@@ -3236,42 +3292,117 @@ export default function BuilderClient({
         {startingEquipment ? (
           <div className="text-sm md:col-span-3">
             <div className="rounded border border-slate-700 bg-slate-950/50 p-3">
-              <div className="font-semibold">Starting Equipment Package</div>
+              <div className="flex items-baseline justify-between gap-2">
+                <div className="font-semibold">Starting Equipment Package</div>
+                <div className="text-xs text-slate-400">
+                  {startingEquipmentApplied.itemsApplied.size} / {startingEquipment.itemIds.length} items in inventory
+                </div>
+              </div>
               <p className="mt-1 text-xs text-slate-300">
                 Derived from selected class/background.
               </p>
-              <div className="mt-2 text-xs text-slate-300">
-                Items:{" "}
-                {startingEquipment.itemIds.length > 0
-                  ? startingEquipment.itemIds
-                      .map((itemId) => content.equipmentById[itemId]?.name ?? itemId)
-                      .join(", ")
-                  : "(none)"}
+              {startingEquipment.itemIds.length > 0 ? (
+                <ul className="mt-2 grid gap-x-3 gap-y-1 text-xs text-slate-300 md:grid-cols-2">
+                  {startingEquipment.itemIds.map((itemId) => {
+                    const applied = startingEquipmentApplied.itemsApplied.has(itemId);
+                    return (
+                      <li key={`starting-item-${itemId}`} className="flex items-center gap-2">
+                        <span
+                          className={applied ? "text-emerald-400" : "text-slate-500"}
+                          aria-hidden="true"
+                        >
+                          {applied ? "✓" : "○"}
+                        </span>
+                        <span className={applied ? "text-slate-200" : "text-slate-400"}>
+                          {content.equipmentById[itemId]?.name ?? itemId}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : (
+                <div className="mt-2 text-xs text-slate-400">Items: (none)</div>
+              )}
+              {hasStartingEquipmentSuggestions ? (
+                <ul className="mt-2 space-y-0.5 text-xs">
+                  {startingEquipment.equippedArmorId ? (
+                    <li className="flex items-center gap-2">
+                      <span
+                        className={startingEquipmentApplied.armorApplied ? "text-emerald-400" : "text-slate-500"}
+                        aria-hidden="true"
+                      >
+                        {startingEquipmentApplied.armorApplied ? "✓" : "○"}
+                      </span>
+                      <span className={startingEquipmentApplied.armorApplied ? "text-slate-200" : "text-slate-400"}>
+                        Equip armor:{" "}
+                        {content.equipmentById[startingEquipment.equippedArmorId]?.name ??
+                          startingEquipment.equippedArmorId}
+                      </span>
+                    </li>
+                  ) : null}
+                  {startingEquipment.equippedShieldId ? (
+                    <li className="flex items-center gap-2">
+                      <span
+                        className={startingEquipmentApplied.shieldApplied ? "text-emerald-400" : "text-slate-500"}
+                        aria-hidden="true"
+                      >
+                        {startingEquipmentApplied.shieldApplied ? "✓" : "○"}
+                      </span>
+                      <span className={startingEquipmentApplied.shieldApplied ? "text-slate-200" : "text-slate-400"}>
+                        Equip shield:{" "}
+                        {content.equipmentById[startingEquipment.equippedShieldId]?.name ??
+                          startingEquipment.equippedShieldId}
+                      </span>
+                    </li>
+                  ) : null}
+                  {startingEquipment.equippedWeaponId ? (
+                    <li className="flex items-center gap-2">
+                      <span
+                        className={startingEquipmentApplied.weaponApplied ? "text-emerald-400" : "text-slate-500"}
+                        aria-hidden="true"
+                      >
+                        {startingEquipmentApplied.weaponApplied ? "✓" : "○"}
+                      </span>
+                      <span className={startingEquipmentApplied.weaponApplied ? "text-slate-200" : "text-slate-400"}>
+                        Equip weapon:{" "}
+                        {content.equipmentById[startingEquipment.equippedWeaponId]?.name ??
+                          startingEquipment.equippedWeaponId}
+                      </span>
+                    </li>
+                  ) : null}
+                </ul>
+              ) : null}
+              <div className="mt-3 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={onApplyStartingEquipment}
+                  disabled={
+                    !hasStartingEquipmentSuggestions && startingEquipment.itemIds.length === 0
+                  }
+                  className={`rounded border px-3 py-1.5 text-sm disabled:opacity-50 ${
+                    startingEquipmentApplied.fullyApplied
+                      ? "border-emerald-700 bg-emerald-900/30 text-emerald-200"
+                      : "border-slate-600"
+                  }`}
+                >
+                  {startingEquipmentApplied.fullyApplied
+                    ? "All Applied — Re-apply"
+                    : startingEquipmentApplied.itemsApplied.size > 0 ||
+                        startingEquipmentApplied.armorApplied ||
+                        startingEquipmentApplied.shieldApplied ||
+                        startingEquipmentApplied.weaponApplied
+                      ? "Apply Missing Items"
+                      : "Apply Starting Equipment"}
+                </button>
+                {startingEquipmentJustApplied ? (
+                  <span
+                    role="status"
+                    className="text-xs font-semibold text-emerald-300"
+                  >
+                    Starting equipment added ✓
+                  </span>
+                ) : null}
               </div>
-              <div className="mt-1 text-xs text-slate-300">
-                Equipped suggestions:{" "}
-                {[
-                  startingEquipment.equippedArmorId
-                    ? `Armor ${content.equipmentById[startingEquipment.equippedArmorId]?.name ?? startingEquipment.equippedArmorId}`
-                    : null,
-                  startingEquipment.equippedShieldId
-                    ? `Shield ${content.equipmentById[startingEquipment.equippedShieldId]?.name ?? startingEquipment.equippedShieldId}`
-                    : null,
-                  startingEquipment.equippedWeaponId
-                    ? `Weapon ${content.equipmentById[startingEquipment.equippedWeaponId]?.name ?? startingEquipment.equippedWeaponId}`
-                    : null,
-                ]
-                  .filter((entry): entry is string => Boolean(entry))
-                  .join(", ") || "(none)"}
-              </div>
-              <button
-                type="button"
-                onClick={onApplyStartingEquipment}
-                disabled={!hasStartingEquipmentSuggestions}
-                className="mt-3 rounded border border-slate-600 px-3 py-1.5 text-sm disabled:opacity-50"
-              >
-                Apply Starting Equipment
-              </button>
             </div>
           </div>
         ) : null}
