@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:ice-storm",
+  "name": "Ice Storm",
+  "description": "A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder centered on a point. 2d8 bludgeoning + 4d6 cold damage on failed Dex save.",
+  "level": 4,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "300 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A hail of rock-hard ice pounds to the ground in a 20-foot-radius, 40-foot-high cylinder centered on a point. 2d8 bludgeoning + 4d6 cold damage on failed Dex save.",
+  "notes": "No additional casting notes."
+}

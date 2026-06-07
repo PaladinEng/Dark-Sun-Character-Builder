@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:sunbeam",
+  "name": "Sunbeam",
+  "description": "A beam of brilliant light flashes out from your hand in a 5-foot-wide, 60-foot-long line. Con save; on fail, 6d8 radiant damage and blinded until your next turn.",
+  "level": 6,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self (60-foot line)",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "A beam of brilliant light flashes out from your hand in a 5-foot-wide, 60-foot-long line. Con save; on fail, 6d8 radiant damage and blinded until your next turn.",
+  "notes": "No additional casting notes."
+}

@@ -97,8 +97,10 @@ export interface CharacterState {
   selectedFeats?: string[];
   originFeatId?: string;
   chosenClassSkills?: string[];
+  chosenSpeciesSkills?: string[];
   touched?: {
     classSkills?: boolean;
+    speciesSkills?: boolean;
   };
   advancements?: Advancement[];
   chosenSkillProficiencies: string[];

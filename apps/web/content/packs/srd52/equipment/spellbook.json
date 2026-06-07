@@ -1,0 +1,6 @@
+{
+  "id": "srd52:equipment:spellbook",
+  "type": "adventuring_gear",
+  "name": "Spellbook",
+  "description": "A leather-bound tome with 100 blank vellum pages suitable for recording spells. A wizard's spellbook holds the spells they prepare from each day."
+}

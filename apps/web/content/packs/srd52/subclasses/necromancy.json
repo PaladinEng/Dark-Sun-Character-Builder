@@ -5,11 +5,11 @@
   "description": "A tradition focused on life-force manipulation, grim endurance, and command of the dead.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:necromancy-necromancy-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:necromancy-grim-harvest"
     },
     {

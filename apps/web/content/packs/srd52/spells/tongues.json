@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:tongues",
+  "name": "Tongues",
+  "description": "Grants a willing creature the ability to understand any spoken language it hears, and any creature that understands a language can understand what the target says.",
+  "level": 3,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false,
+  "summary": "Grants a willing creature the ability to understand any spoken language it hears, and any creature that understands a language can understand what the target says.",
+  "notes": "No additional casting notes."
+}

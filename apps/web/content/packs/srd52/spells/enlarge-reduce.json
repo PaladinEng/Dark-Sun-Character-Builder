@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:enlarge-reduce",
+  "name": "Enlarge/Reduce",
+  "description": "You cause a creature or object you can see in range to grow larger or smaller. Choose enlarge or reduce; the target's size doubles or halves in all dimensions, and its weight is multiplied by 8 or divided by 8.",
+  "level": 2,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "You cause a creature or object you can see in range to grow larger or smaller. Choose enlarge or reduce; the target's size doubles or halves in all dimensions, and its weight is multiplied by 8 or divided by 8.",
+  "notes": "No additional casting notes."
+}

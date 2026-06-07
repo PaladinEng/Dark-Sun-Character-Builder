@@ -5,11 +5,11 @@
   "description": "A defensive tradition built around wards, counters, and magical resilience.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:abjuration-abjuration-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:abjuration-arcane-ward"
     },
     {

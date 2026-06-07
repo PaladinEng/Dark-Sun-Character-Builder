@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:polymorph",
+  "name": "Polymorph",
+  "description": "This spell transforms a creature you can see within range into a new form. An unwilling creature must make a Wisdom save to avoid the effect.",
+  "level": 4,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "summary": "This spell transforms a creature you can see within range into a new form. An unwilling creature must make a Wisdom save to avoid the effect.",
+  "notes": "No additional casting notes."
+}

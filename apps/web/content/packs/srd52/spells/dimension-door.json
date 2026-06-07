@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:dimension-door",
+  "name": "Dimension Door",
+  "description": "You teleport yourself from your current location to any spot within range that you can see or specify by distance and direction.",
+  "level": 4,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "500 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You teleport yourself from your current location to any spot within range that you can see or specify by distance and direction.",
+  "notes": "No additional casting notes."
+}

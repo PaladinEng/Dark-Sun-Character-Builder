@@ -1,0 +1,6 @@
+{
+  "id": "srd52:equipment:component-pouch",
+  "type": "adventuring_gear",
+  "name": "Component Pouch",
+  "description": "A small, watertight leather belt pouch containing the material components and other special items required for spellcasting. Replaces specific material components that have no listed cost."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:witch-bolt",
+  "name": "Witch Bolt",
+  "description": "A beam of crackling, blue energy lances out toward a creature within range, forming a sustained arc of lightning between you and the target. Ranged spell attack; on hit, 1d12 lightning damage, and on each of your turns you can use your action to deal another 1d12 lightning damage.",
+  "level": 1,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "A beam of crackling, blue energy lances out toward a creature within range, forming a sustained arc of lightning between you and the target. Ranged spell attack; on hit, 1d12 lightning damage, and on each of your turns you can use your action to deal another 1d12 lightning damage.",
+  "notes": "No additional casting notes."
+}

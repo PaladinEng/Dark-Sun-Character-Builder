@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:prismatic-wall",
+  "name": "Prismatic Wall",
+  "description": "A shimmering, multicolored plane of light forms a vertical opaque wall — up to 90 feet long, 30 feet high, and 1 inch thick — centered on a point you can see within range. The wall consists of seven layers, each a different color, with different magical effects.",
+  "level": 9,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "10 minutes",
+  "concentration": false,
+  "summary": "A shimmering, multicolored plane of light forms a vertical opaque wall — up to 90 feet long, 30 feet high, and 1 inch thick — centered on a point you can see within range. The wall consists of seven layers, each a different color, with different magical effects.",
+  "notes": "No additional casting notes."
+}

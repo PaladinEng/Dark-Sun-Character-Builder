@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:stoneskin",
+  "name": "Stoneskin",
+  "description": "Until the spell ends, one willing creature you touch has resistance to nonmagical bludgeoning, piercing, and slashing damage.",
+  "level": 4,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "summary": "Until the spell ends, one willing creature you touch has resistance to nonmagical bludgeoning, piercing, and slashing damage.",
+  "notes": "No additional casting notes."
+}

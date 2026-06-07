@@ -5,11 +5,11 @@
   "description": "A subtle tradition that bends will, attention, and hostile intent.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:enchantment-enchantment-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:enchantment-hypnotic-gaze"
     },
     {

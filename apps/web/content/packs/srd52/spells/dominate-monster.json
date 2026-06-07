@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:dominate-monster",
+  "name": "Dominate Monster",
+  "description": "You attempt to beguile a creature you can see within range. Wisdom save; on fail, target is charmed by you for the duration.",
+  "level": 8,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "summary": "You attempt to beguile a creature you can see within range. Wisdom save; on fail, target is charmed by you for the duration.",
+  "notes": "No additional casting notes."
+}

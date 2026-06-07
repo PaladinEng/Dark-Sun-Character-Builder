@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:maze",
+  "name": "Maze",
+  "description": "You banish a creature you can see within range into a labyrinthine demiplane. The target must use its action to make an Intelligence check to escape.",
+  "level": 8,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true,
+  "summary": "You banish a creature you can see within range into a labyrinthine demiplane. The target must use its action to make an Intelligence check to escape.",
+  "notes": "No additional casting notes."
+}

@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:mind-spike",
+  "name": "Mind Spike",
+  "description": "You drive a spike of psychic energy into the mind of one creature. Wisdom save or take 3d8 psychic damage; until the spell ends, you always know the target's location, but it is invisible to you.",
+  "level": 2,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 hour",
+  "concentration": true,
+  "summary": "You drive a spike of psychic energy into the mind of one creature. Wisdom save or take 3d8 psychic damage; until the spell ends, you always know the target's location, but it is invisible to you.",
+  "notes": "No additional casting notes."
+}

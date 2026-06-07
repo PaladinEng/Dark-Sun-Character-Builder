@@ -1,0 +1,6 @@
+{
+  "id": "srd52:equipment:arcane-focus-crystal",
+  "type": "adventuring_gear",
+  "name": "Arcane Focus (Crystal)",
+  "description": "A clear crystal serving as a spellcasting focus for arcane casters. Substitutes for material components that have no listed cost."
+}

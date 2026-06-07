@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:animate-objects",
+  "name": "Animate Objects",
+  "description": "Objects come to life at your command. Choose up to 10 nonmagical objects within range that are not being worn or carried, and animate them with magical force.",
+  "level": 5,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "Objects come to life at your command. Choose up to 10 nonmagical objects within range that are not being worn or carried, and animate them with magical force.",
+  "notes": "No additional casting notes."
+}

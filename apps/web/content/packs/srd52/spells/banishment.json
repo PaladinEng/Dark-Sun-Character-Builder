@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:banishment",
+  "name": "Banishment",
+  "description": "You attempt to send one creature you can see within range to another plane of existence. Charisma save; on fail, target is banished.",
+  "level": 4,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "You attempt to send one creature you can see within range to another plane of existence. Charisma save; on fail, target is banished.",
+  "notes": "No additional casting notes."
+}

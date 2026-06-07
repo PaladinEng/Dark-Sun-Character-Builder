@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:scrying",
+  "name": "Scrying",
+  "description": "You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a Wisdom save modified by your knowledge of and connection to it.",
+  "level": 5,
+  "school": "divination",
+  "ritual": false,
+  "castingTime": "10 minutes",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true,
+  "summary": "You can see and hear a particular creature you choose that is on the same plane of existence as you. The target must make a Wisdom save modified by your knowledge of and connection to it.",
+  "notes": "No additional casting notes."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:hold-monster",
+  "name": "Hold Monster",
+  "description": "Choose a creature you can see within range. Wisdom save; on fail, target is paralyzed for the duration. Can repeat save at end of each of its turns.",
+  "level": 5,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "90 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "Choose a creature you can see within range. Wisdom save; on fail, target is paralyzed for the duration. Can repeat save at end of each of its turns.",
+  "notes": "No additional casting notes."
+}

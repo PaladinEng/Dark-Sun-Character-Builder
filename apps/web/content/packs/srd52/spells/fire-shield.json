@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:fire-shield",
+  "name": "Fire Shield",
+  "description": "Thin flames surround your body for the duration, shedding light and damaging attackers who hit you with a melee attack (2d8 fire or cold damage). You have resistance to fire or cold damage.",
+  "level": 4,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "10 minutes",
+  "concentration": false,
+  "summary": "Thin flames surround your body for the duration, shedding light and damaging attackers who hit you with a melee attack (2d8 fire or cold damage). You have resistance to fire or cold damage.",
+  "notes": "No additional casting notes."
+}

@@ -5,11 +5,11 @@
   "description": "A transformative discipline that rewrites matter, movement, and bodily states.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:transmutation-transmutation-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:transmutation-minor-alchemy"
     },
     {

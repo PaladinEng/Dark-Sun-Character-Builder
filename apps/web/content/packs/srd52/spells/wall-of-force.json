@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:wall-of-force",
+  "name": "Wall of Force",
+  "description": "An invisible wall of force springs into existence at a point within range. The wall is 10 feet by 10 feet panels, up to ten panels, or a sphere up to 10-foot radius. Nothing can physically pass through the wall.",
+  "level": 5,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 10 minutes",
+  "concentration": true,
+  "summary": "An invisible wall of force springs into existence at a point within range. The wall is 10 feet by 10 feet panels, up to ten panels, or a sphere up to 10-foot radius. Nothing can physically pass through the wall.",
+  "notes": "No additional casting notes."
+}

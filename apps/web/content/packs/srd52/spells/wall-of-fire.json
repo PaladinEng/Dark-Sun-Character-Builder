@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:wall-of-fire",
+  "name": "Wall of Fire",
+  "description": "You create a wall of fire on a solid surface within range. The wall is 1 foot thick and 20 feet high. One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall.",
+  "level": 4,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "120 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "You create a wall of fire on a solid surface within range. The wall is 1 foot thick and 20 feet high. One side of the wall, selected by you when you cast this spell, deals 5d8 fire damage to each creature that ends its turn within 10 feet of that side or inside the wall.",
+  "notes": "No additional casting notes."
+}

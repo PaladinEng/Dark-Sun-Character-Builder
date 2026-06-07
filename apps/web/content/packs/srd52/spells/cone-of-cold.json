@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:cone-of-cold",
+  "name": "Cone of Cold",
+  "description": "A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution save, taking 8d8 cold damage on a failed save, or half as much on a successful one.",
+  "level": 5,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self (60-foot cone)",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution save, taking 8d8 cold damage on a failed save, or half as much on a successful one.",
+  "notes": "No additional casting notes."
+}

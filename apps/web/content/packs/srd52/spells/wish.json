@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:wish",
+  "name": "Wish",
+  "description": "Wish is the mightiest spell a mortal creature can cast. By simply speaking aloud, you can alter the very foundations of reality in accord with your desires. The basic use is to duplicate any other spell of 8th level or lower.",
+  "level": 9,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Wish is the mightiest spell a mortal creature can cast. By simply speaking aloud, you can alter the very foundations of reality in accord with your desires. The basic use is to duplicate any other spell of 8th level or lower.",
+  "notes": "No additional casting notes."
+}

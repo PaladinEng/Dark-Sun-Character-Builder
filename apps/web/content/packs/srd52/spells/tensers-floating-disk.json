@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:tensers-floating-disk",
+  "name": "Tenser's Floating Disk",
+  "description": "A circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, springs into existence and follows you. It can hold up to 500 pounds.",
+  "level": 1,
+  "school": "conjuration",
+  "ritual": true,
+  "castingTime": "1 action",
+  "range": "30 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "1 hour",
+  "concentration": false,
+  "summary": "A circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, springs into existence and follows you. It can hold up to 500 pounds.",
+  "notes": "No additional casting notes."
+}

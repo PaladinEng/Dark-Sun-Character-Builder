@@ -5,11 +5,11 @@
   "description": "An arcane path centered on deception, projection, and flexible phantasms.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:illusion-illusion-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:illusion-improved-minor-illusion"
     },
     {

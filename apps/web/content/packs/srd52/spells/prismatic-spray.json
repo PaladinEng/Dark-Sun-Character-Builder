@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:prismatic-spray",
+  "name": "Prismatic Spray",
+  "description": "Eight multicolored rays of light flash from your hand. Each creature in a 60-foot cone takes one of eight effects determined randomly (d8) — fire, acid, lightning, poison, cold, radiant damage; petrified; banished to another plane.",
+  "level": 7,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Self (60-foot cone)",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Eight multicolored rays of light flash from your hand. Each creature in a 60-foot cone takes one of eight effects determined randomly (d8) — fire, acid, lightning, poison, cold, radiant damage; petrified; banished to another plane.",
+  "notes": "No additional casting notes."
+}

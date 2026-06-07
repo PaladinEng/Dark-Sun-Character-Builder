@@ -5,11 +5,11 @@
   "description": "A summoning tradition that bends space to call objects and creatures at will.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:conjuration-conjuration-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:conjuration-minor-conjuration"
     },
     {

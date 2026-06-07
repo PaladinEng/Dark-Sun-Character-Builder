@@ -31,11 +31,23 @@
     },
     {
       "level": 1,
+      "featureId": "srd52:feature:ritual-adept"
+    },
+    {
+      "level": 1,
       "featureId": "srd52:feature:arcane-recovery"
     },
     {
       "level": 2,
+      "featureId": "srd52:feature:scholar"
+    },
+    {
+      "level": 3,
       "featureId": "srd52:feature:arcane-tradition"
+    },
+    {
+      "level": 5,
+      "featureId": "srd52:feature:memorize-spell"
     },
     {
       "level": 18,
@@ -48,13 +60,21 @@
   ],
   "startingEquipment": {
     "itemIds": [
+      "srd52:equipment:spellbook",
+      "srd52:equipment:component-pouch",
+      "srd52:equipment:arcane-focus-crystal",
+      "srd52:equipment:robe",
       "srd52:equipment:dagger",
       "srd52:equipment:quarterstaff",
       "srd52:equipment:backpack",
+      "srd52:equipment:book",
+      "srd52:equipment:ink-and-pen",
+      "srd52:equipment:parchment",
+      "srd52:equipment:map-or-scroll-case",
       "srd52:equipment:bedroll",
       "srd52:equipment:waterskin"
     ],
-    "equippedWeaponId": "srd52:equipment:dagger"
+    "equippedWeaponId": "srd52:equipment:quarterstaff"
   },
   "effects": [
     {

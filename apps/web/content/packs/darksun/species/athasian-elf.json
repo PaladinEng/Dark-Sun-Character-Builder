@@ -1,6 +1,10 @@
 {
   "id": "darksun:species:athasian-elf",
   "name": "Athasian Elf",
+  "skillChoices": {
+    "count": 1,
+    "from": ["insight", "perception", "survival"]
+  },
   "effects": [
     {
       "type": "set_speed",

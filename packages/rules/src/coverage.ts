@@ -44,6 +44,10 @@ const SUPPORTED_EFFECT_TYPES = [
   "grant_trait",
   "grant_tool_proficiency",
   "grant_language",
+  "grant_natural_weapon",
+  "grant_weapon_mastery",
+  "add_speed_bonus",
+  "add_hp_per_level",
 ] as const;
 
 function collectArrayFromContent<T = unknown>(

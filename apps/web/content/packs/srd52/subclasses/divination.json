@@ -5,11 +5,11 @@
   "description": "A predictive tradition that manipulates foresight and magical certainty.",
   "subclassFeaturesByLevel": [
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:divination-divination-savant"
     },
     {
-      "level": 2,
+      "level": 3,
       "featureId": "srd52:feature:divination-portent"
     },
     {

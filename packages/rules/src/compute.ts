@@ -481,6 +481,27 @@ export function computeDerivedState(
 
     skillProficiencies.push(...validChoices.slice(0, classSkillChoices.count));
   }
+  const chosenSpeciesSkills = dedupe(state.chosenSpeciesSkills ?? []);
+  const speciesSkillsTouched = state.touched?.speciesSkills === true;
+  if (species?.skillChoices) {
+    const speciesSkillChoices = species.skillChoices;
+    const allowed = new Set(speciesSkillChoices.from);
+    const invalidChoices = chosenSpeciesSkills.filter((skill) => !allowed.has(skill));
+    if (invalidChoices.length > 0) {
+      warnings.push(
+        `Invalid species skill selections for ${species.name}: ${invalidChoices.join(", ")}`
+      );
+    }
+
+    const validChoices = chosenSpeciesSkills.filter((skill) => allowed.has(skill));
+    if (speciesSkillsTouched && validChoices.length !== speciesSkillChoices.count) {
+      warnings.push(
+        `Species skill selections incomplete for ${species.name}: expected ${speciesSkillChoices.count}, got ${validChoices.length}`
+      );
+    }
+
+    skillProficiencies.push(...validChoices.slice(0, speciesSkillChoices.count));
+  }
   const finalSkillProficiencies = dedupe(skillProficiencies);
   const saveProficiencies = dedupe([
     ...(state.chosenSaveProficiencies ?? []),

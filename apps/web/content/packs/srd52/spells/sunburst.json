@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:sunburst",
+  "name": "Sunburst",
+  "description": "Brilliant sunlight flashes in a 60-foot radius centered on a point within range. Con save; 12d6 radiant damage on fail (half on success) and blinded for 1 minute.",
+  "level": 8,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "150 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Brilliant sunlight flashes in a 60-foot radius centered on a point within range. Con save; 12d6 radiant damage on fail (half on success) and blinded for 1 minute.",
+  "notes": "No additional casting notes."
+}

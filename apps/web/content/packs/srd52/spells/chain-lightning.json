@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:chain-lightning",
+  "name": "Chain Lightning",
+  "description": "You create a bolt of lightning that arcs toward a target. Three other bolts then leap from the primary target to other targets, each within 30 feet of the first. Dex save or take 10d8 lightning damage.",
+  "level": 6,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "150 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You create a bolt of lightning that arcs toward a target. Three other bolts then leap from the primary target to other targets, each within 30 feet of the first. Dex save or take 10d8 lightning damage.",
+  "notes": "No additional casting notes."
+}

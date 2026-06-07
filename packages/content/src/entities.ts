@@ -50,7 +50,14 @@ export type Skill = z.infer<typeof SkillSchema>;
 export const SkillDefinitionSchema = SkillSchema;
 export type SkillDefinition = Skill;
 
-export const SpeciesSchema = EntityBaseSchema;
+export const SpeciesSchema = EntityBaseSchema.extend({
+  skillChoices: z
+    .object({
+      count: z.number().int().positive(),
+      from: z.array(z.string()).min(1),
+    })
+    .optional(),
+});
 export type Species = z.infer<typeof SpeciesSchema>;
 
 export const BackgroundAbilityOptionsSchema = z.object({

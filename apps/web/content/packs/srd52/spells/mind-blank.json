@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:mind-blank",
+  "name": "Mind Blank",
+  "description": "Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, divination spells, and the charmed condition.",
+  "level": 8,
+  "school": "abjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "24 hours",
+  "concentration": false,
+  "summary": "Until the spell ends, one willing creature you touch is immune to psychic damage, any effect that would sense its emotions or read its thoughts, divination spells, and the charmed condition.",
+  "notes": "No additional casting notes."
+}

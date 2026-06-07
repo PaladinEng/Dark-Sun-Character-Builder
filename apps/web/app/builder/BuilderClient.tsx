@@ -835,6 +835,7 @@ export default function BuilderClient({
   );
   const selectedWeapon = selectedWeapons[0];
   const selectedClassSkillChoices = selectedClass?.classSkillChoices;
+  const selectedSpeciesSkillChoices = (selectedSpecies as { skillChoices?: { count: number; from: string[] } } | undefined)?.skillChoices;
   const skillNameById = useMemo(() => {
     const map: Record<string, string> = {};
     for (const skill of content.skillDefinitions ?? []) {
@@ -843,6 +844,7 @@ export default function BuilderClient({
     return map;
   }, [content.skillDefinitions]);
   const chosenClassSkills = state.chosenClassSkills ?? [];
+  const chosenSpeciesSkills = state.chosenSpeciesSkills ?? [];
   const originFeats = useMemo(
     () => collectArray(content, "feats").filter((feat) => feat.category === "origin"),
     [content],
@@ -1714,6 +1716,34 @@ export default function BuilderClient({
         touched: {
           ...(previous.touched ?? {}),
           classSkills: true,
+        },
+      };
+    });
+  };
+
+  const onToggleSpeciesSkill = (skillId: string, checked: boolean) => {
+    const choices = selectedSpeciesSkillChoices;
+    if (!choices) {
+      return;
+    }
+
+    setState((previous) => {
+      const current = new Set(previous.chosenSpeciesSkills ?? []);
+      if (checked) {
+        if (!current.has(skillId) && current.size >= choices.count) {
+          return previous;
+        }
+        current.add(skillId);
+      } else {
+        current.delete(skillId);
+      }
+
+      return {
+        ...previous,
+        chosenSpeciesSkills: Array.from(current),
+        touched: {
+          ...(previous.touched ?? {}),
+          speciesSkills: true,
         },
       };
     });
@@ -3359,6 +3389,40 @@ export default function BuilderClient({
               />
             );
           })()}
+        </section>
+      ) : null}
+
+      {selectedSpeciesSkillChoices ? (
+        <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+          <h2 className="text-sm font-semibold">Species Skills</h2>
+          <p className="mt-1 text-sm text-slate-300">
+            {selectedSpecies?.name}: choose {selectedSpeciesSkillChoices.count} skill{selectedSpeciesSkillChoices.count === 1 ? "" : "s"} (
+            {chosenSpeciesSkills.length}/{selectedSpeciesSkillChoices.count} selected)
+          </p>
+          {chosenSpeciesSkills.length < selectedSpeciesSkillChoices.count ? (
+            <p className="mt-2 text-sm font-semibold text-amber-300">
+              Choose {selectedSpeciesSkillChoices.count} species skill{selectedSpeciesSkillChoices.count === 1 ? "" : "s"} to complete character.
+            </p>
+          ) : null}
+          <div className="mt-3 grid gap-2 md:grid-cols-3">
+            {selectedSpeciesSkillChoices.from.map((skillId) => {
+              const checked = chosenSpeciesSkills.includes(skillId);
+              const canChooseMore = chosenSpeciesSkills.length < selectedSpeciesSkillChoices.count;
+              const disabled = !checked && !canChooseMore;
+
+              return (
+                <label key={`species-skill-${skillId}`} className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    disabled={disabled}
+                    onChange={(event) => onToggleSpeciesSkill(skillId, event.target.checked)}
+                  />
+                  <span>{skillNameById[skillId] ?? formatSkillId(skillId)}</span>
+                </label>
+              );
+            })}
+          </div>
         </section>
       ) : null}
 

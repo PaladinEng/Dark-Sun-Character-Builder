@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:find-familiar",
+  "name": "Find Familiar",
+  "description": "You gain the service of a familiar, a spirit that takes an animal form you choose.",
+  "level": 1,
+  "school": "conjuration",
+  "ritual": true,
+  "castingTime": "1 hour",
+  "range": "10 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You gain the service of a familiar, a spirit that takes an animal form you choose.",
+  "notes": "No additional casting notes."
+}

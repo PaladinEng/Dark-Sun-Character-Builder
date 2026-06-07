@@ -1,0 +1,5 @@
+{
+  "id": "srd52:feature:memorize-spell",
+  "name": "Memorize Spell",
+  "description": "Whenever you finish a Short Rest, you can study your spellbook and replace one Wizard spell you have prepared with another Wizard spell from the book. The replacement spell must be of a level for which you have spell slots."
+}

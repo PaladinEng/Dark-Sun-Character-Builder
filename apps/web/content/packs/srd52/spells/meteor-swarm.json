@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:meteor-swarm",
+  "name": "Meteor Swarm",
+  "description": "Blazing orbs of fire plummet to the ground at four different points within range. Each creature in a 40-foot-radius sphere centered on each point chosen makes a Dex save, taking 20d6 fire and 20d6 bludgeoning damage on a failed save, or half on a successful one.",
+  "level": 9,
+  "school": "evocation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "1 mile",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "Blazing orbs of fire plummet to the ground at four different points within range. Each creature in a 40-foot-radius sphere centered on each point chosen makes a Dex save, taking 20d6 fire and 20d6 bludgeoning damage on a failed save, or half on a successful one.",
+  "notes": "No additional casting notes."
+}

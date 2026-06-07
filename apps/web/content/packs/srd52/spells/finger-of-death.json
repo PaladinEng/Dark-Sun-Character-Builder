@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:finger-of-death",
+  "name": "Finger of Death",
+  "description": "You send negative energy coursing through a creature you can see within range, causing it searing pain. Con save; target takes 7d8+30 necrotic damage on fail, or half on success. A humanoid killed by this spell rises at the start of your next turn as a zombie under your permanent command.",
+  "level": 7,
+  "school": "necromancy",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You send negative energy coursing through a creature you can see within range, causing it searing pain. Con save; target takes 7d8+30 necrotic damage on fail, or half on success. A humanoid killed by this spell rises at the start of your next turn as a zombie under your permanent command.",
+  "notes": "No additional casting notes."
+}

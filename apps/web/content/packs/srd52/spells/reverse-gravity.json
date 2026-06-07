@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:reverse-gravity",
+  "name": "Reverse Gravity",
+  "description": "This spell reverses gravity in a 50-foot-radius, 100-foot-high cylinder centered on a point. All creatures and objects that aren't somehow anchored to the ground in the area fall upward and reach the top of the area.",
+  "level": 7,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "100 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Concentration, up to 1 minute",
+  "concentration": true,
+  "summary": "This spell reverses gravity in a 50-foot-radius, 100-foot-high cylinder centered on a point. All creatures and objects that aren't somehow anchored to the ground in the area fall upward and reach the top of the area.",
+  "notes": "No additional casting notes."
+}

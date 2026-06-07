@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:disintegrate",
+  "name": "Disintegrate",
+  "description": "A thin green ray springs from your finger to a target you can see. Dex save; on fail, target takes 10d6+40 force damage. If reduced to 0 HP, it is disintegrated.",
+  "level": 6,
+  "school": "transmutation",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "A thin green ray springs from your finger to a target you can see. Dex save; on fail, target takes 10d6+40 force damage. If reduced to 0 HP, it is disintegrated.",
+  "notes": "No additional casting notes."
+}

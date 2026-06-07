@@ -1,0 +1,19 @@
+{
+  "id": "srd52:spell:plane-shift",
+  "name": "Plane Shift",
+  "description": "You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms.",
+  "level": 7,
+  "school": "conjuration",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "Touch",
+  "components": [
+    "V",
+    "S",
+    "M"
+  ],
+  "duration": "Instantaneous",
+  "concentration": false,
+  "summary": "You and up to eight willing creatures who link hands in a circle are transported to a different plane of existence. You can specify a target destination in general terms.",
+  "notes": "No additional casting notes."
+}

@@ -1,0 +1,5 @@
+{
+  "id": "srd52:feature:ritual-adept",
+  "name": "Ritual Adept",
+  "description": "You can cast any spell as a ritual if that spell has the Ritual tag and the spell is in your spellbook. You don't need to have the spell prepared, but you must read from the book to cast a spell in this way."
+}

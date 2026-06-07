@@ -1,0 +1,18 @@
+{
+  "id": "srd52:spell:mind-sliver",
+  "name": "Mind Sliver",
+  "description": "A creature you can see must succeed on an Intelligence saving throw or take 1d6 psychic damage and subtract 1d4 from its next saving throw before the end of your next turn.",
+  "level": 0,
+  "school": "enchantment",
+  "ritual": false,
+  "castingTime": "1 action",
+  "range": "60 feet",
+  "components": [
+    "V",
+    "S"
+  ],
+  "duration": "1 round",
+  "concentration": false,
+  "summary": "A creature you can see must succeed on an Intelligence saving throw or take 1d6 psychic damage and subtract 1d4 from its next saving throw before the end of your next turn.",
+  "notes": "No additional casting notes."
+}

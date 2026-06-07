@@ -15,8 +15,17 @@ has been fixed for ability score layout, skill markers, and spell slot alignment
 Starting equipment is now complete for all classes and backgrounds.
 
 ## Last Session
-Date: 2026-06-07 (Cowork — continued: localStorage, spells, subclasses, feats, equipment, print)
+Date: 2026-06-07 (Cowork — Wizard modernization + species skill choice + spell/equipment fill)
 Done:
+- Coverage test fixed: add_hp_per_level, add_speed_bonus, grant_natural_weapon, grant_weapon_mastery added to SUPPORTED_EFFECT_TYPES allowlist
+- Wizard class modernized to 2024 PHB: L1 Ritual Adept (new), L2 Scholar (new), L3 Arcane Tradition (was L2), L5 Memorize Spell (new); 7 wizard subclasses bumped from L2→L3 first feature
+- Species skill choice framework: new SpeciesSchema.skillChoices field; CharacterState.chosenSpeciesSkills + touched.speciesSkills; compute applies; builder renders a Species Skills picker section
+- Athasian Elf Keen Senses now grants choice of Insight/Perception/Survival via the new framework
+- Wizard spell list expanded from 51 to 92 spells: added Mind Sliver (cantrip); Find Familiar, Tenser's Floating Disk, Witch Bolt (L1); Enlarge/Reduce, Mind Spike (L2); Tongues (L3); curated L4–L9 wizard staples (Banishment, Dimension Door, Fireshield, Polymorph, Stoneskin, Wall of Fire/Force, Cone of Cold, Hold Monster, Scrying, Telekinesis, Chain Lightning, Disintegrate, True Seeing, Teleport, Finger of Death, Prismatic Spray, Reverse Gravity, Dominate Monster, Mind Blank, Meteor Swarm, Time Stop, Wish, etc.)
+- Wizard starting equipment now includes Spellbook, Component Pouch, Arcane Focus (Crystal), Robe, Book, Ink & Pen, Parchment, Map/Scroll Case; equippedWeaponId switched to Quarterstaff; 5 alternate Arcane Focus variants (Orb/Rod/Staff/Wand) also added to the catalog
+- 41 new SRD spell entities and 11 new SRD equipment entities added to the catalog
+
+
 - Per-feature notes: featureNotes map on CharacterState, input fields next to each feature/feat, display on sheet/print/PDF
 - Weapon Mastery gating: grant_weapon_mastery effect type, weaponMasteryChoices on CharacterState, weaponMasteryLimit on DerivedState
 - Weapon Mastery features: 4 feature JSONs (base 2-count, fighter 3/4/5-count) wired into all 5 martial classes
@@ -39,6 +48,10 @@ _None._
 _None._
 
 ## Next Session Should Start With
-Run `pnpm loop:check` to confirm baseline passes. Priority items from WORKQUEUE:
+Run `pnpm loop:check` to confirm baseline passes. Then verify outstanding triage items:
+- Wild Talent picker visibility (user reported missing; gated on settingProfile + wildTalentOptions; needs in-browser repro)
+- Saves missing proficiency (user reported; code-path traces clean; needs repro with exported character JSON)
+Then WORKQUEUE priorities:
+- P2 enhancements: starting-equipment "added" badge, filter prepared spells, Dark Sun currency, custom gear
 - P2: Extract template overlay PNGs for pages 3/4
 - P3: Defiler/Psionicist/Bard stubs, content pack generalization, commercialization
