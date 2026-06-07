@@ -227,6 +227,74 @@ function makeDefaultAbilities(): Record<Ability, number> {
   };
 }
 
+function makeDefaultBuilderState(): BuilderState {
+  return {
+    level: 1,
+    baseAbilities: makeDefaultAbilities(),
+    abilityScoreMethod: "manual",
+    selectedSpeciesId: undefined,
+    selectedBackgroundId: undefined,
+    selectedClassId: undefined,
+    subclass: undefined,
+    warlockInvocationFeatureIds: [],
+    warlockPactBoonFeatureId: undefined,
+    warlockMysticArcanumByLevel: {},
+    xp: 0,
+    heroicInspiration: false,
+    equippedArmorId: undefined,
+    equippedShieldId: undefined,
+    equippedWeaponId: undefined,
+    armorProficiencies: [],
+    weaponProficiencies: [],
+    chosenSkillProficiencies: [],
+    chosenClassSkills: [],
+    chosenSaveProficiencies: [],
+    toolProficiencies: [],
+    languages: [],
+    knownSpellIds: [],
+    preparedSpellIds: [],
+    cantripsKnownIds: [],
+    coins: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
+    otherWealth: "",
+    tempHP: 0,
+    hitDiceTotal: undefined,
+    hitDiceSpent: 0,
+    deathSaveSuccesses: 0,
+    deathSaveFailures: 0,
+    exhaustionLevel: 0,
+    attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
+      name: "",
+      itemId: "",
+      notes: "",
+    })),
+    appearance: "",
+    physicalDescription: "",
+    backstory: "",
+    alignment: "",
+    notes: "",
+    companion: {
+      name: "",
+      type: "",
+      summary: "",
+      notes: "",
+    },
+    familiar: {
+      name: "",
+      type: "",
+      summary: "",
+      notes: "",
+    },
+    inventoryItemIds: [],
+    inventoryEntries: [],
+    featSelections: {
+      level: {},
+    },
+    selectedFeats: [],
+    abilityIncreases: [],
+    advancements: [],
+  };
+}
+
 function makeStandardArrayAbilities(): Record<Ability, number> {
   return {
     str: STANDARD_ARRAY[0],
@@ -556,71 +624,7 @@ export default function BuilderClient({
   const [exportNotice, setExportNotice] = useState<string | null>(null);
 
   const [state, setState] = useState<BuilderState>(() => {
-    const defaults: BuilderState = {
-      level: 1,
-      baseAbilities: makeDefaultAbilities(),
-      abilityScoreMethod: "manual",
-      selectedSpeciesId: undefined,
-      selectedBackgroundId: undefined,
-      selectedClassId: undefined,
-      subclass: undefined,
-      warlockInvocationFeatureIds: [],
-      warlockPactBoonFeatureId: undefined,
-      warlockMysticArcanumByLevel: {},
-      xp: 0,
-      heroicInspiration: false,
-      equippedArmorId: undefined,
-      equippedShieldId: undefined,
-      equippedWeaponId: undefined,
-      armorProficiencies: [],
-      weaponProficiencies: [],
-      chosenSkillProficiencies: [],
-      chosenClassSkills: [],
-      chosenSaveProficiencies: [],
-      toolProficiencies: [],
-      languages: [],
-      knownSpellIds: [],
-      preparedSpellIds: [],
-      cantripsKnownIds: [],
-      coins: { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 },
-      otherWealth: "",
-      tempHP: 0,
-      hitDiceTotal: undefined,
-      hitDiceSpent: 0,
-      deathSaveSuccesses: 0,
-      deathSaveFailures: 0,
-      exhaustionLevel: 0,
-      attunedItems: Array.from({ length: ATTUNEMENT_SLOT_COUNT }, () => ({
-        name: "",
-        itemId: "",
-        notes: "",
-      })),
-      appearance: "",
-      physicalDescription: "",
-      backstory: "",
-      alignment: "",
-      notes: "",
-      companion: {
-        name: "",
-        type: "",
-        summary: "",
-        notes: "",
-      },
-      familiar: {
-        name: "",
-        type: "",
-        summary: "",
-        notes: "",
-      },
-      inventoryItemIds: [],
-      inventoryEntries: [],
-      featSelections: {
-        level: {},
-      },
-      selectedFeats: [],
-      abilityIncreases: [],
-      advancements: [],
-    };
+    const defaults = makeDefaultBuilderState();
     if (typeof window !== "undefined") {
       try {
         const saved = window.localStorage.getItem(CHARACTER_STORAGE_KEY);
@@ -1893,6 +1897,40 @@ export default function BuilderClient({
     setExportNotice("JSON exported with validation report.");
   };
 
+  const onResetCharacter = () => {
+    const confirmed = window.confirm(
+      "Reset character?\n\nThis clears every entry on this character — abilities, class, species, background, equipment, spells, notes — and starts fresh. This cannot be undone.",
+    );
+    if (!confirmed) {
+      return;
+    }
+    const defaults = makeDefaultBuilderState();
+    setState(defaults);
+    setBackgroundMode("2+1");
+    setBackgroundPlusTwo("str");
+    setBackgroundPlusOne("dex");
+    setSlotModes({});
+    setFeatDrafts({});
+    setAsiDrafts({});
+    setPointBuyEditing({});
+    setCustomSpellDraft({
+      name: "",
+      level: 0,
+      field: "cantrip",
+      ritual: false,
+      concentration: false,
+    });
+    setStartingEquipmentJustApplied(false);
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.removeItem(CHARACTER_STORAGE_KEY);
+      } catch {
+        // Storage may be unavailable; UI state is reset regardless.
+      }
+    }
+    setExportNotice("Character reset to defaults.");
+  };
+
   const onImportJson = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -2121,6 +2159,13 @@ export default function BuilderClient({
             className="rounded border border-slate-600 px-3 py-1.5 text-sm hover:bg-slate-800"
           >
             Download PDF
+          </button>
+          <button
+            type="button"
+            onClick={onResetCharacter}
+            className="ml-auto rounded border border-rose-700 bg-rose-950/40 px-3 py-1.5 text-sm text-rose-200 hover:bg-rose-900/60"
+          >
+            Reset Character
           </button>
         </div>
         {exportNotice ? <p className="mt-2 text-sm text-amber-300">{exportNotice}</p> : null}
