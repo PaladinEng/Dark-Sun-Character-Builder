@@ -20,11 +20,12 @@ Last updated: 2026-06-07
 - [x] ~~Athasian Elf Keen Senses: choice of Insight/Perception/Survival~~ (done 2026-06-07; added species-level skillChoices framework)
 - [x] ~~Wizard spell list expansion: missing named spells + L4–L9 coverage~~ (done 2026-06-07; 41 new spells)
 - [x] ~~Wizard starting equipment: Spellbook, Component Pouch, Arcane Focus, Scholar's Pack staples~~ (done 2026-06-07)
-- [ ] Visual signal that starting equipment was auto-added on class select
+- [x] ~~Visual signal that starting equipment was auto-added on class select~~ (done 2026-06-07 — per-item ✓ checkmarks, smart button label, inline "added" flash)
+- [x] ~~Wild Talent picker visibility regression~~ (done 2026-06-07 — root cause: parseProfile required unresolvedDisabledSubclassKeys after the field was removed in ef924fd; restored field + made parser tolerant)
+- [x] ~~Reset Character button to clear all entries~~ (done 2026-06-07)
 - [ ] Filter prepared spell list to only show known spells (wizard-style casters)
 - [ ] Dark Sun currency (ceramic/copper/silver/gold pieces)
 - [ ] Custom Gear input (mirror custom spells)
-- [ ] Verify: Wild Talent picker visibility regression (likely pack-toggle/UI; needs in-browser repro)
 - [ ] Verify: saves not including proficiency bonus (code trace clean; needs character JSON to reproduce)
 
 ## P2 — Medium Priority
