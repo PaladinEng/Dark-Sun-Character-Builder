@@ -46,6 +46,7 @@
     "srd52:subclass:fey-wanderer",
     "srd52:subclass:gloom-stalker"
   ],
+  "unresolvedDisabledSubclassKeys": [],
   "wildTalentRequired": true,
   "wildTalentFeatureTag": "wild_talent",
   "arcaneCastingModes": [

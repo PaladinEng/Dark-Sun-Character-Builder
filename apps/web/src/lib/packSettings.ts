@@ -124,7 +124,6 @@ function parseProfile(raw: unknown): Omit<PackSettingProfile, "languages" | "tra
     typeof value.classReplacements !== "object" ||
     value.classReplacements === null ||
     !isStringArray(value.disabledSubclassIds) ||
-    !isStringArray(value.unresolvedDisabledSubclassKeys) ||
     typeof value.wildTalentRequired !== "boolean" ||
     !isStringArray(value.arcaneCastingModes) ||
     !isStringArray(value.notes) ||
@@ -132,6 +131,9 @@ function parseProfile(raw: unknown): Omit<PackSettingProfile, "languages" | "tra
   ) {
     return null;
   }
+  const unresolvedDisabledSubclassKeys = isStringArray(value.unresolvedDisabledSubclassKeys)
+    ? value.unresolvedDisabledSubclassKeys
+    : [];
 
   const classReplacements = Object.fromEntries(
     Object.entries(value.classReplacements as Record<string, unknown>).flatMap(
@@ -159,7 +161,7 @@ function parseProfile(raw: unknown): Omit<PackSettingProfile, "languages" | "tra
     disabledClassIds: value.disabledClassIds,
     classReplacements,
     disabledSubclassIds: value.disabledSubclassIds,
-    unresolvedDisabledSubclassKeys: value.unresolvedDisabledSubclassKeys,
+    unresolvedDisabledSubclassKeys,
     wildTalentRequired: value.wildTalentRequired,
     wildTalentFeatureTag:
       typeof value.wildTalentFeatureTag === "string" ? value.wildTalentFeatureTag : undefined,
