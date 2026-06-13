@@ -1388,6 +1388,123 @@ export default function BuilderClient({
     () => new Set(state.inventoryItemIds ?? []),
     [state.inventoryItemIds],
   );
+
+  // Every id the validator treats as "in inventory" — the simple
+  // inventoryItemIds plus any quantity-tracked adventuring gear entries.
+  const inventoryAllItemIds = useMemo(() => {
+    const ids = state.inventoryItemIds ?? [];
+    const entryIds = (state.inventoryEntries ?? []).map((entry) => entry.itemId);
+    return Array.from(new Set([...ids, ...entryIds]));
+  }, [state.inventoryItemIds, state.inventoryEntries]);
+
+  // Inventory items eligible to be equipped, grouped by slot. Built with
+  // explicit loops + casts rather than a `item is Option` type predicate,
+  // which is incompatible with the equipmentById value type.
+  const inventoryArmor = useMemo(() => {
+    const result: Option[] = [];
+    for (const id of inventoryAllItemIds) {
+      const item = content.equipmentById[id];
+      if (
+        item &&
+        (item.type === "armor_light" ||
+          item.type === "armor_medium" ||
+          item.type === "armor_heavy")
+      ) {
+        result.push(item as Option);
+      }
+    }
+    return result;
+  }, [inventoryAllItemIds, content.equipmentById]);
+  const inventoryShields = useMemo(() => {
+    const result: Option[] = [];
+    for (const id of inventoryAllItemIds) {
+      const item = content.equipmentById[id];
+      if (item && item.type === "shield") {
+        result.push(item as Option);
+      }
+    }
+    return result;
+  }, [inventoryAllItemIds, content.equipmentById]);
+  const inventoryWeapons = useMemo(() => {
+    const result: Option[] = [];
+    for (const id of inventoryAllItemIds) {
+      const item = content.equipmentById[id];
+      if (item && item.type === "weapon") {
+        result.push(item as Option);
+      }
+    }
+    return result;
+  }, [inventoryAllItemIds, content.equipmentById]);
+
+  const [inventorySearchTerm, setInventorySearchTerm] = useState("");
+  const [inventoryFilterType, setInventoryFilterType] = useState<
+    "all" | "weapon" | "armor" | "shield" | "gear"
+  >("all");
+  const filteredInventoryAddItems = useMemo(() => {
+    const existingIds = new Set(inventoryAllItemIds);
+    const allItems = [
+      ...options.weapons,
+      ...options.armor,
+      ...options.shields,
+      ...options.adventuringGear,
+    ];
+    const term = inventorySearchTerm.trim().toLowerCase();
+    return allItems.filter((item) => {
+      if (existingIds.has(item.id)) return false;
+      if (inventoryFilterType === "armor") {
+        if (
+          item.type !== "armor_light" &&
+          item.type !== "armor_medium" &&
+          item.type !== "armor_heavy"
+        ) {
+          return false;
+        }
+      } else if (inventoryFilterType === "weapon") {
+        if (item.type !== "weapon") return false;
+      } else if (inventoryFilterType === "shield") {
+        if (item.type !== "shield") return false;
+      } else if (inventoryFilterType === "gear") {
+        if (item.type !== "adventuring_gear") return false;
+      }
+      if (term) {
+        return item.name.toLowerCase().includes(term);
+      }
+      return true;
+    });
+  }, [inventoryAllItemIds, options, inventorySearchTerm, inventoryFilterType]);
+
+  const addToInventory = (itemId: string) => {
+    setState((previous) => {
+      const ids = previous.inventoryItemIds ?? [];
+      if (ids.includes(itemId)) {
+        return previous;
+      }
+      return { ...previous, inventoryItemIds: sortStringIds([...ids, itemId]) };
+    });
+  };
+
+  const removeFromInventory = (itemId: string) => {
+    setState((previous) => {
+      const ids = (previous.inventoryItemIds ?? []).filter((id) => id !== itemId);
+      const prevWeaponIds =
+        previous.equippedWeaponIds && previous.equippedWeaponIds.length > 0
+          ? previous.equippedWeaponIds
+          : previous.equippedWeaponId
+            ? [previous.equippedWeaponId]
+            : [];
+      const nextWeaponIds = prevWeaponIds.filter((id) => id !== itemId);
+      return {
+        ...previous,
+        inventoryItemIds: ids,
+        equippedArmorId:
+          previous.equippedArmorId === itemId ? undefined : previous.equippedArmorId,
+        equippedShieldId:
+          previous.equippedShieldId === itemId ? undefined : previous.equippedShieldId,
+        equippedWeaponIds: nextWeaponIds,
+        equippedWeaponId: nextWeaponIds[0],
+      };
+    });
+  };
   const startingEquipmentApplied = useMemo(() => {
     if (!startingEquipment) {
       return {
@@ -2642,7 +2759,7 @@ export default function BuilderClient({
         </label>
 
         <label className="text-sm">
-          <div className="font-semibold">Armor</div>
+          <div className="font-semibold">Equipped Armor</div>
           <select
             className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
             value={state.equippedArmorId ?? ""}
@@ -2651,16 +2768,19 @@ export default function BuilderClient({
             }
           >
             <option value="">None</option>
-            {options.armor.map((entry) => (
+            {inventoryArmor.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
               </option>
             ))}
           </select>
+          {inventoryArmor.length === 0 && (
+            <p className="mt-1 text-xs text-slate-400">Add armor to inventory first.</p>
+          )}
         </label>
 
         <label className="text-sm">
-          <div className="font-semibold">Shield</div>
+          <div className="font-semibold">Equipped Shield</div>
           <select
             className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
             value={state.equippedShieldId ?? ""}
@@ -2669,21 +2789,27 @@ export default function BuilderClient({
             }
           >
             <option value="">None</option>
-            {options.shields.map((entry) => (
+            {inventoryShields.map((entry) => (
               <option key={entry.id} value={entry.id}>
                 {entry.name}
               </option>
             ))}
           </select>
+          {inventoryShields.length === 0 && (
+            <p className="mt-1 text-xs text-slate-400">Add a shield to inventory first.</p>
+          )}
         </label>
 
         <div className="text-sm md:col-span-3">
-          <div className="font-semibold">Weapons</div>
+          <div className="font-semibold">Equipped Weapons</div>
           <p className="mt-1 text-xs text-slate-300">
             Equip one or more weapons. Each appears as its own row in the attack table.
           </p>
+          {inventoryWeapons.length === 0 && (
+            <p className="mt-1 text-xs text-slate-400">Add a weapon to inventory first.</p>
+          )}
           <div className="mt-2 grid gap-1 md:grid-cols-2">
-            {options.weapons.map((entry) => {
+            {inventoryWeapons.map((entry) => {
               const checked = equippedWeaponIds.includes(entry.id);
               return (
                 <label
@@ -2753,6 +2879,84 @@ export default function BuilderClient({
               ))}
             </ul>
           ) : null}
+        </div>
+
+        <div className="text-sm md:col-span-3">
+          <div className="font-semibold">Inventory</div>
+          <p className="mt-1 text-xs text-slate-300">
+            Add items to your inventory, then equip armor, shields, and weapons above.
+          </p>
+          {(state.inventoryItemIds ?? []).length > 0 && (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(state.inventoryItemIds ?? []).map((itemId) => {
+                const item = content.equipmentById[itemId];
+                return (
+                  <span
+                    key={`inv-${itemId}`}
+                    className="inline-flex items-center gap-1 rounded border border-slate-700 bg-slate-950/60 px-2 py-1 text-xs"
+                  >
+                    {item?.name ?? itemId}
+                    <button
+                      type="button"
+                      onClick={() => removeFromInventory(itemId)}
+                      className="ml-1 text-rose-400 hover:text-rose-300"
+                      title="Remove from inventory"
+                      aria-label={`Remove ${item?.name ?? itemId} from inventory`}
+                    >
+                      ×
+                    </button>
+                  </span>
+                );
+              })}
+            </div>
+          )}
+          <div className="mt-2 flex gap-2">
+            <select
+              value={inventoryFilterType}
+              onChange={(event) =>
+                setInventoryFilterType(event.target.value as typeof inventoryFilterType)
+              }
+              className="rounded border border-slate-700 bg-slate-950 px-2 py-1 text-xs"
+            >
+              <option value="all">All types</option>
+              <option value="weapon">Weapons</option>
+              <option value="armor">Armor</option>
+              <option value="shield">Shields</option>
+              <option value="gear">Gear</option>
+            </select>
+            <input
+              type="text"
+              placeholder="Search items..."
+              value={inventorySearchTerm}
+              onChange={(event) => setInventorySearchTerm(event.target.value)}
+              className="flex-1 rounded border border-slate-700 bg-slate-950 px-2 py-1 text-xs"
+            />
+          </div>
+          {inventorySearchTerm.trim() || inventoryFilterType !== "all" ? (
+            <div className="mt-2 max-h-48 overflow-y-auto rounded border border-slate-700 bg-slate-950/40">
+              {filteredInventoryAddItems.length === 0 ? (
+                <p className="p-2 text-xs text-slate-400">No matching items found.</p>
+              ) : (
+                filteredInventoryAddItems.slice(0, 50).map((item) => (
+                  <button
+                    key={`add-inv-${item.id}`}
+                    type="button"
+                    onClick={() => addToInventory(item.id)}
+                    className="block w-full px-3 py-1.5 text-left text-xs hover:bg-slate-800"
+                  >
+                    {item.name}{" "}
+                    <span className="text-slate-400">
+                      ({item.type?.replace(/_/g, " ") ?? "item"})
+                    </span>
+                  </button>
+                ))
+              )}
+            </div>
+          ) : (
+            <p className="mt-1 text-xs text-slate-500">
+              Choose a type or search to browse the catalog.
+            </p>
+          )}
         </div>
 
         {derived.weaponMasteryLimit > 0 && (
