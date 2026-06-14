@@ -57,6 +57,12 @@ export const SpeciesSchema = EntityBaseSchema.extend({
       from: z.array(z.string()).min(1),
     })
     .optional(),
+  /** Number of additional language choices this species grants (e.g. Human +2). */
+  languageChoices: z
+    .object({
+      count: z.number().int().positive(),
+    })
+    .optional(),
 });
 export type Species = z.infer<typeof SpeciesSchema>;
 

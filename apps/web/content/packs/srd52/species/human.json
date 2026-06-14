@@ -1,6 +1,32 @@
 {
   "id": "srd52:species:human",
   "name": "Human",
+  "skillChoices": {
+    "count": 1,
+    "from": [
+      "acrobatics",
+      "animal_handling",
+      "arcana",
+      "athletics",
+      "deception",
+      "history",
+      "insight",
+      "intimidation",
+      "investigation",
+      "medicine",
+      "nature",
+      "perception",
+      "performance",
+      "persuasion",
+      "religion",
+      "sleight_of_hand",
+      "stealth",
+      "survival"
+    ]
+  },
+  "languageChoices": {
+    "count": 2
+  },
   "effects": [
     {
       "type": "set_speed",
@@ -8,20 +34,23 @@
     },
     {
       "type": "grant_trait",
-      "name": "Resourceful"
+      "name": "Resourceful",
+      "description": "You gain Heroic Inspiration whenever you finish a Long Rest."
     },
     {
       "type": "grant_trait",
-      "name": "Skillful"
+      "name": "Skillful",
+      "description": "You gain proficiency in one skill of your choice (see Species Skills)."
     },
     {
       "type": "grant_trait",
-      "name": "Versatile"
+      "name": "Versatile",
+      "description": "You gain an Origin feat of your choice (record it in the Feats section)."
     },
     {
       "type": "grant_language",
       "language": "Common"
     }
   ],
-  "description": "A versatile and ambitious people with broad potential across every calling."
+  "description": "A versatile and ambitious people with broad potential across every calling. Skillful grants one skill proficiency of your choice; Versatile grants an Origin feat of your choice; you also learn two additional languages of your choice."
 }

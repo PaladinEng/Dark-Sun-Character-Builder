@@ -4926,7 +4926,11 @@ export default function BuilderClient({
           const automaticLanguages = derived.languages.filter((lang) => !chosenSet.has(lang));
           const chosenLanguages = (state.languages ?? []).filter((lang) => derived.languages.includes(lang));
           const langConfig = settingProfile?.languages ?? null;
-          const additionalSlots = langConfig?.selectionRules.additionalChoices ?? 0;
+          const speciesLanguageChoices =
+            (selectedSpecies as { languageChoices?: { count?: number } } | undefined)
+              ?.languageChoices?.count ?? 0;
+          const additionalSlots =
+            (langConfig?.selectionRules.additionalChoices ?? 0) + speciesLanguageChoices;
           const literacyDefault = langConfig?.selectionRules.literacyDefault ?? true;
           const showLiteracy = langConfig != null && langConfig.selectionRules.literacyDefault !== undefined;
           const alreadyUsed = new Set([...automaticLanguages, ...chosenLanguages]);
