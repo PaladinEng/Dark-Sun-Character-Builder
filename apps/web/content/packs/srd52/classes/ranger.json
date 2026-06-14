@@ -22,128 +22,28 @@
   "spellcasting": {
     "ability": "wis",
     "progression": "half",
-    "mode": "known",
+    "mode": "prepared",
     "selectionLimitsByLevel": [
-      {
-        "level": 1,
-        "known": 0,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 2,
-        "known": 2,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 3,
-        "known": 3,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 4,
-        "known": 3,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 5,
-        "known": 4,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 6,
-        "known": 4,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 7,
-        "known": 5,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 8,
-        "known": 5,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 9,
-        "known": 6,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 10,
-        "known": 6,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 11,
-        "known": 7,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 12,
-        "known": 7,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 13,
-        "known": 8,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 14,
-        "known": 8,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 15,
-        "known": 9,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 16,
-        "known": 9,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 17,
-        "known": 10,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 18,
-        "known": 10,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 19,
-        "known": 11,
-        "prepared": 0,
-        "cantripsKnown": 0
-      },
-      {
-        "level": 20,
-        "known": 11,
-        "prepared": 0,
-        "cantripsKnown": 0
-      }
+      { "level": 1, "known": 0, "prepared": 2, "cantripsKnown": 0 },
+      { "level": 2, "known": 0, "prepared": 3, "cantripsKnown": 0 },
+      { "level": 3, "known": 0, "prepared": 4, "cantripsKnown": 0 },
+      { "level": 4, "known": 0, "prepared": 5, "cantripsKnown": 0 },
+      { "level": 5, "known": 0, "prepared": 6, "cantripsKnown": 0 },
+      { "level": 6, "known": 0, "prepared": 6, "cantripsKnown": 0 },
+      { "level": 7, "known": 0, "prepared": 7, "cantripsKnown": 0 },
+      { "level": 8, "known": 0, "prepared": 7, "cantripsKnown": 0 },
+      { "level": 9, "known": 0, "prepared": 9, "cantripsKnown": 0 },
+      { "level": 10, "known": 0, "prepared": 9, "cantripsKnown": 0 },
+      { "level": 11, "known": 0, "prepared": 10, "cantripsKnown": 0 },
+      { "level": 12, "known": 0, "prepared": 10, "cantripsKnown": 0 },
+      { "level": 13, "known": 0, "prepared": 11, "cantripsKnown": 0 },
+      { "level": 14, "known": 0, "prepared": 11, "cantripsKnown": 0 },
+      { "level": 15, "known": 0, "prepared": 12, "cantripsKnown": 0 },
+      { "level": 16, "known": 0, "prepared": 12, "cantripsKnown": 0 },
+      { "level": 17, "known": 0, "prepared": 14, "cantripsKnown": 0 },
+      { "level": 18, "known": 0, "prepared": 14, "cantripsKnown": 0 },
+      { "level": 19, "known": 0, "prepared": 15, "cantripsKnown": 0 },
+      { "level": 20, "known": 0, "prepared": 15, "cantripsKnown": 0 }
     ]
   },
   "spellListRefIds": [
@@ -168,6 +68,10 @@
     },
     {
       "level": 2,
+      "featureId": "srd52:feature:deft-explorer"
+    },
+    {
+      "level": 2,
       "featureId": "srd52:feature:fighting-style"
     },
     {
@@ -179,8 +83,16 @@
       "featureId": "srd52:feature:extra-attack"
     },
     {
+      "level": 6,
+      "featureId": "srd52:feature:roving"
+    },
+    {
       "level": 8,
       "featureId": "srd52:feature:lands-stride"
+    },
+    {
+      "level": 9,
+      "featureId": "srd52:feature:ranger-expertise"
     },
     {
       "level": 10,

@@ -1,5 +1,18 @@
 # WORKQUEUE — Dark Sun Character Builder
-Last updated: 2026-06-07
+Last updated: 2026-06-14
+
+## P2 — Deferred from 2026-06-14 player-feedback batch
+- [ ] Human "Versatile": grant a player-chosen Origin feat at the species level.
+  Needs feat-selection infrastructure parallel to the background origin-feat
+  system (species-level grantsOriginFeatChoice + state + compute + UI). Currently
+  a described trait only.
+- [ ] Ranger 2024 feature placement: move Spellcasting to L1 and drop the 2014-era
+  Natural Explorer (Favored Enemy now = free Hunter's Mark). The prepared-spell
+  progression was set to the 2024 table, but the feature list still has Spellcasting
+  at L2 and retains Natural Explorer (out of scope per the batch brief).
+- [ ] Wire grant_skill_expertise into Rogue Expertise (L1/L6) and Bard Expertise
+  (L3/L10). The shared srd52:feature:expertise is still text-only; per-class/level
+  expertise features are needed so each grants the right number of choices.
 
 ## P1 — High Priority
 - [x] ~~**Class resources system** (Focus Points, Rage, Bardic Inspiration, Sorcery Points, etc.) — schema, derivation, display on sheet/print/PDF~~ (done 2026-06-06, Cowork session)
@@ -23,8 +36,8 @@ Last updated: 2026-06-07
 - [x] ~~Visual signal that starting equipment was auto-added on class select~~ (done 2026-06-07 — per-item ✓ checkmarks, smart button label, inline "added" flash)
 - [x] ~~Wild Talent picker visibility regression~~ (done 2026-06-07 — root cause: parseProfile required unresolvedDisabledSubclassKeys after the field was removed in ef924fd; restored field + made parser tolerant)
 - [x] ~~Reset Character button to clear all entries~~ (done 2026-06-07)
-- [ ] Filter prepared spell list to only show known spells (wizard-style casters)
-- [ ] Dark Sun currency (ceramic/copper/silver/gold pieces)
+- [x] ~~Filter prepared spell list to castable-level spells~~ (done 2026-06-14 — Known/Prepared pickers filtered to level <= highest available slot)
+- [x] ~~Dark Sun currency (bit/ceramic/silver/gold, base-10)~~ (done 2026-06-14 — setting-aware denominations on builder/sheet/print/PDF)
 - [ ] Custom Gear input (mirror custom spells)
 - [x] ~~Verify: saves not including proficiency bonus~~ (closed 2026-06-07 — unit test confirms Wizard L1 INT save = +5 and L5 INT save = +6 end-to-end against the real SRD pack; any user-reported instance is stale localStorage and Reset Character clears it)
 - [x] ~~Fighting Style picker tied to class feature trigger~~ (done 2026-06-07 — new srd52:feature:fighting-style, chosenFightingStyleFeatId state, picker for Fighter L1 / Paladin L2 / Ranger L2)

@@ -235,6 +235,7 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
           ep: normalizeOptionalNonNegativeInt(coins.ep),
           gp: normalizeOptionalNonNegativeInt(coins.gp),
           pp: normalizeOptionalNonNegativeInt(coins.pp),
+          bit: normalizeOptionalNonNegativeInt(coins.bit),
         }
       : undefined,
   };
@@ -438,6 +439,24 @@ export default async function SheetPage({
   const ppCoins = Number.isFinite(coinValues.pp)
     ? Math.max(0, Math.floor(coinValues.pp ?? 0))
     : 0;
+  const bitCoins = Number.isFinite(coinValues.bit)
+    ? Math.max(0, Math.floor(coinValues.bit ?? 0))
+    : 0;
+  const isDarkSun = payload.enabledPackIds.includes("darksun");
+  const currencyCells: Array<[string, number]> = isDarkSun
+    ? [
+        ["Bits", bitCoins],
+        ["CP", cpCoins],
+        ["SP", spCoins],
+        ["GP", gpCoins],
+      ]
+    : [
+        ["CP", cpCoins],
+        ["SP", spCoins],
+        ["EP", epCoins],
+        ["GP", gpCoins],
+        ["PP", ppCoins],
+      ];
 
   const inventoryCounts = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
@@ -494,6 +513,7 @@ export default async function SheetPage({
   const skillRows = skillAndToolRows.flatMap((row) => (row.kind === "skill" ? [row] : []));
   const proficientToolRows = skillAndToolRows.flatMap((row) => (row.kind === "tool" ? [row] : []));
   const skillProficiencySet = new Set(derived.skillProficiencies ?? []);
+  const skillExpertiseSet = new Set(derived.skillExpertise ?? []);
   const skillAbilityById = new Map<string, Ability>(
     Object.entries(DEFAULT_SKILL_ABILITY_BY_ID) as Array<[string, Ability]>,
   );
@@ -864,8 +884,17 @@ export default async function SheetPage({
                     {skillsByAbility[ability].map((row) => (
                       <div key={`skill-${row.id}`} className="flex justify-between">
                         <span>
-                          {skillProficiencySet.has(row.id) ? "● " : "○ "}
+                          <span title={skillExpertiseSet.has(row.id) ? "Expertise" : undefined}>
+                            {skillExpertiseSet.has(row.id)
+                              ? "⊙ "
+                              : skillProficiencySet.has(row.id)
+                                ? "● "
+                                : "○ "}
+                          </span>
                           {row.label}
+                          {skillExpertiseSet.has(row.id) ? (
+                            <span className="ml-1 text-[10px] uppercase text-amber-700">Exp</span>
+                          ) : null}
                         </span>
                         <span className="font-semibold">{formatModifier(row.value)}</span>
                       </div>
@@ -905,6 +934,12 @@ export default async function SheetPage({
             <SheetSection title="Senses">
               <ul className="space-y-1 p-2 text-sm">
                 <li>Passive Perception {derived.passivePerception}</li>
+                <li>Walking Speed {derived.speed} ft</li>
+                {Object.entries(derived.movementSpeeds ?? {}).map(([movement, value]) => (
+                  <li key={`move-${movement}`}>
+                    {movement.charAt(0).toUpperCase() + movement.slice(1)} Speed {value} ft
+                  </li>
+                ))}
                 {derived.senses.map((sense, index) => (
                   <li key={`sense-${index}`}>{formatSenseSummary(sense)}</li>
                 ))}
@@ -945,21 +980,15 @@ export default async function SheetPage({
           </SheetSection>
 
           <SheetSection title="Currency">
-            <div className="grid grid-cols-5 gap-2 p-2 text-center text-sm">
-              {[
-                ["CP", cpCoins],
-                ["SP", spCoins],
-                ["EP", epCoins],
-                ["GP", gpCoins],
-                ["PP", ppCoins],
-              ].map(([label, value]) => (
-                <div key={label as string} className="rounded border border-slate-900 p-2">
+            <div className={`grid gap-2 p-2 text-center text-sm ${isDarkSun ? "grid-cols-4" : "grid-cols-5"}`}>
+              {currencyCells.map(([label, value]) => (
+                <div key={label} className="rounded border border-slate-900 p-2">
                   <div className="text-[10px] uppercase tracking-wide text-slate-600">{label}</div>
                   <div className="font-semibold">{value}</div>
                 </div>
               ))}
               {payload.characterState.otherWealth ? (
-                <div className="col-span-5 text-left text-xs text-slate-700">
+                <div className={`text-left text-xs text-slate-700 ${isDarkSun ? "col-span-4" : "col-span-5"}`}>
                   Other wealth: {payload.characterState.otherWealth}
                 </div>
               ) : null}

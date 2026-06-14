@@ -22,7 +22,6 @@
       "toHit": 5
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -43,6 +42,7 @@
     "Common"
   ],
   "maxHP": 12,
+  "movementSpeeds": {},
   "passivePerception": 11,
   "proficiencyBonus": 2,
   "resistances": [],
@@ -58,6 +58,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "acrobatics",
     "insight"
@@ -100,6 +101,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Martial Weapons",
     "Simple Weapons"

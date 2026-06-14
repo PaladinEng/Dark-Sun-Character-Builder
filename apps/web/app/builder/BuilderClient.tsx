@@ -20,6 +20,8 @@ import {
   STANDARD_ARRAY,
   computePointBuyCost,
   computeDerivedState,
+  COIN_LABELS,
+  getCoinDenominations,
   getAvailableAdvancementSlots,
   getPointBuyScoreCost,
   getSkillAndToolDisplayRows,
@@ -29,7 +31,7 @@ import { formatSpellNameWithFlags } from "../../src/lib/spells";
 import type { PackSettingProfile } from "../../src/lib/packSettings";
 
 type Ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
-type CoinDenomination = "gp" | "sp" | "ep" | "cp" | "pp";
+type CoinDenomination = "bit" | "gp" | "sp" | "ep" | "cp" | "pp";
 type AbilityChanges = Partial<Record<Ability, number>>;
 
 type BackgroundAbilityOptions = {
@@ -207,7 +209,6 @@ type BuilderClientProps = {
 };
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
-const COIN_DENOMINATIONS: CoinDenomination[] = ["cp", "sp", "ep", "gp", "pp"];
 const ATTUNEMENT_SLOT_COUNT = 5;
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
 const CHARACTER_STORAGE_KEY = "darksun-builder:character";
@@ -619,6 +620,8 @@ export default function BuilderClient({
 
   const manifestOrder = useMemo(() => manifests.map((manifest) => manifest.id), [manifests]);
   const [enabledSources, setEnabledSources] = useState<string[]>(enabledSourceIds);
+  const isDarkSun = enabledSources.includes("darksun");
+  const coinDenominations = getCoinDenominations(isDarkSun);
   const [showDebug, setShowDebug] = useState(false);
   const [customSpellDraft, setCustomSpellDraft] = useState<{
     name: string; level: number; field: CustomSpell["field"]; ritual: boolean; concentration: boolean;
@@ -645,8 +648,8 @@ export default function BuilderClient({
   });
 
   const [backgroundMode, setBackgroundMode] = useState<"2+1" | "1+1+1">("2+1");
-  const [backgroundPlusTwo, setBackgroundPlusTwo] = useState<Ability>("str");
-  const [backgroundPlusOne, setBackgroundPlusOne] = useState<Ability>("dex");
+  const [backgroundPlusTwo, setBackgroundPlusTwo] = useState<Ability | "">("");
+  const [backgroundPlusOne, setBackgroundPlusOne] = useState<Ability | "">("");
 
   const [slotModes, setSlotModes] = useState<Record<number, "feat" | "asi">>({});
   const [featDrafts, setFeatDrafts] = useState<Record<number, string>>({});
@@ -886,6 +889,122 @@ export default function BuilderClient({
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
   );
+
+  // Highest spell level the character can currently cast (from spell slots),
+  // used to filter the prepared/known spell pickers to castable spells only.
+  const maxPreparableSpellLevel = useMemo(() => {
+    const slots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+    if (!slots) {
+      return 0;
+    }
+    let max = 0;
+    slots.forEach((count, index) => {
+      if (count > 0) {
+        max = index + 1;
+      }
+    });
+    return max;
+  }, [derived.spellSlots, derived.spellcasting]);
+  const preparableLeveledSpells = useMemo(
+    () => availableLeveledSpells.filter((spell) => spell.level <= maxPreparableSpellLevel),
+    [availableLeveledSpells, maxPreparableSpellLevel],
+  );
+
+  // Features/feats that grant a *choice* of skill expertise, surfaced as pickers.
+  const expertiseChoiceSlots = useMemo(() => {
+    type ExpertiseEffect = {
+      type?: string;
+      skill?: string;
+      choiceCount?: number;
+      choiceFrom?: string[];
+    };
+    type ExpertiseSource = { id?: string; name?: string; effects?: ExpertiseEffect[] };
+    const skillProfSet = new Set(derived.skillProficiencies ?? []);
+    const sources: ExpertiseSource[] = [];
+    const klass = selectedClass as
+      | { classFeaturesByLevel?: Array<{ level: number; featureId: string }> }
+      | undefined;
+    for (const entry of klass?.classFeaturesByLevel ?? []) {
+      if (entry.level <= state.level) {
+        const feature = content.featuresById?.[entry.featureId] as ExpertiseSource | undefined;
+        if (feature) sources.push(feature);
+      }
+    }
+    const sub = selectedSubclass as
+      | { subclassFeaturesByLevel?: Array<{ level: number; featureId: string }> }
+      | undefined;
+    for (const entry of sub?.subclassFeaturesByLevel ?? []) {
+      if (entry.level <= state.level) {
+        const feature = content.featuresById?.[entry.featureId] as ExpertiseSource | undefined;
+        if (feature) sources.push(feature);
+      }
+    }
+    for (const featureId of state.selectedFeatureIds ?? []) {
+      const feature = content.featuresById?.[featureId] as ExpertiseSource | undefined;
+      if (feature) sources.push(feature);
+    }
+    for (const feat of derived.feats ?? []) {
+      const f = content.featsById?.[feat.id] as ExpertiseSource | undefined;
+      if (f) sources.push(f);
+    }
+
+    const slots: Array<{
+      sourceId: string;
+      sourceName: string;
+      choiceCount: number;
+      options: string[];
+    }> = [];
+    const seen = new Set<string>();
+    for (const source of sources) {
+      if (!source?.id || seen.has(source.id)) continue;
+      seen.add(source.id);
+      for (const effect of source.effects ?? []) {
+        if (effect.type !== "grant_skill_expertise" || !effect.choiceCount) continue;
+        const options =
+          effect.choiceFrom && effect.choiceFrom.length > 0
+            ? effect.choiceFrom
+            : [...skillProfSet];
+        slots.push({
+          sourceId: source.id,
+          sourceName: source.name ?? source.id,
+          choiceCount: effect.choiceCount,
+          options,
+        });
+      }
+    }
+    return slots;
+  }, [
+    selectedClass,
+    selectedSubclass,
+    state.level,
+    state.selectedFeatureIds,
+    derived.feats,
+    derived.skillProficiencies,
+    content.featuresById,
+    content.featsById,
+  ]);
+
+  const onToggleExpertiseSkill = (
+    sourceId: string,
+    skillId: string,
+    checked: boolean,
+    choiceCount: number,
+  ) => {
+    setState((previous) => {
+      const map = { ...(previous.chosenExpertiseSkills ?? {}) };
+      const current = new Set(map[sourceId] ?? []);
+      if (checked) {
+        if (!current.has(skillId) && current.size >= choiceCount) {
+          return previous;
+        }
+        current.add(skillId);
+      } else {
+        current.delete(skillId);
+      }
+      map[sourceId] = Array.from(current);
+      return { ...previous, chosenExpertiseSkills: map };
+    });
+  };
   /** All weapons that have at least one mastery property, sorted by name. */
   const weaponsWithMastery = useMemo(() => {
     const allEquipment = Object.values(content.equipmentById ?? {});
@@ -1577,14 +1696,14 @@ export default function BuilderClient({
       field: "knownSpellIds",
       label: "Known Spells",
       selectedIds: state.knownSpellIds ?? [],
-      availableSpells: availableLeveledSpells,
+      availableSpells: preparableLeveledSpells,
       maxCount: knownSpellLimit,
     },
     {
       field: "preparedSpellIds",
       label: "Prepared Spells",
       selectedIds: state.preparedSpellIds ?? [],
-      availableSpells: availableLeveledSpells,
+      availableSpells: preparableLeveledSpells,
       maxCount: preparedSpellLimit,
     },
   ];
@@ -3178,10 +3297,15 @@ export default function BuilderClient({
 
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Coins</div>
-          <div className="mt-1 grid grid-cols-5 gap-2">
-            {COIN_DENOMINATIONS.map((denomination) => (
+          {isDarkSun ? (
+            <p className="mt-1 text-xs text-slate-400">
+              Athasian currency: 10 bits = 1 ceramic (CP), 10 CP = 1 silver (SP), 10 SP = 1 gold (GP).
+            </p>
+          ) : null}
+          <div className={`mt-1 grid gap-2 ${isDarkSun ? "grid-cols-4" : "grid-cols-5"}`}>
+            {coinDenominations.map((denomination) => (
               <label key={`coins-${denomination}`} className="text-sm">
-                <div className="font-semibold uppercase">{denomination}</div>
+                <div className="font-semibold">{COIN_LABELS[denomination]}</div>
                 <input
                   type="number"
                   min={0}
@@ -3833,6 +3957,69 @@ export default function BuilderClient({
         </section>
       ) : null}
 
+      {expertiseChoiceSlots.length > 0 ? (
+        <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+          <h2 className="text-sm font-semibold">Skill Expertise</h2>
+          <p className="mt-1 text-sm text-slate-300">
+            Choose skills to gain Expertise (proficiency bonus doubled).
+          </p>
+          <div className="mt-3 space-y-4">
+            {expertiseChoiceSlots.map((slot) => {
+              const chosen = state.chosenExpertiseSkills?.[slot.sourceId] ?? [];
+              const incomplete = chosen.length < slot.choiceCount;
+              return (
+                <div key={`expertise-${slot.sourceId}`}>
+                  <div className="text-sm font-semibold">
+                    {slot.sourceName}: choose {slot.choiceCount} ({chosen.length}/{slot.choiceCount}{" "}
+                    selected)
+                  </div>
+                  {slot.options.length === 0 ? (
+                    <p className="mt-1 text-xs text-slate-400">
+                      Become proficient in a skill first, then choose it for expertise here.
+                    </p>
+                  ) : (
+                    <div className="mt-2 grid gap-2 md:grid-cols-3">
+                      {slot.options.map((skillId) => {
+                        const checked = chosen.includes(skillId);
+                        const canChooseMore = chosen.length < slot.choiceCount;
+                        const disabled = !checked && !canChooseMore;
+                        return (
+                          <label
+                            key={`expertise-${slot.sourceId}-${skillId}`}
+                            className="flex items-center gap-2 text-sm"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              disabled={disabled}
+                              onChange={(event) =>
+                                onToggleExpertiseSkill(
+                                  slot.sourceId,
+                                  skillId,
+                                  event.target.checked,
+                                  slot.choiceCount,
+                                )
+                              }
+                            />
+                            <span>{skillNameById[skillId] ?? formatSkillId(skillId)}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  )}
+                  {incomplete && slot.options.length > 0 ? (
+                    <p className="mt-1 text-xs text-amber-300">
+                      Choose {slot.choiceCount} skill{slot.choiceCount === 1 ? "" : "s"} for
+                      expertise.
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
       {grantsFightingStyle && fightingStyleOptions.length > 0 ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold">Fighting Style</h2>
@@ -3927,12 +4114,17 @@ export default function BuilderClient({
           {backgroundMode === "2+1" ? (
             <div className="mt-3 grid gap-3 md:grid-cols-2">
               <label className="text-sm">
-                <div className="font-semibold">+2 Ability</div>
+                <div className="font-semibold">
+                  +2 Ability {backgroundPlusTwo ? <span className="text-emerald-400">✓</span> : null}
+                </div>
                 <select
-                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  className={`mt-1 w-full rounded border bg-slate-950 px-2 py-1 ${
+                    backgroundPlusTwo ? "border-emerald-500" : "border-slate-700"
+                  }`}
                   value={backgroundPlusTwo}
-                  onChange={(event) => setBackgroundPlusTwo(event.target.value as Ability)}
+                  onChange={(event) => setBackgroundPlusTwo(event.target.value as Ability | "")}
                 >
+                  <option value="">Select…</option>
                   {selectedBackground.abilityOptions.abilities.map((ability) => (
                     <option key={`plus2-${ability}`} value={ability}>
                       {ability.toUpperCase()}
@@ -3941,12 +4133,17 @@ export default function BuilderClient({
                 </select>
               </label>
               <label className="text-sm">
-                <div className="font-semibold">+1 Ability</div>
+                <div className="font-semibold">
+                  +1 Ability {backgroundPlusOne ? <span className="text-emerald-400">✓</span> : null}
+                </div>
                 <select
-                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  className={`mt-1 w-full rounded border bg-slate-950 px-2 py-1 ${
+                    backgroundPlusOne ? "border-emerald-500" : "border-slate-700"
+                  }`}
                   value={backgroundPlusOne}
-                  onChange={(event) => setBackgroundPlusOne(event.target.value as Ability)}
+                  onChange={(event) => setBackgroundPlusOne(event.target.value as Ability | "")}
                 >
+                  <option value="">Select…</option>
                   {selectedBackground.abilityOptions.abilities.map((ability) => (
                     <option key={`plus1-${ability}`} value={ability}>
                       {ability.toUpperCase()}
@@ -4247,6 +4444,110 @@ export default function BuilderClient({
         );
       })()}
 
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold">Custom Gear</h2>
+          <div className="text-xs text-slate-300">{(state.customGear ?? []).length} added</div>
+        </div>
+        <p className="mt-1 text-xs text-slate-400">
+          Manually add items not in the equipment catalog (homebrew gear, loot, trinkets, etc.). Appears on the printed sheet alongside catalog inventory.
+        </p>
+
+        {(state.customGear ?? []).length > 0 ? (
+          <div className="mt-3 space-y-1">
+            {(state.customGear ?? []).map((item, index) => (
+              <div
+                key={`custom-gear-${index}`}
+                className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
+              >
+                <span className="truncate">
+                  {item.name}
+                  {item.quantity && item.quantity > 1 ? (
+                    <span className="ml-1 text-slate-400">×{item.quantity}</span>
+                  ) : null}
+                  {item.notes ? (
+                    <span className="ml-2 italic text-slate-400">— {item.notes}</span>
+                  ) : null}
+                </span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      customGear: (prev.customGear ?? []).filter((_, i) => i !== index),
+                    }))
+                  }
+                  className="shrink-0 rounded border border-slate-700 px-2 py-0.5"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-3 grid gap-2 rounded border border-slate-800 bg-slate-950/70 p-3 md:grid-cols-6">
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Item Name</div>
+            <input
+              type="text"
+              value={customGearDraft.name}
+              onChange={(e) => setCustomGearDraft((d) => ({ ...d, name: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. Sunblade Hilt"
+            />
+          </label>
+          <label className="text-xs">
+            <div className="font-semibold">Qty</div>
+            <input
+              type="number"
+              min={1}
+              max={999}
+              value={customGearDraft.quantity}
+              onChange={(e) =>
+                setCustomGearDraft((d) => ({
+                  ...d,
+                  quantity: Math.max(1, Math.min(999, Number(e.target.value) || 1)),
+                }))
+              }
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Notes (optional)</div>
+            <input
+              type="text"
+              value={customGearDraft.notes}
+              onChange={(e) => setCustomGearDraft((d) => ({ ...d, notes: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. attuned, broken, etc."
+            />
+          </label>
+          <div className="flex items-end">
+            <button
+              type="button"
+              disabled={!customGearDraft.name.trim()}
+              onClick={() => {
+                if (!customGearDraft.name.trim()) return;
+                const entry: CustomGearItem = {
+                  name: customGearDraft.name.trim(),
+                  ...(customGearDraft.quantity > 1 ? { quantity: customGearDraft.quantity } : {}),
+                  ...(customGearDraft.notes.trim() ? { notes: customGearDraft.notes.trim() } : {}),
+                };
+                setState((prev) => ({
+                  ...prev,
+                  customGear: [...(prev.customGear ?? []), entry],
+                }));
+                setCustomGearDraft({ name: "", quantity: 1, notes: "" });
+              }}
+              className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </section>
+
       {selectedSpellcasting ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold">Spell Selection</h2>
@@ -4260,7 +4561,9 @@ export default function BuilderClient({
             </p>
           ) : null}
           <div className="mt-3 grid gap-3 md:grid-cols-3">
-            {spellSelectionBuckets.map((bucket) => {
+            {spellSelectionBuckets
+              .filter((bucket) => bucket.maxCount !== 0)
+              .map((bucket) => {
               const selectedSet = new Set(bucket.selectedIds);
               const atLimit =
                 typeof bucket.maxCount === "number" && bucket.selectedIds.length >= bucket.maxCount;
@@ -4490,110 +4793,6 @@ export default function BuilderClient({
         </div>
       </section>
 
-      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
-        <div className="flex items-center justify-between gap-2">
-          <h2 className="text-sm font-semibold">Custom Gear</h2>
-          <div className="text-xs text-slate-300">{(state.customGear ?? []).length} added</div>
-        </div>
-        <p className="mt-1 text-xs text-slate-400">
-          Manually add items not in the equipment catalog (homebrew gear, loot, trinkets, etc.). Appears on the printed sheet alongside catalog inventory.
-        </p>
-
-        {(state.customGear ?? []).length > 0 ? (
-          <div className="mt-3 space-y-1">
-            {(state.customGear ?? []).map((item, index) => (
-              <div
-                key={`custom-gear-${index}`}
-                className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
-              >
-                <span className="truncate">
-                  {item.name}
-                  {item.quantity && item.quantity > 1 ? (
-                    <span className="ml-1 text-slate-400">×{item.quantity}</span>
-                  ) : null}
-                  {item.notes ? (
-                    <span className="ml-2 italic text-slate-400">— {item.notes}</span>
-                  ) : null}
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setState((prev) => ({
-                      ...prev,
-                      customGear: (prev.customGear ?? []).filter((_, i) => i !== index),
-                    }))
-                  }
-                  className="shrink-0 rounded border border-slate-700 px-2 py-0.5"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : null}
-
-        <div className="mt-3 grid gap-2 rounded border border-slate-800 bg-slate-950/70 p-3 md:grid-cols-6">
-          <label className="text-xs md:col-span-2">
-            <div className="font-semibold">Item Name</div>
-            <input
-              type="text"
-              value={customGearDraft.name}
-              onChange={(e) => setCustomGearDraft((d) => ({ ...d, name: e.target.value }))}
-              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-              placeholder="e.g. Sunblade Hilt"
-            />
-          </label>
-          <label className="text-xs">
-            <div className="font-semibold">Qty</div>
-            <input
-              type="number"
-              min={1}
-              max={999}
-              value={customGearDraft.quantity}
-              onChange={(e) =>
-                setCustomGearDraft((d) => ({
-                  ...d,
-                  quantity: Math.max(1, Math.min(999, Number(e.target.value) || 1)),
-                }))
-              }
-              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-            />
-          </label>
-          <label className="text-xs md:col-span-2">
-            <div className="font-semibold">Notes (optional)</div>
-            <input
-              type="text"
-              value={customGearDraft.notes}
-              onChange={(e) => setCustomGearDraft((d) => ({ ...d, notes: e.target.value }))}
-              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-              placeholder="e.g. attuned, broken, etc."
-            />
-          </label>
-          <div className="flex items-end">
-            <button
-              type="button"
-              disabled={!customGearDraft.name.trim()}
-              onClick={() => {
-                if (!customGearDraft.name.trim()) return;
-                const entry: CustomGearItem = {
-                  name: customGearDraft.name.trim(),
-                  ...(customGearDraft.quantity > 1 ? { quantity: customGearDraft.quantity } : {}),
-                  ...(customGearDraft.notes.trim() ? { notes: customGearDraft.notes.trim() } : {}),
-                };
-                setState((prev) => ({
-                  ...prev,
-                  customGear: [...(prev.customGear ?? []), entry],
-                }));
-                setCustomGearDraft({ name: "", quantity: 1, notes: "" });
-              }}
-              className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-      </section>
-
       {isWarlockClass ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold">Warlock Options</h2>
@@ -4765,7 +4964,11 @@ export default function BuilderClient({
           const automaticLanguages = derived.languages.filter((lang) => !chosenSet.has(lang));
           const chosenLanguages = (state.languages ?? []).filter((lang) => derived.languages.includes(lang));
           const langConfig = settingProfile?.languages ?? null;
-          const additionalSlots = langConfig?.selectionRules.additionalChoices ?? 0;
+          const speciesLanguageChoices =
+            (selectedSpecies as { languageChoices?: { count?: number } } | undefined)
+              ?.languageChoices?.count ?? 0;
+          const additionalSlots =
+            (langConfig?.selectionRules.additionalChoices ?? 0) + speciesLanguageChoices;
           const literacyDefault = langConfig?.selectionRules.literacyDefault ?? true;
           const showLiteracy = langConfig != null && langConfig.selectionRules.literacyDefault !== undefined;
           const alreadyUsed = new Set([...automaticLanguages, ...chosenLanguages]);

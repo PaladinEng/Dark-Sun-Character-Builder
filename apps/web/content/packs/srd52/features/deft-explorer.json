@@ -1,0 +1,11 @@
+{
+  "id": "srd52:feature:deft-explorer",
+  "name": "Deft Explorer",
+  "description": "You are an unsurpassed explorer and survivor. You gain Expertise in one skill of your choice in which you have proficiency. Your Proficiency Bonus is doubled for any ability check you make that uses that skill.",
+  "effects": [
+    {
+      "type": "grant_skill_expertise",
+      "choiceCount": 1
+    }
+  ]
+}

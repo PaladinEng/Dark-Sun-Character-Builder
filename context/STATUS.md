@@ -1,5 +1,5 @@
 # STATUS — Dark Sun Character Builder
-Updated: 2026-06-07
+Updated: 2026-06-14
 
 ## Current State
 Phase 0 — Project registered with Paladin Control Plane on 2026-04-03.
@@ -10,11 +10,35 @@ Builder core works with the closed-loop validation harness green (13/13 stages).
 Both /print and /sheet have been reworked to a multi-section information
 architecture. The rules engine supports multiple equipped weapons, natural weapon
 attacks, half-feat ability bonuses, custom spell entry, language picker with
-literacy tracking, and character save/load via JSON import/export. PDF export
-has been fixed for ability score layout, skill markers, and spell slot alignment.
-Starting equipment is now complete for all classes and backgrounds.
+literacy tracking, skill expertise (proficiency bonus doubled), non-walking
+movement speeds, a setting-aware currency system, and character save/load via
+JSON import/export. PDF export has been fixed for ability score layout, skill
+markers, and spell slot alignment. Starting equipment is complete for all classes
+and backgrounds.
 
 ## Last Session
+Date: 2026-06-14 (Player feedback batch — expertise, Ranger 2024, currency, UI)
+Done:
+- grant_skill_expertise effect type (fixed or player-choice); doubles proficiency
+  bonus, tracked in DerivedState.skillExpertise, shown on sheet/print/PDF; builder
+  Skill Expertise picker. Wired Scholar (Wizard L2).
+- Ranger 2024: Deft Explorer (L2), Roving (L6), Expertise (L9); new
+  grant_movement_speed effect + DerivedState.movementSpeeds (climb/swim/fly/burrow);
+  converted Ranger to the 2024 prepared-spell progression (L6 = 6 prepared).
+- Human (SRD + Athasian): Skillful skill choice via skillChoices; +2 language
+  choices via new Species.languageChoices. Versatile (origin feat) deferred.
+- Added 6 SRD equipment items (Arrows, Bolts, Quiver, Sprig of Mistletoe, Tent,
+  Traveler's Clothes).
+- Spell-list audit: confirmed wizard->arcane / ranger+druid->nature override works
+  at runtime via classSpellListOverrides; added Hunter's Mark to the nature list.
+- Dark Sun (Athasian) base-10 currency (Bit/CP/SP/GP); SRD reordered low-to-high.
+- UI: empty background ability defaults with green indicators; Custom Gear moved
+  before spells; Known/Prepared spell pickers filtered to castable levels.
+- Verified via rendered /sheet: Ranger L6 Human (Dark Sun) shows expertise (PP 18),
+  Roving 40 ft walk/climb/swim, Bits currency, nature tradition; Wizard L2 (Dark
+  Sun) shows Scholar expertise and arcane tradition.
+
+## Previous Session
 Date: 2026-06-07 (Cowork — Wizard modernization + species skill choice + spell/equipment fill)
 Done:
 - Coverage test fixed: add_hp_per_level, add_speed_bonus, grant_natural_weapon, grant_weapon_mastery added to SUPPORTED_EFFECT_TYPES allowlist

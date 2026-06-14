@@ -32,7 +32,6 @@
       "toHit": 3
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -55,6 +54,7 @@
   "languageLiteracy": {},
   "languages": [],
   "maxHP": 52,
+  "movementSpeeds": {},
   "passivePerception": 13,
   "proficiencyBonus": 3,
   "resistances": [],
@@ -70,6 +70,7 @@
     "wis": 6
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "insight",
     "medicine",
@@ -139,6 +140,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]

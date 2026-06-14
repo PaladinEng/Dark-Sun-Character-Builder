@@ -76,6 +76,26 @@ export const EffectSchema = z.discriminatedUnion("type", [
   z.object({
     type: z.literal("add_hp_per_level"),
     value: z.number().int().positive(),
+  }),
+  z.object({
+    type: z.literal("grant_skill_expertise"),
+    /** Fixed skill that gains expertise (proficiency bonus doubled). */
+    skill: z.string().min(1).optional(),
+    /** Number of skills the player chooses to gain expertise in. */
+    choiceCount: z.number().int().positive().optional(),
+    /**
+     * Skills the choice is restricted to. Omit to allow any skill the
+     * character is already proficient in (e.g. Ranger Deft Explorer).
+     */
+    choiceFrom: z.array(z.string().min(1)).min(1).optional(),
+  }),
+  z.object({
+    type: z.literal("grant_movement_speed"),
+    movement: z.enum(["climb", "swim", "fly", "burrow"]),
+    /** Set this movement speed equal to the final walking speed (e.g. Roving). */
+    matchWalking: z.boolean().optional(),
+    /** Fixed movement speed in feet (used when matchWalking is not set). */
+    value: z.number().int().nonnegative().optional(),
   })
 ]);
 

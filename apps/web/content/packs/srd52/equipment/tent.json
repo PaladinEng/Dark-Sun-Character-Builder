@@ -1,0 +1,6 @@
+{
+  "id": "srd52:equipment:tent",
+  "type": "adventuring_gear",
+  "name": "Tent",
+  "description": "A simple and portable canvas shelter that sleeps two."
+}

@@ -22,7 +22,6 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -41,6 +40,7 @@
   "languageLiteracy": {},
   "languages": [],
   "maxHP": 52,
+  "movementSpeeds": {},
   "passivePerception": 13,
   "proficiencyBonus": 3,
   "resistances": [],
@@ -54,6 +54,7 @@
     "wis": 3
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 0,
@@ -119,5 +120,6 @@
     "Preserve Life"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": []
 }

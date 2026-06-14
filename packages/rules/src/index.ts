@@ -1,4 +1,11 @@
 export { applyEffectsToCharacter } from "./effects";
+export {
+  COIN_LABELS,
+  SRD_COIN_DENOMINATIONS,
+  DARKSUN_COIN_DENOMINATIONS,
+  getCoinDenominations,
+} from "./currency";
+export type { CoinKey } from "./currency";
 export { getFeatOrAsiLevels, getAvailableAdvancementSlots } from "./advancement";
 export { generateRulesCoverageReport } from "./coverage";
 export {

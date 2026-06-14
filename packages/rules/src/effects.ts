@@ -18,7 +18,9 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_natural_weapon",
   "grant_weapon_mastery",
   "add_speed_bonus",
-  "add_hp_per_level"
+  "add_hp_per_level",
+  "grant_skill_expertise",
+  "grant_movement_speed"
 ] as const;
 
 export interface DerivedBonus {
@@ -46,6 +48,8 @@ export interface NaturalWeapon {
 
 export interface AppliedEffects {
   grantedSkillProficiencies: string[];
+  /** Skills granted expertise (proficiency bonus doubled) via a fixed-skill effect. */
+  grantedSkillExpertise: string[];
   grantedSaveProficiencies: Ability[];
   grantedToolProficiencies: string[];
   grantedLanguages: string[];
@@ -64,6 +68,12 @@ export interface AppliedEffects {
   speedBonus: number;
   /** Extra HP per character level (e.g. Tough +2). */
   hpPerLevel: number;
+  /** Non-walking movement speed grants, resolved against walking speed in compute. */
+  movementSpeedGrants: Array<{
+    movement: "climb" | "swim" | "fly" | "burrow";
+    matchWalking?: boolean;
+    value?: number;
+  }>;
 }
 
 function dedupe<T>(items: T[]): T[] {
@@ -75,6 +85,7 @@ export function applyEffectsToCharacter(
   effects: Effect[]
 ): AppliedEffects {
   const skillProfs: string[] = [];
+  const skillExpertise: string[] = [];
   const saveProfs: Ability[] = [];
   const toolProfs: string[] = [];
   const languages: string[] = [];
@@ -90,10 +101,19 @@ export function applyEffectsToCharacter(
   let weaponMasteryLimit = 0;
   let speedBonus = 0;
   let hpPerLevel = 0;
+  const movementSpeedGrants: AppliedEffects["movementSpeedGrants"] = [];
 
   for (const effect of effects) {
     if (effect.type === "grant_skill_proficiency") {
       skillProfs.push(effect.skill);
+      continue;
+    }
+    if (effect.type === "grant_skill_expertise") {
+      // Choice-based expertise is resolved in compute() with feature context;
+      // here we only capture fixed-skill expertise grants.
+      if (effect.skill) {
+        skillExpertise.push(effect.skill);
+      }
       continue;
     }
     if (effect.type === "grant_save_proficiency") {
@@ -177,11 +197,20 @@ export function applyEffectsToCharacter(
     }
     if (effect.type === "add_hp_per_level") {
       hpPerLevel += effect.value;
+      continue;
+    }
+    if (effect.type === "grant_movement_speed") {
+      movementSpeedGrants.push({
+        movement: effect.movement,
+        ...(effect.matchWalking ? { matchWalking: true } : {}),
+        ...(typeof effect.value === "number" ? { value: effect.value } : {}),
+      });
     }
   }
 
   return {
     grantedSkillProficiencies: dedupe(skillProfs),
+    grantedSkillExpertise: dedupe(skillExpertise),
     grantedSaveProficiencies: dedupe(saveProfs),
     grantedToolProficiencies: dedupe(toolProfs),
     grantedLanguages: dedupe(languages),
@@ -206,6 +235,7 @@ export function applyEffectsToCharacter(
     speedOverride,
     weaponMasteryLimit,
     speedBonus,
-    hpPerLevel
+    hpPerLevel,
+    movementSpeedGrants
   };
 }

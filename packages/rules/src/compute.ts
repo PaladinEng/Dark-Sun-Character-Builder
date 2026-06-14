@@ -511,7 +511,45 @@ export function computeDerivedState(
 
     skillProficiencies.push(...validChoices.slice(0, speciesSkillChoices.count));
   }
-  const finalSkillProficiencies = dedupe(skillProficiencies);
+  const baseSkillProficiencies = dedupe(skillProficiencies);
+
+  // Resolve skill expertise (proficiency bonus doubled). Fixed-skill grants
+  // come from applied effects; choice-based grants are keyed by the granting
+  // feature/feat/class id so the player's selection resolves with context.
+  const expertiseSet = new Set<string>(applied.grantedSkillExpertise);
+  const expertiseSources: Array<{ id?: string; effects?: Effect[] }> = [
+    ...(klass ? [klass] : []),
+    ...(subclass ? [subclass] : []),
+    ...classFeatures,
+    ...subclassFeatures,
+    ...features,
+    ...feats,
+    ...(species ? [species] : []),
+    ...(background ? [background] : []),
+  ];
+  for (const source of expertiseSources) {
+    if (!source?.id) {
+      continue;
+    }
+    for (const effect of source.effects ?? []) {
+      if (effect.type !== "grant_skill_expertise" || !effect.choiceCount) {
+        continue;
+      }
+      const allowed =
+        effect.choiceFrom && effect.choiceFrom.length > 0
+          ? new Set(effect.choiceFrom)
+          : new Set(baseSkillProficiencies);
+      const chosen = (state.chosenExpertiseSkills?.[source.id] ?? []).filter((skill) =>
+        allowed.has(skill),
+      );
+      for (const skill of chosen.slice(0, effect.choiceCount)) {
+        expertiseSet.add(skill);
+      }
+    }
+  }
+  const skillExpertise = dedupe([...expertiseSet]);
+  // Expertise implies proficiency for display and marker purposes.
+  const finalSkillProficiencies = dedupe([...baseSkillProficiencies, ...skillExpertise]);
   const saveProficiencies = dedupe([
     ...(state.chosenSaveProficiencies ?? []),
     ...applied.grantedSaveProficiencies
@@ -545,8 +583,10 @@ export function computeDerivedState(
   const skills: Record<string, number> = {};
   for (const skill of skillDefinitions) {
     const bonus = getBonusTotal(applied.bonuses, "skill", skill.id);
+    const hasExpertise = expertiseSet.has(skill.id);
     const proficient = finalSkillProficiencies.includes(skill.id);
-    skills[skill.id] = abilityMods[skill.ability] + (proficient ? proficiencyBonus : 0) + bonus;
+    const profMultiplier = hasExpertise ? 2 : proficient ? 1 : 0;
+    skills[skill.id] = abilityMods[skill.ability] + proficiencyBonus * profMultiplier + bonus;
   }
 
   const savingThrows: AbilityRecord = {
@@ -575,6 +615,13 @@ export function computeDerivedState(
       (saveProficiencies.includes("cha") ? proficiencyBonus : 0) +
       getBonusTotal(applied.bonuses, "save", "cha")
   };
+
+  const finalSpeed = (applied.speedOverride ?? state.baseSpeed ?? 30) + applied.speedBonus;
+  const movementSpeeds: Record<string, number> = {};
+  for (const grant of applied.movementSpeedGrants) {
+    const value = grant.matchWalking ? finalSpeed : grant.value ?? 0;
+    movementSpeeds[grant.movement] = Math.max(movementSpeeds[grant.movement] ?? 0, value);
+  }
 
   const hitDie = klass?.hitDie ?? 8;
   const conMod = abilityMods.con;
@@ -772,13 +819,15 @@ export function computeDerivedState(
     finalAbilities,
     abilityMods,
     proficiencyBonus,
-    speed: (applied.speedOverride ?? state.baseSpeed ?? 30) + applied.speedBonus,
+    speed: finalSpeed,
+    movementSpeeds,
     senses,
     resistances,
     traits,
     savingThrows,
     skills,
     skillProficiencies: finalSkillProficiencies,
+    skillExpertise,
     saveProficiencies,
     toolProficiencies,
     weaponProficiencies,

@@ -49,6 +49,7 @@ export type PdfExportCharacterSnapshot = {
   saveProficiencies?: readonly Ability[];
   skills?: Record<string, number>;
   skillProficiencies?: readonly string[];
+  skillExpertise?: readonly string[];
   skillDefinitions?: ReadonlyArray<{ id: string; name: string; ability: Ability }>;
   skillAndToolRows?: readonly SkillAndToolDisplayRow[];
   proficiencyBonus: number;
@@ -63,6 +64,7 @@ export type PdfExportCharacterSnapshot = {
   deathSaveFailures?: number | null;
   exhaustionLevel?: number | null;
   speed: number;
+  movementSpeeds?: Record<string, number>;
   passivePerception?: number;
   attackName?: string | null;
   attackToHit?: number | null;
@@ -97,6 +99,8 @@ export type PdfExportCharacterSnapshot = {
   ep?: number | null;
   gp?: number | null;
   pp?: number | null;
+  bit?: number | null;
+  isDarkSun?: boolean;
   otherWealth?: string | null;
   attunedItems?: readonly PdfAttunedItem[];
   inventoryItems?: readonly string[];
@@ -576,12 +580,17 @@ function formatCoinTotalInGp(snapshot: PdfExportCharacterSnapshot): string | nul
   const ep = typeof snapshot.ep === "number" ? Math.max(0, snapshot.ep) : 0;
   const gp = typeof snapshot.gp === "number" ? Math.max(0, snapshot.gp) : 0;
   const pp = typeof snapshot.pp === "number" ? Math.max(0, snapshot.pp) : 0;
+  const bit = typeof snapshot.bit === "number" ? Math.max(0, snapshot.bit) : 0;
 
-  if (cp + sp + ep + gp + pp <= 0) {
+  // Athasian base-10 system: 10 bit = 1 cp, 10 cp = 1 sp, 10 sp = 1 gp.
+  const total = snapshot.isDarkSun
+    ? bit / 1000 + cp / 100 + sp / 10 + gp
+    : cp / 100 + sp / 10 + ep / 2 + gp + pp * 10;
+
+  if (total <= 0) {
     return null;
   }
 
-  const total = cp / 100 + sp / 10 + ep / 2 + gp + pp * 10;
   const rounded = Math.round(total * 100) / 100;
   const asString =
     Math.abs(rounded - Math.floor(rounded)) < 0.00001 ? `${Math.floor(rounded)}` : `${rounded.toFixed(2)}`;
@@ -1196,14 +1205,21 @@ function createSupplementalPageStreams(snapshot: PdfExportCharacterSnapshot): st
   drawSection(commands, rightX, coinsY, rightColumnWidth, coinsHeight, "Coins");
   const coinFieldY = coinsY + 34;
   const coinFieldGap = 4;
-  const coinFieldWidth = (rightColumnWidth - 16 - coinFieldGap * 4) / 5;
-  const coinFields: Array<[string, string]> = [
-    ["CP", formatNumeric(snapshot.cp)],
-    ["SP", formatNumeric(snapshot.sp)],
-    ["EP", formatNumeric(snapshot.ep)],
-    ["GP", formatNumeric(snapshot.gp)],
-    ["PP", formatNumeric(snapshot.pp)],
-  ];
+  const coinFields: Array<[string, string]> = snapshot.isDarkSun
+    ? [
+        ["Bits", formatNumeric(snapshot.bit)],
+        ["CP", formatNumeric(snapshot.cp)],
+        ["SP", formatNumeric(snapshot.sp)],
+        ["GP", formatNumeric(snapshot.gp)],
+      ]
+    : [
+        ["CP", formatNumeric(snapshot.cp)],
+        ["SP", formatNumeric(snapshot.sp)],
+        ["EP", formatNumeric(snapshot.ep)],
+        ["GP", formatNumeric(snapshot.gp)],
+        ["PP", formatNumeric(snapshot.pp)],
+      ];
+  const coinFieldWidth = (rightColumnWidth - 16 - coinFieldGap * 4) / coinFields.length;
   coinFields.forEach(([label, value], index) => {
     drawField(
       commands,
@@ -1842,10 +1858,13 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   }
 
   drawSection(commands, margin, combatY, contentWidth, combatHeight, "Combat");
+  const movementSpeedSuffix = Object.entries(snapshot.movementSpeeds ?? {})
+    .map(([movement, value]) => ` ${movement.charAt(0).toUpperCase()}${value}`)
+    .join("");
   const combatStats = [
     ["Armor Class", `${snapshot.armorClass}`],
     ["Shield", shieldContribution],
-    ["Speed", `${snapshot.speed} ft`],
+    ["Speed", `${snapshot.speed} ft${movementSpeedSuffix}`],
     ["Initiative", initiative],
     ["Prof Bonus", proficiencyBonusLabel],
   ] as const;
@@ -1958,6 +1977,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
 
   drawSection(commands, leftX, skillsY, leftWidth, skillsHeight, "Skills");
   const skillProficiencySet = new Set(snapshot.skillProficiencies ?? []);
+  const skillExpertiseSet = new Set(snapshot.skillExpertise ?? []);
   const skillRows = (snapshot.skillAndToolRows ?? []).filter(
     (row): row is typeof row & { kind: "skill" } => row.kind === "skill"
   );
@@ -1971,10 +1991,12 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     if (lineY < skillListMinY) {
       break;
     }
+    const isExpertise = skillExpertiseSet.has(row.id);
     const isProficient = skillProficiencySet.has(row.id);
-    const marker = isProficient ? "* " : "  ";
+    const marker = isExpertise ? "** " : isProficient ? "* " : "  ";
     const modLabel = row.value >= 0 ? `+${row.value}` : `${row.value}`;
-    const skillText = `${marker}${row.label}: ${modLabel}`;
+    const expertiseSuffix = isExpertise ? " (Exp)" : "";
+    const skillText = `${marker}${row.label}: ${modLabel}${expertiseSuffix}`;
     drawText(commands, skillText, leftX + SECTION_INNER_PADDING, lineY, 8, false);
   }
 

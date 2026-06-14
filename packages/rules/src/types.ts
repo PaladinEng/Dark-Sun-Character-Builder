@@ -45,6 +45,8 @@ export interface CharacterCoins {
   ep?: number;
   pp?: number;
   cp: number;
+  /** Athasian "bit" denomination (10 bits = 1 ceramic piece). Dark Sun only. */
+  bit?: number;
 }
 
 export interface InventoryEntry {
@@ -106,6 +108,8 @@ export interface CharacterState {
   originFeatId?: string;
   chosenClassSkills?: string[];
   chosenSpeciesSkills?: string[];
+  /** Maps a feature/feat/class id → chosen skill ids for its expertise choice. */
+  chosenExpertiseSkills?: Record<string, string[]>;
   touched?: {
     classSkills?: boolean;
     speciesSkills?: boolean;
@@ -179,12 +183,16 @@ export interface DerivedState {
   abilityMods: AbilityRecord;
   proficiencyBonus: number;
   speed: number;
+  /** Non-walking movement speeds in feet, keyed by movement type (climb/swim/fly/burrow). */
+  movementSpeeds: Record<string, number>;
   senses: DerivedSense[];
   resistances: string[];
   traits: string[];
   savingThrows: AbilityRecord;
   skills: Record<string, number>;
   skillProficiencies: string[];
+  /** Skill ids with expertise (proficiency bonus doubled). Subset of skillProficiencies. */
+  skillExpertise: string[];
   saveProficiencies: Ability[];
   toolProficiencies: string[];
   weaponProficiencies: string[];

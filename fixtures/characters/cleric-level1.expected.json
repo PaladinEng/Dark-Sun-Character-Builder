@@ -22,7 +22,6 @@
       "toHit": 2
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -41,6 +40,7 @@
   "languageLiteracy": {},
   "languages": [],
   "maxHP": 10,
+  "movementSpeeds": {},
   "passivePerception": 13,
   "proficiencyBonus": 2,
   "resistances": [],
@@ -56,6 +56,7 @@
     "wis": 5
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "insight",
     "religion"
@@ -120,6 +121,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]

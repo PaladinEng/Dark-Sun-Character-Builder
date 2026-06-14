@@ -1,0 +1,21 @@
+{
+  "id": "srd52:feature:roving",
+  "name": "Roving",
+  "description": "Your Speed increases by 10 feet while you aren't wearing Heavy armor. You also have a Climb Speed and a Swim Speed equal to your Speed.",
+  "effects": [
+    {
+      "type": "add_speed_bonus",
+      "value": 10
+    },
+    {
+      "type": "grant_movement_speed",
+      "movement": "climb",
+      "matchWalking": true
+    },
+    {
+      "type": "grant_movement_speed",
+      "movement": "swim",
+      "matchWalking": true
+    }
+  ]
+}

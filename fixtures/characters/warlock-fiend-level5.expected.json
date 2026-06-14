@@ -32,7 +32,6 @@
       "toHit": 5
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -51,6 +50,7 @@
   "languageLiteracy": {},
   "languages": [],
   "maxHP": 38,
+  "movementSpeeds": {},
   "passivePerception": 11,
   "proficiencyBonus": 3,
   "resistances": [],
@@ -64,6 +64,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 2,
@@ -137,6 +138,7 @@
     "Eldritch Invocations"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]

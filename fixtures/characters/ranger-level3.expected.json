@@ -22,7 +22,6 @@
       "toHit": 5
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -41,6 +40,7 @@
   "languageLiteracy": {},
   "languages": [],
   "maxHP": 25,
+  "movementSpeeds": {},
   "passivePerception": 14,
   "proficiencyBonus": 2,
   "resistances": [],
@@ -57,6 +57,7 @@
     "wis": 4
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "perception",
     "stealth",
@@ -126,6 +127,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Martial Weapons",
     "Simple Weapons"
