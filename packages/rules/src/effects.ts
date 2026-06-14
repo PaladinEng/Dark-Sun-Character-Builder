@@ -18,7 +18,8 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_natural_weapon",
   "grant_weapon_mastery",
   "add_speed_bonus",
-  "add_hp_per_level"
+  "add_hp_per_level",
+  "grant_skill_expertise"
 ] as const;
 
 export interface DerivedBonus {
@@ -46,6 +47,8 @@ export interface NaturalWeapon {
 
 export interface AppliedEffects {
   grantedSkillProficiencies: string[];
+  /** Skills granted expertise (proficiency bonus doubled) via a fixed-skill effect. */
+  grantedSkillExpertise: string[];
   grantedSaveProficiencies: Ability[];
   grantedToolProficiencies: string[];
   grantedLanguages: string[];
@@ -75,6 +78,7 @@ export function applyEffectsToCharacter(
   effects: Effect[]
 ): AppliedEffects {
   const skillProfs: string[] = [];
+  const skillExpertise: string[] = [];
   const saveProfs: Ability[] = [];
   const toolProfs: string[] = [];
   const languages: string[] = [];
@@ -94,6 +98,14 @@ export function applyEffectsToCharacter(
   for (const effect of effects) {
     if (effect.type === "grant_skill_proficiency") {
       skillProfs.push(effect.skill);
+      continue;
+    }
+    if (effect.type === "grant_skill_expertise") {
+      // Choice-based expertise is resolved in compute() with feature context;
+      // here we only capture fixed-skill expertise grants.
+      if (effect.skill) {
+        skillExpertise.push(effect.skill);
+      }
       continue;
     }
     if (effect.type === "grant_save_proficiency") {
@@ -182,6 +194,7 @@ export function applyEffectsToCharacter(
 
   return {
     grantedSkillProficiencies: dedupe(skillProfs),
+    grantedSkillExpertise: dedupe(skillExpertise),
     grantedSaveProficiencies: dedupe(saveProfs),
     grantedToolProficiencies: dedupe(toolProfs),
     grantedLanguages: dedupe(languages),

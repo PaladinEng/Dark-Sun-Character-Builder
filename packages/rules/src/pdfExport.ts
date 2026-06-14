@@ -49,6 +49,7 @@ export type PdfExportCharacterSnapshot = {
   saveProficiencies?: readonly Ability[];
   skills?: Record<string, number>;
   skillProficiencies?: readonly string[];
+  skillExpertise?: readonly string[];
   skillDefinitions?: ReadonlyArray<{ id: string; name: string; ability: Ability }>;
   skillAndToolRows?: readonly SkillAndToolDisplayRow[];
   proficiencyBonus: number;
@@ -1958,6 +1959,7 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
 
   drawSection(commands, leftX, skillsY, leftWidth, skillsHeight, "Skills");
   const skillProficiencySet = new Set(snapshot.skillProficiencies ?? []);
+  const skillExpertiseSet = new Set(snapshot.skillExpertise ?? []);
   const skillRows = (snapshot.skillAndToolRows ?? []).filter(
     (row): row is typeof row & { kind: "skill" } => row.kind === "skill"
   );
@@ -1971,10 +1973,12 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
     if (lineY < skillListMinY) {
       break;
     }
+    const isExpertise = skillExpertiseSet.has(row.id);
     const isProficient = skillProficiencySet.has(row.id);
-    const marker = isProficient ? "* " : "  ";
+    const marker = isExpertise ? "** " : isProficient ? "* " : "  ";
     const modLabel = row.value >= 0 ? `+${row.value}` : `${row.value}`;
-    const skillText = `${marker}${row.label}: ${modLabel}`;
+    const expertiseSuffix = isExpertise ? " (Exp)" : "";
+    const skillText = `${marker}${row.label}: ${modLabel}${expertiseSuffix}`;
     drawText(commands, skillText, leftX + SECTION_INNER_PADDING, lineY, 8, false);
   }
 

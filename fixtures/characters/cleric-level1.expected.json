@@ -22,7 +22,6 @@
       "toHit": 2
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -56,6 +55,7 @@
     "wis": 5
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "insight",
     "religion"
@@ -120,6 +120,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]

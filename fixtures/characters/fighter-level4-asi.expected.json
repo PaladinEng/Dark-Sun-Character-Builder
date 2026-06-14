@@ -31,7 +31,6 @@
       "toHit": 6
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -66,6 +65,7 @@
     "wis": 2
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "athletics",
     "stealth"
@@ -103,6 +103,7 @@
     "Speed 35 ft."
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Martial Weapons",
     "Simple Weapons"

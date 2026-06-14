@@ -41,7 +41,6 @@
       "toHit": 6
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -77,6 +76,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 2,
@@ -155,6 +155,7 @@
     "Resilient Training: Fixture feat for higher-level advancement slot."
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]

@@ -32,7 +32,6 @@
       "toHit": 6
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -70,6 +69,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "athletics",
     "perception",
@@ -103,6 +103,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Martial Weapons",
     "Simple Weapons"

@@ -22,7 +22,6 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -54,6 +53,7 @@
     "wis": 0
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 2,
@@ -118,5 +118,6 @@
     "Sculpt Spells"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": []
 }

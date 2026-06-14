@@ -12,7 +12,6 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [],
   "finalAbilities": {
@@ -39,6 +38,7 @@
     "wis": 0
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 2,
@@ -68,5 +68,6 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": []
 }

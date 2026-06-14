@@ -32,7 +32,6 @@
       "toHit": 5
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -64,6 +63,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 2,
@@ -139,6 +139,7 @@
     "Pact of the Tome"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]

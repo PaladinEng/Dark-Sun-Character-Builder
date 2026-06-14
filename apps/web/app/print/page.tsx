@@ -423,6 +423,7 @@ export default async function PrintPage({
   });
 
   const skillProficiencySet = new Set(derived.skillProficiencies ?? []);
+  const skillExpertiseSet = new Set(derived.skillExpertise ?? []);
   const saveProficiencySet = new Set(derived.saveProficiencies ?? []);
 
   const attacks = derived.attacks;
@@ -611,9 +612,16 @@ export default async function PrintPage({
                           <div key={skill} className="detail-line">
                             <span>
                               <span className="prof-dot">
-                                {skillProficiencySet.has(skill) ? "●" : "○"}
+                                {skillExpertiseSet.has(skill)
+                                  ? "⊙"
+                                  : skillProficiencySet.has(skill)
+                                    ? "●"
+                                    : "○"}
                               </span>{" "}
                               {formatSkillName(skill)}
+                              {skillExpertiseSet.has(skill) ? (
+                                <span className="expertise-tag"> EXP</span>
+                              ) : null}
                             </span>
                             <span className="detail-num">
                               {formatModifier(derived.skills[skill] ?? 0)}
@@ -1460,6 +1468,13 @@ export default async function PrintPage({
 
         .prof-dot {
           font-size: 8px;
+        }
+
+        .expertise-tag {
+          font-size: 6px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          color: #92400e;
         }
 
         .detail-num {

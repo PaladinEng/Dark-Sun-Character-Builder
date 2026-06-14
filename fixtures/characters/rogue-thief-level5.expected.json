@@ -22,7 +22,6 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -54,6 +53,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 3,
@@ -87,5 +87,6 @@
     "Sneak Attack"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": []
 }

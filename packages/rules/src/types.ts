@@ -106,6 +106,8 @@ export interface CharacterState {
   originFeatId?: string;
   chosenClassSkills?: string[];
   chosenSpeciesSkills?: string[];
+  /** Maps a feature/feat/class id → chosen skill ids for its expertise choice. */
+  chosenExpertiseSkills?: Record<string, string[]>;
   touched?: {
     classSkills?: boolean;
     speciesSkills?: boolean;
@@ -185,6 +187,8 @@ export interface DerivedState {
   savingThrows: AbilityRecord;
   skills: Record<string, number>;
   skillProficiencies: string[];
+  /** Skill ids with expertise (proficiency bonus doubled). Subset of skillProficiencies. */
+  skillExpertise: string[];
   saveProficiencies: Ability[];
   toolProficiencies: string[];
   weaponProficiencies: string[];

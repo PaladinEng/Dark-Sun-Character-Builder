@@ -22,7 +22,6 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -54,6 +53,7 @@
     "wis": 3
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 0,
@@ -119,5 +119,6 @@
     "Preserve Life"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": []
 }

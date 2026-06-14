@@ -494,6 +494,7 @@ export default async function SheetPage({
   const skillRows = skillAndToolRows.flatMap((row) => (row.kind === "skill" ? [row] : []));
   const proficientToolRows = skillAndToolRows.flatMap((row) => (row.kind === "tool" ? [row] : []));
   const skillProficiencySet = new Set(derived.skillProficiencies ?? []);
+  const skillExpertiseSet = new Set(derived.skillExpertise ?? []);
   const skillAbilityById = new Map<string, Ability>(
     Object.entries(DEFAULT_SKILL_ABILITY_BY_ID) as Array<[string, Ability]>,
   );
@@ -864,8 +865,17 @@ export default async function SheetPage({
                     {skillsByAbility[ability].map((row) => (
                       <div key={`skill-${row.id}`} className="flex justify-between">
                         <span>
-                          {skillProficiencySet.has(row.id) ? "● " : "○ "}
+                          <span title={skillExpertiseSet.has(row.id) ? "Expertise" : undefined}>
+                            {skillExpertiseSet.has(row.id)
+                              ? "⊙ "
+                              : skillProficiencySet.has(row.id)
+                                ? "● "
+                                : "○ "}
+                          </span>
                           {row.label}
+                          {skillExpertiseSet.has(row.id) ? (
+                            <span className="ml-1 text-[10px] uppercase text-amber-700">Exp</span>
+                          ) : null}
                         </span>
                         <span className="font-semibold">{formatModifier(row.value)}</span>
                       </div>

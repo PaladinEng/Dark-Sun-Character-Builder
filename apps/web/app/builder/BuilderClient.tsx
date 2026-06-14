@@ -886,6 +886,102 @@ export default function BuilderClient({
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
   );
+
+  // Features/feats that grant a *choice* of skill expertise, surfaced as pickers.
+  const expertiseChoiceSlots = useMemo(() => {
+    type ExpertiseEffect = {
+      type?: string;
+      skill?: string;
+      choiceCount?: number;
+      choiceFrom?: string[];
+    };
+    type ExpertiseSource = { id?: string; name?: string; effects?: ExpertiseEffect[] };
+    const skillProfSet = new Set(derived.skillProficiencies ?? []);
+    const sources: ExpertiseSource[] = [];
+    const klass = selectedClass as
+      | { classFeaturesByLevel?: Array<{ level: number; featureId: string }> }
+      | undefined;
+    for (const entry of klass?.classFeaturesByLevel ?? []) {
+      if (entry.level <= state.level) {
+        const feature = content.featuresById?.[entry.featureId] as ExpertiseSource | undefined;
+        if (feature) sources.push(feature);
+      }
+    }
+    const sub = selectedSubclass as
+      | { subclassFeaturesByLevel?: Array<{ level: number; featureId: string }> }
+      | undefined;
+    for (const entry of sub?.subclassFeaturesByLevel ?? []) {
+      if (entry.level <= state.level) {
+        const feature = content.featuresById?.[entry.featureId] as ExpertiseSource | undefined;
+        if (feature) sources.push(feature);
+      }
+    }
+    for (const featureId of state.selectedFeatureIds ?? []) {
+      const feature = content.featuresById?.[featureId] as ExpertiseSource | undefined;
+      if (feature) sources.push(feature);
+    }
+    for (const feat of derived.feats ?? []) {
+      const f = content.featsById?.[feat.id] as ExpertiseSource | undefined;
+      if (f) sources.push(f);
+    }
+
+    const slots: Array<{
+      sourceId: string;
+      sourceName: string;
+      choiceCount: number;
+      options: string[];
+    }> = [];
+    const seen = new Set<string>();
+    for (const source of sources) {
+      if (!source?.id || seen.has(source.id)) continue;
+      seen.add(source.id);
+      for (const effect of source.effects ?? []) {
+        if (effect.type !== "grant_skill_expertise" || !effect.choiceCount) continue;
+        const options =
+          effect.choiceFrom && effect.choiceFrom.length > 0
+            ? effect.choiceFrom
+            : [...skillProfSet];
+        slots.push({
+          sourceId: source.id,
+          sourceName: source.name ?? source.id,
+          choiceCount: effect.choiceCount,
+          options,
+        });
+      }
+    }
+    return slots;
+  }, [
+    selectedClass,
+    selectedSubclass,
+    state.level,
+    state.selectedFeatureIds,
+    derived.feats,
+    derived.skillProficiencies,
+    content.featuresById,
+    content.featsById,
+  ]);
+
+  const onToggleExpertiseSkill = (
+    sourceId: string,
+    skillId: string,
+    checked: boolean,
+    choiceCount: number,
+  ) => {
+    setState((previous) => {
+      const map = { ...(previous.chosenExpertiseSkills ?? {}) };
+      const current = new Set(map[sourceId] ?? []);
+      if (checked) {
+        if (!current.has(skillId) && current.size >= choiceCount) {
+          return previous;
+        }
+        current.add(skillId);
+      } else {
+        current.delete(skillId);
+      }
+      map[sourceId] = Array.from(current);
+      return { ...previous, chosenExpertiseSkills: map };
+    });
+  };
   /** All weapons that have at least one mastery property, sorted by name. */
   const weaponsWithMastery = useMemo(() => {
     const allEquipment = Object.values(content.equipmentById ?? {});
@@ -3827,6 +3923,69 @@ export default function BuilderClient({
                   />
                   <span>{skillNameById[skillId] ?? formatSkillId(skillId)}</span>
                 </label>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
+
+      {expertiseChoiceSlots.length > 0 ? (
+        <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+          <h2 className="text-sm font-semibold">Skill Expertise</h2>
+          <p className="mt-1 text-sm text-slate-300">
+            Choose skills to gain Expertise (proficiency bonus doubled).
+          </p>
+          <div className="mt-3 space-y-4">
+            {expertiseChoiceSlots.map((slot) => {
+              const chosen = state.chosenExpertiseSkills?.[slot.sourceId] ?? [];
+              const incomplete = chosen.length < slot.choiceCount;
+              return (
+                <div key={`expertise-${slot.sourceId}`}>
+                  <div className="text-sm font-semibold">
+                    {slot.sourceName}: choose {slot.choiceCount} ({chosen.length}/{slot.choiceCount}{" "}
+                    selected)
+                  </div>
+                  {slot.options.length === 0 ? (
+                    <p className="mt-1 text-xs text-slate-400">
+                      Become proficient in a skill first, then choose it for expertise here.
+                    </p>
+                  ) : (
+                    <div className="mt-2 grid gap-2 md:grid-cols-3">
+                      {slot.options.map((skillId) => {
+                        const checked = chosen.includes(skillId);
+                        const canChooseMore = chosen.length < slot.choiceCount;
+                        const disabled = !checked && !canChooseMore;
+                        return (
+                          <label
+                            key={`expertise-${slot.sourceId}-${skillId}`}
+                            className="flex items-center gap-2 text-sm"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              disabled={disabled}
+                              onChange={(event) =>
+                                onToggleExpertiseSkill(
+                                  slot.sourceId,
+                                  skillId,
+                                  event.target.checked,
+                                  slot.choiceCount,
+                                )
+                              }
+                            />
+                            <span>{skillNameById[skillId] ?? formatSkillId(skillId)}</span>
+                          </label>
+                        );
+                      })}
+                    </div>
+                  )}
+                  {incomplete && slot.options.length > 0 ? (
+                    <p className="mt-1 text-xs text-amber-300">
+                      Choose {slot.choiceCount} skill{slot.choiceCount === 1 ? "" : "s"} for
+                      expertise.
+                    </p>
+                  ) : null}
+                </div>
               );
             })}
           </div>

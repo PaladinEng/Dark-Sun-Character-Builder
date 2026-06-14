@@ -12,7 +12,6 @@
   "armorProficiencies": [],
   "attack": null,
   "attacks": [],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [],
   "finalAbilities": {
@@ -49,6 +48,7 @@
       "type": "darkvision"
     }
   ],
+  "skillExpertise": [],
   "skillProficiencies": [],
   "skills": {
     "acrobatics": 0,
@@ -81,5 +81,6 @@
     "Stonecunning"
   ],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": []
 }

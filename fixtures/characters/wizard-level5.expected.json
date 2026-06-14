@@ -32,7 +32,6 @@
       "toHit": 5
     }
   ],
-  "weaponMasteryLimit": 0,
   "classResources": [],
   "feats": [
     {
@@ -70,6 +69,7 @@
     "wis": 1
   },
   "senses": [],
+  "skillExpertise": [],
   "skillProficiencies": [
     "arcana",
     "investigation",
@@ -139,6 +139,7 @@
   "toolProficiencies": [],
   "traits": [],
   "warnings": [],
+  "weaponMasteryLimit": 0,
   "weaponProficiencies": [
     "Simple Weapons"
   ]
