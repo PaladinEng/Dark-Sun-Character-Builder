@@ -616,6 +616,13 @@ export function computeDerivedState(
       getBonusTotal(applied.bonuses, "save", "cha")
   };
 
+  const finalSpeed = (applied.speedOverride ?? state.baseSpeed ?? 30) + applied.speedBonus;
+  const movementSpeeds: Record<string, number> = {};
+  for (const grant of applied.movementSpeedGrants) {
+    const value = grant.matchWalking ? finalSpeed : grant.value ?? 0;
+    movementSpeeds[grant.movement] = Math.max(movementSpeeds[grant.movement] ?? 0, value);
+  }
+
   const hitDie = klass?.hitDie ?? 8;
   const conMod = abilityMods.con;
   const levelGain = Math.floor(hitDie / 2) + 1 + conMod;
@@ -812,7 +819,8 @@ export function computeDerivedState(
     finalAbilities,
     abilityMods,
     proficiencyBonus,
-    speed: (applied.speedOverride ?? state.baseSpeed ?? 30) + applied.speedBonus,
+    speed: finalSpeed,
+    movementSpeeds,
     senses,
     resistances,
     traits,

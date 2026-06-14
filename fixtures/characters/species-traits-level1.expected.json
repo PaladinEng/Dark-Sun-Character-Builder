@@ -28,6 +28,7 @@
     "Dwarvish"
   ],
   "maxHP": 8,
+  "movementSpeeds": {},
   "passivePerception": 10,
   "proficiencyBonus": 2,
   "resistances": [

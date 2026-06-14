@@ -64,6 +64,7 @@ export type PdfExportCharacterSnapshot = {
   deathSaveFailures?: number | null;
   exhaustionLevel?: number | null;
   speed: number;
+  movementSpeeds?: Record<string, number>;
   passivePerception?: number;
   attackName?: string | null;
   attackToHit?: number | null;
@@ -1843,10 +1844,13 @@ function createPdfFromCharacterSheet(snapshot: PdfExportCharacterSnapshot): Uint
   }
 
   drawSection(commands, margin, combatY, contentWidth, combatHeight, "Combat");
+  const movementSpeedSuffix = Object.entries(snapshot.movementSpeeds ?? {})
+    .map(([movement, value]) => ` ${movement.charAt(0).toUpperCase()}${value}`)
+    .join("");
   const combatStats = [
     ["Armor Class", `${snapshot.armorClass}`],
     ["Shield", shieldContribution],
-    ["Speed", `${snapshot.speed} ft`],
+    ["Speed", `${snapshot.speed} ft${movementSpeedSuffix}`],
     ["Initiative", initiative],
     ["Prof Bonus", proficiencyBonusLabel],
   ] as const;

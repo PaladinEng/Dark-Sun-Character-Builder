@@ -181,6 +181,8 @@ export interface DerivedState {
   abilityMods: AbilityRecord;
   proficiencyBonus: number;
   speed: number;
+  /** Non-walking movement speeds in feet, keyed by movement type (climb/swim/fly/burrow). */
+  movementSpeeds: Record<string, number>;
   senses: DerivedSense[];
   resistances: string[];
   traits: string[];

@@ -403,6 +403,10 @@ export default async function PrintPage({
       : [];
 
   const sensesEntries = derived.senses.map((sense) => formatSenseSummary(sense));
+  const movementEntries = Object.entries(derived.movementSpeeds ?? {}).map(
+    ([movement, value]) =>
+      `${movement.charAt(0).toUpperCase()}${movement.slice(1)} Speed ${value} ft`,
+  );
   const passiveTraits = derived.traits;
   const activeConditionEntries = (derived.activeConditionIds ?? []).map(
     (conditionId) => formatConditionLabel(conditionId),
@@ -708,6 +712,9 @@ export default async function PrintPage({
                   ) : (
                     <ul className="trimmed-list compact">
                       <li>Passive Perception {passivePerception}</li>
+                      {movementEntries.map((entry, index) => (
+                        <li key={`move-${index}`}>{entry}</li>
+                      ))}
                       {sensesEntries.map((entry, index) => (
                         <li key={`sense-${index}`}>{entry}</li>
                       ))}

@@ -19,7 +19,8 @@ export const SUPPORTED_EFFECT_TYPES = [
   "grant_weapon_mastery",
   "add_speed_bonus",
   "add_hp_per_level",
-  "grant_skill_expertise"
+  "grant_skill_expertise",
+  "grant_movement_speed"
 ] as const;
 
 export interface DerivedBonus {
@@ -67,6 +68,12 @@ export interface AppliedEffects {
   speedBonus: number;
   /** Extra HP per character level (e.g. Tough +2). */
   hpPerLevel: number;
+  /** Non-walking movement speed grants, resolved against walking speed in compute. */
+  movementSpeedGrants: Array<{
+    movement: "climb" | "swim" | "fly" | "burrow";
+    matchWalking?: boolean;
+    value?: number;
+  }>;
 }
 
 function dedupe<T>(items: T[]): T[] {
@@ -94,6 +101,7 @@ export function applyEffectsToCharacter(
   let weaponMasteryLimit = 0;
   let speedBonus = 0;
   let hpPerLevel = 0;
+  const movementSpeedGrants: AppliedEffects["movementSpeedGrants"] = [];
 
   for (const effect of effects) {
     if (effect.type === "grant_skill_proficiency") {
@@ -189,6 +197,14 @@ export function applyEffectsToCharacter(
     }
     if (effect.type === "add_hp_per_level") {
       hpPerLevel += effect.value;
+      continue;
+    }
+    if (effect.type === "grant_movement_speed") {
+      movementSpeedGrants.push({
+        movement: effect.movement,
+        ...(effect.matchWalking ? { matchWalking: true } : {}),
+        ...(typeof effect.value === "number" ? { value: effect.value } : {}),
+      });
     }
   }
 
@@ -219,6 +235,7 @@ export function applyEffectsToCharacter(
     speedOverride,
     weaponMasteryLimit,
     speedBonus,
-    hpPerLevel
+    hpPerLevel,
+    movementSpeedGrants
   };
 }

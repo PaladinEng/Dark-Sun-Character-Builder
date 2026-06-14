@@ -626,6 +626,7 @@ export async function POST(request: Request) {
     skills: derived.skills,
     skillProficiencies: derived.skillProficiencies,
     skillExpertise: derived.skillExpertise,
+    movementSpeeds: derived.movementSpeeds,
     skillDefinitions: merged.content.skillDefinitions,
     skillAndToolRows,
     proficiencyBonus: derived.proficiencyBonus,

@@ -1,0 +1,11 @@
+{
+  "id": "srd52:feature:ranger-expertise",
+  "name": "Expertise",
+  "description": "Choose two of your skill proficiencies. Your Proficiency Bonus is doubled for any ability check you make that uses either of the chosen proficiencies.",
+  "effects": [
+    {
+      "type": "grant_skill_expertise",
+      "choiceCount": 2
+    }
+  ]
+}

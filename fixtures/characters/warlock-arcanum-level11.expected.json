@@ -63,6 +63,7 @@
   "languageLiteracy": {},
   "languages": [],
   "maxHP": 80,
+  "movementSpeeds": {},
   "passivePerception": 11,
   "proficiencyBonus": 4,
   "resistances": [],

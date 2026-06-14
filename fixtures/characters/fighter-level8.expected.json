@@ -68,6 +68,7 @@
     "Common"
   ],
   "maxHP": 68,
+  "movementSpeeds": {},
   "passivePerception": 14,
   "proficiencyBonus": 3,
   "resistances": [],

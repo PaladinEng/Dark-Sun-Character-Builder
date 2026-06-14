@@ -915,6 +915,12 @@ export default async function SheetPage({
             <SheetSection title="Senses">
               <ul className="space-y-1 p-2 text-sm">
                 <li>Passive Perception {derived.passivePerception}</li>
+                <li>Walking Speed {derived.speed} ft</li>
+                {Object.entries(derived.movementSpeeds ?? {}).map(([movement, value]) => (
+                  <li key={`move-${movement}`}>
+                    {movement.charAt(0).toUpperCase() + movement.slice(1)} Speed {value} ft
+                  </li>
+                ))}
                 {derived.senses.map((sense, index) => (
                   <li key={`sense-${index}`}>{formatSenseSummary(sense)}</li>
                 ))}

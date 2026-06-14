@@ -88,6 +88,14 @@ export const EffectSchema = z.discriminatedUnion("type", [
      * character is already proficient in (e.g. Ranger Deft Explorer).
      */
     choiceFrom: z.array(z.string().min(1)).min(1).optional(),
+  }),
+  z.object({
+    type: z.literal("grant_movement_speed"),
+    movement: z.enum(["climb", "swim", "fly", "burrow"]),
+    /** Set this movement speed equal to the final walking speed (e.g. Roving). */
+    matchWalking: z.boolean().optional(),
+    /** Fixed movement speed in feet (used when matchWalking is not set). */
+    value: z.number().int().nonnegative().optional(),
   })
 ]);
 

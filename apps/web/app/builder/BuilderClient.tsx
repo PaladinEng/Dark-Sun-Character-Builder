@@ -4419,7 +4419,9 @@ export default function BuilderClient({
             </p>
           ) : null}
           <div className="mt-3 grid gap-3 md:grid-cols-3">
-            {spellSelectionBuckets.map((bucket) => {
+            {spellSelectionBuckets
+              .filter((bucket) => bucket.maxCount !== 0)
+              .map((bucket) => {
               const selectedSet = new Set(bucket.selectedIds);
               const atLimit =
                 typeof bucket.maxCount === "number" && bucket.selectedIds.length >= bucket.maxCount;

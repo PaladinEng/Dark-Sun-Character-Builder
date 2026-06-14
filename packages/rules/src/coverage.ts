@@ -49,6 +49,7 @@ const SUPPORTED_EFFECT_TYPES = [
   "add_speed_bonus",
   "add_hp_per_level",
   "grant_skill_expertise",
+  "grant_movement_speed",
 ] as const;
 
 function collectArrayFromContent<T = unknown>(
