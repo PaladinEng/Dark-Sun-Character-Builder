@@ -648,8 +648,8 @@ export default function BuilderClient({
   });
 
   const [backgroundMode, setBackgroundMode] = useState<"2+1" | "1+1+1">("2+1");
-  const [backgroundPlusTwo, setBackgroundPlusTwo] = useState<Ability>("str");
-  const [backgroundPlusOne, setBackgroundPlusOne] = useState<Ability>("dex");
+  const [backgroundPlusTwo, setBackgroundPlusTwo] = useState<Ability | "">("");
+  const [backgroundPlusOne, setBackgroundPlusOne] = useState<Ability | "">("");
 
   const [slotModes, setSlotModes] = useState<Record<number, "feat" | "asi">>({});
   const [featDrafts, setFeatDrafts] = useState<Record<number, string>>({});
@@ -888,6 +888,26 @@ export default function BuilderClient({
   const derived = useMemo(
     () => computeDerivedState(state, content) as DerivedState,
     [content, state],
+  );
+
+  // Highest spell level the character can currently cast (from spell slots),
+  // used to filter the prepared/known spell pickers to castable spells only.
+  const maxPreparableSpellLevel = useMemo(() => {
+    const slots = derived.spellSlots ?? derived.spellcasting?.slots ?? null;
+    if (!slots) {
+      return 0;
+    }
+    let max = 0;
+    slots.forEach((count, index) => {
+      if (count > 0) {
+        max = index + 1;
+      }
+    });
+    return max;
+  }, [derived.spellSlots, derived.spellcasting]);
+  const preparableLeveledSpells = useMemo(
+    () => availableLeveledSpells.filter((spell) => spell.level <= maxPreparableSpellLevel),
+    [availableLeveledSpells, maxPreparableSpellLevel],
   );
 
   // Features/feats that grant a *choice* of skill expertise, surfaced as pickers.
@@ -1676,14 +1696,14 @@ export default function BuilderClient({
       field: "knownSpellIds",
       label: "Known Spells",
       selectedIds: state.knownSpellIds ?? [],
-      availableSpells: availableLeveledSpells,
+      availableSpells: preparableLeveledSpells,
       maxCount: knownSpellLimit,
     },
     {
       field: "preparedSpellIds",
       label: "Prepared Spells",
       selectedIds: state.preparedSpellIds ?? [],
-      availableSpells: availableLeveledSpells,
+      availableSpells: preparableLeveledSpells,
       maxCount: preparedSpellLimit,
     },
   ];
@@ -4094,12 +4114,17 @@ export default function BuilderClient({
           {backgroundMode === "2+1" ? (
             <div className="mt-3 grid gap-3 md:grid-cols-2">
               <label className="text-sm">
-                <div className="font-semibold">+2 Ability</div>
+                <div className="font-semibold">
+                  +2 Ability {backgroundPlusTwo ? <span className="text-emerald-400">✓</span> : null}
+                </div>
                 <select
-                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  className={`mt-1 w-full rounded border bg-slate-950 px-2 py-1 ${
+                    backgroundPlusTwo ? "border-emerald-500" : "border-slate-700"
+                  }`}
                   value={backgroundPlusTwo}
-                  onChange={(event) => setBackgroundPlusTwo(event.target.value as Ability)}
+                  onChange={(event) => setBackgroundPlusTwo(event.target.value as Ability | "")}
                 >
+                  <option value="">Select…</option>
                   {selectedBackground.abilityOptions.abilities.map((ability) => (
                     <option key={`plus2-${ability}`} value={ability}>
                       {ability.toUpperCase()}
@@ -4108,12 +4133,17 @@ export default function BuilderClient({
                 </select>
               </label>
               <label className="text-sm">
-                <div className="font-semibold">+1 Ability</div>
+                <div className="font-semibold">
+                  +1 Ability {backgroundPlusOne ? <span className="text-emerald-400">✓</span> : null}
+                </div>
                 <select
-                  className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1"
+                  className={`mt-1 w-full rounded border bg-slate-950 px-2 py-1 ${
+                    backgroundPlusOne ? "border-emerald-500" : "border-slate-700"
+                  }`}
                   value={backgroundPlusOne}
-                  onChange={(event) => setBackgroundPlusOne(event.target.value as Ability)}
+                  onChange={(event) => setBackgroundPlusOne(event.target.value as Ability | "")}
                 >
+                  <option value="">Select…</option>
                   {selectedBackground.abilityOptions.abilities.map((ability) => (
                     <option key={`plus1-${ability}`} value={ability}>
                       {ability.toUpperCase()}
@@ -4414,6 +4444,110 @@ export default function BuilderClient({
         );
       })()}
 
+      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-sm font-semibold">Custom Gear</h2>
+          <div className="text-xs text-slate-300">{(state.customGear ?? []).length} added</div>
+        </div>
+        <p className="mt-1 text-xs text-slate-400">
+          Manually add items not in the equipment catalog (homebrew gear, loot, trinkets, etc.). Appears on the printed sheet alongside catalog inventory.
+        </p>
+
+        {(state.customGear ?? []).length > 0 ? (
+          <div className="mt-3 space-y-1">
+            {(state.customGear ?? []).map((item, index) => (
+              <div
+                key={`custom-gear-${index}`}
+                className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
+              >
+                <span className="truncate">
+                  {item.name}
+                  {item.quantity && item.quantity > 1 ? (
+                    <span className="ml-1 text-slate-400">×{item.quantity}</span>
+                  ) : null}
+                  {item.notes ? (
+                    <span className="ml-2 italic text-slate-400">— {item.notes}</span>
+                  ) : null}
+                </span>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setState((prev) => ({
+                      ...prev,
+                      customGear: (prev.customGear ?? []).filter((_, i) => i !== index),
+                    }))
+                  }
+                  className="shrink-0 rounded border border-slate-700 px-2 py-0.5"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : null}
+
+        <div className="mt-3 grid gap-2 rounded border border-slate-800 bg-slate-950/70 p-3 md:grid-cols-6">
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Item Name</div>
+            <input
+              type="text"
+              value={customGearDraft.name}
+              onChange={(e) => setCustomGearDraft((d) => ({ ...d, name: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. Sunblade Hilt"
+            />
+          </label>
+          <label className="text-xs">
+            <div className="font-semibold">Qty</div>
+            <input
+              type="number"
+              min={1}
+              max={999}
+              value={customGearDraft.quantity}
+              onChange={(e) =>
+                setCustomGearDraft((d) => ({
+                  ...d,
+                  quantity: Math.max(1, Math.min(999, Number(e.target.value) || 1)),
+                }))
+              }
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+            />
+          </label>
+          <label className="text-xs md:col-span-2">
+            <div className="font-semibold">Notes (optional)</div>
+            <input
+              type="text"
+              value={customGearDraft.notes}
+              onChange={(e) => setCustomGearDraft((d) => ({ ...d, notes: e.target.value }))}
+              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
+              placeholder="e.g. attuned, broken, etc."
+            />
+          </label>
+          <div className="flex items-end">
+            <button
+              type="button"
+              disabled={!customGearDraft.name.trim()}
+              onClick={() => {
+                if (!customGearDraft.name.trim()) return;
+                const entry: CustomGearItem = {
+                  name: customGearDraft.name.trim(),
+                  ...(customGearDraft.quantity > 1 ? { quantity: customGearDraft.quantity } : {}),
+                  ...(customGearDraft.notes.trim() ? { notes: customGearDraft.notes.trim() } : {}),
+                };
+                setState((prev) => ({
+                  ...prev,
+                  customGear: [...(prev.customGear ?? []), entry],
+                }));
+                setCustomGearDraft({ name: "", quantity: 1, notes: "" });
+              }}
+              className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </section>
+
       {selectedSpellcasting ? (
         <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
           <h2 className="text-sm font-semibold">Spell Selection</h2>
@@ -4650,110 +4784,6 @@ export default function BuilderClient({
                   ],
                 }));
                 setCustomSpellDraft({ name: "", level: 0, field: "cantrip", ritual: false, concentration: false });
-              }}
-              className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
-            >
-              Add
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section className="rounded-lg border border-slate-700 bg-slate-900/60 p-4">
-        <div className="flex items-center justify-between gap-2">
-          <h2 className="text-sm font-semibold">Custom Gear</h2>
-          <div className="text-xs text-slate-300">{(state.customGear ?? []).length} added</div>
-        </div>
-        <p className="mt-1 text-xs text-slate-400">
-          Manually add items not in the equipment catalog (homebrew gear, loot, trinkets, etc.). Appears on the printed sheet alongside catalog inventory.
-        </p>
-
-        {(state.customGear ?? []).length > 0 ? (
-          <div className="mt-3 space-y-1">
-            {(state.customGear ?? []).map((item, index) => (
-              <div
-                key={`custom-gear-${index}`}
-                className="flex items-center justify-between gap-2 rounded border border-slate-800 px-2 py-1 text-xs"
-              >
-                <span className="truncate">
-                  {item.name}
-                  {item.quantity && item.quantity > 1 ? (
-                    <span className="ml-1 text-slate-400">×{item.quantity}</span>
-                  ) : null}
-                  {item.notes ? (
-                    <span className="ml-2 italic text-slate-400">— {item.notes}</span>
-                  ) : null}
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setState((prev) => ({
-                      ...prev,
-                      customGear: (prev.customGear ?? []).filter((_, i) => i !== index),
-                    }))
-                  }
-                  className="shrink-0 rounded border border-slate-700 px-2 py-0.5"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
-          </div>
-        ) : null}
-
-        <div className="mt-3 grid gap-2 rounded border border-slate-800 bg-slate-950/70 p-3 md:grid-cols-6">
-          <label className="text-xs md:col-span-2">
-            <div className="font-semibold">Item Name</div>
-            <input
-              type="text"
-              value={customGearDraft.name}
-              onChange={(e) => setCustomGearDraft((d) => ({ ...d, name: e.target.value }))}
-              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-              placeholder="e.g. Sunblade Hilt"
-            />
-          </label>
-          <label className="text-xs">
-            <div className="font-semibold">Qty</div>
-            <input
-              type="number"
-              min={1}
-              max={999}
-              value={customGearDraft.quantity}
-              onChange={(e) =>
-                setCustomGearDraft((d) => ({
-                  ...d,
-                  quantity: Math.max(1, Math.min(999, Number(e.target.value) || 1)),
-                }))
-              }
-              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-            />
-          </label>
-          <label className="text-xs md:col-span-2">
-            <div className="font-semibold">Notes (optional)</div>
-            <input
-              type="text"
-              value={customGearDraft.notes}
-              onChange={(e) => setCustomGearDraft((d) => ({ ...d, notes: e.target.value }))}
-              className="mt-1 w-full rounded border border-slate-700 bg-slate-950 px-2 py-1 text-sm"
-              placeholder="e.g. attuned, broken, etc."
-            />
-          </label>
-          <div className="flex items-end">
-            <button
-              type="button"
-              disabled={!customGearDraft.name.trim()}
-              onClick={() => {
-                if (!customGearDraft.name.trim()) return;
-                const entry: CustomGearItem = {
-                  name: customGearDraft.name.trim(),
-                  ...(customGearDraft.quantity > 1 ? { quantity: customGearDraft.quantity } : {}),
-                  ...(customGearDraft.notes.trim() ? { notes: customGearDraft.notes.trim() } : {}),
-                };
-                setState((prev) => ({
-                  ...prev,
-                  customGear: [...(prev.customGear ?? []), entry],
-                }));
-                setCustomGearDraft({ name: "", quantity: 1, notes: "" });
               }}
               className="rounded border border-slate-700 bg-slate-800 px-3 py-1 text-xs disabled:opacity-40"
             >
