@@ -290,6 +290,24 @@ export default async function PrintPage({
   const ppCoins = Number.isFinite(coinValues.pp)
     ? Math.max(0, Math.floor(coinValues.pp ?? 0))
     : 0;
+  const bitCoins = Number.isFinite(coinValues.bit)
+    ? Math.max(0, Math.floor(coinValues.bit ?? 0))
+    : 0;
+  const isDarkSun = payload.enabledPackIds.includes("darksun");
+  const currencyCells: Array<[string, number]> = isDarkSun
+    ? [
+        ["Bits", bitCoins],
+        ["CP", cpCoins],
+        ["SP", spCoins],
+        ["GP", gpCoins],
+      ]
+    : [
+        ["CP", cpCoins],
+        ["SP", spCoins],
+        ["EP", epCoins],
+        ["GP", gpCoins],
+        ["PP", ppCoins],
+      ];
   const inventoryQuantities = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
     if (!inventoryQuantities.has(itemId)) {
@@ -781,15 +799,9 @@ export default async function PrintPage({
 
                 <section className="panel currency-panel">
                   <div className="section-head">Currency</div>
-                  <div className="currency-row">
-                    {[
-                      ["CP", cpCoins],
-                      ["SP", spCoins],
-                      ["EP", epCoins],
-                      ["GP", gpCoins],
-                      ["PP", ppCoins],
-                    ].map(([label, value]) => (
-                      <div key={label as string} className="coin-cell">
+                  <div className="currency-row" style={{ gridTemplateColumns: `repeat(${currencyCells.length}, 1fr)` }}>
+                    {currencyCells.map(([label, value]) => (
+                      <div key={label} className="coin-cell">
                         <div className="small-label">{label}</div>
                         <div className="coin-value">{value}</div>
                       </div>

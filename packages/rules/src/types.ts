@@ -45,6 +45,8 @@ export interface CharacterCoins {
   ep?: number;
   pp?: number;
   cp: number;
+  /** Athasian "bit" denomination (10 bits = 1 ceramic piece). Dark Sun only. */
+  bit?: number;
 }
 
 export interface InventoryEntry {

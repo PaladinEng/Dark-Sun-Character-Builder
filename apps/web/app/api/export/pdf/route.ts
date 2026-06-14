@@ -269,6 +269,7 @@ function normalizeCharacterState(input: CharacterState): CharacterState {
           ep: normalizeOptionalNonNegativeInt(coins.ep),
           gp: normalizeOptionalNonNegativeInt(coins.gp),
           pp: normalizeOptionalNonNegativeInt(coins.pp),
+          bit: normalizeOptionalNonNegativeInt(coins.bit),
         }
       : undefined,
   };
@@ -358,6 +359,8 @@ export async function POST(request: Request) {
   const epCoins = Number.isFinite(coinValues.ep) ? Math.max(0, Math.floor(coinValues.ep ?? 0)) : 0;
   const gpCoins = Number.isFinite(coinValues.gp) ? Math.max(0, Math.floor(coinValues.gp ?? 0)) : 0;
   const ppCoins = Number.isFinite(coinValues.pp) ? Math.max(0, Math.floor(coinValues.pp ?? 0)) : 0;
+  const bitCoins = Number.isFinite(coinValues.bit) ? Math.max(0, Math.floor(coinValues.bit ?? 0)) : 0;
+  const isDarkSun = (payload.enabledPackIds ?? []).includes("darksun");
   const inventoryCounts = new Map<string, number>();
   for (const itemId of payload.characterState.inventoryItemIds ?? []) {
     inventoryCounts.set(itemId, (inventoryCounts.get(itemId) ?? 0) + 1);
@@ -671,6 +674,8 @@ export async function POST(request: Request) {
     ep: epCoins,
     gp: gpCoins,
     pp: ppCoins,
+    bit: bitCoins,
+    isDarkSun,
     otherWealth: payload.characterState.otherWealth ?? null,
     attunedItems,
     inventoryItems: inventoryItems.slice(0, 16),

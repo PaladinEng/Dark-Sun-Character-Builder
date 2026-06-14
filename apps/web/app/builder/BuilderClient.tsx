@@ -20,6 +20,8 @@ import {
   STANDARD_ARRAY,
   computePointBuyCost,
   computeDerivedState,
+  COIN_LABELS,
+  getCoinDenominations,
   getAvailableAdvancementSlots,
   getPointBuyScoreCost,
   getSkillAndToolDisplayRows,
@@ -29,7 +31,7 @@ import { formatSpellNameWithFlags } from "../../src/lib/spells";
 import type { PackSettingProfile } from "../../src/lib/packSettings";
 
 type Ability = "str" | "dex" | "con" | "int" | "wis" | "cha";
-type CoinDenomination = "gp" | "sp" | "ep" | "cp" | "pp";
+type CoinDenomination = "bit" | "gp" | "sp" | "ep" | "cp" | "pp";
 type AbilityChanges = Partial<Record<Ability, number>>;
 
 type BackgroundAbilityOptions = {
@@ -207,7 +209,6 @@ type BuilderClientProps = {
 };
 
 const ABILITIES: Ability[] = ["str", "dex", "con", "int", "wis", "cha"];
-const COIN_DENOMINATIONS: CoinDenomination[] = ["cp", "sp", "ep", "gp", "pp"];
 const ATTUNEMENT_SLOT_COUNT = 5;
 const SOURCE_STORAGE_KEY = "darksun-builder:sources";
 const CHARACTER_STORAGE_KEY = "darksun-builder:character";
@@ -619,6 +620,8 @@ export default function BuilderClient({
 
   const manifestOrder = useMemo(() => manifests.map((manifest) => manifest.id), [manifests]);
   const [enabledSources, setEnabledSources] = useState<string[]>(enabledSourceIds);
+  const isDarkSun = enabledSources.includes("darksun");
+  const coinDenominations = getCoinDenominations(isDarkSun);
   const [showDebug, setShowDebug] = useState(false);
   const [customSpellDraft, setCustomSpellDraft] = useState<{
     name: string; level: number; field: CustomSpell["field"]; ritual: boolean; concentration: boolean;
@@ -3274,10 +3277,15 @@ export default function BuilderClient({
 
         <div className="text-sm md:col-span-3">
           <div className="font-semibold">Coins</div>
-          <div className="mt-1 grid grid-cols-5 gap-2">
-            {COIN_DENOMINATIONS.map((denomination) => (
+          {isDarkSun ? (
+            <p className="mt-1 text-xs text-slate-400">
+              Athasian currency: 10 bits = 1 ceramic (CP), 10 CP = 1 silver (SP), 10 SP = 1 gold (GP).
+            </p>
+          ) : null}
+          <div className={`mt-1 grid gap-2 ${isDarkSun ? "grid-cols-4" : "grid-cols-5"}`}>
+            {coinDenominations.map((denomination) => (
               <label key={`coins-${denomination}`} className="text-sm">
-                <div className="font-semibold uppercase">{denomination}</div>
+                <div className="font-semibold">{COIN_LABELS[denomination]}</div>
                 <input
                   type="number"
                   min={0}
