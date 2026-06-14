@@ -1,0 +1,6 @@
+{
+  "id": "srd52:equipment:quiver",
+  "type": "adventuring_gear",
+  "name": "Quiver",
+  "description": "A container that holds up to 20 arrows, worn at the hip or on the back for quick access."
+}
